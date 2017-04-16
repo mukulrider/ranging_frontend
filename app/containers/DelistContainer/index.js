@@ -28,6 +28,8 @@ import {browserHistory} from 'react-router';
 import Panel from 'components/panel';
 import Checkbox from 'components/checkbox';
 import {Modal} from 'react-bootstrap';
+import {Nav} from 'react-bootstrap';
+import {NavItem} from 'react-bootstrap';
 import {
   apiFetch,
   dataUrlParams,
@@ -82,7 +84,9 @@ export class DelistContainer extends React.PureComponent { // eslint-disable-lin
       supplierImpactInfo: false,
       profitImpactInfo: false,
       spplierImpactTableInfo: false,
-      delistImpactTableInfo: false
+      delistImpactTableInfo: false,
+      activeKey:"1",
+      activeKey2:"11",
     };
   }
 
@@ -151,115 +155,170 @@ export class DelistContainer extends React.PureComponent { // eslint-disable-lin
         {  console.log("hiii", this.props) }
         <div className="col-xs-10">
           <div className="row">
-            <div className="nav-tabs-customm">
-              <ul className="nav nav-tabs  nav-justified">
-                <li><a href="#" onClick={() => {
-                  let week_no = "time_period=13_weeks";
-                  this.props.onWeekClick(week_no);
-                  this.props.onWaterfallValueChart();
-                  this.props.onApiFetch();
-                  this.props.ondelistTable();
-                  this.props.onWeekTabClick("Week: 13 weeks ");
-                }}>WEEK 13</a></li>
-                <li><a href="#" onClick={() => {
-                  let week_no = "time_period=26_weeks";
-                  this.props.onWeekClick(week_no);
-                  this.props.onWaterfallValueChart();
-                  this.props.onApiFetch();
-                  this.props.ondelistTable();
-                  this.props.onWeekTabClick("Week: 26 weeks ");
-                }}>Week 26</a></li>
-                <li><a href="#" onClick={() => {
-                  let week_no = "time_period=52_weeks";
-                  this.props.onWeekClick(week_no);
-                  this.props.onWaterfallValueChart();
-                  this.props.onApiFetch();
-                  this.props.ondelistTable();
-                  this.props.onWeekTabClick("Week: 52 weeks ");
-                }}>Week 52</a></li>
-              </ul>
-            </div>
+            {/*<div className="nav-tabs-customm">*/}
+              {/*<ul className="nav nav-tabs  nav-justified">*/}
+                {/*<li><a href="#" style={{fontSize: '14px'}} onClick={() => {*/}
+                  {/*let week_no = "time_period=13_weeks";*/}
+                  {/*this.props.onWeekClick(week_no);*/}
+                  {/*this.props.onWaterfallValueChart();*/}
+                  {/*this.props.onApiFetch();*/}
+                  {/*this.props.ondelistTable();*/}
+                  {/*this.props.onWeekTabClick("Week: 13 weeks ");*/}
+                {/*}}>WEEK 13</a></li>*/}
+                {/*<li><a href="#" style={{fontSize: '14px'}} onClick={() => {*/}
+                  {/*let week_no = "time_period=26_weeks";*/}
+                  {/*this.props.onWeekClick(week_no);*/}
+                  {/*this.props.onWaterfallValueChart();*/}
+                  {/*this.props.onApiFetch();*/}
+                  {/*this.props.ondelistTable();*/}
+                  {/*this.props.onWeekTabClick("Week: 26 weeks ");*/}
+                {/*}}>Week 26</a></li>*/}
+                {/*<li><a href="#" style={{fontSize: '14px'}} onClick={() => {*/}
+                  {/*let week_no = "time_period=52_weeks";*/}
+                  {/*this.props.onWeekClick(week_no);*/}
+                  {/*this.props.onWaterfallValueChart();*/}
+                  {/*this.props.onApiFetch();*/}
+                  {/*this.props.ondelistTable();*/}
+                  {/*this.props.onWeekTabClick("Week: 52 weeks ");*/}
+                {/*}}>Week 52</a></li>*/}
+              {/*</ul>*/}
+            {/*</div>*/}
 
-            <div className="nav-tabs-customm">
-              <ul className="nav nav-tabs  nav-justified">
-                <li><a href="#" onClick={() => {
-                  let store_type = "store_type=Overview";
-                  this.props.onStoreClick(store_type);
-                  this.props.onWaterfallValueChart();
-                  this.props.onApiFetch();
-                  this.props.ondelistTable();
-                  this.props.onStoreTabClick("Store: Overview ");
-                }}>Overview</a></li>
-                <li><a href="#"  onClick={() => {
-                  let store_type = "store_type=Main Estate";
-                  this.props.onStoreClick(store_type);
-                  this.props.onWaterfallValueChart();
-                  this.props.onApiFetch();
-                  this.props.ondelistTable();
-                  this.props.onStoreTabClick("Store: Main Estate ");
-                }}>Main Estate</a></li>
-                <li><a href="#" onClick={() => {
-                  let store_type = "store_type=Express";
-                  this.props.onStoreClick(store_type);
-                  this.props.onWaterfallValueChart();
-                  this.props.onApiFetch();
-                  this.props.ondelistTable();
-                  this.props.onStoreTabClick("Store: Express");
-                }}>Express</a></li>
-              </ul>
-            </div>
+            <Nav bsStyle="tabs" activeKey={this.state.activeKey} onSelect={this.handleSelect}>
+              <NavItem eventKey="1" onClick={() => {
+                this.setState({activeKey: "1"});
+                let week_no = "time_period=13_weeks";
+                this.props.onWeekClick(week_no);
+                this.props.onWaterfallValueChart();
+                this.props.onApiFetch();
+                this.props.ondelistTable();
+                this.props.onWeekTabClick("Week: 13 weeks ")}} style={{fontSize: '14px'}}>WEEK 13</NavItem>
+              <NavItem eventKey="2" onClick={() => {
+                this.setState({activeKey: "2"});
+                let week_no = "time_period=26_weeks";
+                this.props.onWeekClick(week_no);
+                this.props.onWaterfallValueChart();
+                this.props.onApiFetch();
+                this.props.ondelistTable();
+                this.props.onWeekTabClick("Week: 26 weeks ")}} style={{fontSize: '14px'}}>Week 26</NavItem>
+              <NavItem eventKey="3" onClick={() => {
+                this.setState({activeKey: "3"});
+                let week_no = "time_period=52_weeks";
+                this.props.onWeekClick(week_no);
+                this.props.onWaterfallValueChart();
+                this.props.onApiFetch();
+                this.props.ondelistTable();
+                this.props.onWeekTabClick("Week: 52 weeks ")}} style={{fontSize: '14px'}}>Week 52</NavItem>
+            </Nav>
+
+            <Nav bsStyle="tabs" activeKey={this.state.activeKey} onSelect={this.handleSelect}>
+              <NavItem eventKey="1" onClick={() => {
+                this.setState({activeKey: "11"});
+                let store_type = "store_type=Overview";
+                this.props.onStoreClick(store_type);
+                this.props.onWaterfallValueChart();
+                this.props.onApiFetch();
+                this.props.ondelistTable();
+                this.props.onStoreTabClick("Store: Overview ")}} style={{fontSize: '14px'}}>Overview</NavItem>
+              <NavItem eventKey="2" onClick={() => {
+                this.setState({activeKey: "22"});
+                let store_type = "store_type=Main Estate";
+                this.props.onStoreClick(store_type);
+                this.props.onWaterfallValueChart();
+                this.props.onApiFetch();
+                this.props.ondelistTable();
+                this.props.onStoreTabClick("Store: Main Estate ")}} style={{fontSize: '14px'}}>Main Estate</NavItem>
+              <NavItem eventKey="3" onClick={() => {
+                this.setState({activeKey: "33"});
+                let store_type = "store_type=Express";
+                this.props.onStoreClick(store_type);
+                this.props.onWaterfallValueChart();
+                this.props.onApiFetch();
+                this.props.ondelistTable();
+                this.props.onStoreTabClick("Store: Express")}} style={{fontSize: '14px'}}>Express</NavItem>
+            </Nav>
+
+
+            {/*<div className="nav-tabs-customm">*/}
+              {/*<ul className="nav nav-tabs  nav-justified">*/}
+                {/*<li><a href="#" style={{fontSize: '14px'}} onClick={() => {*/}
+                  {/*let store_type = "store_type=Overview";*/}
+                  {/*this.props.onStoreClick(store_type);*/}
+                  {/*this.props.onWaterfallValueChart();*/}
+                  {/*this.props.onApiFetch();*/}
+                  {/*this.props.ondelistTable();*/}
+                  {/*this.props.onStoreTabClick("Store: Overview ");*/}
+                {/*}}>Overview</a></li>*/}
+                {/*<li><a href="#" style={{fontSize: '14px'}} onClick={() => {*/}
+                  {/*let store_type = "store_type=Main Estate";*/}
+                  {/*this.props.onStoreClick(store_type);*/}
+                  {/*this.props.onWaterfallValueChart();*/}
+                  {/*this.props.onApiFetch();*/}
+                  {/*this.props.ondelistTable();*/}
+                  {/*this.props.onStoreTabClick("Store: Main Estate ");*/}
+                {/*}}>Main Estate</a></li>*/}
+                {/*<li><a href="#" style={{fontSize: '14px'}} onClick={() => {*/}
+                  {/*let store_type = "store_type=Express";*/}
+                  {/*this.props.onStoreClick(store_type);*/}
+                  {/*this.props.onWaterfallValueChart();*/}
+                  {/*this.props.onApiFetch();*/}
+                  {/*this.props.ondelistTable();*/}
+                  {/*this.props.onStoreTabClick("Store: Express");*/}
+                {/*}}>Express</a></li>*/}
+              {/*</ul>*/}
+            {/*</div>*/}
 
             {/*<Button onClick={() => {*/}
-              {/*let week_no = "time_period=13_weeks";*/}
-              {/*this.props.onWeekClick(week_no);*/}
-              {/*this.props.onWaterfallValueChart();*/}
-              {/*this.props.onApiFetch();*/}
-              {/*this.props.ondelistTable();*/}
-              {/*this.props.onWeekTabClick("Week: 13 weeks ");*/}
+            {/*let week_no = "time_period=13_weeks";*/}
+            {/*this.props.onWeekClick(week_no);*/}
+            {/*this.props.onWaterfallValueChart();*/}
+            {/*this.props.onApiFetch();*/}
+            {/*this.props.ondelistTable();*/}
+            {/*this.props.onWeekTabClick("Week: 13 weeks ");*/}
             {/*}}>WEEK 13</Button>&nbsp;&nbsp;*/}
             {/*<Button onClick={() => {*/}
-              {/*let week_no = "time_period=26_weeks";*/}
-              {/*this.props.onWeekClick(week_no);*/}
-              {/*this.props.onWaterfallValueChart();*/}
-              {/*this.props.onApiFetch();*/}
-              {/*this.props.ondelistTable();*/}
-              {/*this.props.onWeekTabClick("Week: 26 weeks ");*/}
+            {/*let week_no = "time_period=26_weeks";*/}
+            {/*this.props.onWeekClick(week_no);*/}
+            {/*this.props.onWaterfallValueChart();*/}
+            {/*this.props.onApiFetch();*/}
+            {/*this.props.ondelistTable();*/}
+            {/*this.props.onWeekTabClick("Week: 26 weeks ");*/}
             {/*}}>Week 26</Button>&nbsp;&nbsp;*/}
             {/*<Button onClick={() => {*/}
-              {/*let week_no = "time_period=52_weeks";*/}
-              {/*this.props.onWeekClick(week_no);*/}
-              {/*this.props.onWaterfallValueChart();*/}
-              {/*this.props.onApiFetch();*/}
-              {/*this.props.ondelistTable();*/}
-              {/*this.props.onWeekTabClick("Week: 52 weeks ");*/}
+            {/*let week_no = "time_period=52_weeks";*/}
+            {/*this.props.onWeekClick(week_no);*/}
+            {/*this.props.onWaterfallValueChart();*/}
+            {/*this.props.onApiFetch();*/}
+            {/*this.props.ondelistTable();*/}
+            {/*this.props.onWeekTabClick("Week: 52 weeks ");*/}
             {/*}}>Week 52</Button>*/}
           </div>
           <br></br>
           {/*<div className="row">*/}
-            {/*<Button onClick={() => {*/}
-              {/*let store_type = "store_type=Overview";*/}
-              {/*this.props.onStoreClick(store_type);*/}
-              {/*this.props.onWaterfallValueChart();*/}
-              {/*this.props.onApiFetch();*/}
-              {/*this.props.ondelistTable();*/}
-              {/*this.props.onStoreTabClick("Store: Overview ");*/}
-            {/*}}>Overview</Button>&nbsp;&nbsp;*/}
-            {/*<Button onClick={() => {*/}
-              {/*let store_type = "store_type=Main Estate";*/}
-              {/*this.props.onStoreClick(store_type);*/}
-              {/*this.props.onWaterfallValueChart();*/}
-              {/*this.props.onApiFetch();*/}
-              {/*this.props.ondelistTable();*/}
-              {/*this.props.onStoreTabClick("Store: Main Estate ");*/}
-            {/*}}>Main Estate</Button>&nbsp;&nbsp;*/}
-            {/*<Button onClick={() => {*/}
-              {/*let store_type = "store_type=Express";*/}
-              {/*this.props.onStoreClick(store_type);*/}
-              {/*this.props.onWaterfallValueChart();*/}
-              {/*this.props.onApiFetch();*/}
-              {/*this.props.ondelistTable();*/}
-              {/*this.props.onStoreTabClick("Store: Express");*/}
-            {/*}}>Express</Button>*/}
+          {/*<Button onClick={() => {*/}
+          {/*let store_type = "store_type=Overview";*/}
+          {/*this.props.onStoreClick(store_type);*/}
+          {/*this.props.onWaterfallValueChart();*/}
+          {/*this.props.onApiFetch();*/}
+          {/*this.props.ondelistTable();*/}
+          {/*this.props.onStoreTabClick("Store: Overview ");*/}
+          {/*}}>Overview</Button>&nbsp;&nbsp;*/}
+          {/*<Button onClick={() => {*/}
+          {/*let store_type = "store_type=Main Estate";*/}
+          {/*this.props.onStoreClick(store_type);*/}
+          {/*this.props.onWaterfallValueChart();*/}
+          {/*this.props.onApiFetch();*/}
+          {/*this.props.ondelistTable();*/}
+          {/*this.props.onStoreTabClick("Store: Main Estate ");*/}
+          {/*}}>Main Estate</Button>&nbsp;&nbsp;*/}
+          {/*<Button onClick={() => {*/}
+          {/*let store_type = "store_type=Express";*/}
+          {/*this.props.onStoreClick(store_type);*/}
+          {/*this.props.onWaterfallValueChart();*/}
+          {/*this.props.onApiFetch();*/}
+          {/*this.props.ondelistTable();*/}
+          {/*this.props.onStoreTabClick("Store: Express");*/}
+          {/*}}>Express</Button>*/}
           {/*</div>*/}
           <div className="row">
             <p>
@@ -273,6 +332,12 @@ export class DelistContainer extends React.PureComponent { // eslint-disable-lin
             onClick={() => {
               this.setState({supplierImpactInfo: true});
             }}></span></h1>
+
+          {/*<Nav bsStyle="tabs" activeKey={this.state.activeKey2}>*/}
+            {/*<NavItem eventKey="11" onClick={() => this.setState({activeKey2: "11"})}>NavItem 11 content</NavItem>*/}
+            {/*<NavItem eventKey="22" onClick={() => this.setState({activeKey2: "22"})}>NavItem 22 content</NavItem>*/}
+            {/*<NavItem eventKey="33" onClick={() => this.setState({activeKey2: "33"})}>NavItem 33 content</NavItem>*/}
+          {/*</Nav>*/}
 
           {/*MODAL FOR SUPPLIER IMPACT INFO ICON */}
 
@@ -299,7 +364,7 @@ export class DelistContainer extends React.PureComponent { // eslint-disable-lin
                   <div className="col-xs-6">
                     <Panel>
                       <h2 className="ts-blk-proview-subhead ts-blk-proview"
-                          style={{fontSize: '28px', verticalAlign: 'middle', top: '-22px', position:'relative'}}><b
+                          style={{fontSize: '28px', verticalAlign: 'middle', top: '-22px', position: 'relative'}}><b
                         style={{verticalAlign: 'middle'}}>Value</b></h2>
                       <div className="row">
                         <div className="col-xs-7">
@@ -363,7 +428,8 @@ export class DelistContainer extends React.PureComponent { // eslint-disable-lin
                   <div className="col-xs-6">
                     <Panel>
                       <h2 className="ts-blk-proview-subhead ts-blk-proview"
-                          style={{fontSize: '28px', verticalAlign: 'middle', position:'relative'}}><b style={{verticalAlign: 'middle'}}>Volume</b>
+                          style={{fontSize: '28px', verticalAlign: 'middle', top: '-22px', position: 'relative'}}><b
+                        style={{verticalAlign: 'middle'}}>Volume</b>
                       </h2>
                       <div className="row">
                         <div className="col-xs-7">
@@ -470,7 +536,8 @@ export class DelistContainer extends React.PureComponent { // eslint-disable-lin
                   <div className="col-xs-6">
                     <Panel>
                       <h2 className="ts-blk-proview-subhead ts-blk-proview"
-                          style={{fontSize: '28px', verticalAlign: 'middle'}}><b style={{verticalAlign: 'middle'}}>PROFIT</b>
+                          style={{fontSize: '28px', verticalAlign: 'middle', top: '-22px', position: 'relative'}}><b
+                        style={{verticalAlign: 'middle'}}>PROFIT</b>
                       </h2>
                       <div className="row">
                         <div className="col-xs-7">
@@ -536,7 +603,7 @@ export class DelistContainer extends React.PureComponent { // eslint-disable-lin
                   <div className="col-xs-6">
                     <Panel>
                       <h2 className="ts-blk-proview-subhead ts-blk-proview"
-                          style={{fontSize: '28px', verticalAlign: 'middle'}}><b
+                          style={{fontSize: '28px', verticalAlign: 'middle', top: '-22px', position: 'relative'}}><b
                         style={{verticalAlign: 'middle'}}>CTS</b></h2>
                       <div className="row">
                         <div className="col-xs-7">
@@ -636,7 +703,7 @@ export class DelistContainer extends React.PureComponent { // eslint-disable-lin
           </Modal>
 
           <Panel>
-            <div className="col-xs-12 col-xs-5" style={{left: '-13px'}}>
+            <div className="col-xs-12 col-xs-5" style={{left: '-16px'}}>
               <InputField type={'string'}
                           placeholder="Search Supplier"
                           value={this.props.textBoxQueryString}
@@ -767,7 +834,8 @@ export class DelistContainer extends React.PureComponent { // eslint-disable-lin
                 position: 'relative',
                 float: 'left',
                 top: '40px',
-                fontSize: '14px'
+                fontSize: '14px',
+                left: '5px'
               }}>Page:</span>
               <ul className="pagination pagination-lg">
                 {(() => {
@@ -837,7 +905,11 @@ export class DelistContainer extends React.PureComponent { // eslint-disable-lin
                  dialogClassName="custom-modal">
             <Modal.Header>
               <Modal.Title id="contained-modal-title-sm">
-                <div style={{textAlign: 'center'}}><b>{this.props.DelistContainer.supplierPopupTableData}</b>
+                <div style={{textAlign: 'center'}}><b style={{
+                  textAlign: 'center',
+                  top: '15px',
+                  position: 'relative'
+                }}>{this.props.DelistContainer.supplierPopupTableData}</b>
                   <div style={{textAlign: 'right'}}><span onClick={() => this.setState({smShow: false})}><b>X</b></span>
                   </div>
                 </div>
@@ -999,7 +1071,7 @@ export class DelistContainer extends React.PureComponent { // eslint-disable-lin
           </Modal>
 
           <Panel>
-            <div className="col-xs-12 col-xs-5" style={{left: '-13px'}}>
+            <div className="col-xs-12 col-xs-5" style={{left: '-16px'}}>
               <InputField type={'string'}
                           placeholder="Search Product Description"
                           value={this.props.textBoxQueryString}
@@ -1036,11 +1108,11 @@ export class DelistContainer extends React.PureComponent { // eslint-disable-lin
                           <td style={{
                             verticalAlign: 'middle',
                             textAlign: "center"
-                          }}>{formatSales(obj.predicted_sales)}</td>
+                          }}>{formatSales(obj.predicted_value)}</td>
                           <td style={{
                             verticalAlign: 'middle',
                             textAlign: "center"
-                          }}>{formatVolume(obj.predicted_volume_x)}</td>
+                          }}>{formatVolume(obj.predicted_volume)}</td>
                           <td
                             style={{verticalAlign: 'middle', textAlign: "center"}}>{formatSales(obj.predicted_cgm)}</td>
                           <td><Button style={{minWidth: '10px', height: '50px'}} onClick={() => {
@@ -1078,7 +1150,8 @@ export class DelistContainer extends React.PureComponent { // eslint-disable-lin
                 position: 'relative',
                 float: 'left',
                 top: '20px',
-                fontSize: '14px'
+                fontSize: '14px',
+                left: '5px'
               }}>Page:</span>
                 {(() => {
 
