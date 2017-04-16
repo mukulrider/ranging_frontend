@@ -1,0 +1,44 @@
+@import "./../../stylesheet";
+
+.row-header{
+  text-align: center;
+  //font-weight: bold;
+  //font-size: 16px;
+}
+
+.center-this{
+  text-align: center;
+}
+
+.cannibalization-perc-number{
+
+  font-size: 15px;
+}
+
+.dashed-border{
+  border-bottom: dashed;
+  border-width: thin;
+}
+
+//
+.table-body-format{
+
+  font-size: 16px;
+  font-family:Tesco;
+
+}
+
+
+.ts-blk-proview-subhead {
+  text-align: center;
+
+  width: 100%;
+  line-height: 28px;
+  font-size: 18px;
+  height: 28px;
+
+  color:#00294f !important;
+  background-color: #e5e8ea;
+
+
+}

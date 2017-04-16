@@ -1,0 +1,72 @@
+body{
+  font-family: Tesco;
+}
+
+.ts-blk-proview-subhead {
+  text-align: center;
+  //color: #00539f !important;
+  width: 100%;
+  line-height: 30px;
+  font-size: 18px;
+  height: 40px;
+  background-color: #e5e8ea;
+  margin-top: -10px;
+
+}
+
+tbody{
+  font-size:14px ;
+}
+.blk-heading{
+  background: #00539f;
+}
+
+.week-row{
+  margin-top : 10px;
+
+}
+
+.store-row{
+  margin-left : 20px;
+
+  margin-top : 10px;
+}
+
+.resetButton{
+  float:right;
+  margin-right:160px;
+  font-style:bold ;
+
+}
+.resetButton:hover{
+cursor: pointer;
+}
+.time{
+
+  margin-left: 30px;
+}
+
+.wrapper{
+  width:600px;
+  margin: 0 auto;
+}
+
+.panel:hover{
+cursor:pointer;
+  outline: none;
+  box-shadow: 0px 0px 5px #61C5FA;
+  border:1px solid #5AB0DB;
+}
+
+.panel:focus{
+  outline: none;
+  box-shadow: 0px 0px 5px #61C5FA;
+  border:1px solid #5AB0DB;
+}
+
+table{
+  font-size: 12px;
+}
+
+
+

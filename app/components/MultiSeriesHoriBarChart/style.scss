@@ -1,0 +1,39 @@
+
+.chart .legend {
+  color: black;
+  font: 15px sans-serif;
+  text-anchor: end;
+  font-size: 15px;
+}
+
+.chart text {
+  fill: black;
+  font: 10px sans-serif;
+  text-anchor: end;
+}
+
+.chart .label {
+  fill: black;
+  font: 14px sans-serif;
+  text-anchor: end;
+}
+
+.bar:hover {
+  fill: brown;
+}
+
+.axis text {
+  font: 10px sans-serif;
+}
+
+.axis path,
+.axis line {
+  fill: none;
+  stroke: #000;
+  shape-rendering: crispEdges;
+}
+
+//
+//.multilineChart {
+//  margin-left:-100px;
+//}
