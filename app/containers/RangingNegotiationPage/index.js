@@ -368,12 +368,12 @@ export class RangingNegotiationPage extends React.PureComponent { // eslint-disa
                             {/*document.cookie = "username=John Doe";*/
                             }
                             //x.substring(0, x.length - 1);
-                            let objString = '/ranging/delist/?'
+                            let objString = '/ranging/delist?'
 
 
                             this.props.RangingNegotiationPage.checkedList.map(obj => {
                               if (obj.checked){
-                              objString += 'base_product_number=' + obj.productId + '&'
+                              objString += 'long_description=' + obj.productId + '&'
                               }
                             })
                             objString.substring(0, objString.length - 1);

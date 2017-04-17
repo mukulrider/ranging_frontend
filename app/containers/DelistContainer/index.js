@@ -58,23 +58,25 @@ import {
   GenerateTextBoxQueryStringDelist,
   WeekTabClick,
   StoreTabClick,
+  UrlParams,
 } from './actions';
 
 import styles from './style.scss';
 
 export class DelistContainer extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
   componentDidMount = () => {
-    this.props.onDataUrlParams(this.props.location.query);
     this.props.onGenerateUrlParamsString();
+    this.props.onDataUrlParams(this.props.location.query);
+    this.props.onUrlParams(this.props.location.search);
     this.props.onWaterfallValueChart();
     this.props.onApiFetch();
     this.props.ondelistTable();
     this.props.onGenerateSideFilter();
   };
 
-  componentDidUpdate = () => {
-    this.props.onDataUrlParams(this.props.location.query);
-  };
+  // componentDidUpdate = () => {
+  //   this.props.onDataUrlParams(this.props.location.query);
+  // };
 
   constructor(props) {
     super(props);
@@ -94,7 +96,7 @@ export class DelistContainer extends React.PureComponent { // eslint-disable-lin
 
     let formatSales = (i) => {
       if (i >= 1000 || i <= -1000) {
-        let rounded = Math.round(i / 1000)
+        let rounded = Math.round(i / 1000);
         return ('£ ' + rounded.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + 'K');
 
       }
@@ -102,12 +104,12 @@ export class DelistContainer extends React.PureComponent { // eslint-disable-lin
       else {
         return ('£ ' + Math.round(i));
       }
-    }
+    };
 
 
     let formatVolume = (i) => {
       if (i >= 1000 || i <= -1000) {
-        let rounded = Math.round(i / 1000)
+        let rounded = Math.round(i / 1000);
         return (rounded.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + 'K');
 
       } else {
@@ -115,7 +117,7 @@ export class DelistContainer extends React.PureComponent { // eslint-disable-lin
       }
 
 
-    }
+    };
 
     return (
 
@@ -135,14 +137,15 @@ export class DelistContainer extends React.PureComponent { // eslint-disable-lin
                 return (
                   <NewSelector2 sideFilter={this.props.DelistContainer.sideFilter}
                                 location={this.props.location}
+                                onDataUrlParams={this.props.DataUrlParams}
+                                onUrlParamsData={this.props.onUrlParamsData}
+                                onGenerateUrlParamsString={this.props.onGenerateUrlParamsString}
+                                onGenerateUrlParamsData={this.props.onGenerateUrlParamsData}
                                 onApplyClick={this.props.onApplyClick}
                                 onWaterfall={this.props.onWaterfallValueChart}
                                 onApiFetch={this.props.onApiFetch}
                                 ondelist={this.props.ondelistTable}
-                                onDataUrlParams={this.props.DataUrlParams}
-                                onUrlParamsData={this.props.onUrlParamsData}
-                                onGenerateUrlParamsString={this.props.onGenerateUrlParamsString}
-                                onGenerateUrlParamsData={this.props.onGenerateUrlParamsData}/>
+                  />
                 )
               } else {
                 return (
@@ -212,25 +215,25 @@ export class DelistContainer extends React.PureComponent { // eslint-disable-lin
                 this.props.onWeekTabClick("Week: 52 weeks ")}} style={{fontSize: '14px'}}><b>Week 52</b></NavItem>
             </Nav>
 
-            <Nav bsStyle="tabs" activeKey={this.state.activeKey} onSelect={this.handleSelect}>
-              <NavItem eventKey="1" onClick={() => {
-                this.setState({activeKey: "11"});
+            <Nav bsStyle="tabs" activeKey={this.state.activeKey2} onSelect={this.handleSelect}>
+              <NavItem eventKey="11" onClick={() => {
+                this.setState({activeKey2: "11"});
                 let store_type = "store_type=Overview";
                 this.props.onStoreClick(store_type);
                 this.props.onWaterfallValueChart();
                 this.props.onApiFetch();
                 this.props.ondelistTable();
                 this.props.onStoreTabClick("Store: Overview ")}} style={{fontSize: '14px'}}><b>Overview</b></NavItem>
-              <NavItem eventKey="2" onClick={() => {
-                this.setState({activeKey: "22"});
+              <NavItem eventKey="22" onClick={() => {
+                this.setState({activeKey2: "22"});
                 let store_type = "store_type=Main Estate";
                 this.props.onStoreClick(store_type);
                 this.props.onWaterfallValueChart();
                 this.props.onApiFetch();
                 this.props.ondelistTable();
                 this.props.onStoreTabClick("Store: Main Estate ")}} style={{fontSize: '14px'}}><b>Main Estate</b></NavItem>
-              <NavItem eventKey="3" onClick={() => {
-                this.setState({activeKey: "33"});
+              <NavItem eventKey="33" onClick={() => {
+                this.setState({activeKey2: "33"});
                 let store_type = "store_type=Express";
                 this.props.onStoreClick(store_type);
                 this.props.onWaterfallValueChart();
@@ -327,12 +330,12 @@ export class DelistContainer extends React.PureComponent { // eslint-disable-lin
               <span>&nbsp;{this.props.DelistContainer.storeBreadcrumb}</span>
             </p>
           </div>
-          <h1 className="ts-blk-proview-subhead ts-blk-proview" style={{fontSize: '32px', verticalAlign: 'middle'}}><b
+          <h2 className="ts-blk-proview-subhead ts-blk-proview" style={{fontSize: '28px', verticalAlign: 'middle'}}><b
             style={{verticalAlign: 'middle'}}>SALES IMPACT</b> <span
-            className="glyphicon glyphicon-info-sign pull-right" style={{right: '4px', fontSize: '28px', top: '4px'}}
+            className="glyphicon glyphicon-info-sign pull-right" style={{right: '4px', fontSize: '24px', top: '4px'}}
             onClick={() => {
               this.setState({supplierImpactInfo: true});
-            }}></span></h1>
+            }}></span></h2>
 
           {/*<Nav bsStyle="tabs" activeKey={this.state.activeKey2}>*/}
             {/*<NavItem eventKey="11" onClick={() => this.setState({activeKey2: "11"})}>NavItem 11 content</NavItem>*/}
@@ -342,8 +345,8 @@ export class DelistContainer extends React.PureComponent { // eslint-disable-lin
 
           {/*MODAL FOR SUPPLIER IMPACT INFO ICON */}
 
-          <Modal show={this.state.supplierImpactInfo} bsSize="sm"
-                 aria-labelledby="contained-modal-title-sm"
+          <Modal show={this.state.supplierImpactInfo} bsSize="lg"
+                 aria-labelledby="contained-modal-title-lg"
           >
             <Modal.Header>
               <Modal.Title id="contained-modal-title-sm">
@@ -351,9 +354,9 @@ export class DelistContainer extends React.PureComponent { // eslint-disable-lin
                   onClick={() => this.setState({supplierImpactInfo: false})}><b>X</b></span></b></div>
               </Modal.Title>
             </Modal.Header>
-            <Modal.Body>
-
-
+            <Modal.Body style={{fontSize: '14px'}}>
+              This graph compares direct sales lost from the delisted products vs the final loss/gain in sales due to demand transfer to substitute products.
+              Value: Sales of a supplier in £
             </Modal.Body>
           </Modal>
 
@@ -363,134 +366,150 @@ export class DelistContainer extends React.PureComponent { // eslint-disable-lin
                 <div className="row">
 
                   <div className="col-xs-6">
-                    <Panel>
-                      <h2 className="ts-blk-proview-subhead ts-blk-proview"
-                          style={{fontSize: '28px', verticalAlign: 'middle', top: '-22px', position: 'relative'}}><b
-                        style={{verticalAlign: 'middle'}}>Value</b></h2>
-                      <div className="row">
-                        <div className="col-xs-7">
-                          <WaterFallChart2 id="waterfallChart_1" yAxisName="Value" formatter="formatSales"
-                                           positive_text='positive' negative_text='negative' total_text='total'
-                                           data={ this.props.DelistContainer.waterfallValue.sales_chart }/>
+                      {/*<h2 className="ts-blk-proview-subhead ts-blk-proview"*/}
+                          {/*style={{fontSize: '28px', verticalAlign: 'middle', top: '-22px', position: 'relative'}}><b*/}
+                        {/*style={{verticalAlign: 'middle'}}>Value</b></h2>*/}
+                        <div className="panel  panel-default">
+                          <div className="panel-heading" style={{fontSize: '20px', textAlign: 'center'}}>
+                            Value
+                          </div>
+                          <div className="panel-body">
+                            <div className="row">
+                              <div className="col-xs-7">
+                                <WaterFallChart2 id="waterfallChart_1" yAxisName="Value" formatter="formatSales"
+                                                 positive_text='positive' negative_text='negative' total_text='total'
+                                                 data={ this.props.DelistContainer.waterfallValue.sales_chart }/>
 
-                        </div>
-                        <div className="col-xs-5">
-                          <Panel>
-                            {/*<div style={{textAlign: 'center', color: '#00539f', fontWeight: 'bold', fontSize: '16px'}}>*/}
-                            <div style={{textAlign: 'center', color: '#333333', fontWeight: 'bold', fontSize: '16px'}}>
-                              Impact to Buying
-                              Controller
-                              <br></br>
-                              <div style={{fontWeight: 'bold', fontSize: '16px', left: '9px'}}
-                                   className={(() => {
-                                     if (this.props.DelistContainer.waterfallValue.bc_sales_contri > 0) {
-                                       return "glyphicon glyphicon-chevron-up waterfallCalloutsPositive"
-                                     }
-                                     else if (this.props.DelistContainer.waterfallValue.bc_sales_contri < 0) {
-                                       return "glyphicon glyphicon-chevron-down waterfallCalloutsNegative"
-                                     } else {
-                                       return "glyphicon glyphicon-minus-sign waterfallCalloutsNeutral"
-                                     }
-                                   })()}>
-                                {this.props.DelistContainer.waterfallValue.bc_sales_contri}
+                              </div>
+                              <div className="col-xs-5">
+                                <Panel>
+                                  {/*<div style={{textAlign: 'center', color: '#00539f', fontWeight: 'bold', fontSize: '16px'}}>*/}
+                                  <div style={{textAlign: 'center', color: '#333333', fontWeight: 'bold', fontSize: '16px'}}>
+                                    Impact to Buying
+                                    Controller
+                                    <br></br>
+                                    <div style={{fontWeight: 'bold', fontSize: '16px', left: '9px'}}
+                                         className={(() => {
+                                           if (this.props.DelistContainer.waterfallValue.bc_sales_contri > 0) {
+                                             return "glyphicon glyphicon-chevron-up waterfallCalloutsPositive"
+                                           }
+                                           else if (this.props.DelistContainer.waterfallValue.bc_sales_contri < 0) {
+                                             return "glyphicon glyphicon-chevron-down waterfallCalloutsNegative"
+                                           } else {
+                                             return "glyphicon glyphicon-minus-sign waterfallCalloutsNeutral"
+                                           }
+                                         })()}>
+                                      {this.props.DelistContainer.waterfallValue.bc_sales_contri}
+                                    </div>
+                                  </div>
+                                </Panel>
+
+                                <Panel>
+                                  <div style={{textAlign: 'center', color: '#333333', fontWeight: 'bold', fontSize: '16px'}}>
+                                    Impact to Product
+                                    Sub-group
+                                  </div>
+                                  <div style={{
+                                    textAlign: 'center',
+                                    fontWeight: 'bold',
+                                    fontSize: '16px',
+                                    left: '93px'
+                                  }}
+                                       className={(() => {
+                                         if (this.props.DelistContainer.waterfallValue.psg_sales_contri > 0) {
+                                           return "glyphicon glyphicon-chevron-up waterfallCalloutsPositive"
+                                         }
+                                         else if (this.props.DelistContainer.waterfallValue.psg_sales_contri < 0) {
+                                           return "glyphicon glyphicon-chevron-down waterfallCalloutsNegative"
+                                         } else {
+                                           return "glyphicon glyphicon-minus-sign waterfallCalloutsNeutral"
+                                         }
+                                       })()}>
+                                    {this.props.DelistContainer.waterfallValue.psg_sales_contri}
+                                  </div>
+                                </Panel>
                               </div>
                             </div>
-                          </Panel>
-
-                          <Panel>
-                            <div style={{textAlign: 'center', color: '#333333', fontWeight: 'bold', fontSize: '16px'}}>
-                              Impact to Product
-                              Sub-group
-                            </div>
-                            <div style={{
-                              textAlign: 'center',
-                              fontWeight: 'bold',
-                              fontSize: '16px',
-                              left: '93px'
-                            }}
-                                 className={(() => {
-                                   if (this.props.DelistContainer.waterfallValue.psg_sales_contri > 0) {
-                                     return "glyphicon glyphicon-chevron-up waterfallCalloutsPositive"
-                                   }
-                                   else if (this.props.DelistContainer.waterfallValue.psg_sales_contri < 0) {
-                                     return "glyphicon glyphicon-chevron-down waterfallCalloutsNegative"
-                                   } else {
-                                     return "glyphicon glyphicon-minus-sign waterfallCalloutsNeutral"
-                                   }
-                                 })()}>
-                              {this.props.DelistContainer.waterfallValue.psg_sales_contri}
-                            </div>
-                          </Panel>
+                          </div>
                         </div>
-                      </div>
 
-                    </Panel>
+
                   </div>
                   <div className="col-xs-6">
-                    <Panel>
-                      <h2 className="ts-blk-proview-subhead ts-blk-proview"
-                          style={{fontSize: '28px', verticalAlign: 'middle', top: '-22px', position: 'relative'}}><b
-                        style={{verticalAlign: 'middle'}}>Volume</b>
-                      </h2>
-                      <div className="row">
-                        <div className="col-xs-7">
-                          <WaterFallChart2 id="waterfallChart_2" yAxisName="Volume" formatter="formatSales"
-                                           positive_text='positive' negative_text='negative' total_text='total'
-                                           data={ this.props.DelistContainer.waterfallValue.vols_chart }/>
+                      {/*<h2 className="ts-blk-proview-subhead ts-blk-proview"*/}
+                          {/*style={{fontSize: '28px', verticalAlign: 'middle', top: '-22px', position: 'relative'}}><b*/}
+                        {/*style={{verticalAlign: 'middle'}}>Volume</b>*/}
+                      {/*</h2>*/}
+                      <div className="panel panel-default">
+                        <div className="panel-heading" style={{fontSize: '20px', textAlign: 'center'}}>
+                          Volume
                         </div>
-                        <div className="col-xs-5">
-                          <Panel>
-                            <div style={{textAlign: 'center', color: '#333333', fontWeight: 'bold', fontSize: '16px'}}>
-                              Impact to Buying
-                              Controller
+                        <div className="panel-body">
+                          <div className="row">
+                            <div className="col-xs-7">
+                              <WaterFallChart2 id="waterfallChart_2" yAxisName="Volume" formatter="formatSales"
+                                               positive_text='positive' negative_text='negative' total_text='total'
+                                               data={ this.props.DelistContainer.waterfallValue.vols_chart }/>
                             </div>
-                            <div style={{
-                              textAlign: 'center',
-                              fontWeight: 'bold',
-                              fontSize: '16px',
-                              left: '93px'
-                            }}
-                                 className={(() => {
-                                   if (this.props.DelistContainer.waterfallValue.bc_vols_contri > 0) {
-                                     return "glyphicon glyphicon-chevron-up waterfallCalloutsPositive"
-                                   }
-                                   else if (this.props.DelistContainer.waterfallValue.bc_vols_contri < 0) {
-                                     return "glyphicon glyphicon-chevron-down waterfallCalloutsNegative"
-                                   } else {
-                                     return "glyphicon glyphicon-minus-sign waterfallCalloutsNeutral"
-                                   }
-                                 })()}>
-                              {this.props.DelistContainer.waterfallValue.bc_vols_contri}
-                            </div>
-                          </Panel>
+                            <div className="col-xs-5">
 
-                          <Panel>
-                            <div style={{textAlign: 'center', color: '#333333', fontWeight: 'bold', fontSize: '16px'}}>
-                              Impact to Product
-                              Sub-group
+                              <Panel>
+                                <div style={{textAlign: 'center', color: '#333333', fontWeight: 'bold', fontSize: '16px'}}>
+                                  Impact to Buying
+                                  Controller
+                                </div>
+                                <div style={{
+                                  textAlign: 'center',
+                                  fontWeight: 'bold',
+                                  fontSize: '16px',
+                                  left: '93px'
+                                }}
+                                     className={(() => {
+                                       if (this.props.DelistContainer.waterfallValue.bc_vols_contri > 0) {
+                                         return "glyphicon glyphicon-chevron-up waterfallCalloutsPositive"
+                                       }
+                                       else if (this.props.DelistContainer.waterfallValue.bc_vols_contri < 0) {
+                                         return "glyphicon glyphicon-chevron-down waterfallCalloutsNegative"
+                                       } else {
+                                         return "glyphicon glyphicon-minus-sign waterfallCalloutsNeutral"
+                                       }
+                                     })()}>
+                                  {this.props.DelistContainer.waterfallValue.bc_vols_contri}
+                                </div>
+                              </Panel>
+
+
+                              <Panel>
+                                <div style={{textAlign: 'center', color: '#333333', fontWeight: 'bold', fontSize: '16px'}}>
+                                  Impact to Product
+                                  Sub-group
+                                </div>
+                                <div style={{
+                                  textAlign: 'center',
+                                  fontWeight: 'bold',
+                                  fontSize: '16px',
+                                  left: '93px'
+                                }}
+                                     className={(() => {
+                                       if (this.props.DelistContainer.waterfallValue.psg_vols_contri > 0) {
+                                         return "glyphicon glyphicon-chevron-up waterfallCalloutsPositive"
+                                       }
+                                       else if (this.props.DelistContainer.waterfallValue.psg_vols_contri < 0) {
+                                         return "glyphicon glyphicon-chevron-down waterfallCalloutsNegative"
+                                       } else {
+                                         return "glyphicon glyphicon-minus-sign waterfallCalloutsNeutral"
+                                       }
+                                     })()}>
+                                  {this.props.DelistContainer.waterfallValue.psg_vols_contri}
+                                </div>
+                              </Panel>
                             </div>
-                            <div style={{
-                              textAlign: 'center',
-                              fontWeight: 'bold',
-                              fontSize: '16px',
-                              left: '93px'
-                            }}
-                                 className={(() => {
-                                   if (this.props.DelistContainer.waterfallValue.psg_vols_contri > 0) {
-                                     return "glyphicon glyphicon-chevron-up waterfallCalloutsPositive"
-                                   }
-                                   else if (this.props.DelistContainer.waterfallValue.psg_vols_contri < 0) {
-                                     return "glyphicon glyphicon-chevron-down waterfallCalloutsNegative"
-                                   } else {
-                                     return "glyphicon glyphicon-minus-sign waterfallCalloutsNeutral"
-                                   }
-                                 })()}>
-                              {this.props.DelistContainer.waterfallValue.psg_vols_contri}
-                            </div>
-                          </Panel>
+                          </div>
+                        </div>
+                        <div className="body">
+
                         </div>
                       </div>
-                    </Panel>
                   </div>
                 </div>
               )
@@ -503,29 +522,29 @@ export class DelistContainer extends React.PureComponent { // eslint-disable-lin
               )
             }
           })()}
-          <h1 className="ts-blk-proview-subhead ts-blk-proview" style={{fontSize: '32px', verticalAlign: 'middle'}}><b
+          <h2 className="ts-blk-proview-subhead ts-blk-proview" style={{fontSize: '28px', verticalAlign: 'middle'}}><b
             style={{verticalAlign: 'middle'}}>PROFIT IMPACT</b> <span
-            className="glyphicon glyphicon-info-sign pull-right" style={{right: '4px', fontSize: '28px', top: '4px'}}
+            className="glyphicon glyphicon-info-sign pull-right" style={{right: '4px', fontSize: '24px', top: '4px'}}
             onClick={() => {
               this.setState({profitImpactInfo: true});
-            }}></span></h1>
+            }}></span></h2>
 
 
           {/*MODAL FOR PROFIT IMPACT INFO ICON */}
 
-          <Modal show={this.state.profitImpactInfo} bsSize="small"
-                 aria-labelledby="contained-modal-title-sm">
+          <Modal show={this.state.profitImpactInfo} bsSize="lg"
+                 aria-labelledby="contained-modal-title-lg">
             <Modal.Header>
               <Modal.Title id="contained-modal-title-sm">
-                <div style={{textAlign: 'center'}}><b>{this.props.DelistContainer.supplierPopupTableData}
+                <div style={{textAlign: 'center'}}><b>
                   <div style={{textAlign: 'right'}}><span
                     onClick={() => this.setState({profitImpactInfo: false})}><b>X</b></span></div>
                 </b></div>
               </Modal.Title>
             </Modal.Header>
-            <Modal.Body>
-
-
+            <Modal.Body style={{fontSize: '14px'}}>
+              This graph compares direct CGM lost from the delisted products vs the final loss/gain in CGM due to demand transfer to substitute products.
+              Commercial Gross Margin (CGM) : This is BGM plus all other commercial income and expenses that are managed by Product.
             </Modal.Body>
           </Modal>
 
@@ -535,138 +554,149 @@ export class DelistContainer extends React.PureComponent { // eslint-disable-lin
               return (
                 <div className="row">
                   <div className="col-xs-6">
-                    <Panel>
-                      <h2 className="ts-blk-proview-subhead ts-blk-proview"
-                          style={{fontSize: '28px', verticalAlign: 'middle', top: '-22px', position: 'relative'}}><b
-                        style={{verticalAlign: 'middle'}}>PROFIT</b>
-                      </h2>
-                      <div className="row">
-                        <div className="col-xs-7">
-                          <WaterFallChart2 id="waterfallChart_3" yAxisName="Profit" formatter="formatSales"
-                                           positive_text='positive' negative_text='negative' total_text='total'
-                                           data={ this.props.DelistContainer.waterfallValue.cgm_chart }/>
+                      {/*<h2 className="ts-blk-proview-subhead ts-blk-proview"*/}
+                          {/*style={{fontSize: '28px', verticalAlign: 'middle', top: '-22px', position: 'relative'}}><b*/}
+                        {/*style={{verticalAlign: 'middle'}}>PROFIT</b>*/}
+                      {/*</h2>*/}
+                      <div className="panel panel-default">
+                        <div className="panel-heading" style={{fontSize: '20px', textAlign: 'center'}}>
+                          PROFIT
                         </div>
-                        <div className="col-xs-5">
-                          <Panel>
-                            <div style={{textAlign: 'center', color: '#333333', fontWeight: 'bold', fontSize: '16px'}}>
-                              Impact to Buying
-                              Controller
+                        <div className="panel-body">
+                          <div className="row">
+                            <div className="col-xs-7">
+                              <WaterFallChart2 id="waterfallChart_3" yAxisName="Profit" formatter="formatSales"
+                                               positive_text='positive' negative_text='negative' total_text='total'
+                                               data={ this.props.DelistContainer.waterfallValue.cgm_chart }/>
                             </div>
-                            <div style={{
-                              textAlign: 'center',
-                              color: 'red',
-                              fontWeight: 'bold',
-                              fontSize: '16px',
-                              left: '93px'
-                            }}
-                                 className={(() => {
-                                   if (this.props.DelistContainer.waterfallValue.bc_cgm_contri > 0) {
-                                     return "glyphicon glyphicon-chevron-up waterfallCalloutsPositive"
-                                   }
-                                   else if (this.props.DelistContainer.waterfallValue.bc_cgm_contri < 0) {
-                                     return "glyphicon glyphicon-chevron-down waterfallCalloutsNegative"
-                                   } else {
-                                     return "glyphicon glyphicon-minus-sign waterfallCalloutsNeutral"
-                                   }
-                                 })()}>
-                              {this.props.DelistContainer.waterfallValue.bc_cgm_contri}
+                            <div className="col-xs-5">
+                              <Panel>
+                                <div style={{textAlign: 'center', color: '#333333', fontWeight: 'bold', fontSize: '16px'}}>
+                                  Impact to Buying
+                                  Controller
+                                </div>
+                                <div style={{
+                                  textAlign: 'center',
+                                  color: 'red',
+                                  fontWeight: 'bold',
+                                  fontSize: '16px',
+                                  left: '93px'
+                                }}
+                                     className={(() => {
+                                       if (this.props.DelistContainer.waterfallValue.bc_cgm_contri > 0) {
+                                         return "glyphicon glyphicon-chevron-up waterfallCalloutsPositive"
+                                       }
+                                       else if (this.props.DelistContainer.waterfallValue.bc_cgm_contri < 0) {
+                                         return "glyphicon glyphicon-chevron-down waterfallCalloutsNegative"
+                                       } else {
+                                         return "glyphicon glyphicon-minus-sign waterfallCalloutsNeutral"
+                                       }
+                                     })()}>
+                                  {this.props.DelistContainer.waterfallValue.bc_cgm_contri}
+                                </div>
+                              </Panel>
+                              <Panel>
+                                <div style={{textAlign: 'center', color: '#333333', fontWeight: 'bold', fontSize: '16px'}}>
+                                  Impact to Product
+                                  Sub-group
+                                </div>
+                                <div style={{
+                                  textAlign: 'center',
+                                  color: 'red',
+                                  fontWeight: 'bold',
+                                  fontSize: '16px',
+                                  left: '93px'
+                                }}
+                                     className={(() => {
+                                       if (this.props.DelistContainer.waterfallValue.psg_cgm_contri > 0) {
+                                         return "glyphicon glyphicon-chevron-up"
+                                       }
+                                       else if (this.props.DelistContainer.waterfallValue.psg_cgm_contri < 0) {
+                                         return "glyphicon glyphicon-chevron-down"
+                                       } else {
+                                         return "glyphicon glyphicon-minus-sign"
+                                       }
+                                     })()}>
+                                  {this.props.DelistContainer.waterfallValue.psg_cgm_contri}
+                                </div>
+                              </Panel>
                             </div>
-                          </Panel>
-                          <Panel>
-                            <div style={{textAlign: 'center', color: '#333333', fontWeight: 'bold', fontSize: '16px'}}>
-                              Impact to Product
-                              Sub-group
-                            </div>
-                            <div style={{
-                              textAlign: 'center',
-                              color: 'red',
-                              fontWeight: 'bold',
-                              fontSize: '16px',
-                              left: '93px'
-                            }}
-                                 className={(() => {
-                                   if (this.props.DelistContainer.waterfallValue.psg_cgm_contri > 0) {
-                                     return "glyphicon glyphicon-chevron-up"
-                                   }
-                                   else if (this.props.DelistContainer.waterfallValue.psg_cgm_contri < 0) {
-                                     return "glyphicon glyphicon-chevron-down"
-                                   } else {
-                                     return "glyphicon glyphicon-minus-sign"
-                                   }
-                                 })()}>
-                              {this.props.DelistContainer.waterfallValue.psg_cgm_contri}
-                            </div>
-                          </Panel>
+                          </div>
                         </div>
                       </div>
-                    </Panel>
                   </div>
                   <div className="col-xs-6">
-                    <Panel>
-                      <h2 className="ts-blk-proview-subhead ts-blk-proview"
-                          style={{fontSize: '28px', verticalAlign: 'middle', top: '-22px', position: 'relative'}}><b
-                        style={{verticalAlign: 'middle'}}>CTS</b></h2>
-                      <div className="row">
-                        <div className="col-xs-7">
-                          <WaterFallChart2 id="waterfallChart_4" yAxisName="CTS" formatter="formatSales"
-                                           positive_text='negative' negative_text='positive' total_text='total1'
-                                           data={ this.props.DelistContainer.waterfallValue.cts_chart }/>
-                        </div>
-                        <div className="col-xs-5">
-                          <Panel>
-                            <div style={{textAlign: 'center', color: '#333333', fontWeight: 'bold', fontSize: '16px'}}>
-                              Impact to Buying
-                              Controller
-                            </div>
-                            <div style={{
-                              textAlign: 'center',
-                              color: 'red',
-                              fontWeight: 'bold',
-                              fontSize: '16px',
-                              left: '93px'
-                            }}
-                                 className={(() => {
-                                   if (this.props.DelistContainer.waterfallValue.bc_cgm_contri > 0) {
-                                     return "glyphicon glyphicon-chevron-up waterfallCalloutsPositive"
-                                   }
-                                   else if (this.props.DelistContainer.waterfallValue.bc_cgm_contri < 0) {
-                                     return "glyphicon glyphicon-chevron-down waterfallCalloutsNegative"
-                                   } else {
-                                     return "glyphicon glyphicon-minus-sign"
-                                   }
-                                 })()}>
-                              {this.props.DelistContainer.waterfallValue.bc_cgm_contri}
-                            </div>
-                          </Panel>
+                      {/*<h2 className="ts-blk-proview-subhead ts-blk-proview"*/}
+                          {/*style={{fontSize: '28px', verticalAlign: 'middle', top: '-22px', position: 'relative'}}><b*/}
+                        {/*style={{verticalAlign: 'middle'}}>CTS</b></h2>*/}
 
-                          <Panel>
-                            <div style={{textAlign: 'center', color: '#333333', fontWeight: 'bold', fontSize: '16px'}}>
-                              Impact to Product
-                              Sub-group
+                      <div className="panel panel-default">
+                        <div className="panel-heading" style={{fontSize: '20px', textAlign: 'center'}}>
+                          CTS
+                        </div>
+                        <div className="panel-body">
+                          <div className="row">
+                            <div className="col-xs-7">
+                              <WaterFallChart2 id="waterfallChart_4" yAxisName="CTS" formatter="formatSales"
+                                               positive_text='negative' negative_text='positive' total_text='total1'
+                                               data={ this.props.DelistContainer.waterfallValue.cts_chart }/>
                             </div>
-                            <div style={{
-                              textAlign: 'center',
-                              color: 'red',
-                              fontWeight: 'bold',
-                              fontSize: '16px',
-                              left: '93px'
-                            }}
-                                 className={(() => {
-                                   if (this.props.DelistContainer.waterfallValue.psg_cgm_contri > 0) {
-                                     return "glyphicon glyphicon-chevron-up"
-                                   }
-                                   else if (this.props.DelistContainer.waterfallValue.psg_cgm_contri < 0) {
-                                     return "glyphicon glyphicon-chevron-down"
-                                   } else {
-                                     return "glyphicon glyphicon-minus-sign"
-                                   }
-                                 })()}>
-                              {this.props.DelistContainer.waterfallValue.psg_cgm_contri}
+                            <div className="col-xs-5">
+                              <Panel>
+                                <div style={{textAlign: 'center', color: '#333333', fontWeight: 'bold', fontSize: '16px'}}>
+                                  Impact to Buying
+                                  Controller
+                                </div>
+                                <div style={{
+                                  textAlign: 'center',
+                                  color: 'red',
+                                  fontWeight: 'bold',
+                                  fontSize: '16px',
+                                  left: '93px'
+                                }}
+                                     className={(() => {
+                                       if (this.props.DelistContainer.waterfallValue.bc_cgm_contri > 0) {
+                                         return "glyphicon glyphicon-chevron-up waterfallCalloutsPositive"
+                                       }
+                                       else if (this.props.DelistContainer.waterfallValue.bc_cgm_contri < 0) {
+                                         return "glyphicon glyphicon-chevron-down waterfallCalloutsNegative"
+                                       } else {
+                                         return "glyphicon glyphicon-minus-sign"
+                                       }
+                                     })()}>
+                                  {this.props.DelistContainer.waterfallValue.bc_cgm_contri}
+                                </div>
+                              </Panel>
+
+                              <Panel>
+                                <div style={{textAlign: 'center', color: '#333333', fontWeight: 'bold', fontSize: '16px'}}>
+                                  Impact to Product
+                                  Sub-group
+                                </div>
+                                <div style={{
+                                  textAlign: 'center',
+                                  color: 'red',
+                                  fontWeight: 'bold',
+                                  fontSize: '16px',
+                                  left: '93px'
+                                }}
+                                     className={(() => {
+                                       if (this.props.DelistContainer.waterfallValue.psg_cgm_contri > 0) {
+                                         return "glyphicon glyphicon-chevron-up"
+                                       }
+                                       else if (this.props.DelistContainer.waterfallValue.psg_cgm_contri < 0) {
+                                         return "glyphicon glyphicon-chevron-down"
+                                       } else {
+                                         return "glyphicon glyphicon-minus-sign"
+                                       }
+                                     })()}>
+                                  {this.props.DelistContainer.waterfallValue.psg_cgm_contri}
+                                </div>
+                              </Panel>
                             </div>
-                          </Panel>
+                          </div>
                         </div>
                       </div>
-                    </Panel>
                   </div>
                 </div>
               )
@@ -678,28 +708,28 @@ export class DelistContainer extends React.PureComponent { // eslint-disable-lin
             }
           })()}
 
-          <h1 className="ts-blk-proview-subhead ts-blk-proview" style={{fontSize: '32px', verticalAlign: 'middle'}}><b
+          <h2 className="ts-blk-proview-subhead ts-blk-proview" style={{fontSize: '28px', verticalAlign: 'middle'}}><b
             style={{verticalAlign: 'middle'}}>SUPPLIER IMPACT TABLE </b><span
-            className="glyphicon glyphicon-info-sign pull-right" style={{right: '4px', fontSize: '28px', top: '4px'}}
+            className="glyphicon glyphicon-info-sign pull-right" style={{right: '4px', fontSize: '24px', top: '4px'}}
             onClick={() => {
               this.setState({spplierImpactTableInfo: true});
-            }}></span></h1>
+            }}></span></h2>
 
           {/*MODAL FOR SUPPLIER IMPACT TABLE INFO ICON */}
 
-          <Modal show={this.state.spplierImpactTableInfo} bsSize="small"
-                 aria-labelledby="contained-modal-title-sm">
+          <Modal show={this.state.spplierImpactTableInfo} bsSize="lg"
+                 aria-labelledby="contained-modal-title-lg">
             <Modal.Header>
               <Modal.Title id="contained-modal-title-sm">
-                <div style={{textAlign: 'center'}}><b>{this.props.DelistContainer.supplierPopupTableData}</b>
+                <div style={{textAlign: 'center'}}><b></b>
                   <div style={{textAlign: 'right'}}><span
                     onClick={() => this.setState({spplierImpactTableInfo: false})}><b>X</b></span></div>
                 </div>
               </Modal.Title>
             </Modal.Header>
-            <Modal.Body>
-
-
+            <Modal.Body style={{fontSize: '14px'}}>
+              A Supplier level view of the gains (due to the substitute product) and losses (due to the delist product)
+              Click on any row to view the data at a Product x Supplier level for that supplier.
             </Modal.Body>
           </Modal>
 
@@ -1046,17 +1076,17 @@ export class DelistContainer extends React.PureComponent { // eslint-disable-lin
             </Modal.Body>
           </Modal>
 
-          <h1 className="ts-blk-proview-subhead ts-blk-proview" style={{fontSize: '32px', verticalAlign: 'middle'}}><b
+          <h2 className="ts-blk-proview-subhead ts-blk-proview" style={{fontSize: '28px', verticalAlign: 'middle'}}><b
             style={{verticalAlign: 'middle'}}>DELIST PRODUCT TABLE</b> <span
-            className="glyphicon glyphicon-info-sign pull-right" style={{right: '4px', fontSize: '28px', top: '4px'}}
+            className="glyphicon glyphicon-info-sign pull-right" style={{right: '4px', fontSize: '24px', top: '4px'}}
             onClick={() => {
               this.setState({delistImpactTableInfo: true});
-            }}></span></h1>
+            }}></span></h2>
 
           {/*MODAL FOR DELIST PRODUCT TABLE INFO ICON */}
 
-          <Modal show={this.state.delistImpactTableInfo} bsSize="small"
-                 aria-labelledby="contained-modal-title-sm">
+          <Modal show={this.state.delistImpactTableInfo} bsSize="lg"
+                 aria-labelledby="contained-modal-title-lg">
             <Modal.Header>
               <Modal.Title id="contained-modal-title-sm">
                 <div style={{textAlign: 'center'}}><b></b>
@@ -1065,9 +1095,10 @@ export class DelistContainer extends React.PureComponent { // eslint-disable-lin
                 </div>
               </Modal.Title>
             </Modal.Header>
-            <Modal.Body>
-
-
+            <Modal.Body style={{fontSize: '14px'}}>
+              This table provides more details about the delisted products
+              •	If you do not agree with the forecasted sales, click on ‘Edit Forecast’ to modify the forecast value
+              •	If you do not agree with some of the substitutes listed, uncheck them to remove from list
             </Modal.Body>
           </Modal>
 
@@ -1354,6 +1385,7 @@ function mapDispatchToProps(dispatch) {
   return {
     onApiFetch: (e) => dispatch(apiFetch(e)),
     onDataUrlParams: (e) => dispatch(dataUrlParams(e)),
+    onUrlParams: (e) => dispatch(UrlParams(e)),
 
     //TABS
     onWeekClick: (e) => dispatch(WeekClick(e)),
