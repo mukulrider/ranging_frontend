@@ -193,7 +193,8 @@ export function* generateApiFetch() {
   try {
     const data = yield call(request,
       // `http://172.20.78.87:8000/ranging/product_impact_table/`);
-    `http://172.20.78.87:8000/ranging/product_impact_supplier_table${urlParams}`);
+    // `http://172.20.78.87:8000/ranging/product_impact_supplier_table${urlParams}`);
+    `http://172.20.246.146:8000/ranging/product_impact_supplier_table${urlParams}`);
     // `http://172.20.78.87:8000/ranging/product_impact_table${paramstring}`);
     // `http://172.20.78.87:8000/ranging/product_impact_table/?store_type=Main%20Estate&time_period=13_weeks&${paramstring}`);
 
@@ -320,7 +321,8 @@ export function* generateSubstitutesFetch() {
   try {
     const data = yield call(request,
       // `http://172.20.246.140:8000/ranging/product_impact_chart/`);
-      `http://172.20.78.87:8000/ranging/delist_table_popup?delist_product=${urlParams}`);
+      // `http://172.20.78.87:8000/ranging/delist_table_popup?delist_product=${urlParams}`);
+      `http://172.20.246.146:8000/ranging/delist_table_popup?delist_product=${urlParams}`);
     yield put(SubstitutesClickSuccess(data));
   } catch (err) {
     // console.log(err);
@@ -397,7 +399,8 @@ if(!(pagination_data == "")){
   try {
     const data = yield call(request,
       // `http://172.20.246.140:8000/ranging/product_impact_chart/`);
-      `http://172.20.78.87:8000/ranging/supplier_table_popup?supplier=${urlParams}`);
+      // `http://172.20.78.87:8000/ranging/supplier_table_popup?supplier=${urlParams}`);
+      `http://172.20.246.146:8000/ranging/supplier_table_popup?supplier=${urlParams}`);
     yield put(SupplierPopupTableDataFetchSuccess(data));
   } catch (err) {
     // console.log(err);
@@ -526,7 +529,8 @@ let urlParamsString = "";
 
   try {
     console.log("urlParams2", urlParams);
-    let data = yield call(request,`http://172.20.78.87:8000/ranging/product_impact_delist_table`+ urlParams);
+    let data = yield call(request,`http://172.20.246.146:8000/ranging/product_impact_delist_table`+ urlParams);
+    // let data = yield call(request,`http://172.20.78.87:8000/ranging/product_impact_delist_table`+ urlParams);
     console.log("delist data", data);
     yield put(delistTableSuccess(data));
   } catch (err) {
@@ -623,7 +627,8 @@ export function* generateWaterfallValueFetch() {
     const data = yield call(request,
       // `http://localhost:8090/pricing/generate-scenario/?` + paramstring);
       // 'http://172.20.246.140:8000/ranging/product_impact_chart/');
-      `http://172.20.78.87:8000/ranging/product_impact_chart${urlParams}`);
+      `http://172.20.246.146:8000/ranging/product_impact_chart${urlParams}`);
+      // `http://172.20.78.87:8000/ranging/product_impact_chart${urlParams}`);
     yield put(WaterfallValueChartSuccess(data));
   } catch (err) {
     // console.log(err);
@@ -644,7 +649,8 @@ export function* generateTable() {
   try {
     urlParamsString = urlParamsString.replace('commercial_director', 'commerical_director');
 
-    const data = yield call(request, `http://172.20.78.87:8000/ranging/product_impact_table/?${urlParamsString}`);
+    const data = yield call(request, `http://172.20.246.146:8000/ranging/product_impact_table/?${urlParamsString}`);
+    // const data = yield call(request, `http://172.20.78.87:8000/ranging/product_impact_table/?${urlParamsString}`);
     // const data = yield call(request, `http://172.20.246.140:8000/ranging/product_impact_table/?${urlParamsString}`);
     // const data = yield call(request, `http://172.20.78.87:8080/ranging/product_impact/filter_data&${urlParamsString}`);
     yield put(generateTableSuccess(data));
@@ -675,7 +681,8 @@ export function* generateSideFilter() {
     // todo: update url
     // const data = yield call(request, 'http://172.20.246.141:8000/ranging/product_impact/filter_data');
     // const data = yield call(request, 'http://172.20.247.17:8000/ranging/product_impact/filter_data');
-    const data = yield call(request, `http://172.20.78.87:8000/ranging/product_impact/filter_data/?${urlParamsString}`);
+    const data = yield call(request, `http://172.20.246.146:8000/ranging/product_impact/filter_data/?${urlParamsString}`);
+    // const data = yield call(request, `http://172.20.78.87:8000/ranging/product_impact/filter_data/?${urlParamsString}`);
     // const data = yield call(request, `http://172.20.78.87:8000/ranging/product_impact/filter_data/?"buying_controller=Wines"`);
     // const data = yield call(request, 'http://172.20.78.87:8000/ranging/product_impact/filter_logic');
     yield put(generateSideFilterSuccess(data));

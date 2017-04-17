@@ -192,7 +192,7 @@ export class DelistContainer extends React.PureComponent { // eslint-disable-lin
                 this.props.onWaterfallValueChart();
                 this.props.onApiFetch();
                 this.props.ondelistTable();
-                this.props.onWeekTabClick("Week: 13 weeks ")}} style={{fontSize: '14px'}}>WEEK 13</NavItem>
+                this.props.onWeekTabClick("Week: 13 weeks ")}} style={{fontSize: '14px'}}><b>Week 13</b></NavItem>
               <NavItem eventKey="2" onClick={() => {
                 this.setState({activeKey: "2"});
                 let week_no = "time_period=26_weeks";
@@ -200,7 +200,7 @@ export class DelistContainer extends React.PureComponent { // eslint-disable-lin
                 this.props.onWaterfallValueChart();
                 this.props.onApiFetch();
                 this.props.ondelistTable();
-                this.props.onWeekTabClick("Week: 26 weeks ")}} style={{fontSize: '14px'}}>Week 26</NavItem>
+                this.props.onWeekTabClick("Week: 26 weeks ")}} style={{fontSize: '14px'}}><b>Week 26</b></NavItem>
               <NavItem eventKey="3" onClick={() => {
                 this.setState({activeKey: "3"});
                 let week_no = "time_period=52_weeks";
@@ -208,7 +208,7 @@ export class DelistContainer extends React.PureComponent { // eslint-disable-lin
                 this.props.onWaterfallValueChart();
                 this.props.onApiFetch();
                 this.props.ondelistTable();
-                this.props.onWeekTabClick("Week: 52 weeks ")}} style={{fontSize: '14px'}}>Week 52</NavItem>
+                this.props.onWeekTabClick("Week: 52 weeks ")}} style={{fontSize: '14px'}}><b>Week 52</b></NavItem>
             </Nav>
 
             <Nav bsStyle="tabs" activeKey={this.state.activeKey} onSelect={this.handleSelect}>
@@ -219,7 +219,7 @@ export class DelistContainer extends React.PureComponent { // eslint-disable-lin
                 this.props.onWaterfallValueChart();
                 this.props.onApiFetch();
                 this.props.ondelistTable();
-                this.props.onStoreTabClick("Store: Overview ")}} style={{fontSize: '14px'}}>Overview</NavItem>
+                this.props.onStoreTabClick("Store: Overview ")}} style={{fontSize: '14px'}}><b>Overview</b></NavItem>
               <NavItem eventKey="2" onClick={() => {
                 this.setState({activeKey: "22"});
                 let store_type = "store_type=Main Estate";
@@ -227,7 +227,7 @@ export class DelistContainer extends React.PureComponent { // eslint-disable-lin
                 this.props.onWaterfallValueChart();
                 this.props.onApiFetch();
                 this.props.ondelistTable();
-                this.props.onStoreTabClick("Store: Main Estate ")}} style={{fontSize: '14px'}}>Main Estate</NavItem>
+                this.props.onStoreTabClick("Store: Main Estate ")}} style={{fontSize: '14px'}}><b>Main Estate</b></NavItem>
               <NavItem eventKey="3" onClick={() => {
                 this.setState({activeKey: "33"});
                 let store_type = "store_type=Express";
@@ -235,7 +235,7 @@ export class DelistContainer extends React.PureComponent { // eslint-disable-lin
                 this.props.onWaterfallValueChart();
                 this.props.onApiFetch();
                 this.props.ondelistTable();
-                this.props.onStoreTabClick("Store: Express")}} style={{fontSize: '14px'}}>Express</NavItem>
+                this.props.onStoreTabClick("Store: Express")}} style={{fontSize: '14px'}}><b>Express</b></NavItem>
             </Nav>
 
 
@@ -346,7 +346,7 @@ export class DelistContainer extends React.PureComponent { // eslint-disable-lin
           >
             <Modal.Header>
               <Modal.Title id="contained-modal-title-sm">
-                <div style={{textAlign: 'right'}}><b>{this.props.DelistContainer.supplierPopupTableData} <span
+                <div style={{textAlign: 'right'}}><b><span
                   onClick={() => this.setState({supplierImpactInfo: false})}><b>X</b></span></b></div>
               </Modal.Title>
             </Modal.Header>
@@ -780,9 +780,9 @@ export class DelistContainer extends React.PureComponent { // eslint-disable-lin
                             verticalAlign: 'middle',
                             textAlign: "center"
                           }}>{formatSales(obj.value_gain_share)}</td>
-                          <td style={{verticalAlign: 'middle', textAlign: "right"}}>{formatSales(obj.value_impact)}</td>
+                          <td style={{verticalAlign: 'middle', textAlign: "center"}}>{formatSales(obj.value_impact)}</td>
                           <td style={{
-                            verticalAlign: 'middle',
+                            verticalAlign: 'center',
                             textAlign: "center",
                             fontSize: '14px'
                           }}>{obj.value_impact_per}</td>
@@ -920,14 +920,14 @@ export class DelistContainer extends React.PureComponent { // eslint-disable-lin
                 {/*<div>*/}
                 <thead>
                 <th style={{verticalAlign: 'middle'}}>Delisted product</th>
-                <th style={{verticalAlign: 'middle'}}>Predicted Value</th>
-                <th style={{verticalAlign: 'middle'}}>Predicted Volume</th>
-                <th style={{verticalAlign: 'middle', width: '80px'}}>Value loss</th>
-                <th style={{verticalAlign: 'middle'}}>Volume loss</th>
+                <th style={{verticalAlign: 'middle', position: 'relative', width: '9%'}}>Predicted Value</th>
+                <th style={{verticalAlign: 'middle', position: 'relative', width: '9%'}}>Predicted Volume</th>
+                <th style={{verticalAlign: 'middle', position: 'relative', width: '8%'}}>Value loss</th>
+                <th style={{verticalAlign: 'middle', position: 'relative', width: '8%'}}>Volume loss</th>
                 <th style={{verticalAlign: 'middle'}}>Substituting Supplier</th>
                 <th style={{verticalAlign: 'middle'}}>Substituting Product</th>
-                <th style={{verticalAlign: 'middle'}}>Value gain due to substitution</th>
-                <th style={{verticalAlign: 'middle'}}>Volume gain due to substitution</th>
+                <th style={{verticalAlign: 'middle', position: 'relative', width: '9%'}}>Value gain due to substitution</th>
+                <th style={{verticalAlign: 'middle', position: 'relative', width: '9%'}}>Volume gain due to substitution</th>
                 </thead>
                 <tbody>
                 {
@@ -946,14 +946,14 @@ export class DelistContainer extends React.PureComponent { // eslint-disable-lin
                             }}>{formatSales(obj.delist_pred_value)}</td>
                             <td style={{
                               verticalAlign: 'middle',
-                              textAlign: "center"
+                              textAlign: "center",
                             }}>{formatVolume(obj.delist_pred_vol)}</td>
-                            <td style={{textAlign: "right"}}>{formatSales(obj.delist_value_loss)}</td>
+                            <td style={{verticalAlign: 'middle',textAlign: "center"}}>{formatSales(obj.delist_value_loss)}</td>
                             <td style={{
                               verticalAlign: 'middle',
                               textAlign: "center"
                             }}>{formatVolume(obj.delist_vol_loss)}</td>
-                            <td>{obj.substitute_supplier}</td>
+                            <td style={{verticalAlign: 'middle'}}>{obj.substitute_supplier}</td>
                             <td>{obj.substituteproductcode}-{obj.substituteproductdescription}</td>
                             <td style={{
                               verticalAlign: 'middle',
@@ -1087,8 +1087,8 @@ export class DelistContainer extends React.PureComponent { // eslint-disable-lin
             <br></br>
             <table className="table table-hover table-striped table-bordered table_cust">
               <thead>
-              <th style={{verticalAlign: 'middle', fontSize: '14px'}}>Product Code</th>
-              <th style={{verticalAlign: 'middle', fontSize: '14px'}}>Product Description</th>
+              <th style={{verticalAlign: 'middle', fontSize: '14px', position: 'relative', width: '13%'}}>Product Code</th>
+              <th style={{verticalAlign: 'middle', fontSize: '14px', position: 'relative', width: '15%'}}>Product Description</th>
               <th style={{verticalAlign: 'middle', fontSize: '14px'}}>No of Stores</th>
               <th style={{verticalAlign: 'middle', fontSize: '14px'}}>Predicted Value</th>
               <th style={{verticalAlign: 'middle', fontSize: '14px'}}>Predicted Volume</th>
