@@ -184,6 +184,7 @@ export class DelistContainer extends React.PureComponent { // eslint-disable-lin
               {/*</ul>*/}
             {/*</div>*/}
 
+
             <Nav bsStyle="tabs" activeKey={this.state.activeKey} onSelect={this.handleSelect}>
               <NavItem eventKey="1" onClick={() => {
                 this.setState({activeKey: "1"});
