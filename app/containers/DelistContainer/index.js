@@ -201,7 +201,7 @@ export class DelistContainer extends React.PureComponent { // eslint-disable-lin
                 this.props.onApiFetch();
                 this.props.ondelistTable();
                 this.props.onWeekTabClick("Week: 13 weeks ")
-              }} style={{fontSize: '14px'}}><b>Week 13</b></NavItem>
+              }} style={{fontSize: '14px', fontFamily: 'Tesco'}}><b>Week 13</b></NavItem>
               <NavItem eventKey="2" onClick={() => {
                 this.setState({activeKey: "2"});
                 let week_no = "time_period=26_weeks";
@@ -210,7 +210,7 @@ export class DelistContainer extends React.PureComponent { // eslint-disable-lin
                 this.props.onApiFetch();
                 this.props.ondelistTable();
                 this.props.onWeekTabClick("Week: 26 weeks ")
-              }} style={{fontSize: '14px'}}><b>Week 26</b></NavItem>
+              }} style={{fontSize: '14px', fontFamily: 'Tesco'}}><b>Week 26</b></NavItem>
               <NavItem eventKey="3" onClick={() => {
                 this.setState({activeKey: "3"});
                 let week_no = "time_period=52_weeks";
@@ -219,7 +219,7 @@ export class DelistContainer extends React.PureComponent { // eslint-disable-lin
                 this.props.onApiFetch();
                 this.props.ondelistTable();
                 this.props.onWeekTabClick("Week: 52 weeks ")
-              }} style={{fontSize: '14px'}}><b>Week 52</b></NavItem>
+              }} style={{fontSize: '14px', fontFamily: 'Tesco'}}><b>Week 52</b></NavItem>
             </Nav>
 
             <Nav bsStyle="tabs" activeKey={this.state.activeKey2} onSelect={this.handleSelect}>
@@ -231,7 +231,7 @@ export class DelistContainer extends React.PureComponent { // eslint-disable-lin
                 this.props.onApiFetch();
                 this.props.ondelistTable();
                 this.props.onStoreTabClick("Store: Overview ")
-              }} style={{fontSize: '14px'}}><b>Overview</b></NavItem>
+              }} style={{fontSize: '14px', fontFamily: 'Tesco'}}><b>Overview</b></NavItem>
               <NavItem eventKey="22" onClick={() => {
                 this.setState({activeKey2: "22"});
                 let store_type = "store_type=Main Estate";
@@ -240,7 +240,7 @@ export class DelistContainer extends React.PureComponent { // eslint-disable-lin
                 this.props.onApiFetch();
                 this.props.ondelistTable();
                 this.props.onStoreTabClick("Store: Main Estate ")
-              }} style={{fontSize: '14px'}}><b>Main Estate</b></NavItem>
+              }} style={{fontSize: '14px', fontFamily: 'Tesco'}}><b>Main Estate</b></NavItem>
               <NavItem eventKey="33" onClick={() => {
                 this.setState({activeKey2: "33"});
                 let store_type = "store_type=Express";
@@ -249,7 +249,7 @@ export class DelistContainer extends React.PureComponent { // eslint-disable-lin
                 this.props.onApiFetch();
                 this.props.ondelistTable();
                 this.props.onStoreTabClick("Store: Express")
-              }} style={{fontSize: '14px'}}><b>Express</b></NavItem>
+              }} style={{fontSize: '14px', fontFamily: 'Tesco'}}><b>Express</b></NavItem>
             </Nav>
 
 
@@ -410,8 +410,8 @@ export class DelistContainer extends React.PureComponent { // eslint-disable-lin
                                 <div style={{fontWeight: 'bold', fontSize: '16px', left: '9px'}}
                                      className={(() => {
                                        if (this.props.DelistContainer.waterfallValue.bc_sales_contri > 0) {
-                                         alert(this.props.DelistContainer.waterfallValue.bc_sales_contri)
-                                         alert(this.props.DelistContainer.waterfallValue.bc_sales_contri)
+                                         {/*alert(this.props.DelistContainer.waterfallValue.bc_sales_contri)*/}
+                                         {/*alert(this.props.DelistContainer.waterfallValue.bc_sales_contri)*/}
                                          return "glyphicon glyphicon-chevron-up waterfallCalloutsPositive"
                                        }
                                        else if (this.props.DelistContainer.waterfallValue.bc_sales_contri < 0) {
@@ -640,7 +640,6 @@ export class DelistContainer extends React.PureComponent { // eslint-disable-lin
                               </div>
                               <div style={{
                                 textAlign: 'center',
-                                color: 'red',
                                 fontWeight: 'bold',
                                 fontSize: '16px',
                                 left: '93px'
@@ -666,19 +665,18 @@ export class DelistContainer extends React.PureComponent { // eslint-disable-lin
                               </div>
                               <div style={{
                                 textAlign: 'center',
-                                color: 'red',
                                 fontWeight: 'bold',
                                 fontSize: '16px',
                                 left: '93px'
                               }}
                                    className={(() => {
                                      if (this.props.DelistContainer.waterfallValue.psg_cgm_contri > 0) {
-                                       return "glyphicon glyphicon-chevron-up"
+                                       return "glyphicon glyphicon-chevron-up waterfallCalloutsPositive"
                                      }
                                      else if (this.props.DelistContainer.waterfallValue.psg_cgm_contri < 0) {
-                                       return "glyphicon glyphicon-chevron-down"
+                                       return "glyphicon glyphicon-chevron-down waterfallCalloutsNegative"
                                      } else {
-                                       return "glyphicon glyphicon-minus-sign"
+                                       return "glyphicon glyphicon-minus-sign waterfallCalloutsNeutral"
                                      }
                                    })()}>
                                 {this.props.DelistContainer.waterfallValue.psg_cgm_contri}%
@@ -741,7 +739,6 @@ export class DelistContainer extends React.PureComponent { // eslint-disable-lin
                               </div>
                               <div style={{
                                 textAlign: 'center',
-                                color: 'red',
                                 fontWeight: 'bold',
                                 fontSize: '16px',
                                 left: '93px'
@@ -753,7 +750,7 @@ export class DelistContainer extends React.PureComponent { // eslint-disable-lin
                                      else if (this.props.DelistContainer.waterfallValue.bc_cgm_contri < 0) {
                                        return "glyphicon glyphicon-chevron-down waterfallCalloutsNegative"
                                      } else {
-                                       return "glyphicon glyphicon-minus-sign"
+                                       return "glyphicon glyphicon-minus-sign waterfallCalloutsNeutral"
                                      }
                                    })()}>
                                 {this.props.DelistContainer.waterfallValue.bc_cgm_contri}%
@@ -768,19 +765,18 @@ export class DelistContainer extends React.PureComponent { // eslint-disable-lin
                               </div>
                               <div style={{
                                 textAlign: 'center',
-                                color: 'red',
                                 fontWeight: 'bold',
                                 fontSize: '16px',
                                 left: '93px'
                               }}
                                    className={(() => {
                                      if (this.props.DelistContainer.waterfallValue.psg_cgm_contri > 0) {
-                                       return "glyphicon glyphicon-chevron-up"
+                                       return "glyphicon glyphicon-chevron-up waterfallCalloutsPositive"
                                      }
                                      else if (this.props.DelistContainer.waterfallValue.psg_cgm_contri < 0) {
-                                       return "glyphicon glyphicon-chevron-down"
+                                       return "glyphicon glyphicon-chevron-down waterfallCalloutsNegative"
                                      } else {
-                                       return "glyphicon glyphicon-minus-sign"
+                                       return "glyphicon glyphicon-minus-sign waterfallCalloutsNeutral"
                                      }
                                    })()}>
                                 {this.props.DelistContainer.waterfallValue.psg_cgm_contri}%
