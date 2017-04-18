@@ -20,7 +20,6 @@ export function* defaultSaga() {
   // See example in containers/HomePage/sagas.js
 }
 
-
 //------------------------------- Bubble Chart TableLoad ------------------------------------------
 export function* generateDataFetch() {
   // console.log('generateDataFetch saga');
