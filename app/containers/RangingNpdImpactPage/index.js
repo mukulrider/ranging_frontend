@@ -20,6 +20,7 @@ import Spinner from 'components/spinner';
 import BubbleChartNpd from 'components/BubbleChartNpd';
 import WaterFallChartNpd from 'components/WaterFallChartNpd';
 import InputField from 'components/input_field';
+import {Modal, Nav, NavItem, MenuItem, NavDropdown} from 'react-bootstrap';
 import {
   dataFetchOnPageLoad,dataFetchOnBubbleData,dataFetchCanniProdTable,dataFetchOnWaterFallChart,
   sendUrlParams,generateSideFilter, generateUrlParams, generateUrlParamsString,
@@ -59,6 +60,11 @@ export class RangingNpdImpactPage extends React.PureComponent { // eslint-disabl
     // this.setCookie('');
 
   };
+  constructor(props) {
+    super(props);
+    this.state = {smShow: false, lgShow: false, showPreviousChanges: true, activeKey: '1'};
+  }
+
 
   setCookie =(filter_selections)=>{
 
@@ -213,7 +219,91 @@ export class RangingNpdImpactPage extends React.PureComponent { // eslint-disabl
 
           {/*Content*/}
           <div className="col-xs-10">
+            <Modal show={this.state.lgShow} bsSize="large" aria-labelledby="contained-modal-title-sm">
+              <Modal.Body>
+                <div>
+                  {/*<InputField type="text"*/}
+                              {/*placeholder="Enter Forecast Name"*/}
+                              {/*value={this.props.newForecastName}*/}
+                              {/*onChange={(e) => {*/}
+                                {/*this.props.onGenerateForecastName(e.target.value)*/}
+                              {/*}}/>*/}
+                  {/*<br/>*/}
+                  {/*<div style={{textAlign: 'center'}}>*/}
+                    {/*{this.props.newScenarioSpinner ?*/}
+                      {/*<Spinner style={{display: 'block', margin: '0 auto'}}/> : ''}*/}
+                  {/*</div>*/}
+                  <div className="row">
+                    <div className="col-xs-12">
 
+                      <div className="col-xs-6 center-this">
+                        <Panel>
+                          <div>
+                            <h4>PREDICTED FORECAST</h4>
+                          </div>
+
+                          {(() => {
+                            if (this.props.RangingNpdImpactPage.waterFallChartData) {
+                              {/*console.log('this.props.RangingNpdImpactPage.waterFallChartData',this.props.RangingNpdImpactPage.waterFallChartData);*/}
+                              return (
+                                <div className="cannibalization-perc-number">
+                                  {this.props.RangingNpdImpactPage.waterFallChartData.impact.Cannibilized_volume} %
+                                </div>
+                              )
+                            }})()}
+
+                        </Panel>
+                      </div>
+
+                      <div className="col-xs-6 center-this">
+                        <Panel>
+                          <div>
+                            <h4>EDIT FORECAST</h4>
+                          </div>
+                          <InputField type="text"
+                          placeholder="Enter Forecast Value"
+                          value={this.props.newForecastName}
+                          // onChange={(e) => {
+                          // this.props.onGenerateForecastName(e.target.value)}}
+                           />
+                          <br/>
+                          {/*{(() => {*/}
+                            {/*if (this.props.RangingNpdImpactPage.waterFallChartData) {*/}
+                              {/*return (*/}
+                                {/*<div className="cannibalization-perc-number">*/}
+                                  {/*{this.props.RangingNpdImpactPage.waterFallChartData.impact.perc_impact_psg} %*/}
+                                {/*</div>*/}
+                              {/*)*/}
+                            {/*}})()}*/}
+                        </Panel>
+                      </div>
+                    </div>
+
+
+
+                  </div>
+                  <br/>
+                  {/*<a href="/pricing/scenario-tracker/">*/}
+                  <Button
+                    onClick={() => {
+                      this.props.onGenerateNewScenario2();
+                      this.setState({lgShow: true})
+                    }}
+                    style={{display: 'block', margin: '0 auto'}}>
+                    Generate Forecast
+                  </Button>
+                  {/*</a>*/}
+                  <br/>
+                </div>
+              </Modal.Body>
+              <Modal.Footer>
+                <Button
+                  onClick={() => {
+                    this.setState({lgShow: false})
+                  }}
+                  style={{display: 'block', margin: '0 auto'}}>Close</Button>
+              </Modal.Footer>
+            </Modal>
             <Panel>
 
               {/*Net Impact (Waterfall chart and impact numbers)*/}
@@ -238,7 +328,8 @@ export class RangingNpdImpactPage extends React.PureComponent { // eslint-disabl
                           {(() => {
                             if (this.props.RangingNpdImpactPage.waterFallChartData) {
                               return (
-                                <WaterFallChartNpd data={{chart_data:this.props.RangingNpdImpactPage.waterFallChartData.data,chart_id:"net_impact_waterfall"}}/>
+                                <WaterFallChartNpd data={{chart_data:this.props.RangingNpdImpactPage.sales_chart.data
+                                  ,chart_id:"net_impact_waterfall"}}/>
                               )
                             }})()}
 
@@ -286,7 +377,6 @@ export class RangingNpdImpactPage extends React.PureComponent { // eslint-disabl
 
 
                           </div>
-
                         </Panel>
                       </div>
 
@@ -346,8 +436,6 @@ export class RangingNpdImpactPage extends React.PureComponent { // eslint-disabl
                             </div>
                           </div>
 
-
-
                         </div>
 
                       </Panel>
@@ -355,6 +443,13 @@ export class RangingNpdImpactPage extends React.PureComponent { // eslint-disabl
                   </div>
                 </div>
               </div>
+
+                <Button
+                  onClick={() => this.setState({lgShow: true})}
+                  style={{display: 'block', margin: '0 auto'}}>
+                  EDIT VOLUME FORECAST
+                </Button>
+
               </Panel>
 
               {/*Cannibalization Table*/}

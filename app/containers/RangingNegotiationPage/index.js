@@ -25,8 +25,7 @@ import {
   SavePFilterParam,
   SaveStoreParam,
   SaveWeekParam,
-  SaveBubbleParam
-  ,
+  SaveBubbleParam,
   SaveSideFilterParam,
   SavePageParam,
   generateTextBoxQueryString,
@@ -246,7 +245,7 @@ export class RangingNegotiationPage extends React.PureComponent { // eslint-disa
                                     onFetchGraph={this.props.onFetchGraph}
                                     onGenerateTable={this.props.onGenerateTable}
                       />
-                      <i>*Size of the bubble corresponds to RoS</i>
+                      <i style={{fontSize:'12px'}}>*Size of the bubble corresponds to Rate of Sales</i>
                     </div>
 
                     <div className="col-xs-12 col-md-4">
@@ -352,10 +351,12 @@ export class RangingNegotiationPage extends React.PureComponent { // eslint-disa
 
                   <InputField type={'string'}
                               placeholder="Search for Product Description ..."
+                              dataPageUrlParams="page=1"
                               value={this.props.textBoxQueryString}
                               onChange={(e) => {
                                 this.props.onGenerateTextBoxQueryString(e);
                                 this.props.onGenerateTable();
+                                this.props.onSavePageParam(dataPageUrlParams);
                               }}
                   />
                 </div>
@@ -380,24 +381,24 @@ export class RangingNegotiationPage extends React.PureComponent { // eslint-disa
 
 
                             window.location = objString;
-                          }}>SAVE</Button>
+                          }}>SEND TO DE-LIST</Button>
                 </div>
                 <table className="table table-hover table-bordered table-striped ">
 
                   <thead style={{fontWeight: '700', fontSize: '12px', textAlign: 'center'}}>
 
-                  <th>Select</th>
-                  <th>Store Type</th>
-                  <th>Base Product Number</th>
-                  <th>Product Description</th>
-                  <th>CPS</th>
-                  <th>PPS</th>
-                  <th>#Substitute Prod.</th>
-                  <th>Value</th>
-                  <th>Volume</th>
-                  <th>Rate of Sale</th>
-                  <th>Store Count</th>
-                  <th>ASP</th>
+                  <th style={{textAlign:'center'}}>Select</th>
+                  <th style={{textAlign:'center'}}>Store Type</th>
+                  <th style={{textAlign:'center'}}>Base Product Number</th>
+                  <th style={{textAlign:'center'}}>Product Description</th>
+                  <th style={{textAlign:'center'}}>CPS</th>
+                  <th style={{textAlign:'center'}}>PPS</th>
+                  <th style={{textAlign:'center'}}>#Substitute Prod.</th>
+                  <th style={{textAlign:'center'}}>Value</th>
+                  <th style={{textAlign:'center'}}>Volume</th>
+                  <th style={{textAlign:'center'}}>Rate of Sale</th>
+                  <th style={{textAlign:'center'}}>Store Count</th>
+                  <th style={{textAlign:'center'}}>ASP</th>
 
                   </thead>
                   <tbody >
@@ -437,17 +438,17 @@ export class RangingNegotiationPage extends React.PureComponent { // eslint-disa
                                         })()}
                                         valid={true}/>
                             </td>
-                            <td>{obj.store_type}</td>
-                            <td style={{textAlign: "right"}}>{obj.base_product_number}</td>
-                            <td style={{textAlign: "left"}}>{obj.long_description}</td>
-                            <td style={{textAlign: "right"}}>{obj.cps}</td>
-                            <td style={{textAlign: "right"}}>{formatSales(obj.pps)}</td>
-                            <td style={{textAlign: "right"}}>{obj.subs_count}</td>
-                            <td style={{textAlign: "right"}}>{formatSales(obj.sales_value)}</td>
-                            <td style={{textAlign: "right"}}>{formatVolume(obj.sales_volume)}</td>
-                            <td style={{textAlign: "right"}}>{formatSales(obj.rate_of_sale)}</td>
-                            <td style={{textAlign: "right"}}>{obj.store_count}</td>
-                            <td style={{textAlign: "right"}}>£ {obj.rsp}</td>
+                            <td style={{textAlign:'center'}}>{obj.store_type}</td>
+                            <td style={{textAlign:'center'}}>{obj.base_product_number}</td>
+                            <td style={{textAlign:'center'}}>{obj.long_description}</td>
+                            <td style={{textAlign:'center'}}>{obj.cps}</td>
+                            <td style={{textAlign:'center'}}>{formatSales(obj.pps)}</td>
+                            <td style={{textAlign:'center'}}>{obj.subs_count}</td>
+                            <td style={{textAlign:'center'}}>{formatSales(obj.sales_value)}</td>
+                            <td style={{textAlign:'center'}}>{formatVolume(obj.sales_volume)}</td>
+                            <td style={{textAlign:'center'}}>{formatSales(obj.rate_of_sale)}</td>
+                            <td style={{textAlign:'center'}}>{obj.store_count}</td>
+                            <td style={{textAlign:'center'}}>£ {obj.rsp}</td>
                           </tr>
                         )
                       })

@@ -38,6 +38,7 @@ class SelectorNegotiation2 extends React.PureComponent { // eslint-disable-line 
   componentDidMount = () => {
     console.log('location->>> ');
     this.props.onGenerateUrlParamsString(this.props.location.search.substring(1, this.props.location.search.length));
+
   };
   // componentDidUpdate = () => {
   //   const urlParams = this.props.location.query;
@@ -118,7 +119,7 @@ class SelectorNegotiation2 extends React.PureComponent { // eslint-disable-line 
                 onClick={() => {
                   this.props.onGenerateUrlParamsString('');
                   this.props.onGenerateUrlParamsData();
-                }}>Clear all</Button>
+                }}>Reset Filters</Button>
             </div>
           )
         })()}

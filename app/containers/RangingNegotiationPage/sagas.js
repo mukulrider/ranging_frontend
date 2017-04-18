@@ -74,10 +74,10 @@ export function* generateSideFilter() {
     // todo: update url
     let data = '';
     if (urlParams){
-      data = yield call(request, `http://172.20.244.141:8000/ranging/nego/filter_data?` + urlParams);
+      data = yield call(request, `http://172.20.244.141:8000/api/nego/filter_data?` + urlParams);
 
     }else{
-      data = yield call(request, `http://172.20.244.141:8000/ranging/nego/filter_data`);
+      data = yield call(request, `http://172.20.244.141:8000/api/nego/filter_data`);
     }
     // // console.log(data);
     yield put(generateSideFilterSuccess(data));
@@ -169,11 +169,11 @@ export function* generateTable() {
   ajaxSelection = SelectionState.replace('&', '');
   console.log("final url for table",ajaxSelection);
   if (ajaxSelection != '') {
-    const data = yield call(request, `http://172.20.244.141:8000/ranging/nego_bubble_table?` + ajaxSelection+"&"+urlParams);
+    const data = yield call(request, `http://172.20.244.141:8000/api/nego_table?` + ajaxSelection+"&"+urlParams);
     yield put(generateTableSuccess(data));
   }
   else {
-    const data = yield call(request, `http://172.20.244.141:8000/ranging/nego_bubble_table?`+urlParams);
+    const data = yield call(request, `http://172.20.244.141:8000/api/nego_table?`+urlParams);
     yield put(generateTableSuccess(data));
   }
 
@@ -263,20 +263,20 @@ export function* generateGraph() {
   if (performanceParams !== '') {
     SelectionState = SelectionState + '&' + performanceParams
   }
-  if (bubbleParams !== '') {
-    SelectionState = SelectionState + '&' + bubbleParams
-  }
+  // if (bubbleParams !== '') {
+  //   SelectionState = SelectionState + '&' + bubbleParams
+  // }
 
   //Removing "&"
   let ajaxSelection = '';
   ajaxSelection = SelectionState.replace('&', '');
   console.log("final url for graph",ajaxSelection);
   if (ajaxSelection != '') {
-    const data = yield call(request, `http://172.20.244.141:8000/ranging/nego_bubble_chart?` + urlParams +"&"+ ajaxSelection);
+    const data = yield call(request, `http://172.20.244.141:8000/api/nego_chart?` + urlParams +"&"+ ajaxSelection);
     yield put(fetchGraphSuccess(data));
   }
   else {
-    const data = yield call(request, `http://172.20.244.141:8000/ranging/nego_bubble_chart?`+urlParams );
+    const data = yield call(request, `http://172.20.244.141:8000/api/nego_chart?`+urlParams );
     yield put(fetchGraphSuccess(data));
   }
   //Once all the parameters are obtained, remove the first instance of & and then make a call to url with all param appended

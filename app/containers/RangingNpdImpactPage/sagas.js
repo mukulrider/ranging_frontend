@@ -46,12 +46,12 @@ export function* generateDataFetch() {
 
   }
 
-  console.log('Getting data from http://172.20.244.141:8000/ranging/npd_impact_view_bubble_table' + paramString + searchParams);
+  console.log('Getting data from http://172.20.244.141:8000/ranging_new/npd_impact_view_bubble_table' + paramString + searchParams);
   try {
 
     // Table data
     const bubble_table = yield call(request,
-      `http://172.20.244.141:8000/ranging/npd_impact_view_bubble_table?` + paramString + searchParams);
+      `http://172.20.244.141:8000/ranging_new/npd_impact_view_bubble_table?` + paramString + searchParams);
     yield put(dataFetchOnBubbleTableSuccess(bubble_table));
 
   } catch (err) {
@@ -83,12 +83,12 @@ export function* generateBubbleChartDataFetch() {
   });
   paramString = paramString.replace('&', '');
   console.log("logging_bubble_url");
-  console.log('http://172.20.244.141:8000/ranging/npd_impact_view_bubble_chart?' + paramString);
+  console.log('http://172.20.244.141:8000/ranging_new/npd_impact_view_bubble_chart?' + paramString);
   try {
 
     // Bubble chart data
     const bubble_chart = yield call(request,
-      `http://172.20.244.141:8000/ranging/npd_impact_view_bubble_chart?`+ paramString);
+      `http://172.20.244.141:8000/ranging_new/npd_impact_view_bubble_chart?`+ paramString);
     yield put(dataFetchOnBubbleDataSuccess(bubble_chart));
 
   } catch (err) {
@@ -129,12 +129,12 @@ export function* generateProdCanniTableDataFetch() {
   }
 
 
-  console.log('http://172.20.244.141:8000/ranging/npd_impact_view_table?' + paramString + searchParams);
+  console.log('http://172.20.244.141:8000/ranging_new/npd_impact_view_table?' + paramString + searchParams);
   try {
 
     // Cannibalization table data
     const canni_table = yield call(request,
-      `http://172.20.244.141:8000/ranging/npd_impact_view_table?` + paramString + searchParams);
+      `http://172.20.244.141:8000/ranging_new/npd_impact_view_forecast?` + paramString + searchParams);
     yield put(dataFetchCanniProdTableSuccess(canni_table));
 
 
@@ -163,12 +163,12 @@ export function* generateWaterFallChartDataFetch() {
     paramString += `&${obj}=${urlParams[obj]}`
   });
   paramString = paramString.replace('&', '');
-  console.log('http://172.20.244.141:8000/ranging/npd_impact_view_waterfall?' + paramString);
+  console.log('http://172.20.244.141:8000/ranging_new/npd_impact_view_waterfall?' + paramString);
   try {
 
     // Waterfall chart table data
     const waterfallchart = yield call(request,
-      `http://172.20.244.141:8000/ranging/npd_impact_view_waterfall?` + paramString);
+      `http://172.20.244.141:8000/ranging_new/npd_impact_view_forecast?` + paramString);
     yield put(dataFetchOnWaterFallChartSuccess(waterfallchart));
 
 
@@ -190,18 +190,18 @@ export function* generateSideFilter() {
   try {
     // todo: update url
     // const data = yield call(request, `http://localhost:8090/wash/?format=json`);
-    // const data = yield call(request, `http://172.20.244.141:8000/ranging/npd_impact_view/filter_data`);
+    // const data = yield call(request, `http://172.20.244.141:8000/ranging_new/npd_impact_view/filter_data`);
 
     let urlName = yield select(selectRangingNpdImpactPageDomain());
     // let urlParams = urlName.get('filter_selection');
     let urlParams = urlName.get('filterSelectionsTillNow');
 
-    console.log('http://172.20.244.141:8000/ranging/npd_impact_view/filter_data?' + urlParams);
+    console.log('http://172.20.244.141:8000/ranging_new/npd_impact_view/filter_data?' + urlParams);
     let data = '';
     if (urlParams) {
-      data = yield call(request, `http://172.20.244.141:8000/ranging/npd_impact_view/filter_data?` + urlParams);
+      data = yield call(request, `http://172.20.244.141:8000/ranging_new/npd_impact_view/filter_data?` + urlParams);
     } else {
-      data = yield call(request, `http://172.20.244.141:8000/ranging/npd_impact_view/filter_data`);
+      data = yield call(request, `http://172.20.244.141:8000/ranging_new/npd_impact_view/filter_data`);
     }
 
     yield put(generateSideFilterSuccess(data));
