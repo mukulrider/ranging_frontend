@@ -18,6 +18,7 @@ import {
   APPLY_BTN_CLICK,
   DELIST_TABLE,
   GENERATE_URL_PARAMS_STRING,
+  SIDE_FILTER_RESET,
 } from './constants';
 
 import {
@@ -652,6 +653,29 @@ export function* doGenerateSideFilter() {
   yield cancel(watcher);
 }
 
+
+/* SIDE FILTER RESET*/
+export function* generateSideFilterReset() {
+  console.log("inside filter reset");
+  try {
+    // todo: update url
+    // const data = yield call(request, 'http://172.20.247.17:8000/ranging/product_impact/filter_data');
+    const data = yield call(request, `http://172.20.246.146:8000/ranging/product_impact/filter_data/`);
+
+    yield put(generateSideFilterSuccess(data));
+  } catch (err) {
+    // console.log(err);
+  }
+}
+
+
+export function* doSideFilterReset() {
+  console.log("filter saga");
+  const watcher = yield takeLatest(SIDE_FILTER_RESET, generateSideFilterReset);
+  yield take(LOCATION_CHANGE);
+  yield cancel(watcher);
+}
+
 // TESTING AJAX
 
 export function* generateAjaxFetch() {
@@ -717,4 +741,5 @@ export default [
   doSupplierPopupTableFetch,
   doAjaxApplyBtn,
   doDelistTableFetch,
+  doSideFilterReset,
 ];

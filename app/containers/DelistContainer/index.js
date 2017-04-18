@@ -40,6 +40,7 @@ import {
   SubstitutesClickSendLongDesc,
   SupplierImpactTableClick,
   generateSideFilter,
+  generateSideFilterReset,
   generateUrlParams,
   generateTable,
   generateUrlParamsString,
@@ -137,6 +138,7 @@ export class DelistContainer extends React.PureComponent { // eslint-disable-lin
                 return (
                   <NewSelector2 sideFilter={this.props.DelistContainer.sideFilter}
                                 location={this.props.location}
+                                onFilterReset={this.props.onFilterReset}
                                 onDataUrlParams={this.props.DataUrlParams}
                                 onUrlParamsData={this.props.onUrlParamsData}
                                 onGenerateUrlParamsString={this.props.onGenerateUrlParamsString}
@@ -1432,6 +1434,7 @@ function mapDispatchToProps(dispatch) {
 
     // onGenerateTable: (e) => dispatch(generateTable(e)),
     onGenerateSideFilter: (e) => dispatch(generateSideFilter(e)),
+    onFilterReset: (e) => dispatch(generateSideFilterReset(e)),
     onGenerateUrlParams: (e) => dispatch(generateUrlParams(e)),
     onGenerateUrlParamsString: (e) => dispatch(generateUrlParamsString(e)),
 

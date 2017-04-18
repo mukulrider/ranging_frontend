@@ -43,6 +43,7 @@ import {
   STORE_BREADCRUMB,
   GENERATE_URL_PARAMS_DATA,
   URL_PARAMS,
+  SIDE_FILTER_RESET,
   } from './constants';
 
 export function defaultAction() {
@@ -273,6 +274,14 @@ export function generateTableSuccess(data) {
 export function generateSideFilter() {
   return {
     type: GENERATE_SIDE_FILTER,
+  };
+}
+
+//FILTER RESET
+export function generateSideFilterReset() {
+  console.log("side filter reset");
+  return {
+    type: SIDE_FILTER_RESET,
   };
 }
 

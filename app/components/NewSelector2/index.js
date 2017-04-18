@@ -98,6 +98,9 @@ class NewSelector2 extends React.PureComponent { // eslint-disable-line react/pr
                   {/*this.props.ondelistTable();*/}
                   {/*this.props.onWeekTabClick("Week: 13 weeks ");*/}
                 }}>APPLY</Button>&nbsp;&nbsp;
+              <Button onClick={() => {
+                this.props.onFilterReset();
+                }}>Reset Filters</Button>&nbsp;&nbsp;
             </div>
           )
         })()}

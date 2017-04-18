@@ -63,6 +63,9 @@ export const STORE_BREADCRUMB = 'app/DelistContainer/STORE_BREADCRUMB';
 //DELIST TABLE
 export const DELIST_TABLE = 'app/DelistContainer/DELIST_TABLE';
 
+//SIDE FILTER RESET
+export const SIDE_FILTER_RESET = 'app/DelistContainer/SIDE_FILTER_RESET';
+
 //DELIST TABLE SUCCESS
 export const DELIST_TABLE_SUCCESS = 'app/DelistContainer/DELIST_TABLE_SUCCESS';
 
