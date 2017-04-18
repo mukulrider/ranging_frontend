@@ -93,6 +93,7 @@ function rangingNpdImpactPageReducer(state = initialState, action) {
     case DEFAULT_ACTION:
       return state;
 
+
     case BUBBLE_CHART_TABLE_SUCCESS :
       // console.log(BUBBLE_CHART_TABLE_SUCCESS , 'reducer', action);
       return state.set('npd_bubble_table_data', action.data);

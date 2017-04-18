@@ -747,6 +747,7 @@ RangingNpdImpactPage.propTypes = {
 
 };
 
+
 const mapStateToProps = createStructuredSelector({
   RangingNpdImpactPage: makeSelectRangingNpdImpactPage(),
 });

@@ -6,6 +6,7 @@
 
 export const DEFAULT_ACTION = 'app/RangingNpdImpactPage/DEFAULT_ACTION';
 
+
 // Fetch data
 export const DATA_FETCH_ON_PAGE_LOAD = 'app/RangingNpdImpactPage/DATA_FETCH_ON_PAGE_LOAD';
 export const BUBBLE_CHART_TABLE_SUCCESS = 'app/RangingNpdImpactPage/BUBBLE_CHART_TABLE_SUCCESS ';
