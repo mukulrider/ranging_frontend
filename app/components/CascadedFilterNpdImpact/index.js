@@ -393,6 +393,7 @@ class CascadedFilterNpdImpact extends React.PureComponent { // eslint-disable-li
 
             this.applyButtonFunctionality();
 
+
           }}>Apply Filters</Button>
         <div/>
         <Button
