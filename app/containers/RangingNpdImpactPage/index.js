@@ -31,6 +31,7 @@ import {
 import CascadedFilterNpdImpact from 'components/CascadedFilterNpdImpact';
 
 
+
 export class RangingNpdImpactPage extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
 
 
@@ -47,7 +48,7 @@ export class RangingNpdImpactPage extends React.PureComponent { // eslint-disabl
 
     this.props.onDataFetchOnBubbleData();
     this.props.onDataFetchCanniProdTable();
-    this.props.onDataFetchOnWaterFallChart();
+   // this.props.onDataFetchOnWaterFallChart();
     this.props.onDataFetchOnPageLoad();
     this.props.onGenerateSideFilter();
 
@@ -247,7 +248,7 @@ export class RangingNpdImpactPage extends React.PureComponent { // eslint-disabl
                               {/*console.log('this.props.RangingNpdImpactPage.waterFallChartData',this.props.RangingNpdImpactPage.waterFallChartData);*/}
                               return (
                                 <div className="cannibalization-perc-number">
-                                  {this.props.RangingNpdImpactPage.waterFallChartData.impact.Cannibilized_volume} %
+                                  {/*{this.props.RangingNpdImpactPage.waterFallChartData.impact.Cannibilized_volume} %*/}
                                 </div>
                               )
                             }})()}
@@ -326,10 +327,10 @@ export class RangingNpdImpactPage extends React.PureComponent { // eslint-disabl
 
                            {/*Waterfall chart*/}
                           {(() => {
-                            if (this.props.RangingNpdImpactPage.waterFallChartData) {
+                            if (this.props.RangingNpdImpactPage.canniProdTableData) {
+                              console.log("a1", this.props.RangingNpdImpactPage.canniProdTableData)
                               return (
-                                <WaterFallChartNpd data={{chart_data:this.props.RangingNpdImpactPage.sales_chart.data
-                                  ,chart_id:"net_impact_waterfall"}}/>
+                                <WaterFallChartNpd data={{chart_data:this.props.RangingNpdImpactPage.canniProdTableData.sales_chart.data, chart_id:"net_impact_waterfall"}}/>
                               )
                             }})()}
 
@@ -342,13 +343,14 @@ export class RangingNpdImpactPage extends React.PureComponent { // eslint-disabl
                                   <div className="dashed-border">
                                     <h4> % CANNIBALIZATION</h4>
                                   </div>
+                                {/*console.log("volume canni data",this.props.RangingNpdImpactPage.sales_chart.impact.Cannibilized_sales);*/}
 
-                                  {(() => {
-                                    if (this.props.RangingNpdImpactPage.waterFallChartData) {
-                                      {/*console.log('this.props.RangingNpdImpactPage.waterFallChartData',this.props.RangingNpdImpactPage.waterFallChartData);*/}
+                                {(() => {
+                                    if (this.props.RangingNpdImpactPage.canniProdTableData) {
+                                      {/*console.log('this.props.RangingNpdImpactPage.waterFallChartData',this.props.RangingNpdImpactPage.sales_chart);*/}
                                       return (
                                         <div className="cannibalization-perc-number">
-                                          {this.props.RangingNpdImpactPage.waterFallChartData.impact.Cannibilized_volume} %
+                                          {this.props.RangingNpdImpactPage.canniProdTableData.sales_chart.impact.Cannibilization_perc} %
                                         </div>
                                       )
                                     }})()}
@@ -363,13 +365,14 @@ export class RangingNpdImpactPage extends React.PureComponent { // eslint-disabl
                                   </div>
 
                                   {(() => {
-                                    if (this.props.RangingNpdImpactPage.waterFallChartData) {
+                                    if (this.props.RangingNpdImpactPage.canniProdTableData) {
                                       return (
                                         <div className="cannibalization-perc-number">
-                                          {this.props.RangingNpdImpactPage.waterFallChartData.impact.perc_impact_psg} %
+                                          {this.props.RangingNpdImpactPage.canniProdTableData.sales_chart.impact.perc_impact_psg} %
                                         </div>
                                       )
-                                    }})()}
+                                    }
+                                  })()}
                                 </Panel>
                               </div>
                             </div>
@@ -389,9 +392,9 @@ export class RangingNpdImpactPage extends React.PureComponent { // eslint-disabl
 
                      {/*Waterfall chart*/}
                         {(() => {
-                          if (this.props.RangingNpdImpactPage.waterFallChartData) {
+                          if (this.props.RangingNpdImpactPage.canniProdTableData) {
                             return (
-                              <WaterFallChartNpd data={{chart_data:this.props.RangingNpdImpactPage.waterFallChartData.data,chart_id:"net_impact_waterfall_2"}}/>
+                              <WaterFallChartNpd data={{chart_data:this.props.RangingNpdImpactPage.canniProdTableData.volume_chart.data,chart_id:"net_impact_waterfall_2"}}/>
                             )
                           }})()}
 
@@ -406,11 +409,11 @@ export class RangingNpdImpactPage extends React.PureComponent { // eslint-disabl
                                 </div>
 
                                 {(() => {
-                                  if (this.props.RangingNpdImpactPage.waterFallChartData) {
+                                  if (this.props.RangingNpdImpactPage.canniProdTableData) {
                                     {/*console.log('this.props.RangingNpdImpactPage.waterFallChartData',this.props.RangingNpdImpactPage.waterFallChartData);*/}
                                     return (
                                       <div className="cannibalization-perc-number">
-                                        {this.props.RangingNpdImpactPage.waterFallChartData.impact.Cannibilized_volume} %
+                                        {this.props.RangingNpdImpactPage.canniProdTableData.volume_chart.impact.Cannibilization_perc} %
                                       </div>
                                     )
                                   }})()}
@@ -425,10 +428,10 @@ export class RangingNpdImpactPage extends React.PureComponent { // eslint-disabl
                                 </div>
 
                                 {(() => {
-                                  if (this.props.RangingNpdImpactPage.waterFallChartData) {
+                                  if (this.props.RangingNpdImpactPage.canniProdTableData) {
                                     return (
                                       <div className="cannibalization-perc-number">
-                                        {this.props.RangingNpdImpactPage.waterFallChartData.impact.perc_impact_psg} %
+                                        {this.props.RangingNpdImpactPage.canniProdTableData.volume_chart.impact.perc_impact_psg} %
                                       </div>
                                     )
                                   }})()}
@@ -483,7 +486,7 @@ export class RangingNpdImpactPage extends React.PureComponent { // eslint-disabl
                             <table className="table table-hover table-striped table-bordered " width="100%">
                           <thead>
                           <tr style={{fontSize:"16px",fontFamily:"Tesco"}}>
-                            <th>Branded Name</th>
+                            {/*<th>Branded Name</th>*/}
                             <th>Brand Indicator</th>
                             <th>Products Description</th>
                             <th>Volume</th>
@@ -494,15 +497,16 @@ export class RangingNpdImpactPage extends React.PureComponent { // eslint-disabl
                           <tbody className="table-body-format">
                             {(() => {
                             if (this.props.RangingNpdImpactPage.canniProdTableData) {
-                              return this.props.RangingNpdImpactPage.canniProdTableData.table.map(obj => {
+                              console.log("a2",this.props.RangingNpdImpactPage.canniProdTableData.similar_product_table);
+                              return this.props.RangingNpdImpactPage.canniProdTableData.similar_product_table.df.map(obj => {
 
                                 return (
                                   <tr key={Math.random() + Date.now()}>
-                                    <td>{obj.brand_name}</td>
+                                    {/*<td>{obj.brand_name}</td>*/}
                                     <td>{obj.brand_indicator}</td>
                                     <td>{obj.long_description}</td>
-                                    <td>{formatVolume(obj.sales_volume)}</td>
-                                    <td>{formatSales(obj.sales_value)}</td>
+                                    <td>{formatVolume(obj.predicted_volume)}</td>
+                                    <td>{formatSales(obj.predicted_sales)}</td>
                                   </tr>
                                 )
                               })
@@ -743,6 +747,7 @@ RangingNpdImpactPage.propTypes = {
 
 };
 
+
 const mapStateToProps = createStructuredSelector({
   RangingNpdImpactPage: makeSelectRangingNpdImpactPage(),
 });
@@ -750,10 +755,12 @@ const mapStateToProps = createStructuredSelector({
 function mapDispatchToProps(dispatch) {
   return {
     // Component data fetch
+    // For bubble table
     onDataFetchOnPageLoad: (e) => dispatch(dataFetchOnPageLoad(e)),
+
     onDataFetchOnBubbleData: (e) => dispatch(dataFetchOnBubbleData(e)),
     onDataFetchCanniProdTable: (e) => dispatch(dataFetchCanniProdTable(e)),
-    onDataFetchOnWaterFallChart: (e) => dispatch(dataFetchOnWaterFallChart(e)),
+    // onDataFetchOnWaterFallChart: (e) => dispatch(dataFetchOnWaterFallChart(e)),
 
 
     //----Filter data----

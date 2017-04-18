@@ -1,5 +1,6 @@
 import { createSelector } from 'reselect';
 
+
 /**
  * Direct selector to the rangingNpdImpactPage state domain
  */

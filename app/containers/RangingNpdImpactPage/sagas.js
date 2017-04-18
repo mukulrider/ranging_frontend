@@ -15,10 +15,12 @@ import {
 } from 'containers/RangingNpdImpactPage/selectors';
 
 
+
 // Individual exports for testing
 export function* defaultSaga() {
   // See example in containers/HomePage/sagas.js
 }
+
 
 //------------------------------- Bubble Chart TableLoad ------------------------------------------
 export function* generateDataFetch() {
@@ -28,30 +30,30 @@ export function* generateDataFetch() {
   let urlParams = urlName.get('dataUrlParms');
   let npdFirstHalfSelections = urlName.get('npdFirstHalfSelections');
   let searchParams = urlName.get('searchTable2');
+  // let paramString = 'buying_controller=Meat%20Fish%20and%20Veg&buyer=Meat%20and%20Poultry&junior_buyer=Coated%20Poultry&package_type=BOX&product_sub_group_description=FROZEN%20COATED%20POULTRY&measure_type=G&asp=1.967819549&acp=0.5&Size=300&brand_name=TESCO&till_roll_description=S/FRIED%20STRI&merchandise_group_code_description=FROZEN%20FISH&range_space_break_code=P&parent_supplier=1190. - MARITIME - JDM PRODUCE LIMITED&week_flag=Latest%2013%20Weeks';
+  let paramString = 'parent_supplier=1190.%20-%20MARITIME%20-%20JDM%20PRODUCE%20LIMITED&buying_controller=Meat%20Fish%20and%20Veg'
+    // let paramString = '';
+  // Object.keys(urlParams).map(obj => {
+  //   //console.log(obj,urlParams[obj]);
+  //   paramString += `&${obj}=${urlParams[obj]}`
+  // });
+  // paramString = paramString.replace('&', '');
+  //
+  // console.log('searchParams', searchParams);
+  // if (searchParams !== '' && paramString !== '') {
+  //   console.log('searchParams inside if ', searchParams);
+  //   searchParams = "&search1=" + searchParams;
+  // } else if (searchParams !== '') {
+  //   searchParams = "search1=" + searchParams;
+  //
+  // }
 
-
-  let paramString = '';
-  Object.keys(urlParams).map(obj => {
-    //console.log(obj,urlParams[obj]);
-    paramString += `&${obj}=${urlParams[obj]}`
-  });
-  paramString = paramString.replace('&', '');
-
-  console.log('searchParams', searchParams);
-  if (searchParams !== '' && paramString !== '') {
-    console.log('searchParams inside if ', searchParams);
-    searchParams = "&search1=" + searchParams;
-  } else if (searchParams !== '') {
-    searchParams = "search1=" + searchParams;
-
-  }
-
-  console.log('Getting data from http://172.20.244.141:8000/ranging_new/npd_impact_view_bubble_table' + paramString + searchParams);
+  console.log('Getting data from http://172.20.246.139:8000/ranging_new/npd_impact_view_bubble_table' + paramString + searchParams);
   try {
 
     // Table data
     const bubble_table = yield call(request,
-      `http://172.20.244.141:8000/ranging_new/npd_impact_view_bubble_table?` + paramString + searchParams);
+      `http://172.20.246.139:8000/ranging_new/npd_impact_view_bubble_table?` + paramString + searchParams);
     yield put(dataFetchOnBubbleTableSuccess(bubble_table));
 
   } catch (err) {
@@ -75,20 +77,23 @@ export function* generateBubbleChartDataFetch() {
   console.log("bubble chart url params");
   console.log(urlParams);
   let npdFirstHalfSelections = urlName.get('npdFirstHalfSelections');
+  let paramString = 'parent_supplier=1190.%20-%20MARITIME%20-%20JDM%20PRODUCE%20LIMITED&buying_controller=Meat%20Fish%20and%20Veg'
 
-  let paramString = '';
-  Object.keys(urlParams).map(obj => {
-    //console.log(obj,urlParams[obj]);
-    paramString += `&${obj}=${urlParams[obj]}`
-  });
-  paramString = paramString.replace('&', '');
-  console.log("logging_bubble_url");
-  console.log('http://172.20.244.141:8000/ranging_new/npd_impact_view_bubble_chart?' + paramString);
+
+  //
+  // let paramString = '';
+  // Object.keys(urlParams).map(obj => {
+  //   //console.log(obj,urlParams[obj]);
+  //   paramString += `&${obj}=${urlParams[obj]}`
+  // });
+  // paramString = paramString.replace('&', '');
+  // console.log("logging_bubble_url");
+  // console.log('http://172.20.246.139:8000/ranging_new/npd_impact_view_bubble_chart?' + paramString);
   try {
 
     // Bubble chart data
     const bubble_chart = yield call(request,
-      `http://172.20.244.141:8000/ranging_new/npd_impact_view_bubble_chart?`+ paramString);
+      `http://172.20.246.139:8000/ranging_new/npd_impact_view_bubble_chart?`+ paramString);
     yield put(dataFetchOnBubbleDataSuccess(bubble_chart));
 
   } catch (err) {
@@ -112,12 +117,13 @@ export function* generateProdCanniTableDataFetch() {
   // let npdFirstHalfSelections = urlName.get('npdFirstHalfSelections');
   let searchParams = urlName.get('searchTable1');
 
-  let paramString = '';
-  Object.keys(urlParams).map(obj => {
-    //console.log(obj,urlParams[obj]);
-    paramString += `&${obj}=${urlParams[obj]}`
-  });
-  paramString = paramString.replace('&', '');
+  let paramString = 'buying_controller=Meat%20Fish%20and%20Veg&buyer=Meat%20and%20Poultry&junior_buyer=Coated%20Poultry&package_type=BOX&product_sub_group_description=FROZEN%20COATED%20POULTRY&measure_type=G&asp=1.967819549&acp=0.5&Size=300&brand_name=TESCO&till_roll_description=S/FRIED%20STRI&merchandise_group_code_description=FROZEN%20FISH&range_space_break_code=P&parent_supplier=1190. - MARITIME - JDM PRODUCE LIMITED&week_flag=Latest%2013%20Weeks';
+  // let paramString = '';
+  // Object.keys(urlParams).map(obj => {
+  //   //console.log(obj,urlParams[obj]);
+  //   paramString += `&${obj}=${urlParams[obj]}`
+  // });
+  // paramString = paramString.replace('&', '');
 
 
   if (searchParams !== '' && paramString !== '') {
@@ -129,12 +135,12 @@ export function* generateProdCanniTableDataFetch() {
   }
 
 
-  console.log('http://172.20.244.141:8000/ranging_new/npd_impact_view_table?' + paramString + searchParams);
+  console.log('http://172.20.246.139:8000/ranging_new/npd_impact_view_table?' + paramString + searchParams);
   try {
 
     // Cannibalization table data
     const canni_table = yield call(request,
-      `http://172.20.244.141:8000/ranging_new/npd_impact_view_forecast?` + paramString + searchParams);
+      `http://172.20.246.139:8000/ranging_new/npd_impact_view_forecast?` + paramString + searchParams);
     yield put(dataFetchCanniProdTableSuccess(canni_table));
 
 
@@ -157,18 +163,21 @@ export function* generateWaterFallChartDataFetch() {
   let urlParams = urlName.get('dataUrlParms');
   let npdFirstHalfSelections = urlName.get('npdFirstHalfSelections');
 
-  let paramString = '';
-  Object.keys(urlParams).map(obj => {
-    //console.log(obj,urlParams[obj]);
-    paramString += `&${obj}=${urlParams[obj]}`
-  });
-  paramString = paramString.replace('&', '');
-  console.log('http://172.20.244.141:8000/ranging_new/npd_impact_view_waterfall?' + paramString);
+  let paramString = 'buying_controller=Meat%20Fish%20and%20Veg&buyer=Meat%20and%20Poultry&junior_buyer=Coated%20Poultry&package_type=BOX&product_sub_group_description=FROZEN%20COATED%20POULTRY&measure_type=G&asp=1.967819549&acp=0.5&Size=300&brand_name=TESCO&till_roll_description=S/FRIED%20STRI&merchandise_group_code_description=FROZEN%20FISH&range_space_break_code=P&parent_supplier=1190. - MARITIME - JDM PRODUCE LIMITED&week_flag=Latest%2013%20Weeks';
+
+
+  // let paramString = '';
+  // Object.keys(urlParams).map(obj => {
+  //   //console.log(obj,urlParams[obj]);
+  //   paramString += `&${obj}=${urlParams[obj]}`
+  // });
+  // paramString = paramString.replace('&', '');
+  // console.log('http://172.20.246.139:8000/ranging_new/npd_impact_view_waterfall?' + paramString);
   try {
 
     // Waterfall chart table data
     const waterfallchart = yield call(request,
-      `http://172.20.244.141:8000/ranging_new/npd_impact_view_forecast?` + paramString);
+      `http://172.20.246.139:8000/ranging_new/npd_impact_view_forecast?` + paramString);
     yield put(dataFetchOnWaterFallChartSuccess(waterfallchart));
 
 
@@ -190,18 +199,18 @@ export function* generateSideFilter() {
   try {
     // todo: update url
     // const data = yield call(request, `http://localhost:8090/wash/?format=json`);
-    // const data = yield call(request, `http://172.20.244.141:8000/ranging_new/npd_impact_view/filter_data`);
+    // const data = yield call(request, `http://172.20.246.139:8000/ranging_new/npd_impact_view/filter_data`);
 
     let urlName = yield select(selectRangingNpdImpactPageDomain());
     // let urlParams = urlName.get('filter_selection');
     let urlParams = urlName.get('filterSelectionsTillNow');
 
-    console.log('http://172.20.244.141:8000/ranging_new/npd_impact_view/filter_data?' + urlParams);
+    console.log('http://172.20.246.139:8000/ranging_new/npd_impact_view/filter_data?' + urlParams);
     let data = '';
     if (urlParams) {
-      data = yield call(request, `http://172.20.244.141:8000/ranging_new/npd_impact_view/filter_data?` + urlParams);
+      data = yield call(request, `http://172.20.246.139:8000/ranging_new/npd_impact_view/filter_data?` + urlParams);
     } else {
-      data = yield call(request, `http://172.20.244.141:8000/ranging_new/npd_impact_view/filter_data`);
+      data = yield call(request, `http://172.20.246.139:8000/ranging_new/npd_impact_view/filter_data`);
     }
 
     yield put(generateSideFilterSuccess(data));

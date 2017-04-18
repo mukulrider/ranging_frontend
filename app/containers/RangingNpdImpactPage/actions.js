@@ -37,6 +37,7 @@ export function dataFetchOnPageLoad() {
   };
 }
 
+
 export function dataFetchOnBubbleTableSuccess(data) {
   // console.log('dataFetchOnPageLoadSuccess action', data);
   return {
