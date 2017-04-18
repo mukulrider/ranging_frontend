@@ -48,7 +48,7 @@ export function* generateApiFetch() {
   let urlName = yield select(selectDelistContainerDomain());
   // let urlParams = urlName.get("dataUrlparams");
   let urlParams = "";
-  // console.log("urlParams",urlParams);
+  console.log("type 1",urlParams);
 
   function isEmpty(obj) {
     for (var key in obj) {
@@ -77,6 +77,7 @@ export function* generateApiFetch() {
   } else {
     // alert("empty");
   }
+  console.log("type 2",urlParams);
 
   let search_data = "";
   if (!(urlName.get('searchSupplierTable') == "")) {
@@ -97,6 +98,7 @@ export function* generateApiFetch() {
   } else {
     // alert("empty");
   }
+  console.log("type 3",urlParams);
 
   let week_no_data = "";
   if (!(urlName.get('weekNumber') == "")) {
@@ -116,6 +118,7 @@ export function* generateApiFetch() {
   } else {
     // alert("empty");
   }
+  console.log("type 4",urlParams);
 
   let store_type = "";
   if (!(urlName.get('storeType') == "")) {
@@ -136,8 +139,11 @@ export function* generateApiFetch() {
     // alert("empty");
   }
 
+  console.log("type 5",urlParams);
+
   let urlParamsString = "";
-  if (!(urlName.get('urlParamsString') == "")) {
+  if (!(typeof(urlParamsString) == "undefined") && !(urlParamsString == "")) {
+  // if (!(urlName.get('urlParamsString') == "")) {
 
     urlParamsString = urlName.get('urlParamsString');
 
@@ -154,10 +160,13 @@ export function* generateApiFetch() {
   } else {
     // alert("empty");
   }
+  console.log("type 6",urlParams);
 
   if (!(urlParams == "")) {
     urlParams = "?" + urlParams.replace('&', '');
   }
+
+  console.log("type 7",urlParams);
 
   // let tableType = urlName.get("tableType");
   // let tableTypeStateName = '';
@@ -273,6 +282,7 @@ export function* doApiFetch() {
 export function* generateSubstitutesFetch() {
   const urlName = yield select(selectDelistContainerDomain());
   let urlParams = urlName.get('substitutesData');
+  console.log("a1",urlParams);
 
 
   function isEmpty(obj) {
@@ -294,6 +304,7 @@ export function* generateSubstitutesFetch() {
     // alert("empty");
   }
 
+  console.log("a2",urlParams);
 
   // let paramstring = '';
   // if (!(isEmpty(urlParams))) {
@@ -392,6 +403,8 @@ export function* generateDelistTableFetch() {
   let urlName = yield select(selectDelistContainerDomain());
   let urlParams = "";
 
+  console.log('t 1',urlParams);
+
   let pagination_data = "";
   if (!(urlName.get('delistTablePagination') == "")) {
     pagination_data = urlName.get('delistTablePagination');
@@ -402,6 +415,8 @@ export function* generateDelistTableFetch() {
   } else {
     // alert("empty");
   }
+
+  console.log('t 2',urlParams);
 
   let search_data = "";
   if (!(urlName.get('searchDelistTable') == "")) {
@@ -415,6 +430,7 @@ export function* generateDelistTableFetch() {
     // alert("empty");
   }
 
+  console.log('t 3',urlParams);
 
   let week_no_data = "";
   if (!(urlName.get('weekNumber') == "")) {
@@ -427,6 +443,8 @@ export function* generateDelistTableFetch() {
   } else {
     // alert("empty");
   }
+
+  console.log('t 4',urlParams);
 
   let store_type = "";
   if (!(urlName.get('storeType') == "")) {
@@ -447,8 +465,12 @@ export function* generateDelistTableFetch() {
     // alert("empty");
   }
 
+  console.log('t 5',urlParams);
+
   let urlParamsString = "";
-  if (!(urlName.get('urlParamsString') == "")) {
+  // if (!(urlName.get('urlParamsString') == "")) {
+
+    if (!(typeof(urlParamsString) == "undefined") && !(urlParamsString == "")) {
 
     urlParamsString = urlName.get('urlParamsString');
 
@@ -465,10 +487,14 @@ export function* generateDelistTableFetch() {
     // alert("empty");
   }
 
+  console.log('t 6',urlParams);
+
   if (!(urlParams == "")) {
     urlParams = "?" + urlParams.replace('&', '');
   }
   console.log("urlParams delist", urlParams);
+
+  console.log('t 7',urlParams);
 
   try {
     console.log("urlParams2", urlParams);
@@ -590,6 +616,7 @@ export function* generateWaterfallValueFetch() {
   console.log('final 4', urlParams);
 
   try {
+    console.log("inside try");
     const data = yield call(request,
       `http://172.20.244.141:8000/api/product_impact_chart${urlParams}`);
       // `http://172.20.246.146:8000/ranging/product_impact_chart${urlParams}`);
@@ -601,6 +628,7 @@ export function* generateWaterfallValueFetch() {
 }
 
 export function* doWaterfallChartValueFetch() {
+  console.log("INSIDE SMALL FUNCTION");
   const watcher = yield takeLatest(WATERFALL_VALUE, generateWaterfallValueFetch);
   yield take(LOCATION_CHANGE);
   yield cancel(watcher);
@@ -644,7 +672,8 @@ export function* generateSideFilter() {
   try {
     // todo: update url
     // const data = yield call(request, 'http://172.20.247.17:8000/ranging/product_impact/filter_data');
-    const data = yield call(request, `http://172.20.246.146:8000/ranging/product_impact/filter_data/?${urlParamsString}`);
+    // const data = yield call(request, `http://172.20.246.146:8000/ranging/product_impact/filter_data/?${urlParamsString}`);
+    const data = yield call(request, `http://172.20.244.141:8000/api/product_impact/filter_data/?${urlParamsString}`);
 
     yield put(generateSideFilterSuccess(data));
   } catch (err) {
@@ -666,7 +695,8 @@ export function* generateSideFilterReset() {
   try {
     // todo: update url
     // const data = yield call(request, 'http://172.20.247.17:8000/ranging/product_impact/filter_data');
-    const data = yield call(request, `http://172.20.246.146:8000/ranging/product_impact/filter_data/`);
+    // const data = yield call(request, `http://172.20.246.146:8000/ranging/product_impact/filter_data/`);
+    const data = yield call(request, `http://172.20.244.141:8000/api/product_impact/filter_data/`);
 
     yield put(generateSideFilterSuccess(data));
   } catch (err) {
