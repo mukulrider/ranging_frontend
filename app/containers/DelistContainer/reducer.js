@@ -37,6 +37,7 @@ import {
   SEARCH_DELIST_TABLE,
   WEEK_BREADCRUMB,
   STORE_BREADCRUMB,
+  URL_PARAMS,
 } from './constants';
 
 const initialState = fromJS(
@@ -51,7 +52,7 @@ const initialState = fromJS(
     searchSupplierTable: "",
     searchDelistTable: "",
     weekBreadcrumb: "",
-    urlParamsString: "abcs",
+    urlParamsString: "",
     storeBreadcrumb: "",
     waterFallChart2Data_1: [{name: ' Product Revenue ', value: 420000},
       {name: ' Services Revenue ', value: 210000},
@@ -90,6 +91,7 @@ function delistContainerReducer(state = initialState, action) {
       return state.set('data', action.data);
 
     case DATA_URL_PARAMS:
+      console.log("storing url", action.data)
       return state.set('dataUrlparams', action.data);
 
     case TABLE_DATA_FETCH:
@@ -163,6 +165,11 @@ function delistContainerReducer(state = initialState, action) {
     // WATERFALL CHART - VALUE
     case WATERFALL_VALUE_SUCCESS:
       return state.set('waterfallValue', action.data);
+
+ // URL PARAMS
+    case URL_PARAMS:
+      console.log('stored in state url params');
+      return state.set('urlparamsDelist', action.data);
 
     // FILTERS
     case GENERATE_SIDE_FILTER_SUCCESS:

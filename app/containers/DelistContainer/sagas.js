@@ -18,6 +18,7 @@ import {
   APPLY_BTN_CLICK,
   DELIST_TABLE,
   GENERATE_URL_PARAMS_STRING,
+  SIDE_FILTER_RESET,
 } from './constants';
 
 import {
@@ -50,15 +51,15 @@ export function* generateApiFetch() {
   // console.log("urlParams",urlParams);
 
   function isEmpty(obj) {
-    for(var key in obj) {
-      if(obj.hasOwnProperty(key))
+    for (var key in obj) {
+      if (obj.hasOwnProperty(key))
         return false;
     }
     return true;
   }
 
   let pagination_data = "";
-  if(!(urlName.get('supplierTablePagination') == "")) {
+  if (!(urlName.get('supplierTablePagination') == "")) {
 
     pagination_data = urlName.get('supplierTablePagination');
 
@@ -66,7 +67,7 @@ export function* generateApiFetch() {
   }
   // let substitutesData = urlName.get(substitutesData);
 
-  if(!(pagination_data == "")){
+  if (!(pagination_data == "")) {
     // alert("non empty");
     // console.log("inside if --- urlParams",urlParams);
     urlParams = urlParams + "&" + pagination_data;
@@ -78,7 +79,7 @@ export function* generateApiFetch() {
   }
 
   let search_data = "";
-  if(!(urlName.get('searchSupplierTable') == "")) {
+  if (!(urlName.get('searchSupplierTable') == "")) {
 
     search_data = urlName.get('searchSupplierTable');
 
@@ -86,7 +87,7 @@ export function* generateApiFetch() {
   }
 
 
-  if(!(search_data == "")){
+  if (!(search_data == "")) {
     // alert("non empty");
     // console.log("inside if --- search_data",search_data);
     urlParams = urlParams + "&" + "supplier_search=" + search_data;
@@ -98,14 +99,14 @@ export function* generateApiFetch() {
   }
 
   let week_no_data = "";
-  if(!(urlName.get('weekNumber') == "")) {
+  if (!(urlName.get('weekNumber') == "")) {
 
     week_no_data = urlName.get('weekNumber');
 
     console.log("week_no_data", week_no_data);
   }
 
-  if(!(week_no_data == "")){
+  if (!(week_no_data == "")) {
     // alert("non empty");
     // console.log("inside if --- week_no_data",week_no_data);
     urlParams = urlParams + "&" + week_no_data;
@@ -117,14 +118,14 @@ export function* generateApiFetch() {
   }
 
   let store_type = "";
-  if(!(urlName.get('storeType') == "")) {
+  if (!(urlName.get('storeType') == "")) {
 
     store_type = urlName.get('storeType');
 
     console.log("store_type", store_type);
   }
 
-  if(!(store_type == "")){
+  if (!(store_type == "")) {
     // alert("non empty");
     // console.log("inside if --- store_type",store_type);
     urlParams = urlParams + "&" + store_type;
@@ -136,14 +137,14 @@ export function* generateApiFetch() {
   }
 
   let urlParamsString = "";
-  if(!(urlName.get('urlParamsString') == "")) {
+  if (!(urlName.get('urlParamsString') == "")) {
 
     urlParamsString = urlName.get('urlParamsString');
 
     console.log("urlParamsString", urlParamsString);
   }
 
-  if(!(urlParamsString == "")){
+  if (!(urlParamsString == "")) {
     // alert("non empty");
     // console.log("inside if --- store_type",store_type);
     urlParams = urlParams + "&" + urlParamsString;
@@ -154,7 +155,7 @@ export function* generateApiFetch() {
     // alert("empty");
   }
 
-  if(!(urlParams == "")) {
+  if (!(urlParams == "")) {
     urlParams = "?" + urlParams.replace('&', '');
   }
 
@@ -192,10 +193,13 @@ export function* generateApiFetch() {
 
   try {
     const data = yield call(request,
-      // `http://172.20.78.87:8000/ranging/product_impact_table/`);
-    `http://172.20.78.87:8000/ranging/product_impact_supplier_table${urlParams}`);
-    // `http://172.20.78.87:8000/ranging/product_impact_table${paramstring}`);
-    // `http://172.20.78.87:8000/ranging/product_impact_table/?store_type=Main%20Estate&time_period=13_weeks&${paramstring}`);
+      // `http://172.20.246.146:8000/ranging/product_impact_table/`);
+      // `http://172.20.246.146:8000/ranging/product_impact_supplier_table${urlParams}`);
+      `http://172.20.244.141:8000/api/product_impact_supplier_table${urlParams}`);
+      // `http://172.20.246.146:8000/ranging/product_impact_supplier_table${urlParams}`);
+      // `http://172.20.246.146:8000/ranging/product_impact_supplier_table${urlParams}`);
+    // `http://172.20.246.146:8000/ranging/product_impact_table${paramstring}`);
+    // `http://172.20.246.146:8000/ranging/product_impact_table/?store_type=Main%20Estate&time_period=13_weeks&${paramstring}`);
 
 
     yield put(apiFetchSuccess(data));
@@ -272,29 +276,20 @@ export function* generateSubstitutesFetch() {
 
 
   function isEmpty(obj) {
-    for(var key in obj) {
-      if(obj.hasOwnProperty(key))
+    for (var key in obj) {
+      if (obj.hasOwnProperty(key))
         return false;
     }
     return true;
   }
 
   let pagination_data = "";
-  if(!(urlName.get('delistPopupTablePagination') == "")) {
-
+  if (!(urlName.get('delistPopupTablePagination') == "")) {
     pagination_data = urlName.get('delistPopupTablePagination');
-
-    // console.log("pagination_data", pagination_data);
   }
-  // let substitutesData = urlName.get(substitutesData);
 
-  if(!(pagination_data == "")){
-    // alert("non empty");
-    // console.log("inside if --- urlParams",urlParams);
+  if (!(pagination_data == "")) {
     urlParams = urlParams + "&" + pagination_data;
-    // console.log("inside if --- urlParams",urlParams);
-    // alert("urlParams");
-    // alert(urlParams);
   } else {
     // alert("empty");
   }
@@ -319,8 +314,8 @@ export function* generateSubstitutesFetch() {
 
   try {
     const data = yield call(request,
-      // `http://172.20.246.140:8000/ranging/product_impact_chart/`);
-      `http://172.20.78.87:8000/ranging/delist_table_popup?delist_product=${urlParams}`);
+      // `http://172.20.246.146:8000/ranging/delist_table_popup?delist_product=${urlParams}`);
+      `http://172.20.244.141:8000/api/delist_table_popup?delist_product=${urlParams}`);
     yield put(SubstitutesClickSuccess(data));
   } catch (err) {
     // console.log(err);
@@ -337,31 +332,18 @@ export function* doSubstitutesFetch() {
 export function* generateSupplierPopupTableFetch() {
   const urlName = yield select(selectDelistContainerDomain());
   let urlParams = urlName.get('supplierPopupTableData');
-  // console.log("sagas",urlParams);
 
   function isEmpty(obj) {
-    for(var key in obj) {
-      if(obj.hasOwnProperty(key))
+    for (var key in obj) {
+      if (obj.hasOwnProperty(key))
         return false;
     }
     return true;
   }
 
-  // let tableType = urlName.get("tableType");
-  // let tableTypeStateName = '';
-  // if( tableType=="supplier_popup"){
-  //   tableTypeStateName = "supplierPopupTablePagination";
-  // } else if( tableType=="delist_popup") {
-  //   tableTypeStateName = "delistPopupTablePagination";
-  // }
-  // alert(tableTypeStateName);
-  //
   let pagination_data = "";
-  if(!(urlName.get('supplierPopupTablePagination') == "")) {
-
+  if (!(urlName.get('supplierPopupTablePagination') == "")) {
     pagination_data = urlName.get('supplierPopupTablePagination');
-
-    // console.log("pagination_data", pagination_data);
   }
 
 //   let paramstring = '';
@@ -381,23 +363,16 @@ export function* generateSupplierPopupTableFetch() {
 // alert("paramstring");
 // alert(paramstring);
 
-if(!(pagination_data == "")){
-    // alert("non empty");
-    // console.log("inside if --- urlParams",urlParams);
-  urlParams = urlParams + "&" + pagination_data;
-  // console.log("inside if --- urlParams",urlParams);
-  // alert("urlParams");
-  // alert(urlParams);
-} else {
-  // alert("empty");
-}
-
-
+  if (!(pagination_data == "")) {
+    urlParams = urlParams + "&" + pagination_data;
+  } else {
+    // alert("empty");
+  }
 
   try {
     const data = yield call(request,
-      // `http://172.20.246.140:8000/ranging/product_impact_chart/`);
-      `http://172.20.78.87:8000/ranging/supplier_table_popup?supplier=${urlParams}`);
+      // `http://172.20.246.146:8000/ranging/supplier_table_popup?supplier=${urlParams}`);
+      `http://172.20.244.141:8000/api/supplier_table_popup?supplier=${urlParams}`);
     yield put(SupplierPopupTableDataFetchSuccess(data));
   } catch (err) {
     // console.log(err);
@@ -414,119 +389,91 @@ export function* doSupplierPopupTableFetch() {
 // DELIST TABLE
 
 export function* generateDelistTableFetch() {
-  console.log("inside bigger delist fn");
   let urlName = yield select(selectDelistContainerDomain());
-  console.log("inside urlName fn",urlName);
-  // let urlParams = urlName.get("waterfallValue");
   let urlParams = "";
-  console.log("urlParams delist empty",urlParams);
 
   let pagination_data = "";
-  if(!(urlName.get('delistTablePagination') == "")) {
-
+  if (!(urlName.get('delistTablePagination') == "")) {
     pagination_data = urlName.get('delistTablePagination');
-
-    console.log("delist pagination_data", pagination_data);
   }
-  // let substitutesData = urlName.get(substitutesData);
 
-  if(!(pagination_data == "")){
-    // alert("non empty");
-    console.log("delist inside if --- urlParams",urlParams);
+  if (!(pagination_data == "")) {
     urlParams = urlParams + "&" + pagination_data;
-    console.log("delist inside if --- urlParams",urlParams);
-    // alert("urlParams");
-    // alert(urlParams);
   } else {
     // alert("empty");
   }
 
   let search_data = "";
-  if(!(urlName.get('searchDelistTable') == "")) {
-
+  if (!(urlName.get('searchDelistTable') == "")) {
     search_data = urlName.get('searchDelistTable');
-
-    // console.log("search_data", search_data);
   }
 
 
-  if(!(search_data == "")){
-    // alert("non empty");
-    // console.log("inside if --- search_data",search_data);
+  if (!(search_data == "")) {
     urlParams = urlParams + "&" + "delist_search=" + search_data;
-    // console.log("inside if --- search_data",search_data);
-    // alert("urlParams");
-    // alert(urlParams);
   } else {
     // alert("empty");
   }
 
 
   let week_no_data = "";
-  if(!(urlName.get('weekNumber') == "")) {
-
+  if (!(urlName.get('weekNumber') == "")) {
     week_no_data = urlName.get('weekNumber');
-
     console.log("delist week_no_data", week_no_data);
   }
 
-  if(!(week_no_data == "")){
-    // alert("non empty");
-    // console.log("delist inside if --- week_no_data",week_no_data);
+  if (!(week_no_data == "")) {
     urlParams = urlParams + "&" + week_no_data;
-    // console.log("delist inside if --- week_no_data",week_no_data);
-    // alert("urlParams");
-    // alert(urlParams);
   } else {
     // alert("empty");
   }
 
   let store_type = "";
-  if(!(urlName.get('storeType') == "")) {
+  if (!(urlName.get('storeType') == "")) {
 
     store_type = urlName.get('storeType');
 
     console.log("store_type", store_type);
   }
 
-  if(!(store_type == "")){
+  if (!(store_type == "")) {
     // alert("non empty");
-    console.log("delist inside if --- store_type",store_type);
+    console.log("delist inside if --- store_type", store_type);
     urlParams = urlParams + "&" + store_type;
-    console.log("delist inside if --- store_type",store_type);
+    console.log("delist inside if --- store_type", store_type);
     // alert("store_type");
     // alert(store_type);
   } else {
     // alert("empty");
   }
 
-let urlParamsString = "";
-  if(!(urlName.get('urlParamsString') == "")) {
+  let urlParamsString = "";
+  if (!(urlName.get('urlParamsString') == "")) {
 
     urlParamsString = urlName.get('urlParamsString');
 
     console.log("urlParamsString", urlParamsString);
   }
 
-  if(!(urlParamsString == "")){
+  if (!(urlParamsString == "")) {
     // alert("non empty");
-    console.log("delist inside if --- store_type",urlParamsString);
+    console.log("delist inside if --- store_type", urlParamsString);
     urlParams = urlParams + "&" + urlParamsString;
-    console.log("delist inside if --- store_type",urlParamsString);
-    // alert("store_type");
-    // alert(store_type);
+    console.log("delist inside if --- store_type", urlParamsString);
+
   } else {
     // alert("empty");
   }
 
-  if(!(urlParams == "")) {
+  if (!(urlParams == "")) {
     urlParams = "?" + urlParams.replace('&', '');
   }
   console.log("urlParams delist", urlParams);
 
   try {
     console.log("urlParams2", urlParams);
-    let data = yield call(request,`http://172.20.78.87:8000/ranging/product_impact_delist_table`+ urlParams);
+    // let data = yield call(request, `http://172.20.246.146:8000/ranging/product_impact_delist_table` + urlParams);
+    let data = yield call(request, `http://172.20.244.141:8000/api/product_impact_delist_table` + urlParams);
     console.log("delist data", data);
     yield put(delistTableSuccess(data));
   } catch (err) {
@@ -542,13 +489,14 @@ export function* doDelistTableFetch() {
 }
 
 
-
 // WATERFALL CHART - VALIUE
 export function* generateWaterfallValueFetch() {
   let urlName = yield select(selectDelistContainerDomain());
-  console.log("urlName",urlName);
-  // let urlParams = urlName.get("waterfallValue");
+  console.log("urlName", urlName);
   let urlParams = "";
+
+  console.log('final 1', urlParams);
+
   // console.log('urlParams for waterfall chart - value', urlParams);
   //
   // let paramstring = '';
@@ -559,71 +507,93 @@ export function* generateWaterfallValueFetch() {
   // paramstring = paramstring.replace('&', '')
 
   let week_no_data = "";
-  if(!(urlName.get('weekNumber') == "")) {
-
+  if (!(urlName.get('weekNumber') == "")) {
     week_no_data = urlName.get('weekNumber');
-
     console.log("week_no_data", week_no_data);
   }
 
-  if(!(week_no_data == "")){
-    // alert("non empty");
-    // console.log("inside if --- week_no_data",week_no_data);
+  if (!(week_no_data == "")) {
+    console.log("inside if --- week_no_data", week_no_data);
     urlParams = urlParams + "&" + week_no_data;
-    // console.log("inside if --- week_no_data",week_no_data);
-    // alert("urlParams");
+  } else {
+    // alert("empty");
+  }
+
+  console.log('final 2', urlParams);
+
+  let store_type = "";
+  if (!(urlName.get('storeType') == "")) {
+    store_type = urlName.get('storeType');
+    console.log("store_type", store_type);
+  }
+
+  if (!(store_type == "")) {
+    urlParams = urlParams + "&" + store_type;
+    console.log("inside if --- store_type", store_type);
+
+  } else {
+    // alert("empty");
+  }
+
+  console.log('final 3', urlParams);
+  //
+  // let urlParamsString = "";
+  // if(!((urlName.get('urlParamsString') == "") || (typeof(urlParamsString) == "undefined"))) {
+  //
+  //   urlParamsString = urlName.get('urlParamsString');
+  //
+  //   console.log("urlParamsString nt", urlParamsString);
+  // }
+  //
+
+  let urlParamsString = "";
+  if (!(urlName.get('urlParamsString') == "")) {
+    urlParamsString = urlName.get('urlParamsString');
+    console.log("urlParamsString", urlParamsString);
+  }
+
+  if (!(typeof(urlParamsString) == "undefined") && !(urlParamsString == "")) {
+    // alert("non empty");
+    // alert(urlParamsString);
+    console.log("inside if for params", urlParamsString);
+    urlParams = urlParams + "&" + urlParamsString;
+    console.log("inside if 2 for params", urlParams);
+
+  } else {
+    // alert("empty");
+  }
+  //
+  console.log('final 4', urlParams);
+
+  let urlparamsDelist = "";
+  if (!(urlName.get('urlparamsDelist') == "")) {
+
+    urlparamsDelist = urlName.get('urlparamsDelist').replace('?', '');
+    // alert(urlparamsDelist);
+
+    console.log("urlparamsDelist nt", urlparamsDelist);
+  }
+
+  if (!(urlparamsDelist == "")) {
+    urlParams = urlParams + "&" + urlparamsDelist;
     // alert(urlParams);
   } else {
     // alert("empty");
   }
 
-  let store_type = "";
-  if(!(urlName.get('storeType') == "")) {
+  console.log('final params1', urlParams);
 
-    store_type = urlName.get('storeType');
-
-    console.log("store_type", store_type);
-  }
-
-  if(!(store_type == "")){
-    // alert("non empty");
-    // console.log("inside if --- store_type",store_type);
-    urlParams = urlParams + "&" + store_type;
-    // console.log("inside if --- store_type",store_type);
-    // alert("store_type");
-    // alert(store_type);
-  } else {
-    // alert("empty");
-  }
-
-  let urlParamsString = "";
-  if(!(urlName.get('urlParamsString') == "")) {
-
-    urlParamsString = urlName.get('urlParamsString');
-
-    console.log("urlParamsString nt", urlParamsString);
-  }
-
-  if(!(urlParamsString == "")){
-    // alert("non empty");
-    // console.log("inside if --- store_type",store_type);
-    urlParams = urlParams + "&" + urlParamsString;
-    // console.log("inside if --- store_type",store_type);
-    // alert("store_type");
-    // alert(store_type);
-  } else {
-    // alert("empty");
-  }
-
-  if(!(urlParams == "")) {
+  if (!(urlParams == "")) {
     urlParams = "?" + urlParams.replace('&', '');
   }
 
+  console.log('final 4', urlParams);
+
   try {
     const data = yield call(request,
-      // `http://localhost:8090/pricing/generate-scenario/?` + paramstring);
-      // 'http://172.20.246.140:8000/ranging/product_impact_chart/');
-      `http://172.20.78.87:8000/ranging/product_impact_chart${urlParams}`);
+      `http://172.20.244.141:8000/api/product_impact_chart${urlParams}`);
+      // `http://172.20.246.146:8000/ranging/product_impact_chart${urlParams}`);
+
     yield put(WaterfallValueChartSuccess(data));
   } catch (err) {
     // console.log(err);
@@ -644,7 +614,8 @@ export function* generateTable() {
   try {
     urlParamsString = urlParamsString.replace('commercial_director', 'commerical_director');
 
-    const data = yield call(request, `http://172.20.78.87:8000/ranging/product_impact_table/?${urlParamsString}`);
+    const data = yield call(request, `http://172.20.246.146:8000/ranging/product_impact_table/?${urlParamsString}`);
+    // const data = yield call(request, `http://172.20.246.146:8000/ranging/product_impact_table/?${urlParamsString}`);
     // const data = yield call(request, `http://172.20.246.140:8000/ranging/product_impact_table/?${urlParamsString}`);
     // const data = yield call(request, `http://172.20.78.87:8080/ranging/product_impact/filter_data&${urlParamsString}`);
     yield put(generateTableSuccess(data));
@@ -652,7 +623,6 @@ export function* generateTable() {
     // console.log(err);
   }
 }
-// buyingc, parent supplier, buyer, jr bu, pd sub, brand ind, products
 export function* doGenerateTable() {
   const watcher = yield takeLatest(GENERATE_TABLE, generateTable);
   yield take(LOCATION_CHANGE);
@@ -669,15 +639,13 @@ export function* generateSideFilter() {
   if (typeof(urlParamsString) == "undefined") {
     urlParamsString = "";
   }
-  console.log("urlParams",urlParamsString);
+  console.log("urlParams", urlParamsString);
   // alert(urlParamsString);
   try {
     // todo: update url
-    // const data = yield call(request, 'http://172.20.246.141:8000/ranging/product_impact/filter_data');
     // const data = yield call(request, 'http://172.20.247.17:8000/ranging/product_impact/filter_data');
-    const data = yield call(request, `http://172.20.78.87:8000/ranging/product_impact/filter_data/?${urlParamsString}`);
-    // const data = yield call(request, `http://172.20.78.87:8000/ranging/product_impact/filter_data/?"buying_controller=Wines"`);
-    // const data = yield call(request, 'http://172.20.78.87:8000/ranging/product_impact/filter_logic');
+    const data = yield call(request, `http://172.20.246.146:8000/ranging/product_impact/filter_data/?${urlParamsString}`);
+
     yield put(generateSideFilterSuccess(data));
   } catch (err) {
     // console.log(err);
@@ -687,6 +655,29 @@ export function* generateSideFilter() {
 export function* doGenerateSideFilter() {
   console.log("filter saga");
   const watcher = yield takeLatest(GENERATE_URL_PARAMS_STRING, generateSideFilter);
+  yield take(LOCATION_CHANGE);
+  yield cancel(watcher);
+}
+
+
+/* SIDE FILTER RESET*/
+export function* generateSideFilterReset() {
+  console.log("inside filter reset");
+  try {
+    // todo: update url
+    // const data = yield call(request, 'http://172.20.247.17:8000/ranging/product_impact/filter_data');
+    const data = yield call(request, `http://172.20.246.146:8000/ranging/product_impact/filter_data/`);
+
+    yield put(generateSideFilterSuccess(data));
+  } catch (err) {
+    // console.log(err);
+  }
+}
+
+
+export function* doSideFilterReset() {
+  console.log("filter saga");
+  const watcher = yield takeLatest(SIDE_FILTER_RESET, generateSideFilterReset);
   yield take(LOCATION_CHANGE);
   yield cancel(watcher);
 }
@@ -704,7 +695,7 @@ export function* generateAjaxFetch() {
   try {
     const data = yield call(request,
       // `http://172.20.246.140:8000/ranging/product_impact_table?${paramstring}`);
-      `http://172.20.78.87:8000/ranging/product_impact_table?${paramstring}`);
+      `http://172.20.246.146:8000/ranging/product_impact_table?${paramstring}`);
     yield put(ajaxFetchSuccess(data));
   } catch (err) {
     // console.log(err);
@@ -731,7 +722,7 @@ export function* generateRefreshedData() {
   try {
     const data = yield call(request,
       // `http://172.20.246.140:8000/ranging/product_impact_table?${paramstring}`);
-      `http://172.20.78.87:8000/ranging/product_impact_table`);
+      `http://172.20.246.146:8000/ranging/product_impact_table`);
     yield put(ajaxFetchSuccess(data));
   } catch (err) {
     // console.log(err);
@@ -756,4 +747,5 @@ export default [
   doSupplierPopupTableFetch,
   doAjaxApplyBtn,
   doDelistTableFetch,
+  doSideFilterReset,
 ];

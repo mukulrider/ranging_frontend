@@ -42,6 +42,8 @@ import {
   WEEK_BREADCRUMB,
   STORE_BREADCRUMB,
   GENERATE_URL_PARAMS_DATA,
+  URL_PARAMS,
+  SIDE_FILTER_RESET,
   } from './constants';
 
 export function defaultAction() {
@@ -116,6 +118,15 @@ export function delistTableSuccess(data) {
   console.log("delist updated data in action", data);
   return {
     type: DELIST_TABLE_SUCCESS,
+    data,
+  };
+}
+
+//URL PARAMS
+export function UrlParams(data) {
+  console.log("URL PARAMS", data);
+  return {
+    type: URL_PARAMS,
     data,
   };
 }
@@ -231,13 +242,15 @@ export function SubstitutesClickSuccess(data) {
 }
 
 // WATERFALL CHART - VALUE
-export function WaterfallValueChart(data) {
+export function WaterfallValueChart() {
+  console.log('calling waterfall-----------------------');
   return {
     type: WATERFALL_VALUE,
   };
 }
 
 export function WaterfallValueChartSuccess(data) {
+  console.log("waterfall data ---------------------------", data);
   return {
     type: WATERFALL_VALUE_SUCCESS,
     data,
@@ -261,6 +274,14 @@ export function generateTableSuccess(data) {
 export function generateSideFilter() {
   return {
     type: GENERATE_SIDE_FILTER,
+  };
+}
+
+//FILTER RESET
+export function generateSideFilterReset() {
+  console.log("side filter reset");
+  return {
+    type: SIDE_FILTER_RESET,
   };
 }
 

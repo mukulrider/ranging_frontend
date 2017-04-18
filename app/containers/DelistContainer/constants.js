@@ -25,6 +25,9 @@ export const GENERATE_URL_PARAMS_DATA = 'app/DelistContainer/GENERATE_URL_PARAMS
 
 export const GENERATE_URL_PARAMS_DATA_SUCCESS = 'app/DelistContainer/GENERATE_URL_PARAMS_DATA_SUCCESS';
 
+//URL PARAMS
+export const URL_PARAMS = 'app/DelistContainer/URL_PARAMS';
+
 export const SUPPLIER_POPUP_TABLE_DATA_FETCH_SUCCESS = 'app/DelistContainer/SUPPLIER_POPUP_TABLE_DATA_FETCH_SUCCESS';
 
 // DELIST POPUP TABLE
@@ -59,6 +62,9 @@ export const STORE_BREADCRUMB = 'app/DelistContainer/STORE_BREADCRUMB';
 
 //DELIST TABLE
 export const DELIST_TABLE = 'app/DelistContainer/DELIST_TABLE';
+
+//SIDE FILTER RESET
+export const SIDE_FILTER_RESET = 'app/DelistContainer/SIDE_FILTER_RESET';
 
 //DELIST TABLE SUCCESS
 export const DELIST_TABLE_SUCCESS = 'app/DelistContainer/DELIST_TABLE_SUCCESS';
