@@ -222,28 +222,47 @@ export class DelistContainer extends React.PureComponent { // eslint-disable-lin
                 let week_no = "time_period=13_weeks";
                 this.props.onWeekClick(week_no);
                 this.props.onWaterfallValueChart();
-                this.props.onApiFetch();
-                this.props.ondelistTable();
+                setTimeout(() => {
+                  // alert("time");
+                  this.props.onApiFetch();
+                  console.log("5onApiFetch");
+                  this.props.ondelistTable();
+                 }, 10000);
+
+
+                {/*this.props.onApiFetch();*/}
+                {/*this.props.ondelistTable();*/}
                 this.props.onWeekTabClick("Week: 13 weeks ")
-              }} style={{fontSize: '14px', fontFamily: 'Tesco'}}><b>Week 13</b></NavItem>
+              }} style={{fontSize: '14px', fontFamily: 'Tesco', textDecoration: 'none'}}><b style={{textDecoration: 'none'}}>Week 13</b></NavItem>
               <NavItem eventKey="2" onClick={() => {
                 this.setState({activeKey: "2"});
                 let week_no = "time_period=26_weeks";
                 this.props.onWeekClick(week_no);
                 this.props.onWaterfallValueChart();
-                this.props.onApiFetch();
-                this.props.ondelistTable();
+
+                setTimeout(() => {
+                  this.props.onApiFetch();
+                  this.props.ondelistTable();
+                 }, 10000);
+
+                {/*this.props.onApiFetch();*/}
+                {/*this.props.ondelistTable();*/}
                 this.props.onWeekTabClick("Week: 26 weeks ")
-              }} style={{fontSize: '14px', fontFamily: 'Tesco'}}><b>Week 26</b></NavItem>
+              }} style={{fontSize: '14px', fontFamily: 'Tesco', textDecoration: 'none !important'}}><b>Week 26</b></NavItem>
               <NavItem eventKey="3" onClick={() => {
                 this.setState({activeKey: "3"});
                 let week_no = "time_period=52_weeks";
                 this.props.onWeekClick(week_no);
                 this.props.onWaterfallValueChart();
-                this.props.onApiFetch();
-                this.props.ondelistTable();
+
+                setTimeout(() => {
+                  this.props.onApiFetch();
+                  this.props.ondelistTable();}, 10000);
+
+                {/*this.props.onApiFetch();*/}
+                {/*this.props.ondelistTable();*/}
                 this.props.onWeekTabClick("Week: 52 weeks ")
-              }} style={{fontSize: '14px', fontFamily: 'Tesco'}}><b>Week 52</b></NavItem>
+              }} style={{fontSize: '14px', fontFamily: 'Tesco', textDecoration: 'none !important'}}><b>Week 52</b></NavItem>
             </Nav>
 
             <Nav bsStyle="tabs" activeKey={this.state.activeKey2} onSelect={this.handleSelect}>
@@ -252,28 +271,43 @@ export class DelistContainer extends React.PureComponent { // eslint-disable-lin
                 let store_type = "store_type=Overview";
                 this.props.onStoreClick(store_type);
                 this.props.onWaterfallValueChart();
-                this.props.onApiFetch();
-                this.props.ondelistTable();
+
+                setTimeout(() => {
+                  this.props.onApiFetch();
+                  this.props.ondelistTable();}, 10000);
+
+                {/*this.props.onApiFetch();*/}
+                {/*this.props.ondelistTable();*/}
                 this.props.onStoreTabClick("Store: Overview ")
-              }} style={{fontSize: '14px', fontFamily: 'Tesco'}}><b>Overview</b></NavItem>
+              }} style={{fontSize: '14px', fontFamily: 'Tesco', textDecoration: 'none'}}><b>Overview</b></NavItem>
               <NavItem eventKey="22" onClick={() => {
                 this.setState({activeKey2: "22"});
                 let store_type = "store_type=Main Estate";
                 this.props.onStoreClick(store_type);
                 this.props.onWaterfallValueChart();
-                this.props.onApiFetch();
-                this.props.ondelistTable();
+
+                setTimeout(() => {
+                  this.props.onApiFetch();
+                  this.props.ondelistTable();}, 10000);
+
+                {/*this.props.onApiFetch();*/}
+                {/*this.props.ondelistTable();*/}
                 this.props.onStoreTabClick("Store: Main Estate ")
-              }} style={{fontSize: '14px', fontFamily: 'Tesco'}}><b>Main Estate</b></NavItem>
+              }} style={{fontSize: '14px', fontFamily: 'Tesco', textDecoration: 'none'}}><b>Main Estate</b></NavItem>
               <NavItem eventKey="33" onClick={() => {
                 this.setState({activeKey2: "33"});
                 let store_type = "store_type=Express";
                 this.props.onStoreClick(store_type);
                 this.props.onWaterfallValueChart();
-                this.props.onApiFetch();
-                this.props.ondelistTable();
+
+                setTimeout(() => {
+                  this.props.onApiFetch();
+                  this.props.ondelistTable();}, 10000);
+
+                {/*this.props.onApiFetch();*/}
+                {/*this.props.ondelistTable();*/}
                 this.props.onStoreTabClick("Store: Express")
-              }} style={{fontSize: '14px', fontFamily: 'Tesco'}}><b>Express</b></NavItem>
+              }} style={{fontSize: '14px', fontFamily: 'Tesco', textDecoration: 'none'}}><b>Express</b></NavItem>
             </Nav>
 
 
