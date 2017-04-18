@@ -399,7 +399,7 @@ export class DelistContainer extends React.PureComponent { // eslint-disable-lin
                                              return "glyphicon glyphicon-minus-sign waterfallCalloutsNeutral"
                                            }
                                          })()}>
-                                      {this.props.DelistContainer.waterfallValue.bc_sales_contri}
+                                      {this.props.DelistContainer.waterfallValue.bc_sales_contri}%
                                     </div>
                                   </div>
                                 </Panel>
@@ -425,7 +425,7 @@ export class DelistContainer extends React.PureComponent { // eslint-disable-lin
                                            return "glyphicon glyphicon-minus-sign waterfallCalloutsNeutral"
                                          }
                                        })()}>
-                                    {this.props.DelistContainer.waterfallValue.psg_sales_contri}
+                                    {this.props.DelistContainer.waterfallValue.psg_sales_contri}%
                                   </div>
                                 </Panel>
                               </div>
@@ -474,7 +474,7 @@ export class DelistContainer extends React.PureComponent { // eslint-disable-lin
                                          return "glyphicon glyphicon-minus-sign waterfallCalloutsNeutral"
                                        }
                                      })()}>
-                                  {this.props.DelistContainer.waterfallValue.bc_vols_contri}
+                                  {this.props.DelistContainer.waterfallValue.bc_vols_contri}%
                                 </div>
                               </Panel>
 
@@ -500,7 +500,7 @@ export class DelistContainer extends React.PureComponent { // eslint-disable-lin
                                          return "glyphicon glyphicon-minus-sign waterfallCalloutsNeutral"
                                        }
                                      })()}>
-                                  {this.props.DelistContainer.waterfallValue.psg_vols_contri}
+                                  {this.props.DelistContainer.waterfallValue.psg_vols_contri}%
                                 </div>
                               </Panel>
                             </div>
@@ -592,7 +592,7 @@ export class DelistContainer extends React.PureComponent { // eslint-disable-lin
                                          return "glyphicon glyphicon-minus-sign waterfallCalloutsNeutral"
                                        }
                                      })()}>
-                                  {this.props.DelistContainer.waterfallValue.bc_cgm_contri}
+                                  {this.props.DelistContainer.waterfallValue.bc_cgm_contri}%
                                 </div>
                               </Panel>
                               <Panel>
@@ -617,7 +617,7 @@ export class DelistContainer extends React.PureComponent { // eslint-disable-lin
                                          return "glyphicon glyphicon-minus-sign"
                                        }
                                      })()}>
-                                  {this.props.DelistContainer.waterfallValue.psg_cgm_contri}
+                                  {this.props.DelistContainer.waterfallValue.psg_cgm_contri}%
                                 </div>
                               </Panel>
                             </div>
@@ -664,7 +664,7 @@ export class DelistContainer extends React.PureComponent { // eslint-disable-lin
                                          return "glyphicon glyphicon-minus-sign"
                                        }
                                      })()}>
-                                  {this.props.DelistContainer.waterfallValue.bc_cgm_contri}
+                                  {this.props.DelistContainer.waterfallValue.bc_cgm_contri}%
                                 </div>
                               </Panel>
 
@@ -690,7 +690,7 @@ export class DelistContainer extends React.PureComponent { // eslint-disable-lin
                                          return "glyphicon glyphicon-minus-sign"
                                        }
                                      })()}>
-                                  {this.props.DelistContainer.waterfallValue.psg_cgm_contri}
+                                  {this.props.DelistContainer.waterfallValue.psg_cgm_contri}%
                                 </div>
                               </Panel>
                             </div>
