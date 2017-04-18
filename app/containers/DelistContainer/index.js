@@ -67,12 +67,27 @@ import styles from './style.scss';
 export class DelistContainer extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
   componentDidMount = () => {
     this.props.onGenerateUrlParamsString();
+    console.log("1onGenerateUrlParamsString");
     this.props.onDataUrlParams(this.props.location.query);
+    console.log("2onDataUrlParams");
     this.props.onUrlParams(this.props.location.search);
+    console.log("3onUrlParams");
+
     this.props.onWaterfallValueChart();
-    this.props.onApiFetch();
-    this.props.ondelistTable();
+
+    console.log("4onWaterfallValueChart");
+    setTimeout(() => {
+      // alert("time");
+      this.props.onApiFetch();
+      console.log("5onApiFetch");
+      this.props.ondelistTable();
+      console.log("6ondelistTable");}, 10000);
+    // this.props.onApiFetch();
+    // console.log("5onApiFetch");
+    // this.props.ondelistTable();
+    // console.log("6ondelistTable");
     this.props.onGenerateSideFilter();
+    console.log("7onGenerateSideFilter");
   };
 
   // componentDidUpdate = () => {
@@ -122,6 +137,15 @@ export class DelistContainer extends React.PureComponent { // eslint-disable-lin
 
     };
 
+    // let abc = 1;
+    // while (abc) {
+    //   this.props.onApiFetch();
+    //   console.log("5onApiFetch");
+    //   this.props.ondelistTable();
+    //   console.log("6ondelistTable");
+    //   abc = 0;
+    //   // alert(abc);
+    // }
     return (
 
       <div className="row" style={{fontSize: '14px'}}>
@@ -198,28 +222,47 @@ export class DelistContainer extends React.PureComponent { // eslint-disable-lin
                 let week_no = "time_period=13_weeks";
                 this.props.onWeekClick(week_no);
                 this.props.onWaterfallValueChart();
-                this.props.onApiFetch();
-                this.props.ondelistTable();
+                setTimeout(() => {
+                  // alert("time");
+                  this.props.onApiFetch();
+                  console.log("5onApiFetch");
+                  this.props.ondelistTable();
+                 }, 10000);
+
+
+                {/*this.props.onApiFetch();*/}
+                {/*this.props.ondelistTable();*/}
                 this.props.onWeekTabClick("Week: 13 weeks ")
-              }} style={{fontSize: '14px'}}><b>Week 13</b></NavItem>
+              }} style={{fontSize: '14px', fontFamily: 'Tesco', textDecoration: 'none'}}><b style={{textDecoration: 'none'}}>Week 13</b></NavItem>
               <NavItem eventKey="2" onClick={() => {
                 this.setState({activeKey: "2"});
                 let week_no = "time_period=26_weeks";
                 this.props.onWeekClick(week_no);
                 this.props.onWaterfallValueChart();
-                this.props.onApiFetch();
-                this.props.ondelistTable();
+
+                setTimeout(() => {
+                  this.props.onApiFetch();
+                  this.props.ondelistTable();
+                 }, 10000);
+
+                {/*this.props.onApiFetch();*/}
+                {/*this.props.ondelistTable();*/}
                 this.props.onWeekTabClick("Week: 26 weeks ")
-              }} style={{fontSize: '14px'}}><b>Week 26</b></NavItem>
+              }} style={{fontSize: '14px', fontFamily: 'Tesco', textDecoration: 'none !important'}}><b>Week 26</b></NavItem>
               <NavItem eventKey="3" onClick={() => {
                 this.setState({activeKey: "3"});
                 let week_no = "time_period=52_weeks";
                 this.props.onWeekClick(week_no);
                 this.props.onWaterfallValueChart();
-                this.props.onApiFetch();
-                this.props.ondelistTable();
+
+                setTimeout(() => {
+                  this.props.onApiFetch();
+                  this.props.ondelistTable();}, 10000);
+
+                {/*this.props.onApiFetch();*/}
+                {/*this.props.ondelistTable();*/}
                 this.props.onWeekTabClick("Week: 52 weeks ")
-              }} style={{fontSize: '14px'}}><b>Week 52</b></NavItem>
+              }} style={{fontSize: '14px', fontFamily: 'Tesco', textDecoration: 'none !important'}}><b>Week 52</b></NavItem>
             </Nav>
 
             <Nav bsStyle="tabs" activeKey={this.state.activeKey2} onSelect={this.handleSelect}>
@@ -228,28 +271,43 @@ export class DelistContainer extends React.PureComponent { // eslint-disable-lin
                 let store_type = "store_type=Overview";
                 this.props.onStoreClick(store_type);
                 this.props.onWaterfallValueChart();
-                this.props.onApiFetch();
-                this.props.ondelistTable();
+
+                setTimeout(() => {
+                  this.props.onApiFetch();
+                  this.props.ondelistTable();}, 10000);
+
+                {/*this.props.onApiFetch();*/}
+                {/*this.props.ondelistTable();*/}
                 this.props.onStoreTabClick("Store: Overview ")
-              }} style={{fontSize: '14px'}}><b>Overview</b></NavItem>
+              }} style={{fontSize: '14px', fontFamily: 'Tesco', textDecoration: 'none'}}><b>Overview</b></NavItem>
               <NavItem eventKey="22" onClick={() => {
                 this.setState({activeKey2: "22"});
                 let store_type = "store_type=Main Estate";
                 this.props.onStoreClick(store_type);
                 this.props.onWaterfallValueChart();
-                this.props.onApiFetch();
-                this.props.ondelistTable();
+
+                setTimeout(() => {
+                  this.props.onApiFetch();
+                  this.props.ondelistTable();}, 10000);
+
+                {/*this.props.onApiFetch();*/}
+                {/*this.props.ondelistTable();*/}
                 this.props.onStoreTabClick("Store: Main Estate ")
-              }} style={{fontSize: '14px'}}><b>Main Estate</b></NavItem>
+              }} style={{fontSize: '14px', fontFamily: 'Tesco', textDecoration: 'none'}}><b>Main Estate</b></NavItem>
               <NavItem eventKey="33" onClick={() => {
                 this.setState({activeKey2: "33"});
                 let store_type = "store_type=Express";
                 this.props.onStoreClick(store_type);
                 this.props.onWaterfallValueChart();
-                this.props.onApiFetch();
-                this.props.ondelistTable();
+
+                setTimeout(() => {
+                  this.props.onApiFetch();
+                  this.props.ondelistTable();}, 10000);
+
+                {/*this.props.onApiFetch();*/}
+                {/*this.props.ondelistTable();*/}
                 this.props.onStoreTabClick("Store: Express")
-              }} style={{fontSize: '14px'}}><b>Express</b></NavItem>
+              }} style={{fontSize: '14px', fontFamily: 'Tesco', textDecoration: 'none'}}><b>Express</b></NavItem>
             </Nav>
 
 
@@ -386,7 +444,8 @@ export class DelistContainer extends React.PureComponent { // eslint-disable-lin
                     <div className="panel  panel-default">
                       <div className="panel-heading" style={{fontSize: '20px', textAlign: 'center'}}>
                         Value<span
-                        className="glyphicon glyphicon-info-sign pull-right" style={{right: '4px', fontSize: '24px', top: '4px'}}
+                        className="glyphicon glyphicon-info-sign pull-right"
+                        style={{right: '4px', fontSize: '24px', top: '4px'}}
                         onClick={() => {
                           this.setState({supplierImpactInfo: true});
                         }}></span>
@@ -410,8 +469,10 @@ export class DelistContainer extends React.PureComponent { // eslint-disable-lin
                                 <div style={{fontWeight: 'bold', fontSize: '16px', left: '9px'}}
                                      className={(() => {
                                        if (this.props.DelistContainer.waterfallValue.bc_sales_contri > 0) {
-                                         alert(this.props.DelistContainer.waterfallValue.bc_sales_contri)
-                                         alert(this.props.DelistContainer.waterfallValue.bc_sales_contri)
+                                         {/*alert(this.props.DelistContainer.waterfallValue.bc_sales_contri)*/
+                                         }
+                                         {/*alert(this.props.DelistContainer.waterfallValue.bc_sales_contri)*/
+                                         }
                                          return "glyphicon glyphicon-chevron-up waterfallCalloutsPositive"
                                        }
                                        else if (this.props.DelistContainer.waterfallValue.bc_sales_contri < 0) {
@@ -477,7 +538,8 @@ export class DelistContainer extends React.PureComponent { // eslint-disable-lin
 
                     </Modal.Header>
                     <Modal.Body style={{fontSize: '14px'}}>
-                      This graph compares direct sales lost from the delisted products vs the final loss/gain in sales due to
+                      This graph compares direct sales lost from the delisted products vs the final loss/gain in sales
+                      due to
                       demand transfer to substitute products.
                       Value: Sales of a supplier in £
                     </Modal.Body>
@@ -491,7 +553,8 @@ export class DelistContainer extends React.PureComponent { // eslint-disable-lin
                     <div className="panel panel-default">
                       <div className="panel-heading" style={{fontSize: '20px', textAlign: 'center'}}>
                         Volume<span
-                        className="glyphicon glyphicon-info-sign pull-right" style={{right: '4px', fontSize: '24px', top: '4px'}}
+                        className="glyphicon glyphicon-info-sign pull-right"
+                        style={{right: '4px', fontSize: '24px', top: '4px'}}
                         onClick={() => {
                           this.setState({salesImpactVolumeInfo: true});
                         }}></span>
@@ -619,7 +682,8 @@ export class DelistContainer extends React.PureComponent { // eslint-disable-lin
                     <div className="panel panel-default">
                       <div className="panel-heading" style={{fontSize: '20px', textAlign: 'center'}}>
                         PROFIT<span
-                        className="glyphicon glyphicon-info-sign pull-right" style={{right: '4px', fontSize: '24px', top: '4px'}}
+                        className="glyphicon glyphicon-info-sign pull-right"
+                        style={{right: '4px', fontSize: '24px', top: '4px'}}
                         onClick={() => {
                           this.setState({profitImpactInfo: true});
                         }}></span>
@@ -640,7 +704,6 @@ export class DelistContainer extends React.PureComponent { // eslint-disable-lin
                               </div>
                               <div style={{
                                 textAlign: 'center',
-                                color: 'red',
                                 fontWeight: 'bold',
                                 fontSize: '16px',
                                 left: '93px'
@@ -666,19 +729,18 @@ export class DelistContainer extends React.PureComponent { // eslint-disable-lin
                               </div>
                               <div style={{
                                 textAlign: 'center',
-                                color: 'red',
                                 fontWeight: 'bold',
                                 fontSize: '16px',
                                 left: '93px'
                               }}
                                    className={(() => {
                                      if (this.props.DelistContainer.waterfallValue.psg_cgm_contri > 0) {
-                                       return "glyphicon glyphicon-chevron-up"
+                                       return "glyphicon glyphicon-chevron-up waterfallCalloutsPositive"
                                      }
                                      else if (this.props.DelistContainer.waterfallValue.psg_cgm_contri < 0) {
-                                       return "glyphicon glyphicon-chevron-down"
+                                       return "glyphicon glyphicon-chevron-down waterfallCalloutsNegative"
                                      } else {
-                                       return "glyphicon glyphicon-minus-sign"
+                                       return "glyphicon glyphicon-minus-sign waterfallCalloutsNeutral"
                                      }
                                    })()}>
                                 {this.props.DelistContainer.waterfallValue.psg_cgm_contri}%
@@ -707,7 +769,8 @@ export class DelistContainer extends React.PureComponent { // eslint-disable-lin
 
                     </Modal.Header>
                     <Modal.Body style={{fontSize: '14px'}}>
-                      This graph compares direct CTS gained from the delisted products vs the final loss/gain in CTS due to demand transfer to substitute products.
+                      This graph compares direct CTS gained from the delisted products vs the final loss/gain in CTS due
+                      to demand transfer to substitute products.
                       Cost to Serve (CTS)
                     </Modal.Body>
                   </Modal>
@@ -720,7 +783,8 @@ export class DelistContainer extends React.PureComponent { // eslint-disable-lin
                     <div className="panel panel-default">
                       <div className="panel-heading" style={{fontSize: '20px', textAlign: 'center'}}>
                         CTS<span
-                        className="glyphicon glyphicon-info-sign pull-right" style={{right: '4px', fontSize: '24px', top: '4px'}}
+                        className="glyphicon glyphicon-info-sign pull-right"
+                        style={{right: '4px', fontSize: '24px', top: '4px'}}
                         onClick={() => {
                           this.setState({profitImpactCtsInfo: true});
                         }}></span>
@@ -741,7 +805,6 @@ export class DelistContainer extends React.PureComponent { // eslint-disable-lin
                               </div>
                               <div style={{
                                 textAlign: 'center',
-                                color: 'red',
                                 fontWeight: 'bold',
                                 fontSize: '16px',
                                 left: '93px'
@@ -753,7 +816,7 @@ export class DelistContainer extends React.PureComponent { // eslint-disable-lin
                                      else if (this.props.DelistContainer.waterfallValue.bc_cgm_contri < 0) {
                                        return "glyphicon glyphicon-chevron-down waterfallCalloutsNegative"
                                      } else {
-                                       return "glyphicon glyphicon-minus-sign"
+                                       return "glyphicon glyphicon-minus-sign waterfallCalloutsNeutral"
                                      }
                                    })()}>
                                 {this.props.DelistContainer.waterfallValue.bc_cgm_contri}%
@@ -768,19 +831,18 @@ export class DelistContainer extends React.PureComponent { // eslint-disable-lin
                               </div>
                               <div style={{
                                 textAlign: 'center',
-                                color: 'red',
                                 fontWeight: 'bold',
                                 fontSize: '16px',
                                 left: '93px'
                               }}
                                    className={(() => {
                                      if (this.props.DelistContainer.waterfallValue.psg_cgm_contri > 0) {
-                                       return "glyphicon glyphicon-chevron-up"
+                                       return "glyphicon glyphicon-chevron-up waterfallCalloutsPositive"
                                      }
                                      else if (this.props.DelistContainer.waterfallValue.psg_cgm_contri < 0) {
-                                       return "glyphicon glyphicon-chevron-down"
+                                       return "glyphicon glyphicon-chevron-down waterfallCalloutsNegative"
                                      } else {
-                                       return "glyphicon glyphicon-minus-sign"
+                                       return "glyphicon glyphicon-minus-sign waterfallCalloutsNeutral"
                                      }
                                    })()}>
                                 {this.props.DelistContainer.waterfallValue.psg_cgm_contri}%
@@ -911,7 +973,7 @@ export class DelistContainer extends React.PureComponent { // eslint-disable-lin
                           <td
                             style={{verticalAlign: 'middle', textAlign: "center"}}>{formatSales(obj.value_impact)}</td>
                           <td style={{
-                            verticalAlign: 'center',
+                            verticalAlign: 'middle',
                             textAlign: "center",
                             fontSize: '14px'
                           }}>{obj.value_impact_per}</td>
@@ -1189,6 +1251,7 @@ export class DelistContainer extends React.PureComponent { // eslint-disable-lin
             }}></span></h2>
 
           {/*MODAL FOR DELIST PRODUCT TABLE INFO ICON */}
+
 
           <Modal show={this.state.delistImpactTableInfo} bsSize="lg"
                  aria-labelledby="contained-modal-title-lg">

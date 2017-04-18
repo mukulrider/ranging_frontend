@@ -92,8 +92,13 @@ class NewSelector2 extends React.PureComponent { // eslint-disable-line react/pr
                   {/*let week_no = "time_period=13_weeks";*/}
                   {/*this.props.onWeekClick(week_no);*/}
                   this.props.onWaterfall();
-                  this.props.onApiFetch();
-                  this.props.ondelist();
+
+                  setTimeout(() => {
+                    this.props.onApiFetch();
+                    this.props.ondelistTable();}, 10000);
+
+                  {/*this.props.onApiFetch();*/}
+                  {/*this.props.ondelist();*/}
                   {/*this.props.onApiFetch();*/}
                   {/*this.props.ondelistTable();*/}
                   {/*this.props.onWeekTabClick("Week: 13 weeks ");*/}

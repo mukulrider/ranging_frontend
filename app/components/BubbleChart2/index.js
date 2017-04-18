@@ -6,7 +6,6 @@
 
 import React from 'react';
 import * as d3 from 'd3';
-import Button from 'components/button';
 import {browserHistory} from 'react-router';
 
 
@@ -14,7 +13,7 @@ class BubbleChart2 extends React.PureComponent { // eslint-disable-line react/pr
   createChart = (data2, path, bubbleFunc, makeChart, makeTable) => {
     let dataBubbleUrlParams = '';
     let productSelected= '';
-    let prodArr = [];
+
     //Chart configurations
 
     let margin = {top: 20, right: 20, bottom: 40, left: 30};
@@ -75,18 +74,19 @@ class BubbleChart2 extends React.PureComponent { // eslint-disable-line react/pr
         return (yScale(d.pps));
       })
       .on('click', function (d) {
-        dataBubbleUrlParams = "base_product_number=" + d.base_product_number;
-
+        let dataBubbleUrlParams = "base_product_number=" + d.base_product_number;
+        let prodArr = [];
         prodArr.push(dataBubbleUrlParams)
 
-
-        //let productSelected = d.base_product_number;
+        let productSelected = d.base_product_number;
         console.log("bubble url", dataBubbleUrlParams);
         console.log("printing product selected", productSelected);
+        console.log("consoling if condition", d.base_product_number == productSelected);
         console.log("consoling prod array", prodArr);
-        bubbleFunc(dataBubbleUrlParams);
-        makeChart();
-        makeTable();
+
+        //bubbleFunc(dataBubbleUrlParams);
+        // makeChart();
+        // makeTable();
         // // chart.style("opacity", function () {
         //   console.log("in_opacity_function", productSelected);
         //   if (d.base_product_number == productSelected) {
@@ -96,8 +96,6 @@ class BubbleChart2 extends React.PureComponent { // eslint-disable-line react/pr
         //     return opacity[1];
         //   }
         // })
-        //chart.style("opacity",0.3);
-
       })
       .attr("r", 0)
       .transition()
@@ -123,7 +121,6 @@ class BubbleChart2 extends React.PureComponent { // eslint-disable-line react/pr
           return colorArray[0];
         }
       });
-
 
     //This is for getting the axis labels
     chart.append("text")
@@ -195,11 +192,6 @@ class BubbleChart2 extends React.PureComponent { // eslint-disable-line react/pr
       <div>
         <svg id="svgg" width="800" height="600" fontFamily="sans-serif" fontSize="10"
              textAnchor="middle"></svg>
-        {/*<Button onClick={() => {*/}
-          {/*this.props.onSavePFilterParam(prodArr);*/}
-          {/*this.props.onFetchGraph();*/}
-          {/*this.props.onGenerateTable();*/}
-        {/*}}> Update for selected products</Button>*/}
       </div>
     );
   }
