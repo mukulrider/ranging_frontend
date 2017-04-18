@@ -27,13 +27,13 @@ class CascadedFilterNpdImpact extends React.PureComponent { // eslint-disable-li
     this.props.onGenerateUrlParams(urlParams);
     this.props.onSendUrlParams(urlParams);
     //
-    // this.props.onDataFetchOnPageLoad();
-    // this.props.onDataFetchOnBubbleData();
-    // this.props.onDataFetchCanniProdTable();
-    // this.props.onDataFetchOnWaterFallChart();
-    // this.props.onDataFetchOnBubbleData();
-    // this.props.onDataFetchCanniProdTable();
-    // this.props.onDataFetchOnWaterFallChart();
+    this.props.onDataFetchOnPageLoad();
+    this.props.onDataFetchOnBubbleData();
+    this.props.onDataFetchCanniProdTable();
+    this.props.onDataFetchOnWaterFallChart();
+  //this.props.onDataFetchOnBubbleData();
+    //this.props.onDataFetchCanniProdTable();
+    //this.props.onDataFetchOnWaterFallChart();
 
 
   };
@@ -73,14 +73,15 @@ class CascadedFilterNpdImpact extends React.PureComponent { // eslint-disable-li
     let size = this.props.location.Size_field_entry;
 
     let validFilters = 1;
-
+    console.log("size value entered ",size);
+    console.log("typeofsize", typeof size);
     // ---------------------FINAL VALIDATIONS BEFORE APPLYING---------------------
 
     // FOR FILTERS - all filters are mandatory , so checking wthr all are selected or not
-    if (numberOfFiltersSelected != 9) {
-      alert("All filters are mandatory");
-      validFilters = 0;
-    }
+    // if (numberOfFiltersSelected != 9) {
+    //   alert("All filters are mandatory");
+    //   validFilters = 0;
+    // }
 
     // Validation fof the manual entry should come here ----->
 
@@ -99,20 +100,18 @@ class CascadedFilterNpdImpact extends React.PureComponent { // eslint-disable-li
     //   validFilters = 0;
     // }
 
-    console.log("queryString in log",queryString);
-    browserHistory.push(newUrl + '?' + queryString);
-    this.props.onDataFetchOnPageLoad();
-    //If all the filters are selected and the manual entries are valid
+
+    // If all the filters are selected and the manual entries are valid
     // if (validFilters == 1) {
-    //
-    //   let completeSelections = queryString + "&asp=" + asp + "&acp=" + acp + "&size=" + size;
-    //
-    //   if (this.props.dataWeekUrlParams !== '') {
-    //     browserHistory.push(newUrl + "?" + this.props.dataWeekUrlParams + "&" + completeSelections);
-    //   } else {
-    //     browserHistory.push(newUrl + '?' + completeSelections);
-    //   }
-    //
+
+      let completeSelections = queryString + "&asp=" + asp + "&acp=" + acp + "&size=" + size;
+
+      if (this.props.dataWeekUrlParams !== '') {
+        browserHistory.push(newUrl + "?" + this.props.dataWeekUrlParams + "&" + completeSelections);
+      } else {
+        browserHistory.push(newUrl + '?' + completeSelections);
+      }
+
     // }
 
   };

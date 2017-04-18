@@ -104,7 +104,7 @@ class BubbleChartNpd extends React.PureComponent { // eslint-disable-line react/
             .transition()
             .duration(2000)
             .attr("r", function (d) {
-                return (rScale(d[radius_metric]));
+                return (rScale(d[radius_metric]/1000));
             })
             .style("fill", "#0B946C");
 

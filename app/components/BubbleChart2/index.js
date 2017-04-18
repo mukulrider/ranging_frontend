@@ -12,6 +12,7 @@ import {browserHistory} from 'react-router';
 class BubbleChart2 extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
   createChart = (data2, path, bubbleFunc, makeChart, makeTable) => {
     let dataBubbleUrlParams = '';
+    let productSelected= '';
 
     //Chart configurations
 
@@ -21,7 +22,8 @@ class BubbleChart2 extends React.PureComponent { // eslint-disable-line react/pr
 
     let svg = d3.select('#svgg');
 
-    let colorArray = ['steelblue', 'darkolivegreen'];
+    let colorArray = ['darkolivegreen','steelblue'];
+    let opacity = [1,0.2];
 
     svg.selectAll("*").remove();
     //Adjusting position of the svg area
@@ -69,27 +71,47 @@ class BubbleChart2 extends React.PureComponent { // eslint-disable-line react/pr
         return (margin.left + xScale(d.cps));
       })
       .attr("cy", function (d) {
-
         return (yScale(d.pps));
       })
       .on('click', function (d) {
         let dataBubbleUrlParams = "base_product_number=" + d.base_product_number;
+        let prodArr = [];
+        prodArr.push(dataBubbleUrlParams)
+
+        let productSelected = d.base_product_number;
         console.log("bubble url", dataBubbleUrlParams);
-        bubbleFunc(dataBubbleUrlParams);
-        makeChart();
-        makeTable();
-        // browserHistory.push(path.pathname + "?base_product_number="+d.base_product_number)
+        console.log("printing product selected", productSelected);
+        console.log("consoling if condition", d.base_product_number == productSelected);
+        console.log("consoling prod array", prodArr);
+
+        //bubbleFunc(dataBubbleUrlParams);
+        // makeChart();
+        // makeTable();
+        // // chart.style("opacity", function () {
+        //   console.log("in_opacity_function", productSelected);
+        //   if (d.base_product_number == productSelected) {
+        //     return opacity[0];
+        //   }
+        //   else {
+        //     return opacity[1];
+        //   }
+        // })
       })
-      // .on('mouseover',function(d){
-      //   this.append("text")
-      //     .text(d.base_product_number)
-      // })
       .attr("r", 0)
       .transition()
       .duration(1000)
       .attr("r", function (d) {
         return (rScale(d.rate_of_sale));
       })
+      // .style("opacity", function (d) {
+      //   console.log("in_opacity_function",dataBubbleUrlParams);
+      //   if (d.base_product_number == productSelected) {
+      //     return opacity[0];
+      //   }
+      //   else {
+      //     return opacity[1];
+      //   }
+      // })
       .style("fill", function (d) {
         console.log("in_color_function", colorArray[0]);
         if (d.brand_ind == "Brand") {
@@ -99,7 +121,6 @@ class BubbleChart2 extends React.PureComponent { // eslint-disable-line react/pr
           return colorArray[0];
         }
       });
-
 
     //This is for getting the axis labels
     chart.append("text")
@@ -116,7 +137,7 @@ class BubbleChart2 extends React.PureComponent { // eslint-disable-line react/pr
       .style("text-anchor", "middle")
       .text("Profit per store percentile (CGM)");
 
-    let series_type_values=["Brand","OL"];
+    let series_type_values=["OL","Brand"];
 
     let legend = chart.append("g")
       .attr("font-family", "Tesco")
@@ -134,10 +155,7 @@ class BubbleChart2 extends React.PureComponent { // eslint-disable-line react/pr
       .attr("width", 19)
       .attr("height", 19)
       .attr("fill", function (d,i) {
-
-          console.log("---------i-------------",i);
           return colorArray[i];
-
         }
       );
 
