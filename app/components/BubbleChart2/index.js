@@ -84,9 +84,9 @@ class BubbleChart2 extends React.PureComponent { // eslint-disable-line react/pr
         console.log("consoling if condition", d.base_product_number == productSelected);
         console.log("consoling prod array", prodArr);
 
-        //bubbleFunc(dataBubbleUrlParams);
-        // makeChart();
-        // makeTable();
+        bubbleFunc(dataBubbleUrlParams);
+        makeChart();
+        makeTable();
         // // chart.style("opacity", function () {
         //   console.log("in_opacity_function", productSelected);
         //   if (d.base_product_number == productSelected) {
