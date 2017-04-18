@@ -1,0 +1,47 @@
+
+class PricingScenarioGraph(APIView):
+    def get(self, request, format=None):
+        reqobj = dict(request.GET)
+        finalObj = []
+        for filename in reqobj['name']:
+            data = []
+            with open('./to_send_files/raw/' +
+                              filename +
+                              '.csv',
+                      newline='') as csvfile:
+                spamreader = csv.reader(csvfile, delimiter=' ', quotechar=',')
+                for row in spamreader:
+                    # print(', '.join(row))
+                    row = (', '.join(row)).split(',')
+                    data.append(row)
+
+            colnames = data[0]
+            data = data[1:]
+
+            weeks = set()
+            for i in data:
+                weeks.add(int(i[6]))
+            weeks.discard(-1)
+            weeks = list(weeks)
+
+            fileObj = []
+            for excelcol in [8, 10, 12, 14]:
+                typeobj = []
+                for col in colnames[excelcol: excelcol + 2]:
+                    colindex = colnames.index(col)
+                    obj = {'id': col, 'values': []}
+                    for week in weeks:
+                        weekobj = {}
+                        for row in data:
+                            if week == float(row[6]):
+                                if week in weekobj.values():
+                                    weekobj['date'] = week
+                                    weekobj['temperature'] += float(row[colindex + 1])
+                                else:
+                                    weekobj['date'] = week
+                                    weekobj['temperature'] = 0
+                        obj['values'].append(weekobj)
+                    typeobj.append(obj)
+                fileObj.append(typeobj)
+            finalObj.append(fileObj)
+        return JsonResponse(finalObj, safe=False)

@@ -1,0 +1,30 @@
+@import './../../styles/colours';
+@import '../../styles/fonts';
+.ui-components-library {
+  .ui-search-button {
+    display: inline-block;
+    .tesco-font;
+    font-size: 16px;
+    color: @ddl-blue;
+    padding: 0 20px;
+    height: 48px;
+    background-color: @ddl-white;
+    border: 1px solid @ddl-grey-7;
+    border-radius: 0;
+    outline: none;
+    border-left: none;
+    vertical-align: middle;
+    .search-button-content {
+      border-bottom: 1px solid transparent;
+      transition: border 0.3s;
+    }
+    &:hover,
+    &:focus {
+      box-shadow: none;
+      cursor: pointer;
+      .search-button-content {
+        border-bottom: 1px solid @ddl-blue;
+      }
+    }
+  }
+}
