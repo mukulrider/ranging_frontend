@@ -616,6 +616,7 @@ export function* generateWaterfallValueFetch() {
   console.log('final 4', urlParams);
 
   try {
+    console.log("inside try");
     const data = yield call(request,
       `http://172.20.244.141:8000/api/product_impact_chart${urlParams}`);
       // `http://172.20.246.146:8000/ranging/product_impact_chart${urlParams}`);
@@ -627,6 +628,7 @@ export function* generateWaterfallValueFetch() {
 }
 
 export function* doWaterfallChartValueFetch() {
+  console.log("INSIDE SMALL FUNCTION");
   const watcher = yield takeLatest(WATERFALL_VALUE, generateWaterfallValueFetch);
   yield take(LOCATION_CHANGE);
   yield cancel(watcher);
