@@ -282,6 +282,7 @@ export function* doApiFetch() {
 export function* generateSubstitutesFetch() {
   const urlName = yield select(selectDelistContainerDomain());
   let urlParams = urlName.get('substitutesData');
+  console.log("a1",urlParams);
 
 
   function isEmpty(obj) {
@@ -303,6 +304,7 @@ export function* generateSubstitutesFetch() {
     // alert("empty");
   }
 
+  console.log("a2",urlParams);
 
   // let paramstring = '';
   // if (!(isEmpty(urlParams))) {
