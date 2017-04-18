@@ -79,6 +79,7 @@ class BubbleChart2 extends React.PureComponent { // eslint-disable-line react/pr
 
         prodArr.push(dataBubbleUrlParams)
 
+
         //let productSelected = d.base_product_number;
         console.log("bubble url", dataBubbleUrlParams);
         console.log("printing product selected", productSelected);
