@@ -195,7 +195,9 @@ export function* generateApiFetch() {
     const data = yield call(request,
       // `http://172.20.246.146:8000/ranging/product_impact_table/`);
       // `http://172.20.246.146:8000/ranging/product_impact_supplier_table${urlParams}`);
-      `http://172.20.246.146:8000/ranging/product_impact_supplier_table${urlParams}`);
+      `http://172.20.244.141:8000/api/product_impact_supplier_table${urlParams}`);
+      // `http://172.20.246.146:8000/ranging/product_impact_supplier_table${urlParams}`);
+      // `http://172.20.246.146:8000/ranging/product_impact_supplier_table${urlParams}`);
     // `http://172.20.246.146:8000/ranging/product_impact_table${paramstring}`);
     // `http://172.20.246.146:8000/ranging/product_impact_table/?store_type=Main%20Estate&time_period=13_weeks&${paramstring}`);
 
@@ -312,7 +314,8 @@ export function* generateSubstitutesFetch() {
 
   try {
     const data = yield call(request,
-      `http://172.20.246.146:8000/ranging/delist_table_popup?delist_product=${urlParams}`);
+      // `http://172.20.246.146:8000/ranging/delist_table_popup?delist_product=${urlParams}`);
+      `http://172.20.244.141:8000/api/delist_table_popup?delist_product=${urlParams}`);
     yield put(SubstitutesClickSuccess(data));
   } catch (err) {
     // console.log(err);
@@ -368,7 +371,8 @@ export function* generateSupplierPopupTableFetch() {
 
   try {
     const data = yield call(request,
-      `http://172.20.246.146:8000/ranging/supplier_table_popup?supplier=${urlParams}`);
+      // `http://172.20.246.146:8000/ranging/supplier_table_popup?supplier=${urlParams}`);
+      `http://172.20.244.141:8000/api/supplier_table_popup?supplier=${urlParams}`);
     yield put(SupplierPopupTableDataFetchSuccess(data));
   } catch (err) {
     // console.log(err);
@@ -468,7 +472,8 @@ export function* generateDelistTableFetch() {
 
   try {
     console.log("urlParams2", urlParams);
-    let data = yield call(request, `http://172.20.246.146:8000/ranging/product_impact_delist_table` + urlParams);
+    // let data = yield call(request, `http://172.20.246.146:8000/ranging/product_impact_delist_table` + urlParams);
+    let data = yield call(request, `http://172.20.244.141:8000/api/product_impact_delist_table` + urlParams);
     console.log("delist data", data);
     yield put(delistTableSuccess(data));
   } catch (err) {
@@ -586,7 +591,8 @@ export function* generateWaterfallValueFetch() {
 
   try {
     const data = yield call(request,
-      `http://172.20.246.146:8000/ranging/product_impact_chart${urlParams}`);
+      `http://172.20.244.141:8000/api/product_impact_chart${urlParams}`);
+      // `http://172.20.246.146:8000/ranging/product_impact_chart${urlParams}`);
 
     yield put(WaterfallValueChartSuccess(data));
   } catch (err) {
