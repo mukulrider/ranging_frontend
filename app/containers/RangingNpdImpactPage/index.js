@@ -31,6 +31,7 @@ import {
 import CascadedFilterNpdImpact from 'components/CascadedFilterNpdImpact';
 
 
+
 export class RangingNpdImpactPage extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
 
 

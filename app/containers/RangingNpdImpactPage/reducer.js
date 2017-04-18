@@ -106,7 +106,6 @@ function rangingNpdImpactPageReducer(state = initialState, action) {
       // console.log(WATERFALL_CHART_DATA_SUCCESS, 'reducer', action);
       return state.set('waterFallChartData', action.data);
 
-
     case SEND_URL_PARAMS:
       return state.set('dataUrlParms', action.data);
     case SAVE_WEEK_PARAM:
