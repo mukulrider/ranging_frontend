@@ -263,9 +263,10 @@ export function* generateGraph() {
   if (performanceParams !== '') {
     SelectionState = SelectionState + '&' + performanceParams
   }
-  // if (bubbleParams !== '') {
-  //   SelectionState = SelectionState + '&' + bubbleParams
-  // }
+  if (bubbleParams !== '') {
+    SelectionState = SelectionState + '&' + bubbleParams
+  }
+
 
   //Removing "&"
   let ajaxSelection = '';

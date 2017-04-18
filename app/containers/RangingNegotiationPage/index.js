@@ -162,6 +162,7 @@ export class RangingNegotiationPage extends React.PureComponent { // eslint-disa
                     <div className="col-xs-12 col-md-3">
                       <Button onClick={() => {
 
+
                         let text = "WEEK : Last 13 weeks";
                         this.updateText(text);
                         dataWeekUrlParams = "time_period=Last 13 weeks"
@@ -234,7 +235,6 @@ export class RangingNegotiationPage extends React.PureComponent { // eslint-disa
                       this.props.onGenerateTable();
 
                     }}><p><u>Reset Chart</u></p></div>
-                    <i className="time">*Time Period | </i>
                   </div>
 
                   <div className="row">
@@ -377,13 +377,13 @@ export class RangingNegotiationPage extends React.PureComponent { // eslint-disa
                               objString += 'long_description=' + obj.productId + '&'
                               }
                             })
-                            objString.substring(0, objString.length - 1);
-
-
+                            {/*objString.substring(0, objString.length - 1);*/}
+                            objString = objString.slice(0,objString.length-1);
                             window.location = objString;
                           }}>SEND TO DE-LIST</Button>
                 </div>
                 <table className="table table-hover table-bordered table-striped ">
+
 
                   <thead style={{fontWeight: '700', fontSize: '12px', textAlign: 'center'}}>
 
