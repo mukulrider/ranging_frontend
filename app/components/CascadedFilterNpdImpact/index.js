@@ -30,7 +30,7 @@ class CascadedFilterNpdImpact extends React.PureComponent { // eslint-disable-li
     this.props.onDataFetchOnPageLoad();
     this.props.onDataFetchOnBubbleData();
     this.props.onDataFetchCanniProdTable();
-    this.props.onDataFetchOnWaterFallChart();
+    // this.props.onDataFetchOnWaterFallChart();
   //this.props.onDataFetchOnBubbleData();
     //this.props.onDataFetchCanniProdTable();
     //this.props.onDataFetchOnWaterFallChart();
@@ -392,6 +392,7 @@ class CascadedFilterNpdImpact extends React.PureComponent { // eslint-disable-li
           onClick={() => {
 
             this.applyButtonFunctionality();
+
 
           }}>Apply Filters</Button>
         <div/>
