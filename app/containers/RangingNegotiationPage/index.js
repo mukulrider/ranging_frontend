@@ -385,6 +385,8 @@ export class RangingNegotiationPage extends React.PureComponent { // eslint-disa
                 <table className="table table-hover table-bordered table-striped ">
 
 
+
+
                   <thead style={{fontWeight: '700', fontSize: '12px', textAlign: 'center'}}>
 
                   <th style={{textAlign:'center'}}>Select</th>

@@ -268,6 +268,8 @@ export function* generateGraph() {
   }
 
 
+
+
   //Removing "&"
   let ajaxSelection = '';
   ajaxSelection = SelectionState.replace('&', '');

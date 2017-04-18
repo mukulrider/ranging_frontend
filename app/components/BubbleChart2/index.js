@@ -189,7 +189,6 @@ class BubbleChart2 extends React.PureComponent { // eslint-disable-line react/pr
 
   render() {
 
-
     return (
       <div>
         <svg id="svgg" width="800" height="600" fontFamily="sans-serif" fontSize="10"
