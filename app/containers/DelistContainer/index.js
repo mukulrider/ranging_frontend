@@ -907,7 +907,7 @@ export class DelistContainer extends React.PureComponent { // eslint-disable-lin
                           <td
                             style={{verticalAlign: 'middle', textAlign: "center"}}>{formatSales(obj.value_impact)}</td>
                           <td style={{
-                            verticalAlign: 'center',
+                            verticalAlign: 'middle',
                             textAlign: "center",
                             fontSize: '14px'
                           }}>{obj.value_impact_per}</td>

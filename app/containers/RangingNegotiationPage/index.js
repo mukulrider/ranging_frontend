@@ -377,7 +377,9 @@ export class RangingNegotiationPage extends React.PureComponent { // eslint-disa
                               objString += 'long_description=' + obj.productId + '&'
                               }
                             })
-                            objString.substring(0, objString.length - 1);
+                            {/*objString.substring(0, objString.length - 1);*/}
+                            objString = objString.slice(0,objString.length-1);
+                            console.log(objString);
 
 
                             window.location = objString;
