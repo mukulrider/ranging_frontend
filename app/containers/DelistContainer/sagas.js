@@ -434,6 +434,7 @@ export function* doDelistTableFetch() {
 
 // WATERFALL CHART - VALIUE
 export function* generateWaterfallValueFetch() {
+
   let urlName = yield select(selectDelistContainerDomain());
   console.log("water 0 urlName", urlName);
   let urlParams = "";
@@ -489,17 +490,37 @@ export function* generateWaterfallValueFetch() {
   // }
   //
 
-  let urlParamsString = "";
-  if (!(urlName.get('urlParamsString') == "")) {
-    urlParamsString = urlName.get('urlParamsString');
-    console.log("urlParamsString", urlParamsString);
+  // let urlParamsString = "";
+  // if (!(urlName.get('urlParamsString') == "")) {
+  //   urlParamsString = urlName.get('urlParamsString');
+  //   console.log("urlParamsString", urlParamsString);
+  // }
+  //
+  // if (!(typeof(urlParamsString) == "undefined") && !(urlParamsString == "")) {
+  //   // alert("non empty");
+  //   // alert(urlParamsString);
+  //   console.log("inside if for params", urlParamsString);
+  //   urlParams = urlParams + "&" + urlParamsString;
+  //   console.log("inside if 2 for params", urlParams);
+  //
+  // } else {
+  //   // alert("empty");
+  // }
+  // //
+  // console.log('water 4 urlParamsString', urlParams);
+  //
+
+let filterParamsString = "";
+  if (!(urlName.get('filterParamsString') == "")) {
+    filterParamsString = urlName.get('filterParamsString');
+    console.log("filterParamsString", filterParamsString);
   }
 
-  if (!(typeof(urlParamsString) == "undefined") && !(urlParamsString == "")) {
+  if (!(typeof(filterParamsString) == "undefined") && !(filterParamsString == "")) {
     // alert("non empty");
     // alert(urlParamsString);
-    console.log("inside if for params", urlParamsString);
-    urlParams = urlParams + "&" + urlParamsString;
+    console.log("inside if for params", filterParamsString);
+    urlParams = urlParams + "&" + filterParamsString;
     console.log("inside if 2 for params", urlParams);
 
   } else {

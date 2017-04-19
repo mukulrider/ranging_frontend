@@ -80,6 +80,8 @@ export const GENERATE_SIDE_FILTER_SUCCESS = 'app/DelistContainer/GENERATE_SIDE_F
 export const GENERATE_URL_PARAMS = 'app/DelistContainer/GENERATE_URL_PARAMS';
 export const GENERATE_URL_PARAMS_STRING = 'app/DelistContainer/GENERATE_URL_PARAMS_STRING';
 
+export const GENERATE_FILTER_PARAMS_STRING = 'app/DelistContainer/GENERATE_FILTER_PARAMS_STRING';
+
 
 export const GENERATE_URL_PARAMS_DATA_STRING = 'app/DelistContainer/GENERATE_URL_PARAMS_DATA_STRING';
 

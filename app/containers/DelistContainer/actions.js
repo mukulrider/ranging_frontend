@@ -23,6 +23,7 @@ import {
   GENERATE_SIDE_FILTER_SUCCESS,
   GENERATE_URL_PARAMS,
   GENERATE_URL_PARAMS_STRING,
+  GENERATE_FILTER_PARAMS_STRING,
   WATERFALL_VALUE,
   WATERFALL_VALUE_SUCCESS,
   TEST_AJAX,
@@ -295,6 +296,13 @@ export function generateUrlParams(data) {
 export function generateUrlParamsString(data) {
   return {
     type: GENERATE_URL_PARAMS_STRING,
+    data,
+  };
+}
+
+export function generateFilterParamsString(data) {
+  return {
+    type: GENERATE_FILTER_PARAMS_STRING,
     data,
   };
 }

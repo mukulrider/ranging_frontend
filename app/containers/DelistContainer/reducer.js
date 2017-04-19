@@ -19,6 +19,7 @@ import {
   GENERATE_SIDE_FILTER,
   GENERATE_URL_PARAMS,
   GENERATE_URL_PARAMS_STRING,
+  GENERATE_FILTER_PARAMS_STRING,
   GENERATE_SIDE_FILTER_SUCCESS,
   GENERATE_TABLE_SUCCESS,
   WATERFALL_VALUE,
@@ -42,6 +43,7 @@ import {
 
 const initialState = fromJS(
   {
+    urlParamsString: "",
     barChart2Data: [{letter: 'A', frequency: 100}, {letter: 'B', frequency: 200}],
     dataUrlparams: "",
     supplierPopupTablePagination: "",
@@ -52,7 +54,6 @@ const initialState = fromJS(
     searchSupplierTable: "",
     searchDelistTable: "",
     weekBreadcrumb: "",
-    urlParamsString: "",
     storeBreadcrumb: "",
     waterFallChart2Data_1: [{name: ' Product Revenue ', value: 420000},
       {name: ' Services Revenue ', value: 210000},
@@ -158,9 +159,10 @@ function delistContainerReducer(state = initialState, action) {
 
     // WATERFALL CHART - VALUE
     case WATERFALL_VALUE_SUCCESS:
+      console.log('water fall');
       return state.set('waterfallValue', action.data);
 
- // URL PARAMS
+    // URL PARAMS
     case URL_PARAMS:
       return state.set('urlparamsDelist', action.data);
 
@@ -171,6 +173,9 @@ function delistContainerReducer(state = initialState, action) {
       return state.set('urlParams', action.data);
     case GENERATE_URL_PARAMS_STRING:
       return state.set('urlParamsString', action.data);
+
+    case GENERATE_FILTER_PARAMS_STRING:
+      return state.set('filterParamsString', action.data);
 
     // AJAX TEST
     case TEST_AJAX_SUCCESS:

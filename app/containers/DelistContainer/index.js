@@ -44,6 +44,7 @@ import {
   generateUrlParams,
   generateTable,
   generateUrlParamsString,
+  generateFilterParamsString,
   WaterfallValueChart,
   WaterfallValueChartSuccess,
   ajaxClick,
@@ -67,6 +68,7 @@ import styles from './style.scss';
 export class DelistContainer extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
   componentDidMount = () => {
     this.props.onGenerateUrlParamsString();
+    this.props.onGenerateFilterParamsString();
     console.log("1onGenerateUrlParamsString");
     this.props.onDataUrlParams(this.props.location.query);
     console.log("2onDataUrlParams");
@@ -90,9 +92,10 @@ export class DelistContainer extends React.PureComponent { // eslint-disable-lin
     this.props.onGenerateSideFilter();
     console.log("7onGenerateSideFilter");
   };
-
+  //
   // componentDidUpdate = () => {
-  //   this.props.onDataUrlParams(this.props.location.query);
+  //   // this.props.onDataUrlParams(this.props.location.query);
+  //   this.props.onUrlParams(this.props.location.search);
   // };
 
   constructor(props) {
@@ -169,6 +172,7 @@ export class DelistContainer extends React.PureComponent { // eslint-disable-lin
                                 onDataUrlParams={this.props.DataUrlParams}
                                 onUrlParamsData={this.props.onUrlParamsData}
                                 onGenerateUrlParamsString={this.props.onGenerateUrlParamsString}
+                                onGenerateFilterParamsString={this.props.onGenerateFilterParamsString}
                                 onGenerateUrlParamsData={this.props.onGenerateUrlParamsData}
                                 onApplyClick={this.props.onApplyClick}
                                 onWaterfall={this.props.onWaterfallValueChart}
@@ -1612,6 +1616,8 @@ function mapDispatchToProps(dispatch) {
     onFilterReset: (e) => dispatch(generateSideFilterReset(e)),
     onGenerateUrlParams: (e) => dispatch(generateUrlParams(e)),
     onGenerateUrlParamsString: (e) => dispatch(generateUrlParamsString(e)),
+
+    onGenerateFilterParamsString: (e) => dispatch(generateFilterParamsString(e)),
 
     onWaterfall: (e) => dispatch(WaterfallValueChart(e)),
     ondelist: (e) => dispatch(delistTable(e)),
