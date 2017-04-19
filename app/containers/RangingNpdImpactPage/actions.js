@@ -83,7 +83,7 @@ export function dataFetchOnWaterFallChartSuccess(data) {
 //--------------------- DATA FOR CANNIBALIZATION TABLE -------------------------------
 
 export function dataFetchCanniProdTable() {
-  // console.log('dataFetchCanniProdTable action');
+  console.log('dataFetchCanniProdTable action');
   return {
     type: CANNIBALIZED_PROD_TABLE_DATA_FETCH,
   };

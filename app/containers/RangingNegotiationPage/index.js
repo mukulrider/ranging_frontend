@@ -134,8 +134,10 @@ export class RangingNegotiationPage extends React.PureComponent { // eslint-disa
                                         onURLRequest={this.props.onURLRequest}
 
                     //checkboxData={this.props.PricingScenarioOverviewPage.sideFilter}
+                    //onGenerateUrlParamsString gets the url parameters
                                         onGenerateUrlParamsString={this.props.onGenerateUrlParamsString}
                                         location={this.props.location}
+                    //This should get the fitler data
                                         onGenerateUrlParamsData={this.props.onGenerateSideFilter}
                   />
 
@@ -154,7 +156,7 @@ export class RangingNegotiationPage extends React.PureComponent { // eslint-disa
             <span id="storeInfo">STORE : Main Estate</span>
           </p>
           {/*</div>*/}
-          <div className="col-xs-12 col-md-10">
+          <div className="col-xs-12 col-md-10" style={{float:'right'}}>
             <div className="row">
               <div className="col-xs-12">
                 <div className="row week-row">
@@ -164,6 +166,7 @@ export class RangingNegotiationPage extends React.PureComponent { // eslint-disa
 
                         let text = "WEEK : Last 13 weeks";
                         this.updateText(text);
+
                         dataWeekUrlParams = "time_period=Last 13 weeks"
                         this.props.onSaveWeekParam(dataWeekUrlParams);
                         this.props.onFetchGraph();

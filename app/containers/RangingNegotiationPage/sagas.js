@@ -50,8 +50,8 @@ export function* generateWeekFetch() {
   paramString = paramString.replace('&', '');
 
   try {
-    // const data = yield call(request, `http://dvempapp00001uk.dev.global.tesco.org/ranging/default_data_for_nego_charts?` + paramString);
-    const data = yield call(request, `http://dvempapp00001uk.dev.global.tesco.org/api/nego_chart?` + paramString);
+    // const data = yield call(request, `http://10.1.161.82:8000/ranging/default_data_for_nego_charts?` + paramString);
+    const data = yield call(request, `http://10.1.161.82:8000/api/nego_chart?` + paramString);
     yield put(fetchDataSuccess(data));
   } catch (err) {
     // console.log(err);
@@ -75,12 +75,12 @@ export function* generateSideFilter() {
     // todo: update url
     let data = '';
     if (urlParams){
-      // data = yield call(request, `http://dvempapp00001uk.dev.global.tesco.org/ranging/nego/filter_data?` + urlParams);
-      data = yield call(request, `http://dvempapp00001uk.dev.global.tesco.org/api/nego/filter_data?` + urlParams);
+      // data = yield call(request, `http://10.1.161.82:8000/ranging/nego/filter_data?` + urlParams);
+      data = yield call(request, `http://10.1.161.82:8000/api/nego/filter_data?` + urlParams);
 
     }else{
-      // data = yield call(request, `http://dvempapp00001uk.dev.global.tesco.org/ranging/nego/filter_data`);
-      data = yield call(request, `http://dvempapp00001uk.dev.global.tesco.org/api/nego/filter_data`);
+      // data = yield call(request, `http://10.1.161.82:8000/ranging/nego/filter_data`);
+      data = yield call(request, `http://10.1.161.82:8000/api/nego/filter_data`);
     }
     // // console.log(data);
     yield put(generateSideFilterSuccess(data));
@@ -172,13 +172,13 @@ export function* generateTable() {
   ajaxSelection = SelectionState.replace('&', '');
   console.log("final url for table",ajaxSelection);
   if (ajaxSelection != '') {
-    // const data = yield call(request, `http://dvempapp00001uk.dev.global.tesco.org/ranging/nego_bubble_table?` + ajaxSelection+"&"+urlParams);
-    const data = yield call(request, `http://dvempapp00001uk.dev.global.tesco.org/api/nego_table?` + ajaxSelection+"&"+urlParams);
+    // const data = yield call(request, `http://10.1.161.82:8000/ranging/nego_bubble_table?` + ajaxSelection+"&"+urlParams);
+    const data = yield call(request, `http://10.1.161.82:8000/api/nego_table?` + ajaxSelection+"&"+urlParams);
     yield put(generateTableSuccess(data));
   }
   else {
-    // const data = yield call(request, `http://dvempapp00001uk.dev.global.tesco.org/ranging/nego_bubble_table?`+urlParams);
-    const data = yield call(request, `http://dvempapp00001uk.dev.global.tesco.org/api/nego_table?`+urlParams);
+    // const data = yield call(request, `http://10.1.161.82:8000/ranging/nego_bubble_table?`+urlParams);
+    const data = yield call(request, `http://10.1.161.82:8000/api/nego_table?`+urlParams);
     yield put(generateTableSuccess(data));
   }
 
@@ -204,7 +204,7 @@ export function* generateTable() {
 //
 //
 //   try {
-//     const data = yield call(request, `http://dvempapp00001uk.dev.global.tesco.org/ranging/nego_bubble_table?${paramString}`);
+//     const data = yield call(request, `http://10.1.161.82:8000/ranging/nego_bubble_table?${paramString}`);
 //     yield put(generateTableSuccess(data));
 //   } catch (err) {
 //     // console.log(err);
@@ -277,13 +277,13 @@ export function* generateGraph() {
   ajaxSelection = SelectionState.replace('&', '');
   console.log("final url for graph",ajaxSelection);
   if (ajaxSelection != '') {
-    // const data = yield call(request, `http://dvempapp00001uk.dev.global.tesco.org/ranging/nego_bubble_chart?` + urlParams +"&"+ ajaxSelection);
-    const data = yield call(request, `http://dvempapp00001uk.dev.global.tesco.org/api/nego_chart?` + urlParams +"&"+ ajaxSelection);
+    // const data = yield call(request, `http://10.1.161.82:8000/ranging/nego_bubble_chart?` + urlParams +"&"+ ajaxSelection);
+    const data = yield call(request, `http://10.1.161.82:8000/api/nego_chart?` + urlParams +"&"+ ajaxSelection);
     yield put(fetchGraphSuccess(data));
   }
   else {
-    // const data = yield call(request, `http://dvempapp00001uk.dev.global.tesco.org/ranging/nego_bubble_chart?`+urlParams );
-    const data = yield call(request, `http://dvempapp00001uk.dev.global.tesco.org/api/nego_chart?`+urlParams );
+    // const data = yield call(request, `http://10.1.161.82:8000/ranging/nego_bubble_chart?`+urlParams );
+    const data = yield call(request, `http://10.1.161.82:8000/api/nego_chart?`+urlParams );
     yield put(fetchGraphSuccess(data));
   }
   //Once all the parameters are obtained, remove the first instance of & and then make a call to url with all param appended
@@ -292,7 +292,7 @@ export function* generateGraph() {
   // try {
   //      console.log('Checking params for graph under try', urlParamsString);
   //
-  //      const data = yield call(request, `http://dvempapp00001uk.dev.global.tesco.org/ranging/nego_bubble_chart?`+ paramString);
+  //      const data = yield call(request, `http://10.1.161.82:8000/ranging/nego_bubble_chart?`+ paramString);
   //      yield put(fetchGraphSuccess(data));
   //  } catch (err) {
   //      // console.log(err);

@@ -18,7 +18,7 @@ class CascadedFilterNpdImpact extends React.PureComponent { // eslint-disable-li
   componentDidMount = () => {
     // console.log("----inside selector----",this.props);
     this.props.onGenerateSideFilter();
-
+    // this.props.onDataFetchCanniProdTable();
   };
 
   componentDidUpdate = () => {
@@ -26,12 +26,12 @@ class CascadedFilterNpdImpact extends React.PureComponent { // eslint-disable-li
     const urlParams = this.props.location.query;
     this.props.onGenerateUrlParams(urlParams);
     this.props.onSendUrlParams(urlParams);
-    //
+    this.props.onDataFetchCanniProdTable();
     this.props.onDataFetchOnPageLoad();
     this.props.onDataFetchOnBubbleData();
-    this.props.onDataFetchCanniProdTable();
+
     // this.props.onDataFetchOnWaterFallChart();
-  //this.props.onDataFetchOnBubbleData();
+    //this.props.onDataFetchOnBubbleData();
     //this.props.onDataFetchCanniProdTable();
     //this.props.onDataFetchOnWaterFallChart();
 
@@ -68,13 +68,15 @@ class CascadedFilterNpdImpact extends React.PureComponent { // eslint-disable-li
     this.props.onGenerateUrlParamsString(queryString);
 
     //For the manual inputs
-    let acp = this.props.location.ACP_field_entry;
-    let asp = this.props.location.ASP_field_entry;
-    let size = this.props.location.Size_field_entry;
+    let acp = this.props.ACP_field_entry;
+    let asp = this.props.ASP_field_entry;
+    let size = this.props.Size_field_entry;
+    // let size = this.props.RangingNpdImpactPage.Size_field_entry;
 
     let validFilters = 1;
     console.log("size value entered ",size);
     console.log("typeofsize", typeof size);
+    // console.log("this.props.location.Size_field_entry", this.props.location.Size_field_entry);
     // ---------------------FINAL VALIDATIONS BEFORE APPLYING---------------------
 
     // FOR FILTERS - all filters are mandatory , so checking wthr all are selected or not
@@ -111,8 +113,14 @@ class CascadedFilterNpdImpact extends React.PureComponent { // eslint-disable-li
       } else {
         browserHistory.push(newUrl + '?' + completeSelections);
       }
-
+    console.log("just_before_ajax");
+    this.props.onDataFetchCanniProdTable();
     // }
+    // this.props.onGenerateUrlParams(urlParams);
+    // this.props.onSendUrlParams(urlParams);
+
+    // this.props.onDataFetchOnPageLoad();
+    // this.props.onDataFetchOnBubbleData();
 
   };
 
@@ -343,14 +351,13 @@ class CascadedFilterNpdImpact extends React.PureComponent { // eslint-disable-li
 
             {/*Size*/}
             <div style={{marginBottom: "15px"}}>
-              <InputField type={'string'}
+              <InputField type={"number"}
                           placeholder="Enter Size"
                           value={this.props.Size_field_entry}
                           onChange={(e) => {
                             this.props.onSaveSizeFilterData(e);
                             {/*this.props.onDataFetchOnPageLoad();*/
                             }
-
                           }}
               />
 
@@ -358,7 +365,7 @@ class CascadedFilterNpdImpact extends React.PureComponent { // eslint-disable-li
 
             {/*ASP*/}
             <div style={{marginBottom: "15px"}}>
-              <InputField type={'string'}
+              <InputField type={"number" }
                           placeholder="Enter ASP"
                           value={this.props.ASP_field_entry}
                           onChange={(e) => {
@@ -372,7 +379,7 @@ class CascadedFilterNpdImpact extends React.PureComponent { // eslint-disable-li
 
             {/*ACP*/}
             <div style={{marginBottom: "15px"}}>
-              <InputField type={'string'}
+              <InputField type={"number"}
                           placeholder="Enter ACP"
                           value={this.props.ACP_field_entry}
                           onChange={(e) => {
