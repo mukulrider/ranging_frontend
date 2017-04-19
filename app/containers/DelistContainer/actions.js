@@ -265,6 +265,7 @@ export function WaterfallValueChartSuccess(data) {
 // }
 
 
+
 export function WaterfallSpinnerSuccess(spinnerCheck) {
   console.log("waterfall data ---------------------------", spinnerCheck);
   return {

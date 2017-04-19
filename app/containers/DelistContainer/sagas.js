@@ -333,6 +333,7 @@ export function* generateSupplierPopupTableFetch() {
     // alert("empty");
   }
 
+
   try {
     const data = yield call(request,
       // `http://172.20.246.146:8000/ranging/supplier_table_popup?supplier=${urlParams}`);

@@ -168,6 +168,7 @@ function delistContainerReducer(state = initialState, action) {
       console.log('water fall spinner');
       return state.set('waterfallSpinner', action.spinnerCheck);
 
+
     // URL PARAMS
     case URL_PARAMS:
       return state.set('urlparamsDelist', action.data);

@@ -174,6 +174,7 @@ class NewSelector2 extends React.PureComponent { // eslint-disable-line react/pr
                   </Panel>
                 )
               })}
+
               <Button onClick={() => {
                 {/*let week_no = "time_period=13_weeks";*/}
                 {/*this.props.onWeekClick(week_no);*/}

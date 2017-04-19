@@ -81,6 +81,7 @@ export const GENERATE_URL_PARAMS = 'app/DelistContainer/GENERATE_URL_PARAMS';
 export const GENERATE_URL_PARAMS_STRING = 'app/DelistContainer/GENERATE_URL_PARAMS_STRING';
 export const WATERFALL_SPINNER_SUCCESS = 'app/DelistContainer/WATERFALL_SPINNER_SUCCESS';
 
+
 //WATERFALL SPINNER STARTED
 export const SPINNER_STARTED = 'app/DelistContainer/SPINNER_STARTED';
 

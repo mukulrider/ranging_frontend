@@ -446,7 +446,6 @@ export class DelistContainer extends React.PureComponent { // eslint-disable-lin
           </Modal>
 
           {(() => {
-            {/*if (this.props.DelistContainer.waterfallValue && this.props.DelistContainer.waterfallValue.sales_chart && this.props.DelistContainer.waterfallValue.vols_chart && this.props.DelistContainer.waterfallSpinner) {*/}
             if (this.props.DelistContainer.waterfallValue && this.props.DelistContainer.waterfallValue.sales_chart && this.props.DelistContainer.waterfallValue.vols_chart) {
               return (
                 <div className="row">
