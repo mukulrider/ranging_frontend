@@ -48,27 +48,27 @@ export function* generateUnmatchedTableFetch() {
 
 
   try {
-  console.log('---------------------http://172.20.244.141:8000/ranging/npd_view/unmatchedprod?'+paramString+searchParams);
+  console.log('---------------------http://10.1.161.82:8000/ranging/npd_view/unmatchedprod?'+paramString+searchParams);
       // Table data
         const data = yield call(request,
-          `http://172.20.244.141:8000/api/npd/unmatchedprod?`+paramString+searchParams);
+          `http://10.1.161.82:8000/api/npd/unmatchedprod?`+paramString+searchParams);
         yield put(unmatchedProdTableSuccess(data));
 
    // Sku chart data
    //    const sku_chart = yield call(request,
-   //    `http://172.20.244.141:8000/ranging/npd_view/psgskudistribution?`+paramString);
+   //    `http://10.1.161.82:8000/ranging/npd_view/psgskudistribution?`+paramString);
    //      yield put(skuChartSuccess(sku_chart));
    //
    //    // Table data
    //    const out_performance= yield call(request,
-   //      `http://172.20.244.141:8000/ranging/npd_view/outperformance?`+paramString);
+   //      `http://10.1.161.82:8000/ranging/npd_view/outperformance?`+paramString);
    //    yield put(outPerfromanceChartSuccess(out_performance));
    //
    //
    //    // Price gravity chart data
    //  console.log('price_gravity sagas');
    //  const price_gravity = yield call(request,
-   //      `http://172.20.244.141:8000/ranging/npd_view/pricebucket?`+paramString);
+   //      `http://10.1.161.82:8000/ranging/npd_view/pricebucket?`+paramString);
    //    yield put(priceGravitySuccess(price_gravity));
 
 
@@ -98,11 +98,11 @@ export function* generateSkuChartDataFetch() {
 try {
 
 
-  console.log('---------------------http://172.20.244.141:8000/ranging/npd_view/psgskudistribution?'+paramString);
+  console.log('---------------------http://10.1.161.82:8000/ranging/npd_view/psgskudistribution?'+paramString);
 
    // Sku chart data
       const sku_chart = yield call(request,
-      `http://172.20.244.141:8000/api/npd/psgskudistribution?`+paramString);
+      `http://10.1.161.82:8000/api/npd/psgskudistribution?`+paramString);
         yield put(skuChartSuccess(sku_chart));
 
 
@@ -135,14 +135,14 @@ export function* generateOutPerformanceChartFetch() {
 
     paramString=paramString.replace('&','');
 
-  console.log('---------------------http://172.20.244.141:8000/ranging/npd_view/outperformance?'+paramString);
+  console.log('---------------------http://10.1.161.82:8000/ranging/npd_view/outperformance?'+paramString);
 
 
   try {
 
       // Out performance data
       const out_performance= yield call(request,
-        `http://172.20.244.141:8000/api/npd/outperformance?`+paramString);
+        `http://10.1.161.82:8000/api/npd/outperformance?`+paramString);
 
       yield put(outPerformanceChartSuccess(out_performance));
 
@@ -174,12 +174,12 @@ export function* generatePriceGravityFetch() {
 
 try {
 
-  console.log('---------------------http://172.20.244.141:8000/ranging/npd_view/pricebucket?'+paramString);
+  console.log('---------------------http://10.1.161.82:8000/ranging/npd_view/pricebucket?'+paramString);
 
       // Price gravity chart data
 
       const price_gravity = yield call(request,
-        `http://172.20.244.141:8000/api/npd/pricebucket?`+paramString);
+        `http://10.1.161.82:8000/api/npd/pricebucket?`+paramString);
       yield put(priceGravitySuccess(price_gravity));
 
 
@@ -203,17 +203,17 @@ export function* generateSideFilter() {
 
     let urlName=yield select(selectRangingNpdPageDomain());
     let urlParams = urlName.get('filter_selection');
-    console.log('http://172.20.244.141:8000/ranging/npd_view1/filter_data?'+urlParams);
+    console.log('http://10.1.161.82:8000/ranging/npd_view1/filter_data?'+urlParams);
 
     // if (urlParams==='')
     // {urlParams='default'
     // }
 
-    const data = yield call(request, `http://172.20.244.141:8000/api/npd_view1/filter_data?` + urlParams);
+    const data = yield call(request, `http://10.1.161.82:8000/api/npd_view1/filter_data?` + urlParams);
 
 
     // const data = yield call(request, `http://localhost:8090/wash/?format=json`);
-    // const data = yield call(request, `http://172.20.244.141:8000/ranging/npd_view/filter_data?`);
+    // const data = yield call(request, `http://10.1.161.82:8000/ranging/npd_view/filter_data?`);
 
     // // //console.log(data);
     yield put(generateSideFilterSuccess(data));
