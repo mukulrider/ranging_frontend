@@ -208,6 +208,7 @@ export function* generateSideFilter() {
     // let urlParams = urlName.get('filter_selection');
     let urlParams = urlName.get('filterSelectionsTillNow');
 
+
     console.log('http://10.1.161.82:8000/api/npd_impact_view/filter_data?' + urlParams);
     let data = '';
     if (urlParams) {

@@ -549,6 +549,7 @@ function mapDispatchToProps(dispatch) {
     onResetClickParam: (e) => dispatch(ResetClickParam(e)),
     onGenerateCheckedList: (a, b) => dispatch(generateCheckedList(a, b)),
 
+
   };
 }
 

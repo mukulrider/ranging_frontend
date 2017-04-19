@@ -56,6 +56,7 @@ class SelectorNegotiation2 extends React.PureComponent { // eslint-disable-line 
   };
 
 
+
   applyButtonFunctionality = () => {
     this.props.onGenerateTable();
     this.props.onFetchGraph();

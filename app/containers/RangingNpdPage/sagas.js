@@ -188,6 +188,7 @@ try {
     }
 }
 
+
 export function* doPriceGravityFetch() {
     const watcher = yield takeLatest(PRICE_GRAVITY_FETCH, generatePriceGravityFetch);
     yield take(LOCATION_CHANGE);

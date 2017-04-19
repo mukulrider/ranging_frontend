@@ -285,6 +285,7 @@ export function* generateGraph() {
     // const data = yield call(request, `http://10.1.161.82:8000/ranging/nego_bubble_chart?`+urlParams );
     const data = yield call(request, `http://10.1.161.82:8000/api/nego_chart?`+urlParams );
     yield put(fetchGraphSuccess(data));
+
   }
   //Once all the parameters are obtained, remove the first instance of & and then make a call to url with all param appended
 
