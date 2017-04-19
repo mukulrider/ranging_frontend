@@ -24,6 +24,7 @@ import {
   GENERATE_TABLE_SUCCESS,
   WATERFALL_VALUE,
   WATERFALL_VALUE_SUCCESS,
+  WATERFALL_SPINNER_SUCCESS,
   TEST_AJAX_SUCCESS,
   DELIST_POPUP_TABLE_DATA_FETCH_SUCCESS,
   SUPPLIER_POPUP_TABLE_DATA_FETCH_SUCCESS,
@@ -161,6 +162,11 @@ function delistContainerReducer(state = initialState, action) {
     case WATERFALL_VALUE_SUCCESS:
       console.log('water fall');
       return state.set('waterfallValue', action.data);
+
+      // WATERFALL CHART - VALUE - SPINNER SUCCESS
+    case WATERFALL_SPINNER_SUCCESS:
+      console.log('water fall spinner');
+      return state.set('waterfallSpinner', action.spinnerCheck);
 
     // URL PARAMS
     case URL_PARAMS:

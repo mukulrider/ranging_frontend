@@ -26,6 +26,8 @@ import {
   GENERATE_FILTER_PARAMS_STRING,
   WATERFALL_VALUE,
   WATERFALL_VALUE_SUCCESS,
+  WATERFALL_SPINNER_SUCCESS,
+  SPINNER_STARTED,
   TEST_AJAX,
   TEST_AJAX_SUCCESS,
   SUPPLIER_POPUP_TABLE_DATA_FETCH_SUCCESS,
@@ -250,6 +252,24 @@ export function WaterfallValueChartSuccess(data) {
   return {
     type: WATERFALL_VALUE_SUCCESS,
     data,
+  };
+}
+
+// // WATERFALL SPINNER STARTED
+// export function waterfallSpinner(data) {
+//   console.log("spinner started",data)
+//   return {
+//     type: SPINNER_STARTED,
+//     data
+//   };
+// }
+
+
+export function WaterfallSpinnerSuccess(spinnerCheck) {
+  console.log("waterfall data ---------------------------", spinnerCheck);
+  return {
+    type: WATERFALL_SPINNER_SUCCESS,
+    spinnerCheck,
   };
 }
 

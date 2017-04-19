@@ -177,6 +177,7 @@ class NewSelector2 extends React.PureComponent { // eslint-disable-line react/pr
               <Button onClick={() => {
                 {/*let week_no = "time_period=13_weeks";*/}
                 {/*this.props.onWeekClick(week_no);*/}
+                {/*this.props.onwaterfallSpinner(0);*/}
                 this.props.onWaterfall();
 
                 setTimeout(() => {
@@ -190,7 +191,7 @@ class NewSelector2 extends React.PureComponent { // eslint-disable-line react/pr
                 {/*this.props.onWeekTabClick("Week: 13 weeks ");*/}
               }}>Apply</Button>&nbsp;&nbsp;
               <Button onClick={() => {
-                this.props.onFilterReset();
+                {/*this.props.onFilterReset();*/}
               }}>Reset Filters</Button>&nbsp;&nbsp;
             </div>
           )

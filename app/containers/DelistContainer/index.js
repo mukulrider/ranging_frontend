@@ -56,6 +56,8 @@ import {
   supplierPopupPagination,
   delistPopupPagination,
   delistTable,
+  WaterfallSpinnerSuccess,
+  waterfallSpinner,
   GenerateTextBoxQueryString,
   GenerateTextBoxQueryStringDelist,
   WeekTabClick,
@@ -76,6 +78,7 @@ export class DelistContainer extends React.PureComponent { // eslint-disable-lin
     console.log("3onUrlParams");
 
     this.props.onWaterfallValueChart();
+    // this.props.onWaterfallValueChart();
 
     console.log("4onWaterfallValueChart");
     setTimeout(() => {
@@ -178,6 +181,7 @@ export class DelistContainer extends React.PureComponent { // eslint-disable-lin
                                 onWaterfall={this.props.onWaterfallValueChart}
                                 onApiFetch={this.props.onApiFetch}
                                 ondelist={this.props.ondelistTable}
+                                onwaterfallSpinner={this.props.onwaterfallSpinner}
                   />
                 )
               } else {
@@ -442,6 +446,7 @@ export class DelistContainer extends React.PureComponent { // eslint-disable-lin
           </Modal>
 
           {(() => {
+            {/*if (this.props.DelistContainer.waterfallValue && this.props.DelistContainer.waterfallValue.sales_chart && this.props.DelistContainer.waterfallValue.vols_chart && this.props.DelistContainer.waterfallSpinner) {*/}
             if (this.props.DelistContainer.waterfallValue && this.props.DelistContainer.waterfallValue.sales_chart && this.props.DelistContainer.waterfallValue.vols_chart) {
               return (
                 <div className="row">
@@ -1621,6 +1626,7 @@ function mapDispatchToProps(dispatch) {
 
     onWaterfall: (e) => dispatch(WaterfallValueChart(e)),
     ondelist: (e) => dispatch(delistTable(e)),
+    onwaterfallSpinner: (e) => dispatch(WaterfallSpinnerSuccess(e)),
 
     //TESTING AJAX     //PAGINATION FOR DEMO TABLE
     onAjaxClick: (e) => dispatch(ajaxClick(e)),
