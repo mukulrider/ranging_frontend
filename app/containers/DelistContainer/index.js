@@ -81,7 +81,8 @@ export class DelistContainer extends React.PureComponent { // eslint-disable-lin
       this.props.onApiFetch();
       console.log("5onApiFetch");
       this.props.ondelistTable();
-      console.log("6ondelistTable");}, 10000);
+      console.log("6ondelistTable");
+    }, 10000);
     // this.props.onApiFetch();
     // console.log("5onApiFetch");
     // this.props.ondelistTable();
@@ -227,13 +228,16 @@ export class DelistContainer extends React.PureComponent { // eslint-disable-lin
                   this.props.onApiFetch();
                   console.log("5onApiFetch");
                   this.props.ondelistTable();
-                 }, 10000);
+                }, 10000);
 
 
-                {/*this.props.onApiFetch();*/}
-                {/*this.props.ondelistTable();*/}
+                {/*this.props.onApiFetch();*/
+                }
+                {/*this.props.ondelistTable();*/
+                }
                 this.props.onWeekTabClick("Week: 13 weeks ")
-              }} style={{fontSize: '14px', fontFamily: 'Tesco', textDecoration: 'none'}}><b style={{textDecoration: 'none'}}>Week 13</b></NavItem>
+              }} style={{fontSize: '14px', fontFamily: 'Tesco', textDecoration: 'none'}}><b
+                style={{textDecoration: 'none'}}>Week 13</b></NavItem>
               <NavItem eventKey="2" onClick={() => {
                 this.setState({activeKey: "2"});
                 let week_no = "time_period=26_weeks";
@@ -243,12 +247,15 @@ export class DelistContainer extends React.PureComponent { // eslint-disable-lin
                 setTimeout(() => {
                   this.props.onApiFetch();
                   this.props.ondelistTable();
-                 }, 10000);
+                }, 10000);
 
-                {/*this.props.onApiFetch();*/}
-                {/*this.props.ondelistTable();*/}
+                {/*this.props.onApiFetch();*/
+                }
+                {/*this.props.ondelistTable();*/
+                }
                 this.props.onWeekTabClick("Week: 26 weeks ")
-              }} style={{fontSize: '14px', fontFamily: 'Tesco', textDecoration: 'none !important'}}><b>Week 26</b></NavItem>
+              }} style={{fontSize: '14px', fontFamily: 'Tesco', textDecoration: 'none !important'}}><b>Week
+                26</b></NavItem>
               <NavItem eventKey="3" onClick={() => {
                 this.setState({activeKey: "3"});
                 let week_no = "time_period=52_weeks";
@@ -257,12 +264,16 @@ export class DelistContainer extends React.PureComponent { // eslint-disable-lin
 
                 setTimeout(() => {
                   this.props.onApiFetch();
-                  this.props.ondelistTable();}, 10000);
+                  this.props.ondelistTable();
+                }, 10000);
 
-                {/*this.props.onApiFetch();*/}
-                {/*this.props.ondelistTable();*/}
+                {/*this.props.onApiFetch();*/
+                }
+                {/*this.props.ondelistTable();*/
+                }
                 this.props.onWeekTabClick("Week: 52 weeks ")
-              }} style={{fontSize: '14px', fontFamily: 'Tesco', textDecoration: 'none !important'}}><b>Week 52</b></NavItem>
+              }} style={{fontSize: '14px', fontFamily: 'Tesco', textDecoration: 'none !important'}}><b>Week
+                52</b></NavItem>
             </Nav>
 
             <Nav bsStyle="tabs" activeKey={this.state.activeKey2} onSelect={this.handleSelect}>
@@ -274,10 +285,8 @@ export class DelistContainer extends React.PureComponent { // eslint-disable-lin
 
                 setTimeout(() => {
                   this.props.onApiFetch();
-                  this.props.ondelistTable();}, 10000);
-
-                {/*this.props.onApiFetch();*/}
-                {/*this.props.ondelistTable();*/}
+                  this.props.ondelistTable();
+                }, 10000);
                 this.props.onStoreTabClick("Store: Overview ")
               }} style={{fontSize: '14px', fontFamily: 'Tesco', textDecoration: 'none'}}><b>Overview</b></NavItem>
               <NavItem eventKey="22" onClick={() => {
@@ -288,10 +297,8 @@ export class DelistContainer extends React.PureComponent { // eslint-disable-lin
 
                 setTimeout(() => {
                   this.props.onApiFetch();
-                  this.props.ondelistTable();}, 10000);
-
-                {/*this.props.onApiFetch();*/}
-                {/*this.props.ondelistTable();*/}
+                  this.props.ondelistTable();
+                }, 10000);
                 this.props.onStoreTabClick("Store: Main Estate ")
               }} style={{fontSize: '14px', fontFamily: 'Tesco', textDecoration: 'none'}}><b>Main Estate</b></NavItem>
               <NavItem eventKey="33" onClick={() => {
@@ -302,10 +309,8 @@ export class DelistContainer extends React.PureComponent { // eslint-disable-lin
 
                 setTimeout(() => {
                   this.props.onApiFetch();
-                  this.props.ondelistTable();}, 10000);
-
-                {/*this.props.onApiFetch();*/}
-                {/*this.props.ondelistTable();*/}
+                  this.props.ondelistTable();
+                }, 10000);
                 this.props.onStoreTabClick("Store: Express")
               }} style={{fontSize: '14px', fontFamily: 'Tesco', textDecoration: 'none'}}><b>Express</b></NavItem>
             </Nav>

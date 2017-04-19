@@ -80,18 +80,15 @@ const initialState = fromJS(
 function delistContainerReducer(state = initialState, action) {
   switch (action.type) {
     case WEEK_URL:
-      console.log("weekNumber", action.data)
       return state.set('weekNumber', action.data);
 
     case STORE_URL:
-      console.log("storeType", action.data);
       return state.set('storeType', action.data);
 
     case API_FETCH_SUCCESS:
       return state.set('data', action.data);
 
     case DATA_URL_PARAMS:
-      console.log("storing url", action.data)
       return state.set('dataUrlparams', action.data);
 
     case TABLE_DATA_FETCH:
@@ -102,17 +99,14 @@ function delistContainerReducer(state = initialState, action) {
 
     //DELIST TABLE
     case DELIST_TABLE_SUCCESS:
-      console.log("inside reducer for delist uodated data", action.data);
       return state.set('delisttableData', action.data);
 
     //SEARCH SUPPLIER TABLE
     case SEARCH_SUPPLIER_TABLE:
-      console.log("search data - supplier", action.data);
       return state.set('searchSupplierTable', action.data);
 
     //SEARCH DELIST TABLE
     case SEARCH_DELIST_TABLE:
-      console.log("search data - delist", action.data);
       return state.set('searchDelistTable', action.data);
 
 //PAGINATIONN FOR SUPPLIER TABLE
@@ -168,7 +162,6 @@ function delistContainerReducer(state = initialState, action) {
 
  // URL PARAMS
     case URL_PARAMS:
-      console.log('stored in state url params');
       return state.set('urlparamsDelist', action.data);
 
     // FILTERS
