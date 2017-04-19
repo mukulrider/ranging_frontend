@@ -23,8 +23,11 @@ import {
   GENERATE_SIDE_FILTER_SUCCESS,
   GENERATE_URL_PARAMS,
   GENERATE_URL_PARAMS_STRING,
+  GENERATE_FILTER_PARAMS_STRING,
   WATERFALL_VALUE,
   WATERFALL_VALUE_SUCCESS,
+  WATERFALL_SPINNER_SUCCESS,
+  SPINNER_STARTED,
   TEST_AJAX,
   TEST_AJAX_SUCCESS,
   SUPPLIER_POPUP_TABLE_DATA_FETCH_SUCCESS,
@@ -90,7 +93,6 @@ export function StoreClick(data) {
 
 //SEARCH - SUPPLIER TABLE
 export function GenerateTextBoxQueryString(data) {
-  console.log("inside searc action", data);
   return {
     type: SEARCH_SUPPLIER_TABLE,
     data,
@@ -99,7 +101,6 @@ export function GenerateTextBoxQueryString(data) {
 
 //SEARCH - DELIST TABLE
 export function GenerateTextBoxQueryStringDelist(data) {
-  console.log("inside searc action", data);
   return {
     type: SEARCH_DELIST_TABLE,
     data,
@@ -108,14 +109,12 @@ export function GenerateTextBoxQueryStringDelist(data) {
 
 //DELIST TABLE
 export function delistTable() {
-  console.log("delistTable clicked");
   return {
     type: DELIST_TABLE,
   };
 }
 
 export function delistTableSuccess(data) {
-  console.log("delist updated data in action", data);
   return {
     type: DELIST_TABLE_SUCCESS,
     data,
@@ -124,7 +123,6 @@ export function delistTableSuccess(data) {
 
 //URL PARAMS
 export function UrlParams(data) {
-  console.log("URL PARAMS", data);
   return {
     type: URL_PARAMS,
     data,
@@ -257,6 +255,25 @@ export function WaterfallValueChartSuccess(data) {
   };
 }
 
+// // WATERFALL SPINNER STARTED
+// export function waterfallSpinner(data) {
+//   console.log("spinner started",data)
+//   return {
+//     type: SPINNER_STARTED,
+//     data
+//   };
+// }
+
+
+
+export function WaterfallSpinnerSuccess(spinnerCheck) {
+  console.log("waterfall data ---------------------------", spinnerCheck);
+  return {
+    type: WATERFALL_SPINNER_SUCCESS,
+    spinnerCheck,
+  };
+}
+
 // FILTERS
 
 export function generateTable() {
@@ -279,7 +296,6 @@ export function generateSideFilter() {
 
 //FILTER RESET
 export function generateSideFilterReset() {
-  console.log("side filter reset");
   return {
     type: SIDE_FILTER_RESET,
   };
@@ -299,9 +315,15 @@ export function generateUrlParams(data) {
   };
 }
 export function generateUrlParamsString(data) {
-  console.log("generateUrlParamsString", data);
   return {
     type: GENERATE_URL_PARAMS_STRING,
+    data,
+  };
+}
+
+export function generateFilterParamsString(data) {
+  return {
+    type: GENERATE_FILTER_PARAMS_STRING,
     data,
   };
 }

@@ -44,6 +44,7 @@ import {
   generateUrlParams,
   generateTable,
   generateUrlParamsString,
+  generateFilterParamsString,
   WaterfallValueChart,
   WaterfallValueChartSuccess,
   ajaxClick,
@@ -55,6 +56,8 @@ import {
   supplierPopupPagination,
   delistPopupPagination,
   delistTable,
+  WaterfallSpinnerSuccess,
+  waterfallSpinner,
   GenerateTextBoxQueryString,
   GenerateTextBoxQueryStringDelist,
   WeekTabClick,
@@ -67,6 +70,7 @@ import styles from './style.scss';
 export class DelistContainer extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
   componentDidMount = () => {
     this.props.onGenerateUrlParamsString();
+    this.props.onGenerateFilterParamsString();
     console.log("1onGenerateUrlParamsString");
     this.props.onDataUrlParams(this.props.location.query);
     console.log("2onDataUrlParams");
@@ -74,6 +78,7 @@ export class DelistContainer extends React.PureComponent { // eslint-disable-lin
     console.log("3onUrlParams");
 
     this.props.onWaterfallValueChart();
+    // this.props.onWaterfallValueChart();
 
     console.log("4onWaterfallValueChart");
     setTimeout(() => {
@@ -81,7 +86,8 @@ export class DelistContainer extends React.PureComponent { // eslint-disable-lin
       this.props.onApiFetch();
       console.log("5onApiFetch");
       this.props.ondelistTable();
-      console.log("6ondelistTable");}, 10000);
+      console.log("6ondelistTable");
+    }, 10000);
     // this.props.onApiFetch();
     // console.log("5onApiFetch");
     // this.props.ondelistTable();
@@ -89,9 +95,10 @@ export class DelistContainer extends React.PureComponent { // eslint-disable-lin
     this.props.onGenerateSideFilter();
     console.log("7onGenerateSideFilter");
   };
-
+  //
   // componentDidUpdate = () => {
-  //   this.props.onDataUrlParams(this.props.location.query);
+  //   // this.props.onDataUrlParams(this.props.location.query);
+  //   this.props.onUrlParams(this.props.location.search);
   // };
 
   constructor(props) {
@@ -168,11 +175,13 @@ export class DelistContainer extends React.PureComponent { // eslint-disable-lin
                                 onDataUrlParams={this.props.DataUrlParams}
                                 onUrlParamsData={this.props.onUrlParamsData}
                                 onGenerateUrlParamsString={this.props.onGenerateUrlParamsString}
+                                onGenerateFilterParamsString={this.props.onGenerateFilterParamsString}
                                 onGenerateUrlParamsData={this.props.onGenerateUrlParamsData}
                                 onApplyClick={this.props.onApplyClick}
                                 onWaterfall={this.props.onWaterfallValueChart}
                                 onApiFetch={this.props.onApiFetch}
                                 ondelist={this.props.ondelistTable}
+                                onwaterfallSpinner={this.props.onwaterfallSpinner}
                   />
                 )
               } else {
@@ -227,13 +236,16 @@ export class DelistContainer extends React.PureComponent { // eslint-disable-lin
                   this.props.onApiFetch();
                   console.log("5onApiFetch");
                   this.props.ondelistTable();
-                 }, 10000);
+                }, 10000);
 
 
-                {/*this.props.onApiFetch();*/}
-                {/*this.props.ondelistTable();*/}
+                {/*this.props.onApiFetch();*/
+                }
+                {/*this.props.ondelistTable();*/
+                }
                 this.props.onWeekTabClick("Week: 13 weeks ")
-              }} style={{fontSize: '14px', fontFamily: 'Tesco', textDecoration: 'none'}}><b style={{textDecoration: 'none'}}>Week 13</b></NavItem>
+              }} style={{fontSize: '14px', fontFamily: 'Tesco', textDecoration: 'none'}}><b
+                style={{textDecoration: 'none'}}>Week 13</b></NavItem>
               <NavItem eventKey="2" onClick={() => {
                 this.setState({activeKey: "2"});
                 let week_no = "time_period=26_weeks";
@@ -243,12 +255,15 @@ export class DelistContainer extends React.PureComponent { // eslint-disable-lin
                 setTimeout(() => {
                   this.props.onApiFetch();
                   this.props.ondelistTable();
-                 }, 10000);
+                }, 10000);
 
-                {/*this.props.onApiFetch();*/}
-                {/*this.props.ondelistTable();*/}
+                {/*this.props.onApiFetch();*/
+                }
+                {/*this.props.ondelistTable();*/
+                }
                 this.props.onWeekTabClick("Week: 26 weeks ")
-              }} style={{fontSize: '14px', fontFamily: 'Tesco', textDecoration: 'none !important'}}><b>Week 26</b></NavItem>
+              }} style={{fontSize: '14px', fontFamily: 'Tesco', textDecoration: 'none !important'}}><b>Week
+                26</b></NavItem>
               <NavItem eventKey="3" onClick={() => {
                 this.setState({activeKey: "3"});
                 let week_no = "time_period=52_weeks";
@@ -257,12 +272,16 @@ export class DelistContainer extends React.PureComponent { // eslint-disable-lin
 
                 setTimeout(() => {
                   this.props.onApiFetch();
-                  this.props.ondelistTable();}, 10000);
+                  this.props.ondelistTable();
+                }, 10000);
 
-                {/*this.props.onApiFetch();*/}
-                {/*this.props.ondelistTable();*/}
+                {/*this.props.onApiFetch();*/
+                }
+                {/*this.props.ondelistTable();*/
+                }
                 this.props.onWeekTabClick("Week: 52 weeks ")
-              }} style={{fontSize: '14px', fontFamily: 'Tesco', textDecoration: 'none !important'}}><b>Week 52</b></NavItem>
+              }} style={{fontSize: '14px', fontFamily: 'Tesco', textDecoration: 'none !important'}}><b>Week
+                52</b></NavItem>
             </Nav>
 
             <Nav bsStyle="tabs" activeKey={this.state.activeKey2} onSelect={this.handleSelect}>
@@ -274,10 +293,8 @@ export class DelistContainer extends React.PureComponent { // eslint-disable-lin
 
                 setTimeout(() => {
                   this.props.onApiFetch();
-                  this.props.ondelistTable();}, 10000);
-
-                {/*this.props.onApiFetch();*/}
-                {/*this.props.ondelistTable();*/}
+                  this.props.ondelistTable();
+                }, 10000);
                 this.props.onStoreTabClick("Store: Overview ")
               }} style={{fontSize: '14px', fontFamily: 'Tesco', textDecoration: 'none'}}><b>Overview</b></NavItem>
               <NavItem eventKey="22" onClick={() => {
@@ -288,10 +305,8 @@ export class DelistContainer extends React.PureComponent { // eslint-disable-lin
 
                 setTimeout(() => {
                   this.props.onApiFetch();
-                  this.props.ondelistTable();}, 10000);
-
-                {/*this.props.onApiFetch();*/}
-                {/*this.props.ondelistTable();*/}
+                  this.props.ondelistTable();
+                }, 10000);
                 this.props.onStoreTabClick("Store: Main Estate ")
               }} style={{fontSize: '14px', fontFamily: 'Tesco', textDecoration: 'none'}}><b>Main Estate</b></NavItem>
               <NavItem eventKey="33" onClick={() => {
@@ -302,10 +317,8 @@ export class DelistContainer extends React.PureComponent { // eslint-disable-lin
 
                 setTimeout(() => {
                   this.props.onApiFetch();
-                  this.props.ondelistTable();}, 10000);
-
-                {/*this.props.onApiFetch();*/}
-                {/*this.props.ondelistTable();*/}
+                  this.props.ondelistTable();
+                }, 10000);
                 this.props.onStoreTabClick("Store: Express")
               }} style={{fontSize: '14px', fontFamily: 'Tesco', textDecoration: 'none'}}><b>Express</b></NavItem>
             </Nav>
@@ -1608,8 +1621,11 @@ function mapDispatchToProps(dispatch) {
     onGenerateUrlParams: (e) => dispatch(generateUrlParams(e)),
     onGenerateUrlParamsString: (e) => dispatch(generateUrlParamsString(e)),
 
+    onGenerateFilterParamsString: (e) => dispatch(generateFilterParamsString(e)),
+
     onWaterfall: (e) => dispatch(WaterfallValueChart(e)),
     ondelist: (e) => dispatch(delistTable(e)),
+    onwaterfallSpinner: (e) => dispatch(WaterfallSpinnerSuccess(e)),
 
     //TESTING AJAX     //PAGINATION FOR DEMO TABLE
     onAjaxClick: (e) => dispatch(ajaxClick(e)),

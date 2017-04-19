@@ -19,10 +19,12 @@ import {
   GENERATE_SIDE_FILTER,
   GENERATE_URL_PARAMS,
   GENERATE_URL_PARAMS_STRING,
+  GENERATE_FILTER_PARAMS_STRING,
   GENERATE_SIDE_FILTER_SUCCESS,
   GENERATE_TABLE_SUCCESS,
   WATERFALL_VALUE,
   WATERFALL_VALUE_SUCCESS,
+  WATERFALL_SPINNER_SUCCESS,
   TEST_AJAX_SUCCESS,
   DELIST_POPUP_TABLE_DATA_FETCH_SUCCESS,
   SUPPLIER_POPUP_TABLE_DATA_FETCH_SUCCESS,
@@ -42,6 +44,7 @@ import {
 
 const initialState = fromJS(
   {
+    urlParamsString: "",
     barChart2Data: [{letter: 'A', frequency: 100}, {letter: 'B', frequency: 200}],
     dataUrlparams: "",
     supplierPopupTablePagination: "",
@@ -52,7 +55,6 @@ const initialState = fromJS(
     searchSupplierTable: "",
     searchDelistTable: "",
     weekBreadcrumb: "",
-    urlParamsString: "",
     storeBreadcrumb: "",
     waterFallChart2Data_1: [{name: ' Product Revenue ', value: 420000},
       {name: ' Services Revenue ', value: 210000},
@@ -80,18 +82,15 @@ const initialState = fromJS(
 function delistContainerReducer(state = initialState, action) {
   switch (action.type) {
     case WEEK_URL:
-      console.log("weekNumber", action.data)
       return state.set('weekNumber', action.data);
 
     case STORE_URL:
-      console.log("storeType", action.data);
       return state.set('storeType', action.data);
 
     case API_FETCH_SUCCESS:
       return state.set('data', action.data);
 
     case DATA_URL_PARAMS:
-      console.log("storing url", action.data)
       return state.set('dataUrlparams', action.data);
 
     case TABLE_DATA_FETCH:
@@ -102,17 +101,14 @@ function delistContainerReducer(state = initialState, action) {
 
     //DELIST TABLE
     case DELIST_TABLE_SUCCESS:
-      console.log("inside reducer for delist uodated data", action.data);
       return state.set('delisttableData', action.data);
 
     //SEARCH SUPPLIER TABLE
     case SEARCH_SUPPLIER_TABLE:
-      console.log("search data - supplier", action.data);
       return state.set('searchSupplierTable', action.data);
 
     //SEARCH DELIST TABLE
     case SEARCH_DELIST_TABLE:
-      console.log("search data - delist", action.data);
       return state.set('searchDelistTable', action.data);
 
 //PAGINATIONN FOR SUPPLIER TABLE
@@ -164,11 +160,17 @@ function delistContainerReducer(state = initialState, action) {
 
     // WATERFALL CHART - VALUE
     case WATERFALL_VALUE_SUCCESS:
+      console.log('water fall');
       return state.set('waterfallValue', action.data);
 
- // URL PARAMS
+      // WATERFALL CHART - VALUE - SPINNER SUCCESS
+    case WATERFALL_SPINNER_SUCCESS:
+      console.log('water fall spinner');
+      return state.set('waterfallSpinner', action.spinnerCheck);
+
+
+    // URL PARAMS
     case URL_PARAMS:
-      console.log('stored in state url params');
       return state.set('urlparamsDelist', action.data);
 
     // FILTERS
@@ -178,6 +180,9 @@ function delistContainerReducer(state = initialState, action) {
       return state.set('urlParams', action.data);
     case GENERATE_URL_PARAMS_STRING:
       return state.set('urlParamsString', action.data);
+
+    case GENERATE_FILTER_PARAMS_STRING:
+      return state.set('filterParamsString', action.data);
 
     // AJAX TEST
     case TEST_AJAX_SUCCESS:
