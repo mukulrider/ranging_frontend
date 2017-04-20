@@ -57,6 +57,7 @@ import {
   delistPopupPagination,
   delistTable,
   WaterfallSpinnerSuccess,
+  WaterfallProfitSpinnerSuccess,
   waterfallSpinner,
   GenerateTextBoxQueryString,
   GenerateTextBoxQueryStringDelist,
@@ -182,6 +183,8 @@ export class DelistContainer extends React.PureComponent { // eslint-disable-lin
                                 onApiFetch={this.props.onApiFetch}
                                 ondelist={this.props.ondelistTable}
                                 onwaterfallSpinner={this.props.onwaterfallSpinner}
+                                onwaterfallProfitSpinner={this.props.onwaterfallProfitSpinner}
+                                onSupplierImpactTableSpinner={this.props.onSupplierImpactTableSpinner}
                   />
                 )
               } else {
@@ -236,7 +239,7 @@ export class DelistContainer extends React.PureComponent { // eslint-disable-lin
                   this.props.onApiFetch();
                   console.log("5onApiFetch");
                   this.props.ondelistTable();
-                }, 10000);
+                }, 20000);
 
 
                 {/*this.props.onApiFetch();*/
@@ -255,7 +258,7 @@ export class DelistContainer extends React.PureComponent { // eslint-disable-lin
                 setTimeout(() => {
                   this.props.onApiFetch();
                   this.props.ondelistTable();
-                }, 10000);
+                }, 20000);
 
                 {/*this.props.onApiFetch();*/
                 }
@@ -273,7 +276,7 @@ export class DelistContainer extends React.PureComponent { // eslint-disable-lin
                 setTimeout(() => {
                   this.props.onApiFetch();
                   this.props.ondelistTable();
-                }, 10000);
+                }, 20000);
 
                 {/*this.props.onApiFetch();*/
                 }
@@ -294,7 +297,7 @@ export class DelistContainer extends React.PureComponent { // eslint-disable-lin
                 setTimeout(() => {
                   this.props.onApiFetch();
                   this.props.ondelistTable();
-                }, 10000);
+                }, 20000);
                 this.props.onStoreTabClick("Store: Overview ")
               }} style={{fontSize: '14px', fontFamily: 'Tesco', textDecoration: 'none'}}><b>Overview</b></NavItem>
               <NavItem eventKey="22" onClick={() => {
@@ -306,7 +309,7 @@ export class DelistContainer extends React.PureComponent { // eslint-disable-lin
                 setTimeout(() => {
                   this.props.onApiFetch();
                   this.props.ondelistTable();
-                }, 10000);
+                }, 20000);
                 this.props.onStoreTabClick("Store: Main Estate ")
               }} style={{fontSize: '14px', fontFamily: 'Tesco', textDecoration: 'none'}}><b>Main Estate</b></NavItem>
               <NavItem eventKey="33" onClick={() => {
@@ -318,7 +321,7 @@ export class DelistContainer extends React.PureComponent { // eslint-disable-lin
                 setTimeout(() => {
                   this.props.onApiFetch();
                   this.props.ondelistTable();
-                }, 10000);
+                }, 20000);
                 this.props.onStoreTabClick("Store: Express")
               }} style={{fontSize: '14px', fontFamily: 'Tesco', textDecoration: 'none'}}><b>Express</b></NavItem>
             </Nav>
@@ -446,7 +449,7 @@ export class DelistContainer extends React.PureComponent { // eslint-disable-lin
           </Modal>
 
           {(() => {
-            if (this.props.DelistContainer.waterfallValue && this.props.DelistContainer.waterfallValue.sales_chart && this.props.DelistContainer.waterfallValue.vols_chart) {
+            if (this.props.DelistContainer.waterfallValue && this.props.DelistContainer.waterfallValue.sales_chart && this.props.DelistContainer.waterfallValue.vols_chart && this.props.DelistContainer.waterfallSpinner) {
               return (
                 <div className="row">
 
@@ -682,7 +685,7 @@ export class DelistContainer extends React.PureComponent { // eslint-disable-lin
 
 
           {(() => {
-            if (this.props.DelistContainer.waterfallValue && this.props.DelistContainer.waterfallValue.cgm_chart && this.props.DelistContainer.waterfallValue.cts_chart) {
+            if (this.props.DelistContainer.waterfallValue && this.props.DelistContainer.waterfallValue.cgm_chart && this.props.DelistContainer.waterfallValue.cts_chart && this.props.DelistContainer.waterfallVolumeSpinner) {
               return (
                 <div className="row">
                   <div className="col-xs-6">
@@ -947,7 +950,7 @@ export class DelistContainer extends React.PureComponent { // eslint-disable-lin
               <tbody>
               {
                 (() => {
-                  if (this.props.DelistContainer.data && this.props.DelistContainer.data.sup_sales_table) {
+                  if (this.props.DelistContainer.data && this.props.DelistContainer.data.sup_sales_table && this.props.DelistContainer.supplierImpactTableSpinner) {
                     let a = this.props.DelistContainer.data.sup_sales_table;
                     return a.map(obj => {
                       return (
@@ -1084,7 +1087,7 @@ export class DelistContainer extends React.PureComponent { // eslint-disable-lin
                               this.props.onsupplierPagination(supplierPaginationData);
                               this.props.onTableType("supplier");
                               this.props.onApiFetch();
-                            }}><a className="page-link" href="#" style={{
+                            }}><a className="page-link" style={{
                           borderTopLeftRadius: '20px',
                           borderBottomLeftRadius: '20px',
                           borderBottomRightRadius: '20px',
@@ -1236,7 +1239,7 @@ export class DelistContainer extends React.PureComponent { // eslint-disable-lin
                                 this.props.onsupplierPopupPagination(supplierPopupPaginationData);
                                 this.props.onTableType("supplier_popup");
                                 this.props.onSupplierImpactTableClick(this.props.DelistContainer.supplierPopupTableData);
-                              }}><a className="page-link" href="#" style={{
+                              }}><a className="page-link" style={{
                             borderTopLeftRadius: '20px',
                             borderBottomLeftRadius: '20px',
                             borderBottomRightRadius: '20px',
@@ -1412,7 +1415,7 @@ export class DelistContainer extends React.PureComponent { // eslint-disable-lin
                               this.props.onTableType("delist");
                               this.props.ondelistPagination(delistPaginationData);
                               this.props.ondelistTable();
-                            }}><a className="page-link" href="#" style={{
+                            }}><a className="page-link" style={{
                           borderTopLeftRadius: '20px',
                           borderBottomLeftRadius: '20px',
                           borderBottomRightRadius: '20px',
@@ -1530,7 +1533,7 @@ export class DelistContainer extends React.PureComponent { // eslint-disable-lin
                                 this.props.ondelistPopupPagination(delistPopupPaginationData);
                                 this.props.onTableType("delist_popup");
                                 this.props.onSubstitutesClick(this.props.DelistContainer.substitutesData);
-                              }}><a className="page-link" href="#" style={{
+                              }}><a className="page-link" style={{
                             borderTopLeftRadius: '20px',
                             borderBottomLeftRadius: '20px',
                             borderBottomRightRadius: '20px',
@@ -1624,6 +1627,8 @@ function mapDispatchToProps(dispatch) {
     onWaterfall: (e) => dispatch(WaterfallValueChart(e)),
     ondelist: (e) => dispatch(delistTable(e)),
     onwaterfallSpinner: (e) => dispatch(WaterfallSpinnerSuccess(e)),
+    onwaterfallProfitSpinner: (e) => dispatch(WaterfallProfitSpinnerSuccess(e)),
+    onSupplierImpactTableSpinner: (e) => dispatch(SupplierImpactTableSpinnerSpinnerSuccess(e)),
 
     //TESTING AJAX     //PAGINATION FOR DEMO TABLE
     onAjaxClick: (e) => dispatch(ajaxClick(e)),

@@ -27,6 +27,8 @@ import {
   WATERFALL_VALUE,
   WATERFALL_VALUE_SUCCESS,
   WATERFALL_SPINNER_SUCCESS,
+  WATERFALL_PROFIT_SPINNER_SUCCESS,
+  SUPPLIER_IMPACT_SPINNER_SUCCESS,
   SPINNER_STARTED,
   TEST_AJAX,
   TEST_AJAX_SUCCESS,
@@ -270,6 +272,23 @@ export function WaterfallSpinnerSuccess(spinnerCheck) {
   console.log("waterfall data ---------------------------", spinnerCheck);
   return {
     type: WATERFALL_SPINNER_SUCCESS,
+    spinnerCheck,
+  };
+}
+
+export function WaterfallProfitSpinnerSuccess(spinnerCheck) {
+  console.log("waterfall data Volume---------------------------", spinnerCheck);
+  return {
+    type: WATERFALL_PROFIT_SPINNER_SUCCESS,
+    spinnerCheck,
+  };
+}
+
+// SUPPLIER IMPACT TABLE
+export function SupplierImpactTableSpinnerSpinnerSuccess(spinnerCheck) {
+  console.log("SUPPLIER IMPACT TABLE---------------------------", spinnerCheck);
+  return {
+    type: SUPPLIER_IMPACT_SPINNER_SUCCESS,
     spinnerCheck,
   };
 }

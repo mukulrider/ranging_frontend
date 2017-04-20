@@ -184,10 +184,6 @@ class WaterFallChart2 extends React.PureComponent { // eslint-disable-line react
     const y = d3.scaleLinear()
       .range([height, 0]);
 
-    // var xAxis = d3.svg.axis()
-    //   .scale(x)
-    //   .orient("bottom");
-    //
     const xAxis = d3.axisBottom(x);
 
     const formatSales = (i, chart_id) => {
@@ -199,11 +195,10 @@ class WaterFallChart2 extends React.PureComponent { // eslint-disable-line react
           return (`£ ${Math.round(i)}`);
         }
       } else {
-        // alert("inside else");
         if (i >= 1000 || i <= -1000) {
           const rounded = Math.round(i / 1000);
           let a = (`${rounded.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')}K`);
-          console.log("a",a);
+          console.log("aaa",a);
           return (`${rounded.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')}K`);
         } else {
           let a = Math.round(i);
@@ -236,31 +231,6 @@ class WaterFallChart2 extends React.PureComponent { // eslint-disable-line react
       // .tickFormat((d) => (
         .tickFormat((d) => (formatSales(d,id)))
 
-
-
-
-    // const yAxis = d3.axisLeft(y)
-  //   .tickFormat((d) => (formatSales(d));
-  //
-
-  // if(this.props.yAxisName === "Amount(£)") {
-  //   alert("if");
-  //   const yAxis = d3.axisLeft(y)
-  //   // .tickFormat((d) => (
-  //     .tickFormat((d) => (formatSales(d)));
-  // } else {
-  //   alert("else");
-  //   const yAxis = d3.axisLeft(y)
-  //   // .tickFormat((d) => (
-  //     .tickFormat((d) => (formatVolume(d)));
-  // }
-
-  // var yAxis = d3.svg.axis()
-  //   .scale(y)
-  //   .orient("left")
-
-
-
 // var tooltip = d3.select("body").append("div")
 //   .attr("class", "tooltip")
 //   .style("opacity", 0)
@@ -269,7 +239,6 @@ class WaterFallChart2 extends React.PureComponent { // eslint-disable-line react
 let chart = d3.select(`#${id}`);
 
 chart.selectAll("*").remove();
-
 
 chart = d3.select(`#${id}`)
   .attr('width', width + margin.left + margin.right)
@@ -287,8 +256,6 @@ chart.append("text")
   .style("text-anchor", "middle")
   .text(yaxis_title);
 
-
-//
 // data = [
 //   {"name": "Product Revenue", "value": 420000},
 //   {"name": "Services Revenue", "value": 210000},
@@ -327,14 +294,18 @@ x.domain(data.map((d) => d.name));
 
 // function to find the maximum value in the chart
 const max = d3.max(data, (d) => d.end);
+
+const min = d3.min(data, (d) => d.end);
 // console.log("max value "+max);
 // function to caculate the value by adding 20% more
 const add = max + (max * 20 / 100);
+const sub = min + (min * 20 / 100);
 // console.log("the new  value "+add);
 // function to round the value to the nearest whole number
 const newRound = (Math.round(add / 100000) * 100000);
+const newRound1 = (Math.round(sub / 100000) * 100000);
 // console.log("the round value is  "+newRound);
-y.domain([0, newRound]);
+y.domain([min, newRound]);
 
 let wrap = (text, width) => {
   text.each(function () {
@@ -409,10 +380,11 @@ bar.append('rect')
 
 bar.append('text')
   .attr('x', (x.bandwidth() / 2 - 5))
-  .attr('y', (d) => y(d.end) + 5)
-  .attr('dy', (d) => `${(d.class == 'negative') ? '-' : ''}.75em`)
+  // .attr('y', (d) =>  (Math.abs( y(d.start) - y(d.end))/2))
+  .attr('y', (d) => (d.end))
+  // .attr('y', (d) => y(d.end) + 5)
+  // .attr('dy', (d) => `${(d.class == 'negative') ? '-' : ''}.75em`)
   // .text((d) => ((d.end - d.start)/1000));
-  // .text((d) => (formatSales(d.end - d.start)));
   .text((d) => ((formatSales((d.end - d.start),id))))
   .style("font-size", "10px")
   .style('fill', 'black');
