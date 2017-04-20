@@ -114,14 +114,14 @@ function rangingNegotiationPageReducer(state = initialState, action) {
       // console.log("Updated the PAGE state in Reducer", action.data);
       return state.set('dataPerformanceUrlParams', action.data);
     case SAVE_STORE_PARAM:
-      //console.log("Updated the Store state in Reducer", action.data);
+      // console.log("Bubble array in reducer", action.data);
       return state.set('dataStoreUrlParams', action.data);
 
     case SAVE_WEEK_PARAM:
       //console.log("Updated the Store state in Reducer", action.data);
       return state.set('dataWeekUrlParams', action.data);
     case SAVE_BUBBLE_PARAM:
-      //console.log("Updated the Store state in Reducer", action.data);
+      console.log("Bubble array in reducer", action.data);
       return state.set('dataBubbleUrlParams', action.data);
 
     case SAVE_SIDE_FILTER_PARAM:

@@ -6,14 +6,15 @@
 
 import React from 'react';
 import * as d3 from 'd3';
+import Button from 'components/button';
 import {browserHistory} from 'react-router';
 
 
 class BubbleChart2 extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
-  createChart = (data2, path, bubbleFunc, makeChart, makeTable) => {
+  createChart = (data2, path, bubbleFunc, makeTable) => {
     let dataBubbleUrlParams = '';
     let productSelected= '';
-
+    let prodArr = [];
     //Chart configurations
 
     let margin = {top: 20, right: 20, bottom: 40, left: 30};
@@ -75,20 +76,18 @@ class BubbleChart2 extends React.PureComponent { // eslint-disable-line react/pr
       })
       .on('click', function (d) {
         let dataBubbleUrlParams = "base_product_number=" + d.base_product_number;
-        let prodArr = [];
-        prodArr.push(dataBubbleUrlParams)
-
         let productSelected = d.base_product_number;
-        console.log("bubble url", dataBubbleUrlParams);
-        console.log("printing product selected", productSelected);
-        console.log("consoling if condition", d.base_product_number == productSelected);
+        prodArr.push(dataBubbleUrlParams);
+        console.log("product selected", dataBubbleUrlParams);
         console.log("consoling prod array", prodArr);
-
-        bubbleFunc(dataBubbleUrlParams);
-        makeChart();
+        var myJSON = JSON.stringify(prodArr);
+        bubbleFunc(myJSON);
         makeTable();
-        // // chart.style("opacity", function () {
-        //   console.log("in_opacity_function", productSelected);
+        d3.select(this)
+         .style("opacity", 1);
+        // d3.select(this)
+        // .style("opacity", function () {
+        //   console.log("in_opacity_function",productSelected);
         //   if (d.base_product_number == productSelected) {
         //     return opacity[0];
         //   }
@@ -96,6 +95,8 @@ class BubbleChart2 extends React.PureComponent { // eslint-disable-line react/pr
         //     return opacity[1];
         //   }
         // })
+        //makeChart();
+        //makeTable();
       })
       .attr("r", 0)
       .transition()
@@ -112,6 +113,7 @@ class BubbleChart2 extends React.PureComponent { // eslint-disable-line react/pr
       //     return opacity[1];
       //   }
       // })
+      .style("opacity", 0.4)
       .style("fill", function (d) {
         console.log("in_color_function", colorArray[0]);
         if (d.brand_ind == "Brand") {
@@ -176,12 +178,12 @@ class BubbleChart2 extends React.PureComponent { // eslint-disable-line react/pr
   };
 
   componentDidMount = () => {
-    this.createChart(this.props.data, this.props.path, this.props.onSaveBubbleParam, this.props.onFetchGraph, this.props.onGenerateTable)
+    this.createChart(this.props.data, this.props.path, this.props.onSaveBubbleParam,this.props.onGenerateTable)
 
   };
 
   componentDidUpdate = () => {
-    this.createChart(this.props.data, this.props.path, this.props.onSaveBubbleParam, this.props.onFetchGraph, this.props.onGenerateTable);
+    this.createChart(this.props.data, this.props.path, this.props.onSaveBubbleParam,this.props.onGenerateTable);
     //  this.props.onSaveBubbleParam(databubbleUrlParams);
   };
 
@@ -192,6 +194,11 @@ class BubbleChart2 extends React.PureComponent { // eslint-disable-line react/pr
       <div>
         <svg id="svgg" width="800" height="600" fontFamily="sans-serif" fontSize="10"
              textAnchor="middle"></svg>
+        {/*<Button onClick={() => {*/}
+          {/*/!*this.props.onSaveBubbleParam(prodArr);*!/*/}
+          {/*this.props.onFetchGraph();*/}
+          {/*this.props.onGenerateTable();*/}
+        {/*}}>Update chart</Button>*/}
       </div>
     );
   }
