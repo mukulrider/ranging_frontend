@@ -160,8 +160,8 @@ export function* generateApiFetch() {
     const data = yield call(request,
       // `http://172.20.246.146:8000/ranging/product_impact_table/`);
       // `http://172.20.246.146:8000/ranging/product_impact_supplier_table${urlParams}`);
-      `http://10.1.161.82:8000/api/product_impact_supplier_table${urlParams}`);
-      // `http://172.20.244.141:8000/api/product_impact_supplier_table${urlParams}`);
+      // `http://10.1.161.82:8000/api/product_impact_supplier_table${urlParams}`);
+      `http://172.20.244.141:8000/api/product_impact_supplier_table${urlParams}`);
     // `http://172.20.246.146:8000/ranging/product_impact_supplier_table${urlParams}`);
     // `http://172.20.246.146:8000/ranging/product_impact_supplier_table${urlParams}`);
     // `http://172.20.246.146:8000/ranging/product_impact_table${paramstring}`);
@@ -278,8 +278,8 @@ export function* generateSubstitutesFetch() {
   try {
     const data = yield call(request,
       // `http://172.20.246.146:8000/ranging/delist_table_popup?delist_product=${urlParams}`);
-      // `http://172.20.244.141:8000/api/delist_table_popup?delist_product=${urlParams}`);
-      `http://10.1.161.82:8000/api/delist_table_popup?delist_product=${urlParams}`);
+      `http://172.20.244.141:8000/api/delist_table_popup?delist_product=${urlParams}`);
+      // `http://10.1.161.82:8000/api/delist_table_popup?delist_product=${urlParams}`);
     yield put(SubstitutesClickSuccess(data));
   } catch (err) {
     // console.log(err);
@@ -337,8 +337,8 @@ export function* generateSupplierPopupTableFetch() {
   try {
     const data = yield call(request,
       // `http://172.20.246.146:8000/ranging/supplier_table_popup?supplier=${urlParams}`);
-      // `http://172.20.244.141:8000/api/supplier_table_popup?supplier=${urlParams}`);
-      `http://10.1.161.82:8000/api/supplier_table_popup?supplier=${urlParams}`);
+      `http://172.20.244.141:8000/api/supplier_table_popup?supplier=${urlParams}`);
+      // `http://10.1.161.82:8000/api/supplier_table_popup?supplier=${urlParams}`);
     yield put(SupplierPopupTableDataFetchSuccess(data));
   } catch (err) {
     // console.log(err);
@@ -422,8 +422,8 @@ export function* generateDelistTableFetch() {
 
   try {
     // let data = yield call(request, `http://172.20.246.146:8000/ranging/product_impact_delist_table` + urlParams);
-    // let data = yield call(request, `http://172.20.244.141:8000/api/product_impact_delist_table` + urlParams);
-    let data = yield call(request, `http://10.1.161.82:8000/api/product_impact_delist_table` + urlParams);
+    let data = yield call(request, `http://172.20.244.141:8000/api/product_impact_delist_table` + urlParams);
+    // let data = yield call(request, `http://10.1.161.82:8000/api/product_impact_delist_table` + urlParams);
     yield put(delistTableSuccess(data));
   } catch (err) {
     // console.log(err);
@@ -557,8 +557,8 @@ let filterParamsString = "";
   try {
     console.log("inside try");
     const data = yield call(request,
-      `http://10.1.161.82:8000/api/product_impact_chart${urlParams}`);
-      // `http://172.20.244.141:8000/api/product_impact_chart${urlParams}`);
+      // `http://10.1.161.82:8000/api/product_impact_chart${urlParams}`);
+      `http://172.20.244.141:8000/api/product_impact_chart${urlParams}`);
     // `http://172.20.246.146:8000/ranging/product_impact_chart${urlParams}`);
     let spinnerCheck = 1;
     yield put(WaterfallValueChartSuccess(data));
@@ -610,8 +610,8 @@ export function* generateSideFilter() {
     // todo: update url
     // const data = yield call(request, 'http://172.20.247.17:8000/ranging/product_impact/filter_data');
     // const data = yield call(request, `http://172.20.246.146:8000/ranging/product_impact/filter_data/?${urlParamsString}`);
-    // const data = yield call(request, `http://172.20.244.141:8000/api/product_impact/filter_data/?${urlParamsString}`);
-    const data = yield call(request, `http://10.1.161.82:8000/api/product_impact/filter_data/?${urlParamsString}`);
+    const data = yield call(request, `http://172.20.244.141:8000/api/product_impact/filter_data/?${urlParamsString}`);
+    // const data = yield call(request, `http://10.1.161.82:8000/api/product_impact/filter_data/?${urlParamsString}`);
 
     yield put(generateSideFilterSuccess(data));
   } catch (err) {
@@ -632,8 +632,8 @@ export function* generateSideFilterReset() {
     // todo: update url
     // const data = yield call(request, 'http://172.20.247.17:8000/ranging/product_impact/filter_data');
     // const data = yield call(request, `http://172.20.246.146:8000/ranging/product_impact/filter_data/`);
-    // const data = yield call(request, `http://172.20.244.141:8000/api/product_impact/filter_data/`);
-    const data = yield call(request, `http://10.1.161.82:8000/api/product_impact/filter_data/`);
+    const data = yield call(request, `http://172.20.244.141:8000/api/product_impact/filter_data/`);
+    // const data = yield call(request, `http://10.1.161.82:8000/api/product_impact/filter_data/`);
 
     yield put(generateSideFilterSuccess(data));
   } catch (err) {

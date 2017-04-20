@@ -551,10 +551,8 @@ export class DelistContainer extends React.PureComponent { // eslint-disable-lin
 
                     </Modal.Header>
                     <Modal.Body style={{fontSize: '14px'}}>
-                      This graph compares direct sales lost from the delisted products vs the final loss/gain in sales
-                      due to
-                      demand transfer to substitute products.
-                      Value: Sales of a supplier in £
+                      This graph compares direct volume lost from the delisted products vs the final loss/gain in volume due to demand transfer to substitute products.
+                      Volume: Units of a product sold
                     </Modal.Body>
                   </Modal>
 
