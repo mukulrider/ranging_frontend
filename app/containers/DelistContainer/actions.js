@@ -303,6 +303,8 @@ export function DelistProductTableSpinnerSuccess(spinnerCheck) {
   };
 }
 
+
+
 // FILTERS
 
 export function generateTable() {

@@ -184,6 +184,8 @@ class NewSelector2 extends React.PureComponent { // eslint-disable-line react/pr
                 this.props.onDelistProductTableSpinner(0);
                 this.props.onWaterfall();
 
+
+
                 setTimeout(() => {
                   this.props.onApiFetch();
                   this.props.ondelist();}, 20000);

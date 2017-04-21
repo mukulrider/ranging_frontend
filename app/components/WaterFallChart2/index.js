@@ -245,7 +245,9 @@ class WaterFallChart2 extends React.PureComponent { // eslint-disable-line react
 
     let chart = d3.select(`#${id}`);
 
+
     chart.selectAll("*").remove();
+
 
     chart = d3.select(`#${id}`)
       .attr('width', width + margin.left + margin.right)

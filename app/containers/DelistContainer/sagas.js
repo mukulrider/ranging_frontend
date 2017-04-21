@@ -439,6 +439,8 @@ export function* generateDelistTableFetch() {
   }
 }
 
+
+
 export function* doDelistTableFetch() {
   console.log("inside delist sagas");
   const watcher = yield takeLatest(DELIST_TABLE, generateDelistTableFetch);

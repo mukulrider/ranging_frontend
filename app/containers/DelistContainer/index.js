@@ -1465,6 +1465,7 @@ export class DelistContainer extends React.PureComponent { // eslint-disable-lin
                       x.push(i)
                     }
 
+
                     return x.map(objj => {
                       return (
                         <li className="page-item"
@@ -1493,6 +1494,7 @@ export class DelistContainer extends React.PureComponent { // eslint-disable-lin
           </Panel>
           {/*MODAL FOR PRODUCT IMPACT TABLE*/
           }
+
 
           <Modal show={this.state.lgShow} bsSize="large" aria-labelledby="contained-modal-title-sm">
             <Modal.Header>

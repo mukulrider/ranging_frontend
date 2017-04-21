@@ -171,6 +171,8 @@ function delistContainerReducer(state = initialState, action) {
       console.log('water fall spinner');
       return state.set('waterfallSpinner', action.spinnerCheck);
 
+
+
     // WATERFALL CHART - VOLUME - SPINNER SUCCESS
     case WATERFALL_PROFIT_SPINNER_SUCCESS:
       console.log('water fall volume spinner');
