@@ -27,6 +27,9 @@ import {
   WATERFALL_VALUE,
   WATERFALL_VALUE_SUCCESS,
   WATERFALL_SPINNER_SUCCESS,
+  WATERFALL_PROFIT_SPINNER_SUCCESS,
+  SUPPLIER_IMPACT_SPINNER_SUCCESS,
+  DELIST_PRODUCT_SPINNER_SUCCESS,
   SPINNER_STARTED,
   TEST_AJAX,
   TEST_AJAX_SUCCESS,
@@ -274,6 +277,34 @@ export function WaterfallSpinnerSuccess(spinnerCheck) {
   };
 }
 
+export function WaterfallProfitSpinnerSuccess(spinnerCheck) {
+  console.log("waterfall data Volume---------------------------", spinnerCheck);
+  return {
+    type: WATERFALL_PROFIT_SPINNER_SUCCESS,
+    spinnerCheck,
+  };
+}
+
+// SUPPLIER IMPACT TABLE - SPINNER
+export function SupplierImpactTableSpinnerSuccess(spinnerCheck) {
+  console.log("SUPPLIER IMPACT TABLE---------------------------", spinnerCheck);
+  return {
+    type: SUPPLIER_IMPACT_SPINNER_SUCCESS,
+    spinnerCheck,
+  };
+}
+
+// DELIST PRODUCT TABLE - SPINNER
+export function DelistProductTableSpinnerSuccess(spinnerCheck) {
+  console.log("DELIST PRODUCT TABLE---------------------------", spinnerCheck);
+  return {
+    type: DELIST_PRODUCT_SPINNER_SUCCESS,
+    spinnerCheck,
+  };
+}
+
+
+
 // FILTERS
 
 export function generateTable() {
@@ -281,6 +312,7 @@ export function generateTable() {
     type: GENERATE_TABLE,
   };
 }
+
 
 export function generateTableSuccess(data) {
   return {

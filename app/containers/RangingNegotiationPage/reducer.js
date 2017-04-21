@@ -27,17 +27,6 @@ import {
   GENERATE_CHECKED_LIST
 } from './constants';
 
-function readCookie(name) {
-  let nameEQ = name + "=";
-  let ca = document.cookie.split(';');
-  console.log('******************************0-------------9999999999999 ', ca);
-  for(let i=0;i < ca.length;i++) {
-    let c = ca[i];
-    while (c.charAt(0)==' ') c = c.substring(1,c.length);
-    if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length,c.length);
-  }
-  return null;
-}
 
 const initialState = fromJS({
 
@@ -82,7 +71,7 @@ const initialState = fromJS({
   sideFilterParams:'',
   textBoxQueryString:'',
   resetUrlParams:'',
-  checkedList: readCookie('saved') ? JSON.parse(readCookie('saved')): []
+  checkedList: []
 
 
 

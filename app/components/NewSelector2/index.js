@@ -34,7 +34,7 @@ class NewSelector2 extends React.PureComponent { // eslint-disable-line react/pr
       }
     });
     queryString = queryString.substring(0, queryString.length - 1);
-    alert(queryString);
+    // alert(queryString);
     // APPEND URL PARAMS
     this.props.onGenerateUrlParamsString(queryString);
     this.props.onGenerateFilterParamsString(queryString);
@@ -178,12 +178,15 @@ class NewSelector2 extends React.PureComponent { // eslint-disable-line react/pr
               <Button onClick={() => {
                 {/*let week_no = "time_period=13_weeks";*/}
                 {/*this.props.onWeekClick(week_no);*/}
-                {/*this.props.onwaterfallSpinner(0);*/}
+                this.props.onwaterfallSpinner(0);
+                this.props.onwaterfallProfitSpinner(0);
+                this.props.onSupplierImpactTableSpinner(0);
+                this.props.onDelistProductTableSpinner(0);
                 this.props.onWaterfall();
 
                 setTimeout(() => {
                   this.props.onApiFetch();
-                  this.props.ondelist();}, 10000);
+                  this.props.ondelist();}, 20000);
 
                 {/*this.props.onApiFetch();*/}
                 {/*this.props.ondelist();*/}

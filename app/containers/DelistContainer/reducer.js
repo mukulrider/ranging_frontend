@@ -25,6 +25,9 @@ import {
   WATERFALL_VALUE,
   WATERFALL_VALUE_SUCCESS,
   WATERFALL_SPINNER_SUCCESS,
+  WATERFALL_PROFIT_SPINNER_SUCCESS,
+  SUPPLIER_IMPACT_SPINNER_SUCCESS,
+  DELIST_PRODUCT_SPINNER_SUCCESS,
   TEST_AJAX_SUCCESS,
   DELIST_POPUP_TABLE_DATA_FETCH_SUCCESS,
   SUPPLIER_POPUP_TABLE_DATA_FETCH_SUCCESS,
@@ -163,10 +166,27 @@ function delistContainerReducer(state = initialState, action) {
       console.log('water fall');
       return state.set('waterfallValue', action.data);
 
-      // WATERFALL CHART - VALUE - SPINNER SUCCESS
+    // WATERFALL CHART - VALUE - SPINNER SUCCESS
     case WATERFALL_SPINNER_SUCCESS:
       console.log('water fall spinner');
       return state.set('waterfallSpinner', action.spinnerCheck);
+
+
+
+    // WATERFALL CHART - VOLUME - SPINNER SUCCESS
+    case WATERFALL_PROFIT_SPINNER_SUCCESS:
+      console.log('water fall volume spinner');
+      return state.set('waterfallVolumeSpinner', action.spinnerCheck);
+
+    // SUPPLIER IMPACT TABLE - SPINNER SUCCESS
+    case SUPPLIER_IMPACT_SPINNER_SUCCESS:
+      console.log('SUPPLIER IMPACT TABLE SPINNER');
+      return state.set('supplierImpactTableSpinner', action.spinnerCheck);
+
+      // DELIST PRODUCT TABLE - SPINNER SUCCESS
+    case DELIST_PRODUCT_SPINNER_SUCCESS:
+      console.log('DELIST PRODUCT TABLE SPINNER');
+      return state.set('delistProductTableSpinner', action.spinnerCheck);
 
 
     // URL PARAMS
@@ -176,6 +196,7 @@ function delistContainerReducer(state = initialState, action) {
     // FILTERS
     case GENERATE_SIDE_FILTER_SUCCESS:
       return state.set('sideFilter', action.data);
+
     case GENERATE_URL_PARAMS:
       return state.set('urlParams', action.data);
     case GENERATE_URL_PARAMS_STRING:

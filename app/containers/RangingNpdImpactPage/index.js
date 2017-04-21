@@ -113,7 +113,7 @@ export class RangingNpdImpactPage extends React.PureComponent { // eslint-disabl
 
     return (
       <div>
-
+        {console.log("this.props", this.props)}
         <Helmet
           title="RangingNpdImpactPage"
           meta={[

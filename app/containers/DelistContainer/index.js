@@ -57,6 +57,9 @@ import {
   delistPopupPagination,
   delistTable,
   WaterfallSpinnerSuccess,
+  WaterfallProfitSpinnerSuccess,
+  SupplierImpactTableSpinnerSuccess,
+  DelistProductTableSpinnerSuccess,
   waterfallSpinner,
   GenerateTextBoxQueryString,
   GenerateTextBoxQueryStringDelist,
@@ -182,6 +185,9 @@ export class DelistContainer extends React.PureComponent { // eslint-disable-lin
                                 onApiFetch={this.props.onApiFetch}
                                 ondelist={this.props.ondelistTable}
                                 onwaterfallSpinner={this.props.onwaterfallSpinner}
+                                onwaterfallProfitSpinner={this.props.onwaterfallProfitSpinner}
+                                onSupplierImpactTableSpinner={this.props.onSupplierImpactTableSpinner}
+                                onDelistProductTableSpinner={this.props.onDelistProductTableSpinner}
                   />
                 )
               } else {
@@ -225,10 +231,14 @@ export class DelistContainer extends React.PureComponent { // eslint-disable-lin
             {/*</div>*/}
 
 
-            <Nav bsStyle="tabs" activeKey={this.state.activeKey} onSelect={this.handleSelect}>
-              <NavItem eventKey="1" onClick={() => {
+            <Nav bsStyle="tabs" activeKey={this.state.activeKey} onSelect={this.handleSelect} className="tabsCustom">
+              <NavItem className="tabsCustomList" eventKey="1" onClick={() => {
                 this.setState({activeKey: "1"});
                 let week_no = "time_period=13_weeks";
+                this.props.onwaterfallSpinner();
+                this.props.onwaterfallProfitSpinner();
+                this.props.onSupplierImpactTableSpinner();
+                this.props.onDelistProductTableSpinner();
                 this.props.onWeekClick(week_no);
                 this.props.onWaterfallValueChart();
                 setTimeout(() => {
@@ -236,7 +246,7 @@ export class DelistContainer extends React.PureComponent { // eslint-disable-lin
                   this.props.onApiFetch();
                   console.log("5onApiFetch");
                   this.props.ondelistTable();
-                }, 10000);
+                }, 20000);
 
 
                 {/*this.props.onApiFetch();*/
@@ -245,82 +255,104 @@ export class DelistContainer extends React.PureComponent { // eslint-disable-lin
                 }
                 this.props.onWeekTabClick("Week: 13 weeks ")
               }} style={{fontSize: '14px', fontFamily: 'Tesco', textDecoration: 'none'}}><b
-                style={{textDecoration: 'none'}}>Week 13</b></NavItem>
-              <NavItem eventKey="2" onClick={() => {
+                style={{textDecoration: 'none'}}>WEEK 13</b></NavItem>
+              <NavItem className="tabsCustomList" eventKey="2" onClick={() => {
                 this.setState({activeKey: "2"});
                 let week_no = "time_period=26_weeks";
+                this.props.onwaterfallSpinner();
+                this.props.onwaterfallProfitSpinner();
+                this.props.onSupplierImpactTableSpinner();
+                this.props.onDelistProductTableSpinner();
                 this.props.onWeekClick(week_no);
                 this.props.onWaterfallValueChart();
 
                 setTimeout(() => {
                   this.props.onApiFetch();
                   this.props.ondelistTable();
-                }, 10000);
+                }, 20000);
 
                 {/*this.props.onApiFetch();*/
                 }
                 {/*this.props.ondelistTable();*/
                 }
                 this.props.onWeekTabClick("Week: 26 weeks ")
-              }} style={{fontSize: '14px', fontFamily: 'Tesco', textDecoration: 'none !important'}}><b>Week
+              }} style={{fontSize: '14px', fontFamily: 'Tesco', textDecoration: 'none !important'}}><b>WEEK
                 26</b></NavItem>
-              <NavItem eventKey="3" onClick={() => {
+              <NavItem className="tabsCustomList" eventKey="3" onClick={() => {
                 this.setState({activeKey: "3"});
                 let week_no = "time_period=52_weeks";
+                this.props.onwaterfallSpinner();
+                this.props.onwaterfallProfitSpinner();
+                this.props.onSupplierImpactTableSpinner();
+                this.props.onDelistProductTableSpinner();
                 this.props.onWeekClick(week_no);
                 this.props.onWaterfallValueChart();
 
                 setTimeout(() => {
                   this.props.onApiFetch();
                   this.props.ondelistTable();
-                }, 10000);
+                }, 20000);
 
                 {/*this.props.onApiFetch();*/
                 }
                 {/*this.props.ondelistTable();*/
                 }
                 this.props.onWeekTabClick("Week: 52 weeks ")
-              }} style={{fontSize: '14px', fontFamily: 'Tesco', textDecoration: 'none !important'}}><b>Week
+              }} style={{fontSize: '14px', fontFamily: 'Tesco', textDecoration: 'none !important'}}><b>WEEK
                 52</b></NavItem>
             </Nav>
 
+            <br></br>
+
             <Nav bsStyle="tabs" activeKey={this.state.activeKey2} onSelect={this.handleSelect}>
-              <NavItem eventKey="11" onClick={() => {
+              <NavItem className="tabsCustomList" eventKey="11" onClick={() => {
                 this.setState({activeKey2: "11"});
                 let store_type = "store_type=Overview";
+                this.props.onwaterfallSpinner();
+                this.props.onwaterfallProfitSpinner();
+                this.props.onSupplierImpactTableSpinner();
+                this.props.onDelistProductTableSpinner();
                 this.props.onStoreClick(store_type);
                 this.props.onWaterfallValueChart();
 
                 setTimeout(() => {
                   this.props.onApiFetch();
                   this.props.ondelistTable();
-                }, 10000);
+                }, 20000);
                 this.props.onStoreTabClick("Store: Overview ")
-              }} style={{fontSize: '14px', fontFamily: 'Tesco', textDecoration: 'none'}}><b>Overview</b></NavItem>
-              <NavItem eventKey="22" onClick={() => {
+              }} style={{fontSize: '14px', fontFamily: 'Tesco', textDecoration: 'none'}}><b>OVERVIEW</b></NavItem>
+              <NavItem className="tabsCustomList" eventKey="22" onClick={() => {
                 this.setState({activeKey2: "22"});
                 let store_type = "store_type=Main Estate";
+                this.props.onwaterfallSpinner();
+                this.props.onwaterfallProfitSpinner();
+                this.props.onSupplierImpactTableSpinner();
+                this.props.onDelistProductTableSpinner();
                 this.props.onStoreClick(store_type);
                 this.props.onWaterfallValueChart();
 
                 setTimeout(() => {
                   this.props.onApiFetch();
                   this.props.ondelistTable();
-                }, 10000);
+                }, 20000);
                 this.props.onStoreTabClick("Store: Main Estate ")
-              }} style={{fontSize: '14px', fontFamily: 'Tesco', textDecoration: 'none'}}><b>Main Estate</b></NavItem>
-              <NavItem eventKey="33" onClick={() => {
+              }} style={{fontSize: '14px', fontFamily: 'Tesco', textDecoration: 'none'}}><b>MAIN ESTATE</b></NavItem>
+              <NavItem className="tabsCustomList" eventKey="33" onClick={() => {
                 this.setState({activeKey2: "33"});
                 let store_type = "store_type=Express";
+                this.props.onwaterfallSpinner();
+                this.props.onwaterfallProfitSpinner();
+                this.props.onSupplierImpactTableSpinner();
+                this.props.onDelistProductTableSpinner();
                 this.props.onStoreClick(store_type);
                 this.props.onWaterfallValueChart();
 
                 setTimeout(() => {
                   this.props.onApiFetch();
                   this.props.ondelistTable();
-                }, 10000);
+                }, 20000);
                 this.props.onStoreTabClick("Store: Express")
-              }} style={{fontSize: '14px', fontFamily: 'Tesco', textDecoration: 'none'}}><b>Express</b></NavItem>
+              }} style={{fontSize: '14px', fontFamily: 'Tesco', textDecoration: 'none'}}><b>EXPRESS</b></NavItem>
             </Nav>
 
 
@@ -446,7 +478,7 @@ export class DelistContainer extends React.PureComponent { // eslint-disable-lin
           </Modal>
 
           {(() => {
-            if (this.props.DelistContainer.waterfallValue && this.props.DelistContainer.waterfallValue.sales_chart && this.props.DelistContainer.waterfallValue.vols_chart) {
+            if (this.props.DelistContainer.waterfallValue && this.props.DelistContainer.waterfallValue.sales_chart && this.props.DelistContainer.waterfallValue.vols_chart && (this.props.DelistContainer.waterfallSpinner == 1)) {
               return (
                 <div className="row">
 
@@ -464,14 +496,8 @@ export class DelistContainer extends React.PureComponent { // eslint-disable-lin
                         }}></span>
                       </div>
                       <div className="panel-body">
-                        <div className="row">
-                          <div className="col-xs-7">
-                            <WaterFallChart2 id="waterfallChart_1" yAxisName="Value" formatter="formatSales"
-                                             positive_text='positive' negative_text='negative' total_text='total'
-                                             data={ this.props.DelistContainer.waterfallValue.sales_chart }/>
-
-                          </div>
-                          <div className="col-xs-5">
+                        <div className="row" style={{top: '-25px', position: 'relative'}}>
+                          <div className="col-xs-6">
                             <Panel>
                               {/*<div style={{textAlign: 'center', color: '#00539f', fontWeight: 'bold', fontSize: '16px'}}>*/}
                               <div
@@ -498,7 +524,8 @@ export class DelistContainer extends React.PureComponent { // eslint-disable-lin
                                 </div>
                               </div>
                             </Panel>
-
+                          </div>
+                          <div className="col-xs-6">
                             <Panel>
                               <div
                                 style={{textAlign: 'center', color: '#333333', fontWeight: 'bold', fontSize: '16px'}}>
@@ -526,6 +553,14 @@ export class DelistContainer extends React.PureComponent { // eslint-disable-lin
                             </Panel>
                           </div>
                         </div>
+                        <div className="row" style={{top: '-30px', position: 'relative'}}>
+                          <div className="col-xs-12">
+                            <WaterFallChart2 id="waterfallChart_1" yAxisName="Value" formatter="formatSales"
+                                             positive_text='positive' negative_text='negative' total_text='total'
+                                             data={ this.props.DelistContainer.waterfallValue.sales_chart }/>
+
+                          </div>
+                        </div>
                       </div>
                     </div>
 
@@ -551,18 +586,12 @@ export class DelistContainer extends React.PureComponent { // eslint-disable-lin
 
                     </Modal.Header>
                     <Modal.Body style={{fontSize: '14px'}}>
-                      This graph compares direct sales lost from the delisted products vs the final loss/gain in sales
-                      due to
-                      demand transfer to substitute products.
-                      Value: Sales of a supplier in £
+                      This graph compares direct volume lost from the delisted products vs the final loss/gain in volume due to demand transfer to substitute products.
+                      Volume: Units of a product sold
                     </Modal.Body>
                   </Modal>
 
                   <div className="col-xs-6">
-                    {/*<h2 className="ts-blk-proview-subhead ts-blk-proview"*/}
-                    {/*style={{fontSize: '28px', verticalAlign: 'middle', top: '-22px', position: 'relative'}}><b*/}
-                    {/*style={{verticalAlign: 'middle'}}>Volume</b>*/}
-                    {/*</h2>*/}
                     <div className="panel panel-default">
                       <div className="panel-heading" style={{fontSize: '20px', textAlign: 'center'}}>
                         Volume<span
@@ -573,13 +602,8 @@ export class DelistContainer extends React.PureComponent { // eslint-disable-lin
                         }}></span>
                       </div>
                       <div className="panel-body">
-                        <div className="row">
-                          <div className="col-xs-7">
-                            <WaterFallChart2 id="waterfallChart_2" yAxisName="Volume" formatter="formatSales"
-                                             positive_text='positive' negative_text='negative' total_text='total'
-                                             data={ this.props.DelistContainer.waterfallValue.vols_chart }/>
-                          </div>
-                          <div className="col-xs-5">
+                        <div className="row" style={{top: '-25px', position: 'relative'}}>
+                          <div className="col-xs-6">
 
                             <Panel>
                               <div
@@ -606,7 +630,8 @@ export class DelistContainer extends React.PureComponent { // eslint-disable-lin
                                 {this.props.DelistContainer.waterfallValue.bc_vols_contri}%
                               </div>
                             </Panel>
-
+                          </div>
+                          <div className="col-xs-6">
 
                             <Panel>
                               <div
@@ -635,15 +660,27 @@ export class DelistContainer extends React.PureComponent { // eslint-disable-lin
                             </Panel>
                           </div>
                         </div>
-                      </div>
-                      <div className="body">
-
+                        <div className="row" style={{top: '-30px', position: 'relative'}}>
+                          <div className="col-xs-12">
+                            <WaterFallChart2 id="waterfallChart_2" yAxisName="Volume" formatter="formatSales"
+                                             positive_text='positive' negative_text='negative' total_text='total'
+                                             data={ this.props.DelistContainer.waterfallValue.vols_chart }/>
+                          </div>
+                        </div>
                       </div>
                     </div>
                   </div>
                 </div>
               )
-            } else {
+            } else if(this.props.DelistContainer.waterfallSpinner == 2){
+              let abcd = 1;
+              return (
+                <div>
+                  <h2 className="text-center">Something went wrong. Please reload the page....!</h2>
+                </div>
+              )
+            }
+            else {
               let abcd = 1;
               return (
                 <div>
@@ -684,14 +721,10 @@ export class DelistContainer extends React.PureComponent { // eslint-disable-lin
 
 
           {(() => {
-            if (this.props.DelistContainer.waterfallValue && this.props.DelistContainer.waterfallValue.cgm_chart && this.props.DelistContainer.waterfallValue.cts_chart) {
+            if (this.props.DelistContainer.waterfallValue && this.props.DelistContainer.waterfallValue.cgm_chart && this.props.DelistContainer.waterfallValue.cts_chart && (this.props.DelistContainer.waterfallVolumeSpinner == 1)) {
               return (
                 <div className="row">
                   <div className="col-xs-6">
-                    {/*<h2 className="ts-blk-proview-subhead ts-blk-proview"*/}
-                    {/*style={{fontSize: '28px', verticalAlign: 'middle', top: '-22px', position: 'relative'}}><b*/}
-                    {/*style={{verticalAlign: 'middle'}}>PROFIT</b>*/}
-                    {/*</h2>*/}
                     <div className="panel panel-default">
                       <div className="panel-heading" style={{fontSize: '20px', textAlign: 'center'}}>
                         PROFIT<span
@@ -702,13 +735,8 @@ export class DelistContainer extends React.PureComponent { // eslint-disable-lin
                         }}></span>
                       </div>
                       <div className="panel-body">
-                        <div className="row">
-                          <div className="col-xs-7">
-                            <WaterFallChart2 id="waterfallChart_3" yAxisName="Profit" formatter="formatSales"
-                                             positive_text='positive' negative_text='negative' total_text='total'
-                                             data={ this.props.DelistContainer.waterfallValue.cgm_chart }/>
-                          </div>
-                          <div className="col-xs-5">
+                        <div className="row" style={{top: '-25px', position: 'relative'}}>
+                          <div className="col-xs-6">
                             <Panel>
                               <div
                                 style={{textAlign: 'center', color: '#333333', fontWeight: 'bold', fontSize: '16px'}}>
@@ -734,6 +762,8 @@ export class DelistContainer extends React.PureComponent { // eslint-disable-lin
                                 {this.props.DelistContainer.waterfallValue.bc_cgm_contri}%
                               </div>
                             </Panel>
+                          </div>
+                            <div className="col-xs-6">
                             <Panel>
                               <div
                                 style={{textAlign: 'center', color: '#333333', fontWeight: 'bold', fontSize: '16px'}}>
@@ -759,6 +789,13 @@ export class DelistContainer extends React.PureComponent { // eslint-disable-lin
                                 {this.props.DelistContainer.waterfallValue.psg_cgm_contri}%
                               </div>
                             </Panel>
+                          </div>
+                        </div>
+                        <div className="row" style={{top: '-30px', position: 'relative'}}>
+                          <div className="col-xs-12">
+                            <WaterFallChart2 id="waterfallChart_3" yAxisName="Profit" formatter="formatSales"
+                                             positive_text='positive' negative_text='negative' total_text='total'
+                                             data={ this.props.DelistContainer.waterfallValue.cgm_chart }/>
                           </div>
                         </div>
                       </div>
@@ -789,10 +826,6 @@ export class DelistContainer extends React.PureComponent { // eslint-disable-lin
                   </Modal>
 
                   <div className="col-xs-6">
-                    {/*<h2 className="ts-blk-proview-subhead ts-blk-proview"*/}
-                    {/*style={{fontSize: '28px', verticalAlign: 'middle', top: '-22px', position: 'relative'}}><b*/}
-                    {/*style={{verticalAlign: 'middle'}}>CTS</b></h2>*/}
-
                     <div className="panel panel-default">
                       <div className="panel-heading" style={{fontSize: '20px', textAlign: 'center'}}>
                         CTS<span
@@ -803,13 +836,8 @@ export class DelistContainer extends React.PureComponent { // eslint-disable-lin
                         }}></span>
                       </div>
                       <div className="panel-body">
-                        <div className="row">
-                          <div className="col-xs-7">
-                            <WaterFallChart2 id="waterfallChart_4" yAxisName="CTS" formatter="formatSales"
-                                             positive_text='negative' negative_text='positive' total_text='total1'
-                                             data={ this.props.DelistContainer.waterfallValue.cts_chart }/>
-                          </div>
-                          <div className="col-xs-5">
+                        <div className="row"  style={{top: '-25px', position: 'relative'}}>
+                          <div className="col-xs-6">
                             <Panel>
                               <div
                                 style={{textAlign: 'center', color: '#333333', fontWeight: 'bold', fontSize: '16px'}}>
@@ -835,7 +863,9 @@ export class DelistContainer extends React.PureComponent { // eslint-disable-lin
                                 {this.props.DelistContainer.waterfallValue.bc_cgm_contri}%
                               </div>
                             </Panel>
+                          </div>
 
+                          <div className="col-xs-6">
                             <Panel>
                               <div
                                 style={{textAlign: 'center', color: '#333333', fontWeight: 'bold', fontSize: '16px'}}>
@@ -863,9 +893,26 @@ export class DelistContainer extends React.PureComponent { // eslint-disable-lin
                             </Panel>
                           </div>
                         </div>
+                        <div className="row" style={{top: '-30px', position: 'relative'}}>
+                          <div className="col-xs-12">
+                            <WaterFallChart2 id="waterfallChart_4" yAxisName="CTS" formatter="formatSales"
+                                             positive_text='negative' negative_text='positive' total_text='total1'
+                                             data={ this.props.DelistContainer.waterfallValue.cts_chart }/>
+                            {/*<WaterFallChart2 id="waterfallChart_4" yAxisName="CTS" formatter="formatSales"*/}
+                            {/*positive_text='positive' negative_text='negative' total_text='total'*/}
+                            {/*data={ this.props.DelistContainer.waterfallValue.cts_chart }/>*/}
+                          </div>
+                        </div>
                       </div>
                     </div>
                   </div>
+                </div>
+              )
+            } else if(this.props.DelistContainer.waterfallVolumeSpinner == 2){
+              let abcd = 1;
+              return (
+                <div>
+                  <h2 className="text-center">Something went wrong. Please reload the page....!</h2>
                 </div>
               )
             }
@@ -949,7 +996,7 @@ export class DelistContainer extends React.PureComponent { // eslint-disable-lin
               <tbody>
               {
                 (() => {
-                  if (this.props.DelistContainer.data && this.props.DelistContainer.data.sup_sales_table) {
+                  if (this.props.DelistContainer.data && this.props.DelistContainer.data.sup_sales_table && (this.props.DelistContainer.supplierImpactTableSpinner == 1)) {
                     let a = this.props.DelistContainer.data.sup_sales_table;
                     return a.map(obj => {
                       return (
@@ -1018,8 +1065,14 @@ export class DelistContainer extends React.PureComponent { // eslint-disable-lin
                         </tr>
                       )
                     })
-                  }
-                  else {
+                  } else if(this.props.DelistContainer.supplierImpactTableSpinner == 2){
+                    let abcd = 1;
+                    return (
+                      <tr>
+                        <td className="text-center" colSpan="11">Something went wrong. Please reload the page....!</td>
+                      </tr>
+                    )
+                  } else {
                     return (
                       <tr>
                         <td className="text-center" colSpan="11"><Spinner />Please Wait a Moment....!</td>
@@ -1082,11 +1135,12 @@ export class DelistContainer extends React.PureComponent { // eslint-disable-lin
                         <li className="page-item"
                             onClick={() => {
                               console.log("obj", (objj));
+                              this.props.onSupplierImpactTableSpinner();
                               let supplierPaginationData = "supplier_page=" + objj;
                               this.props.onsupplierPagination(supplierPaginationData);
                               this.props.onTableType("supplier");
                               this.props.onApiFetch();
-                            }}><a className="page-link" href="#" style={{
+                            }}><a className="page-link" style={{
                           borderTopLeftRadius: '20px',
                           borderBottomLeftRadius: '20px',
                           borderBottomRightRadius: '20px',
@@ -1238,7 +1292,7 @@ export class DelistContainer extends React.PureComponent { // eslint-disable-lin
                                 this.props.onsupplierPopupPagination(supplierPopupPaginationData);
                                 this.props.onTableType("supplier_popup");
                                 this.props.onSupplierImpactTableClick(this.props.DelistContainer.supplierPopupTableData);
-                              }}><a className="page-link" href="#" style={{
+                              }}><a className="page-link" style={{
                             borderTopLeftRadius: '20px',
                             borderBottomLeftRadius: '20px',
                             borderBottomRightRadius: '20px',
@@ -1315,7 +1369,7 @@ export class DelistContainer extends React.PureComponent { // eslint-disable-lin
               <tbody>
               {
                 (() => {
-                  if (this.props.DelistContainer.delisttableData && this.props.DelistContainer.delisttableData.delist_prod_table) {
+                  if (this.props.DelistContainer.delisttableData && this.props.DelistContainer.delisttableData.delist_prod_table && (this.props.DelistContainer.delistProductTableSpinner == 1)) {
                     return this.props.DelistContainer.delisttableData.delist_prod_table.map(obj => {
                       return (
                         <tr id={Math.random() + Date.now()}>
@@ -1347,8 +1401,14 @@ export class DelistContainer extends React.PureComponent { // eslint-disable-lin
                         </tr>
                       )
                     })
-                  }
-                  else {
+                  } else if(this.props.DelistContainer.delistProductTableSpinner == 2){
+                    let abcd = 1;
+                    return (
+                      <tr>
+                        <td className="text-center" colSpan="7">Something went wrong. Please reload the page....!</td>
+                      </tr>
+                    )
+                  } else {
                     return (
                       <tr>
                         <td className="text-center" colSpan="7"><Spinner />Please Wait a Moment....!</td>
@@ -1405,16 +1465,18 @@ export class DelistContainer extends React.PureComponent { // eslint-disable-lin
                       x.push(i)
                     }
 
+
                     return x.map(objj => {
                       return (
                         <li className="page-item"
                             onClick={() => {
                               console.log("obj - delist", (objj));
+                              this.props.onDelistProductTableSpinner();
                               let delistPaginationData = "delist_page=" + objj;
                               this.props.onTableType("delist");
                               this.props.ondelistPagination(delistPaginationData);
                               this.props.ondelistTable();
-                            }}><a className="page-link" href="#" style={{
+                            }}><a className="page-link" style={{
                           borderTopLeftRadius: '20px',
                           borderBottomLeftRadius: '20px',
                           borderBottomRightRadius: '20px',
@@ -1432,6 +1494,7 @@ export class DelistContainer extends React.PureComponent { // eslint-disable-lin
           </Panel>
           {/*MODAL FOR PRODUCT IMPACT TABLE*/
           }
+
 
           <Modal show={this.state.lgShow} bsSize="large" aria-labelledby="contained-modal-title-sm">
             <Modal.Header>
@@ -1478,6 +1541,7 @@ export class DelistContainer extends React.PureComponent { // eslint-disable-lin
                   </tbody>
                 </table>
               </div>
+
 
               {/*pagination*/}
               <nav aria-label="Page navigation example">
@@ -1532,7 +1596,7 @@ export class DelistContainer extends React.PureComponent { // eslint-disable-lin
                                 this.props.ondelistPopupPagination(delistPopupPaginationData);
                                 this.props.onTableType("delist_popup");
                                 this.props.onSubstitutesClick(this.props.DelistContainer.substitutesData);
-                              }}><a className="page-link" href="#" style={{
+                              }}><a className="page-link" style={{
                             borderTopLeftRadius: '20px',
                             borderBottomLeftRadius: '20px',
                             borderBottomRightRadius: '20px',
@@ -1626,6 +1690,9 @@ function mapDispatchToProps(dispatch) {
     onWaterfall: (e) => dispatch(WaterfallValueChart(e)),
     ondelist: (e) => dispatch(delistTable(e)),
     onwaterfallSpinner: (e) => dispatch(WaterfallSpinnerSuccess(e)),
+    onwaterfallProfitSpinner: (e) => dispatch(WaterfallProfitSpinnerSuccess(e)),
+    onSupplierImpactTableSpinner: (e) => dispatch(SupplierImpactTableSpinnerSuccess(e)),
+    onDelistProductTableSpinner: (e) => dispatch(DelistProductTableSpinnerSuccess(e)),
 
     //TESTING AJAX     //PAGINATION FOR DEMO TABLE
     onAjaxClick: (e) => dispatch(ajaxClick(e)),
