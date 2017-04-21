@@ -110,7 +110,7 @@ export class RangingNpdPage extends React.PureComponent { // eslint-disable-line
                         {/*/>*/}
 
             <CascadedFilterNpd sideFilter={this.props.RangingNpdPage.sideFilter}
-                         location={this.props.location}
+                              location={this.props.location}
 
                          onSkuChartFetch={this.props.onSkuChartFetch}
                          onOutPerformanceChartFetch={this.props.onOutPerformanceChartFetch}

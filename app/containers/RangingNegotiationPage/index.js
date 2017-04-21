@@ -134,8 +134,10 @@ export class RangingNegotiationPage extends React.PureComponent { // eslint-disa
                                         onURLRequest={this.props.onURLRequest}
 
                     //checkboxData={this.props.PricingScenarioOverviewPage.sideFilter}
+                    //onGenerateUrlParamsString gets the url parameters
                                         onGenerateUrlParamsString={this.props.onGenerateUrlParamsString}
                                         location={this.props.location}
+                    //This should get the fitler data
                                         onGenerateUrlParamsData={this.props.onGenerateSideFilter}
                   />
 
@@ -154,7 +156,7 @@ export class RangingNegotiationPage extends React.PureComponent { // eslint-disa
             <span id="storeInfo">STORE : Main Estate</span>
           </p>
           {/*</div>*/}
-          <div className="col-xs-12 col-md-10">
+          <div className="col-xs-12 col-md-10" style={{float:'right'}}>
             <div className="row">
               <div className="col-xs-12">
                 <div className="row week-row">
@@ -164,6 +166,7 @@ export class RangingNegotiationPage extends React.PureComponent { // eslint-disa
 
                         let text = "WEEK : Last 13 weeks";
                         this.updateText(text);
+
                         dataWeekUrlParams = "time_period=Last 13 weeks"
                         this.props.onSaveWeekParam(dataWeekUrlParams);
                         this.props.onFetchGraph();
@@ -234,7 +237,6 @@ export class RangingNegotiationPage extends React.PureComponent { // eslint-disa
                       this.props.onGenerateTable();
 
                     }}><p><u>Reset Chart</u></p></div>
-                    <i className="time">*Time Period | </i>
                   </div>
 
                   <div className="row">
@@ -256,6 +258,8 @@ export class RangingNegotiationPage extends React.PureComponent { // eslint-disa
                       </h4>
 
                       <div className="panel panel-danger" onClick={() => {
+                        let dataBubbleUrlParams = '';
+                        this.props.onSaveBubbleParam(dataBubbleUrlParams);
                         dataPerformanceUrlParams = "performance_quartile=Low CPS/Low Profit";
                         this.props.onSavePFilterParam(dataPerformanceUrlParams);
                         this.props.onFetchGraph();
@@ -273,6 +277,8 @@ export class RangingNegotiationPage extends React.PureComponent { // eslint-disa
                       <div className="panel panel-default" onClick={() => {
                         dataPerformanceUrlParams = "performance_quartile=Low CPS/High Profit";
                         //  browserHistory.push(this.props.location.pathname + "?performance_quartile=Low CPS/High Profit");
+                        let dataBubbleUrlParams = '';
+                        this.props.onSaveBubbleParam(dataBubbleUrlParams);
                         this.props.onSavePFilterParam(dataPerformanceUrlParams);
                         this.props.onFetchGraph();
                         this.props.onGenerateTable();
@@ -290,6 +296,8 @@ export class RangingNegotiationPage extends React.PureComponent { // eslint-disa
                       <div className="panel panel-warning" onClick={() => {
                         dataPerformanceUrlParams = "performance_quartile=Med CPS/Med Profit"
                         // browserHistory.push(this.props.location.pathname + "?performance_quartile=Med CPS/Med Profit");
+                        let dataBubbleUrlParams = '';
+                        this.props.onSaveBubbleParam(dataBubbleUrlParams);
                         this.props.onSavePFilterParam(dataPerformanceUrlParams);
                         this.props.onFetchGraph();
                         this.props.onGenerateTable();
@@ -307,6 +315,8 @@ export class RangingNegotiationPage extends React.PureComponent { // eslint-disa
                       <div className="panel panel-success" onClick={() => {
                         dataPerformanceUrlParams = "performance_quartile=High CPS/High Profit"
                         //  browserHistory.push(this.props.location.pathname + "?performance_quartile=High CPS/High Profit");
+                        let dataBubbleUrlParams = '';
+                        this.props.onSaveBubbleParam(dataBubbleUrlParams);
                         this.props.onSavePFilterParam(dataPerformanceUrlParams);
                         this.props.onFetchGraph();
                         this.props.onGenerateTable();
@@ -325,6 +335,8 @@ export class RangingNegotiationPage extends React.PureComponent { // eslint-disa
                         dataPerformanceUrlParams = "performance_quartile=High CPS/Low Profit"
 
                         // browserHistory.push(this.props.location.pathname + "?performance_quartile=High CPS/Low Profit");
+                        let dataBubbleUrlParams = '';
+                        this.props.onSaveBubbleParam(dataBubbleUrlParams);
                         this.props.onSavePFilterParam(dataPerformanceUrlParams);
                         this.props.onFetchGraph();
                         this.props.onGenerateTable();
@@ -498,7 +510,7 @@ export class RangingNegotiationPage extends React.PureComponent { // eslint-disa
                                   this.props.onSavePageParam(dataPageUrlParams);
                                   this.props.onGenerateTable();
 
-                                }}><a className="page-link" href="#">{obj}
+                                }}><a className="page-link">{obj}
                             </a></li>
                           )
                         })
@@ -545,6 +557,7 @@ function mapDispatchToProps(dispatch) {
     onGenerateTextBoxQueryString: (e) => dispatch(generateTextBoxQueryString(e.target.value)),
     onResetClickParam: (e) => dispatch(ResetClickParam(e)),
     onGenerateCheckedList: (a, b) => dispatch(generateCheckedList(a, b)),
+
 
   };
 }

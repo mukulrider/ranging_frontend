@@ -188,6 +188,7 @@ try {
     }
 }
 
+
 export function* doPriceGravityFetch() {
     const watcher = yield takeLatest(PRICE_GRAVITY_FETCH, generatePriceGravityFetch);
     yield take(LOCATION_CHANGE);
@@ -199,7 +200,6 @@ export function* doPriceGravityFetch() {
 export function* generateSideFilter() {
   try {
     // todo: update url
-
 
     let urlName=yield select(selectRangingNpdPageDomain());
     let urlParams = urlName.get('filter_selection');

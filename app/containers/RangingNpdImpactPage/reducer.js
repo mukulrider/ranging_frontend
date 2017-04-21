@@ -15,7 +15,7 @@ import {
 const initialState = fromJS({
   dataTable1PageUrlParams: '',
   dataTable2PageUrlParams: '',
-  dataWeekUrlParams: '',
+  dataWeekUrlParams: 'week_flag=Last 13 Weeks',
   urlParamsString: '',
   filter_selection:'',
   npdFirstHalfSelections:'',
@@ -132,7 +132,7 @@ function rangingNpdImpactPageReducer(state = initialState, action) {
         console.log(SAVE_ACP, 'reducer', action);
         return state.set('ACP_field_entry', action.data);
    case SAVE_SIZE:
-        console.log(SAVE_SIZE, 'reducer', action);
+        console.log(SAVE_SIZE, 'size in reducer', action);
         return state.set('Size_field_entry', action.data);
    case SAVE_FILTER_SELECTIONS_TILL_NOW:
         console.log(SAVE_FILTER_SELECTIONS_TILL_NOW, 'reducer', action);

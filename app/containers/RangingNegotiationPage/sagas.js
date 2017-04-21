@@ -50,8 +50,8 @@ export function* generateWeekFetch() {
   paramString = paramString.replace('&', '');
 
   try {
-    // const data = yield call(request, `http://10.1.161.82:8000/ranging/default_data_for_nego_charts?` + paramString);
-    const data = yield call(request, `http://10.1.161.82:8000/api/nego_chart?` + paramString);
+    // const data = yield call(request, `http://172.20.244.141:8000/ranging/default_data_for_nego_charts?` + paramString);
+    const data = yield call(request, `http://172.20.244.141:8000/api/nego_chart?` + paramString);
     yield put(fetchDataSuccess(data));
   } catch (err) {
     // console.log(err);
@@ -75,12 +75,12 @@ export function* generateSideFilter() {
     // todo: update url
     let data = '';
     if (urlParams){
-      // data = yield call(request, `http://10.1.161.82:8000/ranging/nego/filter_data?` + urlParams);
-      data = yield call(request, `http://10.1.161.82:8000/api/nego/filter_data?` + urlParams);
+      // data = yield call(request, `http://172.20.244.141:8000/ranging/nego/filter_data?` + urlParams);
+      data = yield call(request, `http://172.20.244.141:8000/api/nego/filter_data?` + urlParams);
 
     }else{
-      // data = yield call(request, `http://10.1.161.82:8000/ranging/nego/filter_data`);
-      data = yield call(request, `http://10.1.161.82:8000/api/nego/filter_data`);
+      // data = yield call(request, `http://172.20.244.141:8000/ranging/nego/filter_data`);
+      data = yield call(request, `http://172.20.244.141:8000/api/nego/filter_data`);
     }
     // // console.log(data);
     yield put(generateSideFilterSuccess(data));
@@ -128,6 +128,12 @@ export function* generateTable() {
   let bubbleParams = urlName.get('dataBubbleUrlParams');
   console.log("Getting bubbleparams", bubbleParams);
 
+
+  var treated_bubble_params = bubbleParams.replace(/[^=,\w\s]/gi, '');
+  var treated_bubble_params2 =treated_bubble_params.replace(/,/g , "&");
+  // console.log("regex treated string",desired);
+  console.log("regex treated2 string",treated_bubble_params2);
+
   let pageParams = urlName.get('dataPageUrlParams');
   console.log("Getting pageParams", pageParams);
 
@@ -155,8 +161,8 @@ export function* generateTable() {
     SelectionState = SelectionState + '&' + performanceParams
   }
 
-  if (bubbleParams !== '') {
-    SelectionState = SelectionState + '&' + bubbleParams
+  if (treated_bubble_params2 !== '') {
+    SelectionState = SelectionState + '&' + treated_bubble_params2
   }
 
   if (pageParams !== '') {
@@ -172,13 +178,13 @@ export function* generateTable() {
   ajaxSelection = SelectionState.replace('&', '');
   console.log("final url for table",ajaxSelection);
   if (ajaxSelection != '') {
-    // const data = yield call(request, `http://10.1.161.82:8000/ranging/nego_bubble_table?` + ajaxSelection+"&"+urlParams);
-    const data = yield call(request, `http://10.1.161.82:8000/api/nego_table?` + ajaxSelection+"&"+urlParams);
+    // const data = yield call(request, `http://172.20.244.141:8000/ranging/nego_bubble_table?` + ajaxSelection+"&"+urlParams);
+    const data = yield call(request, `http://172.20.244.141:8000/api/nego_table?` + ajaxSelection+"&"+urlParams);
     yield put(generateTableSuccess(data));
   }
   else {
-    // const data = yield call(request, `http://10.1.161.82:8000/ranging/nego_bubble_table?`+urlParams);
-    const data = yield call(request, `http://10.1.161.82:8000/api/nego_table?`+urlParams);
+    // const data = yield call(request, `http://172.20.244.141:8000/ranging/nego_bubble_table?`+urlParams);
+    const data = yield call(request, `http://172.20.244.141:8000/api/nego_table?`+urlParams);
     yield put(generateTableSuccess(data));
   }
 
@@ -204,7 +210,7 @@ export function* generateTable() {
 //
 //
 //   try {
-//     const data = yield call(request, `http://10.1.161.82:8000/ranging/nego_bubble_table?${paramString}`);
+//     const data = yield call(request, `http://172.20.244.141:8000/ranging/nego_bubble_table?${paramString}`);
 //     yield put(generateTableSuccess(data));
 //   } catch (err) {
 //     // console.log(err);
@@ -228,7 +234,7 @@ export function* generateGraph() {
 
 //  Getting the url parameters for filters
   let urlParams = urlName.get('urlParamsString');
-  //  console.log("Getting url params from ",urlParams);
+   // console.log("Getting url params in sagas",urlParams);
   //
   // let paramString = '';
   // Object.keys(urlParams).map(obj => {
@@ -252,8 +258,27 @@ export function* generateGraph() {
   console.log("Getting performanceparams", performanceParams);
 
   let bubbleParams = urlName.get('dataBubbleUrlParams');
-  console.log("Getting bubbleparams", bubbleParams);
+  console.log("Bubbleparams in sagas", bubbleParams);
 
+  var treated_bubble_params = bubbleParams.replace(/[^=,\w\s]/gi, '');
+  var treated_bubble_params2 =treated_bubble_params.replace(/,/g , "&");
+  // console.log("regex treated string",desired);
+  console.log("regex treated2 string",treated_bubble_params2);
+  //Replace , in desired with &
+
+
+  //["base_product_number=77228783","base_product_number=73362272","base_product_number=60857830"]
+  // let paramString = '';
+  // Object.keys(urlParams).map(obj => {
+  //   console.log(obj, urlParams[obj]);
+  //   paramString += `&${obj}=${urlParams[obj]}`
+  // })
+
+  //let products  = JSON.parse(bubbleParams);
+  //Parsing array to convert it to string and append and after every value appended
+  // let products = '';
+  // products = bubbleParams.toString();
+  //  console.log("converting array prods to string sagas",products);
 
   let SelectionState = '';
 
@@ -268,8 +293,8 @@ export function* generateGraph() {
   if (performanceParams !== '') {
     SelectionState = SelectionState + '&' + performanceParams
   }
-  if (bubbleParams !== '') {
-    SelectionState = SelectionState + '&' + bubbleParams
+  if (treated_bubble_params2 !== '') {
+    SelectionState = SelectionState + '&' + treated_bubble_params2
   }
 
   //Removing "&"
@@ -277,13 +302,13 @@ export function* generateGraph() {
   ajaxSelection = SelectionState.replace('&', '');
   console.log("final url for graph",ajaxSelection);
   if (ajaxSelection != '') {
-    // const data = yield call(request, `http://10.1.161.82:8000/ranging/nego_bubble_chart?` + urlParams +"&"+ ajaxSelection);
-    const data = yield call(request, `http://10.1.161.82:8000/api/nego_chart?` + urlParams +"&"+ ajaxSelection);
+    // const data = yield call(request, `http://172.20.244.141:8000/ranging/nego_bubble_chart?` + urlParams +"&"+ ajaxSelection);
+    const data = yield call(request, `http://172.20.244.141:8000/api/nego_chart?` + urlParams +"&"+ ajaxSelection);
     yield put(fetchGraphSuccess(data));
   }
   else {
-    // const data = yield call(request, `http://10.1.161.82:8000/ranging/nego_bubble_chart?`+urlParams );
-    const data = yield call(request, `http://10.1.161.82:8000/api/nego_chart?`+urlParams );
+    // const data = yield call(request, `http://172.20.244.141:8000/ranging/nego_bubble_chart?`+urlParams );
+    const data = yield call(request, `http://172.20.244.141:8000/api/nego_chart?`+urlParams );
     yield put(fetchGraphSuccess(data));
   }
   //Once all the parameters are obtained, remove the first instance of & and then make a call to url with all param appended
@@ -292,7 +317,7 @@ export function* generateGraph() {
   // try {
   //      console.log('Checking params for graph under try', urlParamsString);
   //
-  //      const data = yield call(request, `http://10.1.161.82:8000/ranging/nego_bubble_chart?`+ paramString);
+  //      const data = yield call(request, `http://172.20.244.141:8000/ranging/nego_bubble_chart?`+ paramString);
   //      yield put(fetchGraphSuccess(data));
   //  } catch (err) {
   //      // console.log(err);
