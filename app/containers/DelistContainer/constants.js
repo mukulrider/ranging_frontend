@@ -99,6 +99,7 @@ export const GENERATE_URL_PARAMS_DATA2 = 'app/DelistContainer/GENERATE_URL_PARAM
 export const GENERATE_URL_PARAMS_DATA2_STRING = 'app/DelistContainer/GENERATE_URL_PARAMS_DATA2_STRING';
 
 
+
 //FILTERS - APPLY BUTTON CLICK
 export const APPLY_BTN_CLICK = 'app/DelistContainer/APPLY_BTN_CLICK';
 

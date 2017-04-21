@@ -257,6 +257,7 @@ class WaterFallChart2 extends React.PureComponent { // eslint-disable-line react
 
     let yaxis_title = yAxisName;
 
+
     chart.append("text")
       .attr("transform", "rotate(-90)")
       .attr("y", 0 - (margin.left) + 10)

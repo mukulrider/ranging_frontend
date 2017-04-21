@@ -196,6 +196,7 @@ function delistContainerReducer(state = initialState, action) {
     // FILTERS
     case GENERATE_SIDE_FILTER_SUCCESS:
       return state.set('sideFilter', action.data);
+
     case GENERATE_URL_PARAMS:
       return state.set('urlParams', action.data);
     case GENERATE_URL_PARAMS_STRING:

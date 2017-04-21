@@ -313,6 +313,7 @@ export function generateTable() {
   };
 }
 
+
 export function generateTableSuccess(data) {
   return {
     type: GENERATE_TABLE_SUCCESS,

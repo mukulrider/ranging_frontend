@@ -454,6 +454,7 @@ export function* generateWaterfallValueFetch() {
 
   let urlName = yield select(selectDelistContainerDomain());
   console.log("water 0 urlName", urlName);
+
   let urlParams = "";
 
   console.log('water 1', urlParams);
