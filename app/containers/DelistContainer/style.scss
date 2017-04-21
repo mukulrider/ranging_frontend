@@ -92,6 +92,36 @@ th, td {
   color: red;
 }
 
+.tabsCustom {
+  color: red;
+}
+
+//TABS
+.tabsCustomList {
+  color: red;
+  width: 30%;
+  text-align: center;
+  border-style: ridge;
+  border-radius: 8px;
+  margin-left: 35px;
+}
+
+.li > a {
+  text-decoration: none;
+}
+
+.nav > li > a {
+  position: relative;
+  display: block;
+  padding: 10px 15px;
+  text-decoration: none;
+}
+
+.nav-tabs {
+  border-bottom: 0px solid #ddd !important;
+}
+
+
 
 //li > a:hover {
 //  background-color: #008dc8 !important;

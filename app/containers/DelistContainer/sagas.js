@@ -27,7 +27,8 @@ import {
 
 import {
   apiFetchSuccess,
-  SupplierImpactTableSpinnerSpinnerSuccess,
+  SupplierImpactTableSpinnerSuccess,
+  DelistProductTableSpinnerSuccess,
   ModalTableDataFetchSuccess,
   generateTableSuccess,
   generateSideFilterSuccess,
@@ -170,7 +171,7 @@ export function* generateApiFetch() {
     // `http://172.20.246.146:8000/ranging/product_impact_table${paramstring}`);
     // `http://172.20.246.146:8000/ranging/product_impact_table/?store_type=Main%20Estate&time_period=13_weeks&${paramstring}`);
     yield put(apiFetchSuccess(data));
-    yield put(SupplierImpactTableSpinnerSpinnerSuccess(spinnerCheck));
+    yield put(SupplierImpactTableSpinnerSuccess(spinnerCheck));
   } catch (err) {
     // console.log(err);
   }
@@ -426,7 +427,9 @@ export function* generateDelistTableFetch() {
     // let data = yield call(request, `http://172.20.246.146:8000/ranging/product_impact_delist_table` + urlParams);
     let data = yield call(request, `http://172.20.244.141:8000/api/product_impact_delist_table` + urlParams);
     // let data = yield call(request, `http://10.1.161.82:8000/api/product_impact_delist_table` + urlParams);
+    let spinnerCheck = 1;
     yield put(delistTableSuccess(data));
+    yield put(DelistProductTableSpinnerSuccess(spinnerCheck));
   } catch (err) {
     // console.log(err);
   }

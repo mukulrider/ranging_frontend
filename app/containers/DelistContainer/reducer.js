@@ -27,6 +27,7 @@ import {
   WATERFALL_SPINNER_SUCCESS,
   WATERFALL_PROFIT_SPINNER_SUCCESS,
   SUPPLIER_IMPACT_SPINNER_SUCCESS,
+  DELIST_PRODUCT_SPINNER_SUCCESS,
   TEST_AJAX_SUCCESS,
   DELIST_POPUP_TABLE_DATA_FETCH_SUCCESS,
   SUPPLIER_POPUP_TABLE_DATA_FETCH_SUCCESS,
@@ -179,6 +180,11 @@ function delistContainerReducer(state = initialState, action) {
     case SUPPLIER_IMPACT_SPINNER_SUCCESS:
       console.log('SUPPLIER IMPACT TABLE SPINNER');
       return state.set('supplierImpactTableSpinner', action.spinnerCheck);
+
+      // DELIST PRODUCT TABLE - SPINNER SUCCESS
+    case DELIST_PRODUCT_SPINNER_SUCCESS:
+      console.log('DELIST PRODUCT TABLE SPINNER');
+      return state.set('delistProductTableSpinner', action.spinnerCheck);
 
 
     // URL PARAMS
