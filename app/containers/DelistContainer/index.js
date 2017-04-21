@@ -1135,6 +1135,7 @@ export class DelistContainer extends React.PureComponent { // eslint-disable-lin
                         <li className="page-item"
                             onClick={() => {
                               console.log("obj", (objj));
+                              this.props.onSupplierImpactTableSpinner();
                               let supplierPaginationData = "supplier_page=" + objj;
                               this.props.onsupplierPagination(supplierPaginationData);
                               this.props.onTableType("supplier");
@@ -1469,6 +1470,7 @@ export class DelistContainer extends React.PureComponent { // eslint-disable-lin
                         <li className="page-item"
                             onClick={() => {
                               console.log("obj - delist", (objj));
+                              this.props.onDelistProductTableSpinner();
                               let delistPaginationData = "delist_page=" + objj;
                               this.props.onTableType("delist");
                               this.props.ondelistPagination(delistPaginationData);
