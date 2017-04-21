@@ -28,32 +28,43 @@ export function* generateDataFetch() {
 
   let urlName = yield select(selectRangingNpdImpactPageDomain());
   let urlParams = urlName.get('dataUrlParms');
+
+  let weekParams = urlName.get('dataWeekUrlParams');
   let npdFirstHalfSelections = urlName.get('npdFirstHalfSelections');
   let searchParams = urlName.get('searchTable2');
+  let pageParams = urlName.get('dataTable2PageUrlParams');
+  console.log("printing page in sagas",pageParams);
   // let paramString = 'buying_controller=Meat%20Fish%20and%20Veg&buyer=Meat%20and%20Poultry&junior_buyer=Coated%20Poultry&package_type=BOX&product_sub_group_description=FROZEN%20COATED%20POULTRY&measure_type=G&asp=1.967819549&acp=0.5&Size=300&brand_name=TESCO&till_roll_description=S/FRIED%20STRI&merchandise_group_code_description=FROZEN%20FISH&range_space_break_code=P&parent_supplier=1190. - MARITIME - JDM PRODUCE LIMITED&week_flag=Latest%2013%20Weeks';
   // let paramString = 'parent_supplier=1190.%20-%20MARITIME%20-%20JDM%20PRODUCE%20LIMITED&buying_controller=Meat%20Fish%20and%20Veg'
   let paramString = '';
-  Object.keys(urlParams).map(obj => {
-    //console.log(obj,urlParams[obj]);
-    paramString += `&${obj}=${urlParams[obj]}`
-  });
-  paramString = paramString.replace('&', '');
+  // Object.keys(urlParams).map(obj => {
+  //   //console.log(obj,urlParams[obj]);
+  //   paramString += `&${obj}=${urlParams[obj]}`
+  // // });
+  // paramString = paramString.replace('&', '');
+  //
+  // console.log('searchParams', searchParams);
+  // if (searchParams !== '' && paramString !== '') {
+  //   console.log('searchParams inside if ', searchParams);
+  //   searchParams = "&search1=" + searchParams;
+  // } else if (searchParams !== '') {
+  //   searchParams = "search1=" + searchParams;
+  //
+  // }
 
-  console.log('searchParams', searchParams);
-  if (searchParams !== '' && paramString !== '') {
-    console.log('searchParams inside if ', searchParams);
-    searchParams = "&search1=" + searchParams;
-  } else if (searchParams !== '') {
-    searchParams = "search1=" + searchParams;
+  searchParams = "search1=" + searchParams;
+  let WeekState = '';
 
+  if (weekParams !== '') {
+    WeekState= WeekState + '&' + weekParams
   }
-
-  console.log('Getting data from http://10.1.161.82:8000/api/npd_impact_view_bubble_table' + paramString + searchParams);
+  WeekState = WeekState.replace('&', '');
+  console.log('Getting data from http://172.20.244.141:8000/api/npd_impact_view_bubble_table' + paramString + searchParams);
   try {
 
     // Table data
     const bubble_table = yield call(request,
-      `http://10.1.161.82:8000/api/npd_impact_view_bubble_table?` + paramString + searchParams);
+      `http://172.20.244.141:8000/api/npd_impact_view_bubble_table?` + urlParams +"&"+ searchParams+"&"+ WeekState+"&"+ pageParams);
     yield put(dataFetchOnBubbleTableSuccess(bubble_table));
 
   } catch (err) {
@@ -74,24 +85,32 @@ export function* generateBubbleChartDataFetch() {
 
   let urlName = yield select(selectRangingNpdImpactPageDomain());
   let urlParams = urlName.get('dataUrlParms');
+
+  let weekParams = urlName.get('dataWeekUrlParams');
   console.log("bubble chart url params");
   console.log(urlParams);
   let npdFirstHalfSelections = urlName.get('npdFirstHalfSelections');
   // let paramString = 'parent_supplier=1190.%20-%20MARITIME%20-%20JDM%20PRODUCE%20LIMITED&buying_controller=Meat%20Fish%20and%20Veg'
+  let WeekState = '';
 
-  let paramString = '';
-  Object.keys(urlParams).map(obj => {
-    //console.log(obj,urlParams[obj]);
-    paramString += `&${obj}=${urlParams[obj]}`
-  });
-  paramString = paramString.replace('&', '');
+  if (weekParams !== '') {
+    WeekState= WeekState + '&' + weekParams
+  }
+
+  WeekState = WeekState.replace('&', '');
+  // let paramString = '';
+  // Object.keys(urlParams).map(obj => {
+  //   //console.log(obj,urlParams[obj]);
+  //   paramString += `&${obj}=${urlParams[obj]}`
+  // });
+  // paramString = paramString.replace('&', '');
   // console.log("logging_bubble_url");
-  // console.log('http://10.1.161.82:8000/api/npd_impact_view_bubble_chart?' + paramString);
+  // console.log('http://172.20.244.141:8000/api/npd_impact_view_bubble_chart?' + paramString);
   try {
 
     // Bubble chart data
     const bubble_chart = yield call(request,
-      `http://10.1.161.82:8000/api/npd_impact_view_bubble_chart?`+ paramString);
+      `http://172.20.244.141:8000/api/npd_impact_view_bubble_chart?`+ urlParams +"&"+ WeekState);
     yield put(dataFetchOnBubbleDataSuccess(bubble_chart));
 
   } catch (err) {
@@ -112,21 +131,24 @@ export function* generateProdCanniTableDataFetch() {
 
   let urlName = yield select(selectRangingNpdImpactPageDomain());
   let urlParams = urlName.get('dataUrlParms');
+  let weekParams = urlName.get('dataWeekUrlParams');
   // let npdFirstHalfSelections = urlName.get('npdFirstHalfSelections');
   let searchParams = urlName.get('searchTable1');
   console.log('search');
 
-  // let paramString = 'buying_controller=Meat%20Fish%20and%20Veg&buyer=Meat%20and%20Poultry&junior_buyer=Coated%20Poultry&package_type=BOX&product_sub_group_description=FROZEN%20COATED%20POULTRY&measure_type=G&asp=1.967819549&acp=0.5&Size=300&brand_name=TESCO&till_roll_description=S/FRIED%20STRI&merchandise_group_code_description=FROZEN%20FISH&range_space_break_code=P&parent_supplier=1190. - MARITIME - JDM PRODUCE LIMITED&week_flag=Latest%2013%20Weeks';
-  // let paramString = 'buying_controller=Meat%20Fish%20and%20Veg&buyer=Meat%20and%20Poultry&junior_buyer=Coated%20Poultry&package_type=BOX&product_sub_group_description=FROZEN%20COATED%20POULTRY&measure_type=G&asp=1.674&acp=1.264&Size=300&brand_name=Birds eye&till_roll_description=S/FRIED%20STRI&merchandise_group_code_description=FROZEN%20FISH&range_space_break_code=P&parent_supplier=1190. - MARITIME - JDM PRODUCE LIMITED&week_flag=Latest%2013%20Weeks';
-
+/*
   let paramString = '';
-  Object.keys(urlParams).map(obj => {
-    //console.log(obj,urlParams[obj]);
-    paramString += `&${obj}=${urlParams[obj]}`
-  });
+
   paramString = paramString.replace('&', '');
+*/
 
+  let WeekState = '';
 
+  if (weekParams !== '') {
+    WeekState= WeekState + '&' + weekParams
+  }
+
+  console.log("week params in sagas",weekParams);
   if (searchParams !== '' && paramString !== '') {
     console.log('searchParams inside if ', searchParams);
     searchParams = "&search=" + searchParams;
@@ -135,15 +157,25 @@ export function* generateProdCanniTableDataFetch() {
 
   }
 
+  WeekState = WeekState.replace('&', '');
 
-  console.log('http://10.1.161.82:8000/api/npd_impact_view_table?' + paramString + searchParams);
+  console.log('checking call in sagas');
+  console.log('printing url params in sagas', urlParams);
+  console.log('http://172.20.244.141:8000/api/npd_impact_view_table?' + WeekState);
+
   try {
-
-    // Cannibalization table data
-    const canni_table = yield call(request,
-      `http://10.1.161.82:8000/api/npd_impact_view_forecast?` + paramString + searchParams);
-    yield put(dataFetchCanniProdTableSuccess(canni_table));
-
+    // if (WeekState != '' ) {
+      const canni_table = yield call(request, `http://172.20.244.141:8000/api/npd_impact_view_forecast?` + urlParams +"&"+ WeekState);
+      yield put(dataFetchCanniProdTableSuccess(canni_table));
+    //}
+    // else if(searchParams !='' & WeekState != '') {
+    //   const canni_table = yield call(request, `http://172.20.244.141:8000/api/npd_impact_view_forecast?` + urlParams +"&"+searchParams+"&"+ WeekState);
+    //   yield put(dataFetchCanniProdTableSuccess(canni_table));
+    // }
+    // // Cannibalization table data
+    // const canni_table = yield call(request,
+    //   `http://172.20.244.141:8000/api/npd_impact_view_forecast?` + WeekState );
+    // yield put(dataFetchCanniProdTableSuccess(canni_table));
 
   } catch (err) {
     //console.log(err);
@@ -151,7 +183,7 @@ export function* generateProdCanniTableDataFetch() {
 }
 
 export function* doProdCanniTableDataFetch() {
-  console.log('inside small fn');
+  console.log('doProdCanniTableDataFetch');
   const watcher = yield takeLatest(CANNIBALIZED_PROD_TABLE_DATA_FETCH, generateProdCanniTableDataFetch);
   yield take(LOCATION_CHANGE);
   yield cancel(watcher);
@@ -175,12 +207,12 @@ export function* generateWaterFallChartDataFetch() {
     paramString += `&${obj}=${urlParams[obj]}`
   });
   paramString = paramString.replace('&', '');
-  console.log('http://10.1.161.82:8000/api/npd_impact_view_waterfall?' + paramString);
+  console.log('http://172.20.244.141:8000/api/npd_impact_view_waterfall?' + paramString);
   try {
 
     // Waterfall chart table data
     const waterfallchart = yield call(request,
-      `http://10.1.161.82:8000/api/npd_impact_view_forecast?` + paramString);
+      `http://172.20.244.141:8000/api/npd_impact_view_forecast?` + paramString);
     yield put(dataFetchOnWaterFallChartSuccess(waterfallchart));
 
 
@@ -202,19 +234,19 @@ export function* generateSideFilter() {
   try {
     // todo: update url
     // const data = yield call(request, `http://localhost:8090/wash/?format=json`);
-    // const data = yield call(request, `http://10.1.161.82:8000/api/npd_impact_view/filter_data`);
+    // const data = yield call(request, `http://172.20.244.141:8000/api/npd_impact_view/filter_data`);
 
     let urlName = yield select(selectRangingNpdImpactPageDomain());
     // let urlParams = urlName.get('filter_selection');
     let urlParams = urlName.get('filterSelectionsTillNow');
 
 
-    console.log('http://10.1.161.82:8000/api/npd_impact_view/filter_data?' + urlParams);
+    console.log('http://172.20.244.141:8000/api/npd_impact_view/filter_data?' + urlParams);
     let data = '';
     if (urlParams) {
-      data = yield call(request, `http://10.1.161.82:8000/api/npd_impact_view/filter_data?` + urlParams);
+      data = yield call(request, `http://172.20.244.141:8000/api/npd_impact_view/filter_data?` + urlParams);
     } else {
-      data = yield call(request, `http://10.1.161.82:8000/api/npd_impact_view/filter_data`);
+      data = yield call(request, `http://172.20.244.141:8000/api/npd_impact_view/filter_data`);
     }
 
     yield put(generateSideFilterSuccess(data));
@@ -233,5 +265,5 @@ export function* doGenerateSideFilter() {
 
 // All sagas to be loaded
 export default [
-  defaultSaga, doDataFetch, doBubbleChartDataFetch, doProdCanniTableDataFetch, doGenerateSideFilter, doWaterFallChartDataFetch
+  defaultSaga, doDataFetch, doBubbleChartDataFetch, doGenerateSideFilter, doWaterFallChartDataFetch, doProdCanniTableDataFetch
 ];

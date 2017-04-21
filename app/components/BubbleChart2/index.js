@@ -11,12 +11,12 @@ import {browserHistory} from 'react-router';
 
 
 class BubbleChart2 extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
-  createChart = (data2, path, bubbleFunc, makeTable) => {
+  createChart = (data2, path,selprod2, bubbleFunc, makeTable) => {
     let dataBubbleUrlParams = '';
     let productSelected= '';
     let prodArr = [];
     //Chart configurations
-
+    console.log("in d3 code printing array of selected products",selprod2);
     let margin = {top: 20, right: 20, bottom: 40, left: 30};
     let width = 700 - margin.left - margin.right,
       height = 600 - margin.top - margin.bottom;
@@ -178,12 +178,12 @@ class BubbleChart2 extends React.PureComponent { // eslint-disable-line react/pr
   };
 
   componentDidMount = () => {
-    this.createChart(this.props.data, this.props.path, this.props.onSaveBubbleParam,this.props.onGenerateTable)
+    this.createChart(this.props.data, this.props.path, this.props.selprod,  this.props.onSaveBubbleParam,this.props.onGenerateTable)
 
   };
 
   componentDidUpdate = () => {
-    this.createChart(this.props.data, this.props.path, this.props.onSaveBubbleParam,this.props.onGenerateTable);
+    this.createChart(this.props.data, this.props.path,this.props.selprod, this.props.onSaveBubbleParam,this.props.onGenerateTable);
     //  this.props.onSaveBubbleParam(databubbleUrlParams);
   };
 
