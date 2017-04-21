@@ -235,6 +235,10 @@ export class DelistContainer extends React.PureComponent { // eslint-disable-lin
               <NavItem className="tabsCustomList" eventKey="1" onClick={() => {
                 this.setState({activeKey: "1"});
                 let week_no = "time_period=13_weeks";
+                this.props.onwaterfallSpinner();
+                this.props.onwaterfallProfitSpinner();
+                this.props.onSupplierImpactTableSpinner();
+                this.props.onDelistProductTableSpinner();
                 this.props.onWeekClick(week_no);
                 this.props.onWaterfallValueChart();
                 setTimeout(() => {
@@ -255,6 +259,10 @@ export class DelistContainer extends React.PureComponent { // eslint-disable-lin
               <NavItem className="tabsCustomList" eventKey="2" onClick={() => {
                 this.setState({activeKey: "2"});
                 let week_no = "time_period=26_weeks";
+                this.props.onwaterfallSpinner();
+                this.props.onwaterfallProfitSpinner();
+                this.props.onSupplierImpactTableSpinner();
+                this.props.onDelistProductTableSpinner();
                 this.props.onWeekClick(week_no);
                 this.props.onWaterfallValueChart();
 
@@ -273,6 +281,10 @@ export class DelistContainer extends React.PureComponent { // eslint-disable-lin
               <NavItem className="tabsCustomList" eventKey="3" onClick={() => {
                 this.setState({activeKey: "3"});
                 let week_no = "time_period=52_weeks";
+                this.props.onwaterfallSpinner();
+                this.props.onwaterfallProfitSpinner();
+                this.props.onSupplierImpactTableSpinner();
+                this.props.onDelistProductTableSpinner();
                 this.props.onWeekClick(week_no);
                 this.props.onWaterfallValueChart();
 
@@ -296,6 +308,10 @@ export class DelistContainer extends React.PureComponent { // eslint-disable-lin
               <NavItem className="tabsCustomList" eventKey="11" onClick={() => {
                 this.setState({activeKey2: "11"});
                 let store_type = "store_type=Overview";
+                this.props.onwaterfallSpinner();
+                this.props.onwaterfallProfitSpinner();
+                this.props.onSupplierImpactTableSpinner();
+                this.props.onDelistProductTableSpinner();
                 this.props.onStoreClick(store_type);
                 this.props.onWaterfallValueChart();
 
@@ -308,6 +324,10 @@ export class DelistContainer extends React.PureComponent { // eslint-disable-lin
               <NavItem className="tabsCustomList" eventKey="22" onClick={() => {
                 this.setState({activeKey2: "22"});
                 let store_type = "store_type=Main Estate";
+                this.props.onwaterfallSpinner();
+                this.props.onwaterfallProfitSpinner();
+                this.props.onSupplierImpactTableSpinner();
+                this.props.onDelistProductTableSpinner();
                 this.props.onStoreClick(store_type);
                 this.props.onWaterfallValueChart();
 
@@ -320,6 +340,10 @@ export class DelistContainer extends React.PureComponent { // eslint-disable-lin
               <NavItem className="tabsCustomList" eventKey="33" onClick={() => {
                 this.setState({activeKey2: "33"});
                 let store_type = "store_type=Express";
+                this.props.onwaterfallSpinner();
+                this.props.onwaterfallProfitSpinner();
+                this.props.onSupplierImpactTableSpinner();
+                this.props.onDelistProductTableSpinner();
                 this.props.onStoreClick(store_type);
                 this.props.onWaterfallValueChart();
 
@@ -454,7 +478,7 @@ export class DelistContainer extends React.PureComponent { // eslint-disable-lin
           </Modal>
 
           {(() => {
-            if (this.props.DelistContainer.waterfallValue && this.props.DelistContainer.waterfallValue.sales_chart && this.props.DelistContainer.waterfallValue.vols_chart && this.props.DelistContainer.waterfallSpinner) {
+            if (this.props.DelistContainer.waterfallValue && this.props.DelistContainer.waterfallValue.sales_chart && this.props.DelistContainer.waterfallValue.vols_chart && (this.props.DelistContainer.waterfallSpinner == 1)) {
               return (
                 <div className="row">
 
@@ -648,7 +672,15 @@ export class DelistContainer extends React.PureComponent { // eslint-disable-lin
                   </div>
                 </div>
               )
-            } else {
+            } else if(this.props.DelistContainer.waterfallSpinner == 2){
+              let abcd = 1;
+              return (
+                <div>
+                  <h2 className="text-center">Something went wrong. Please reload the page....!</h2>
+                </div>
+              )
+            }
+            else {
               let abcd = 1;
               return (
                 <div>
@@ -689,7 +721,7 @@ export class DelistContainer extends React.PureComponent { // eslint-disable-lin
 
 
           {(() => {
-            if (this.props.DelistContainer.waterfallValue && this.props.DelistContainer.waterfallValue.cgm_chart && this.props.DelistContainer.waterfallValue.cts_chart && this.props.DelistContainer.waterfallVolumeSpinner) {
+            if (this.props.DelistContainer.waterfallValue && this.props.DelistContainer.waterfallValue.cgm_chart && this.props.DelistContainer.waterfallValue.cts_chart && (this.props.DelistContainer.waterfallVolumeSpinner == 1)) {
               return (
                 <div className="row">
                   <div className="col-xs-6">
@@ -876,6 +908,13 @@ export class DelistContainer extends React.PureComponent { // eslint-disable-lin
                   </div>
                 </div>
               )
+            } else if(this.props.DelistContainer.waterfallVolumeSpinner == 2){
+              let abcd = 1;
+              return (
+                <div>
+                  <h2 className="text-center">Something went wrong. Please reload the page....!</h2>
+                </div>
+              )
             }
             else {
               return (
@@ -957,7 +996,7 @@ export class DelistContainer extends React.PureComponent { // eslint-disable-lin
               <tbody>
               {
                 (() => {
-                  if (this.props.DelistContainer.data && this.props.DelistContainer.data.sup_sales_table && this.props.DelistContainer.supplierImpactTableSpinner) {
+                  if (this.props.DelistContainer.data && this.props.DelistContainer.data.sup_sales_table && (this.props.DelistContainer.supplierImpactTableSpinner == 1)) {
                     let a = this.props.DelistContainer.data.sup_sales_table;
                     return a.map(obj => {
                       return (
@@ -1026,8 +1065,14 @@ export class DelistContainer extends React.PureComponent { // eslint-disable-lin
                         </tr>
                       )
                     })
-                  }
-                  else {
+                  } else if(this.props.DelistContainer.supplierImpactTableSpinner == 2){
+                    let abcd = 1;
+                    return (
+                      <tr>
+                        <td className="text-center" colSpan="11">Something went wrong. Please reload the page....!</td>
+                      </tr>
+                    )
+                  } else {
                     return (
                       <tr>
                         <td className="text-center" colSpan="11"><Spinner />Please Wait a Moment....!</td>
@@ -1323,7 +1368,7 @@ export class DelistContainer extends React.PureComponent { // eslint-disable-lin
               <tbody>
               {
                 (() => {
-                  if (this.props.DelistContainer.delisttableData && this.props.DelistContainer.delisttableData.delist_prod_table && this.props.DelistContainer.delistProductTableSpinner) {
+                  if (this.props.DelistContainer.delisttableData && this.props.DelistContainer.delisttableData.delist_prod_table && (this.props.DelistContainer.delistProductTableSpinner == 1)) {
                     return this.props.DelistContainer.delisttableData.delist_prod_table.map(obj => {
                       return (
                         <tr id={Math.random() + Date.now()}>
@@ -1355,8 +1400,14 @@ export class DelistContainer extends React.PureComponent { // eslint-disable-lin
                         </tr>
                       )
                     })
-                  }
-                  else {
+                  } else if(this.props.DelistContainer.delistProductTableSpinner == 2){
+                    let abcd = 1;
+                    return (
+                      <tr>
+                        <td className="text-center" colSpan="7">Something went wrong. Please reload the page....!</td>
+                      </tr>
+                    )
+                  } else {
                     return (
                       <tr>
                         <td className="text-center" colSpan="7"><Spinner />Please Wait a Moment....!</td>

@@ -174,6 +174,8 @@ export function* generateApiFetch() {
     yield put(SupplierImpactTableSpinnerSuccess(spinnerCheck));
   } catch (err) {
     // console.log(err);
+    let spinnerCheck = 2;
+    yield put(SupplierImpactTableSpinnerSuccess(spinnerCheck));
   }
 }
 
@@ -432,6 +434,8 @@ export function* generateDelistTableFetch() {
     yield put(DelistProductTableSpinnerSuccess(spinnerCheck));
   } catch (err) {
     // console.log(err);
+    let spinnerCheck = 2;
+    yield put(DelistProductTableSpinnerSuccess(spinnerCheck));
   }
 }
 
@@ -571,6 +575,9 @@ let filterParamsString = "";
     yield put(WaterfallProfitSpinnerSuccess(spinnerCheck));
   } catch (err) {
     // console.log(err);
+    let spinnerCheck = 2;
+    yield put(WaterfallSpinnerSuccess(spinnerCheck));
+    yield put(WaterfallProfitSpinnerSuccess(spinnerCheck));
   }
 }
 
