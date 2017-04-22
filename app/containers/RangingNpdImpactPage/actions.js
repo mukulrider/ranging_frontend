@@ -31,7 +31,7 @@ export function defaultAction() {
 //--------------------- DATA FETCH BUBBLE CHART TABLE -------------------------------
 
 export function dataFetchOnPageLoad() {
-  // console.log('dataFetchOnPageLoad action');
+  console.log('dataFetchOnPageLoad action');
   return {
     type: DATA_FETCH_ON_PAGE_LOAD,
   };
@@ -39,7 +39,7 @@ export function dataFetchOnPageLoad() {
 
 
 export function dataFetchOnBubbleTableSuccess(data) {
-  // console.log('dataFetchOnPageLoadSuccess action', data);
+  console.log('dataFetchOnPageLoadSuccess action', data);
   return {
     type: BUBBLE_CHART_TABLE_SUCCESS ,
     data
@@ -83,7 +83,7 @@ export function dataFetchOnWaterFallChartSuccess(data) {
 //--------------------- DATA FOR CANNIBALIZATION TABLE -------------------------------
 
 export function dataFetchCanniProdTable() {
-  console.log('dataFetchCanniProdTable action');
+  // console.log('dataFetchCanniProdTable action');
   return {
     type: CANNIBALIZED_PROD_TABLE_DATA_FETCH,
   };
@@ -147,7 +147,7 @@ export function saveFilterSelectionsTillNow(data) {
 }
 
 export function checkboxChange(data) {
-  console.log("Selection in reducer" + data);
+  // console.log("Selection in reducer" + data);
   return {
 
     type: CHECKBOX_CHANGE,
@@ -200,7 +200,7 @@ export function saveTable1PageParam(data) {
 }
 
 export function saveTable2PageParam(data) {
-  console.log('Saving url params in action',data);
+  // console.log('Saving url params in action',data);
   return {
     type: SAVE_T2_PAGE_PARAM ,
     data
@@ -210,7 +210,7 @@ export function saveTable2PageParam(data) {
 //----------------------Search
 
 export function saveTable1SearchParam(data) {
-  console.log("Search in action for "+data);
+  // console.log("Search in action for "+data);
   return {
     type: SAVE_SEARCH_TABLE1,
     data
@@ -219,7 +219,7 @@ export function saveTable1SearchParam(data) {
 
 
 export function saveTable2SearchParam(data) {
-  console.log("Search in action for "+ data);
+  // console.log("Search in action for "+ data);
   return {
     type: SAVE_SEARCH_TABLE2,
     data

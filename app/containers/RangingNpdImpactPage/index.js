@@ -124,7 +124,7 @@ export class RangingNpdImpactPage extends React.PureComponent { // eslint-disabl
         {/*Week Tabs*/}
         <div className="row">
           <Button onClick={() => {
-            dataWeekUrlParams="week_flag=Last 13 Weeks";
+            dataWeekUrlParams="week_flag=Latest 13 Weeks";
             this.props.onSaveWeekParam(dataWeekUrlParams);
             this.props.onDataFetchCanniProdTable();
             this.props.onDataFetchOnPageLoad();
@@ -143,7 +143,7 @@ export class RangingNpdImpactPage extends React.PureComponent { // eslint-disabl
           }>13 Weeks</Button>
 
           <Button onClick={() => {
-            dataWeekUrlParams="week_flag=Last 26 Weeks";
+            dataWeekUrlParams="week_flag=Latest 26 Weeks";
             this.props.onSaveWeekParam(dataWeekUrlParams);
             this.props.onDataFetchCanniProdTable();
             this.props.onDataFetchOnPageLoad();
@@ -162,7 +162,7 @@ export class RangingNpdImpactPage extends React.PureComponent { // eslint-disabl
           }}>26 Weeks</Button>
 
           <Button onClick={() => {
-            dataWeekUrlParams="week_flag=Last 52 Weeks";
+            dataWeekUrlParams="week_flag=Latest 52 Weeks";
             {/*this.props.onSendUrlParams(completeSelections);*/}
             this.props.onSaveWeekParam(dataWeekUrlParams);
             this.props.onDataFetchCanniProdTable();
