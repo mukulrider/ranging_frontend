@@ -27,7 +27,7 @@ import NewSelector2 from 'components/NewSelector2';
 import {browserHistory} from 'react-router';
 import Panel from 'components/panel';
 import Checkbox from 'components/checkbox';
-import {Modal} from 'react-bootstrap';
+import {Modal, Pagination,Accordion} from 'react-bootstrap';
 import {Nav} from 'react-bootstrap';
 import {NavItem} from 'react-bootstrap';
 import {
@@ -157,9 +157,9 @@ export class DelistContainer extends React.PureComponent { // eslint-disable-lin
     //   // alert(abc);
     // }
     return (
+      <div className="row FlexContainer" style={{fontSize: '14px'}}>
+        <div className="Flexcolleft col-xs-3">
 
-      <div className="row" style={{fontSize: '14px'}}>
-        <div className="col-xs-2">
           <Panel>
             {/*<SelectorDelist sideFilter={this.props.DelistContainer.sideFilter}*/}
             {/*location={this.props.location}*/}
@@ -192,15 +192,16 @@ export class DelistContainer extends React.PureComponent { // eslint-disable-lin
                 )
               } else {
                 return (
-                  <div>LOADING</div>
+                  <div style={{padding: '10px'}}>LOADING</div>
                 )
               }
             })()}
           </Panel>
         </div>
         {  console.log("hiii", this.props) }
-        <div className="col-xs-10">
+        <div className="Flexcolright col-xs-9 ">
           <div className="row">
+            <div className="col-md-12">
             {/*<div className="nav-tabs-customm">*/}
             {/*<ul className="nav nav-tabs  nav-justified">*/}
             {/*<li><a href="#" style={{fontSize: '14px'}} onClick={() => {*/}
@@ -254,8 +255,7 @@ export class DelistContainer extends React.PureComponent { // eslint-disable-lin
                 {/*this.props.ondelistTable();*/
                 }
                 this.props.onWeekTabClick("Week: 13 weeks ")
-              }} style={{fontSize: '14px', fontFamily: 'Tesco', textDecoration: 'none'}}><b
-                style={{textDecoration: 'none'}}>WEEK 13</b></NavItem>
+              }}><span className="tab_label">WEEK 13</span></NavItem>
               <NavItem className="tabsCustomList" eventKey="2" onClick={() => {
                 this.setState({activeKey: "2"});
                 let week_no = "time_period=26_weeks";
@@ -276,8 +276,8 @@ export class DelistContainer extends React.PureComponent { // eslint-disable-lin
                 {/*this.props.ondelistTable();*/
                 }
                 this.props.onWeekTabClick("Week: 26 weeks ")
-              }} style={{fontSize: '14px', fontFamily: 'Tesco', textDecoration: 'none !important'}}><b>WEEK
-                26</b></NavItem>
+              }} ><span className="tab_label">WEEK
+                26</span></NavItem>
               <NavItem className="tabsCustomList" eventKey="3" onClick={() => {
                 this.setState({activeKey: "3"});
                 let week_no = "time_period=52_weeks";
@@ -298,62 +298,15 @@ export class DelistContainer extends React.PureComponent { // eslint-disable-lin
                 {/*this.props.ondelistTable();*/
                 }
                 this.props.onWeekTabClick("Week: 52 weeks ")
-              }} style={{fontSize: '14px', fontFamily: 'Tesco', textDecoration: 'none !important'}}><b>WEEK
-                52</b></NavItem>
+              }}><span className="tab_label">WEEK 52</span></NavItem>
+
+
             </Nav>
 
-            <br></br>
 
-            <Nav bsStyle="tabs" activeKey={this.state.activeKey2} onSelect={this.handleSelect}>
-              <NavItem className="tabsCustomList" eventKey="11" onClick={() => {
-                this.setState({activeKey2: "11"});
-                let store_type = "store_type=Overview";
-                this.props.onwaterfallSpinner();
-                this.props.onwaterfallProfitSpinner();
-                this.props.onSupplierImpactTableSpinner();
-                this.props.onDelistProductTableSpinner();
-                this.props.onStoreClick(store_type);
-                this.props.onWaterfallValueChart();
 
-                setTimeout(() => {
-                  this.props.onApiFetch();
-                  this.props.ondelistTable();
-                }, 20000);
-                this.props.onStoreTabClick("Store: Overview ")
-              }} style={{fontSize: '14px', fontFamily: 'Tesco', textDecoration: 'none'}}><b>OVERVIEW</b></NavItem>
-              <NavItem className="tabsCustomList" eventKey="22" onClick={() => {
-                this.setState({activeKey2: "22"});
-                let store_type = "store_type=Main Estate";
-                this.props.onwaterfallSpinner();
-                this.props.onwaterfallProfitSpinner();
-                this.props.onSupplierImpactTableSpinner();
-                this.props.onDelistProductTableSpinner();
-                this.props.onStoreClick(store_type);
-                this.props.onWaterfallValueChart();
+            </div>
 
-                setTimeout(() => {
-                  this.props.onApiFetch();
-                  this.props.ondelistTable();
-                }, 20000);
-                this.props.onStoreTabClick("Store: Main Estate ")
-              }} style={{fontSize: '14px', fontFamily: 'Tesco', textDecoration: 'none'}}><b>MAIN ESTATE</b></NavItem>
-              <NavItem className="tabsCustomList" eventKey="33" onClick={() => {
-                this.setState({activeKey2: "33"});
-                let store_type = "store_type=Express";
-                this.props.onwaterfallSpinner();
-                this.props.onwaterfallProfitSpinner();
-                this.props.onSupplierImpactTableSpinner();
-                this.props.onDelistProductTableSpinner();
-                this.props.onStoreClick(store_type);
-                this.props.onWaterfallValueChart();
-
-                setTimeout(() => {
-                  this.props.onApiFetch();
-                  this.props.ondelistTable();
-                }, 20000);
-                this.props.onStoreTabClick("Store: Express")
-              }} style={{fontSize: '14px', fontFamily: 'Tesco', textDecoration: 'none'}}><b>EXPRESS</b></NavItem>
-            </Nav>
 
 
             {/*<div className="nav-tabs-customm">*/}
@@ -410,7 +363,6 @@ export class DelistContainer extends React.PureComponent { // eslint-disable-lin
             {/*this.props.onWeekTabClick("Week: 52 weeks ");*/}
             {/*}}>Week 52</Button>*/}
           </div>
-          <br></br>
           {/*<div className="row">*/}
           {/*<Button onClick={() => {*/}
           {/*let store_type = "store_type=Overview";*/}
@@ -438,11 +390,64 @@ export class DelistContainer extends React.PureComponent { // eslint-disable-lin
           {/*}}>Express</Button>*/}
           {/*</div>*/}
           <div className="row">
+            <div className="col-md-12 content-wrap">
+            <Nav bsStyle="tabs" className="tabsCustom" activeKey={this.state.activeKey2} onSelect={this.handleSelect}>
+              <NavItem className="tabsCustomList" eventKey="4" onClick={() => {
+                this.setState({activeKey2: "4"});
+                let store_type = "store_type=Overview";
+                this.props.onwaterfallSpinner();
+                this.props.onwaterfallProfitSpinner();
+                this.props.onSupplierImpactTableSpinner();
+                this.props.onDelistProductTableSpinner();
+                this.props.onStoreClick(store_type);
+                this.props.onWaterfallValueChart();
+
+                setTimeout(() => {
+                  this.props.onApiFetch();
+                  this.props.ondelistTable();
+                }, 20000);
+                this.props.onStoreTabClick("Store: Overview ")
+              }} ><span className="tab_label">OVERVIEW</span></NavItem>
+              <NavItem className="tabsCustomList" eventKey="5" onClick={() => {
+                this.setState({activeKey2: "5"});
+                let store_type = "store_type=Main Estate";
+                this.props.onwaterfallSpinner();
+                this.props.onwaterfallProfitSpinner();
+                this.props.onSupplierImpactTableSpinner();
+                this.props.onDelistProductTableSpinner();
+                this.props.onStoreClick(store_type);
+                this.props.onWaterfallValueChart();
+
+                setTimeout(() => {
+                  this.props.onApiFetch();
+                  this.props.ondelistTable();
+                }, 20000);
+                this.props.onStoreTabClick("Store: Main Estate ")
+              }}><span className="tab_label">MAIN ESTATE</span></NavItem>
+              <NavItem className="tabsCustomList" eventKey="6" onClick={() => {
+                this.setState({activeKey2: "6"});
+                let store_type = "store_type=Express";
+                this.props.onwaterfallSpinner();
+                this.props.onwaterfallProfitSpinner();
+                this.props.onSupplierImpactTableSpinner();
+                this.props.onDelistProductTableSpinner();
+                this.props.onStoreClick(store_type);
+                this.props.onWaterfallValueChart();
+
+                setTimeout(() => {
+                  this.props.onApiFetch();
+                  this.props.ondelistTable();
+                }, 20000);
+                this.props.onStoreTabClick("Store: Express")
+              }} ><span className="tab_label">EXPRESS</span></NavItem>
+
+            </Nav>
+
             <p>
               <span>&nbsp;{this.props.DelistContainer.weekBreadcrumb}</span>
               <span>&nbsp;{this.props.DelistContainer.storeBreadcrumb}</span>
             </p>
-          </div>
+
           <h2 className="ts-blk-proview-subhead ts-blk-proview" style={{fontSize: '28px', verticalAlign: 'middle'}}><b
             style={{verticalAlign: 'middle'}}>SALES IMPACT</b></h2>
 
@@ -497,15 +502,15 @@ export class DelistContainer extends React.PureComponent { // eslint-disable-lin
                       </div>
                       <div className="panel-body">
                         <div className="row" style={{top: '-25px', position: 'relative'}}>
-                          <div className="col-xs-6">
+                          <div className="col-xs-6 text-center">
                             <Panel>
                               {/*<div style={{textAlign: 'center', color: '#00539f', fontWeight: 'bold', fontSize: '16px'}}>*/}
                               <div
-                                style={{textAlign: 'center', color: '#333333', fontWeight: 'bold', fontSize: '16px'}}>
+                                style={{ color: '#333333', fontWeight: 'bold', fontSize: '16px'}}>
                                 Impact to Buying
                                 Controller
                                 <br></br>
-                                <div style={{fontWeight: 'bold', fontSize: '16px', left: '9px'}}
+                                <div style={{fontWeight: 'bold', fontSize: '16px'}}
                                      className={(() => {
                                        if (this.props.DelistContainer.waterfallValue.bc_sales_contri > 0) {
                                          {/*alert(this.props.DelistContainer.waterfallValue.bc_sales_contri)*/
@@ -525,18 +530,17 @@ export class DelistContainer extends React.PureComponent { // eslint-disable-lin
                               </div>
                             </Panel>
                           </div>
-                          <div className="col-xs-6">
+                          <div className="col-xs-6 text-center">
                             <Panel>
                               <div
-                                style={{textAlign: 'center', color: '#333333', fontWeight: 'bold', fontSize: '16px'}}>
+                                style={{ color: '#333333', fontWeight: 'bold', fontSize: '16px'}}>
                                 Impact to Product
                                 Sub-group
                               </div>
                               <div style={{
-                                textAlign: 'center',
+
                                 fontWeight: 'bold',
-                                fontSize: '16px',
-                                left: '93px'
+                                fontSize: '16px'
                               }}
                                    className={(() => {
                                      if (this.props.DelistContainer.waterfallValue.psg_sales_contri > 0) {
@@ -554,7 +558,7 @@ export class DelistContainer extends React.PureComponent { // eslint-disable-lin
                           </div>
                         </div>
                         <div className="row" style={{top: '-30px', position: 'relative'}}>
-                          <div className="col-xs-12">
+                          <div className="col-xs-12 chartwrap">
                             <WaterFallChart2 id="waterfallChart_1" yAxisName="Value" formatter="formatSales"
                                              positive_text='positive' negative_text='negative' total_text='total'
                                              data={ this.props.DelistContainer.waterfallValue.sales_chart }/>
@@ -603,19 +607,17 @@ export class DelistContainer extends React.PureComponent { // eslint-disable-lin
                       </div>
                       <div className="panel-body">
                         <div className="row" style={{top: '-25px', position: 'relative'}}>
-                          <div className="col-xs-6">
+                          <div className="col-xs-6 text-center">
 
                             <Panel>
                               <div
-                                style={{textAlign: 'center', color: '#333333', fontWeight: 'bold', fontSize: '16px'}}>
+                                style={{ color: '#333333', fontWeight: 'bold', fontSize: '16px'}}>
                                 Impact to Buying
                                 Controller
                               </div>
                               <div style={{
-                                textAlign: 'center',
                                 fontWeight: 'bold',
-                                fontSize: '16px',
-                                left: '93px'
+                                fontSize: '16px'
                               }}
                                    className={(() => {
                                      if (this.props.DelistContainer.waterfallValue.bc_vols_contri > 0) {
@@ -631,19 +633,17 @@ export class DelistContainer extends React.PureComponent { // eslint-disable-lin
                               </div>
                             </Panel>
                           </div>
-                          <div className="col-xs-6">
+                          <div className="col-xs-6 text-center">
 
                             <Panel>
                               <div
-                                style={{textAlign: 'center', color: '#333333', fontWeight: 'bold', fontSize: '16px'}}>
+                                style={{color: '#333333', fontWeight: 'bold', fontSize: '16px'}}>
                                 Impact to Product
                                 Sub-group
                               </div>
                               <div style={{
-                                textAlign: 'center',
                                 fontWeight: 'bold',
-                                fontSize: '16px',
-                                left: '93px'
+                                fontSize: '16px'
                               }}
                                    className={(() => {
                                      if (this.props.DelistContainer.waterfallValue.psg_vols_contri > 0) {
@@ -661,7 +661,7 @@ export class DelistContainer extends React.PureComponent { // eslint-disable-lin
                           </div>
                         </div>
                         <div className="row" style={{top: '-30px', position: 'relative'}}>
-                          <div className="col-xs-12">
+                          <div className="col-xs-12 chartwrap">
                             <WaterFallChart2 id="waterfallChart_2" yAxisName="Volume" formatter="formatSales"
                                              positive_text='positive' negative_text='negative' total_text='total'
                                              data={ this.props.DelistContainer.waterfallValue.vols_chart }/>
@@ -739,15 +739,13 @@ export class DelistContainer extends React.PureComponent { // eslint-disable-lin
                           <div className="col-xs-6">
                             <Panel>
                               <div
-                                style={{textAlign: 'center', color: '#333333', fontWeight: 'bold', fontSize: '16px'}}>
+                                style={{color: '#333333', fontWeight: 'bold', fontSize: '16px'}}>
                                 Impact to Buying
                                 Controller
                               </div>
                               <div style={{
-                                textAlign: 'center',
                                 fontWeight: 'bold',
-                                fontSize: '16px',
-                                left: '93px'
+                                fontSize: '16px'
                               }}
                                    className={(() => {
                                      if (this.props.DelistContainer.waterfallValue.bc_cgm_contri > 0) {
@@ -763,18 +761,16 @@ export class DelistContainer extends React.PureComponent { // eslint-disable-lin
                               </div>
                             </Panel>
                           </div>
-                            <div className="col-xs-6">
+                            <div className="col-xs-6 Impact to ">
                             <Panel>
                               <div
-                                style={{textAlign: 'center', color: '#333333', fontWeight: 'bold', fontSize: '16px'}}>
+                                style={{color: '#333333', fontWeight: 'bold', fontSize: '16px'}}>
                                 Impact to Product
                                 Sub-group
                               </div>
                               <div style={{
-                                textAlign: 'center',
                                 fontWeight: 'bold',
-                                fontSize: '16px',
-                                left: '93px'
+                                fontSize: '16px'
                               }}
                                    className={(() => {
                                      if (this.props.DelistContainer.waterfallValue.psg_cgm_contri > 0) {
@@ -792,7 +788,7 @@ export class DelistContainer extends React.PureComponent { // eslint-disable-lin
                           </div>
                         </div>
                         <div className="row" style={{top: '-30px', position: 'relative'}}>
-                          <div className="col-xs-12">
+                          <div className="col-xs-12 chartwrap">
                             <WaterFallChart2 id="waterfallChart_3" yAxisName="Profit" formatter="formatSales"
                                              positive_text='positive' negative_text='negative' total_text='total'
                                              data={ this.props.DelistContainer.waterfallValue.cgm_chart }/>
@@ -837,18 +833,16 @@ export class DelistContainer extends React.PureComponent { // eslint-disable-lin
                       </div>
                       <div className="panel-body">
                         <div className="row"  style={{top: '-25px', position: 'relative'}}>
-                          <div className="col-xs-6">
+                          <div className="col-xs-6 text-center">
                             <Panel>
                               <div
-                                style={{textAlign: 'center', color: '#333333', fontWeight: 'bold', fontSize: '16px'}}>
+                                style={{ color: '#333333', fontWeight: 'bold', fontSize: '16px'}}>
                                 Impact to Buying
                                 Controller
                               </div>
                               <div style={{
-                                textAlign: 'center',
                                 fontWeight: 'bold',
-                                fontSize: '16px',
-                                left: '93px'
+                                fontSize: '16px'
                               }}
                                    className={(() => {
                                      if (this.props.DelistContainer.waterfallValue.bc_cgm_contri > 0) {
@@ -865,18 +859,16 @@ export class DelistContainer extends React.PureComponent { // eslint-disable-lin
                             </Panel>
                           </div>
 
-                          <div className="col-xs-6">
+                          <div className="col-xs-6 text-center">
                             <Panel>
                               <div
-                                style={{textAlign: 'center', color: '#333333', fontWeight: 'bold', fontSize: '16px'}}>
+                                style={{color: '#333333', fontWeight: 'bold', fontSize: '16px'}}>
                                 Impact to Product
                                 Sub-group
                               </div>
                               <div style={{
-                                textAlign: 'center',
                                 fontWeight: 'bold',
-                                fontSize: '16px',
-                                left: '93px'
+                                fontSize: '16px'
                               }}
                                    className={(() => {
                                      if (this.props.DelistContainer.waterfallValue.psg_cgm_contri > 0) {
@@ -894,7 +886,7 @@ export class DelistContainer extends React.PureComponent { // eslint-disable-lin
                           </div>
                         </div>
                         <div className="row" style={{top: '-30px', position: 'relative'}}>
-                          <div className="col-xs-12">
+                          <div className="col-xs-12 chartwrap">
                             <WaterFallChart2 id="waterfallChart_4" yAxisName="CTS" formatter="formatSales"
                                              positive_text='negative' negative_text='positive' total_text='total1'
                                              data={ this.props.DelistContainer.waterfallValue.cts_chart }/>
@@ -1086,15 +1078,8 @@ export class DelistContainer extends React.PureComponent { // eslint-disable-lin
 
             {/*pagination*/}
             <nav aria-label="Page navigation example">
-              <span style={{
-                fontSize: '14px',
-                position: 'relative',
-                float: 'left',
-                top: '40px',
-                fontSize: '14px',
-                left: '5px'
-              }}>Page:</span>
               <ul className="pagination pagination-lg">
+                <li><a role="button" href="#"><span aria-label="Prev">‹</span></a></li>
                 {(() => {
 
                   if (this.props.DelistContainer.data && this.props.DelistContainer.data.sup_sales_table) {
@@ -1140,19 +1125,13 @@ export class DelistContainer extends React.PureComponent { // eslint-disable-lin
                               this.props.onsupplierPagination(supplierPaginationData);
                               this.props.onTableType("supplier");
                               this.props.onApiFetch();
-                            }}><a className="page-link" style={{
-                          borderTopLeftRadius: '20px',
-                          borderBottomLeftRadius: '20px',
-                          borderBottomRightRadius: '20px',
-                          borderTopRightRadius: '20px',
-                          margin: '10px',
-                          fontSize: '14px'
-                        }}>{objj}
+                            }}><a >{objj}
                         </a> &nbsp;&nbsp; </li>
                       )
                     })
                   }
                 })()}
+                <li><a role="button" href="#"><span aria-label="Next">›</span></a></li>
               </ul>
             </nav>
           </Panel>
@@ -1239,13 +1218,8 @@ export class DelistContainer extends React.PureComponent { // eslint-disable-lin
               </table>
               {/*pagination*/}
               <nav aria-label="Page navigation example">
-                <ul className="pagination pagination-lg"><span style={{
-                  fontSize: '14px',
-                  position: 'relative',
-                  float: 'left',
-                  top: '20px',
-                  fontSize: '14px'
-                }}>Page:</span>
+                <ul className="pagination pagination-lg">
+                  <li><a role="button" href="#"><span aria-label="Prev">‹</span></a></li>
                   {(() => {
 
                     if (this.props.DelistContainer.supplierPopuptableDataSuccess && this.props.DelistContainer.supplierPopuptableDataSuccess.table) {
@@ -1292,19 +1266,13 @@ export class DelistContainer extends React.PureComponent { // eslint-disable-lin
                                 this.props.onsupplierPopupPagination(supplierPopupPaginationData);
                                 this.props.onTableType("supplier_popup");
                                 this.props.onSupplierImpactTableClick(this.props.DelistContainer.supplierPopupTableData);
-                              }}><a className="page-link" style={{
-                            borderTopLeftRadius: '20px',
-                            borderBottomLeftRadius: '20px',
-                            borderBottomRightRadius: '20px',
-                            borderTopRightRadius: '20px',
-                            margin: '10px',
-                            fontSize: '14px'
-                          }}>{objj}
+                              }}><a >{objj}
                           </a></li>
                         )
                       })
                     }
                   })()}
+                  <li><a role="button" href="#"><span aria-label="Last">›</span></a></li>
                 </ul>
               </nav>
             </Modal.Body>
@@ -1422,14 +1390,8 @@ export class DelistContainer extends React.PureComponent { // eslint-disable-lin
 
             {/*pagination*/}
             <nav aria-label="Page navigation example">
-              <ul className="pagination pagination-lg"><span style={{
-                fontSize: '14px',
-                position: 'relative',
-                float: 'left',
-                top: '20px',
-                fontSize: '14px',
-                left: '5px'
-              }}>Page:</span>
+              <ul className="pagination pagination-lg">
+                <li><a role="button" href="#"><span aria-label="Prev">‹</span></a></li>
                 {(() => {
 
                   if (this.props.DelistContainer.delisttableData && this.props.DelistContainer.delisttableData.delist_prod_table) {
@@ -1476,19 +1438,13 @@ export class DelistContainer extends React.PureComponent { // eslint-disable-lin
                               this.props.onTableType("delist");
                               this.props.ondelistPagination(delistPaginationData);
                               this.props.ondelistTable();
-                            }}><a className="page-link" style={{
-                          borderTopLeftRadius: '20px',
-                          borderBottomLeftRadius: '20px',
-                          borderBottomRightRadius: '20px',
-                          borderTopRightRadius: '20px',
-                          margin: '10px',
-                          fontSize: '14px'
-                        }}>{objj}
+                            }}><a>{objj}
                         </a></li>
                       )
                     })
                   }
                 })()}
+                <li><a role="button" href="#"><span aria-label="Last">›</span></a></li>
               </ul>
             </nav>
           </Panel>
@@ -1545,13 +1501,8 @@ export class DelistContainer extends React.PureComponent { // eslint-disable-lin
 
               {/*pagination*/}
               <nav aria-label="Page navigation example">
-                <ul className="pagination pagination-lg"><span style={{
-                  fontSize: '14px',
-                  position: 'relative',
-                  float: 'left',
-                  top: '20px',
-                  fontSize: '14px'
-                }}>Page:</span>
+                <ul className="pagination pagination-lg">
+                  <li><a role="button" href="#"><span aria-label="Prev">‹</span></a></li>
                   {(() => {
 
                     if (this.props.DelistContainer.substitutesTableData && this.props.DelistContainer.substitutesTableData.table) {
@@ -1596,26 +1547,21 @@ export class DelistContainer extends React.PureComponent { // eslint-disable-lin
                                 this.props.ondelistPopupPagination(delistPopupPaginationData);
                                 this.props.onTableType("delist_popup");
                                 this.props.onSubstitutesClick(this.props.DelistContainer.substitutesData);
-                              }}><a className="page-link" style={{
-                            borderTopLeftRadius: '20px',
-                            borderBottomLeftRadius: '20px',
-                            borderBottomRightRadius: '20px',
-                            borderTopRightRadius: '20px',
-                            margin: '10px',
-                            fontSize: '14px'
-                          }}>{objj}
+                              }}><a className="page-link" >{objj}
                           </a></li>
                         )
                       })
                     }
                   })()}
+                  <li><a role="button" href="#"><span aria-label="Last">›</span></a></li>
                 </ul>
               </nav>
 
             </Modal.Body>
 
           </Modal>
-
+            </div>
+          </div>
         </div>
       </div>
     )
