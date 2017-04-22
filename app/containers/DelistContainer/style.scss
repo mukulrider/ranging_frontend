@@ -205,31 +205,9 @@ margin-top: 24px;
 .chartwrap{
   overflow-x: auto;
 }
-/*Flex classes*/
 
-.FlexContainer {
-  display: -ms-flex;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-}
 
-.FlexItem {
-  -ms-flex: 1;
-  -webkit-box-flex: 1;
-  flex: 1;
-}
-.Flexcolleft{
-  -ms-flex: 1;
-  -webkit-box-flex: 1;
-  flex: 1;
-}
 
-.Flexcolright{
-  -ms-flex: 3;
-  -webkit-box-flex: 3;
-  flex: 3;
-}
 
 .FlexContainer.Row {
   -ms-flex-direction: row;

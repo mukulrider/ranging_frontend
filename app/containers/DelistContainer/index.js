@@ -157,8 +157,8 @@ export class DelistContainer extends React.PureComponent { // eslint-disable-lin
     //   // alert(abc);
     // }
     return (
-      <div className="row FlexContainer" style={{fontSize: '14px'}}>
-        <div className="Flexcolleft col-xs-3">
+      <div className="flextcontent" style={{fontSize: '14px'}}>
+        <div className="flexleft">
 
           <Panel>
             {/*<SelectorDelist sideFilter={this.props.DelistContainer.sideFilter}*/}
@@ -199,9 +199,7 @@ export class DelistContainer extends React.PureComponent { // eslint-disable-lin
           </Panel>
         </div>
         {  console.log("hiii", this.props) }
-        <div className="Flexcolright col-xs-9 ">
-          <div className="row">
-            <div className="col-md-12">
+        <div className="flexright">
             {/*<div className="nav-tabs-customm">*/}
             {/*<ul className="nav nav-tabs  nav-justified">*/}
             {/*<li><a href="#" style={{fontSize: '14px'}} onClick={() => {*/}
@@ -305,7 +303,6 @@ export class DelistContainer extends React.PureComponent { // eslint-disable-lin
 
 
 
-            </div>
 
 
 
@@ -362,7 +359,7 @@ export class DelistContainer extends React.PureComponent { // eslint-disable-lin
             {/*this.props.ondelistTable();*/}
             {/*this.props.onWeekTabClick("Week: 52 weeks ");*/}
             {/*}}>Week 52</Button>*/}
-          </div>
+
           {/*<div className="row">*/}
           {/*<Button onClick={() => {*/}
           {/*let store_type = "store_type=Overview";*/}
@@ -443,10 +440,11 @@ export class DelistContainer extends React.PureComponent { // eslint-disable-lin
 
             </Nav>
 
-            <p>
-              <span>&nbsp;{this.props.DelistContainer.weekBreadcrumb}</span>
-              <span>&nbsp;{this.props.DelistContainer.storeBreadcrumb}</span>
-            </p>
+            <div className="breadcrumb">
+             <span className="label">&nbsp;{this.props.DelistContainer.weekBreadcrumb}</span>
+                <span className="label">&gt;&nbsp;&nbsp;&nbsp;&nbsp;{this.props.DelistContainer.storeBreadcrumb}</span>
+
+            </div>
 
           <h2 className="ts-blk-proview-subhead ts-blk-proview" style={{fontSize: '28px', verticalAlign: 'middle'}}><b
             style={{verticalAlign: 'middle'}}>SALES IMPACT</b></h2>
@@ -493,8 +491,7 @@ export class DelistContainer extends React.PureComponent { // eslint-disable-lin
                     {/*style={{verticalAlign: 'middle'}}>Value</b></h2>*/}
                     <div className="panel  panel-default">
                       <div className="panel-heading" style={{fontSize: '20px', textAlign: 'center'}}>
-                        Value<span
-                        className="glyphicon glyphicon-info-sign pull-right"
+                        Value <span className="glyphicon glyphicon-info-sign pull-right"
                         style={{right: '4px', fontSize: '24px', top: '4px'}}
                         onClick={() => {
                           this.setState({supplierImpactInfo: true});
