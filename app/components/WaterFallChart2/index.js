@@ -172,7 +172,7 @@ class WaterFallChart2 extends React.PureComponent { // eslint-disable-line react
     //   padding = 0.3;
 
     let margin = {top: 20, right: 50, bottom: 30, left: 45},
-      width = 550 - margin.left - margin.right,
+      width = 500 - margin.left - margin.right,
       height = 300 - margin.top - margin.bottom,
       padding = 0.3;
 
