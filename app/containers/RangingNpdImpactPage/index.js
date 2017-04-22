@@ -338,7 +338,7 @@ export class RangingNpdImpactPage extends React.PureComponent { // eslint-disabl
                             if (this.props.RangingNpdImpactPage.canniProdTableData) {
                               console.log("a1", this.props.RangingNpdImpactPage.canniProdTableData)
                               return (
-                                <WaterFallChartNpd data={{chart_data:this.props.RangingNpdImpactPage.canniProdTableData.sales_chart.data, chart_id:"net_impact_waterfall"}}/>
+                                <WaterFallChartNpd data={{chart_data:this.props.RangingNpdImpactPage.canniProdTableData.sales_chart.data, chart_id:"net_impact_waterfall",chart_type:"value"}}/>
                               )
                             }})()}
 
@@ -402,7 +402,7 @@ export class RangingNpdImpactPage extends React.PureComponent { // eslint-disabl
                         {(() => {
                           if (this.props.RangingNpdImpactPage.canniProdTableData) {
                             return (
-                              <WaterFallChartNpd data={{chart_data:this.props.RangingNpdImpactPage.canniProdTableData.volume_chart.data,chart_id:"net_impact_waterfall_2"}}/>
+                              <WaterFallChartNpd data={{chart_data:this.props.RangingNpdImpactPage.canniProdTableData.volume_chart.data,chart_id:"net_impact_waterfall_2",chart_type:"volume"}}/>
                             )
                           }})()}
 

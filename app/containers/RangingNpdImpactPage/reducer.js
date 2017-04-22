@@ -101,7 +101,7 @@ function rangingNpdImpactPageReducer(state = initialState, action) {
       // console.log(BUBBLE_CHART_DATA_SUCCESS , 'reducer', action);
       return state.set('npd_bubble_chart_data', action.data);
     case CANNIBALIZED_PROD_TABLE_DATA_SUCCESS :
-      // console.log(CANNIBALIZED_PROD_TABLE_DATA_SUCCESS, 'reducer', action);
+      console.log(CANNIBALIZED_PROD_TABLE_DATA_SUCCESS, 'reducer', action);
       return state.set('canniProdTableData', action.data);
     case WATERFALL_CHART_DATA_SUCCESS :
       // console.log(WATERFALL_CHART_DATA_SUCCESS, 'reducer', action);

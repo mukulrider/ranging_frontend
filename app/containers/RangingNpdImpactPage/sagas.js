@@ -181,7 +181,7 @@ export function* generateProdCanniTableDataFetch() {
 
   try {
     // if (WeekState != '' ) {
-      const canni_table = yield call(request, `http://172.20.246.137:8000/api/npd_impact_view_forecast?` + urlParams +"&"+ WeekState);
+      let canni_table = yield call(request, `http://172.20.246.137:8000/api/npd_impact_view_forecast?` + urlParams +"&"+ WeekState);
       yield put(dataFetchCanniProdTableSuccess(canni_table));
     //}
     // else if(searchParams !='' & WeekState != '') {

@@ -383,7 +383,7 @@ export class RangingNpdPage extends React.PureComponent { // eslint-disable-line
              </div>
 
               {/*NPD impact view navigation button*/}
-              <a href="http://172.20.247.4:3000/ranging/npd-impact" style={{fontSize:"18px",color:"black"}}
+              <a href="http://localhost:3000/ranging/npd-impact" style={{fontSize:"18px",color:"black"}}
                   >Click to view NPD impact</a>
 
 
