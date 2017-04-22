@@ -45,17 +45,18 @@ export class RangingNpdImpactPage extends React.PureComponent { // eslint-disabl
     //   console.log("printing coooooooooookkkkiiiiiiieeeeeessssssss in npd impact", selection_from_npd1);
     //   this.props.onLoadFromNpdFirst(selection_from_npd1);
     // }
-
+   //
     this.props.onDataFetchOnBubbleData();
     this.props.onDataFetchCanniProdTable();
-   // this.props.onDataFetchOnWaterFallChart();
     this.props.onDataFetchOnPageLoad();
-    this.props.onGenerateSideFilter();
+    // this.props.onDataFetchOnWaterFallChart();
+
+    //  this.props.onGenerateSideFilter();
 
   };
 
   componentDidUpdate = () => {
-    this.props.onSendUrlParams(this.props.location.query);
+    // this.props.onSendUrlParams(this.props.location.query);
 
    //this.props.onDataFetchOnBubbleData;
     // this.setCookie('');
@@ -125,15 +126,18 @@ export class RangingNpdImpactPage extends React.PureComponent { // eslint-disabl
           <Button onClick={() => {
             dataWeekUrlParams="week_flag=Last 13 Weeks";
             this.props.onSaveWeekParam(dataWeekUrlParams);
+            this.props.onDataFetchCanniProdTable();
+            this.props.onDataFetchOnPageLoad();
+            this.props.onDataFetchOnBubbleData();
 
-            let browserPushStringWeek='';
+            {/*let browserPushStringWeek='';*/}
 
-            if(dataFilterUrlParams !== ''){
-              browserPushStringWeek=dataWeekUrlParams+"&"+dataFilterUrlParams;
-            }else{
-              browserPushStringWeek=dataWeekUrlParams;
-            }
-            browserHistory.push(this.props.location.pathname + "?" +browserPushStringWeek);
+            {/*if(dataFilterUrlParams !== ''){*/}
+              {/*browserPushStringWeek=dataWeekUrlParams+"&"+dataFilterUrlParams;*/}
+            {/*}else{*/}
+              {/*browserPushStringWeek=dataWeekUrlParams;*/}
+            {/*}*/}
+            {/*browserHistory.push(this.props.location.pathname + "?" +browserPushStringWeek);*/}
 
           }
           }>13 Weeks</Button>
@@ -141,33 +145,39 @@ export class RangingNpdImpactPage extends React.PureComponent { // eslint-disabl
           <Button onClick={() => {
             dataWeekUrlParams="week_flag=Last 26 Weeks";
             this.props.onSaveWeekParam(dataWeekUrlParams);
+            this.props.onDataFetchCanniProdTable();
+            this.props.onDataFetchOnPageLoad();
+            this.props.onDataFetchOnBubbleData();
+            {/*let browserPushStringWeek='';*/}
 
-            let browserPushStringWeek='';
+            {/*if(dataFilterUrlParams !== ''){*/}
+              {/*browserPushStringWeek=dataWeekUrlParams+"&"+dataFilterUrlParams;*/}
+            {/*}else{*/}
+              {/*browserPushStringWeek=dataWeekUrlParams;*/}
+            {/*}*/}
 
-            if(dataFilterUrlParams !== ''){
-              browserPushStringWeek=dataWeekUrlParams+"&"+dataFilterUrlParams;
-            }else{
-              browserPushStringWeek=dataWeekUrlParams;
-            }
-
-            browserHistory.push(this.props.location.pathname + "?" +browserPushStringWeek);
+            {/*browserHistory.push(this.props.location.pathname + "?" +browserPushStringWeek);*/}
 
 
           }}>26 Weeks</Button>
 
           <Button onClick={() => {
             dataWeekUrlParams="week_flag=Last 52 Weeks";
+            {/*this.props.onSendUrlParams(completeSelections);*/}
             this.props.onSaveWeekParam(dataWeekUrlParams);
+            this.props.onDataFetchCanniProdTable();
+            this.props.onDataFetchOnPageLoad();
+            this.props.onDataFetchOnBubbleData();
 
-            let browserPushStringWeek='';
+            {/*let browserPushStringWeek='';*/}
 
-            if(dataFilterUrlParams !== ''){
-              browserPushStringWeek=dataWeekUrlParams+"&"+dataFilterUrlParams;
-            }else{
-              browserPushStringWeek=dataWeekUrlParams;
-            }
+            {/*if(dataFilterUrlParams !== ''){*/}
+              {/*browserPushStringWeek=dataWeekUrlParams+"&"+dataFilterUrlParams;*/}
+            {/*}else{*/}
+              {/*browserPushStringWeek=dataWeekUrlParams;*/}
+            {/*}*/}
 
-            browserHistory.push(this.props.location.pathname + "?" +browserPushStringWeek);
+            {/*browserHistory.push(this.props.location.pathname + "?" +browserPushStringWeek);*/}
 
           }}>52 Weeks</Button>
         </div>
@@ -187,10 +197,8 @@ export class RangingNpdImpactPage extends React.PureComponent { // eslint-disabl
             onSendUrlParams={this.props.onSendUrlParams}
             onDataFetchOnBubbleData={this.props.onDataFetchOnBubbleData}
 
-
-
             onDataFetchCanniProdTable={this.props.onDataFetchCanniProdTable}
-            onDataFetchOnWaterFallChart={this.props.onDataFetchOnWaterFallChart}
+          //onDataFetchOnWaterFallChart={this.props.onDataFetchOnWaterFallChart}
             onDataFetchOnPageLoad={this.props.onDataFetchOnPageLoad}
 
             dataWeekUrlParams={dataWeekUrlParams}
@@ -614,11 +622,13 @@ export class RangingNpdImpactPage extends React.PureComponent { // eslint-disabl
                           {/*Search*/}
                           <div className="col-xs-12 col-xs-5" style={{marginBottom:"10px"}}>
                             <InputField type={'string'}
+                                        dataTable2PageUrlParamsNew = "page1=1"
                                         placeholder="Search product"
                                         value={this.props.searchTable2}
                                         onChange={(e)=>{
                                           this.props.onSaveTable2SearchParam(e);
                                           this.props.onDataFetchOnPageLoad();
+                                          this.props.onSaveTable2PageParam(dataTable2PageUrlParamsNew );
                                         }}
                             />
                           </div>
@@ -694,26 +704,27 @@ export class RangingNpdImpactPage extends React.PureComponent { // eslint-disabl
                                       <li className="page-item" key={Math.random() + Date.now()}
                                           onClick={() => {
                                             let dataTable2PageUrlParamsNew = "page1=" + obj;
+                                            console.log("printing pagination for bubble table",dataTable2PageUrlParamsNew);
                                             this.props.onSaveTable2PageParam(dataTable2PageUrlParamsNew );
+                                            this.props.onDataFetchOnPageLoad();
+                                            {/*let browserPushString2='';*/}
 
-                                            let browserPushString2='';
+                                            {/*if(dataFilterUrlParams !== ''){*/}
+                                              {/*browserPushString2=browserPushString2+"&"+dataFilterUrlParams;*/}
+                                            {/*}*/}
+                                            {/*if (dataWeekUrlParams !== ''){*/}
+                                              {/*browserPushString2=browserPushString2+"&"+dataWeekUrlParams;*/}
+                                            {/*}*/}
+                                            {/*if(dataTable1PageUrlParams!==''){*/}
+                                              {/*browserPushString2=browserPushString2+"&"+dataTable1PageUrlParams;*/}
+                                            {/*}*/}
 
-                                            if(dataFilterUrlParams !== ''){
-                                              browserPushString2=browserPushString2+"&"+dataFilterUrlParams;
-                                            }
-                                            if (dataWeekUrlParams !== ''){
-                                              browserPushString2=browserPushString2+"&"+dataWeekUrlParams;
-                                            }
-                                            if(dataTable1PageUrlParams!==''){
-                                              browserPushString2=browserPushString2+"&"+dataTable1PageUrlParams;
-                                            }
+                                            {/*browserPushString2=browserPushString2+"&"+dataTable2PageUrlParamsNew ;*/}
+                                            {/*browserPushString2=browserPushString2.replace('&','');*/}
 
-                                            browserPushString2=browserPushString2+"&"+dataTable2PageUrlParamsNew ;
-                                            browserPushString2=browserPushString2.replace('&','');
+                                            {/*browserHistory.push(this.props.location.pathname + "?" +browserPushString2);*/}
 
-                                            browserHistory.push(this.props.location.pathname + "?" +browserPushString2);
-
-                                          }}><a className="page-link" href="#">{obj}
+                                          }}><a className="page-link">{obj}
                                       </a></li>
                                     )
                                   })
@@ -757,7 +768,6 @@ function mapDispatchToProps(dispatch) {
     // Component data fetch
     // For bubble table
     onDataFetchOnPageLoad: (e) => dispatch(dataFetchOnPageLoad(e)),
-
     onDataFetchOnBubbleData: (e) => dispatch(dataFetchOnBubbleData(e)),
     onDataFetchCanniProdTable: (e) => dispatch(dataFetchCanniProdTable(e)),
     // onDataFetchOnWaterFallChart: (e) => dispatch(dataFetchOnWaterFallChart(e)),

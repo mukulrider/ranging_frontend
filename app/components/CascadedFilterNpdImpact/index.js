@@ -22,21 +22,19 @@ class CascadedFilterNpdImpact extends React.PureComponent { // eslint-disable-li
   };
 
   componentDidUpdate = () => {
+    // const urlParams = this.props.location.query;
+    // this.props.onGenerateUrlParams(urlParams);
+    // this.props.onSendUrlParams(urlParams);
 
-    const urlParams = this.props.location.query;
-    this.props.onGenerateUrlParams(urlParams);
-    this.props.onSendUrlParams(urlParams);
-    this.props.onDataFetchCanniProdTable();
-    this.props.onDataFetchOnPageLoad();
-    this.props.onDataFetchOnBubbleData();
+    // this.props.onDataFetchCanniProdTable();
+    // this.props.onDataFetchOnPageLoad();
+    // this.props.onDataFetchOnBubbleData();
 
 
     // this.props.onDataFetchOnWaterFallChart();
     //this.props.onDataFetchOnBubbleData();
     //this.props.onDataFetchCanniProdTable();
     //this.props.onDataFetchOnWaterFallChart();
-
-
   };
 
 //-------------------------------- APPLY --------------------------------------------
@@ -72,12 +70,8 @@ class CascadedFilterNpdImpact extends React.PureComponent { // eslint-disable-li
     let acp = this.props.ACP_field_entry;
     let asp = this.props.ASP_field_entry;
     let size = this.props.Size_field_entry;
-    // let size = this.props.RangingNpdImpactPage.Size_field_entry;
 
     let validFilters = 1;
-    console.log("size value entered ",size);
-    console.log("typeofsize", typeof size);
-    // console.log("this.props.location.Size_field_entry", this.props.location.Size_field_entry);
     // ---------------------FINAL VALIDATIONS BEFORE APPLYING---------------------
 
     // FOR FILTERS - all filters are mandatory , so checking wthr all are selected or not
@@ -107,21 +101,23 @@ class CascadedFilterNpdImpact extends React.PureComponent { // eslint-disable-li
     // If all the filters are selected and the manual entries are valid
     // if (validFilters == 1) {
 
-      let completeSelections = queryString + "&asp=" + asp + "&acp=" + acp + "&size=" + size;
+    let completeSelections = queryString + "&asp=" + asp + "&acp=" + acp + "&size=" + size;
+    // let urlParams = '';
 
-      if (this.props.dataWeekUrlParams !== '') {
-        browserHistory.push(newUrl + "?" + this.props.dataWeekUrlParams + "&" + completeSelections);
-      } else {
-        browserHistory.push(newUrl + '?' + completeSelections);
-      }
-    console.log("just_before_ajax");
-    this.props.onDataFetchCanniProdTable();
+    // if (this.props.dataWeekUrlParams !== '') {
+    //   browserHistory.push(newUrl + "?" + this.props.dataWeekUrlParams + "&" + completeSelections);
+    // } else {
+    //   browserHistory.push(newUrl + '?' + completeSelections);
     // }
+    console.log("just_before_ajax");
+    // }
+   // let dataWeekUrlParams="week_flag=Last 13 Weeks";
+   //  let totalUrlParams = queryString + dataWeekUrlParams;
     // this.props.onGenerateUrlParams(urlParams);
-    // this.props.onSendUrlParams(urlParams);
-
-    // this.props.onDataFetchOnPageLoad();
-    // this.props.onDataFetchOnBubbleData();
+    this.props.onSendUrlParams(completeSelections);
+    this.props.onDataFetchCanniProdTable();
+    this.props.onDataFetchOnPageLoad();
+    this.props.onDataFetchOnBubbleData();
 
   };
 

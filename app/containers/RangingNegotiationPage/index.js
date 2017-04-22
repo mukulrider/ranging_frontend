@@ -87,6 +87,7 @@ export class RangingNegotiationPage extends React.PureComponent { // eslint-disa
     let dataStoreUrlParams = this.props.RangingNegotiationPage.dataStoreUrlParams;
     let dataWeekUrlParams = this.props.RangingNegotiationPage.dataWeekUrlParams;
 
+    console.log("checking chart data",this.props.RangingNegotiationPage.chartData);
     //Formatting the
     let formatSales = (i) => {
       if (i >= 1000 || i <= -1000) {
@@ -155,6 +156,7 @@ export class RangingNegotiationPage extends React.PureComponent { // eslint-disa
             <span id="separator"> | </span>
             <span id="storeInfo">STORE : Main Estate</span>
           </p>
+
           {/*</div>*/}
           <div className="col-xs-12 col-md-10" style={{float:'right'}}>
             <div className="row">
@@ -219,6 +221,7 @@ export class RangingNegotiationPage extends React.PureComponent { // eslint-disa
                     // browserHistory.push(this.props.location.pathname + "?store_type=Express")
                   }}>Express</Button>
                 </div>
+
                 <Panel>
 
                   <div className="row ">
@@ -243,13 +246,17 @@ export class RangingNegotiationPage extends React.PureComponent { // eslint-disa
                     <div className="col-xs-12 col-md-8">
                       <BubbleChart2 data={this.props.RangingNegotiationPage.chartData}
                                     path={this.props.location}
+                                    // selectedProd ={this.props.RangingNegotiationPage.dataBubbleUrlParams}
                                     onSaveBubbleParam={this.props.onSaveBubbleParam}
                                     onFetchGraph={this.props.onFetchGraph}
                                     onGenerateTable={this.props.onGenerateTable}
                       />
                       <i style={{fontSize:'12px'}}>*Size of the bubble corresponds to Rate of Sales</i>
                     </div>
-
+                    {(()=> {
+                      let bubbleArray = this.props.RangingNegotiationPage.dataBubbleUrlParams;
+                      console.log("checking selected products", bubbleArray);
+                    })()}
                     <div className="col-xs-12 col-md-4">
                       <h4>
                         Please select a negotiation strategy below to filter
@@ -268,7 +275,7 @@ export class RangingNegotiationPage extends React.PureComponent { // eslint-disa
                         <div className="panel-heading">
                           <h5 className="panel-title">Low CPS/Low Profit</h5>
                         </div>
-                        <div className="panel-body">
+                        <div className="panel-body perfDesc">
                           Delist Products
                         </div>
                       </div>
@@ -286,7 +293,7 @@ export class RangingNegotiationPage extends React.PureComponent { // eslint-disa
                         <div className="panel-heading">
                           <h5 className="panel-title">Low CPS/High Profit</h5>
                         </div>
-                        <div className="panel-body">
+                        <div className="panel-body perfDesc" >
                           Hard
                           Bargaining’
                           for stronger
@@ -305,7 +312,7 @@ export class RangingNegotiationPage extends React.PureComponent { // eslint-disa
                         <div className="panel-heading">
                           <h5 className="panel-title">Med CPS/Med Profit</h5>
                         </div>
-                        <div className="panel-body">Area of
+                        <div className="panel-body perfDesc">Area of
                           opportunity. Concession
                           trading – Subs/Ranging/Price. Reduce range to drive
                           volume
@@ -325,7 +332,7 @@ export class RangingNegotiationPage extends React.PureComponent { // eslint-disa
                         <div className="panel-heading">
                           <h5 className="panel-title">High CPS/High Profit</h5>
                         </div>
-                        <div className="panel-body">Build
+                        <div className="panel-body perfDesc">Build
                           Win-Win
                           relationship with
                           supplier to share further profit gains
@@ -344,7 +351,7 @@ export class RangingNegotiationPage extends React.PureComponent { // eslint-disa
                         <div className="panel-heading">
                           <h5 className="panel-title">High CPS/Low Profit</h5>
                         </div>
-                        <div className="panel-body">Work
+                        <div className="panel-body perfDesc">Work
                           collaboratively to jointly
                           solve low profitability
                         </div>

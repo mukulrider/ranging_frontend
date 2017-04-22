@@ -114,6 +114,7 @@ function rangingNpdImpactPageReducer(state = initialState, action) {
     case SAVE_T1_PAGE_PARAM:
       return state.set('dataTable1PageUrlParams', action.data);
     case SAVE_T2_PAGE_PARAM:
+      console.log("bubble page params in reducer",action.data);
       return state.set('dataTable2PageUrlParams', action.data);
     case SAVE_SEARCH_TABLE1:
       return state.set('searchTable1', action.data);
