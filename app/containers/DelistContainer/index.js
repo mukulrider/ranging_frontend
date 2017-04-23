@@ -115,6 +115,8 @@ export class DelistContainer extends React.PureComponent { // eslint-disable-lin
       profitImpactCtsInfo: false,
       spplierImpactTableInfo: false,
       delistImpactTableInfo: false,
+      activePage: 1,
+      activePageDelist: 1,
       activeKey: "1",
       activeKey2: "4",
     };
@@ -1078,69 +1080,35 @@ export class DelistContainer extends React.PureComponent { // eslint-disable-lin
 
             {/*pagination*/}
 
-            <nav aria-label="Page navigation example">
-              <ul className="pagination pagination-lg">
-                <li><a role="button" href="#"><span aria-label="Prev">‹</span></a></li>
-                {(() => {
+            {(() => {
+              if (this.props.DelistContainer.data && this.props.DelistContainer.data.sup_sales_table) {
 
-                  if (this.props.DelistContainer.data && this.props.DelistContainer.data.sup_sales_table) {
-                    let x = [];
-                    let start_index = this.props.DelistContainer.data.start_index;
-                    let page = this.props.DelistContainer.data.page;
-                    let end_index = this.props.DelistContainer.data.end_index;
-                    let pagination_count = this.props.DelistContainer.data.pagination_count;
-                    let selected_page = 1;
+                return <Pagination
+                  prev
+                  next
+                  first
+                  last
+                  ellipsis
+                  boundaryLinks
+                  items={this.props.DelistContainer.data.pagination_count}
+                  maxButtons={5}
+                  activePage={this.state.activePage}
+                  onSelect={(e) => {
 
-                    {/*if (this.props.location.query.startRow) {*/
-                    }
-                    {/*selected_page = this.props.location.query.startRow;*/
-                    }
-                    {/*}*/
-                    }
+                    this.setState({activePage: e})
 
+                    this.props.onSupplierImpactTableSpinner();
+                    let supplierPaginationData = "supplier_page=" + objj;
+                    this.props.onsupplierPagination(supplierPaginationData);
+                    this.props.onTableType("supplier");
+                    this.props.onApiFetch();
+                  }}
+                />
 
-                    if (page > 5) {
-                      page = page - 5
-                    } else {
-                      page = 1
-                    }
+              }
+            }
+            )()}
 
-
-                    if (pagination_count > 10) {
-                      pagination_count = page + 10
-                    }
-
-                    for (let i = page;
-                         i <= pagination_count;
-                         i++) {
-
-                      x.push(i)
-                    }
-
-                    return x.map(objj => {
-                      return (
-                        <li className="page-item" id={objj}
-                            onClick={() => {
-                              console.log("obj", (objj));
-                              this.props.onSupplierImpactTableSpinner();
-                              let supplierPaginationData = "supplier_page=" + objj;
-                              this.props.onsupplierPagination(supplierPaginationData);
-                              this.props.onTableType("supplier");
-                              this.props.onApiFetch();
-                              let maptab = document.getElementById(objj);
-                              {/*alert(objj);*/}
-
-                              maptab.className = maptab.className + ' ' + ' active';
-                            }}><a>{objj}
-                        </a> &nbsp;&nbsp; </li>
-                      )
-                    })
-                  }
-
-                })()}
-                <li><a role="button" href="#"><span aria-label="Next">›</span></a></li>
-              </ul>
-            </nav>
 
           </Panel>
 
@@ -1397,64 +1365,34 @@ export class DelistContainer extends React.PureComponent { // eslint-disable-lin
             </table>
 
             {/*pagination*/}
-            <nav aria-label="Page navigation example">
-              <ul className="pagination pagination-lg">
-                <li><a role="button" href="#"><span aria-label="Prev">‹</span></a></li>
-                {(() => {
 
-                  if (this.props.DelistContainer.delisttableData && this.props.DelistContainer.delisttableData.delist_prod_table) {
-                    let x = [];
-                    let start_index = this.props.DelistContainer.delisttableData.start_index;
-                    let page = this.props.DelistContainer.delisttableData.page;
-                    let end_index = this.props.DelistContainer.delisttableData.end_index;
-                    let pagination_count = this.props.DelistContainer.delisttableData.pagination_count;
-                    let selected_page = 1;
+            {(() => {
 
-                    {/*if (this.props.location.query.startRow) {*/
-                    }
-                    {/*selected_page = this.props.location.query.startRow;*/
-                    }
-                    {/*}*/
-                    }
+              if (this.props.DelistContainer.delisttableData && this.props.DelistContainer.delisttableData.delist_prod_table) {
+                return <Pagination
+                  prev
+                  next
+                  first
+                  last
+                  ellipsis
+                  boundaryLinks
+                  items={this.props.DelistContainer.delisttableData.pagination_count}
+                  maxButtons={5}
+                  activePage={this.state.activePageDelist}
+                  onSelect={(e) => {
+                    this.setState({activePageDelist: e});
+                    this.props.onDelistProductTableSpinner();
+                    let delistPaginationData = "delist_page=" + objj;
+                    this.props.onTableType("delist");
+                    this.props.ondelistPagination(delistPaginationData);
+                    this.props.ondelistTable();
+                  }}
+                />
 
+              }
 
-                    if (page > 5) {
-                      page = page - 5
-                    } else {
-                      page = 1
-                    }
+            })()}
 
-                    if (pagination_count > 10) {
-                      pagination_count = page + 10
-                    }
-
-                    for (let i = page;
-                         i <= pagination_count;
-                         i++) {
-
-                      x.push(i)
-                    }
-
-
-                    return x.map(objj => {
-                      return (
-                        <li className="page-item"
-                            onClick={() => {
-                              console.log("obj - delist", (objj));
-                              this.props.onDelistProductTableSpinner();
-                              let delistPaginationData = "delist_page=" + objj;
-                              this.props.onTableType("delist");
-                              this.props.ondelistPagination(delistPaginationData);
-                              this.props.ondelistTable();
-                            }}><a>{objj}
-                        </a></li>
-                      )
-                    })
-                  }
-                })()}
-                <li><a role="button" href="#"><span aria-label="Last">›</span></a></li>
-              </ul>
-            </nav>
           </Panel>
           {/*MODAL FOR PRODUCT IMPACT TABLE*/
           }
