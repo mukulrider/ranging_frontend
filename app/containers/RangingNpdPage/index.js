@@ -142,64 +142,7 @@ export class RangingNpdPage extends React.PureComponent { // eslint-disable-line
 
           {/*Content*/}
           {/*<div className="col-xs-10">*/}
-          <div className="flexright" style={{marginLeft: "1%"}}>
-
-
-              {/*Buttons*/}
-              {/*<div>*/}
-                {/*<Button key={Date.now() + Math.random()}*/}
-                        {/*onClick={() => {*/}
-
-                          {/*dataWeekUrlParams="week_flag=Latest 13 Weeks";*/}
-
-                          {/*this.props.onSaveWeekParam(dataWeekUrlParams);*/}
-
-                          {/*if (dataFilterUrlParams!==''&& dataPageUrlParams!=='') {*/}
-                            {/*browserHistory.push(this.props.location.pathname+"?"+dataWeekUrlParams+"&"+dataFilterUrlParams+"&"+dataPageUrlParams);*/}
-                          {/*} else if (dataFilterUrlParams!==''|| dataPageUrlParams!=='') {*/}
-                            {/*browserHistory.push(this.props.location.pathname+"?"+dataWeekUrlParams+"&"+dataFilterUrlParams+dataPageUrlParams);*/}
-                          {/*}*/}
-                          {/*else{*/}
-                            {/*browserHistory.push(this.props.location.pathname+"?"+dataWeekUrlParams);*/}
-                          {/*}*/}
-
-
-                        {/*}}>13 Weeks</Button>*/}
-                {/*<Button key={Date.now() + Math.random()}*/}
-                        {/*onClick={() => {*/}
-                          {/*browserHistory.push(this.props.location.pathname + "?week_flag=Latest 26 Weeks")*/}
-
-                          {/*dataWeekUrlParams="week_flag=Latest 26 Weeks";*/}
-                          {/*this.props.onSaveWeekParam(dataWeekUrlParams);*/}
-                          {/*if (dataFilterUrlParams!==''&& dataPageUrlParams!=='') {*/}
-                            {/*browserHistory.push(this.props.location.pathname+"?"+dataWeekUrlParams+"&"+dataFilterUrlParams+"&"+dataPageUrlParams);*/}
-                          {/*} else if (dataFilterUrlParams!==''|| dataPageUrlParams!=='') {*/}
-                            {/*browserHistory.push(this.props.location.pathname+"?"+dataWeekUrlParams+"&"+dataFilterUrlParams+dataPageUrlParams);*/}
-                          {/*}*/}
-                          {/*else{*/}
-                            {/*browserHistory.push(this.props.location.pathname+"?"+dataWeekUrlParams);*/}
-                          {/*}*/}
-
-
-                        {/*}}>26 Weeks</Button>*/}
-                {/*<Button key={Date.now() + Math.random()}*/}
-                      {/*onClick={() => {*/}
-                        {/*/!*browserHistory.push(this.props.location.pathname + "?week_flag=Latest 52 Weeks")*!/*/}
-
-                        {/*dataWeekUrlParams="week_flag=Latest 52 Weeks";*/}
-                        {/*this.props.onSaveWeekParam(dataWeekUrlParams);*/}
-                        {/*if (dataFilterUrlParams!==''&& dataPageUrlParams!=='') {*/}
-                          {/*browserHistory.push(this.props.location.pathname+"?"+dataWeekUrlParams+"&"+dataFilterUrlParams+"&"+dataPageUrlParams);*/}
-                        {/*} else if (dataFilterUrlParams!==''|| dataPageUrlParams!=='') {*/}
-                          {/*browserHistory.push(this.props.location.pathname+"?"+dataWeekUrlParams+"&"+dataFilterUrlParams+dataPageUrlParams);*/}
-                        {/*}*/}
-                        {/*else{*/}
-                          {/*browserHistory.push(this.props.location.pathname+"?"+dataWeekUrlParams);*/}
-                        {/*}*/}
-
-                      {/*}}>52 Weeks</Button>*/}
-            {/*</div>*/}
-
+          <div className="flexright" style={{marginLeft: "1%",marginTop:"24px"}}>
 
                 <Nav bsStyle="tabs" activeKey={this.state.activeKey} onSelect={this.handleSelect} className="tabsCustom"  style={{marginBottom:"-30px"}}>
                   <NavItem className="tabsCustomList" eventKey="1" onClick={() => {
