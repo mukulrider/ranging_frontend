@@ -187,9 +187,6 @@ class SelectorNegotiation2 extends React.PureComponent { // eslint-disable-line 
 
               </PanelGroup>
 
-
-
-
               <Button style={{marginLeft:"40px"}}
                 onClick={() => {
 
