@@ -1118,7 +1118,7 @@ export class DelistContainer extends React.PureComponent { // eslint-disable-lin
 
                     return x.map(objj => {
                       return (
-                        <li className="page-item"
+                        <li className="page-item" id={objj}
                             onClick={() => {
                               console.log("obj", (objj));
                               this.props.onSupplierImpactTableSpinner();
@@ -1126,11 +1126,16 @@ export class DelistContainer extends React.PureComponent { // eslint-disable-lin
                               this.props.onsupplierPagination(supplierPaginationData);
                               this.props.onTableType("supplier");
                               this.props.onApiFetch();
-                            }}><a >{objj}
+                              {/*let maptab = document.getElementById(objj);*/}
+                              {/*alert(objj);*/}
+
+                              {/*maptab.className = maptab.className + ' ' + ' active';*/}
+                            }}><a>{objj}
                         </a> &nbsp;&nbsp; </li>
                       )
                     })
                   }
+
                 })()}
                 <li><a role="button" href="#"><span aria-label="Next">›</span></a></li>
               </ul>
