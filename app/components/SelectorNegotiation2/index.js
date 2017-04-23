@@ -190,18 +190,18 @@ class SelectorNegotiation2 extends React.PureComponent { // eslint-disable-line 
 
 
 
-              <Button
+              <Button style={{marginLeft:"40px"}}
                 onClick={() => {
 
                   this.applyButtonFunctionality();
 
                 }}>Apply Filters</Button>
 
-              {/*<Button*/}
-                {/*onClick={() => {*/}
-                  {/*this.props.onGenerateUrlParamsString('');*/}
-                  {/*this.props.onGenerateUrlParamsData();*/}
-                {/*}}>Reset Filters</Button>*/}
+              <Button style={{marginTop:"4px", marginLeft:"40px"}}
+                onClick={() => {
+                  this.props.onGenerateUrlParamsString('');
+                  this.props.onGenerateUrlParamsData();
+                }}>Clear Filters Selection</Button>
             </div>
           )
         })()}
