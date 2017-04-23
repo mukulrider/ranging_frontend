@@ -69,7 +69,7 @@ export class RangingNegotiationPage extends React.PureComponent { // eslint-disa
       spplierImpactTableInfo: false,
       delistImpactTableInfo: false,
       activeKey: "1",
-      activeKey2: "11",
+      activeKey2: "4",
     };
   }
   componentDidUpdate = () => {
@@ -169,7 +169,7 @@ export class RangingNegotiationPage extends React.PureComponent { // eslint-disa
 
             <Nav bsStyle="tabs" activeKey={this.state.activeKey} onSelect={this.handleSelect} className="tabsCustom">
               <NavItem className="tabsCustomList" eventKey="1" onClick={() => {
-
+                this.setState({activeKey: "1"});
                 let text = "WEEK : Last 13 weeks";
                 this.updateText(text);
 
@@ -182,6 +182,7 @@ export class RangingNegotiationPage extends React.PureComponent { // eslint-disa
 
 
               <NavItem className="tabsCustomList" eventKey="2" onClick={() => {
+                this.setState({activeKey: "2"});
                 let text = "WEEK : Last 26 weeks";
                 this.updateText(text);
                 dataWeekUrlParams = "time_period=Last 26 weeks"
@@ -195,6 +196,7 @@ export class RangingNegotiationPage extends React.PureComponent { // eslint-disa
 
 
               <NavItem className="tabsCustomList" eventKey="3" onClick={() => {
+                this.setState({activeKey: "3"});
                 let text = "WEEK : Last 52 weeks";
                 this.updateText(text);
                 dataWeekUrlParams = "time_period=Last 52 weeks"
@@ -210,6 +212,7 @@ export class RangingNegotiationPage extends React.PureComponent { // eslint-disa
               <div className="col-md-12 content-wrap">
             <Nav bsStyle="tabs" className="tabsCustom" activeKey={this.state.activeKey2} onSelect={this.handleSelect}>
               <NavItem className="tabsCustomList" eventKey="4" onClick={() => {
+                this.setState({activeKey2: "4"});
                 let storeType = "STORE : Main Estate";
                 this.updateStore(storeType);
                 dataStoreUrlParams = "store_type=Main Estate"
@@ -218,6 +221,7 @@ export class RangingNegotiationPage extends React.PureComponent { // eslint-disa
                 this.props.onGenerateTable();
               }}><span className="tab_label">Main Estate</span></NavItem>
               <NavItem className="tabsCustomList" eventKey="5" onClick={() => {
+                this.setState({activeKey2: "5"});
                 let storeType = "STORE : Express";
                 this.updateStore(storeType);
                 dataStoreUrlParams = "store_type=Express"

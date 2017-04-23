@@ -142,7 +142,7 @@ export class RangingNpdPage extends React.PureComponent { // eslint-disable-line
 
           {/*Content*/}
           {/*<div className="col-xs-10">*/}
-          <div className="flexright" style={{marginLeft: '1%'}}>
+          <div className="flexright" style={{marginLeft: "1%"}}>
 
 
               {/*Buttons*/}

@@ -102,14 +102,14 @@ class CascadedFilterNpd extends React.PureComponent { // eslint-disable-line rea
         {(() => {
           return (
             <div id="style-7" style={{
-              height: '80%',
-              position: 'relative',
-              // overflow: 'scroll',
-              paddingRight: '5px',
+              height: '40%',
+              width: '17%',
+              position: 'fixed',
+              /* padding-right: 5px; */
               overflowX: 'hidden',
+              overflowY: 'scroll' ,
               borderTop: '1px solid #ccc',
             }}>
-
 
           {/*<div className="row" ref={'selector'}>*/}
           {/*<div className="col-xs-12">*/}
