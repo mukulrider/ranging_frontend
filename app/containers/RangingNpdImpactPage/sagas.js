@@ -57,7 +57,7 @@ export function* generateDataFetch() {
     WeekState= WeekState + '&' + weekParams
   }
   WeekState = WeekState.replace('&', '');
-  console.log('Getting data from http://172.20.246.137:8000/api/npd_impact_view_bubble_table');
+  console.log('Getting data from http://172.20.244.141:8000/api/npd_impact_view_bubble_table');
 
   // if(urlParams !==''){
   //   paramString="&"+urlParams;
@@ -74,12 +74,12 @@ export function* generateDataFetch() {
 
 /*
   paramString = paramString.replace('&', '');
-  console.log('Getting data from http://172.20.246.137:8000/api/npd_impact_view_bubble_table' + paramString);
+  console.log('Getting data from http://172.20.244.141:8000/api/npd_impact_view_bubble_table' + paramString);
 */
 
   try {
     // Table data
-    const bubble_table = yield call(request,`http://172.20.246.137:8000/api/npd_impact_view_bubble_table?` + urlParams +"&"+ WeekState+"&"+ pageParams);
+    const bubble_table = yield call(request,`http://172.20.244.141:8000/api/npd_impact_view_bubble_table?` + urlParams +"&"+ WeekState+"&"+ pageParams);
 
     yield put(dataFetchOnBubbleTableSuccess(bubble_table));
 
@@ -121,12 +121,12 @@ export function* generateBubbleChartDataFetch() {
   // });
   // paramString = paramString.replace('&', '');
   // console.log("logging_bubble_url");
-  // console.log('http://172.20.246.137:8000/api/npd_impact_view_bubble_chart?' + paramString);
+  // console.log('http://172.20.244.141:8000/api/npd_impact_view_bubble_chart?' + paramString);
   try {
 
     // Bubble chart data
     const bubble_chart = yield call(request,
-      `http://172.20.246.137:8000/api/npd_impact_view_bubble_chart?`+ urlParams +"&"+ WeekState);
+      `http://172.20.244.141:8000/api/npd_impact_view_bubble_chart?`+ urlParams +"&"+ WeekState);
     yield put(dataFetchOnBubbleDataSuccess(bubble_chart));
 
   } catch (err) {
@@ -177,20 +177,20 @@ export function* generateProdCanniTableDataFetch() {
 
   console.log('checking call in sagas');
   console.log('printing url params in sagas', urlParams);
-  console.log('http://172.20.246.137:8000/api/npd_impact_view_table?' + WeekState);
+  console.log('http://172.20.244.141:8000/api/npd_impact_view_table?' + WeekState);
 
   try {
     // if (WeekState != '' ) {
-      let canni_table = yield call(request, `http://172.20.246.137:8000/api/npd_impact_view_forecast?` + urlParams +"&"+ WeekState);
+      let canni_table = yield call(request, `http://172.20.244.141:8000/api/npd_impact_view_forecast?` + urlParams +"&"+ WeekState);
       yield put(dataFetchCanniProdTableSuccess(canni_table));
     //}
     // else if(searchParams !='' & WeekState != '') {
-    //   const canni_table = yield call(request, `http://172.20.246.137:8000/api/npd_impact_view_forecast?` + urlParams +"&"+searchParams+"&"+ WeekState);
+    //   const canni_table = yield call(request, `http://172.20.244.141:8000/api/npd_impact_view_forecast?` + urlParams +"&"+searchParams+"&"+ WeekState);
     //   yield put(dataFetchCanniProdTableSuccess(canni_table));
     // }
     // // Cannibalization table data
     // const canni_table = yield call(request,
-    //   `http://172.20.246.137:8000/api/npd_impact_view_forecast?` + WeekState );
+    //   `http://172.20.244.141:8000/api/npd_impact_view_forecast?` + WeekState );
     // yield put(dataFetchCanniProdTableSuccess(canni_table));
 
   } catch (err) {
@@ -223,12 +223,12 @@ export function* generateWaterFallChartDataFetch() {
     paramString += `&${obj}=${urlParams[obj]}`
   });
   paramString = paramString.replace('&', '');
-  console.log('http://172.20.246.137:8000/api/npd_impact_view_waterfall?' + paramString);
+  console.log('http://172.20.244.141:8000/api/npd_impact_view_waterfall?' + paramString);
   try {
 
     // Waterfall chart table data
     const waterfallchart = yield call(request,
-      `http://172.20.246.137:8000/api/npd_impact_view_forecast?` + paramString);
+      `http://172.20.244.141:8000/api/npd_impact_view_forecast?` + paramString);
     yield put(dataFetchOnWaterFallChartSuccess(waterfallchart));
 
 
@@ -250,19 +250,21 @@ export function* generateSideFilter() {
   try {
     // todo: update url
     // const data = yield call(request, `http://localhost:8090/wash/?format=json`);
-    // const data = yield call(request, `http://172.20.246.137:8000/api/npd_impact_view/filter_data`);
+    // const data = yield call(request, `http://172.20.244.141:8000/api/npd_impact_view/filter_data`);
 
     let urlName = yield select(selectRangingNpdImpactPageDomain());
     // let urlParams = urlName.get('filter_selection');
     let urlParams = urlName.get('filterSelectionsTillNow');
 
 
-    console.log('http://172.20.246.137:8000/api/npd_impact_view/filter_data?' + urlParams);
+    console.log('http://172.20.244.141:8000/api/npd_impact_view/filter_data?' + urlParams);
     let data = '';
     if (urlParams) {
-      data = yield call(request, `http://172.20.246.137:8000/api/npd_impact_view/filter_data?` + urlParams);
+      // data = yield call(request, `http://172.20.244.141:8000/api/npd_impact_view/filter_data?` + urlParams);
+      data = yield call(request, `http://172.20.244.141:8000/api/npd_impact_view/filter_data?` + urlParams);
     } else {
-      data = yield call(request, `http://172.20.246.137:8000/api/npd_impact_view/filter_data`);
+      // data = yield call(request, `http://172.20.244.141:8000/api/npd_impact_view/filter_data`);
+      data = yield call(request, `http://172.20.244.141:8000/api/npd_impact_view/filter_data`);
     }
 
     yield put(generateSideFilterSuccess(data));

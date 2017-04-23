@@ -9,6 +9,8 @@ import React from 'react';
 import Checkbox from 'components/checkbox';
 import Button from 'components/button';
 import {browserHistory} from 'react-router';
+import {Accordion,PanelGroup, Panel} from 'react-bootstrap';
+import styles from './style.scss';
 
 
 class CascadedFilterNpd extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
@@ -95,35 +97,57 @@ class CascadedFilterNpd extends React.PureComponent { // eslint-disable-line rea
   render() {
     // console.log("inside the cascaded filter",this.props.previous_selection)
     return (
-      <div>
+      <div ref={'selector'}>
 
-        <div className="row" ref={'selector'}>
-          <div className="col-xs-12">
+        {(() => {
+          return (
+            <div id="style-7" style={{
+              height: '80%',
+              position: 'relative',
+              // overflow: 'scroll',
+              paddingRight: '5px',
+              overflowX: 'hidden',
+              borderTop: '1px solid #ccc',
+            }}>
+
+
+          {/*<div className="row" ref={'selector'}>*/}
+          {/*<div className="col-xs-12">*/}
+
+          <PanelGroup defaultActiveKey="1" accordion>
             {(() => {
+
               if (this.props.sideFilter) {
                 return (
-                this.props.sideFilter.map(obj => {
+                this.props.sideFilter.map((obj,key) => {
+                  let panelHeader = (
+                    <div  className="text-capitalize">
+                      {obj.name.replace(/_/g, ' ')}&nbsp;<span style={{color:"red"}}>*</span>&nbsp;
+                      <span className="accordion-toggle" style={{float: 'right'}}></span>
+                    </div>
+                  );
                   return (
-                    <div className="panel text-capitalize" key={Date.now() + Math.random()}>
-                      {/*<div className="panel-heading">*/}
+                  <Panel header={panelHeader} eventKey={++key}>
+                      <div className="panel-heading">
                       {/*{obj.name}*/}
                       {/*</div>*/}
-                      <div className="panel-heading"
-                           style={{
-                             fontWeight: '700',
-                             fontSize: '16px',
-                             borderBottom: '1px solid #ddd'
-                           }}>{obj.name.replace(/_/g, ' ')} <span style={{color:"red"}}>*</span></div>
+                      {/*<div className="panel-heading"*/}
+                           {/*style={{*/}
+                             {/*fontWeight: '700',*/}
+                             {/*fontSize: '16px',*/}
+                             {/*borderBottom: '1px solid #ddd'*/}
+                           {/*}}>{obj.name.replace(/_/g, ' ')}&nbsp;<span style={{color:"red"}}>*</span>&nbsp;</div>*/}
 
-                      <div className="panel-body" style={{maxHeight: '250px', overflowX: 'scroll', overflowX: 'hidden'}}>
+                      <div className="panel-body style-7" style={{maxHeight: '250px', overflowX: 'hidden'}}>
                         {(() => {
                           let finalCheckbox =[];
 
                             {obj.items.map(obj2 => {
                               finalCheckbox.push(
-                                <Checkbox id={obj2.name + '__' + obj.name}
+                                <Checkbox
+                                        id={obj2.name + '__' + obj.name}
                                         label={obj2.name}
-                                        style={{fontSize: '10px'}}
+                                        style={{fontSize:"12px",width:"230px"}}
                                         checked={(() => {
                                           return obj2.selected
                                         })()}
@@ -167,16 +191,19 @@ class CascadedFilterNpd extends React.PureComponent { // eslint-disable-line rea
                           return finalled
 
                         })()}
-                          </div>
+                      </div>
                     </div>
+                  </Panel>
                   )
                 })
                 )
               }
-            })()}
-          </div>
-        </div>
 
+              })()}
+            </PanelGroup>
+
+
+          <div style={{textAlign:"center"}}>
         <Button style={{marginTop:"5px"}}
           onClick={() => {
 
@@ -195,16 +222,21 @@ class CascadedFilterNpd extends React.PureComponent { // eslint-disable-line rea
 
           }}>Clear Filter Selections</Button>
 
-        <Button style={{marginTop:"5px"}}
-          onClick={() => {
-            //To un check all the buttons
-            {/*let selection='';*/}
-            {/*this.props.onCheckboxChange(selection);*/}
-            {/*this.props.onGenerateSideFilter();*/}
+        {/*<Button style={{marginTop:"5px"}}*/}
+          {/*onClick={() => {*/}
+            {/*//To un check all the buttons*/}
+            {/*/!*let selection='';*!/*/}
+            {/*/!*this.props.onCheckboxChange(selection);*!/*/}
+            {/*/!*this.props.onGenerateSideFilter();*!/*/}
 
-            this.resetButtonFunctionality();
+            {/*this.resetButtonFunctionality();*/}
 
-          }}>Load Default view</Button>
+          {/*}}>Load Default view</Button>*/}
+        </div>
+
+        </div>
+          )
+        })()}
 
 
       </div>
