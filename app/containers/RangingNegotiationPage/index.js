@@ -12,6 +12,7 @@ import {createStructuredSelector} from 'reselect';
 import makeSelectRangingNegotiationPage from './selectors';
 import Button from 'components/button';
 import BubbleChart2 from 'components/BubbleChart2';
+import RadioButton from 'components/radio_button';
 import Panel from 'components/panel';
 import Checkbox from 'components/checkbox';
 import styles from './style.scss';
@@ -22,7 +23,7 @@ import {Nav} from 'react-bootstrap';
 import {NavItem} from 'react-bootstrap';
 
 import {
-
+  SaveBubbleParam2,
   generateSideFilter,
   SavePFilterParam,
   SaveStoreParam,
@@ -129,10 +130,10 @@ export class RangingNegotiationPage extends React.PureComponent { // eslint-disa
     }
 
     return (
-
-
-        <div className="flextcontent" style={{fontSize: '14px'}}>
-          <div className="flexleft" style={{marginTop: '25px'}}>
+      <div>
+        <div className="pageTitle">Negotiation Opportunity</div>
+        <div className="flextcontent" >
+          <div className="flexleft" style={{ flexBasis: '300px',marginTop: '24px'}}>
             {/*<Panel>*/}
 
             {(() => {
@@ -164,15 +165,14 @@ export class RangingNegotiationPage extends React.PureComponent { // eslint-disa
 
           {/*</div>*/}
 
-          <div className="flexright">
+          <div className="flexright" style={{marginLeft: "3%",marginTop:'-3px'}}>
 
 
             <Nav bsStyle="tabs" activeKey={this.state.activeKey} onSelect={this.handleSelect} className="tabsCustom">
               <NavItem className="tabsCustomList" eventKey="1" onClick={() => {
                 this.setState({activeKey: "1"});
-                let text = "WEEK : Last 13 weeks";
-                this.updateText(text);
-
+                {/*let text = "WEEK : Last 13 weeks";*/}
+                {/*this.updateText(text);*/}
                 dataWeekUrlParams = "time_period=Last 13 weeks"
                 this.props.onSaveWeekParam(dataWeekUrlParams);
                 this.props.onFetchGraph();
@@ -183,8 +183,8 @@ export class RangingNegotiationPage extends React.PureComponent { // eslint-disa
 
               <NavItem className="tabsCustomList" eventKey="2" onClick={() => {
                 this.setState({activeKey: "2"});
-                let text = "WEEK : Last 26 weeks";
-                this.updateText(text);
+                {/*let text = "WEEK : Last 26 weeks";*/}
+                {/*this.updateText(text);*/}
                 dataWeekUrlParams = "time_period=Last 26 weeks"
                 this.props.onSaveWeekParam(dataWeekUrlParams);
                 this.props.onFetchGraph();
@@ -194,11 +194,10 @@ export class RangingNegotiationPage extends React.PureComponent { // eslint-disa
 
 
 
-
               <NavItem className="tabsCustomList" eventKey="3" onClick={() => {
                 this.setState({activeKey: "3"});
-                let text = "WEEK : Last 52 weeks";
-                this.updateText(text);
+                {/*let text = "WEEK : Last 52 weeks";*/}
+                {/*this.updateText(text);*/}
                 dataWeekUrlParams = "time_period=Last 52 weeks"
                 this.props.onSaveWeekParam(dataWeekUrlParams);
                 this.props.onFetchGraph();
@@ -213,8 +212,8 @@ export class RangingNegotiationPage extends React.PureComponent { // eslint-disa
             <Nav bsStyle="tabs" className="tabsCustom" activeKey={this.state.activeKey2} onSelect={this.handleSelect}>
               <NavItem className="tabsCustomList" eventKey="4" onClick={() => {
                 this.setState({activeKey2: "4"});
-                let storeType = "STORE : Main Estate";
-                this.updateStore(storeType);
+                {/*let storeType = "STORE : Main Estate";*/}
+                {/*this.updateStore(storeType);*/}
                 dataStoreUrlParams = "store_type=Main Estate"
                 this.props.onSaveStoreParam(dataStoreUrlParams);
                 this.props.onFetchGraph();
@@ -222,8 +221,8 @@ export class RangingNegotiationPage extends React.PureComponent { // eslint-disa
               }}><span className="tab_label">Main Estate</span></NavItem>
               <NavItem className="tabsCustomList" eventKey="5" onClick={() => {
                 this.setState({activeKey2: "5"});
-                let storeType = "STORE : Express";
-                this.updateStore(storeType);
+                {/*let storeType = "STORE : Express";*/}
+                {/*this.updateStore(storeType);*/}
                 dataStoreUrlParams = "store_type=Express"
                 this.props.onSaveStoreParam(dataStoreUrlParams);
                 this.props.onFetchGraph();
@@ -233,138 +232,154 @@ export class RangingNegotiationPage extends React.PureComponent { // eslint-disa
 
 
             </Nav>
-                <div className="breadcrumb">
-                  <span  className="label" id="clickInfo">WEEK : Last 13 Weeks</span>
-                  <span  className="label" id="separator">&lt;  </span>
-                  <span  className="label" id="storeInfo"> STORE : Main Estate</span>
-                </div>
 
-                <Panel>
+                {/*<Panel>*/}
 
-                  <div className="row ">
-                    <h3 className="text-center ts-blk-proview-subhead">Negotiation Opportunity</h3>
-
-                    <div className="resetButton" onClick={() => {
-                      //let resetUrlParams = "reset_clicked";
-                      //this.props.onResetClickParam(resetUrlParams);
-                      //let dataPageUrlParams = '';
-                      dataPerformanceUrlParams = '';
-                      let dataBubbleUrlParams = '';
-                      this.props.onSavePageParam("page=1");
-                      this.props.onSavePFilterParam(dataPerformanceUrlParams);
-                      this.props.onSaveBubbleParam(dataBubbleUrlParams);
-                      this.props.onFetchGraph();
-                      this.props.onGenerateTable();
-
-                    }}><p><u>Reset Chart</u></p></div>
-                  </div>
-
-                  <div className="row">
-                    <div className="col-xs-12 col-md-8">
+                  <div className="row" >
+                    <div className="col-xs-12 col-md-8" style = {{marginTop:'2%'}}>
                       <BubbleChart2 data={this.props.RangingNegotiationPage.chartData}
                                     path={this.props.location}
+                                    // selectedBubble={this.props.RangingNegotiationPage.x}
+                                    // selectedBubble2={this.props.RangingNegotiationPage.dataBubbleUrlParams2}
                                     onSaveBubbleParam={this.props.onSaveBubbleParam}
+                                    onSaveBubbleParam2={this.props.onSaveBubbleParam2}
                                     onFetchGraph={this.props.onFetchGraph}
                                     onGenerateTable={this.props.onGenerateTable}
                       />
                       <i style={{fontSize:'12px'}}>*Size of the bubble corresponds to Rate of Sales</i>
+
+                      <div className="resetButton" onClick={() => {
+                        //let resetUrlParams = "reset_clicked";
+                        //this.props.onResetClickParam(resetUrlParams);
+                        //let dataPageUrlParams = '';
+                        dataPerformanceUrlParams = '';
+                        let dataBubbleUrlParams = '';
+                        this.props.onSavePageParam("page=1");
+                        this.props.onSavePFilterParam(dataPerformanceUrlParams);
+                        this.props.onSaveBubbleParam(dataBubbleUrlParams);
+                        this.props.onFetchGraph();
+                        this.props.onGenerateTable();
+
+                      }}><p>Reset Chart</p></div>
                     </div>
 
-                    <div className="col-xs-12 col-md-4">
+                    <div className="col-xs-12 col-md-4" style = {{marginTop:'2%'}}>
+
                       <h4>
                         Please select a negotiation strategy below to filter
                         'Negotiation
                         Opportunity' chart and table
                       </h4>
 
-                      <div className="panel panel-danger" onClick={() => {
-                        let dataBubbleUrlParams = '';
-                        this.props.onSaveBubbleParam(dataBubbleUrlParams);
-                        dataPerformanceUrlParams = "performance_quartile=Low CPS/Low Profit";
-                        this.props.onSavePFilterParam(dataPerformanceUrlParams);
-                        this.props.onFetchGraph();
-                        this.props.onGenerateTable();
-                      }}>
-                        <div className="panel-heading">
-                          <h5 className="panel-title">Low CPS/Low Profit</h5>
+                      <div className="panel">
+                        <div className="lowProfit" style={{height: '35px',backgroundColor:'#c74a52',opacity:'0.8'}}>
+                          <RadioButton id={'1'}
+                                       label={'Low CPS/Low Profit'}
+                                       valid={true}
+                                       onChange={() => {
+                                         let dataBubbleUrlParams = '';
+                                         this.props.onSaveBubbleParam(dataBubbleUrlParams);
+                                         dataPerformanceUrlParams = "performance_quartile=Low CPS/Low Profit";
+                                         this.props.onSavePFilterParam(dataPerformanceUrlParams);
+                                         this.props.onFetchGraph();
+                                         this.props.onGenerateTable();
+                                       }}
+                                       name="x"
+                          />
                         </div>
-                        <div className="panel-body">
+                        <div className="panel-body" style={{marginTop: '2%'}}>
                           Delist Products
                         </div>
                       </div>
-
-
-                      <div className="panel panel-default" onClick={() => {
-                        dataPerformanceUrlParams = "performance_quartile=Low CPS/High Profit";
-                        //  browserHistory.push(this.props.location.pathname + "?performance_quartile=Low CPS/High Profit");
-                        let dataBubbleUrlParams = '';
-                        this.props.onSaveBubbleParam(dataBubbleUrlParams);
-                        this.props.onSavePFilterParam(dataPerformanceUrlParams);
-                        this.props.onFetchGraph();
-                        this.props.onGenerateTable();
-                      }}>
-                        <div className="panel-heading">
-                          <h5 className="panel-title">Low CPS/High Profit</h5>
+                      <div className="panel panel-default">
+                        <div className="default" style={{height: '35px',backgroundColor:'#6e6767',opacity:'0.8',fontColor:'white'}}>
+                          <RadioButton id={'2'}
+                                       label={'Low CPS/High Profit'}
+                                       valid={true}
+                                       onChange={() => {
+                                         let dataBubbleUrlParams = '';
+                                         dataPerformanceUrlParams = "performance_quartile=Low CPS/High Profit";
+                                         this.props.onSaveBubbleParam(dataBubbleUrlParams);
+                                         this.props.onSavePFilterParam(dataPerformanceUrlParams);
+                                         this.props.onFetchGraph();
+                                         this.props.onGenerateTable();
+                                       }}
+                                       name="x"
+                          />
                         </div>
-                        <div className="panel-body">
+                        <div className="panel-body" style={{height: '65px' , marginTop: '3%'}}>
                           Hard
                           Bargaining’
                           for stronger
                           profits – Low importance to customers
                         </div>
                       </div>
-                      <div className="panel panel-warning" onClick={() => {
-                        dataPerformanceUrlParams = "performance_quartile=Med CPS/Med Profit"
-                        // browserHistory.push(this.props.location.pathname + "?performance_quartile=Med CPS/Med Profit");
-                        let dataBubbleUrlParams = '';
-                        this.props.onSaveBubbleParam(dataBubbleUrlParams);
-                        this.props.onSavePFilterParam(dataPerformanceUrlParams);
-                        this.props.onFetchGraph();
-                        this.props.onGenerateTable();
-                      }}>
-                        <div className="panel-heading">
-                          <h5 className="panel-title">Med CPS/Med Profit</h5>
+
+
+                      <div className="panel panel-warning">
+                        <div className="medProfit" style={{height: '35px',backgroundColor:'#ffa626',opacity:'0.8',fontColor:'white'}}>
+                          <RadioButton id={'3'}
+                                       label={'Med CPS/Med Profit'}
+                                       valid={true}
+                                       onChange={() => {
+                                         let dataBubbleUrlParams = '';
+                                         dataPerformanceUrlParams = "performance_quartile=Med CPS/Med Profit";
+                                         this.props.onSaveBubbleParam(dataBubbleUrlParams);
+                                         this.props.onSavePFilterParam(dataPerformanceUrlParams);
+                                         this.props.onFetchGraph();
+                                         this.props.onGenerateTable();
+                                       }}
+                                       name="x"
+                          />
                         </div>
-                        <div className="panel-body">Area of
+                        <div className="panel-body" style={{height: '60px' , marginTop: '3%'}}>Area of
                           opportunity. Concession
                           trading – Subs/Ranging/Price. Reduce range to drive
                           volume
                         </div>
                       </div>
 
-                      <div className="panel panel-success" onClick={() => {
-                        dataPerformanceUrlParams = "performance_quartile=High CPS/High Profit"
-                        //  browserHistory.push(this.props.location.pathname + "?performance_quartile=High CPS/High Profit");
-                        let dataBubbleUrlParams = '';
-                        this.props.onSaveBubbleParam(dataBubbleUrlParams);
-                        this.props.onSavePFilterParam(dataPerformanceUrlParams);
-                        this.props.onFetchGraph();
-                        this.props.onGenerateTable();
+                      <div className="panel panel-success">
+                        <div className="highProfit" style={{height: '35px',backgroundColor:'#69b24a',opacity:'0.8',fontColor:'white'}}>
+                          <RadioButton id={'4'}
+                                       label={'High CPS/High Profit'}
+                                       valid={true}
+                                       onChange={() => {
+                                         dataPerformanceUrlParams = "performance_quartile=High CPS/High Profit"
 
-                      }}>
-                        <div className="panel-heading">
-                          <h5 className="panel-title">High CPS/High Profit</h5>
+                                         let dataBubbleUrlParams = '';
+                                         this.props.onSaveBubbleParam(dataBubbleUrlParams);
+                                         this.props.onSavePFilterParam(dataPerformanceUrlParams);
+                                         this.props.onFetchGraph();
+                                         this.props.onGenerateTable();
+                                       }}
+                                       name="x"
+                          />
                         </div>
-                        <div className="panel-body">Build
+                        <div className="panel-body" style={{height: '50px' , marginTop: '3%'}}>Build
                           Win-Win
                           relationship with
                           supplier to share further profit gains
                         </div>
                       </div>
-                      <div className="panel panel-info" onClick={() => {
-                        dataPerformanceUrlParams = "performance_quartile=High CPS/Low Profit"
+                      <div className="panel">
+                        <div className="highCps" style={{height: '35px',backgroundColor:'#99d9e5'}}>
+                          <RadioButton id={'5'}
+                                       label={'High CPS/Low Profit'}
+                                       valid={true}
+                                       onChange={() => {
+                                         dataPerformanceUrlParams = "performance_quartile=High CPS/Low Profit"
 
-                        // browserHistory.push(this.props.location.pathname + "?performance_quartile=High CPS/Low Profit");
-                        let dataBubbleUrlParams = '';
-                        this.props.onSaveBubbleParam(dataBubbleUrlParams);
-                        this.props.onSavePFilterParam(dataPerformanceUrlParams);
-                        this.props.onFetchGraph();
-                        this.props.onGenerateTable();
-                      }}>
-                        <div className="panel-heading">
-                          <h5 className="panel-title">High CPS/Low Profit</h5>
+                                         let dataBubbleUrlParams = '';
+                                         this.props.onSaveBubbleParam(dataBubbleUrlParams);
+                                         this.props.onSavePFilterParam(dataPerformanceUrlParams);
+                                         this.props.onFetchGraph();
+                                         this.props.onGenerateTable();
+                                       }}
+                                       name="x"
+                          />
                         </div>
-                        <div className="panel-body">Work
+                        <div className="panel-body" style={{marginTop: '5%'}}>Work
                           collaboratively to jointly
                           solve low profitability
                         </div>
@@ -372,12 +387,12 @@ export class RangingNegotiationPage extends React.PureComponent { // eslint-disa
 
                     </div>
                   </div>
-                </Panel>
+                {/*</Panel>*/}
 
 
             <Panel>
               <div>
-                <div className="col-xs-12 col-xs-3" style={{marginBottom: '14px'}}>
+                <div className="col-xs-12 col-xs-5" style={{marginBottom:"10px",marginLeft:"-14px"}}>
 
                   <InputField type={'string'}
                               placeholder="Search for Product Description ..."
@@ -390,35 +405,11 @@ export class RangingNegotiationPage extends React.PureComponent { // eslint-disa
                               }}
                   />
                 </div>
-                <div>
-                  <Button buttonType={'primary'}
-                          onClick={() => {
-                            console.log('done')
-                            {/*document.cookie = 'saved=' + JSON.stringify(this.props.RangingNegotiationPage.checkedList)*/
-                            }
-                            {/*document.cookie = "username=John Doe";*/
-                            }
-                            //x.substring(0, x.length - 1);
-                            let objString = '/ranging/delist?'
 
+                <table className="table table-hover table-bordered" width="100%">
 
-                            this.props.RangingNegotiationPage.checkedList.map(obj => {
-                              if (obj.checked){
-                              objString += 'long_description=' + obj.productId + '&'
-                              }
-                            })
-                            {/*objString.substring(0, objString.length - 1);*/}
-                            objString = objString.slice(0,objString.length-1);
-                            console.log(objString);
-
-
-                            window.location = objString;
-                          }}>SEND TO DE-LIST</Button>
-                </div>
-                <table className="table table-hover table-bordered table-striped ">
-
-                  <thead style={{fontWeight: '700', fontSize: '12px', textAlign: 'center'}}>
-
+                  <thead  style={{fontWeight: '700', fontSize: '12px', textAlign: 'center'}}>
+      <tr className="table-header-format">
                   <th style={{textAlign:'center'}}>Select</th>
                   <th style={{textAlign:'center'}}>Store Type</th>
                   <th style={{textAlign:'center'}}>Base Product Number</th>
@@ -431,9 +422,9 @@ export class RangingNegotiationPage extends React.PureComponent { // eslint-disa
                   <th style={{textAlign:'center'}}>Rate of Sale</th>
                   <th style={{textAlign:'center'}}>Store Count</th>
                   <th style={{textAlign:'center'}}>ASP</th>
-
+</tr>
                   </thead>
-                  <tbody >
+                  <tbody className="table-body-format" >
 
                   {(() => {
 
@@ -470,17 +461,17 @@ export class RangingNegotiationPage extends React.PureComponent { // eslint-disa
                                         })()}
                                         valid={true}/>
                             </td>
-                            <td style={{textAlign:'center'}}>{obj.store_type}</td>
-                            <td style={{textAlign:'center'}}>{obj.base_product_number}</td>
-                            <td style={{textAlign:'center'}}>{obj.long_description}</td>
-                            <td style={{textAlign:'center'}}>{obj.cps}</td>
-                            <td style={{textAlign:'center'}}>{formatSales(obj.pps)}</td>
-                            <td style={{textAlign:'center'}}>{obj.subs_count}</td>
-                            <td style={{textAlign:'center'}}>{formatSales(obj.sales_value)}</td>
-                            <td style={{textAlign:'center'}}>{formatVolume(obj.sales_volume)}</td>
-                            <td style={{textAlign:'center'}}>{formatSales(obj.rate_of_sale)}</td>
-                            <td style={{textAlign:'center'}}>{obj.store_count}</td>
-                            <td style={{textAlign:'center'}}>£ {obj.rsp}</td>
+                            <td style={{textAlign:'center', verticalAlign:'center'}}>{obj.store_type}</td>
+                            <td style={{textAlign:'center', verticalAlign:'center'}}>{obj.base_product_number}</td>
+                            <td style={{textAlign:'center', verticalAlign:'center'}}>{obj.long_description}</td>
+                            <td style={{textAlign:'center', verticalAlign:'center'}}>{obj.cps}</td>
+                            <td style={{textAlign:'center', verticalAlign:'center'}}>{formatSales(obj.pps)}</td>
+                            <td style={{textAlign:'center', verticalAlign:'center'}}>{obj.subs_count}</td>
+                            <td style={{textAlign:'center', verticalAlign:'center'}}>{formatSales(obj.sales_value)}</td>
+                            <td style={{textAlign:'center', verticalAlign:'center'}}>{formatVolume(obj.sales_volume)}</td>
+                            <td style={{textAlign:'center', verticalAlign:'center'}}>{formatSales(obj.rate_of_sale)}</td>
+                            <td style={{textAlign:'center', verticalAlign:'center'}}>{obj.store_count}</td>
+                            <td style={{textAlign:'center', verticalAlign:'center'}}>£ {obj.rsp}</td>
                           </tr>
                         )
                       })
@@ -536,6 +527,31 @@ export class RangingNegotiationPage extends React.PureComponent { // eslint-disa
                     })()}
                   </ul>
                 </nav>
+                <div className="delistButton">
+                  <Button buttonType={'primary'}
+                          onClick={() => {
+                            console.log('done')
+                            {/*document.cookie = 'saved=' + JSON.stringify(this.props.RangingNegotiationPage.checkedList)*/
+                            }
+                            {/*document.cookie = "username=John Doe";*/
+                            }
+                            //x.substring(0, x.length - 1);
+                            let objString = '/ranging/delist?'
+
+
+                            this.props.RangingNegotiationPage.checkedList.map(obj => {
+                              if (obj.checked){
+                                objString += 'long_description=' + obj.productId + '&'
+                              }
+                            })
+                            {/*objString.substring(0, objString.length - 1);*/}
+                            objString = objString.slice(0,objString.length-1);
+                            console.log(objString);
+
+
+                            window.location = objString;
+                          }}>SEND TO DE-LIST</Button>
+                </div>
               </div>
 
             </Panel>
@@ -543,9 +559,7 @@ export class RangingNegotiationPage extends React.PureComponent { // eslint-disa
         </div>
         </div>
       </div>
-
-
-
+      </div>
 
     );
   }
@@ -573,6 +587,7 @@ function mapDispatchToProps(dispatch) {
     onSaveStoreParam: (e) => dispatch(SaveStoreParam(e)),
     onSaveWeekParam: (e) => dispatch(SaveWeekParam(e)),
     onSaveBubbleParam: (e) => dispatch(SaveBubbleParam(e)),
+    onSaveBubbleParam2: (e) => dispatch(SaveBubbleParam2(e)),
     onSavePageParam: (e) => dispatch(SavePageParam(e)),
     onSaveSideFilterParam: (e) => dispatch(SaveSideFilterParam(e)),
     onGenerateTextBoxQueryString: (e) => dispatch(generateTextBoxQueryString(e.target.value)),

@@ -22,54 +22,11 @@ import {
 
 export class RangingHomePage extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
     render() {
-        let group = [{name: 'harshit', age: 24}, {name: 'nishant', age: 23}, {name: 'harman', age: 24}];
-
-        let someFunc = () => {
-            console.log('button1');
-        };
-        console.log(this.props.RangingHomePage.name);
-        console.log(this.props.RangingHomePage);
-        //noinspection JSUnresolvedVariable
         return (
             <div style={{fontSize: '14px'}}>
 
-                <FormattedMessage {...messages.header} />
-                <TestComponent name={'Nita'} age={23}/>
-                {this.props.RangingHomePage.name}
-                <Button onClick={someFunc} onMouseOver={someFunc}>Click me!</Button>
-                <Button onClick={this.props.onApiFetch}>Ajax Button</Button>
-                {group.map(obj => {
-                    return (
-                        <TestComponent key={Math.random() + Date.now()} name={obj.name} age={obj.age}/>
-                    )
-                })}
+              <b style={{textAlign:'center'}}>Welcome to Ranging Modulue! <br/>Please select options on the bottom of the page to get started.</b>
 
-                <table className="table table-bordered table-striped table-hover">
-                    <thead>
-                    <th>competitor_product_desc</th>
-                    <th>retailer</th>
-                    <th>asp</th>
-                    </thead>
-                    <tbody>
-                    {(() => {
-                        if (this.props.RangingHomePage.data) {
-                            console.log('done');
-                            return this.props.RangingHomePage.data.map(obj => {
-                                return (
-                                    <tr key={Math.random() + Date.now()}>
-                                    <td>{obj.competitor_product_desc}</td>
-                                    <td>{obj.retailer}</td>
-                                    <td>{obj.asp}</td>
-
-                                </tr>
-                                )
-                            })
-                        }
-
-                    })()}
-
-                    </tbody>
-                </table>
             </div>
         );
     }

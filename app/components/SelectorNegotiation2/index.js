@@ -77,7 +77,7 @@ class SelectorNegotiation2 extends React.PureComponent { // eslint-disable-line 
         {(() => {
           return (
             <div id="style-7" style={{
-              height: '38%',
+              height: '90%',
               width: '18%',
               position: 'fixed',
               overflow: 'scroll',

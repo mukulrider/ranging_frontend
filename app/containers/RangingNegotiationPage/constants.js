@@ -17,6 +17,7 @@ export const FILTER_FETCH_SUCCESS= 'app/RangingNegotiationPage/FILTER_FETCH_SUCC
 export const SAVE_PERF_PARAM= 'app/RangingNpdPage/SAVE_PERF_PARAM';
 export const SAVE_STORE_PARAM= 'app/RangingNpdPage/SAVE_STORE_PARAM';
 export const SAVE_WEEK_PARAM= 'app/RangingNpdPage/SAVE_WEEK_PARAM';
+export const SAVE_BUBBLE_PARAM2= 'app/RangingNpdPage/SAVE_BUBBLE_PARAM2';
 export const SAVE_BUBBLE_PARAM= 'app/RangingNpdPage/SAVE_BUBBLE_PARAM';
 export const SAVE_SIDE_FILTER_PARAM= 'app/RangingNpdPage/SAVE_SIDE_FILTER_PARAM';
 export const SAVE_PAGE_PARAM = 'app/RangingNpdPage/SAVE_PAGE_PARAM';
