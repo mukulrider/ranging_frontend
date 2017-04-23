@@ -77,127 +77,127 @@ class NewSelector2 extends React.PureComponent { // eslint-disable-line react/pr
             }}>
 
               <PanelGroup defaultActiveKey="1" accordion>
-              {this.props.sideFilter.checkbox_list.map((item, key) => {
-                var panelHeader = (
-                  <div  className="text-capitalize">
-                    {item.title.replace(/_/g, ' ')}&nbsp;{item.required ? <span style={{color: 'red'}}>*</span> : '' } &nbsp;
-                    <span className="accordion-toggle" style={{float: 'right'}}></span>
-                  </div>
-                );
-                return (
-
-                  <Panel header={panelHeader} eventKey={++key}>
-                    <div className="panel selector">
-                      {/*<div className="panel-heading">*/}
-                        {/*<input type="text" value={this.props.filterSearch}*/}
-                               {/*onChange={(e) => {*/}
-                                 {/*// console.log(e);*/}
-                                 {/*let search = e.target.value.toLowerCase();*/}
-                                 {/*if (!search) return*/}
-
-                                 {/*let parent = e.target.parentNode;*/}
-                                 {/*while (parent.classList.contains('selector')) {*/}
-                                   {/*parent = parent.parentNode;*/}
-                                 {/*}*/}
-                                 {/*parent = parent.parentNode;*/}
-                                 {/*let inputText = parent.querySelectorAll(`input[name*=${search}]`);*/}
-                                 {/*// console.log(inputText);*/}
-
-                                 {/*// inputText.map(obj=>{*/}
-                                 {/*//   obj.setAttribute('hidden')*/}
-                                 {/*// })*/}
-
-                                 {/*// for (let i = 0; i < inputText.length; i++) {*/}
-                                 {/*//   inputText[i].setAttribute("hidden", true)*/}
-                                 {/*// }*/}
-                               {/*}}/>*/}
-                      {/*</div>*/}
-                      <div className="panel-body style-7"
-                           style={{maxHeight: '250px', overflowX: 'hidden'}}>
-                        {item.items.map(obj => {
-                          if (obj.highlighted) {
-                            if (item.input_type == 'RadioButton') {
-                              return <RadioButton id={item.id + '__' + item.category_director + '__' + obj.title}
-                                                  label={obj.title}
-                                                  valid={true}
-                                                  key={item.id + '__' + obj.title}
-                                                  name={obj.title.toLowerCase() }
-                                                  onChange={() => {
-                                                    this.updateUrl(item.id)
-                                                  }}
-                                                  checked={obj.resource.selected}
-                                                  isDisabled={!obj.highlighted}
-                              />
-                            }
-                            return <Checkbox style="font-size:12px;" id={item.id + '__' + item.category_director + '__' + obj.title}
-                                             label={obj.title}
-                                             valid={true}
-                                             key={item.id + '__' + obj.title}
-                                             name={obj.title.toLowerCase()}
-                                             onChange={() => {
-                                               this.updateUrl(item.id)
-                                             }}
-                                             checked={obj.resource.selected}
-                                             isDisabled={!obj.highlighted}
-                            />
-                          }
-                        })}
-                        <hr/>
-                        {item.items.map(obj => {
-                          if (!obj.highlighted) {
-                            if (item.input_type == 'RadioButton') {
-                              return <RadioButton id={item.id + '__' + item.category_director + '__' + obj.title}
-                                                  label={obj.title}
-                                                  valid={true}
-                                                  key={item.id + '__' + obj.title}
-                                                  name={obj.title.toLowerCase() }
-                                                  onChange={() => {
-                                                    this.updateUrl(item.id)
-                                                  }}
-                                                  checked={obj.resource.selected}
-                                                  isDisabled={!obj.highlighted}
-                              />
-                            }
-                            return <Checkbox  style="font-size:12px,width:230px;" id={item.id + '__' + item.category_director + '__' + obj.title}
-                                             label={obj.title} valid={true}
-                                             key={item.id + '__' + obj.title}
-                                             name={obj.title.toLowerCase() }
-                                             onChange={() => {
-                                               this.updateUrl(item.category_director)
-                                             }}
-                                             checked={obj.resource.selected}
-                                             isDisabled={!obj.highlighted}
-                            />
-                          }
-                        })}
-                      </div>
+                {this.props.sideFilter.checkbox_list.map((item, key) => {
+                  var panelHeader = (
+                    <div  className="text-capitalize">
+                      {item.title.replace(/_/g, ' ')}&nbsp;{item.required ? <span style={{color: 'red'}}>*</span> : '' } &nbsp;
+                      <span className="accordion-toggle" style={{float: 'right'}}></span>
                     </div>
-                  </Panel>
-                )
-              })}
+                  );
+                  return (
+
+                    <Panel header={panelHeader} eventKey={++key}>
+                      <div className="panel selector">
+                        {/*<div className="panel-heading">*/}
+                        {/*<input type="text" value={this.props.filterSearch}*/}
+                        {/*onChange={(e) => {*/}
+                        {/*// console.log(e);*/}
+                        {/*let search = e.target.value.toLowerCase();*/}
+                        {/*if (!search) return*/}
+
+                        {/*let parent = e.target.parentNode;*/}
+                        {/*while (parent.classList.contains('selector')) {*/}
+                        {/*parent = parent.parentNode;*/}
+                        {/*}*/}
+                        {/*parent = parent.parentNode;*/}
+                        {/*let inputText = parent.querySelectorAll(`input[name*=${search}]`);*/}
+                        {/*// console.log(inputText);*/}
+
+                        {/*// inputText.map(obj=>{*/}
+                        {/*//   obj.setAttribute('hidden')*/}
+                        {/*// })*/}
+
+                        {/*// for (let i = 0; i < inputText.length; i++) {*/}
+                        {/*//   inputText[i].setAttribute("hidden", true)*/}
+                        {/*// }*/}
+                        {/*}}/>*/}
+                        {/*</div>*/}
+                        <div className="panel-body style-7"
+                             style={{maxHeight: '250px', overflowX: 'hidden'}}>
+                          {item.items.map(obj => {
+                            if (obj.highlighted) {
+                              if (item.input_type == 'RadioButton') {
+                                return <RadioButton id={item.id + '__' + item.category_director + '__' + obj.title}
+                                                    label={obj.title}
+                                                    valid={true}
+                                                    key={item.id + '__' + obj.title}
+                                                    name={obj.title.toLowerCase() }
+                                                    onChange={() => {
+                                                      this.updateUrl(item.id)
+                                                    }}
+                                                    checked={obj.resource.selected}
+                                                    isDisabled={!obj.highlighted}
+                                />
+                              }
+                              return <Checkbox style="font-size:12px;" id={item.id + '__' + item.category_director + '__' + obj.title}
+                                               label={obj.title}
+                                               valid={true}
+                                               key={item.id + '__' + obj.title}
+                                               name={obj.title.toLowerCase()}
+                                               onChange={() => {
+                                                 this.updateUrl(item.id)
+                                               }}
+                                               checked={obj.resource.selected}
+                                               isDisabled={!obj.highlighted}
+                              />
+                            }
+                          })}
+                          <hr/>
+                          {item.items.map(obj => {
+                            if (!obj.highlighted) {
+                              if (item.input_type == 'RadioButton') {
+                                return <RadioButton id={item.id + '__' + item.category_director + '__' + obj.title}
+                                                    label={obj.title}
+                                                    valid={true}
+                                                    key={item.id + '__' + obj.title}
+                                                    name={obj.title.toLowerCase() }
+                                                    onChange={() => {
+                                                      this.updateUrl(item.id)
+                                                    }}
+                                                    checked={obj.resource.selected}
+                                                    isDisabled={!obj.highlighted}
+                                />
+                              }
+                              return <Checkbox  style="font-size:12px,width:230px;" id={item.id + '__' + item.category_director + '__' + obj.title}
+                                                label={obj.title} valid={true}
+                                                key={item.id + '__' + obj.title}
+                                                name={obj.title.toLowerCase() }
+                                                onChange={() => {
+                                                  this.updateUrl(item.category_director)
+                                                }}
+                                                checked={obj.resource.selected}
+                                                isDisabled={!obj.highlighted}
+                              />
+                            }
+                          })}
+                        </div>
+                      </div>
+                    </Panel>
+                  )
+                })}
               </PanelGroup>
               <div className="text-center">
-              <Button onClick={() => {
-                {/*let week_no = "time_period=13_weeks";*/}
-                {/*this.props.onWeekClick(week_no);*/}
-                this.props.onwaterfallSpinner(0);
-                this.props.onwaterfallProfitSpinner(0);
-                this.props.onSupplierImpactTableSpinner(0);
-                this.props.onDelistProductTableSpinner(0);
-                this.props.onWaterfall();
+                <Button onClick={() => {
+                  {/*let week_no = "time_period=13_weeks";*/}
+                  {/*this.props.onWeekClick(week_no);*/}
+                  this.props.onwaterfallSpinner(0);
+                  this.props.onwaterfallProfitSpinner(0);
+                  this.props.onSupplierImpactTableSpinner(0);
+                  this.props.onDelistProductTableSpinner(0);
+                  this.props.onWaterfall();
 
-                setTimeout(() => {
-                  this.props.onApiFetch();
-                  this.props.ondelist();}, 20000);
+                  {/*setTimeout(() => {*/}
+                    {/*this.props.onApiFetch();*/}
+                    {/*this.props.ondelist();}, 20000);*/}
 
-                {/*this.props.onApiFetch();*/}
-                {/*this.props.ondelist();*/}
-                {/*this.props.onApiFetch();*/}
-                {/*this.props.ondelistTable();*/}
-                {/*this.props.onWeekTabClick("Week: 13 weeks ");*/}
-              }}>Apply</Button></div>
+                  {/*this.props.onApiFetch();*/}
+                  {/*this.props.ondelist();*/}
+                  {/*this.props.onApiFetch();*/}
+                  {/*this.props.ondelistTable();*/}
+                  {/*this.props.onWeekTabClick("Week: 13 weeks ");*/}
+                }}>Apply</Button></div>
               {/*<Button onClick={() => {*/}
-                {/*/!*this.props.onFilterReset();*!/*/}
+              {/*/!*this.props.onFilterReset();*!/*/}
               {/*}}>Reset Filters</Button>&nbsp;&nbsp;*/}
             </div>
           )

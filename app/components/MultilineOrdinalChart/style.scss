@@ -1,10 +1,52 @@
-.axis text {
-  font: 10px sans-serif;
+
+
+.chartDataLabel{
+  font-size: 10px !important;
+  fill: #333333;
+  font-family: Tesco;
+  text-anchor: end;
 }
 
-.axis path,
-.axis line {
-  fill: none;
-  stroke: #000;
-  shape-rendering: crispEdges;
+
+.chartLegend{
+  font-size: 10px !important;
+  fill: #333333;
+  font-family: Tesco;
+  text-anchor: end;
 }
+
+
+.chartAxisTitle{
+  font-size: 10px !important;
+  fill: #333333;
+  font-family: Tesco;
+}
+
+
+.chartAxisLabel{
+
+  font-size: 10px !important;
+  color: #333333;
+  font-family: Tesco;
+}
+
+
+
+.chartXAxisLabel{
+  //font-size: 8px !important;
+  font-size: 10px !important;
+  color: #333333;
+  font-family: Tesco;
+}
+
+.chartYAxisLabel{
+  //font-size: 9px !important;
+  font-size: 10px !important;
+  fill: #333333;
+  font-family: Tesco;
+}
+
+
+
+
+

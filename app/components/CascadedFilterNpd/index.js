@@ -102,8 +102,8 @@ class CascadedFilterNpd extends React.PureComponent { // eslint-disable-line rea
         {(() => {
           return (
             <div id="style-7" style={{
-              height: '40%',
-              width: '17%',
+              height: '90%',
+              width: '21%',
               position: 'fixed',
               /* padding-right: 5px; */
               overflowX: 'hidden',

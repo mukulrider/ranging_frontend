@@ -8,9 +8,11 @@ import React from 'react';
 // import styled from 'styled-components';
 import Checkbox from 'components/checkbox';
 import Button from 'components/button';
-import Panel from 'components/panel';
+// import Panel from 'components/panel';
 import {browserHistory} from 'react-router';
 import InputField from 'components/input_field';
+import {Accordion,PanelGroup,Panel} from 'react-bootstrap';
+import styles from './style.scss';
 
 
 class CascadedFilterNpdImpact extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
@@ -156,7 +158,15 @@ class CascadedFilterNpdImpact extends React.PureComponent { // eslint-disable-li
 
   render() {
     return (
-      <div>
+        <div id="style-7" style={{
+          height: '52%',
+          width: '20%',
+          position: 'fixed',
+          overflow: 'scroll',
+          paddingRight: '5px',
+          overflowX: 'hidden',
+          borderTop: '1px solid #ccc',
+        }}>
 
         <div className="row" ref={'npdImpactFilters'}>
           <div className="col-xs-12">
@@ -165,23 +175,23 @@ class CascadedFilterNpdImpact extends React.PureComponent { // eslint-disable-li
             {/*Upper half of hierarchy -- Product hierarchy part*/}
             <div className="row" ref={'productHierarchyFilterBlock'}>
               <div className="col-xs-12">
-
+                <PanelGroup defaultActiveKey="1" accordion>
                 {(() => {
                   if (this.props.sideFilter) {
                     return (
-                      this.props.sideFilter.product_hierarchy.map(obj => {
+
+                      this.props.sideFilter.product_hierarchy.map((obj, key) => {
+                        console.log("checking",obj);
+                        var panelHeader = (
+                          <div className="text-capitalize">{obj.name.replace(/_/g, ' ')} <span style={{color: "red"}}>*</span>&nbsp;
+                            <span className="accordion-toggle" style={{float: 'right'}}></span></div>
+                        );
                         return (
-                          <Panel>
-                            <div className="panel text-capitalize" key={Date.now() + Math.random()}>
+                          <Panel header={panelHeader} eventKey={++key}>
+                            {/*<div className="panel text-capitalize" key={Date.now() + Math.random()}>*/}
+                              <div className="panel selector">
 
-                              <div className="panel-heading"
-                                   style={{
-                                     fontWeight: '700',
-                                     fontSize: '16px',
-                                     borderBottom: '1px solid #ddd'
-                                   }}>{obj.name.replace(/_/g, ' ')} <span style={{color: "red"}}>*</span></div>
-
-                              <div className="panel-body"
+                              <div className="panel-body style-7"
                                    style={{maxHeight: '250px', overflowX: 'scroll', overflowX: 'hidden'}}>
                                 {(() => {
                                   let finalCheckbox = [];
@@ -241,9 +251,11 @@ class CascadedFilterNpdImpact extends React.PureComponent { // eslint-disable-li
                           </Panel>
                         )
                       })
+
                     )
                   }
                 })()}
+                </PanelGroup>
 
               </div>
             </div>
@@ -252,26 +264,33 @@ class CascadedFilterNpdImpact extends React.PureComponent { // eslint-disable-li
             {/*Lower half of hierarchy -- Product information part*/}
             <div className="row" ref={'productInfoFilterBlock'}>
               <div className="col-xs-12">
-                <Panel>
+                <PanelGroup defaultActiveKey="11" accordion>
                   {(() => {
                     if (this.props.sideFilter) {
                       if (this.props.sideFilter.product_information) {
+
                         console.log("Inside the info loop");
                         {/*this.saveHierarchySelections();*/
                         }
                         return (
-                          this.props.sideFilter.product_information.map(obj => {
+                          this.props.sideFilter.product_information.map((obj,key1) => {
+
+                            var panelHeader = (
+                              <div className="text-capitalize"
+                                   style={{
+                                     fontWeight: '700',
+                                     fontSize: '16px',
+                                     borderBottom: '1px solid #ddd'
+                                   }}>{obj.name.replace(/_/g, ' ')} <span style={{color: "red"}}>*</span>&nbsp;
+                                <span className="accordion-toggle" style={{float: 'right'}}></span></div>
+                            );
+
                             return (
+                              <Panel header={panelHeader} eventKey={++key1}>
                               <div className="panel text-capitalize"
                                    key={Date.now() + Math.random() + Math.random() + 10}>
 
                                 {/*title*/}
-                                <div className="panel-heading"
-                                     style={{
-                                       fontWeight: '700',
-                                       fontSize: '16px',
-                                       borderBottom: '1px solid #ddd'
-                                     }}>{obj.name.replace(/_/g, ' ')} <span style={{color: "red"}}>*</span></div>
 
                                 {/*Filter checkbox*/}
                                 <div className="panel-body"
@@ -333,13 +352,14 @@ class CascadedFilterNpdImpact extends React.PureComponent { // eslint-disable-li
                                   })()}
                                 </div>
                               </div>
+                              </Panel>
                             )
                           })
                         )
                       }
                     }
                   })()}
-                </Panel>
+                </PanelGroup>
               </div>
             </div>
 
@@ -399,7 +419,7 @@ class CascadedFilterNpdImpact extends React.PureComponent { // eslint-disable-li
 
 
           }}>Apply Filters</Button>
-        <div/>
+        {/*<div/>*/}
         <Button
           onClick={() => {
             //To un check all the buttons

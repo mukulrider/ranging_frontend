@@ -110,11 +110,11 @@ export class RangingNpdPage extends React.PureComponent { // eslint-disable-line
   return (
       <div>
 
-        {/*<div className="row">*/}
+        {/*Page title*/}
+        <div className="pageTitle">NPD Opportunity</div>
 
-          {/*Filter*/}
-          {/*<div className="col-xs-2">*/}
-        <div className="flextcontent" style={{fontSize: '14px'}}>
+        {/*Filters and content*/}
+        <div className="flextcontent">
 
           <div className="flexleft"  style={{ flexBasis: '300px',marginTop:"24px"}}>
 
@@ -201,7 +201,7 @@ export class RangingNpdPage extends React.PureComponent { // eslint-disable-line
             {/*</div>*/}
 
 
-                <Nav bsStyle="tabs" activeKey={this.state.activeKey} onSelect={this.handleSelect} className="tabsCustom">
+                <Nav bsStyle="tabs" activeKey={this.state.activeKey} onSelect={this.handleSelect} className="tabsCustom"  style={{marginBottom:"-30px"}}>
                   <NavItem className="tabsCustomList" eventKey="1" onClick={() => {
                     this.setState({activeKey: "1"});
                     dataWeekUrlParams="week_flag=Latest 13 Weeks";
@@ -261,7 +261,7 @@ export class RangingNpdPage extends React.PureComponent { // eslint-disable-line
 
                 {/*</div>*/}
 
-               <Panel style={{marginTop:"-5px"}}>
+               <Panel>
 
 
               {/*Outperformance and SKU distribution*/}
@@ -270,7 +270,7 @@ export class RangingNpdPage extends React.PureComponent { // eslint-disable-line
                 {/*Outperformance*/}
                 <div className="col-xs-12 col-md-6">
                   <div className="ts-blk-proview">
-                    <h4 className="ts-blk-proview-subhead">Product Sub-group Sales Outperformance</h4>
+                    <h4 className="pageModuleTitle">Product sub-group sales outperformance</h4>
 
 
                       {/*<MultiSeriesHoriBarChart data={this.props.RangingNpdPage.multiHoriBarChartData}/>*/}
@@ -288,7 +288,7 @@ export class RangingNpdPage extends React.PureComponent { // eslint-disable-line
                 {/*SKU distribution*/}
                 <div className="col-xs-12 col-md-6">
                   <div className="ts-blk-proview">
-                    <h4 className="ts-blk-proview-subhead">SKU distribution across Retailers</h4>
+                    <h4 className="pageModuleTitle">SKU distribution across retailers</h4>
                     <div id="table">
                       {(() => {
                         if (this.props.RangingNpdPage.multiBarChartData) {
@@ -312,7 +312,7 @@ export class RangingNpdPage extends React.PureComponent { // eslint-disable-line
                 {/*Price gravity*/}
                 <div className="col-xs-12 col-md-6">
                   <div className="ts-blk-proview">
-                    <h4 className="ts-blk-proview-subhead">Price gravity across Retailers</h4>
+                    <h4 className="pageModuleTitle">Price gravity across retailers</h4>
 
                     <div id="table">
                       {(() => {
@@ -334,7 +334,7 @@ export class RangingNpdPage extends React.PureComponent { // eslint-disable-line
                 {/*table*/}
                 <div className="col-xs-12 col-md-6">
                   <div className="ts-blk-proview">
-                    <h4 className="ts-blk-proview-subhead">Unmatched Products with Retailers </h4>
+                    <h4 className="pageModuleTitle">Unmatched products with retailers </h4>
                     <div id="table">
 
                     {/*Search*/}
@@ -357,12 +357,12 @@ export class RangingNpdPage extends React.PureComponent { // eslint-disable-line
 
 
                       {/*table*/}
-                      <table className="table table-hover table-striped table-bordered " width="100%">
+                      <table className="table table-hover table-bordered " width="100%">
                         <thead>
-                        <tr style={{fontSize:"16px",fontFamily:"Tesco"}}>
-                          <th>Product description</th>
-                          <th>Retailer</th>
-                          <th>ASP</th>
+                        <tr>
+                          <th className="table-header-format">Product description</th>
+                          <th className="table-header-format">Retailer</th>
+                          <th className="table-header-format">ASP</th>
                         </tr>
                         </thead>
                         <tbody className="table-body-format">
@@ -385,7 +385,7 @@ export class RangingNpdPage extends React.PureComponent { // eslint-disable-line
                       </table>
 
                       {/*pagination*/}
-                      <nav aria-label="Page navigation example">
+                      <nav aria-label="Page navigation example" style={{paddingLeft:"10px"}}>
                         <ul className="pagination pagination-lg">
                           {(() => {
 
@@ -435,7 +435,7 @@ export class RangingNpdPage extends React.PureComponent { // eslint-disable-line
                                         else {
                                           browserHistory.push(this.props.location.pathname + "?" + dataPageUrlParams);
                                         }
-                                      }}><a className="page-link" href="#">{obj}
+                                      }}><a className="page-link">{obj}
                                   </a></li>
                                 )
                               })
@@ -452,16 +452,22 @@ export class RangingNpdPage extends React.PureComponent { // eslint-disable-line
              </div>
 
               {/*NPD impact view navigation button*/}
-              <a href="http://localhost:3000/ranging/npd-impact" style={{fontSize:"18px",color:"black"}}
-                  >Click to view NPD impact</a>
+              <div style={{textAlign:"right"}}>
+                 <Button buttonType={'primary'}
+                         style={{marginTop:"5px"}}
+                         onClick={() => {
 
+                           let objString = '/ranging/npd-impact';
+                            window.location = objString;
+
+                         }}>Click to select new products</Button>
+              </div>
 
             </Panel>
+
           </div>
-
        </div>
-
-      </div>
+    </div>
     );
   }
 }
