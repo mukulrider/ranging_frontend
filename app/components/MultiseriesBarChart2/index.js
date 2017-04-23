@@ -46,10 +46,6 @@ class MultiseriesBarChart2 extends React.PureComponent { // eslint-disable-line 
     }
 
 
-    // let keys = Object.keys(data[0]).slice(1);
-    // console.log(keys);
-    // keys=["Aldi","Asda","Lidl","Morrisons","Tesco","Waitrose","JS"];
-    // let keys=["Aldi","Asda","JS","Tesco","Morrisons"];
 
     let svg = d3.select("#npdMultiSeriesGraph"),
           margin = {top: 20, right: 15, bottom: 40, left: 40},
@@ -65,7 +61,7 @@ class MultiseriesBarChart2 extends React.PureComponent { // eslint-disable-line 
     let x0 = d3.scaleBand().rangeRound([0, width-spaceForLegends]).paddingInner(0.1),
       x1 = d3.scaleBand().rangeRound([height, 0]),
       y = d3.scaleLinear().rangeRound([height, 0]),
-      // z = d3.scaleOrdinal().range(["#b2b2b2", "#7fb256", "#c288d6", "#896219", "#f60909", "#e5f213", "#0931f6"]);
+
       z = d3.scaleOrdinal().range(colors);
 
     // Mapping domains
@@ -89,8 +85,6 @@ class MultiseriesBarChart2 extends React.PureComponent { // eslint-disable-line 
         .data(data)
         .enter().append("g")
         .attr("transform", function (d) {
-
-
           return "translate(" + x0(d.psg) + ",0)";
         })
         .selectAll("rect")
@@ -115,27 +109,24 @@ class MultiseriesBarChart2 extends React.PureComponent { // eslint-disable-line 
         });
 
     g.append("g")
-        .attr("class", "axis")
+        .attr("class", "chartAxisLabel")
         .attr("transform", "translate(0," + height + ")")
         .call(d3.axisBottom(x0))
         .selectAll(".tick text")
-        .call(wrap, x0.bandwidth())
-        .style("font-size","10px")
-        .style("font-family","Tesco");
+        .call(wrap, x0.bandwidth());
 
       g.append("g")
-        .attr("class", "axis")
-        .call(d3.axisLeft(y))
+        .attr("class", "chartAxisLabel")
+        // .attr("transform", "translate("+margin.left+",0)")
+        .call(d3.axisLeft(y));
 
       //AXIS TITLES
        g.append("text")
+         .attr("class", "chartAxisTitle")
         .attr("transform", "rotate(-90)")
         .attr("y", 0-45)
         .attr("x",0 - (height / 2))
         .attr("dy", "2em")
-        // .style("text-anchor", "middle")
-        .style("font-size","10px")
-        .style("font-family","Tesco")
         .text("# of SKU");
 
 
@@ -148,9 +139,7 @@ class MultiseriesBarChart2 extends React.PureComponent { // eslint-disable-line 
 
     // LEGENDS
       let legend = g.append("g")
-        .attr("font-family", "Tesco")
-        .attr("font-size", 10)
-        .attr("text-anchor", "end")
+        .attr("class", "chartLegend")
         .selectAll("g")
         .data(keys.slice())
         .enter().append("g")
@@ -191,7 +180,7 @@ class MultiseriesBarChart2 extends React.PureComponent { // eslint-disable-line 
   render() {
     return (
       <div>
-        <svg id="npdMultiSeriesGraph" width="500" height="330"></svg>
+        <svg id="npdMultiSeriesGraph" width="480" height="330"></svg>
       </div>
     );
   }
