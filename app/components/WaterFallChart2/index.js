@@ -186,7 +186,12 @@ class WaterFallChart2 extends React.PureComponent { // eslint-disable-line react
 
     const xAxis = d3.axisBottom(x);
 
-    const formatSales = (i, chart_id) => {
+    const formatSales = (i, chart_id,total_or_not) => {
+      // console.log("--------------",total_or_not);
+      if(total_or_not===3 && i<0){
+        i=-1*i;
+      }
+
       if (chart_id != "waterfallChart_2") {
         if (i >= 1000 || i <= -1000) {
           const rounded = Math.round(i / 1000);
@@ -235,7 +240,7 @@ class WaterFallChart2 extends React.PureComponent { // eslint-disable-line react
 
     const yAxis = d3.axisLeft(y)
     // .tickFormat((d) => (
-      .tickFormat((d) => (formatSales(d, id)))
+      .tickFormat((d) => (formatSales(d, id,1)))
     //   .tickFormat((d) => (d))
 
 // var tooltip = d3.select("body").append("div")
@@ -259,6 +264,7 @@ class WaterFallChart2 extends React.PureComponent { // eslint-disable-line react
 
 
     chart.append("text")
+      .attr('class', 'chartAxisTitle')
       .attr("transform", "rotate(-90)")
       .attr("y", 0 - (margin.left) + 10)
       .attr("x", 0 - (height / 2))
@@ -278,6 +284,20 @@ class WaterFallChart2 extends React.PureComponent { // eslint-disable-line react
 //   keys.shift()
 //   console.log(keys);
 
+    //function to decide colour of the total bar
+    let cumulativeTotalColor=(total_text,cumulative)=>{
+
+      let totalColour='';
+      if(total_text==="total"){
+        totalColour=(cumulative >= 0) ? positive_text : negative_text;
+      }else{
+        totalColour=(cumulative >= 0) ? negative_text : positive_text;
+        }
+
+        return totalColour;
+      };
+
+
 // Transform data (i.e., finding cumulative values and total) for easier charting
     let cumulative = 0;
     for (let i = 0; i < data.length; i++) {
@@ -295,7 +315,7 @@ class WaterFallChart2 extends React.PureComponent { // eslint-disable-line react
       name: 'Potential Gain/Loss',
       end: cumulative,
       start: 0,
-      class: total_text,
+      class: cumulativeTotalColor(total_text,cumulative),
       value: cumulative,
     });
 
@@ -366,9 +386,9 @@ class WaterFallChart2 extends React.PureComponent { // eslint-disable-line react
       .attr('transform', `translate(45,${height})`)
       .call(xAxis)
       .selectAll(".tick text")
-      // .call(wrap, x.rangeBand());
+      .call(wrap, x.bandwidth())
+      .style("font-family","Tesco");
 
-      .call(wrap, x.bandwidth());
 
     chart.append('g')
       .attr('class', 'y axis')
@@ -414,10 +434,10 @@ class WaterFallChart2 extends React.PureComponent { // eslint-disable-line react
       // .attr('y', 100)
       // .attr('y', 100)
       // .attr('y', (d) => y(d.end) + 5)
-      .attr('y', (d) => y((d.end + d.start) / 2))
+      .attr('y', (d) =>{ return (y((((d.end - d.start > 0 )? d.end:d.start )))-5)})
       // .attr('dy', (d) => `${(d.class == 'negative') ? '-' : ''}.75em`)
       // .text((d) => ((d.end - d.start)/1000));
-      .text((d) => ((formatSales((d.end - d.start), id))))
+      .text((d,i) => ((formatSales((d.end - d.start), id,i))))
       .style("font-size", "10px")
       .style('fill', 'black');
 
