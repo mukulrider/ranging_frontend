@@ -62,13 +62,14 @@ class NewSelector2 extends React.PureComponent { // eslint-disable-line react/pr
 
   render() {
     return (
+
       <div ref={'selector'}>
         {(() => {
           return (
             <div id="style-7" style={{
-              height: '65%',
+              height: '52%',
+              width: '19%',
               position: 'fixed',
-              width:'25%',
               overflow: 'scroll',
               paddingRight: '5px',
               overflowX: 'hidden',
@@ -84,40 +85,33 @@ class NewSelector2 extends React.PureComponent { // eslint-disable-line react/pr
                   </div>
                 );
                 return (
+
                   <Panel header={panelHeader} eventKey={++key}>
                     <div className="panel selector">
-                      <div className="panel-heading"
-                           style={{
-                             fontWeight: '700',
-                             fontSize: '16px',
-                             borderBottom: '1px solid #ddd'
-                           }}>
-                        <h3 className="text-capitalize">{item.title.replace(/_/g, ' ')}&nbsp;{item.required ? <span style={{color: 'red'}}>*</span> : ''} &nbsp;
-                          <span style={{float: 'right'}} onClick={this.clearFilter}>Clear</span>
-                        </h3>
-                        <input type="text" value={this.props.filterSearch}
-                               onChange={(e) => {
-                                 // console.log(e);
-                                 let search = e.target.value.toLowerCase();
-                                 if (!search) return
+                      {/*<div className="panel-heading">*/}
+                        {/*<input type="text" value={this.props.filterSearch}*/}
+                               {/*onChange={(e) => {*/}
+                                 {/*// console.log(e);*/}
+                                 {/*let search = e.target.value.toLowerCase();*/}
+                                 {/*if (!search) return*/}
 
-                                 let parent = e.target.parentNode;
-                                 while (parent.classList.contains('selector')) {
-                                   parent = parent.parentNode;
-                                 }
-                                 parent = parent.parentNode;
-                                 let inputText = parent.querySelectorAll(`input[name*=${search}]`);
-                                 // console.log(inputText);
+                                 {/*let parent = e.target.parentNode;*/}
+                                 {/*while (parent.classList.contains('selector')) {*/}
+                                   {/*parent = parent.parentNode;*/}
+                                 {/*}*/}
+                                 {/*parent = parent.parentNode;*/}
+                                 {/*let inputText = parent.querySelectorAll(`input[name*=${search}]`);*/}
+                                 {/*// console.log(inputText);*/}
 
-                                 // inputText.map(obj=>{
-                                 //   obj.setAttribute('hidden')
-                                 // })
+                                 {/*// inputText.map(obj=>{*/}
+                                 {/*//   obj.setAttribute('hidden')*/}
+                                 {/*// })*/}
 
-                                 // for (let i = 0; i < inputText.length; i++) {
-                                 //   inputText[i].setAttribute("hidden", true)
-                                 // }
-                               }}/>
-                      </div>
+                                 {/*// for (let i = 0; i < inputText.length; i++) {*/}
+                                 {/*//   inputText[i].setAttribute("hidden", true)*/}
+                                 {/*// }*/}
+                               {/*}}/>*/}
+                      {/*</div>*/}
                       <div className="panel-body style-7"
                            style={{maxHeight: '250px', overflowX: 'hidden'}}>
                         {item.items.map(obj => {
@@ -135,7 +129,7 @@ class NewSelector2 extends React.PureComponent { // eslint-disable-line react/pr
                                                   isDisabled={!obj.highlighted}
                               />
                             }
-                            return <Checkbox id={item.id + '__' + item.category_director + '__' + obj.title}
+                            return <Checkbox style="font-size:12px;" id={item.id + '__' + item.category_director + '__' + obj.title}
                                              label={obj.title}
                                              valid={true}
                                              key={item.id + '__' + obj.title}
@@ -164,7 +158,7 @@ class NewSelector2 extends React.PureComponent { // eslint-disable-line react/pr
                                                   isDisabled={!obj.highlighted}
                               />
                             }
-                            return <Checkbox id={item.id + '__' + item.category_director + '__' + obj.title}
+                            return <Checkbox  style="font-size:12px,width:230px;" id={item.id + '__' + item.category_director + '__' + obj.title}
                                              label={obj.title} valid={true}
                                              key={item.id + '__' + obj.title}
                                              name={obj.title.toLowerCase() }
@@ -182,6 +176,7 @@ class NewSelector2 extends React.PureComponent { // eslint-disable-line react/pr
                 )
               })}
               </PanelGroup>
+              <div className="text-center">
               <Button onClick={() => {
                 {/*let week_no = "time_period=13_weeks";*/}
                 {/*this.props.onWeekClick(week_no);*/}
@@ -200,10 +195,10 @@ class NewSelector2 extends React.PureComponent { // eslint-disable-line react/pr
                 {/*this.props.onApiFetch();*/}
                 {/*this.props.ondelistTable();*/}
                 {/*this.props.onWeekTabClick("Week: 13 weeks ");*/}
-              }}>Apply</Button>&nbsp;&nbsp;
-              <Button onClick={() => {
-                {/*this.props.onFilterReset();*/}
-              }}>Reset Filters</Button>&nbsp;&nbsp;
+              }}>Apply</Button></div>
+              {/*<Button onClick={() => {*/}
+                {/*/!*this.props.onFilterReset();*!/*/}
+              {/*}}>Reset Filters</Button>&nbsp;&nbsp;*/}
             </div>
           )
         })()}

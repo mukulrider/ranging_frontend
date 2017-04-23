@@ -21,6 +21,7 @@ import BubbleChartNpd from 'components/BubbleChartNpd';
 import WaterFallChartNpd from 'components/WaterFallChartNpd';
 import InputField from 'components/input_field';
 import {Modal, Nav, NavItem, MenuItem, NavDropdown} from 'react-bootstrap';
+import { Pagination,Accordion} from 'react-bootstrap';
 import {
   dataFetchOnPageLoad,dataFetchOnBubbleData,dataFetchCanniProdTable,dataFetchOnWaterFallChart,
   sendUrlParams,generateSideFilter, generateUrlParams, generateUrlParamsString,
@@ -65,6 +66,7 @@ export class RangingNpdImpactPage extends React.PureComponent { // eslint-disabl
   constructor(props) {
     super(props);
     this.state = {smShow: false, lgShow: false, showPreviousChanges: true, activeKey: '1'};
+
   }
 
 
@@ -114,73 +116,140 @@ export class RangingNpdImpactPage extends React.PureComponent { // eslint-disabl
     return (
       <div>
         {console.log("this.props", this.props)}
-        <Helmet
-          title="RangingNpdImpactPage"
-          meta={[
-            {name: 'description', content: 'Description of RangingNpdImpactPage'},
-          ]}
-        />
+
 
         {/*Week Tabs*/}
-        <div className="row">
-          <Button onClick={() => {
-            dataWeekUrlParams="week_flag=Last 13 Weeks";
-            this.props.onSaveWeekParam(dataWeekUrlParams);
-            this.props.onDataFetchCanniProdTable();
-            this.props.onDataFetchOnPageLoad();
-            this.props.onDataFetchOnBubbleData();
+        {/*<div className="row">*/}
+          {/*<Button onClick={() => {*/}
+            {/*dataWeekUrlParams="week_flag=Latest 13 Weeks";*/}
+            {/*this.props.onSaveWeekParam(dataWeekUrlParams);*/}
+            {/*this.props.onDataFetchCanniProdTable();*/}
+            {/*this.props.onDataFetchOnPageLoad();*/}
+            {/*this.props.onDataFetchOnBubbleData();*/}
 
-            {/*let browserPushStringWeek='';*/}
+            {/*/!*let browserPushStringWeek='';*!/*/}
 
-            {/*if(dataFilterUrlParams !== ''){*/}
+            {/*/!*if(dataFilterUrlParams !== ''){*!/*/}
+              {/*/!*browserPushStringWeek=dataWeekUrlParams+"&"+dataFilterUrlParams;*!/*/}
+            {/*/!*}else{*!/*/}
+              {/*/!*browserPushStringWeek=dataWeekUrlParams;*!/*/}
+            {/*/!*}*!/*/}
+            {/*/!*browserHistory.push(this.props.location.pathname + "?" +browserPushStringWeek);*!/*/}
+
+          {/*}*/}
+          {/*}>13 Weeks</Button>*/}
+
+          {/*<Button onClick={() => {*/}
+            {/*dataWeekUrlParams="week_flag=Latest 26 Weeks";*/}
+            {/*this.props.onSaveWeekParam(dataWeekUrlParams);*/}
+            {/*this.props.onDataFetchCanniProdTable();*/}
+            {/*this.props.onDataFetchOnPageLoad();*/}
+            {/*this.props.onDataFetchOnBubbleData();*/}
+            {/*/!*let browserPushStringWeek='';*!/*/}
+
+            {/*/!*if(dataFilterUrlParams !== ''){*!/*/}
+              {/*/!*browserPushStringWeek=dataWeekUrlParams+"&"+dataFilterUrlParams;*!/*/}
+            {/*/!*}else{*!/*/}
+              {/*/!*browserPushStringWeek=dataWeekUrlParams;*!/*/}
+            {/*/!*}*!/*/}
+
+            {/*/!*browserHistory.push(this.props.location.pathname + "?" +browserPushStringWeek);*!/*/}
+
+
+          {/*}}>26 Weeks</Button>*/}
+
+          {/*<Button onClick={() => {*/}
+            {/*dataWeekUrlParams="week_flag=Latest 52 Weeks";*/}
+            {/*/!*this.props.onSendUrlParams(completeSelections);*!/*/}
+            {/*this.props.onSaveWeekParam(dataWeekUrlParams);*/}
+            {/*this.props.onDataFetchCanniProdTable();*/}
+            {/*this.props.onDataFetchOnPageLoad();*/}
+            {/*this.props.onDataFetchOnBubbleData();*/}
+
+            {/*/!*let browserPushStringWeek='';*!/*/}
+
+            {/*/!*if(dataFilterUrlParams !== ''){*!/*/}
+              {/*/!*browserPushStringWeek=dataWeekUrlParams+"&"+dataFilterUrlParams;*!/*/}
+            {/*/!*}else{*!/*/}
+              {/*/!*browserPushStringWeek=dataWeekUrlParams;*!/*/}
+            {/*/!*}*!/*/}
+
+            {/*/!*browserHistory.push(this.props.location.pathname + "?" +browserPushStringWeek);*!/*/}
+
+          {/*}}>52 Weeks</Button>*/}
+        {/*</div>*/}
+
+        <div>
+          <Nav bsStyle="tabs" activeKey={this.state.activeKey} onSelect={this.handleSelect} className="tabsCustom">
+            <NavItem className="tabsCustomList" eventKey="1" onClick={() => {
+              this.setState({activeKey: "1"});
+              dataWeekUrlParams="week_flag=Latest 13 Weeks";
+              this.props.onSaveWeekParam(dataWeekUrlParams);
+              this.props.onDataFetchCanniProdTable();
+              this.props.onDataFetchOnPageLoad();
+              this.props.onDataFetchOnBubbleData();
+
+              {/*let browserPushStringWeek='';*/}
+
+              {/*if(dataFilterUrlParams !== ''){*/}
               {/*browserPushStringWeek=dataWeekUrlParams+"&"+dataFilterUrlParams;*/}
-            {/*}else{*/}
+              {/*}else{*/}
               {/*browserPushStringWeek=dataWeekUrlParams;*/}
-            {/*}*/}
-            {/*browserHistory.push(this.props.location.pathname + "?" +browserPushStringWeek);*/}
+              {/*}*/}
+              {/*browserHistory.push(this.props.location.pathname + "?" +browserPushStringWeek);*/}
 
-          }
-          }>13 Weeks</Button>
+            }
+            }><span className="tab_label">13 Weeks</span></NavItem>
+            <NavItem className="tabsCustomList" eventKey="2" onClick={() => {
+              this.setState({activeKey: "2"});
+              dataWeekUrlParams="week_flag=Latest 26 Weeks";
+              this.props.onSaveWeekParam(dataWeekUrlParams);
+              this.props.onDataFetchCanniProdTable();
+              this.props.onDataFetchOnPageLoad();
+              this.props.onDataFetchOnBubbleData();
+              {/*let browserPushStringWeek='';*/}
 
-          <Button onClick={() => {
-            dataWeekUrlParams="week_flag=Last 26 Weeks";
-            this.props.onSaveWeekParam(dataWeekUrlParams);
-            this.props.onDataFetchCanniProdTable();
-            this.props.onDataFetchOnPageLoad();
-            this.props.onDataFetchOnBubbleData();
-            {/*let browserPushStringWeek='';*/}
-
-            {/*if(dataFilterUrlParams !== ''){*/}
+              {/*if(dataFilterUrlParams !== ''){*/}
               {/*browserPushStringWeek=dataWeekUrlParams+"&"+dataFilterUrlParams;*/}
-            {/*}else{*/}
+              {/*}else{*/}
               {/*browserPushStringWeek=dataWeekUrlParams;*/}
-            {/*}*/}
+              {/*}*/}
 
-            {/*browserHistory.push(this.props.location.pathname + "?" +browserPushStringWeek);*/}
+              {/*browserHistory.push(this.props.location.pathname + "?" +browserPushStringWeek);*/}
 
 
-          }}>26 Weeks</Button>
+            }}><span className="tab_label">26 Weeks</span></NavItem>
+            <NavItem className="tabsCustomList" eventKey="3" onClick={() => {
+              dataWeekUrlParams="week_flag=Latest 52 Weeks";
+              {/*this.props.onSendUrlParams(completeSelections);*/}
+              this.setState({activeKey: "3"});
+              this.props.onSaveWeekParam(dataWeekUrlParams);
+              this.props.onDataFetchCanniProdTable();
+              this.props.onDataFetchOnPageLoad();
+              this.props.onDataFetchOnBubbleData();
 
-          <Button onClick={() => {
-            dataWeekUrlParams="week_flag=Last 52 Weeks";
-            {/*this.props.onSendUrlParams(completeSelections);*/}
-            this.props.onSaveWeekParam(dataWeekUrlParams);
-            this.props.onDataFetchCanniProdTable();
-            this.props.onDataFetchOnPageLoad();
-            this.props.onDataFetchOnBubbleData();
+              {/*let browserPushStringWeek='';*/}
 
-            {/*let browserPushStringWeek='';*/}
-
-            {/*if(dataFilterUrlParams !== ''){*/}
+              {/*if(dataFilterUrlParams !== ''){*/}
               {/*browserPushStringWeek=dataWeekUrlParams+"&"+dataFilterUrlParams;*/}
-            {/*}else{*/}
+              {/*}else{*/}
               {/*browserPushStringWeek=dataWeekUrlParams;*/}
-            {/*}*/}
+              {/*}*/}
 
-            {/*browserHistory.push(this.props.location.pathname + "?" +browserPushStringWeek);*/}
+              {/*browserHistory.push(this.props.location.pathname + "?" +browserPushStringWeek);*/}
 
-          }}>52 Weeks</Button>
+            }}><span className="tab_label">52 Weeks</span></NavItem>
+
+
+          </Nav>
+
+          <div className="breadcrumb">
+            <span className="label">&nbsp;13 Weeks</span>
+
+          </div>
+
         </div>
+
 
         {/*Main Content*/}
         <div className="row">
@@ -338,7 +407,7 @@ export class RangingNpdImpactPage extends React.PureComponent { // eslint-disabl
                             if (this.props.RangingNpdImpactPage.canniProdTableData) {
                               console.log("a1", this.props.RangingNpdImpactPage.canniProdTableData)
                               return (
-                                <WaterFallChartNpd data={{chart_data:this.props.RangingNpdImpactPage.canniProdTableData.sales_chart.data, chart_id:"net_impact_waterfall"}}/>
+                                <WaterFallChartNpd data={{chart_data:this.props.RangingNpdImpactPage.canniProdTableData.sales_chart.data, chart_id:"net_impact_waterfall",chart_type:"value"}}/>
                               )
                             }})()}
 
@@ -402,7 +471,7 @@ export class RangingNpdImpactPage extends React.PureComponent { // eslint-disabl
                         {(() => {
                           if (this.props.RangingNpdImpactPage.canniProdTableData) {
                             return (
-                              <WaterFallChartNpd data={{chart_data:this.props.RangingNpdImpactPage.canniProdTableData.volume_chart.data,chart_id:"net_impact_waterfall_2"}}/>
+                              <WaterFallChartNpd data={{chart_data:this.props.RangingNpdImpactPage.canniProdTableData.volume_chart.data,chart_id:"net_impact_waterfall_2",chart_type:"volume"}}/>
                             )
                           }})()}
 

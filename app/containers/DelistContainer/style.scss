@@ -92,20 +92,11 @@ th, td {
   color: red;
 }
 
+
 .tabsCustom {
 margin-top: 24px;
 }
 
-
-//TABS
-.tabsCustomList {
-  //color: red;
-  //width: 30%;
-  //text-align: center;
-  //border-style: ridge;
-  //border-radius: 8px;
-  //margin-left: 35px;
-}
 
 .tabsCustomList {
   display: inline-block;
@@ -128,6 +119,7 @@ margin-top: 24px;
 .tabsCustomList.active{
   margin-bottom: -1px;
 }
+
 
 .tabsCustomList span.tab_label{
   padding: 12px 8px;
@@ -205,31 +197,9 @@ margin-top: 24px;
 .chartwrap{
   overflow-x: auto;
 }
-/*Flex classes*/
 
-.FlexContainer {
-  display: -ms-flex;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-}
 
-.FlexItem {
-  -ms-flex: 1;
-  -webkit-box-flex: 1;
-  flex: 1;
-}
-.Flexcolleft{
-  -ms-flex: 1;
-  -webkit-box-flex: 1;
-  flex: 1;
-}
 
-.Flexcolright{
-  -ms-flex: 3;
-  -webkit-box-flex: 3;
-  flex: 3;
-}
 
 .FlexContainer.Row {
   -ms-flex-direction: row;

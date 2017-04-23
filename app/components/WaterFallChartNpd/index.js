@@ -15,15 +15,40 @@ import messages from './messages';
 
 class WaterFallChartNpd extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
 
+
   // createChart = (data, id) => {
-  createWaterFallChart = (data,id) => {
+  createWaterFallChart = (data,id,chart_type) => {
 
     let yaxis_title="Amount(£)";
+
+    let formatSales = (i) => {
+      if(i>=1000 || i<=-1000) {
+      let rounded=Math.round(i /1000);
+      return ('£ ' + rounded.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + 'K');
+    }
+    else{
+      return ('£ ' + Math.round(i));
+    }
+    };
+
+
+    let formatVolume = (i) => {
+      if(i>=1000 || i<=-1000)
+      { let rounded=Math.round(i /1000);
+        return (rounded.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + 'K');
+
+      }else{
+        return (Math.round(i));
+      }
+
+
+    }
 
 
     // Transform data (i.e., finding cumulative values and total) for easier charting
     let cumulative = 0;
-    for (let i = 0; i < data.length; i++) {
+
+    for (let i = 0; i < 2; i++) {
       data[i].start = cumulative;
       cumulative += data[i].value;
       data[i].end = cumulative;
@@ -58,7 +83,7 @@ class WaterFallChartNpd extends React.PureComponent { // eslint-disable-line rea
     //--------------Configurations & Axis definitions
 
     //Configurations
-    let margin = {top: 20, right: 30, bottom: 30, left: 30},
+    let margin = {top: 20, right: 30, bottom: 30, left: 40},
       width = 450 - margin.left - margin.right ,
       height = 300 - margin.top - margin.bottom,
       padding = 0.3;
@@ -78,15 +103,22 @@ class WaterFallChartNpd extends React.PureComponent { // eslint-disable-line rea
 
     let yAxis = d3.axisLeft(y)
                 .tickFormat(function (d) {
-                  return (d);
+
+                  if(chart_type=="value"){
+                    return formatSales(d);
+                  }else{
+                    return formatVolume(d);
+                  }
+
                 });
 
     //---------- Adding the chart(svg)
 
+    let chart = d3.select(`#${id}`);
 
-    // svg.selectAll("*").remove();
+    chart.selectAll("*").remove();
 
-    let chart = d3.select('#' + id)
+    chart = d3.select('#' + id)
       .attr("width", width + margin.left + margin.right)
       .attr("height", height + margin.top + margin.bottom)
       .append("g")
@@ -136,7 +168,12 @@ class WaterFallChartNpd extends React.PureComponent { // eslint-disable-line rea
           return ((d.class == 'negative') ? '-' : '') + ".75em"
         })
         .text(function (d) {
-          return (d.end - d.start);
+          if(chart_type=="value"){
+            return formatSales((d.end - d.start));
+          }else{
+            return formatVolume((d.end - d.start));
+          }
+     // return (d.end - d.start);
         });
 
 
@@ -171,17 +208,18 @@ class WaterFallChartNpd extends React.PureComponent { // eslint-disable-line rea
       .style("text-anchor", "middle")
       .text(yaxis_title);
 
-
+    data=0;
   };
 
   componentDidMount = () => {
     // this.createChart(this.props.data, this.props.id)
     // console.log("Waterfall chart",this.props.data);
-    this.createWaterFallChart(this.props.data.chart_data,this.props.data.chart_id)
+    this.createWaterFallChart(this.props.data.chart_data,this.props.data.chart_id,this.props.data.chart_type)
   };
 
   componentDidUpdate = () => {
     // this.createWaterFallChart()
+    this.createWaterFallChart(this.props.data.chart_data,this.props.data.chart_id,this.props.data.chart_type)
   };
 
   render() {

@@ -1,4 +1,4 @@
-// import { take, call, put, select } from 'redux-saga/effects';
+``// import { take, call, put, select } from 'redux-saga/effects';
 import {take, call, put, select, cancel, takeLatest} from 'redux-saga/effects';
 import {LOCATION_CHANGE} from 'react-router-redux';
 import request from 'utils/request';
@@ -178,6 +178,7 @@ export function* generateApiFetch() {
     yield put(SupplierImpactTableSpinnerSuccess(spinnerCheck));
   }
 }
+
 
 export function* doApiFetch() {
   const watcher = yield takeLatest(API_FETCH, generateApiFetch);

@@ -463,6 +463,7 @@ class WaterFallChart2 extends React.PureComponent { // eslint-disable-line react
   }
 }
 
+
 WaterFallChart2.propTypes = {};
 
 export default WaterFallChart2;

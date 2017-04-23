@@ -75,6 +75,7 @@
   transition: border 0.3s;
   font-weight: 600;
 }
+
 .panel-heading a:hover{
   color: #00539f;
   text-decoration: underline;
@@ -94,6 +95,7 @@
   width: 24px;
   text-align: center;
 }
+
 .panel-heading .collapsed .accordion-toggle:after {
   /* symbol for "collapsed" panels */
   content: "\e080";    /* adjust as needed, taken from bootstrap.css */
