@@ -64,22 +64,17 @@ class MultiSeriesHoriBarChart extends React.PureComponent { // eslint-disable-li
       width = 600,
       height = 320;
 
-
-
-
-
     let spaceForLabels   = 120,
       spaceForLegend   = 40,
       chartWidth= width-spaceForLabels,
       chartHeight = height-spaceForLegend,
       groupHeight= chartHeight / harddata.labels.length,
       barHeight=groupHeight/3,
+      spaceForOuterDataLabels=25,
       gapBetweenGroups = barHeight*0.85;
 
 
     //------------- Axis
-    // let color = d3.scaleOrdinal(d3.schemeCategory20b);
-    // let color = ["#00539f","#ee1c2e"];
       let color = ["#7F297B","#009688"];
 
 
@@ -97,9 +92,9 @@ class MultiSeriesHoriBarChart extends React.PureComponent { // eslint-disable-li
 
     // x axis
     let x = d3.scaleLinear()
-      .domain([d3.min(zippedData), d3.max(zippedData)])
+      // .domain([d3.min(zippedData), d3.max(zippedData)])
       .domain([minDomain(zippedData), d3.max(zippedData)])
-      .range([spaceForLabels, chartWidth-10]);
+      .range([spaceForLabels+spaceForOuterDataLabels, chartWidth-margin.right-spaceForOuterDataLabels]);
 
     let xAxis = d3.axisBottom(x)
       .tickFormat(function(d) {
@@ -124,7 +119,7 @@ class MultiSeriesHoriBarChart extends React.PureComponent { // eslint-disable-li
     chart.attr("width",  chartWidth)
       .attr("height", height)
       .attr("transform","translate(" + margin.left + "," + margin.top + ")");
-      // .attr("transform","translate(5,0)");
+
 
 
     // ------------ Create bars
@@ -155,23 +150,26 @@ class MultiSeriesHoriBarChart extends React.PureComponent { // eslint-disable-li
 
 // Add text label in bar
     bar.append("text")
+      .attr("className", "chartDataLabel")
       .attr("x", function(d) {
-        if(d>0)
-        {return x(d) - 20; }
+        if(d>=0)
+        {
+          // return x(d) - 20;
+          return x(d) + 2;
+        }
         else{
-          return x(d) +5;
+          // return x(d) +5;
+          return x(d) -spaceForOuterDataLabels;
         }
         }
       )
       .attr("y", barHeight / 2)
-      .attr("fill", "white")
       .attr("dy", ".25em")
       .text(function(d) { return d; });
 
-  // Draw labels
+  //--------------------- Y axis labels
     let label = bar.append("text")
-      .attr("className", "label")
-      // .attr("x", function(d) { return -spaceForLabels ; })
+      .attr("className", "chartYAxisLabel")
       .attr("x",0)
       .attr("y", groupHeight / 3)
       .attr("dy", ".35em")
@@ -179,42 +177,52 @@ class MultiSeriesHoriBarChart extends React.PureComponent { // eslint-disable-li
         if (i % harddata.series.length === 0)
           return harddata.labels[Math.floor(i/harddata.series.length)];
         else
-          return ""})
-      .style("font-size","9px")
-      .style("font-family","Tesco");
+          return ""});
 
-    chart.selectAll(".tick text")
-      .style("font-size","9px")
-      .style("font-family","Tesco");
+      // .selectAll('.chartYAxisLabel text')
+      // .call(wrap,spaceForLabels/2);
+
+      // .style("font-size","9px")
+      // .style("font-family","Tesco");
+
+    // chart.selectAll(".tick text")
+    //   .style("font-size","9px")
+    //   .style("font-family","Tesco");
 
 
 
     // label.selectAll('text .label')
     //   .call(wrap,spaceForLabels/2);
+    //
+    // bar.selectAll(".tick text")
+    //   .call(wrap,spaceForLabels/2);
 
-    bar.selectAll('text .label')
-      .call(wrap,spaceForLabels);
+
+    // bar.selectAll('text .label')
+    //   .call(wrap,spaceForLabels/2);
 
 
 
 
     // ------------------ Appending axis
     chart.append("g")
-      .attr("className", "y axis")
       .attr("transform", "translate(" + (x(0)) + ",0)" )
       .call(yAxis);
 
     chart.append("g")
       .attr("transform", "translate(0," + chartHeight + ")")
-      .attr("class", "x axis")
+      .attr("class", "chartXAxisLabel")
       .call(xAxis);
 
-    // Legend
+
+
+    //--------------------Legend
 
 
     let legend = chart.append("g")
-      .attr("font-family", "sans-serif")
-      .attr("font-size", 10)
+      .attr("className", "chartLegend")
+      // .attr("font-family", "sans-serif")
+      // .attr("font-size", 10)
       .attr("text-anchor", "end")
       .selectAll("g")
       .data(harddata.series)
@@ -222,24 +230,6 @@ class MultiSeriesHoriBarChart extends React.PureComponent { // eslint-disable-li
       .attr("transform", function (d, i) {
         return "translate(0,0)";
       });
-    //
-    // legend.append("rect")
-    //   .attr("x", (width/2)-20)
-    //   .attr("y", chartHeight+19)
-    //   .attr("width", 12)
-    //   .attr("height", 12)
-    //   .attr("fill",
-    //     function (d, i) { return color[i]; }
-    //   );
-
-
-    // legend.append("text")
-    //   .attr("x", (width/2) + 100)
-    //   .attr("y", chartHeight+23)
-    //   .attr("dy", "0.24em")
-    //   .text(function (d) { return d.label; })
-    //   .selectAll("text");
-    // .call(wrap,width/10);
 
 
     legend.append("rect")
@@ -254,6 +244,7 @@ class MultiSeriesHoriBarChart extends React.PureComponent { // eslint-disable-li
       );
 
     legend.append("text")
+
       .attr("x",
         function (d,i) {return (spaceForLabels+((chartWidth/2)*(i))+120);}
       )

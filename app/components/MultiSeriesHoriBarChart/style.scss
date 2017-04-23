@@ -1,39 +1,40 @@
 
-.chart .legend {
-  color: black;
-  font: 15px sans-serif;
-  text-anchor: end;
-  font-size: 15px;
-}
 
-.chart text {
-  fill: black;
-  font: 10px sans-serif;
+.chartDataLabel{
+  font-size: 12px !important;
+  fill: #333333;
+  font-family: Tesco;
   text-anchor: end;
 }
 
-.chart .label {
-  fill: black;
-  font: 14px sans-serif;
-  text-anchor: end;
+
+.chartLegend{
+  font-size: 10px !important;
+  fill: #333333;
+  font-family: Tesco;
 }
 
-.bar:hover {
-  fill: brown;
+
+.chartAxisTitle{
+  font-size: 10px !important;
+  fill: #333333;
+  font-family: Tesco;
 }
 
-.axis text {
-  font: 10px sans-serif;
+.chartXAxisLabel{
+  //font-size: 8px !important;
+  font-size: 10px !important;
+  color: #333333;
+  font-family: Tesco;
 }
 
-.axis path,
-.axis line {
-  fill: none;
-  stroke: #000;
-  shape-rendering: crispEdges;
+.chartYAxisLabel{
+  //font-size: 9px !important;
+  font-size: 10px !important;
+  fill: #333333;
+  font-family: Tesco;
 }
 
-//
-//.multilineChart {
-//  margin-left:-100px;
-//}
+
+
+

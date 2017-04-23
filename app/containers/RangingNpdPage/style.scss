@@ -1,5 +1,45 @@
 @import "./../../stylesheet";
 
+.pageTitle{
+  font-family: Tesco;
+  font-size: 20px;
+  text-align: center;
+  //color: #e5e5e5;
+  //background-color: #00294f;
+  //background-color: #00539f;
+  width: 100%;
+  padding: 0px;
+
+  color:#00294f !important;
+  background-color: #e5e8ea;
+
+}
+
+  .pageModuleTitle{
+
+    //TESCO STYLE GUIDE
+    //width: 100%;
+    //line-height: 17px;
+    //font-size: 12px;
+    //height: 17px;
+    //color: #666666 !important;
+    //text-align: left;
+    //
+    width: 100%;
+    line-height: 28px;
+    font-size: 18px;
+    height: 28px;
+    color: #00539f !important;
+    //font-weight: bold;
+    font-weight: 500;
+    //color: #666666 !important;
+    text-align: center;
+    padding-left: 1%;
+
+  }
+
+
+
 .ts-blk-proview-subhead {
   text-align: center;
   //color: #00539f !important;
@@ -32,262 +72,26 @@
 
 .table-body-format{
 
-  font-size: 16px;
+  font-size: 14px;
   font-family:Tesco;
 
 }
 
 .table-header-format{
-  //font-size: 16px;
-  //font-family:Tesco;
+  font-size: 16px;
+  font-family:Tesco;
+  text-align: center;
+  color: #333333;
+  background-color: #e5e5e5;
+
 }
-
-
-//For button
-
-
-//.col {
-//  display: inline-block;
-//  vertical-align: top;
-//}
-//
-//
-//.button {
-//  position: relative;
-//  margin: 1em;
-//  font-weight: bold;
-//  padding: 1em 1.25em;
-//  text-align: center;
-//  width: 200px;
-//  border-radius: 5px;
-//  overflow: hidden;
-//  position: relative;
-//  z-index: 0;
-//  cursor: pointer;
-//}
-//
-//
-//.button.raised {
-//  -moz-transition: 0.1s all;
-//  -o-transition: 0.1s all;
-//  -webkit-transition: 0.1s all;
-//  transition: 0.1s all;
-//  background: #00539f;
-//  box-shadow: 0px 1px 1px #085a9b;
-//}
-//.button.raised:active {
-//  background: #0c7dd8;
-//  box-shadow: 0px 1px 1px #063e6b;
-//}
-//
-//
-//input[type="checkbox"].toggle {
-//  -moz-appearance: none;
-//  -webkit-appearance: none;
-//  position: absolute;
-//  width: 100%;
-//  height: 100%;
-//  margin: 0;
-//  left: 0;
-//  top: 0;
-//  cursor: pointer;
-//}
-//input[type="checkbox"].toggle:focus {
-//  outline: 0;
-//}
-//
-//.anim {
-//  -moz-transform: translateY(-50%) translateX(-50%);
-//  -ms-transform: translateY(-50%) translateX(-50%);
-//  -webkit-transform: translateY(-50%) translateX(-50%);
-//  transform: translateY(-50%) translateX(-50%);
-//  position: absolute;
-//  top: 50%;
-//  left: 50%;
-//  z-index: -1;
-//}
-//.anim:before {
-//  position: relative;
-//  content: '';
-//  display: block;
-//  margin-top: 100%;
-//}
-//.anim:after {
-//  content: '';
-//  position: absolute;
-//  top: 0;
-//  bottom: 0;
-//  left: 0;
-//  right: 0;
-//  border-radius: 50%;
-//}
-//
-//.clickable .toggle:checked + .anim {
-//  -moz-animation: anim-in 0.75s;
-//  -webkit-animation: anim-in 0.75s;
-//  animation: anim-in 0.75s;
-//}
-//.clickable .toggle:checked + .anim:after {
-//  -moz-animation: anim-in-pseudo 0.75s;
-//  -webkit-animation: anim-in-pseudo 0.75s;
-//  animation: anim-in-pseudo 0.75s;
-//}
-//.clickable .toggle:not(:checked) + .anim {
-//  -moz-animation: anim-out 0.75s;
-//  -webkit-animation: anim-out 0.75s;
-//  animation: anim-out 0.75s;
-//}
-//.clickable .toggle:not(:checked) + .anim:after {
-//  -moz-animation: anim-out-pseudo 0.75s;
-//  -webkit-animation: anim-out-pseudo 0.75s;
-//  animation: anim-out-pseudo 0.75s;
-//}
-//
-//.hoverable:hover > .anim {
-//  -moz-animation: anim-out 0.75s;
-//  -webkit-animation: anim-out 0.75s;
-//  animation: anim-out 0.75s;
-//}
-//.hoverable:hover > .anim:after {
-//  -moz-animation: anim-out-pseudo 0.75s;
-//  -webkit-animation: anim-out-pseudo 0.75s;
-//  animation: anim-out-pseudo 0.75s;
-//}
-//
-//@-webkit-keyframes anim-in {
-//  0% {
-//    width: 0%;
-//  }
-//  100% {
-//    width: 100%;
-//  }
-//}
-//@-moz-keyframes anim-in {
-//  0% {
-//    width: 0%;
-//  }
-//  100% {
-//    width: 100%;
-//  }
-//}
-//@-ms-keyframes anim-in {
-//  0% {
-//    width: 0%;
-//  }
-//  100% {
-//    width: 100%;
-//  }
-//}
-//@keyframes anim-in {
-//  0% {
-//    width: 0%;
-//  }
-//  100% {
-//    width: 100%;
-//  }
-//}
-//@-webkit-keyframes anim-in-pseudo {
-//  0% {
-//    background: rgba(0, 0, 0, 0.25);
-//  }
-//  100% {
-//    background: transparent;
-//  }
-//}
-//@-moz-keyframes anim-in-pseudo {
-//  0% {
-//    background: rgba(0, 0, 0, 0.25);
-//  }
-//  100% {
-//    background: transparent;
-//  }
-//}
-//@-ms-keyframes anim-in-pseudo {
-//  0% {
-//    background: rgba(0, 0, 0, 0.25);
-//  }
-//  100% {
-//    background: transparent;
-//  }
-//}
-//@keyframes anim-in-pseudo {
-//  0% {
-//    background: rgba(0, 0, 0, 0.25);
-//  }
-//  100% {
-//    background: transparent;
-//  }
-//}
-//@-webkit-keyframes anim-out {
-//  0% {
-//    width: 0%;
-//  }
-//  100% {
-//    width: 100%;
-//  }
-//}
-//@-moz-keyframes anim-out {
-//  0% {
-//    width: 0%;
-//  }
-//  100% {
-//    width: 100%;
-//  }
-//}
-//@-ms-keyframes anim-out {
-//  0% {
-//    width: 0%;
-//  }
-//  100% {
-//    width: 100%;
-//  }
-//}
-//@keyframes anim-out {
-//  0% {
-//    width: 0%;
-//  }
-//  100% {
-//    width: 100%;
-//  }
-//}
-//@-webkit-keyframes anim-out-pseudo {
-//  0% {
-//    background: rgba(0, 0, 0, 0.25);
-//  }
-//  100% {
-//    background: transparent;
-//  }
-//}
-//@-moz-keyframes anim-out-pseudo {
-//  0% {
-//    background: rgba(0, 0, 0, 0.25);
-//  }
-//  100% {
-//    background: transparent;
-//  }
-//}
-//@-ms-keyframes anim-out-pseudo {
-//  0% {
-//    background: rgba(0, 0, 0, 0.25);
-//  }
-//  100% {
-//    background: transparent;
-//  }
-//}
-//@keyframes anim-out-pseudo {
-//  0% {
-//    background: rgba(0, 0, 0, 0.25);
-//  }
-//  100% {
-//    background: transparent;
-//  }
-//}
 
 
 //NEW CSS - FORMATTED
 
 .tabsCustom {
   margin-top: 24px;
+
 }
 
 
@@ -310,7 +114,8 @@
 .tabsCustomList a{
   background: #EDECEC;
   fontFamily: 'Tesco' !important;
-  color: #00539f !important;
+  //color: #00539f !important;
+  color: #2061AE !important;
   display: block !important;
   padding: 15px 24px 16px 24px !important;
   text-decoration: none;
@@ -325,8 +130,15 @@
 
 .tabsCustomList span.tab_label{
   padding: 12px 8px;
-  color: #048EC3;
+  //color: #048EC3;
+  //font-weight: 600;
+
   font-weight: 600;
+  font-family: Tesco;
+  color: #00539f;
+  font-size: 16px;
+  vertical-align: middle;
+
 }
 
 

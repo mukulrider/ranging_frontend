@@ -202,11 +202,11 @@ class MultilineOrdinalChart extends React.PureComponent { // eslint-disable-line
       //---------- Adding the axis
       chart.append("g")
             .attr("transform", "translate(0," + height + ")")
-            .attr("class", "x axis")
+            .attr("class", "chartAxisLabel")
             .call(xAxis);
 
         chart.append("g")
-            .classed("axis yaxis", true)
+            .classed("chartAxisLabel", true)
             .call(yAxis);
 
 
@@ -235,21 +235,19 @@ class MultilineOrdinalChart extends React.PureComponent { // eslint-disable-line
 
       //X axis
       chart.append("text")
-        .attr("transform","translate(" + (width/2) + " ," +(height + margin.top+(margin.bottom/2)) + ")")
+        .attr("class", "chartAxisTitle")
+        .attr("transform","translate(" + (width/2) + " ," +(height + margin.top+(margin.bottom/3)) + ")")
         .style("text-anchor", "middle")
-        .text(xaxis_title)
-        .style("font-size","10px")
-        .style("font-family","Tesco");
+        .text(xaxis_title);
 
       //Y axis
       chart.append("text")
+        .attr("class", "chartAxisTitle")
         .attr("transform", "rotate(-90)")
         .attr("y", 0 - (margin.left)+10)
         .attr("x",0 - (height / 2))
         .attr("dy", "1em")
         .style("text-anchor", "middle")
-        .style("font-size","10px")
-        .style("font-family","Tesco")
         .text(yaxis_title);
 
       chart.selectAll(".tick text")
@@ -261,9 +259,7 @@ class MultilineOrdinalChart extends React.PureComponent { // eslint-disable-line
       //---------- Adding the legends
 
         let legend = chart.append("g")
-            .attr("font-family", "Tesco")
-            .attr("font-size", 10)
-            .attr("text-anchor", "end")
+          .attr("class", "chartLegend")
             .selectAll("g")
             .data(series_type_values)
             .enter().append("g")
