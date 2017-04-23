@@ -226,8 +226,8 @@ export class RangingNpdImpactPage extends React.PureComponent { // eslint-disabl
           {/*Content*/}
         <div className="flexright">
 
-          <div className="row">
-            <div className="col-md-12 content-wrap">
+          <div style={{width: '100%'}}>
+            <div className="content-wrap">
 
               <Nav bsStyle="tabs" activeKey={this.state.activeKey} onSelect={this.handleSelect} className="tabsCustom">
                 <NavItem className="tabsCustomList" eventKey="1" onClick={() => {
