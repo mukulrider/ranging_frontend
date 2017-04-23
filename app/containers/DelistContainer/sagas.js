@@ -26,6 +26,8 @@ import {
 } from 'containers/DelistContainer/selectors';
 
 import {
+  apiFetch,
+  delistTable,
   apiFetchSuccess,
   SupplierImpactTableSpinnerSuccess,
   DelistProductTableSpinnerSuccess,
@@ -577,6 +579,8 @@ let filterParamsString = "";
     yield put(WaterfallValueChartSuccess(data));
     yield put(WaterfallSpinnerSuccess(spinnerCheck));
     yield put(WaterfallProfitSpinnerSuccess(spinnerCheck));
+    yield put(apiFetch());
+    yield put(delistTable());
   } catch (err) {
     // console.log(err);
     let spinnerCheck = 2;

@@ -84,13 +84,13 @@ export class DelistContainer extends React.PureComponent { // eslint-disable-lin
     // this.props.onWaterfallValueChart();
 
     console.log("4onWaterfallValueChart");
-    setTimeout(() => {
-      // alert("time");
-      this.props.onApiFetch();
-      console.log("5onApiFetch");
-      this.props.ondelistTable();
-      console.log("6ondelistTable");
-    }, 10000);
+    // setTimeout(() => {
+    //   // alert("time");
+    //   this.props.onApiFetch();
+    //   console.log("5onApiFetch");
+    //   this.props.ondelistTable();
+    //   console.log("6ondelistTable");
+    // }, 10000);
     // this.props.onApiFetch();
     // console.log("5onApiFetch");
     // this.props.ondelistTable();
@@ -116,7 +116,7 @@ export class DelistContainer extends React.PureComponent { // eslint-disable-lin
       spplierImpactTableInfo: false,
       delistImpactTableInfo: false,
       activeKey: "1",
-      activeKey2: "11",
+      activeKey2: "4",
     };
   }
 
@@ -240,12 +240,12 @@ export class DelistContainer extends React.PureComponent { // eslint-disable-lin
                 this.props.onDelistProductTableSpinner();
                 this.props.onWeekClick(week_no);
                 this.props.onWaterfallValueChart();
-                setTimeout(() => {
-                  // alert("time");
-                  this.props.onApiFetch();
-                  console.log("5onApiFetch");
-                  this.props.ondelistTable();
-                }, 20000);
+                {/*setTimeout(() => {*/}
+                  {/*// alert("time");*/}
+                  {/*this.props.onApiFetch();*/}
+                  {/*console.log("5onApiFetch");*/}
+                  {/*this.props.ondelistTable();*/}
+                {/*}, 20000);*/}
 
 
                 {/*this.props.onApiFetch();*/
@@ -264,10 +264,10 @@ export class DelistContainer extends React.PureComponent { // eslint-disable-lin
                 this.props.onWeekClick(week_no);
                 this.props.onWaterfallValueChart();
 
-                setTimeout(() => {
-                  this.props.onApiFetch();
-                  this.props.ondelistTable();
-                }, 20000);
+                {/*setTimeout(() => {*/}
+                  {/*this.props.onApiFetch();*/}
+                  {/*this.props.ondelistTable();*/}
+                {/*}, 20000);*/}
 
                 {/*this.props.onApiFetch();*/
                 }
@@ -286,10 +286,10 @@ export class DelistContainer extends React.PureComponent { // eslint-disable-lin
                 this.props.onWeekClick(week_no);
                 this.props.onWaterfallValueChart();
 
-                setTimeout(() => {
-                  this.props.onApiFetch();
-                  this.props.ondelistTable();
-                }, 20000);
+                {/*setTimeout(() => {*/}
+                  {/*this.props.onApiFetch();*/}
+                  {/*this.props.ondelistTable();*/}
+                {/*}, 20000);*/}
 
                 {/*this.props.onApiFetch();*/
                 }
@@ -399,10 +399,10 @@ export class DelistContainer extends React.PureComponent { // eslint-disable-lin
                 this.props.onStoreClick(store_type);
                 this.props.onWaterfallValueChart();
 
-                setTimeout(() => {
-                  this.props.onApiFetch();
-                  this.props.ondelistTable();
-                }, 20000);
+                {/*setTimeout(() => {*/}
+                  {/*this.props.onApiFetch();*/}
+                  {/*this.props.ondelistTable();*/}
+                {/*}, 20000);*/}
                 this.props.onStoreTabClick("Store: Overview ")
               }} ><span className="tab_label">OVERVIEW</span></NavItem>
               <NavItem className="tabsCustomList" eventKey="5" onClick={() => {
@@ -415,10 +415,10 @@ export class DelistContainer extends React.PureComponent { // eslint-disable-lin
                 this.props.onStoreClick(store_type);
                 this.props.onWaterfallValueChart();
 
-                setTimeout(() => {
-                  this.props.onApiFetch();
-                  this.props.ondelistTable();
-                }, 20000);
+                {/*setTimeout(() => {*/}
+                  {/*this.props.onApiFetch();*/}
+                  {/*this.props.ondelistTable();*/}
+                {/*}, 20000);*/}
                 this.props.onStoreTabClick("Store: Main Estate ")
               }}><span className="tab_label">MAIN ESTATE</span></NavItem>
               <NavItem className="tabsCustomList" eventKey="6" onClick={() => {
@@ -431,10 +431,10 @@ export class DelistContainer extends React.PureComponent { // eslint-disable-lin
                 this.props.onStoreClick(store_type);
                 this.props.onWaterfallValueChart();
 
-                setTimeout(() => {
-                  this.props.onApiFetch();
-                  this.props.ondelistTable();
-                }, 20000);
+                {/*setTimeout(() => {*/}
+                  {/*this.props.onApiFetch();*/}
+                  {/*this.props.ondelistTable();*/}
+                {/*}, 20000);*/}
                 this.props.onStoreTabClick("Store: Express")
               }} ><span className="tab_label">EXPRESS</span></NavItem>
 
@@ -1077,6 +1077,7 @@ export class DelistContainer extends React.PureComponent { // eslint-disable-lin
             </table>
 
             {/*pagination*/}
+
             <nav aria-label="Page navigation example">
               <ul className="pagination pagination-lg">
                 <li><a role="button" href="#"><span aria-label="Prev">‹</span></a></li>
@@ -1126,10 +1127,10 @@ export class DelistContainer extends React.PureComponent { // eslint-disable-lin
                               this.props.onsupplierPagination(supplierPaginationData);
                               this.props.onTableType("supplier");
                               this.props.onApiFetch();
-                              {/*let maptab = document.getElementById(objj);*/}
+                              let maptab = document.getElementById(objj);
                               {/*alert(objj);*/}
 
-                              {/*maptab.className = maptab.className + ' ' + ' active';*/}
+                              maptab.className = maptab.className + ' ' + ' active';
                             }}><a>{objj}
                         </a> &nbsp;&nbsp; </li>
                       )
@@ -1140,6 +1141,7 @@ export class DelistContainer extends React.PureComponent { // eslint-disable-lin
                 <li><a role="button" href="#"><span aria-label="Next">›</span></a></li>
               </ul>
             </nav>
+
           </Panel>
 
           {/*MODAL FOR SUPPLIER IMPACT TABLE*/}
