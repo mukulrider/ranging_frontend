@@ -8,9 +8,10 @@ import React from 'react';
 // import styled from 'styled-components';
 import {browserHistory} from 'react-router';
 import style from './style.scss';
-import Panel from 'components/panel';
+// import Panel from 'components/panel';
 import Checkbox from 'components/checkbox';
 import Button from 'components/button';
+import {Accordion,PanelGroup, Panel} from 'react-bootstrap';
 
 
 class SelectorNegotiation2 extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
@@ -70,57 +71,56 @@ class SelectorNegotiation2 extends React.PureComponent { // eslint-disable-line 
 
   render() {
 
-
     return (
 
       <div ref={'selector'}>
         {(() => {
           return (
             <div id="style-7" style={{
-              height: '80%',
-              position: 'relative',
-              // overflow: 'scroll',
+              height: '38%',
+              width: '18%',
+              position: 'fixed',
+              overflow: 'scroll',
               paddingRight: '5px',
               overflowX: 'hidden',
               borderTop: '1px solid #ccc',
             }}>
-              {this.props.sideFilter.checkbox_list.map(item => {
+
+              <PanelGroup defaultActiveKey="1" accordion>
+                {console.log('this.props.sideFilter.checkbox_list',this.props.sideFilter.checkbox_list)}
+              {this.props.sideFilter.checkbox_list.map((item,key) => {
+                var panelHeader = (
+                <div  className="text-capitalize">
+                  {item.title.replace(/_/g, ' ')}&nbsp;{item.required ? <span style={{color: 'red'}}>*</span> : ''} &nbsp;
+                  <span className="accordion-toggle" style={{float: 'right'}}></span>
+                </div>);
                 return (
-                  <Panel key={Math.random() + Date.now()}>
-                    <div className="panel selector">
-                      <div className="panel-heading"
-                           style={{
-                             fontWeight: '700',
-                             fontSize: '16px',
-                             borderBottom: '1px solid #ddd'
-                           }}>
-                        <h3
-                          className="text-capitalize">{item.title.replace(/_/g, ' ')}&nbsp;{item.required ? <span style={{color: 'red'}}>*</span> : ''} &nbsp;
-                          <span style={{float: 'right'}} onClick={this.clearFilter}>Clear</span>
-                        </h3>
-                        <input type="text" value={this.props.filterSearch}
-                               onChange={(e) => {
-                                 // console.log(e);
-                                 let search = e.target.value.toLowerCase();
-                                 if (!search) return
+                        <Panel header={panelHeader} eventKey={++key}>
+                          <div className="panel selector">
+                        {/*<input type="text" value={this.props.filterSearch}*/}
+                               {/*onChange={(e) => {*/}
+                                 {/*// console.log(e);*/}
+                                 {/*let search = e.target.value.toLowerCase();*/}
+                                 {/*if (!search) return*/}
 
-                                 let parent = e.target.parentNode;
-                                 while (parent.classList.contains('selector')) {
-                                   parent = parent.parentNode;
-                                 }
-                                 parent = parent.parentNode;
-                                 let inputText = parent.querySelectorAll(`input[name*=${search}]`);
-                                 // console.log(inputText);
+                                 {/*let parent = e.target.parentNode;*/}
+                                 {/*while (parent.classList.contains('selector')) {*/}
+                                   {/*parent = parent.parentNode;*/}
+                                 {/*}*/}
+                                 {/*parent = parent.parentNode;*/}
+                                 {/*let inputText = parent.querySelectorAll(`input[name*=${search}]`);*/}
+                                 {/*// console.log(inputText);*/}
 
-                                 // inputText.map(obj=>{
-                                 //   obj.setAttribute('hidden')
-                                 // })
+                                 {/*// inputText.map(obj=>{*/}
+                                 {/*//   obj.setAttribute('hidden')*/}
+                                 {/*// })*/}
 
-                                 // for (let i = 0; i < inputText.length; i++) {
-                                 //   inputText[i].setAttribute("hidden", true)
-                                 // }
-                               }}/>
-                      </div>
+                                 {/*// for (let i = 0; i < inputText.length; i++) {*/}
+                                 {/*//   inputText[i].setAttribute("hidden", true)*/}
+                                 {/*// }*/}
+                               {/*}}/>*/}
+
+
                       <div className="panel-body style-7"
                            style={{maxHeight: '250px', overflowX: 'hidden'}}>
                         {item.items.map(obj => {
@@ -181,9 +181,15 @@ class SelectorNegotiation2 extends React.PureComponent { // eslint-disable-line 
                         })}
                       </div>
                     </div>
-                  </Panel>
-                )
-              })}
+                  </Panel>)
+                })
+              }
+
+              </PanelGroup>
+
+
+
+
               <Button
                 onClick={() => {
 
@@ -191,11 +197,11 @@ class SelectorNegotiation2 extends React.PureComponent { // eslint-disable-line 
 
                 }}>Apply Filters</Button>
 
-              <Button
-                onClick={() => {
-                  this.props.onGenerateUrlParamsString('');
-                  this.props.onGenerateUrlParamsData();
-                }}>Reset Filters</Button>
+              {/*<Button*/}
+                {/*onClick={() => {*/}
+                  {/*this.props.onGenerateUrlParamsString('');*/}
+                  {/*this.props.onGenerateUrlParamsData();*/}
+                {/*}}>Reset Filters</Button>*/}
             </div>
           )
         })()}

@@ -18,6 +18,8 @@ import styles from './style.scss';
 import SelectorNegotiation2 from 'components/SelectorNegotiation2';
 import {browserHistory} from 'react-router';
 import InputField from 'components/input_field';
+import {Nav} from 'react-bootstrap';
+import {NavItem} from 'react-bootstrap';
 
 import {
 
@@ -55,7 +57,21 @@ export class RangingNegotiationPage extends React.PureComponent { // eslint-disa
     // FOR FILTER
     this.props.onGenerateSideFilter();
   };
-
+  constructor(props) {
+    super(props);
+    this.state = {
+      smShow: false,
+      lgShow: false,
+      supplierImpactInfo: false,
+      salesImpactVolumeInfo: false,
+      profitImpactInfo: false,
+      profitImpactCtsInfo: false,
+      spplierImpactTableInfo: false,
+      delistImpactTableInfo: false,
+      activeKey: "1",
+      activeKey2: "11",
+    };
+  }
   componentDidUpdate = () => {
     //this.props.onURLRequest(this.props.location.query);
   };
@@ -87,7 +103,6 @@ export class RangingNegotiationPage extends React.PureComponent { // eslint-disa
     let dataStoreUrlParams = this.props.RangingNegotiationPage.dataStoreUrlParams;
     let dataWeekUrlParams = this.props.RangingNegotiationPage.dataWeekUrlParams;
 
-    console.log("checking chart data",this.props.RangingNegotiationPage.chartData);
     //Formatting the
     let formatSales = (i) => {
       if (i >= 1000 || i <= -1000) {
@@ -115,16 +130,11 @@ export class RangingNegotiationPage extends React.PureComponent { // eslint-disa
 
     return (
 
-      <div className={{'fontSize': '14px'}}>
-        <Helmet
-          title="Compass - Negotiation View"
-          meta={[
-            {name: 'description', content: 'Description of RangingNegotiationPage'},
-          ]}
-        />
 
-        <div className="row">
-          <div className="col-xs-12 col-md-2">
+        <div className="flextcontent" style={{fontSize: '14px'}}>
+          <div className="flexleft" style={{marginTop: '25px'}}>
+            {/*<Panel>*/}
+
             {(() => {
               if (this.props.RangingNegotiationPage.sideFilter) {
                 return (
@@ -147,79 +157,82 @@ export class RangingNegotiationPage extends React.PureComponent { // eslint-disa
                 return (<div>Loading</div>)
               }
             })()}
-
+            {/*</Panel>*/}
           </div>
           {/*Defining the area for the content on right to the filters */}
           {/*<div className="wrapper">*/}
-          <p>
-            <span id="clickInfo">WEEK : Last 13 Weeks</span>
-            <span id="separator"> | </span>
-            <span id="storeInfo">STORE : Main Estate</span>
-          </p>
 
           {/*</div>*/}
-          <div className="col-xs-12 col-md-10" style={{float:'right'}}>
+
+          <div className="flexright">
+
+
+            <Nav bsStyle="tabs" activeKey={this.state.activeKey} onSelect={this.handleSelect} className="tabsCustom">
+              <NavItem className="tabsCustomList" eventKey="1" onClick={() => {
+
+                let text = "WEEK : Last 13 weeks";
+                this.updateText(text);
+
+                dataWeekUrlParams = "time_period=Last 13 weeks"
+                this.props.onSaveWeekParam(dataWeekUrlParams);
+                this.props.onFetchGraph();
+                this.props.onGenerateTable();
+                //browserHistory.push(this.props.location.pathname + "?time_period=Last 13 weeks")
+              }}><span className="tab_label">Last 13 Weeks</span></NavItem>
+
+
+              <NavItem className="tabsCustomList" eventKey="2" onClick={() => {
+                let text = "WEEK : Last 26 weeks";
+                this.updateText(text);
+                dataWeekUrlParams = "time_period=Last 26 weeks"
+                this.props.onSaveWeekParam(dataWeekUrlParams);
+                this.props.onFetchGraph();
+                this.props.onGenerateTable();
+                //browserHistory.push(this.props.location.pathname + "?time_period=Last 26 weeks")
+              }}><span className="tab_label">Last 26 Weeks</span></NavItem>
+
+
+
+
+              <NavItem className="tabsCustomList" eventKey="3" onClick={() => {
+                let text = "WEEK : Last 52 weeks";
+                this.updateText(text);
+                dataWeekUrlParams = "time_period=Last 52 weeks"
+                this.props.onSaveWeekParam(dataWeekUrlParams);
+                this.props.onFetchGraph();
+                this.props.onGenerateTable();
+                //browserHistory.push(this.props.location.pathname + "?time_period=Last 52 weeks")
+              }}><span className="tab_label">Last 52 Weeks</span></NavItem>
+
+
+            </Nav>
             <div className="row">
-              <div className="col-xs-12">
-                <div className="row week-row">
-                  <div className="col-xs-12 col-md-8">
-                    <div className="col-xs-12 col-md-3">
-                      <Button onClick={() => {
+              <div className="col-md-12 content-wrap">
+            <Nav bsStyle="tabs" className="tabsCustom" activeKey={this.state.activeKey2} onSelect={this.handleSelect}>
+              <NavItem className="tabsCustomList" eventKey="4" onClick={() => {
+                let storeType = "STORE : Main Estate";
+                this.updateStore(storeType);
+                dataStoreUrlParams = "store_type=Main Estate"
+                this.props.onSaveStoreParam(dataStoreUrlParams);
+                this.props.onFetchGraph();
+                this.props.onGenerateTable();
+              }}><span className="tab_label">Main Estate</span></NavItem>
+              <NavItem className="tabsCustomList" eventKey="5" onClick={() => {
+                let storeType = "STORE : Express";
+                this.updateStore(storeType);
+                dataStoreUrlParams = "store_type=Express"
+                this.props.onSaveStoreParam(dataStoreUrlParams);
+                this.props.onFetchGraph();
+                this.props.onGenerateTable();
+                // browserHistory.push(this.props.location.pathname + "?store_type=Express")
+              }}><span className="tab_label">Express</span></NavItem>
 
-                        let text = "WEEK : Last 13 weeks";
-                        this.updateText(text);
 
-                        dataWeekUrlParams = "time_period=Last 13 weeks"
-                        this.props.onSaveWeekParam(dataWeekUrlParams);
-                        this.props.onFetchGraph();
-                        this.props.onGenerateTable();
-                        //browserHistory.push(this.props.location.pathname + "?time_period=Last 13 weeks")
-                      }}>Last 13 Weeks</Button>
-                    </div>
-                    <div className="col-xs-12 col-md-3">
-                      <Button onClick={() => {
-                        let text = "WEEK : Last 26 weeks";
-                        this.updateText(text);
-                        dataWeekUrlParams = "time_period=Last 26 weeks"
-                        this.props.onSaveWeekParam(dataWeekUrlParams);
-                        this.props.onFetchGraph();
-                        this.props.onGenerateTable();
-                        //browserHistory.push(this.props.location.pathname + "?time_period=Last 26 weeks")
-                      }}>Last 26 Weeks</Button>
-                    </div>
-                    <div className="col-xs-12 col-md-2">
-                      <Button onClick={() => {
-                        let text = "WEEK : Last 52 weeks";
-                        this.updateText(text);
-                        dataWeekUrlParams = "time_period=Last 52 weeks"
-                        this.props.onSaveWeekParam(dataWeekUrlParams);
-                        this.props.onFetchGraph();
-                        this.props.onGenerateTable();
-                        //browserHistory.push(this.props.location.pathname + "?time_period=Last 52 weeks")
-                      }}>Last 52 Weeks</Button>
-                    </div>
-                  </div>
-                  {/*<div className="col-xs-12 col-md-2"></div>*/}
-                </div>
-
-                <div className="row store-row">
-                  <Button onClick={() => {
-                    let storeType = "STORE : Main Estate";
-                    this.updateStore(storeType);
-                    dataStoreUrlParams = "store_type=Main Estate"
-                    this.props.onSaveStoreParam(dataStoreUrlParams);
-                    this.props.onFetchGraph();
-                    this.props.onGenerateTable();
-                  }}>Main Estate</Button>
-                  <Button onClick={() => {
-                    let storeType = "STORE : Express";
-                    this.updateStore(storeType);
-                    dataStoreUrlParams = "store_type=Express"
-                    this.props.onSaveStoreParam(dataStoreUrlParams);
-                    this.props.onFetchGraph();
-                    this.props.onGenerateTable();
-                    // browserHistory.push(this.props.location.pathname + "?store_type=Express")
-                  }}>Express</Button>
+            </Nav>
+                <div className="breadcrumb">
+                  <span  className="label" id="clickInfo">WEEK : Last 13 Weeks</span>
+                  <span  className="label" id="separator">&lt;  </span>
+                  <span  className="label" id="storeInfo"> STORE : Main Estate</span>
                 </div>
 
                 <Panel>
@@ -246,17 +259,13 @@ export class RangingNegotiationPage extends React.PureComponent { // eslint-disa
                     <div className="col-xs-12 col-md-8">
                       <BubbleChart2 data={this.props.RangingNegotiationPage.chartData}
                                     path={this.props.location}
-                                    // selectedProd ={this.props.RangingNegotiationPage.dataBubbleUrlParams}
                                     onSaveBubbleParam={this.props.onSaveBubbleParam}
                                     onFetchGraph={this.props.onFetchGraph}
                                     onGenerateTable={this.props.onGenerateTable}
                       />
                       <i style={{fontSize:'12px'}}>*Size of the bubble corresponds to Rate of Sales</i>
                     </div>
-                    {(()=> {
-                      let bubbleArray = this.props.RangingNegotiationPage.dataBubbleUrlParams;
-                      console.log("checking selected products", bubbleArray);
-                    })()}
+
                     <div className="col-xs-12 col-md-4">
                       <h4>
                         Please select a negotiation strategy below to filter
@@ -275,7 +284,7 @@ export class RangingNegotiationPage extends React.PureComponent { // eslint-disa
                         <div className="panel-heading">
                           <h5 className="panel-title">Low CPS/Low Profit</h5>
                         </div>
-                        <div className="panel-body perfDesc">
+                        <div className="panel-body">
                           Delist Products
                         </div>
                       </div>
@@ -293,7 +302,7 @@ export class RangingNegotiationPage extends React.PureComponent { // eslint-disa
                         <div className="panel-heading">
                           <h5 className="panel-title">Low CPS/High Profit</h5>
                         </div>
-                        <div className="panel-body perfDesc" >
+                        <div className="panel-body">
                           Hard
                           Bargaining’
                           for stronger
@@ -312,7 +321,7 @@ export class RangingNegotiationPage extends React.PureComponent { // eslint-disa
                         <div className="panel-heading">
                           <h5 className="panel-title">Med CPS/Med Profit</h5>
                         </div>
-                        <div className="panel-body perfDesc">Area of
+                        <div className="panel-body">Area of
                           opportunity. Concession
                           trading – Subs/Ranging/Price. Reduce range to drive
                           volume
@@ -332,7 +341,7 @@ export class RangingNegotiationPage extends React.PureComponent { // eslint-disa
                         <div className="panel-heading">
                           <h5 className="panel-title">High CPS/High Profit</h5>
                         </div>
-                        <div className="panel-body perfDesc">Build
+                        <div className="panel-body">Build
                           Win-Win
                           relationship with
                           supplier to share further profit gains
@@ -351,7 +360,7 @@ export class RangingNegotiationPage extends React.PureComponent { // eslint-disa
                         <div className="panel-heading">
                           <h5 className="panel-title">High CPS/Low Profit</h5>
                         </div>
-                        <div className="panel-body perfDesc">Work
+                        <div className="panel-body">Work
                           collaboratively to jointly
                           solve low profitability
                         </div>
@@ -360,8 +369,6 @@ export class RangingNegotiationPage extends React.PureComponent { // eslint-disa
                     </div>
                   </div>
                 </Panel>
-              </div>
-            </div>
 
 
             <Panel>
@@ -530,8 +537,11 @@ export class RangingNegotiationPage extends React.PureComponent { // eslint-disa
             </Panel>
           </div>
         </div>
-
+        </div>
       </div>
+
+
+
 
     );
   }

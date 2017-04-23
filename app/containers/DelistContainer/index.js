@@ -441,8 +441,8 @@ export class DelistContainer extends React.PureComponent { // eslint-disable-lin
             </Nav>
 
             <div className="breadcrumb">
-             <span className="label">&nbsp;{this.props.DelistContainer.weekBreadcrumb}</span>
-                <span className="label">&gt;&nbsp;&nbsp;&nbsp;&nbsp;{this.props.DelistContainer.storeBreadcrumb}</span>
+             <span className="label">&nbsp;{this.props.DelistContainer.weekBreadcrumb ? this.props.DelistContainer.weekBreadcrumb:'Week 13'}</span>
+                <span className="label">&gt;&nbsp;&nbsp;&nbsp;&nbsp;{this.props.DelistContainer.storeBreadcrumb?this.props.DelistContainer.storeBreadcrumb:'Overview'}</span>
 
             </div>
 
@@ -499,7 +499,7 @@ export class DelistContainer extends React.PureComponent { // eslint-disable-lin
                       </div>
                       <div className="panel-body">
                         <div className="row" style={{top: '-25px', position: 'relative'}}>
-                          <div className="col-xs-6 text-center">
+                          <div className="col-xs-6 text-center" style={{marginLeft: '25%'}}>
                             <Panel>
                               {/*<div style={{textAlign: 'center', color: '#00539f', fontWeight: 'bold', fontSize: '16px'}}>*/}
                               <div
@@ -528,30 +528,30 @@ export class DelistContainer extends React.PureComponent { // eslint-disable-lin
                             </Panel>
                           </div>
                           <div className="col-xs-6 text-center">
-                            <Panel>
-                              <div
-                                style={{ color: '#333333', fontWeight: 'bold', fontSize: '16px'}}>
-                                Impact to Product
-                                Sub-group
-                              </div>
-                              <div style={{
+                            {/*<Panel>*/}
+                              {/*<div*/}
+                                {/*style={{ color: '#333333', fontWeight: 'bold', fontSize: '16px'}}>*/}
+                                {/*Impact to Product*/}
+                                {/*Sub-group*/}
+                              {/*</div>*/}
+                              {/*<div style={{*/}
 
-                                fontWeight: 'bold',
-                                fontSize: '16px'
-                              }}
-                                   className={(() => {
-                                     if (this.props.DelistContainer.waterfallValue.psg_sales_contri > 0) {
-                                       return "glyphicon glyphicon-chevron-up waterfallCalloutsPositive"
-                                     }
-                                     else if (this.props.DelistContainer.waterfallValue.psg_sales_contri < 0) {
-                                       return "glyphicon glyphicon-chevron-down waterfallCalloutsNegative"
-                                     } else {
-                                       return "glyphicon glyphicon-minus-sign waterfallCalloutsNeutral"
-                                     }
-                                   })()}>
-                                {this.props.DelistContainer.waterfallValue.psg_sales_contri}%
-                              </div>
-                            </Panel>
+                                {/*fontWeight: 'bold',*/}
+                                {/*fontSize: '16px'*/}
+                              {/*}}*/}
+                                   {/*className={(() => {*/}
+                                     {/*if (this.props.DelistContainer.waterfallValue.psg_sales_contri > 0) {*/}
+                                       {/*return "glyphicon glyphicon-chevron-up waterfallCalloutsPositive"*/}
+                                     {/*}*/}
+                                     {/*else if (this.props.DelistContainer.waterfallValue.psg_sales_contri < 0) {*/}
+                                       {/*return "glyphicon glyphicon-chevron-down waterfallCalloutsNegative"*/}
+                                     {/*} else {*/}
+                                       {/*return "glyphicon glyphicon-minus-sign waterfallCalloutsNeutral"*/}
+                                     {/*}*/}
+                                   {/*})()}>*/}
+                                {/*{this.props.DelistContainer.waterfallValue.psg_sales_contri}%*/}
+                              {/*</div>*/}
+                            {/*</Panel>*/}
                           </div>
                         </div>
                         <div className="row" style={{top: '-30px', position: 'relative'}}>
@@ -604,7 +604,7 @@ export class DelistContainer extends React.PureComponent { // eslint-disable-lin
                       </div>
                       <div className="panel-body">
                         <div className="row" style={{top: '-25px', position: 'relative'}}>
-                          <div className="col-xs-6 text-center">
+                          <div className="col-xs-6 text-center" style={{marginLeft: '25%'}}>
 
                             <Panel>
                               <div
@@ -632,29 +632,29 @@ export class DelistContainer extends React.PureComponent { // eslint-disable-lin
                           </div>
                           <div className="col-xs-6 text-center">
 
-                            <Panel>
-                              <div
-                                style={{color: '#333333', fontWeight: 'bold', fontSize: '16px'}}>
-                                Impact to Product
-                                Sub-group
-                              </div>
-                              <div style={{
-                                fontWeight: 'bold',
-                                fontSize: '16px'
-                              }}
-                                   className={(() => {
-                                     if (this.props.DelistContainer.waterfallValue.psg_vols_contri > 0) {
-                                       return "glyphicon glyphicon-chevron-up waterfallCalloutsPositive"
-                                     }
-                                     else if (this.props.DelistContainer.waterfallValue.psg_vols_contri < 0) {
-                                       return "glyphicon glyphicon-chevron-down waterfallCalloutsNegative"
-                                     } else {
-                                       return "glyphicon glyphicon-minus-sign waterfallCalloutsNeutral"
-                                     }
-                                   })()}>
-                                {this.props.DelistContainer.waterfallValue.psg_vols_contri}%
-                              </div>
-                            </Panel>
+                            {/*<Panel>*/}
+                              {/*<div*/}
+                                {/*style={{color: '#333333', fontWeight: 'bold', fontSize: '16px'}}>*/}
+                                {/*Impact to Product*/}
+                                {/*Sub-group*/}
+                              {/*</div>*/}
+                              {/*<div style={{*/}
+                                {/*fontWeight: 'bold',*/}
+                                {/*fontSize: '16px'*/}
+                              {/*}}*/}
+                                   {/*className={(() => {*/}
+                                     {/*if (this.props.DelistContainer.waterfallValue.psg_vols_contri > 0) {*/}
+                                       {/*return "glyphicon glyphicon-chevron-up waterfallCalloutsPositive"*/}
+                                     {/*}*/}
+                                     {/*else if (this.props.DelistContainer.waterfallValue.psg_vols_contri < 0) {*/}
+                                       {/*return "glyphicon glyphicon-chevron-down waterfallCalloutsNegative"*/}
+                                     {/*} else {*/}
+                                       {/*return "glyphicon glyphicon-minus-sign waterfallCalloutsNeutral"*/}
+                                     {/*}*/}
+                                   {/*})()}>*/}
+                                {/*{this.props.DelistContainer.waterfallValue.psg_vols_contri}%*/}
+                              {/*</div>*/}
+                            {/*</Panel>*/}
                           </div>
                         </div>
                         <div className="row" style={{top: '-30px', position: 'relative'}}>
@@ -697,7 +697,7 @@ export class DelistContainer extends React.PureComponent { // eslint-disable-lin
             <Modal.Header>
 
               <Modal.Title id="contained-modal-title-sm" style={{textAlign: 'center', fontSize: '14px'}}><span
-                style={{textAlign: 'center', fontSize: '14px'}}><b>PROFIT</b><span
+                style={{textAlign: 'center', fontSize: '14px'}}><b>Profit</b><span
                 style={{textAlign: 'right', float: 'right'}}
                 onClick={() => this.setState({profitImpactInfo: false})}><b>X</b></span></span>
                 <div style={{textAlign: 'center'}}>
@@ -733,7 +733,8 @@ export class DelistContainer extends React.PureComponent { // eslint-disable-lin
                       </div>
                       <div className="panel-body">
                         <div className="row" style={{top: '-25px', position: 'relative'}}>
-                          <div className="col-xs-6">
+                          {/*<div className="col-xs-6">*/}
+                          <div className="col-xs-6" style={{marginLeft: '25%'}}>
                             <Panel>
                               <div
                                 style={{color: '#333333', fontWeight: 'bold', fontSize: '16px'}}>
@@ -742,7 +743,8 @@ export class DelistContainer extends React.PureComponent { // eslint-disable-lin
                               </div>
                               <div style={{
                                 fontWeight: 'bold',
-                                fontSize: '16px'
+                                fontSize: '16px',
+                                left: '20%'
                               }}
                                    className={(() => {
                                      if (this.props.DelistContainer.waterfallValue.bc_cgm_contri > 0) {
@@ -759,29 +761,29 @@ export class DelistContainer extends React.PureComponent { // eslint-disable-lin
                             </Panel>
                           </div>
                             <div className="col-xs-6 Impact to ">
-                            <Panel>
-                              <div
-                                style={{color: '#333333', fontWeight: 'bold', fontSize: '16px'}}>
-                                Impact to Product
-                                Sub-group
-                              </div>
-                              <div style={{
-                                fontWeight: 'bold',
-                                fontSize: '16px'
-                              }}
-                                   className={(() => {
-                                     if (this.props.DelistContainer.waterfallValue.psg_cgm_contri > 0) {
-                                       return "glyphicon glyphicon-chevron-up waterfallCalloutsPositive"
-                                     }
-                                     else if (this.props.DelistContainer.waterfallValue.psg_cgm_contri < 0) {
-                                       return "glyphicon glyphicon-chevron-down waterfallCalloutsNegative"
-                                     } else {
-                                       return "glyphicon glyphicon-minus-sign waterfallCalloutsNeutral"
-                                     }
-                                   })()}>
-                                {this.props.DelistContainer.waterfallValue.psg_cgm_contri}%
-                              </div>
-                            </Panel>
+                            {/*<Panel>*/}
+                              {/*<div*/}
+                                {/*style={{color: '#333333', fontWeight: 'bold', fontSize: '16px'}}>*/}
+                                {/*Impact to Product*/}
+                                {/*Sub-group*/}
+                              {/*</div>*/}
+                              {/*<div style={{*/}
+                                {/*fontWeight: 'bold',*/}
+                                {/*fontSize: '16px'*/}
+                              {/*}}*/}
+                                   {/*className={(() => {*/}
+                                     {/*if (this.props.DelistContainer.waterfallValue.psg_cgm_contri > 0) {*/}
+                                       {/*return "glyphicon glyphicon-chevron-up waterfallCalloutsPositive"*/}
+                                     {/*}*/}
+                                     {/*else if (this.props.DelistContainer.waterfallValue.psg_cgm_contri < 0) {*/}
+                                       {/*return "glyphicon glyphicon-chevron-down waterfallCalloutsNegative"*/}
+                                     {/*} else {*/}
+                                       {/*return "glyphicon glyphicon-minus-sign waterfallCalloutsNeutral"*/}
+                                     {/*}*/}
+                                   {/*})()}>*/}
+                                {/*{this.props.DelistContainer.waterfallValue.psg_cgm_contri}%*/}
+                              {/*</div>*/}
+                            {/*</Panel>*/}
                           </div>
                         </div>
                         <div className="row" style={{top: '-30px', position: 'relative'}}>
@@ -830,7 +832,7 @@ export class DelistContainer extends React.PureComponent { // eslint-disable-lin
                       </div>
                       <div className="panel-body">
                         <div className="row"  style={{top: '-25px', position: 'relative'}}>
-                          <div className="col-xs-6 text-center">
+                          <div className="col-xs-6 text-center" style={{marginLeft: '25%'}}>
                             <Panel>
                               <div
                                 style={{ color: '#333333', fontWeight: 'bold', fontSize: '16px'}}>
@@ -857,29 +859,29 @@ export class DelistContainer extends React.PureComponent { // eslint-disable-lin
                           </div>
 
                           <div className="col-xs-6 text-center">
-                            <Panel>
-                              <div
-                                style={{color: '#333333', fontWeight: 'bold', fontSize: '16px'}}>
-                                Impact to Product
-                                Sub-group
-                              </div>
-                              <div style={{
-                                fontWeight: 'bold',
-                                fontSize: '16px'
-                              }}
-                                   className={(() => {
-                                     if (this.props.DelistContainer.waterfallValue.psg_cgm_contri > 0) {
-                                       return "glyphicon glyphicon-chevron-up waterfallCalloutsPositive"
-                                     }
-                                     else if (this.props.DelistContainer.waterfallValue.psg_cgm_contri < 0) {
-                                       return "glyphicon glyphicon-chevron-down waterfallCalloutsNegative"
-                                     } else {
-                                       return "glyphicon glyphicon-minus-sign waterfallCalloutsNeutral"
-                                     }
-                                   })()}>
-                                {this.props.DelistContainer.waterfallValue.psg_cgm_contri}%
-                              </div>
-                            </Panel>
+                            {/*<Panel>*/}
+                              {/*<div*/}
+                                {/*style={{color: '#333333', fontWeight: 'bold', fontSize: '16px'}}>*/}
+                                {/*Impact to Product*/}
+                                {/*Sub-group*/}
+                              {/*</div>*/}
+                              {/*<div style={{*/}
+                                {/*fontWeight: 'bold',*/}
+                                {/*fontSize: '16px'*/}
+                              {/*}}*/}
+                                   {/*className={(() => {*/}
+                                     {/*if (this.props.DelistContainer.waterfallValue.psg_cgm_contri > 0) {*/}
+                                       {/*return "glyphicon glyphicon-chevron-up waterfallCalloutsPositive"*/}
+                                     {/*}*/}
+                                     {/*else if (this.props.DelistContainer.waterfallValue.psg_cgm_contri < 0) {*/}
+                                       {/*return "glyphicon glyphicon-chevron-down waterfallCalloutsNegative"*/}
+                                     {/*} else {*/}
+                                       {/*return "glyphicon glyphicon-minus-sign waterfallCalloutsNeutral"*/}
+                                     {/*}*/}
+                                   {/*})()}>*/}
+                                {/*{this.props.DelistContainer.waterfallValue.psg_cgm_contri}%*/}
+                              {/*</div>*/}
+                            {/*</Panel>*/}
                           </div>
                         </div>
                         <div className="row" style={{top: '-30px', position: 'relative'}}>
@@ -963,6 +965,7 @@ export class DelistContainer extends React.PureComponent { // eslint-disable-lin
                 <th colSpan="5" style={{verticalAlign: 'middle', fontSize: '14px'}}>Value</th>
                 <th colSpan="5" style={{verticalAlign: 'middle', fontSize: '14px'}}>Volume</th>
               </tr>
+
               <tr>
                 <th colSpan="1" style={{verticalAlign: 'middle', fontSize: '14px'}}>Before</th>
                 <th colSpan="4" style={{verticalAlign: 'middle', fontSize: '14px'}}>After</th>
@@ -1100,6 +1103,7 @@ export class DelistContainer extends React.PureComponent { // eslint-disable-lin
                     } else {
                       page = 1
                     }
+
 
                     if (pagination_count > 10) {
                       pagination_count = page + 10

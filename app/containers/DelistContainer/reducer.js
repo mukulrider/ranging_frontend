@@ -87,6 +87,7 @@ function delistContainerReducer(state = initialState, action) {
     case WEEK_URL:
       return state.set('weekNumber', action.data);
 
+
     case STORE_URL:
       return state.set('storeType', action.data);
 

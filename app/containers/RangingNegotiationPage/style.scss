@@ -59,9 +59,6 @@ cursor:pointer;
   box-shadow: 0px 0px 5px #61C5FA;
   border:1px solid #5AB0DB;
 }
-.perfDesc{
-  font-size: 14px;
-}
 
 .panel:focus{
   outline: none;
@@ -71,6 +68,116 @@ cursor:pointer;
 
 table{
   font-size: 12px;
+}
+
+
+
+
+.tabsCustom {
+  margin-top: 24px;
+}
+
+
+
+.tabsCustomList {
+  display: inline-block;
+  margin: 0 8px 0 0;
+  border-bottom: none;
+}
+
+
+.tabsCustomList a{
+  background: #EDECEC;
+  fontFamily: 'Tesco' !important;
+  color: #00539f !important;
+  display: block !important;
+  padding: 15px 24px 16px 24px !important;
+  text-decoration: none;
+}
+
+.tabsCustomList a:hover {
+  text-decoration: underline !important;
+  color:#008dc8;
+}
+
+.tabsCustomList.active{
+  margin-bottom: -1px;
+}
+
+.tabsCustomList span.tab_label{
+  padding: 12px 8px;
+  color: #048EC3;
+  font-weight: 600;
+}
+
+
+.tabsCustomList.active span.tab_label{
+  border-bottom: #048EC3 solid 4px;
+}
+.content-wrap{
+  background: #fff;
+}
+
+.pagination{
+  margin: 0px;
+}
+.pagination a {
+  margin: 0px 10px;
+  margin-top: -3px !important;
+  width: 30px !important;
+  height: 30px !important;
+  display: inline-block !important;
+  border-radius: 50%;
+  background-color: #fff;
+  color: #008dc8 !important;
+  padding: 0px !important;
+  text-align: center;
+  line-height: 30px !important;
+  border: 0px !important;
+}
+
+.pagination li.disabled:first-child a,
+.pagination li.disabled:last-child a{
+  border:2px solid #ccc !important;
+}
+.pagination li:last-child a,
+.pagination li:first-child a{
+  border:2px solid #008dc8 !important;
+  border-radius: 50% !important;
+  line-height: 25px !important;
+}
+.pagination li:last-child a:hover,
+.pagination li:first-child a:hover {
+  box-shadow: 0 0 0 4px rgba(0, 83, 159, 0.4);
+  transition: box-shadow 0.3s;
+}
+.pagination .active a{
+  background-color: #008dc8 !important;
+  color: #ffffff !important;
+  margin-top: -3px !important;
+}
+.chartwrap{
+  overflow-x: auto;
+}
+
+
+
+
+.FlexContainer.Row {
+  -ms-flex-direction: row;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+  flex-direction: row;
+}
+
+.FlexContainer.Column {
+  -ms-flex-direction: column;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  flex-direction: column;
+}
+.container-left{
+  display: flex;
 }
 
 

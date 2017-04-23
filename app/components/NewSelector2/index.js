@@ -62,11 +62,13 @@ class NewSelector2 extends React.PureComponent { // eslint-disable-line react/pr
 
   render() {
     return (
+
       <div ref={'selector'}>
         {(() => {
           return (
             <div id="style-7" style={{
-              height: '66%',
+              height: '52%',
+              width: '19%',
               position: 'fixed',
               overflow: 'scroll',
               paddingRight: '5px',
@@ -83,6 +85,7 @@ class NewSelector2 extends React.PureComponent { // eslint-disable-line react/pr
                   </div>
                 );
                 return (
+
                   <Panel header={panelHeader} eventKey={++key}>
                     <div className="panel selector">
                       {/*<div className="panel-heading">*/}

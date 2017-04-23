@@ -64,7 +64,7 @@ const initialState = fromJS({
     }],
   urlParamsString: '',
   dataPerformanceUrlParams: '',
-  dataStoreUrlParams: 'store_type=Main Estate',
+  dataStoreUrlParams: '',
   dataWeekUrlParams: '',
   dataBubbleUrlParams: '',
   dataPageUrlParams:'page=1',
