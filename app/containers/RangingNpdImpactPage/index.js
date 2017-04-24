@@ -760,7 +760,7 @@ export class RangingNpdImpactPage extends React.PureComponent { // eslint-disabl
 
                                     this.setState({activePage: e})
 
-                                    let dataTable2PageUrlParamsNew = "page1=" + obj;
+                                    let dataTable2PageUrlParamsNew = "page1=" + e;
                                     console.log("printing pagination for bubble table",dataTable2PageUrlParamsNew);
                                     this.props.onSaveTable2PageParam(dataTable2PageUrlParamsNew );
                                     this.props.onDataFetchOnPageLoad();

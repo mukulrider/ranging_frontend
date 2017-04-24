@@ -118,6 +118,7 @@ class BubbleChartNpd extends React.PureComponent { // eslint-disable-line react/
           });
 
 
+
       // ------------- Labels -----------------
         // X axis labels
         chart.append("text")

@@ -176,7 +176,8 @@ class WaterFallChartNpd extends React.PureComponent { // eslint-disable-line rea
      // return (d.end - d.start);
         });
 
-  
+
+
       bar.filter(function (d) {
         return d.class != "total"
       }).append("line")

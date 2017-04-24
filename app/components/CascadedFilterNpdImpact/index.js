@@ -414,6 +414,7 @@ class CascadedFilterNpdImpact extends React.PureComponent { // eslint-disable-li
                                 }}
                     />
 
+
                   </div>
                   </div>
                 )
