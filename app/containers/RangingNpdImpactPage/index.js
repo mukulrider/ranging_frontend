@@ -65,7 +65,7 @@ export class RangingNpdImpactPage extends React.PureComponent { // eslint-disabl
   };
   constructor(props) {
     super(props);
-    this.state = {smShow: false, lgShow: false, showPreviousChanges: true, activeKey: '1'};
+    this.state = {smShow: false, lgShow: false, showPreviousChanges: true, activeKey: '1', activePage: 1};
 
   }
 
@@ -739,69 +739,52 @@ export class RangingNpdImpactPage extends React.PureComponent { // eslint-disabl
                           </table>
 
                           {/*pagination*/}
-                          <nav aria-label="Page navigation example" style={{marginTop:"-35px"}}>
-                            <ul className="pagination pagination-lg">
-                              {(() => {
-
-                                if (this.props.RangingNpdImpactPage.npd_bubble_table_data && this.props.RangingNpdImpactPage.npd_bubble_table_data.count) {
-                                  let x = [];
-                                  let start_index = this.props.RangingNpdImpactPage.npd_bubble_table_data.start_index;
-                                  let page = this.props.RangingNpdImpactPage.npd_bubble_table_data.page;
-                                  let end_index = this.props.RangingNpdImpactPage.npd_bubble_table_data.end_index;
-                                  let pagination_count = this.props.RangingNpdImpactPage.npd_bubble_table_data.pagination_count;
-                                  let selected_page = 1;
 
 
-                                  if (page > 5) {
-                                    page = page - 5
-                                  } else {
-                                    page = 1
-                                  }
+                          {(() => {
+                              if (this.props.RangingNpdImpactPage.npd_bubble_table_data && this.props.RangingNpdImpactPage.npd_bubble_table_data.count) {
 
-                                  if (pagination_count > 10) {
-                                    pagination_count = page + 10
-                                  }
+                                return <Pagination
+                                  prev
+                                  next
+                                  first
+                                  last
+                                  ellipsis
+                                  boundaryLinks
+                                  items={this.props.RangingNpdImpactPage.npd_bubble_table_data.pagination_count}
+                                  maxButtons={5}
+                                  activePage={this.state.activePage}
+                                  onSelect={(e) => {
 
-                                  for (let i = page;
-                                       i <= pagination_count;
-                                       i++) {
+                                    this.setState({activePage: e})
 
-                                    x.push(i)
-                                  }
+                                    let dataTable2PageUrlParamsNew = "page1=" + obj;
+                                    console.log("printing pagination for bubble table",dataTable2PageUrlParamsNew);
+                                    this.props.onSaveTable2PageParam(dataTable2PageUrlParamsNew );
+                                    this.props.onDataFetchOnPageLoad();
+                                    {/*let browserPushString2='';*/}
 
-                                  return x.map(obj => {
-                                    return (
-                                      <li className="page-item" key={Math.random() + Date.now()}
-                                          onClick={() => {
-                                            let dataTable2PageUrlParamsNew = "page1=" + obj;
-                                            console.log("printing pagination for bubble table",dataTable2PageUrlParamsNew);
-                                            this.props.onSaveTable2PageParam(dataTable2PageUrlParamsNew );
-                                            this.props.onDataFetchOnPageLoad();
-                                            {/*let browserPushString2='';*/}
+                                    {/*if(dataFilterUrlParams !== ''){*/}
+                                    {/*browserPushString2=browserPushString2+"&"+dataFilterUrlParams;*/}
+                                    {/*}*/}
+                                    {/*if (dataWeekUrlParams !== ''){*/}
+                                    {/*browserPushString2=browserPushString2+"&"+dataWeekUrlParams;*/}
+                                    {/*}*/}
+                                    {/*if(dataTable1PageUrlParams!==''){*/}
+                                    {/*browserPushString2=browserPushString2+"&"+dataTable1PageUrlParams;*/}
+                                    {/*}*/}
 
-                                            {/*if(dataFilterUrlParams !== ''){*/}
-                                            {/*browserPushString2=browserPushString2+"&"+dataFilterUrlParams;*/}
-                                            {/*}*/}
-                                            {/*if (dataWeekUrlParams !== ''){*/}
-                                            {/*browserPushString2=browserPushString2+"&"+dataWeekUrlParams;*/}
-                                            {/*}*/}
-                                            {/*if(dataTable1PageUrlParams!==''){*/}
-                                            {/*browserPushString2=browserPushString2+"&"+dataTable1PageUrlParams;*/}
-                                            {/*}*/}
+                                    {/*browserPushString2=browserPushString2+"&"+dataTable2PageUrlParamsNew ;*/}
+                                    {/*browserPushString2=browserPushString2.replace('&','');*/}
 
-                                            {/*browserPushString2=browserPushString2+"&"+dataTable2PageUrlParamsNew ;*/}
-                                            {/*browserPushString2=browserPushString2.replace('&','');*/}
+                                    {/*browserHistory.push(this.props.location.pathname + "?" +browserPushString2);*/}
 
-                                            {/*browserHistory.push(this.props.location.pathname + "?" +browserPushString2);*/}
+                                  }}
+                                />
 
-                                          }}><a className="page-link">{obj}
-                                      </a></li>
-                                    )
-                                  })
-                                }
-                              })()}
-                            </ul>
-                          </nav>
+                              }
+                            }
+                          )()}
 
 
                         </div>
