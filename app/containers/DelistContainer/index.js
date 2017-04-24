@@ -211,35 +211,6 @@ export class DelistContainer extends React.PureComponent { // eslint-disable-lin
 
 
         <div className="flexright" style={{marginLeft: "1%"}}>
-            {/*<div className="nav-tabs-customm">*/}
-            {/*<ul className="nav nav-tabs  nav-justified">*/}
-            {/*<li><a href="#" style={{fontSize: '14px'}} onClick={() => {*/}
-            {/*let week_no = "time_period=13_weeks";*/}
-            {/*this.props.onWeekClick(week_no);*/}
-            {/*this.props.onWaterfallValueChart();*/}
-            {/*this.props.onApiFetch();*/}
-            {/*this.props.ondelistTable();*/}
-            {/*this.props.onWeekTabClick("Week: 13 weeks ");*/}
-            {/*}}>WEEK 13</a></li>*/}
-            {/*<li><a href="#" style={{fontSize: '14px'}} onClick={() => {*/}
-            {/*let week_no = "time_period=26_weeks";*/}
-            {/*this.props.onWeekClick(week_no);*/}
-            {/*this.props.onWaterfallValueChart();*/}
-            {/*this.props.onApiFetch();*/}
-            {/*this.props.ondelistTable();*/}
-            {/*this.props.onWeekTabClick("Week: 26 weeks ");*/}
-            {/*}}>Week 26</a></li>*/}
-            {/*<li><a href="#" style={{fontSize: '14px'}} onClick={() => {*/}
-            {/*let week_no = "time_period=52_weeks";*/}
-            {/*this.props.onWeekClick(week_no);*/}
-            {/*this.props.onWaterfallValueChart();*/}
-            {/*this.props.onApiFetch();*/}
-            {/*this.props.ondelistTable();*/}
-            {/*this.props.onWeekTabClick("Week: 52 weeks ");*/}
-            {/*}}>Week 52</a></li>*/}
-            {/*</ul>*/}
-            {/*</div>*/}
-
 
             <Nav bsStyle="tabs" activeKey={this.state.activeKey} onSelect={this.handleSelect} className="tabsCustom">
               <NavItem className="tabsCustomList" eventKey="1" onClick={() => {
@@ -309,91 +280,6 @@ export class DelistContainer extends React.PureComponent { // eslint-disable-lin
               }}><span className="tab_label">52 weeks</span></NavItem>
            </Nav>
 
-
-
-
-
-
-            {/*<div className="nav-tabs-customm">*/}
-            {/*<ul className="nav nav-tabs  nav-justified">*/}
-            {/*<li><a href="#" style={{fontSize: '14px'}} onClick={() => {*/}
-            {/*let store_type = "store_type=Overview";*/}
-            {/*this.props.onStoreClick(store_type);*/}
-            {/*this.props.onWaterfallValueChart();*/}
-            {/*this.props.onApiFetch();*/}
-            {/*this.props.ondelistTable();*/}
-            {/*this.props.onStoreTabClick("Store: Overview ");*/}
-            {/*}}>Overview</a></li>*/}
-            {/*<li><a href="#" style={{fontSize: '14px'}} onClick={() => {*/}
-            {/*let store_type = "store_type=Main Estate";*/}
-            {/*this.props.onStoreClick(store_type);*/}
-            {/*this.props.onWaterfallValueChart();*/}
-            {/*this.props.onApiFetch();*/}
-            {/*this.props.ondelistTable();*/}
-            {/*this.props.onStoreTabClick("Store: Main Estate ");*/}
-            {/*}}>Main Estate</a></li>*/}
-            {/*<li><a href="#" style={{fontSize: '14px'}} onClick={() => {*/}
-            {/*let store_type = "store_type=Express";*/}
-            {/*this.props.onStoreClick(store_type);*/}
-            {/*this.props.onWaterfallValueChart();*/}
-            {/*this.props.onApiFetch();*/}
-            {/*this.props.ondelistTable();*/}
-            {/*this.props.onStoreTabClick("Store: Express");*/}
-            {/*}}>Express</a></li>*/}
-            {/*</ul>*/}
-            {/*</div>*/}
-
-            {/*<Button onClick={() => {*/}
-            {/*let week_no = "time_period=13_weeks";*/}
-            {/*this.props.onWeekClick(week_no);*/}
-            {/*this.props.onWaterfallValueChart();*/}
-            {/*this.props.onApiFetch();*/}
-            {/*this.props.ondelistTable();*/}
-            {/*this.props.onWeekTabClick("Week: 13 weeks ");*/}
-            {/*}}>WEEK 13</Button>&nbsp;&nbsp;*/}
-            {/*<Button onClick={() => {*/}
-            {/*let week_no = "time_period=26_weeks";*/}
-            {/*this.props.onWeekClick(week_no);*/}
-            {/*this.props.onWaterfallValueChart();*/}
-            {/*this.props.onApiFetch();*/}
-            {/*this.props.ondelistTable();*/}
-            {/*this.props.onWeekTabClick("Week: 26 weeks ");*/}
-            {/*}}>Week 26</Button>&nbsp;&nbsp;*/}
-            {/*<Button onClick={() => {*/}
-            {/*let week_no = "time_period=52_weeks";*/}
-            {/*this.props.onWeekClick(week_no);*/}
-            {/*this.props.onWaterfallValueChart();*/}
-            {/*this.props.onApiFetch();*/}
-            {/*this.props.ondelistTable();*/}
-            {/*this.props.onWeekTabClick("Week: 52 weeks ");*/}
-            {/*}}>Week 52</Button>*/}
-
-          {/*<div className="row">*/}
-          {/*<Button onClick={() => {*/}
-          {/*let store_type = "store_type=Overview";*/}
-          {/*this.props.onStoreClick(store_type);*/}
-          {/*this.props.onWaterfallValueChart();*/}
-          {/*this.props.onApiFetch();*/}
-          {/*this.props.ondelistTable();*/}
-          {/*this.props.onStoreTabClick("Store: Overview ");*/}
-          {/*}}>Overview</Button>&nbsp;&nbsp;*/}
-          {/*<Button onClick={() => {*/}
-          {/*let store_type = "store_type=Main Estate";*/}
-          {/*this.props.onStoreClick(store_type);*/}
-          {/*this.props.onWaterfallValueChart();*/}
-          {/*this.props.onApiFetch();*/}
-          {/*this.props.ondelistTable();*/}
-          {/*this.props.onStoreTabClick("Store: Main Estate ");*/}
-          {/*}}>Main Estate</Button>&nbsp;&nbsp;*/}
-          {/*<Button onClick={() => {*/}
-          {/*let store_type = "store_type=Express";*/}
-          {/*this.props.onStoreClick(store_type);*/}
-          {/*this.props.onWaterfallValueChart();*/}
-          {/*this.props.onApiFetch();*/}
-          {/*this.props.ondelistTable();*/}
-          {/*this.props.onStoreTabClick("Store: Express");*/}
-          {/*}}>Express</Button>*/}
-          {/*</div>*/}
           <div className="row" style={{marginLeft: "0.5%",paddingTop:"-5px"}}>
             <div className="col-md-12 content-wrap">
 
@@ -671,7 +557,6 @@ export class DelistContainer extends React.PureComponent { // eslint-disable-lin
 
           <h2 className="pageModuleMainTitle" >PROFIT IMPACT</h2>
 
-              {/*<Nav
 
           {/*MODAL FOR PROFIT IMPACT PROFIT INFO ICON */}
 
@@ -991,7 +876,7 @@ export class DelistContainer extends React.PureComponent { // eslint-disable-lin
                     this.setState({activePage: e})
 
                     this.props.onSupplierImpactTableSpinner();
-                    let supplierPaginationData = "supplier_page=" + objj;
+                    let supplierPaginationData = "supplier_page=" + e;
                     this.props.onsupplierPagination(supplierPaginationData);
                     this.props.onTableType("supplier");
                     this.props.onApiFetch();
@@ -1253,7 +1138,7 @@ export class DelistContainer extends React.PureComponent { // eslint-disable-lin
                   onSelect={(e) => {
                     this.setState({activePageDelist: e});
                     this.props.onDelistProductTableSpinner();
-                    let delistPaginationData = "delist_page=" + objj;
+                    let delistPaginationData = "delist_page=" + e;
                     this.props.onTableType("delist");
                     this.props.ondelistPagination(delistPaginationData);
                     this.props.ondelistTable();
