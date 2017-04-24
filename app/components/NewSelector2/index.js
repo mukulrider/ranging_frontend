@@ -67,14 +67,23 @@ class NewSelector2 extends React.PureComponent { // eslint-disable-line react/pr
         {(() => {
           return (
             <div id="style-7" style={{
-              height: '52%',
-              width: '19%',
+              height: '90%',
+              width: '21%',
               position: 'fixed',
-              overflow: 'scroll',
-              paddingRight: '5px',
+              /* padding-right: 5px; */
               overflowX: 'hidden',
+              overflowY: 'scroll' ,
               borderTop: '1px solid #ccc',
             }}>
+              {/*<div id="style-7" style={{*/}
+              {/*height: '52%',*/}
+              {/*width: '19%',*/}
+              {/*position: 'fixed',*/}
+              {/*overflow: 'scroll',*/}
+              {/*paddingRight: '5px',*/}
+              {/*overflowX: 'hidden',*/}
+              {/*borderTop: '1px solid #ccc',*/}
+            {/*}}>*/}
 
               <PanelGroup defaultActiveKey="1" accordion>
                 {this.props.sideFilter.checkbox_list.map((item, key) => {

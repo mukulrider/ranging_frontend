@@ -3,11 +3,13 @@
 }
 
 .bar.positive rect {
+  //fill: #cc3333;
   fill: #cc3333;
 }
 
 .bar.negative rect {
-  fill: #58ee81;
+  //fill: #58ee81;
+  fill: #69B24A;
 }
 
 .bar line.connector {
@@ -18,12 +20,21 @@
 
 .bar text {
   fill: white;
-  font: 12px sans-serif;
+  font: 10px Tesco;
   text-anchor: middle;
 }
 
+
+.chartAxisTitle{
+  font-size: 10px !important;
+  fill: #333333;
+  font-family: Tesco;
+}
+
+
+
 .axis text {
-  font: 10px sans-serif;
+  font: 10px Tesco;
 }
 
 .axis path,
