@@ -292,10 +292,10 @@ class WaterFallChart2 extends React.PureComponent { // eslint-disable-line react
         totalColour=(cumulative >= 0) ? positive_text : negative_text;
       }else{
         totalColour=(cumulative >= 0) ? negative_text : positive_text;
-        }
+      }
 
-        return totalColour;
-      };
+      return totalColour;
+    };
 
 
 // Transform data (i.e., finding cumulative values and total) for easier charting
@@ -407,7 +407,7 @@ class WaterFallChart2 extends React.PureComponent { // eslint-disable-line react
       // function to draw the tooltip
 
       .attr('width', (x.bandwidth()/2));
-      // .attr('width', (x.bandwidth() - 5));
+    // .attr('width', (x.bandwidth() - 5));
 //   .on("mouseover", function (d) {
 //   // to find the parent node,to calculate the x position
 //   var parentG = d3.select(this.parentNode);
@@ -464,7 +464,7 @@ class WaterFallChart2 extends React.PureComponent { // eslint-disable-line react
       return result;
     }
   }
-  ;
+    ;
 
   componentDidMount = () => {
     this.createChart(this.props.data, this.props.id, this.props.yAxisName, this.props.formatter, this.props.positive_text, this.props.negative_text, this.props.total_text);
