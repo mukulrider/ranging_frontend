@@ -383,7 +383,7 @@ export class RangingNpdPage extends React.PureComponent { // eslint-disable-line
                            let objString = '/ranging/npd-impact';
                             window.location = objString;
 
-                         }}>Click to select new products</Button>
+                         }}>Click to add new products</Button>
               </div>
 
             </Panel>
