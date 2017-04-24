@@ -20,7 +20,7 @@ import SelectorNegotiation2 from 'components/SelectorNegotiation2';
 import {browserHistory} from 'react-router';
 import InputField from 'components/input_field';
 import {Nav} from 'react-bootstrap';
-import {NavItem} from 'react-bootstrap';
+import {NavItem,Pagination} from 'react-bootstrap';
 
 import {
   SaveBubbleParam2,
@@ -71,6 +71,7 @@ export class RangingNegotiationPage extends React.PureComponent { // eslint-disa
       delistImpactTableInfo: false,
       activeKey: "1",
       activeKey2: "4",
+      activePage: 1,
     };
   }
   componentDidUpdate = () => {
@@ -483,50 +484,36 @@ export class RangingNegotiationPage extends React.PureComponent { // eslint-disa
                 </table>
 
                 {/*pagination*/}
-                <nav aria-label="Page navigation example">
-                  <ul className="pagination pagination-lg">
-                    {(() => {
 
-                      if (this.props.RangingNegotiationPage.data && this.props.RangingNegotiationPage.data.count) {
-                        let x = [];
-                        let start_index = this.props.RangingNegotiationPage.data.start_index;
-                        let page = this.props.RangingNegotiationPage.data.page;
-                        let end_index = this.props.RangingNegotiationPage.data.end_index;
-                        let pagination_count = this.props.RangingNegotiationPage.data.pagination_count;
+                {(() => {
+                    if (this.props.RangingNegotiationPage.data && this.props.RangingNegotiationPage.data.count) {
 
-                        if (page > 5) {
-                          page = page - 5
-                        } else {
-                          page = 1
-                        }
+                      return <Pagination
+                        prev
+                        next
+                        first
+                        last
+                        ellipsis
+                        boundaryLinks
+                        items={this.props.RangingNegotiationPage.data.pagination_count}
+                        maxButtons={5}
+                        activePage={this.state.activePage}
+                        onSelect={(e) => {
 
-                        if (pagination_count > 10) {
-                          pagination_count = page + 10
-                        }
+                          this.setState({activePage: e})
 
-                        for (let i = page;
-                             i <= pagination_count;
-                             i++) {
+                          let dataPageUrlParams = "page=" + e;
+                          console.log("dataPageUrlParams",dataPageUrlParams)
+                          this.props.onSavePageParam(dataPageUrlParams);
+                          this.props.onGenerateTable();
 
-                          x.push(i)
-                        }
+                        }}
+                      />
 
-                        return x.map(obj => {
-                          return (
-                            <li className="page-item"
-                                onClick={() => {
-                                  let dataPageUrlParams = "page=" + obj;
-                                  this.props.onSavePageParam(dataPageUrlParams);
-                                  this.props.onGenerateTable();
+                    }
+                  }
+                )()}
 
-                                }}><a className="page-link">{obj}
-                            </a></li>
-                          )
-                        })
-                      }
-                    })()}
-                  </ul>
-                </nav>
                 <div className="delistButton">
                   <Button buttonType={'primary'}
                           onClick={() => {
