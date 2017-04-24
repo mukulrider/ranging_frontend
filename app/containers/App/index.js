@@ -37,6 +37,14 @@ export default class App extends React.PureComponent { // eslint-disable-line re
   };
 
   render() {
+    const links = [
+      { text: 'Sales Reporting', icon: 'home', href: '/sales-reporting/' },
+      { text: 'Ranging', icon: 'home', href: '/ranging/negotiation' },
+      { text: 'Pricing', icon: 'home', href: '/pricing/' },
+      { text: 'Pricing Scenario Tracker', icon: 'home', href: '/pricing/scenario-tracker'},
+      { text: 'Tesco.com', icon: 'home', href: 'http://www.tesco.com/' },
+      { text: 'Contact us', icon: 'telephone', href: 'http://www.tesco.com/help/contact/' },
+      { text: 'Help', icon: 'help', href: 'http://www.tesco.com/help/' }];
     return (
       <div>
         {/*<nav className="navbar navbar-default">*/}
@@ -53,14 +61,14 @@ export default class App extends React.PureComponent { // eslint-disable-line re
             {/*</ul>*/}
           {/*</div>*/}
         {/*</nav>*/}
-        <Header/>
+        <Header links={links} />
         <div className="container-fluid" style={{marginTop: '120px'}}>
           {React.Children.toArray(this.props.children)}
         </div>
         <Footer footerLinks={[
           {linkTitle: 'Negotiation', linkHref: '/ranging/negotiation'},
           {linkTitle: 'Product Impact', linkHref: '/ranging/delist'},
-          {linkTitle: 'NPD', linkHref: '/ranging/npd'},
+          {linkTitle: 'NPD', linkHref: '/ranging/npd'}
           ]}/>
       </div>
     );

@@ -11,7 +11,7 @@ import {
   FETCH_DATA_SUCCESS,
   URL_PARAM,
   WEEK_FETCH,
-  GENERATE_SIDE_FILTER_SUCCESS,
+  GENERATE_SIDE_FILTER_SUCCESS,SAVE_BUBBLE_PARAM2,
   GENERATE_URL_PARAMS_STRING,
   GRAPH_FETCH_SUCCESS,
   FILTER_FETCH,
@@ -64,16 +64,17 @@ const initialState = fromJS({
     }],
   urlParamsString: '',
   dataPerformanceUrlParams: '',
-  dataStoreUrlParams: '',
+  dataStoreUrlParams: 'store_type=Main Estate',
   dataWeekUrlParams: '',
   dataBubbleUrlParams: '',
+  dataBubbleUrlParams2: '[]',
   dataPageUrlParams:'page=1',
   sideFilterParams:'',
   textBoxQueryString:'',
   resetUrlParams:'',
-  checkedList: []
+  checkedList: [],
 
-
+  x:'["base_product_number=67696064","base_product_number=60147616"]'
 
 });
 
@@ -112,6 +113,10 @@ function rangingNegotiationPageReducer(state = initialState, action) {
     case SAVE_BUBBLE_PARAM:
       console.log("Bubble array in reducer", action.data);
       return state.set('dataBubbleUrlParams', action.data);
+
+    case SAVE_BUBBLE_PARAM2:
+      console.log("Bubble array in reducer", action.data);
+      return state.set('dataBubbleUrlParams2', action.data);
 
     case SAVE_SIDE_FILTER_PARAM:
       //console.log("Updated the Store state in Reducer", action.data);

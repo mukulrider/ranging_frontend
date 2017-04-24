@@ -32,14 +32,14 @@
     }
     &:not(:disabled):hover, &:not(:disabled):focus {
       & + .ui-component__radio-button-label .ui-component__radio-button-dot {
-        box-shadow: 0 0 0 4px rgba($radio-button-checked-background,0.4);
+        box-shadow: 0 0 0 2px rgba($radio-button-checked-background,0.4);
       }
     }
     &-dot {
       background: $white;
-      border-radius: 16px;
-      width: 32px;
-      height: 32px;
+      border-radius: 8px;
+      width: 16px;
+      height: 16px;
       border: 1px solid $radio-button-border;
       box-sizing: border-box;
       margin: 0 12px 0 0;
@@ -53,9 +53,10 @@
       transition: box-shadow 0.3s;
     }
     &-label {
+      font-family: Tesco;
       font-size: 16px;
       font-weight: 200;
-      color: $radio-button-label-text-color;
+      color: white;
       line-height: 19px;
       cursor: pointer;
       display: block;

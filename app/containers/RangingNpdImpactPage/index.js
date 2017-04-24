@@ -46,7 +46,7 @@ export class RangingNpdImpactPage extends React.PureComponent { // eslint-disabl
     //   console.log("printing coooooooooookkkkiiiiiiieeeeeessssssss in npd impact", selection_from_npd1);
     //   this.props.onLoadFromNpdFirst(selection_from_npd1);
     // }
-   //
+    //
     this.props.onDataFetchOnBubbleData();
     this.props.onDataFetchCanniProdTable();
     this.props.onDataFetchOnPageLoad();
@@ -59,7 +59,7 @@ export class RangingNpdImpactPage extends React.PureComponent { // eslint-disabl
   componentDidUpdate = () => {
     // this.props.onSendUrlParams(this.props.location.query);
 
-   //this.props.onDataFetchOnBubbleData;
+    //this.props.onDataFetchOnBubbleData;
     // this.setCookie('');
 
   };
@@ -90,11 +90,11 @@ export class RangingNpdImpactPage extends React.PureComponent { // eslint-disabl
       if(i>=1000 || i<=-1000) {
         let rounded=Math.round(i /1000);
         return ('£ ' + rounded.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + 'K');
-    }
+      }
 
-    else{
-      return ('£ ' + Math.round(i));
-    }
+      else{
+        return ('£ ' + Math.round(i));
+      }
     };
 
     let formatVolume = (i) => {
@@ -114,202 +114,203 @@ export class RangingNpdImpactPage extends React.PureComponent { // eslint-disabl
 
 
     return (
-      <div>
+      <div className="flextcontent" style={{fontSize: '14px'}}>
         {console.log("this.props", this.props)}
 
 
         {/*Week Tabs*/}
         {/*<div className="row">*/}
-          {/*<Button onClick={() => {*/}
-            {/*dataWeekUrlParams="week_flag=Latest 13 Weeks";*/}
-            {/*this.props.onSaveWeekParam(dataWeekUrlParams);*/}
-            {/*this.props.onDataFetchCanniProdTable();*/}
-            {/*this.props.onDataFetchOnPageLoad();*/}
-            {/*this.props.onDataFetchOnBubbleData();*/}
+        {/*<Button onClick={() => {*/}
+        {/*dataWeekUrlParams="week_flag=Latest 13 Weeks";*/}
+        {/*this.props.onSaveWeekParam(dataWeekUrlParams);*/}
+        {/*this.props.onDataFetchCanniProdTable();*/}
+        {/*this.props.onDataFetchOnPageLoad();*/}
+        {/*this.props.onDataFetchOnBubbleData();*/}
 
-            {/*/!*let browserPushStringWeek='';*!/*/}
+        {/*/!*let browserPushStringWeek='';*!/*/}
 
-            {/*/!*if(dataFilterUrlParams !== ''){*!/*/}
-              {/*/!*browserPushStringWeek=dataWeekUrlParams+"&"+dataFilterUrlParams;*!/*/}
-            {/*/!*}else{*!/*/}
-              {/*/!*browserPushStringWeek=dataWeekUrlParams;*!/*/}
-            {/*/!*}*!/*/}
-            {/*/!*browserHistory.push(this.props.location.pathname + "?" +browserPushStringWeek);*!/*/}
+        {/*/!*if(dataFilterUrlParams !== ''){*!/*/}
+        {/*/!*browserPushStringWeek=dataWeekUrlParams+"&"+dataFilterUrlParams;*!/*/}
+        {/*/!*}else{*!/*/}
+        {/*/!*browserPushStringWeek=dataWeekUrlParams;*!/*/}
+        {/*/!*}*!/*/}
+        {/*/!*browserHistory.push(this.props.location.pathname + "?" +browserPushStringWeek);*!/*/}
 
-          {/*}*/}
-          {/*}>13 Weeks</Button>*/}
+        {/*}*/}
+        {/*}>13 Weeks</Button>*/}
 
-          {/*<Button onClick={() => {*/}
-            {/*dataWeekUrlParams="week_flag=Latest 26 Weeks";*/}
-            {/*this.props.onSaveWeekParam(dataWeekUrlParams);*/}
-            {/*this.props.onDataFetchCanniProdTable();*/}
-            {/*this.props.onDataFetchOnPageLoad();*/}
-            {/*this.props.onDataFetchOnBubbleData();*/}
-            {/*/!*let browserPushStringWeek='';*!/*/}
+        {/*<Button onClick={() => {*/}
+        {/*dataWeekUrlParams="week_flag=Latest 26 Weeks";*/}
+        {/*this.props.onSaveWeekParam(dataWeekUrlParams);*/}
+        {/*this.props.onDataFetchCanniProdTable();*/}
+        {/*this.props.onDataFetchOnPageLoad();*/}
+        {/*this.props.onDataFetchOnBubbleData();*/}
+        {/*/!*let browserPushStringWeek='';*!/*/}
 
-            {/*/!*if(dataFilterUrlParams !== ''){*!/*/}
-              {/*/!*browserPushStringWeek=dataWeekUrlParams+"&"+dataFilterUrlParams;*!/*/}
-            {/*/!*}else{*!/*/}
-              {/*/!*browserPushStringWeek=dataWeekUrlParams;*!/*/}
-            {/*/!*}*!/*/}
+        {/*/!*if(dataFilterUrlParams !== ''){*!/*/}
+        {/*/!*browserPushStringWeek=dataWeekUrlParams+"&"+dataFilterUrlParams;*!/*/}
+        {/*/!*}else{*!/*/}
+        {/*/!*browserPushStringWeek=dataWeekUrlParams;*!/*/}
+        {/*/!*}*!/*/}
 
-            {/*/!*browserHistory.push(this.props.location.pathname + "?" +browserPushStringWeek);*!/*/}
+        {/*/!*browserHistory.push(this.props.location.pathname + "?" +browserPushStringWeek);*!/*/}
 
 
-          {/*}}>26 Weeks</Button>*/}
+        {/*}}>26 Weeks</Button>*/}
 
-          {/*<Button onClick={() => {*/}
-            {/*dataWeekUrlParams="week_flag=Latest 52 Weeks";*/}
-            {/*/!*this.props.onSendUrlParams(completeSelections);*!/*/}
-            {/*this.props.onSaveWeekParam(dataWeekUrlParams);*/}
-            {/*this.props.onDataFetchCanniProdTable();*/}
-            {/*this.props.onDataFetchOnPageLoad();*/}
-            {/*this.props.onDataFetchOnBubbleData();*/}
+        {/*<Button onClick={() => {*/}
+        {/*dataWeekUrlParams="week_flag=Latest 52 Weeks";*/}
+        {/*/!*this.props.onSendUrlParams(completeSelections);*!/*/}
+        {/*this.props.onSaveWeekParam(dataWeekUrlParams);*/}
+        {/*this.props.onDataFetchCanniProdTable();*/}
+        {/*this.props.onDataFetchOnPageLoad();*/}
+        {/*this.props.onDataFetchOnBubbleData();*/}
 
-            {/*/!*let browserPushStringWeek='';*!/*/}
+        {/*/!*let browserPushStringWeek='';*!/*/}
 
-            {/*/!*if(dataFilterUrlParams !== ''){*!/*/}
-              {/*/!*browserPushStringWeek=dataWeekUrlParams+"&"+dataFilterUrlParams;*!/*/}
-            {/*/!*}else{*!/*/}
-              {/*/!*browserPushStringWeek=dataWeekUrlParams;*!/*/}
-            {/*/!*}*!/*/}
+        {/*/!*if(dataFilterUrlParams !== ''){*!/*/}
+        {/*/!*browserPushStringWeek=dataWeekUrlParams+"&"+dataFilterUrlParams;*!/*/}
+        {/*/!*}else{*!/*/}
+        {/*/!*browserPushStringWeek=dataWeekUrlParams;*!/*/}
+        {/*/!*}*!/*/}
 
-            {/*/!*browserHistory.push(this.props.location.pathname + "?" +browserPushStringWeek);*!/*/}
+        {/*/!*browserHistory.push(this.props.location.pathname + "?" +browserPushStringWeek);*!/*/}
 
-          {/*}}>52 Weeks</Button>*/}
+        {/*}}>52 Weeks</Button>*/}
         {/*</div>*/}
 
-        <div>
-          <Nav bsStyle="tabs" activeKey={this.state.activeKey} onSelect={this.handleSelect} className="tabsCustom">
-            <NavItem className="tabsCustomList" eventKey="1" onClick={() => {
-              this.setState({activeKey: "1"});
-              dataWeekUrlParams="week_flag=Latest 13 Weeks";
-              this.props.onSaveWeekParam(dataWeekUrlParams);
-              this.props.onDataFetchCanniProdTable();
-              this.props.onDataFetchOnPageLoad();
-              this.props.onDataFetchOnBubbleData();
+               {/*Main Content*/}
 
-              {/*let browserPushStringWeek='';*/}
-
-              {/*if(dataFilterUrlParams !== ''){*/}
-              {/*browserPushStringWeek=dataWeekUrlParams+"&"+dataFilterUrlParams;*/}
-              {/*}else{*/}
-              {/*browserPushStringWeek=dataWeekUrlParams;*/}
-              {/*}*/}
-              {/*browserHistory.push(this.props.location.pathname + "?" +browserPushStringWeek);*/}
-
-            }
-            }><span className="tab_label">13 Weeks</span></NavItem>
-            <NavItem className="tabsCustomList" eventKey="2" onClick={() => {
-              this.setState({activeKey: "2"});
-              dataWeekUrlParams="week_flag=Latest 26 Weeks";
-              this.props.onSaveWeekParam(dataWeekUrlParams);
-              this.props.onDataFetchCanniProdTable();
-              this.props.onDataFetchOnPageLoad();
-              this.props.onDataFetchOnBubbleData();
-              {/*let browserPushStringWeek='';*/}
-
-              {/*if(dataFilterUrlParams !== ''){*/}
-              {/*browserPushStringWeek=dataWeekUrlParams+"&"+dataFilterUrlParams;*/}
-              {/*}else{*/}
-              {/*browserPushStringWeek=dataWeekUrlParams;*/}
-              {/*}*/}
-
-              {/*browserHistory.push(this.props.location.pathname + "?" +browserPushStringWeek);*/}
-
-
-            }}><span className="tab_label">26 Weeks</span></NavItem>
-            <NavItem className="tabsCustomList" eventKey="3" onClick={() => {
-              dataWeekUrlParams="week_flag=Latest 52 Weeks";
-              {/*this.props.onSendUrlParams(completeSelections);*/}
-              this.setState({activeKey: "3"});
-              this.props.onSaveWeekParam(dataWeekUrlParams);
-              this.props.onDataFetchCanniProdTable();
-              this.props.onDataFetchOnPageLoad();
-              this.props.onDataFetchOnBubbleData();
-
-              {/*let browserPushStringWeek='';*/}
-
-              {/*if(dataFilterUrlParams !== ''){*/}
-              {/*browserPushStringWeek=dataWeekUrlParams+"&"+dataFilterUrlParams;*/}
-              {/*}else{*/}
-              {/*browserPushStringWeek=dataWeekUrlParams;*/}
-              {/*}*/}
-
-              {/*browserHistory.push(this.props.location.pathname + "?" +browserPushStringWeek);*/}
-
-            }}><span className="tab_label">52 Weeks</span></NavItem>
-
-
-          </Nav>
-
-          <div className="breadcrumb">
-            <span className="label">&nbsp;13 Weeks</span>
-
-          </div>
-
-        </div>
-
-
-        {/*Main Content*/}
-        <div className="row">
 
           {/*Filters*/}
-          <div className="col-xs-2">
+        <div className="flexleft">
             <Panel>
 
               <CascadedFilterNpdImpact sideFilter={this.props.RangingNpdImpactPage.sideFilter}
-            location={this.props.location}
+                                       location={this.props.location}
 
-            onGenerateUrlParams={this.props.onGenerateUrlParams}
-            onGenerateUrlParamsString={this.props.onGenerateUrlParamsString}
-            onSendUrlParams={this.props.onSendUrlParams}
-            onDataFetchOnBubbleData={this.props.onDataFetchOnBubbleData}
+                                       onGenerateUrlParams={this.props.onGenerateUrlParams}
+                                       onGenerateUrlParamsString={this.props.onGenerateUrlParamsString}
+                                       onSendUrlParams={this.props.onSendUrlParams}
+                                       onDataFetchOnBubbleData={this.props.onDataFetchOnBubbleData}
 
-            onDataFetchCanniProdTable={this.props.onDataFetchCanniProdTable}
-          //onDataFetchOnWaterFallChart={this.props.onDataFetchOnWaterFallChart}
-            onDataFetchOnPageLoad={this.props.onDataFetchOnPageLoad}
+                                       onDataFetchCanniProdTable={this.props.onDataFetchCanniProdTable}
+                //onDataFetchOnWaterFallChart={this.props.onDataFetchOnWaterFallChart}
+                                       onDataFetchOnPageLoad={this.props.onDataFetchOnPageLoad}
 
-            dataWeekUrlParams={dataWeekUrlParams}
-            dataFilterUrlParams={dataFilterUrlParams}
+                                       dataWeekUrlParams={dataWeekUrlParams}
+                                       dataFilterUrlParams={dataFilterUrlParams}
 
-           previous_selection={this.props.RangingNpdImpactPage.filter_selection}
-           urlParamsString={this.props.RangingNpdImpactPage.urlParamsString}
-           onCheckboxChange={this.props.onCheckboxChange}
-           onGenerateSideFilter={this.props.onGenerateSideFilter}
+                                       previous_selection={this.props.RangingNpdImpactPage.filter_selection}
+                                       urlParamsString={this.props.RangingNpdImpactPage.urlParamsString}
+                                       onCheckboxChange={this.props.onCheckboxChange}
+                                       onGenerateSideFilter={this.props.onGenerateSideFilter}
 
 
-           onSaveAspFilterData={this.props.onSaveAspFilterData}
-           onSaveAcpFilterData={this.props.onSaveAcpFilterData}
-           onSaveSizeFilterData={this.props.onSaveSizeFilterData}
-           onSaveFilterSelectionsTillNow={this.props.onSaveFilterSelectionsTillNow}
+                                       onSaveAspFilterData={this.props.onSaveAspFilterData}
+                                       onSaveAcpFilterData={this.props.onSaveAcpFilterData}
+                                       onSaveSizeFilterData={this.props.onSaveSizeFilterData}
+                                       onSaveFilterSelectionsTillNow={this.props.onSaveFilterSelectionsTillNow}
 
-            ASP_field_entry={this.props.RangingNpdImpactPage.ASP_field_entry}
-            ACP_field_entry={this.props.RangingNpdImpactPage.ACP_field_entry}
-            Size_field_entry={this.props.RangingNpdImpactPage.Size_field_entry}
-            filterSelectionsTillNow={this.props.RangingNpdImpactPage.filterSelectionsTillNow}
+                                       ASP_field_entry={this.props.RangingNpdImpactPage.ASP_field_entry}
+                                       ACP_field_entry={this.props.RangingNpdImpactPage.ACP_field_entry}
+                                       Size_field_entry={this.props.RangingNpdImpactPage.Size_field_entry}
+                                       filterSelectionsTillNow={this.props.RangingNpdImpactPage.filterSelectionsTillNow}
 
-            />
+              />
 
             </Panel>
           </div>
 
 
           {/*Content*/}
-          <div className="col-xs-10">
+        <div className="flexright">
+
+          <div style={{width: '100%'}}>
+            <div className="content-wrap">
+
+              <Nav bsStyle="tabs" activeKey={this.state.activeKey} onSelect={this.handleSelect} className="tabsCustom">
+                <NavItem className="tabsCustomList" eventKey="1" onClick={() => {
+                  this.setState({activeKey: "1"});
+                  dataWeekUrlParams="week_flag=Latest 13 Weeks";
+                  this.props.onSaveWeekParam(dataWeekUrlParams);
+                  this.props.onDataFetchCanniProdTable();
+                  this.props.onDataFetchOnPageLoad();
+                  this.props.onDataFetchOnBubbleData();
+
+                  {/*let browserPushStringWeek='';*/}
+
+                  {/*if(dataFilterUrlParams !== ''){*/}
+                  {/*browserPushStringWeek=dataWeekUrlParams+"&"+dataFilterUrlParams;*/}
+                  {/*}else{*/}
+                  {/*browserPushStringWeek=dataWeekUrlParams;*/}
+                  {/*}*/}
+                  {/*browserHistory.push(this.props.location.pathname + "?" +browserPushStringWeek);*/}
+
+                }
+                }><span className="tab_label">13 Weeks</span></NavItem>
+                <NavItem className="tabsCustomList" eventKey="2" onClick={() => {
+                  this.setState({activeKey: "2"});
+                  dataWeekUrlParams="week_flag=Latest 26 Weeks";
+                  this.props.onSaveWeekParam(dataWeekUrlParams);
+                  this.props.onDataFetchCanniProdTable();
+                  this.props.onDataFetchOnPageLoad();
+                  this.props.onDataFetchOnBubbleData();
+                  {/*let browserPushStringWeek='';*/}
+
+                  {/*if(dataFilterUrlParams !== ''){*/}
+                  {/*browserPushStringWeek=dataWeekUrlParams+"&"+dataFilterUrlParams;*/}
+                  {/*}else{*/}
+                  {/*browserPushStringWeek=dataWeekUrlParams;*/}
+                  {/*}*/}
+
+                  {/*browserHistory.push(this.props.location.pathname + "?" +browserPushStringWeek);*/}
+
+
+                }}><span className="tab_label">26 Weeks</span></NavItem>
+                <NavItem className="tabsCustomList" eventKey="3" onClick={() => {
+                  dataWeekUrlParams="week_flag=Latest 52 Weeks";
+                  {/*this.props.onSendUrlParams(completeSelections);*/}
+                  this.setState({activeKey: "3"});
+                  this.props.onSaveWeekParam(dataWeekUrlParams);
+                  this.props.onDataFetchCanniProdTable();
+                  this.props.onDataFetchOnPageLoad();
+                  this.props.onDataFetchOnBubbleData();
+
+                  {/*let browserPushStringWeek='';*/}
+
+                  {/*if(dataFilterUrlParams !== ''){*/}
+                  {/*browserPushStringWeek=dataWeekUrlParams+"&"+dataFilterUrlParams;*/}
+                  {/*}else{*/}
+                  {/*browserPushStringWeek=dataWeekUrlParams;*/}
+                  {/*}*/}
+
+                  {/*browserHistory.push(this.props.location.pathname + "?" +browserPushStringWeek);*/}
+
+                }}><span className="tab_label">52 Weeks</span></NavItem>
+
+
+              </Nav>
+
+              <div className="breadcrumb">
+                <span className="label">&nbsp;13 Weeks</span>
+
+              </div>
+
+
             <Modal show={this.state.lgShow} bsSize="large" aria-labelledby="contained-modal-title-sm">
               <Modal.Body>
                 <div>
                   {/*<InputField type="text"*/}
-                              {/*placeholder="Enter Forecast Name"*/}
-                              {/*value={this.props.newForecastName}*/}
-                              {/*onChange={(e) => {*/}
-                                {/*this.props.onGenerateForecastName(e.target.value)*/}
-                              {/*}}/>*/}
+                  {/*placeholder="Enter Forecast Name"*/}
+                  {/*value={this.props.newForecastName}*/}
+                  {/*onChange={(e) => {*/}
+                  {/*this.props.onGenerateForecastName(e.target.value)*/}
+                  {/*}}/>*/}
                   {/*<br/>*/}
                   {/*<div style={{textAlign: 'center'}}>*/}
-                    {/*{this.props.newScenarioSpinner ?*/}
-                      {/*<Spinner style={{display: 'block', margin: '0 auto'}}/> : ''}*/}
+                  {/*{this.props.newScenarioSpinner ?*/}
+                  {/*<Spinner style={{display: 'block', margin: '0 auto'}}/> : ''}*/}
                   {/*</div>*/}
                   <div className="row">
                     <div className="col-xs-12">
@@ -339,20 +340,20 @@ export class RangingNpdImpactPage extends React.PureComponent { // eslint-disabl
                             <h4>EDIT FORECAST</h4>
                           </div>
                           <InputField type="text"
-                          placeholder="Enter Forecast Value"
-                          value={this.props.newForecastName}
-                          // onChange={(e) => {
-                          // this.props.onGenerateForecastName(e.target.value)}}
-                           />
+                                      placeholder="Enter Forecast Value"
+                                      value={this.props.newForecastName}
+                            // onChange={(e) => {
+                            // this.props.onGenerateForecastName(e.target.value)}}
+                          />
                           <br/>
                           {/*{(() => {*/}
-                            {/*if (this.props.RangingNpdImpactPage.waterFallChartData) {*/}
-                              {/*return (*/}
-                                {/*<div className="cannibalization-perc-number">*/}
-                                  {/*{this.props.RangingNpdImpactPage.waterFallChartData.impact.perc_impact_psg} %*/}
-                                {/*</div>*/}
-                              {/*)*/}
-                            {/*}})()}*/}
+                          {/*if (this.props.RangingNpdImpactPage.waterFallChartData) {*/}
+                          {/*return (*/}
+                          {/*<div className="cannibalization-perc-number">*/}
+                          {/*{this.props.RangingNpdImpactPage.waterFallChartData.impact.perc_impact_psg} %*/}
+                          {/*</div>*/}
+                          {/*)*/}
+                          {/*}})()}*/}
                         </Panel>
                       </div>
                     </div>
@@ -386,23 +387,23 @@ export class RangingNpdImpactPage extends React.PureComponent { // eslint-disabl
 
               {/*Net Impact (Waterfall chart and impact numbers)*/}
               <Panel>
-              <div className="row">
-                <div className="col-xs-12">
-                  <div className="net-impact-row">
+                <div className="row">
+                  <div className="col-xs-12">
+                    <div className="net-impact-row">
 
-                    <div>
-                      <h4 className="ts-blk-proview-subhead"> NET IMPACT </h4>
-                    </div>
+                      <div>
+                        <h4 className="ts-blk-proview-subhead"> NET IMPACT </h4>
+                      </div>
 
-                    {/*Value*/}
-                    <div className="col-xs-6">
+                      {/*Value*/}
+                      <div className="col-xs-6">
                         <Panel>
                           <div className="dashed-border center-this">
                             <h4> VALUE </h4>
                           </div>
                           {/*<h5>Water fall chart</h5>*/}
 
-                           {/*Waterfall chart*/}
+                          {/*Waterfall chart*/}
                           {(() => {
                             if (this.props.RangingNpdImpactPage.canniProdTableData) {
                               console.log("a1", this.props.RangingNpdImpactPage.canniProdTableData)
@@ -420,9 +421,9 @@ export class RangingNpdImpactPage extends React.PureComponent { // eslint-disabl
                                   <div className="dashed-border">
                                     <h4> % CANNIBALIZATION</h4>
                                   </div>
-                                {/*console.log("volume canni data",this.props.RangingNpdImpactPage.sales_chart.impact.Cannibilized_sales);*/}
+                                  {/*console.log("volume canni data",this.props.RangingNpdImpactPage.sales_chart.impact.Cannibilized_sales);*/}
 
-                                {(() => {
+                                  {(() => {
                                     if (this.props.RangingNpdImpactPage.canniProdTableData) {
                                       {/*console.log('this.props.RangingNpdImpactPage.waterFallChartData',this.props.RangingNpdImpactPage.sales_chart);*/}
                                       return (
@@ -460,69 +461,69 @@ export class RangingNpdImpactPage extends React.PureComponent { // eslint-disabl
                         </Panel>
                       </div>
 
-                    {/*Volume*/}
-                    <div className="col-xs-6">
-                      <Panel>
-                        <div className="dashed-border center-this">
-                          <h4> VOLUME </h4>
-                        </div>
-
-                     {/*Waterfall chart*/}
-                        {(() => {
-                          if (this.props.RangingNpdImpactPage.canniProdTableData) {
-                            return (
-                              <WaterFallChartNpd data={{chart_data:this.props.RangingNpdImpactPage.canniProdTableData.volume_chart.data,chart_id:"net_impact_waterfall_2",chart_type:"volume"}}/>
-                            )
-                          }})()}
-
-                        {/*Impact numbers*/}
-                        <div className="row">
-                          <div className="col-xs-12">
-
-                            <div className="col-xs-6 center-this">
-                              <Panel>
-                                <div className="dashed-border">
-                                  <h4> % CANNIBALIZATION</h4>
-                                </div>
-
-                                {(() => {
-                                  if (this.props.RangingNpdImpactPage.canniProdTableData) {
-                                    {/*console.log('this.props.RangingNpdImpactPage.waterFallChartData',this.props.RangingNpdImpactPage.waterFallChartData);*/}
-                                    return (
-                                      <div className="cannibalization-perc-number">
-                                        {this.props.RangingNpdImpactPage.canniProdTableData.volume_chart.impact.Cannibilization_perc} %
-                                      </div>
-                                    )
-                                  }})()}
-
-                              </Panel>
-                            </div>
-
-                            <div className="col-xs-6 center-this">
-                              <Panel>
-                                <div className="dashed-border">
-                                  <h4> % IMPACT IN PSG </h4>
-                                </div>
-
-                                {(() => {
-                                  if (this.props.RangingNpdImpactPage.canniProdTableData) {
-                                    return (
-                                      <div className="cannibalization-perc-number">
-                                        {this.props.RangingNpdImpactPage.canniProdTableData.volume_chart.impact.perc_impact_psg} %
-                                      </div>
-                                    )
-                                  }})()}
-                              </Panel>
-                            </div>
+                      {/*Volume*/}
+                      <div className="col-xs-6">
+                        <Panel>
+                          <div className="dashed-border center-this">
+                            <h4> VOLUME </h4>
                           </div>
 
-                        </div>
+                          {/*Waterfall chart*/}
+                          {(() => {
+                            if (this.props.RangingNpdImpactPage.canniProdTableData) {
+                              return (
+                                <WaterFallChartNpd data={{chart_data:this.props.RangingNpdImpactPage.canniProdTableData.volume_chart.data,chart_id:"net_impact_waterfall_2",chart_type:"volume"}}/>
+                              )
+                            }})()}
 
-                      </Panel>
+                          {/*Impact numbers*/}
+                          <div className="row">
+                            <div className="col-xs-12">
+
+                              <div className="col-xs-6 center-this">
+                                <Panel>
+                                  <div className="dashed-border">
+                                    <h4> % CANNIBALIZATION</h4>
+                                  </div>
+
+                                  {(() => {
+                                    if (this.props.RangingNpdImpactPage.canniProdTableData) {
+                                      {/*console.log('this.props.RangingNpdImpactPage.waterFallChartData',this.props.RangingNpdImpactPage.waterFallChartData);*/}
+                                      return (
+                                        <div className="cannibalization-perc-number">
+                                          {this.props.RangingNpdImpactPage.canniProdTableData.volume_chart.impact.Cannibilization_perc} %
+                                        </div>
+                                      )
+                                    }})()}
+
+                                </Panel>
+                              </div>
+
+                              <div className="col-xs-6 center-this">
+                                <Panel>
+                                  <div className="dashed-border">
+                                    <h4> % IMPACT IN PSG </h4>
+                                  </div>
+
+                                  {(() => {
+                                    if (this.props.RangingNpdImpactPage.canniProdTableData) {
+                                      return (
+                                        <div className="cannibalization-perc-number">
+                                          {this.props.RangingNpdImpactPage.canniProdTableData.volume_chart.impact.perc_impact_psg} %
+                                        </div>
+                                      )
+                                    }})()}
+                                </Panel>
+                              </div>
+                            </div>
+
+                          </div>
+
+                        </Panel>
+                      </div>
                     </div>
                   </div>
                 </div>
-              </div>
 
                 <Button
                   onClick={() => this.setState({lgShow: true})}
@@ -537,30 +538,30 @@ export class RangingNpdImpactPage extends React.PureComponent { // eslint-disabl
                 <div className="row">
                   <div className="col-xs-12">
                     <div className="net-cannibalized-prod">
-                       <h4 className="ts-blk-proview-subhead">CURRENT PRODUCTS THAT MIGHT BE CANNIBALIZED</h4>
-                          <div id="table">
+                      <h4 className="ts-blk-proview-subhead">CURRENT PRODUCTS THAT MIGHT BE CANNIBALIZED</h4>
+                      <div id="table">
 
-                            {/*Search*/}
-                            <div className="col-xs-12 col-xs-5" style={{marginBottom:"10px"}}>
-                              <InputField type={'string'}
-                                          placeholder="Search Retailer"
-                                          value={this.props.searchTable1}
-                                          onChange={(e)=>{
-                                            this.props.onSaveTable1SearchParam(e);
-                                            this.props.onDataFetchCanniProdTable();
-                                          }}
-                              />
-                            </div>
-                            <div className="col-xs-0 col-xs-7 " style={{textAlign:"right"}}>
-                              {/*<a style={{fontSize:"15px",verticalAlign:"centre"}} onClick={()=>{*/}
-                              {/*this.props.onGenerateTextBoxQueryString('');*/}
-                              {/*this.props.onUnmatchedProdTable();*/}
-                              {/*}}> Clear </a>*/}
-                            </div>
+                        {/*Search*/}
+                        <div className="col-xs-12 col-xs-5" style={{marginBottom:"10px"}}>
+                          <InputField type={'string'}
+                                      placeholder="Search Retailer"
+                                      value={this.props.searchTable1}
+                                      onChange={(e)=>{
+                                        this.props.onSaveTable1SearchParam(e);
+                                        this.props.onDataFetchCanniProdTable();
+                                      }}
+                          />
+                        </div>
+                        <div className="col-xs-0 col-xs-7 " style={{textAlign:"right"}}>
+                          {/*<a style={{fontSize:"15px",verticalAlign:"centre"}} onClick={()=>{*/}
+                          {/*this.props.onGenerateTextBoxQueryString('');*/}
+                          {/*this.props.onUnmatchedProdTable();*/}
+                          {/*}}> Clear </a>*/}
+                        </div>
 
 
-                            {/*table*/}
-                            <table className="table table-hover table-striped table-bordered " width="100%">
+                        {/*table*/}
+                        <table className="table table-hover table-striped table-bordered " width="100%">
                           <thead>
                           <tr style={{fontSize:"16px",fontFamily:"Tesco"}}>
                             {/*<th>Branded Name</th>*/}
@@ -572,7 +573,7 @@ export class RangingNpdImpactPage extends React.PureComponent { // eslint-disabl
 
                           </thead>
                           <tbody className="table-body-format">
-                            {(() => {
+                          {(() => {
                             if (this.props.RangingNpdImpactPage.canniProdTableData) {
                               console.log("a2",this.props.RangingNpdImpactPage.canniProdTableData.similar_product_table);
                               return this.props.RangingNpdImpactPage.canniProdTableData.similar_product_table.df.map(obj => {
@@ -592,69 +593,69 @@ export class RangingNpdImpactPage extends React.PureComponent { // eslint-disabl
                           </tbody>
                         </table>
 
-                            {/*pagination*/}
-                            <nav aria-label="Page navigation example" style={{marginTop:"-35px"}}>
-                              <ul className="pagination pagination-lg">
-                                {(() => {
+                        {/*pagination*/}
+                        <nav aria-label="Page navigation example" style={{marginTop:"-35px"}}>
+                          <ul className="pagination pagination-lg">
+                            {(() => {
 
-                                  if (this.props.RangingNpdImpactPage.canniProdTableData && this.props.RangingNpdImpactPage.canniProdTableData.count) {
-                                    let x = [];
-                                    let start_index = this.props.RangingNpdImpactPage.canniProdTableData.start_index;
-                                    let page = this.props.RangingNpdImpactPage.canniProdTableData.page;
-                                    let end_index = this.props.RangingNpdImpactPage.canniProdTableData.end_index;
-                                    let pagination_count = this.props.RangingNpdImpactPage.canniProdTableData.pagination_count;
-                                    let selected_page = 1;
+                              if (this.props.RangingNpdImpactPage.canniProdTableData && this.props.RangingNpdImpactPage.canniProdTableData.count) {
+                                let x = [];
+                                let start_index = this.props.RangingNpdImpactPage.canniProdTableData.start_index;
+                                let page = this.props.RangingNpdImpactPage.canniProdTableData.page;
+                                let end_index = this.props.RangingNpdImpactPage.canniProdTableData.end_index;
+                                let pagination_count = this.props.RangingNpdImpactPage.canniProdTableData.pagination_count;
+                                let selected_page = 1;
 
 
-                                    if (page > 5) {
-                                      page = page - 5
-                                    } else {
-                                      page = 1
-                                    }
+                                if (page > 5) {
+                                  page = page - 5
+                                } else {
+                                  page = 1
+                                }
 
-                                    if (pagination_count > 10) {
-                                      pagination_count = page + 10
-                                    }
+                                if (pagination_count > 10) {
+                                  pagination_count = page + 10
+                                }
 
-                                    for (let i = page;
-                                         i <= pagination_count;
-                                         i++) {
+                                for (let i = page;
+                                     i <= pagination_count;
+                                     i++) {
 
-                                      x.push(i)
-                                    }
+                                  x.push(i)
+                                }
 
-                                    return x.map(obj => {
-                                      return (
-                                        <li className="page-item" key={Math.random() + Date.now()}
-                                            onClick={() => {
-                                              let dataTable1PageUrlParamsNew = "page=" + obj;
-                                              this.props.onSaveTable1PageParam(dataTable1PageUrlParamsNew );
+                                return x.map(obj => {
+                                  return (
+                                    <li className="page-item" key={Math.random() + Date.now()}
+                                        onClick={() => {
+                                          let dataTable1PageUrlParamsNew = "page=" + obj;
+                                          this.props.onSaveTable1PageParam(dataTable1PageUrlParamsNew );
 
-                                              let browserPushString='';
+                                          let browserPushString='';
 
-                                              if(dataFilterUrlParams !== ''){
-                                                browserPushString=browserPushString+"&"+dataFilterUrlParams;
-                                              }
-                                              if (dataWeekUrlParams !== ''){
-                                                browserPushString=browserPushString+"&"+dataWeekUrlParams;
-                                              }
-                                              if(dataTable2PageUrlParams!==''){
-                                                browserPushString=browserPushString+"&"+dataTable2PageUrlParams;
-                                              }
+                                          if(dataFilterUrlParams !== ''){
+                                            browserPushString=browserPushString+"&"+dataFilterUrlParams;
+                                          }
+                                          if (dataWeekUrlParams !== ''){
+                                            browserPushString=browserPushString+"&"+dataWeekUrlParams;
+                                          }
+                                          if(dataTable2PageUrlParams!==''){
+                                            browserPushString=browserPushString+"&"+dataTable2PageUrlParams;
+                                          }
 
-                                              browserPushString=browserPushString+"&"+dataTable1PageUrlParamsNew ;
-                                              browserPushString=browserPushString.replace('&','');
+                                          browserPushString=browserPushString+"&"+dataTable1PageUrlParamsNew ;
+                                          browserPushString=browserPushString.replace('&','');
 
-                                              browserHistory.push(this.props.location.pathname + "?" +browserPushString);
+                                          browserHistory.push(this.props.location.pathname + "?" +browserPushString);
 
-                                            }}><a className="page-link" href="#">{obj}
-                                        </a></li>
-                                      )
-                                    })
-                                  }
-                                })()}
-                              </ul>
-                            </nav>
+                                        }}><a className="page-link" href="#">{obj}
+                                    </a></li>
+                                  )
+                                })
+                              }
+                            })()}
+                          </ul>
+                        </nav>
 
                       </div>
 
@@ -721,18 +722,18 @@ export class RangingNpdImpactPage extends React.PureComponent { // eslint-disabl
                             <tbody className="table-body-format">
                             {(() => {
                               if (this.props.RangingNpdImpactPage.npd_bubble_table_data) {
-                              return this.props.RangingNpdImpactPage.npd_bubble_table_data.table.map(obj => {
+                                return this.props.RangingNpdImpactPage.npd_bubble_table_data.table.map(obj => {
 
-                              return (
-                              <tr key={Math.random() + Date.now()+Math.random()}>
-                                <td>{obj.base_product_number}</td>
-                                <td>{obj.long_description}</td>
-                                <td>{obj.cps}</td>
-                                <td>{obj.pps}</td>
-                              </tr>
-                            )
-                            })
-                            }
+                                  return (
+                                    <tr key={Math.random() + Date.now()+Math.random()}>
+                                      <td>{obj.base_product_number}</td>
+                                      <td>{obj.long_description}</td>
+                                      <td>{obj.cps}</td>
+                                      <td>{obj.pps}</td>
+                                    </tr>
+                                  )
+                                })
+                              }
                             })()}
                             </tbody>
                           </table>
@@ -779,13 +780,13 @@ export class RangingNpdImpactPage extends React.PureComponent { // eslint-disabl
                                             {/*let browserPushString2='';*/}
 
                                             {/*if(dataFilterUrlParams !== ''){*/}
-                                              {/*browserPushString2=browserPushString2+"&"+dataFilterUrlParams;*/}
+                                            {/*browserPushString2=browserPushString2+"&"+dataFilterUrlParams;*/}
                                             {/*}*/}
                                             {/*if (dataWeekUrlParams !== ''){*/}
-                                              {/*browserPushString2=browserPushString2+"&"+dataWeekUrlParams;*/}
+                                            {/*browserPushString2=browserPushString2+"&"+dataWeekUrlParams;*/}
                                             {/*}*/}
                                             {/*if(dataTable1PageUrlParams!==''){*/}
-                                              {/*browserPushString2=browserPushString2+"&"+dataTable1PageUrlParams;*/}
+                                            {/*browserPushString2=browserPushString2+"&"+dataTable1PageUrlParams;*/}
                                             {/*}*/}
 
                                             {/*browserPushString2=browserPushString2+"&"+dataTable2PageUrlParamsNew ;*/}
@@ -815,6 +816,7 @@ export class RangingNpdImpactPage extends React.PureComponent { // eslint-disabl
 
           </div>
 
+          </div>
         </div>
 
 

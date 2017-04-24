@@ -11,29 +11,33 @@ import {browserHistory} from 'react-router';
 
 
 class BubbleChart2 extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
-  createChart = (data2, path,selprod2, bubbleFunc, makeTable) => {
+  createChart = (data2, path, selprod, bubbleFunc, bubbleFunc2, makeTable, dataUrlParams2) => {
+    console.log('create chart called');
     let dataBubbleUrlParams = '';
-    let productSelected= '';
+    let productSelected = '';
     let prodArr = [];
+    let prodArr2 = [];
+
     //Chart configurations
-    console.log("in d3 code printing array of selected products",selprod2);
+    console.log("in d3 code printing array of selected products", selprod);
+    //Removing '' from the array
     let margin = {top: 20, right: 20, bottom: 40, left: 30};
-    let width = 700 - margin.left - margin.right,
+    let width = 750 - margin.left - margin.right,
       height = 600 - margin.top - margin.bottom;
 
     let svg = d3.select('#svgg');
 
-    let colorArray = ['darkolivegreen','steelblue'];
-    let opacity = [1,0.2];
+    let colorArray = ['#00838f', '#33691e'];
+    let opacity = [1, 0.2];
 
     svg.selectAll("*").remove();
-    //Adjusting position of the svg area
+      //Adjusting position of the svg area
     let chart = svg.append("g").attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
 
     let xScale = d3.scaleLinear().domain([0, 100]).range([0, width]);
 
-    let yScale = d3.scaleLinear().domain([0,100]).range([height, 0]);
+    let yScale = d3.scaleLinear().domain([0, 100]).range([height, 0]);
 
     let rScale = d3.scaleLinear().domain([0, d3.max(data2, function (d) {
       return d.rate_of_sale;
@@ -76,15 +80,19 @@ class BubbleChart2 extends React.PureComponent { // eslint-disable-line react/pr
       })
       .on('click', function (d) {
         let dataBubbleUrlParams = "base_product_number=" + d.base_product_number;
-        let productSelected = d.base_product_number;
+        // let productSelected = d.base_product_number;
         prodArr.push(dataBubbleUrlParams);
         console.log("product selected", dataBubbleUrlParams);
         console.log("consoling prod array", prodArr);
         var myJSON = JSON.stringify(prodArr);
         bubbleFunc(myJSON);
+        // console.log('dataUrlParams2>>>>>>>>>>>>>>>>>>>>>>>', dataUrlParams2);
+        // let myJson2 = JSON.parse(dataUrlParams2);
+        // myJson2.push(d.base_product_number);
+        // bubbleFunc2(JSON.stringify(myJson2));
         makeTable();
         d3.select(this)
-         .style("opacity", 1);
+          .style("opacity", 1);
         // d3.select(this)
         // .style("opacity", function () {
         //   console.log("in_opacity_function",productSelected);
@@ -129,6 +137,7 @@ class BubbleChart2 extends React.PureComponent { // eslint-disable-line react/pr
       .attr("transform",
         "translate(" + (width / 2) + " ," + (height + (margin.top * 1.75)) + ")")
       .style("text-anchor", "middle")
+      .style("font-size", "10px")
       .text("CPS percentile");
 
     chart.append("text")
@@ -137,9 +146,10 @@ class BubbleChart2 extends React.PureComponent { // eslint-disable-line react/pr
       .attr("x", 0 - (height / 2))
       .attr("dy", "1em")
       .style("text-anchor", "middle")
+      .style("font-size", "10px")
       .text("Profit per store percentile (CGM)");
 
-    let series_type_values=["OL","Brand"];
+    let series_type_values = ["OL", "Brand"];
 
     let legend = chart.append("g")
       .attr("font-family", "Tesco")
@@ -153,38 +163,35 @@ class BubbleChart2 extends React.PureComponent { // eslint-disable-line react/pr
       });
 
     legend.append("rect")
-      .attr("x", 700 )
+      .attr("x", 800)
       .attr("width", 19)
       .attr("height", 19)
-      .attr("fill", function (d,i) {
+      .attr("fill", function (d, i) {
           return colorArray[i];
         }
       );
 
     legend.append("text")
-      .attr("x", 735)
+      .attr("x", 770)
       .attr("y", 9.5)
       .attr("dy", "0.32em")
       .style("text-anchor", "middle")
       .text(function (d) {
         return d;
       });
-
     // let color = d3.scaleLinear().range(d3.schemeCategory20b);
-
-
-
-
   };
 
   componentDidMount = () => {
-    this.createChart(this.props.data, this.props.path, this.props.selprod,  this.props.onSaveBubbleParam,this.props.onGenerateTable)
+    this.createChart(this.props.data, this.props.path, this.props.selectedBubble, this.props.onSaveBubbleParam, this.props.onSaveBubbleParam2,
+      this.props.onGenerateTable,this.props.selectedBubble2)
 
   };
 
   componentDidUpdate = () => {
-    this.createChart(this.props.data, this.props.path,this.props.selprod, this.props.onSaveBubbleParam,this.props.onGenerateTable);
-    //  this.props.onSaveBubbleParam(databubbleUrlParams);
+    this.createChart(this.props.data, this.props.path, this.props.selectedBubble, this.props.onSaveBubbleParam, this.props.onSaveBubbleParam2,
+      this.props.onGenerateTable, this.props.selectedBubble2);
+    console.log('component Did Update', this.props.selectedBubble2);
   };
 
   render() {
@@ -192,12 +199,12 @@ class BubbleChart2 extends React.PureComponent { // eslint-disable-line react/pr
 
     return (
       <div>
-        <svg id="svgg" width="800" height="600" fontFamily="sans-serif" fontSize="10"
+        <svg id="svgg" width="900" height="600" fontFamily="sans-serif" fontSize="10"
              textAnchor="middle"></svg>
         {/*<Button onClick={() => {*/}
-          {/*/!*this.props.onSaveBubbleParam(prodArr);*!/*/}
-          {/*this.props.onFetchGraph();*/}
-          {/*this.props.onGenerateTable();*/}
+        {/*/!*this.props.onSaveBubbleParam(prodArr);*!/*/}
+        {/*this.props.onFetchGraph();*/}
+        {/*this.props.onGenerateTable();*/}
         {/*}}>Update chart</Button>*/}
       </div>
     );

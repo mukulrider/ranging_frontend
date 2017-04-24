@@ -77,7 +77,7 @@ class SelectorNegotiation2 extends React.PureComponent { // eslint-disable-line 
         {(() => {
           return (
             <div id="style-7" style={{
-              height: '38%',
+              height: '90%',
               width: '18%',
               position: 'fixed',
               overflow: 'scroll',
@@ -187,21 +187,18 @@ class SelectorNegotiation2 extends React.PureComponent { // eslint-disable-line 
 
               </PanelGroup>
 
-
-
-
-              <Button
+              <Button style={{marginLeft:"40px"}}
                 onClick={() => {
 
                   this.applyButtonFunctionality();
 
                 }}>Apply Filters</Button>
 
-              {/*<Button*/}
-                {/*onClick={() => {*/}
-                  {/*this.props.onGenerateUrlParamsString('');*/}
-                  {/*this.props.onGenerateUrlParamsData();*/}
-                {/*}}>Reset Filters</Button>*/}
+              <Button style={{marginTop:"4px", marginLeft:"40px"}}
+                onClick={() => {
+                  this.props.onGenerateUrlParamsString('');
+                  this.props.onGenerateUrlParamsData();
+                }}>Clear Filters Selection</Button>
             </div>
           )
         })()}
