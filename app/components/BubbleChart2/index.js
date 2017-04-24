@@ -137,6 +137,7 @@ class BubbleChart2 extends React.PureComponent { // eslint-disable-line react/pr
       .attr("transform",
         "translate(" + (width / 2) + " ," + (height + (margin.top * 1.75)) + ")")
       .style("text-anchor", "middle")
+      .style("font-size", "10px")
       .text("CPS percentile");
 
     chart.append("text")
@@ -145,6 +146,7 @@ class BubbleChart2 extends React.PureComponent { // eslint-disable-line react/pr
       .attr("x", 0 - (height / 2))
       .attr("dy", "1em")
       .style("text-anchor", "middle")
+      .style("font-size", "10px")
       .text("Profit per store percentile (CGM)");
 
     let series_type_values = ["OL", "Brand"];

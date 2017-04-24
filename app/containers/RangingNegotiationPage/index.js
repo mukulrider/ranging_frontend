@@ -263,7 +263,7 @@ export class RangingNegotiationPage extends React.PureComponent { // eslint-disa
                       }}><p>Reset Chart</p></div>
                     </div>
 
-                    <div className="col-xs-12 col-md-4" style = {{marginTop:'2%'}}>
+                    <div className="col-xs-12 col-md-4" style = {{marginTop:'2%',fontSize:'14px'}}>
 
                       <h4>
                         Please select a negotiation strategy below to filter
