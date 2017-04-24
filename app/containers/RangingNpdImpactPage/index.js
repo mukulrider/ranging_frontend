@@ -292,10 +292,6 @@ export class RangingNpdImpactPage extends React.PureComponent { // eslint-disabl
 
               </Nav>
 
-              <div className="breadcrumb">
-                <span className="label">&nbsp;13 Weeks</span>
-
-              </div>
 
 
             <Modal show={this.state.lgShow} bsSize="large" aria-labelledby="contained-modal-title-sm">
@@ -387,18 +383,20 @@ export class RangingNpdImpactPage extends React.PureComponent { // eslint-disabl
 
               {/*Net Impact (Waterfall chart and impact numbers)*/}
               <Panel>
-                <div className="row">
+                <div className="row" style={{width:"100%"}}>
                   <div className="col-xs-12">
-                    <div className="net-impact-row">
+                    <div>
 
                       <div>
-                        <h4 className="ts-blk-proview-subhead"> NET IMPACT </h4>
+                        <h4 className="pageModuleMainTitle" > NET IMPACT </h4>
                       </div>
 
+                      <div className="row" style={{width:"100%",marginLeft:'6%'}}>
                       {/*Value*/}
-                      <div className="col-xs-6">
+                      <div className="col-xs-5 ts-blk-proview">
                         <Panel>
-                          <div className="dashed-border center-this">
+
+                          <div className="pageModuleSubTitle">
                             <h4> VALUE </h4>
                           </div>
                           {/*<h5>Water fall chart</h5>*/}
@@ -406,7 +404,7 @@ export class RangingNpdImpactPage extends React.PureComponent { // eslint-disabl
                           {/*Waterfall chart*/}
                           {(() => {
                             if (this.props.RangingNpdImpactPage.canniProdTableData) {
-                              console.log("a1", this.props.RangingNpdImpactPage.canniProdTableData)
+                              {/*console.log("a1", this.props.RangingNpdImpactPage.canniProdTableData)*/}
                               return (
                                 <WaterFallChartNpd data={{chart_data:this.props.RangingNpdImpactPage.canniProdTableData.sales_chart.data, chart_id:"net_impact_waterfall",chart_type:"value"}}/>
                               )
@@ -414,12 +412,12 @@ export class RangingNpdImpactPage extends React.PureComponent { // eslint-disabl
 
                           {/*Impact numbers*/}
                           <div className="row">
-                            <div className="col-xs-12">
+                            <div className="col-xs-12 valueNumbers">
 
-                              <div className="col-xs-6 center-this">
+                              <div className="col-xs-5 impactNumbers">
                                 <Panel>
-                                  <div className="dashed-border">
-                                    <h4> % CANNIBALIZATION</h4>
+                                  <div>
+                                    <h4 className="impactHeading">% CANNIBALIZATION</h4>
                                   </div>
                                   {/*console.log("volume canni data",this.props.RangingNpdImpactPage.sales_chart.impact.Cannibilized_sales);*/}
 
@@ -435,11 +433,12 @@ export class RangingNpdImpactPage extends React.PureComponent { // eslint-disabl
 
                                 </Panel>
                               </div>
+                              <div className="col-xs-2"></div>
 
-                              <div className="col-xs-6 center-this">
+                              <div className="col-xs-5 impactNumbers">
                                 <Panel>
-                                  <div className="dashed-border">
-                                    <h4> % IMPACT IN PSG </h4>
+                                  <div>
+                                    <h4 className="impactHeading"> % IMPACT IN PSG </h4>
                                   </div>
 
                                   {(() => {
@@ -461,10 +460,12 @@ export class RangingNpdImpactPage extends React.PureComponent { // eslint-disabl
                         </Panel>
                       </div>
 
+                      <div className="col-xs-1"></div>
+
                       {/*Volume*/}
-                      <div className="col-xs-6">
+                      <div className="col-xs-5 ts-blk-proview">
                         <Panel>
-                          <div className="dashed-border center-this">
+                          <div className="pageModuleSubTitle">
                             <h4> VOLUME </h4>
                           </div>
 
@@ -478,12 +479,12 @@ export class RangingNpdImpactPage extends React.PureComponent { // eslint-disabl
 
                           {/*Impact numbers*/}
                           <div className="row">
-                            <div className="col-xs-12">
+                            <div className="col-xs-12 valueNumbers">
 
-                              <div className="col-xs-6 center-this">
+                              <div className="col-xs-5 impactNumbers">
                                 <Panel>
-                                  <div className="dashed-border">
-                                    <h4> % CANNIBALIZATION</h4>
+                                  <div>
+                                    <h4 className="impactHeading"> % CANNIBALIZATION</h4>
                                   </div>
 
                                   {(() => {
@@ -495,14 +496,14 @@ export class RangingNpdImpactPage extends React.PureComponent { // eslint-disabl
                                         </div>
                                       )
                                     }})()}
-
                                 </Panel>
                               </div>
 
-                              <div className="col-xs-6 center-this">
+                          <div className="col-xs-2"></div>
+                              <div className="col-xs-5 impactNumbers">
                                 <Panel>
-                                  <div className="dashed-border">
-                                    <h4> % IMPACT IN PSG </h4>
+                                  <div>
+                                    <h4 className="impactHeading"> % IMPACT IN PSG </h4>
                                   </div>
 
                                   {(() => {
@@ -521,13 +522,14 @@ export class RangingNpdImpactPage extends React.PureComponent { // eslint-disabl
 
                         </Panel>
                       </div>
+                      </div>
                     </div>
                   </div>
                 </div>
 
                 <Button
                   onClick={() => this.setState({lgShow: true})}
-                  style={{display: 'block', margin: '0 auto'}}>
+                  style={{display: 'block', marginTop: '5px'}}>
                   EDIT VOLUME FORECAST
                 </Button>
 
@@ -538,13 +540,13 @@ export class RangingNpdImpactPage extends React.PureComponent { // eslint-disabl
                 <div className="row">
                   <div className="col-xs-12">
                     <div className="net-cannibalized-prod">
-                      <h4 className="ts-blk-proview-subhead">CURRENT PRODUCTS THAT MIGHT BE CANNIBALIZED</h4>
+                      <h4 className="pageModuleMainTitle">CURRENT PRODUCTS THAT MIGHT BE CANNIBALIZED</h4>
                       <div id="table">
 
                         {/*Search*/}
                         <div className="col-xs-12 col-xs-5" style={{marginBottom:"10px"}}>
                           <InputField type={'string'}
-                                      placeholder="Search Retailer"
+                                      placeholder="Search Product Description"
                                       value={this.props.searchTable1}
                                       onChange={(e)=>{
                                         this.props.onSaveTable1SearchParam(e);
@@ -561,9 +563,9 @@ export class RangingNpdImpactPage extends React.PureComponent { // eslint-disabl
 
 
                         {/*table*/}
-                        <table className="table table-hover table-striped table-bordered " width="100%">
+                        <table className="table table-hover table-bordered " width="100%">
                           <thead>
-                          <tr style={{fontSize:"16px",fontFamily:"Tesco"}}>
+                          <tr className="table-header-format" style={{fontSize:"16px",fontFamily:"Tesco"}}>
                             {/*<th>Branded Name</th>*/}
                             <th>Brand Indicator</th>
                             <th>Products Description</th>
@@ -669,7 +671,7 @@ export class RangingNpdImpactPage extends React.PureComponent { // eslint-disabl
                 <div className="row">
                   <div className="col-xs-12">
                     <div className="supplier-performance">
-                      <h4 className="ts-blk-proview-subhead">SUPPLIER PERFORMANCE IN PAST</h4>
+                      <h4 className="pageModuleMainTitle">SUPPLIER PERFORMANCE IN PAST</h4>
 
                       {/*Bubble Chart*/}
                       <div className="col-xs-6 ">
@@ -693,7 +695,7 @@ export class RangingNpdImpactPage extends React.PureComponent { // eslint-disabl
                           <div className="col-xs-12 col-xs-5" style={{marginBottom:"10px"}}>
                             <InputField type={'string'}
                                         dataTable2PageUrlParamsNew = "page1=1"
-                                        placeholder="Search product"
+                                        placeholder="Search Product Description"
                                         value={this.props.searchTable2}
                                         onChange={(e)=>{
                                           this.props.onSaveTable2SearchParam(e);
@@ -710,9 +712,9 @@ export class RangingNpdImpactPage extends React.PureComponent { // eslint-disabl
                           </div>
 
                           {/*Table*/}
-                          <table className="table table-hover table-striped table-bordered " width="100%">
+                          <table className="table table-hover table-bordered " width="100%">
                             <thead>
-                            <tr style={{fontSize:"16px",fontFamily:"Tesco"}} key={Math.random() + Date.now()}>
+                            <tr className="table-header-format" style={{fontSize:"16px",fontFamily:"Tesco" ,textAlign:'center'}} key={Math.random() + Date.now()}>
                               <th>BPN</th>
                               <th>Description</th>
                               <th>CPS</th>
@@ -758,7 +760,7 @@ export class RangingNpdImpactPage extends React.PureComponent { // eslint-disabl
 
                                     this.setState({activePage: e})
 
-                                    let dataTable2PageUrlParamsNew = "page1=" + e;
+                                    let dataTable2PageUrlParamsNew = "page1=" + obj;
                                     console.log("printing pagination for bubble table",dataTable2PageUrlParamsNew);
                                     this.props.onSaveTable2PageParam(dataTable2PageUrlParamsNew );
                                     this.props.onDataFetchOnPageLoad();

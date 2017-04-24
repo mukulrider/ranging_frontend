@@ -21,8 +21,8 @@ class BubbleChartNpd extends React.PureComponent { // eslint-disable-line react/
 
         //Chart configurations
         let margin = {top: 20, right: 20, bottom: 40, left: 30};
-        let width = 400-margin.left-margin.right,
-          height = 300-margin.top-margin.bottom;
+        let width = 550-margin.left-margin.right,
+          height = 500-margin.top-margin.bottom;
 
       // let svg = d3.select('#'+chart_id);
       // svg.selectAll("*").remove();
@@ -31,6 +31,7 @@ class BubbleChartNpd extends React.PureComponent { // eslint-disable-line react/
       //   .attr("height", height + margin.top + margin.bottom)
       //   .attr("transform","translate(" + margin.left + "," + margin.top + ")");
 
+       let colorArray = ['#00838f', '#33691e'];
 
 
       //Selecting svg element
@@ -104,9 +105,17 @@ class BubbleChartNpd extends React.PureComponent { // eslint-disable-line react/
             .transition()
             .duration(2000)
             .attr("r", function (d) {
-                return (rScale(d[radius_metric]/1000));
+                return (rScale(d[radius_metric]/100));
             })
-            .style("fill", "#0B946C");
+          .style("fill", function (d) {
+            console.log("in_color_function", colorArray[0]);
+            if (d.brand_indicator == "Brand") {
+              return colorArray[1];
+            }
+            else {
+              return colorArray[0];
+            }
+          });
 
 
       // ------------- Labels -----------------
@@ -125,6 +134,38 @@ class BubbleChartNpd extends React.PureComponent { // eslint-disable-line react/
             .style("text-anchor", "middle")
             .text("PPS - Q");
 
+
+       let series_type_values = ["OL", "Brand"];
+
+       let legend = chart.append("g")
+         .attr("font-family", "Tesco")
+         .attr("font-size", 10).attr("text-anchor", "end")
+         .selectAll("g")
+         .data(series_type_values)
+         .enter()
+         .append("g")
+         .attr("transform", function (d, i) {
+           return "translate(0," + i * 25 + ")";
+         });
+
+       legend.append("rect")
+         .attr("x", 500)
+         .attr("width", 19)
+         .attr("height", 19)
+         .attr("fill", function (d, i) {
+             return colorArray[i];
+           }
+         );
+
+       legend.append("text")
+         .attr("x", 450)
+         .attr("y", 9.5)
+         .attr("dy", "0.32em")
+         .style("text-anchor", "middle")
+         .text(function (d) {
+           return d;
+         });
+
     };
 
     componentDidMount = () => {
@@ -140,7 +181,7 @@ class BubbleChartNpd extends React.PureComponent { // eslint-disable-line react/
     render() {
         return (
             <div>
-                <svg id={this.props.data[1]} width="400" height="300" fontFamily="sans-serif" fontSize="10"
+                <svg id={this.props.data[1]} width="550" height="600" fontFamily="sans-serif" fontSize="10"
                      textAnchor="middle"> </svg>
             </div>
         );

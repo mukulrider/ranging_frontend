@@ -84,7 +84,7 @@ class WaterFallChartNpd extends React.PureComponent { // eslint-disable-line rea
 
     //Configurations
     let margin = {top: 20, right: 30, bottom: 30, left: 40},
-      width = 450 - margin.left - margin.right ,
+      width = 500 - margin.left - margin.right ,
       height = 300 - margin.top - margin.bottom,
       padding = 0.3;
 
@@ -144,7 +144,7 @@ class WaterFallChartNpd extends React.PureComponent { // eslint-disable-line rea
                             return "bar " + d.class
                           })
                     .attr("transform", function (d) {
-                            return "translate(" + (x(d.name)+35) + ",0)";
+                            return "translate(" + (x(d.name)+40) + ",0)";
                           });
 
 
@@ -176,7 +176,7 @@ class WaterFallChartNpd extends React.PureComponent { // eslint-disable-line rea
      // return (d.end - d.start);
         });
 
-
+  
       bar.filter(function (d) {
         return d.class != "total"
       }).append("line")
