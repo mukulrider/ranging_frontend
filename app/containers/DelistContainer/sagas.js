@@ -340,9 +340,10 @@ export function* generateSupplierPopupTableFetch() {
 
   try {
     const data = yield call(request,
-      // `http://172.20.246.146:8000/ranging/supplier_table_popup?supplier=${urlParams}`);
-      `http://172.20.244.141:8000/api/supplier_table_popup?supplier=${urlParams}`);
-      // `http://10.1.161.82:8000/api/supplier_table_popup?supplier=${urlParams}`);
+
+      // `http://172.20.244.141:8000/api/supplier_table_popup?supplier=${urlParams}`);
+      `http://172.20.246.143:8000/api/supplier_table_popup?supplier=${urlParams}`);
+
     yield put(SupplierPopupTableDataFetchSuccess(data));
   } catch (err) {
     // console.log(err);

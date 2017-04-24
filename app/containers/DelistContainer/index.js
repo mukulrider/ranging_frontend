@@ -117,6 +117,8 @@ export class DelistContainer extends React.PureComponent { // eslint-disable-lin
       delistImpactTableInfo: false,
       activePage: 1,
       activePageDelist: 1,
+      activePageSupplierPopup: 1,
+      activePageDelistPopup: 1,
       activeKey: "1",
       activeKey2: "4",
     };
@@ -953,64 +955,34 @@ export class DelistContainer extends React.PureComponent { // eslint-disable-lin
                 {/*</div>*/}
               </table>
               {/*pagination*/}
-              <nav aria-label="Page navigation example">
-                <ul className="pagination pagination-lg">
-                  <li><a role="button" href="#"><span aria-label="Prev">‹</span></a></li>
-                  {(() => {
-
-                    if (this.props.DelistContainer.supplierPopuptableDataSuccess && this.props.DelistContainer.supplierPopuptableDataSuccess.table) {
-                      let x = [];
-                      let start_index = this.props.DelistContainer.supplierPopuptableDataSuccess.start_index;
-                      let page = this.props.DelistContainer.supplierPopuptableDataSuccess.page;
-                      let end_index = this.props.DelistContainer.supplierPopuptableDataSuccess.end_index;
-                      let pagination_count = this.props.DelistContainer.supplierPopuptableDataSuccess.pagination_count;
-                      let selected_page = 1;
-
-                      {/*if (this.props.location.query.startRow) {*/
-                      }
-                      {/*selected_page = this.props.location.query.startRow;*/
-                      }
-                      {/*}*/
-                      }
 
 
-                      if (page > 5) {
-                        page = page - 5
-                      } else {
-                        page = 1
-                      }
+              {(() => {
+                  if (this.props.DelistContainer.supplierPopuptableDataSuccess && this.props.DelistContainer.supplierPopuptableDataSuccess.table) {
+                    return <Pagination
+                      prev
+                      next
+                      first
+                      last
+                      ellipsis
+                      boundaryLinks
+                      items={ this.props.DelistContainer.supplierPopuptableDataSuccess.pagination_count}
+                      maxButtons={5}
+                      activePage={this.state.activePageSupplierPopup}
+                      onSelect={(e) => {
+                        this.setState({activePageSupplierPopup: e})
+                        let supplierPopupPaginationData = "supplier_popup_page=" + e;
+                        this.props.onsupplierPopupPagination(supplierPopupPaginationData);
+                        this.props.onTableType("supplier_popup");
+                        this.props.onSupplierImpactTableClick(this.props.DelistContainer.supplierPopupTableData);
+                      }}
+                    />
+                  }
+                }
+              )()}
 
-                      if (pagination_count > 10) {
-                        pagination_count = page + 10
-                      }
 
-                      for (let i = page;
-                           i <= pagination_count;
-                           i++) {
 
-                        x.push(i)
-                      }
-
-                      return x.map(objj => {
-                        return (
-                          <li className="page-item"
-                              onClick={() => {
-                                console.log("obj", (objj));
-                                {/*alert(this.props.DelistContainer.supplierPopupTableData);*/
-                                }
-                                let supplierPopupPaginationData = "supplier_popup_page=" + objj;
-                                this.props.onsupplierPopupPagination(supplierPopupPaginationData);
-                                this.props.onTableType("supplier_popup");
-                                this.props.onSupplierImpactTableClick(this.props.DelistContainer.supplierPopupTableData);
-                              }}><a >{objj}
-                          </a></li>
-                        )
-                      })
-                    }
-                  })()}
-                  <li><a role="button" href="#"><span aria-label="Last">›</span></a></li>
-                </ul>
-              </nav>
             </Modal.Body>
           </Modal>
 
@@ -1202,62 +1174,31 @@ export class DelistContainer extends React.PureComponent { // eslint-disable-lin
 
 
               {/*pagination*/}
-              <nav aria-label="Page navigation example">
-                <ul className="pagination pagination-lg">
-                  <li><a role="button" href="#"><span aria-label="Prev">‹</span></a></li>
-                  {(() => {
 
-                    if (this.props.DelistContainer.substitutesTableData && this.props.DelistContainer.substitutesTableData.table) {
-                      let x = [];
-                      let start_index = this.props.DelistContainer.substitutesTableData.start_index;
-                      let page = this.props.DelistContainer.substitutesTableData.page;
-                      let end_index = this.props.DelistContainer.substitutesTableData.end_index;
-                      let pagination_count = this.props.DelistContainer.substitutesTableData.pagination_count;
-                      let selected_page = 1;
+              {(() => {
+                  if (this.props.DelistContainer.substitutesTableData && this.props.DelistContainer.substitutesTableData.table) {
+                    return <Pagination
+                      prev
+                      next
+                      first
+                      last
+                      ellipsis
+                      boundaryLinks
+                      items={this.props.DelistContainer.substitutesTableData.pagination_count}
+                      maxButtons={5}
+                      activePage={this.state.activePageDelistPopup}
+                      onSelect={(e) => {
+                        this.setState({activePageDelistPopup: e})
+                        let delistPopupPaginationData = "delist_popup_page=" + e;
+                        this.props.ondelistPopupPagination(delistPopupPaginationData);
+                        this.props.onTableType("delist_popup");
+                        this.props.onSubstitutesClick(this.props.DelistContainer.substitutesData);
+                      }}
+                    />
+                  }
+                }
+              )()}
 
-                      {/*if (this.props.location.query.startRow) {*/
-                      }
-                      {/*selected_page = this.props.location.query.startRow;*/
-                      }
-                      {/*}*/
-                      }
-
-
-                      if (page > 5) {
-                        page = page - 5
-                      } else {
-                        page = 1
-                      }
-
-                      if (pagination_count > 10) {
-                        pagination_count = page + 10
-                      }
-
-                      for (let i = page;
-                           i <= pagination_count;
-                           i++) {
-
-                        x.push(i)
-                      }
-
-                      return x.map(objj => {
-                        return (
-                          <li className="page-item"
-                              onClick={() => {
-                                console.log("obj", (objj));
-                                let delistPopupPaginationData = "delist_popup_page=" + objj;
-                                this.props.ondelistPopupPagination(delistPopupPaginationData);
-                                this.props.onTableType("delist_popup");
-                                this.props.onSubstitutesClick(this.props.DelistContainer.substitutesData);
-                              }}><a className="page-link" >{objj}
-                          </a></li>
-                        )
-                      })
-                    }
-                  })()}
-                  <li><a role="button" href="#"><span aria-label="Last">›</span></a></li>
-                </ul>
-              </nav>
 
             </Modal.Body>
 

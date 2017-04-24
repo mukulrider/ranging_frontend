@@ -83,6 +83,7 @@ export class RangingNpdPage extends React.PureComponent { // eslint-disable-line
       delistImpactTableInfo: false,
       activeKey: "1",
       activeKey2: "11",
+      activePage: 1,
     };
   }
 
@@ -328,64 +329,43 @@ export class RangingNpdPage extends React.PureComponent { // eslint-disable-line
                       </table>
 
                       {/*pagination*/}
-                      <nav aria-label="Page navigation example" style={{paddingLeft:"10px"}}>
-                        <ul className="pagination pagination-lg">
-                          {(() => {
 
-                            if (this.props.RangingNpdPage.data && this.props.RangingNpdPage.data.count) {
-                              let x = [];
-                              let start_index = this.props.RangingNpdPage.data.start_index;
-                              let page = this.props.RangingNpdPage.data.page;
-                              let end_index = this.props.RangingNpdPage.data.end_index;
-                              let pagination_count = this.props.RangingNpdPage.data.pagination_count;
-                              let selected_page = 1;
+                      {(() => {
+                          if (this.props.RangingNpdPage.data && this.props.RangingNpdPage.data.count) {
 
-                              {/*if (this.props.location.query.startRow) {*/}
-                                {/*selected_page = this.props.location.query.startRow;*/}
-                              {/*}*/}
+                            return <Pagination
+                              prev
+                              next
+                              first
+                              last
+                              ellipsis
+                              boundaryLinks
+                              items={this.props.RangingNpdPage.data.pagination_count}
+                              maxButtons={5}
+                              activePage={this.state.activePage}
+                              onSelect={(e) => {
 
+                                this.setState({activePage: e})
 
-                              if (page > 5) {
-                                page = page - 5
-                              } else {
-                                page = 1
-                              }
+                                dataPageUrlParams = "page=" + e;
+                                this.props.onSavePageParam(dataPageUrlParams);
+                                {/**/
+                                }
+                                if (dataFilterUrlParams !== '' && dataWeekUrlParams !== '') {
+                                  browserHistory.push(this.props.location.pathname + "?" + dataWeekUrlParams + "&" + dataFilterUrlParams + "&" + dataPageUrlParams);
+                                } else if (dataFilterUrlParams !== '' || dataWeekUrlParams !== '') {
+                                  browserHistory.push(this.props.location.pathname + "?" + dataWeekUrlParams + dataFilterUrlParams + "&" + dataPageUrlParams);
+                                }
+                                else {
+                                  browserHistory.push(this.props.location.pathname + "?" + dataPageUrlParams);
+                                }
+                              }}
+                            />
 
-                              if (pagination_count > 5) {
-                                pagination_count = page + 5
-                              }
+                          }
+                        }
+                      )()}
 
-                              for (let i = page;
-                                   i <= pagination_count;
-                                   i++) {
-
-                                x.push(i)
-                              }
-
-                              return x.map(obj => {
-                                return (
-                                  <li className="page-item"
-                                      onClick={() => {
-                                        dataPageUrlParams = "page=" + obj;
-                                        this.props.onSavePageParam(dataPageUrlParams);
-                                        {/**/
-                                        }
-                                        if (dataFilterUrlParams !== '' && dataWeekUrlParams !== '') {
-                                          browserHistory.push(this.props.location.pathname + "?" + dataWeekUrlParams + "&" + dataFilterUrlParams + "&" + dataPageUrlParams);
-                                        } else if (dataFilterUrlParams !== '' || dataWeekUrlParams !== '') {
-                                          browserHistory.push(this.props.location.pathname + "?" + dataWeekUrlParams + dataFilterUrlParams + "&" + dataPageUrlParams);
-                                        }
-                                        else {
-                                          browserHistory.push(this.props.location.pathname + "?" + dataPageUrlParams);
-                                        }
-                                      }}><a className="page-link">{obj}
-                                  </a></li>
-                                )
-                              })
-                            }
-                          })()}
-                        </ul>
-                      </nav>
 
 
                     </div>
