@@ -276,12 +276,7 @@ class CascadedFilterNpdImpact extends React.PureComponent { // eslint-disable-li
                           this.props.sideFilter.product_information.map((obj,key1) => {
 
                             var panelHeader = (
-                              <div className="text-capitalize"
-                                   style={{
-                                     fontWeight: '700',
-                                     fontSize: '16px',
-                                     borderBottom: '1px solid #ddd'
-                                   }}>{obj.name.replace(/_/g, ' ')} <span style={{color: "red"}}>*</span>&nbsp;
+                              <div className="text-capitalize">{obj.name.replace(/_/g, ' ')} <span style={{color: "red"}}>*</span>&nbsp;
                                 <span className="accordion-toggle" style={{float: 'right'}}></span></div>
                             );
 

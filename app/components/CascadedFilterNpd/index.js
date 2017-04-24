@@ -138,7 +138,7 @@ class CascadedFilterNpd extends React.PureComponent { // eslint-disable-line rea
                              {/*borderBottom: '1px solid #ddd'*/}
                            {/*}}>{obj.name.replace(/_/g, ' ')}&nbsp;<span style={{color:"red"}}>*</span>&nbsp;</div>*/}
 
-                      <div className="panel-body style-7" style={{maxHeight: '250px', overflowX: 'hidden'}}>
+                      <div className="panel-body style-7" style={{maxHeight: '250px', overflowX: 'hidden', fontSize: '9px'}}>
                         {(() => {
                           let finalCheckbox =[];
 
