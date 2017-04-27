@@ -47,3 +47,7 @@ export const GENERATE_TABLE_SUCCESS = 'app/RangingNpdPage/GENERATE_TABLE_SUCCESS
 
 
 
+//On page load and bread crumb
+export const SELECT_FILTER_INDICATOR = 'app/RangingNpdPage/SELECT_FILTER_INDICATOR';
+export const UPDATE_BREADCRUMBS = 'app/RangingNpdPage/UPDATE_BREADCRUMBS';
+

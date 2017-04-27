@@ -11,6 +11,7 @@ import Button from 'components/button';
 import {browserHistory} from 'react-router';
 import {Accordion,PanelGroup, Panel} from 'react-bootstrap';
 import styles from './style.scss';
+import {Modal} from 'react-bootstrap';
 
 
 class CascadedFilterNpd extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
@@ -37,13 +38,19 @@ class CascadedFilterNpd extends React.PureComponent { // eslint-disable-line rea
 
   };
 
+  constructor(props) {
+    super(props);
+    this.state = {alertShow: false,alertmsg:"Please select all the mandatory filters"};
 
+  }
 
   applyButtonFunctionality = () => {
 
     let newUrl = this.props.location.pathname;
     let x = '';
-  //
+    let breadcrumb = '';
+    let numberOfFiltersSelected = 0;
+
     [...this.refs.selector.querySelectorAll('input')].map(obj => {
       if (obj.checked == true) {
 
@@ -51,25 +58,42 @@ class CascadedFilterNpd extends React.PureComponent { // eslint-disable-line rea
 
         x = x + split[1]+"="+split[0]+"&";
 
+        breadcrumb = breadcrumb + split[0] + " > ";
+        numberOfFiltersSelected = numberOfFiltersSelected + 1;
       }
     });
   //
     const queryString = x.substring(0, x.length - 1);
+    breadcrumb = breadcrumb.substring(0, breadcrumb.length - 3);
     // console.log(queryString);
-    this.props.onGenerateUrlParamsString(queryString);
 
-  //   console.log("-=-=-==-==-=-=",queryString)
-  //   browserHistory.push(newUrl + '?' + queryString);
 
-    if (this.props.dataPageUrlParams!==''&& this.props.dataWeekUrlParams!=='') {
-      browserHistory.push(newUrl+"?"+this.props.dataWeekUrlParams+"&"+queryString+"&"+this.props.dataPageUrlParams);
-    } else if (this.props.dataPageUrlParams!==''|| this.props.dataWeekUrlParams!=='') {
-      browserHistory.push(newUrl+"?"+this.props.dataWeekUrlParams+this.props.dataPageUrlParams+"&"+queryString);
-    }
-    else{
-      browserHistory.push(newUrl + '?' + queryString);
+    let validFilters = 1;
+    // ---------------------FINAL VALIDATIONS BEFORE APPLYING---------------------
+
+    // FOR FILTERS - all filters are mandatory , so checking wthr all are selected or not
+    if (numberOfFiltersSelected != 4) {
+      this.setState({alertShow: true})
+      this.setState({alertmsg: "Please select all the mandatory filters"})
+      validFilters = 0;
     }
 
+    //Validation for mandatory filters
+    if (validFilters == 1) {
+      this.props.onUpdateBreadCrumbs(breadcrumb)
+      this.props.onPageLoadSelectFilterIndicator(false);
+      this.props.onGenerateUrlParamsString(queryString);
+
+
+      if (this.props.dataPageUrlParams !== '' && this.props.dataWeekUrlParams !== '') {
+        browserHistory.push(newUrl + "?" + this.props.dataWeekUrlParams + "&" + queryString + "&" + this.props.dataPageUrlParams);
+      } else if (this.props.dataPageUrlParams !== '' || this.props.dataWeekUrlParams !== '') {
+        browserHistory.push(newUrl + "?" + this.props.dataWeekUrlParams + this.props.dataPageUrlParams + "&" + queryString);
+      }
+      else {
+        browserHistory.push(newUrl + '?' + queryString);
+      }
+    }
 
   };
 
@@ -202,7 +226,29 @@ class CascadedFilterNpd extends React.PureComponent { // eslint-disable-line rea
               })()}
             </PanelGroup>
 
+          {/*Alert modal*/}
+          <Modal show={this.state.alertShow} bsSize="large" aria-labelledby="contained-modal-title-sm">
+                <Modal.Body>
 
+                  <div className="row">
+                    <div className="col-xs-12 alertMadatoryFilter">
+                      {this.state.alertmsg}
+                    </div>
+                  </div>
+
+
+                </Modal.Body>
+                <Modal.Footer>
+                  <Button
+                    onClick={() => {
+                      this.setState({alertShow: false})
+                    }}
+                    style={{display: 'block', margin: '0 auto'}}>Close</Button>
+                </Modal.Footer>
+              </Modal>
+
+
+          {/*Buttons*/}
           <div style={{textAlign:"center"}}>
         <Button style={{marginTop:"5px"}}
           onClick={() => {
