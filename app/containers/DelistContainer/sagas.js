@@ -48,6 +48,8 @@ export function* defaultSaga() {
   // See example in containers/HomePage/sagas.js
 }
 
+let host_url = "http://172.20.244.238:8000"
+
 // All sagas to be loaded
 export function* generateApiFetch() {
 
@@ -129,42 +131,19 @@ export function* generateApiFetch() {
   }
 
 
-  // let tableType = urlName.get("tableType");
-  // let tableTypeStateName = '';
-  // if( tableType=="supplier"){
-  //   tableTypeStateName = "supplierTablePagination";
-  // } else if( tableType=="supplier_popup"){
-  //   tableTypeStateName = "supplierPopupTablePagination";
-  // } else if( tableType=="delist") {
-  //   tableTypeStateName = "delistTablePagination";
-  // } else if( tableType=="delist_popup") {
-  //   tableTypeStateName = "delistPopupTablePagination";
-  // }
-  // alert(tableTypeStateName);
-  // let pagination_data = urlName.get(tableTypeStateName);
-  // alert(pagination_data);
-  //
+
   // let paramstring = '';
   // if (!(isEmpty(urlParams))) {
   //   // console.log("generateApiFetch");
   //   Object.keys(urlParams).map(obj => {
   //     paramstring += `&${obj}=${urlParams[obj]}`;
   //   })
-  //   paramstring = paramstring + '&id=' + urlParams;
-  //   paramstring = +'/?' + paramstring.replace('&', '') + '&' + tableType + '_page=' + pagination_data;
-  // } else if(pagination_data != undefined){
-  //   // console.log("else if of sagas");
-  //   paramstring = '?' + pagination_data;
-  //   alert(paramstring);
-  // } else {
-  //
-  // }
 
 
   try {
-    const data = yield call(request,
-      // `http://172.20.246.143:8000/api/product_impact_supplier_table${urlParams}`);
-      `http://172.20.246.143:8000/api/product_impact_supplier_table${urlParams}`);
+    const data = yield call(request, host_url +
+      `/api/product_impact_supplier_table${urlParams}`);
+      // `http://172.20.247.16:8000/api/product_impact_supplier_table${urlParams}`);
     let spinnerCheck = 1;
 
     // `http://172.20.246.146:8000/ranging/product_impact_table/?store_type=Main%20Estate&time_period=13_weeks&${paramstring}`);
@@ -183,61 +162,6 @@ export function* doApiFetch() {
   yield take(LOCATION_CHANGE);
   yield cancel(watcher);
 }
-
-// export function* generateWeekFetch() {
-//   // const urlName = yield select(selectDelistContainerDomain());
-//   // const urlParams = urlName.get('weekNumber');
-//   // let paramstring = '';
-//
-//   // Object.keys(urlParams).map(obj => {
-//   //   console.log('obj-> ', obj);
-//   //   paramstring += `&${obj}=${urlParams[obj]}`;
-//   // });
-//
-//   // paramstring = `${paramstring}&time_period=${urlParams}`;
-//   // paramstring = paramstring.replace('&', '');
-//   try {
-//     const data = yield call(request,
-//       `http://172.20.246.140:8000/ranging/product_impact_chart`);
-//     // `http://172.20.246.140:8000/ranging/product_impact_chart/?${paramstring}`);
-//     yield put(apiFetchSuccess(data));
-//   } catch (err) {
-//     // console.log(err);
-//   }
-// }
-
-// export function* doWeekFetch() {
-//   const watcher = yield takeLatest(WEEK_URL, generateWeekFetch);
-//   yield take(LOCATION_CHANGE);
-//   yield cancel(watcher);
-// }
-
-// export function* generateTableFetch() {
-//   console.log('generateTableFetch>>>>>>>>>>>>>>>>>')
-//   let urlName = yield select(selectDelistContainerDomain());
-//   let urlParams = urlName.get("tableDataFetch");
-//   console.log(urlParams);
-//
-//   let paramstring = '';
-//   Object.keys(urlParams).map(obj => {
-//     paramstring += `&${obj}=${urlParams[obj]}`;
-//   })
-//   paramstring = paramstring + '&id=' + urlParams;
-//   paramstring = paramstring.replace('&', '')
-//   try {
-//     const data = yield call(request,
-//       `http://172.20.246.140:8000/ranging/product_impact_table/?` + paramstring);
-//     yield put(ModalTableDataFetchSuccess(data));
-//   } catch (err) {
-//     // console.log(err);
-//   }
-// }
-//
-// export function* doTableFetch() {
-//   const watcher = yield takeLatest(GENERATE_TABLE, generateTableFetch);
-//   yield take(LOCATION_CHANGE);
-//   yield cancel(watcher);
-// }
 
 export function* generateSubstitutesFetch() {
   const urlName = yield select(selectDelistContainerDomain());
@@ -280,9 +204,9 @@ export function* generateSubstitutesFetch() {
   // }
 
   try {
-    const data = yield call(request,
-      // `http://172.20.244.141:8000/api/delist_table_popup?delist_product=${urlParams}`);
-      `http://172.20.246.143:8000/api/delist_table_popup?delist_product=${urlParams}`);
+    const data = yield call(request,host_url +
+      // `http://172.20.246.143:8000/api/delist_table_popup?delist_product=${urlParams}`);
+      `/api/delist_table_popup?delist_product=${urlParams}`);
 
     yield put(SubstitutesClickSuccess(data));
   } catch (err) {
@@ -314,23 +238,6 @@ export function* generateSupplierPopupTableFetch() {
     pagination_data = urlName.get('supplierPopupTablePagination');
   }
 
-//   let paramstring = '';
-//   if (!(isEmpty(urlParams))) {
-//     Object.keys(urlParams).map(obj => {
-//       paramstring += `&${obj}=${urlParams[obj]}`;
-//     })
-//     paramstring = paramstring + '&id=' + urlParams;
-//     paramstring = +'/?' + paramstring.replace('&', '') + '&' + pagination_data;
-//   } else if(pagination_data != ""){
-//     console.log("else if of sagas");
-//     paramstring = '?' + pagination_data;
-//     alert(paramstring);
-//   } else {
-//     paramstring = urlParams;
-//   }
-// alert("paramstring");
-// alert(paramstring);
-
   if (!(pagination_data == "")) {
     urlParams = urlParams + "&" + pagination_data;
   } else {
@@ -339,10 +246,9 @@ export function* generateSupplierPopupTableFetch() {
 
 
   try {
-    const data = yield call(request,
-
-      // `http://172.20.244.141:8000/api/supplier_table_popup?supplier=${urlParams}`);
-      `http://172.20.246.143:8000/api/supplier_table_popup?supplier=${urlParams}`);
+    const data = yield call(request,host_url +
+      // `http://172.20.246.143:8000/api/supplier_table_popup?supplier=${urlParams}`);
+      `/api/supplier_table_popup?supplier=${urlParams}`);
 
     yield put(SupplierPopupTableDataFetchSuccess(data));
   } catch (err) {
@@ -426,8 +332,9 @@ export function* generateDelistTableFetch() {
   }
 
   try {
-    // let data = yield call(request, `http://172.20.244.141:8000/api/product_impact_delist_table` + urlParams);
-    let data = yield call(request, `http://172.20.246.143:8000/api/product_impact_delist_table` + urlParams);
+
+    let data = yield call(request, host_url + `/api/product_impact_delist_table` + urlParams);
+    // let data = yield call(request, `http://172.20.247.16:8000/api/product_impact_delist_table` + urlParams);
     let spinnerCheck = 1;
     yield put(delistTableSuccess(data));
     yield put(DelistProductTableSpinnerSuccess(spinnerCheck));
@@ -452,80 +359,30 @@ export function* doDelistTableFetch() {
 export function* generateWaterfallValueFetch() {
 
   let urlName = yield select(selectDelistContainerDomain());
-  console.log("water 0 urlName", urlName);
 
   let urlParams = "";
-
-  console.log('water 1', urlParams);
-
-  // console.log('urlParams for waterfall chart - value', urlParams);
-  //
-  // let paramstring = '';
-  // Object.keys(urlParams).map(obj => {
-  //   paramstring += `&${obj}=${urlParams[obj]}`;
-  // })
-  // paramstring = paramstring + '&id=' + urlParams;
-  // paramstring = paramstring.replace('&', '')
 
   let week_no_data = "";
   if (!(urlName.get('weekNumber') == "")) {
     week_no_data = urlName.get('weekNumber');
-    console.log("week_no_data", week_no_data);
   }
 
   if (!(week_no_data == "")) {
-    console.log("inside if --- week_no_data", week_no_data);
     urlParams = urlParams + "&" + week_no_data;
   } else {
     // alert("empty");
   }
 
-  console.log('water 2', urlParams);
-
   let store_type = "";
   if (!(urlName.get('storeType') == "")) {
     store_type = urlName.get('storeType');
-    console.log("store_type", store_type);
   }
 
   if (!(store_type == "")) {
     urlParams = urlParams + "&" + store_type;
-    console.log("inside if --- store_type", store_type);
-
   } else {
     // alert("empty");
   }
-
-  console.log('water 3', urlParams);
-  //
-  // let urlParamsString = "";
-  // if(!((urlName.get('urlParamsString') == "") || (typeof(urlParamsString) == "undefined"))) {
-  //
-  //   urlParamsString = urlName.get('urlParamsString');
-  //
-  //   console.log("urlParamsString nt", urlParamsString);
-  // }
-  //
-
-  // let urlParamsString = "";
-  // if (!(urlName.get('urlParamsString') == "")) {
-  //   urlParamsString = urlName.get('urlParamsString');
-  //   console.log("urlParamsString", urlParamsString);
-  // }
-  //
-  // if (!(typeof(urlParamsString) == "undefined") && !(urlParamsString == "")) {
-  //   // alert("non empty");
-  //   // alert(urlParamsString);
-  //   console.log("inside if for params", urlParamsString);
-  //   urlParams = urlParams + "&" + urlParamsString;
-  //   console.log("inside if 2 for params", urlParams);
-  //
-  // } else {
-  //   // alert("empty");
-  // }
-  // //
-  // console.log('water 4 urlParamsString', urlParams);
-  //
 
 let filterParamsString = "";
   if (!(urlName.get('filterParamsString') == "")) {
@@ -534,17 +391,11 @@ let filterParamsString = "";
   }
 
   if (!(typeof(filterParamsString) == "undefined") && !(filterParamsString == "")) {
-    // alert("non empty");
-    // alert(urlParamsString);
-    console.log("inside if for params", filterParamsString);
     urlParams = urlParams + "&" + filterParamsString;
-    console.log("inside if 2 for params", urlParams);
 
   } else {
     // alert("empty");
   }
-  //
-  console.log('water 4 urlParamsString', urlParams);
 
   let urlparamsDelist = "";
   if (!(urlName.get('urlparamsDelist') == "")) {
@@ -554,23 +405,19 @@ let filterParamsString = "";
   if (!(urlparamsDelist == "")) {
     urlParams = urlParams + "&" + urlparamsDelist;
   } else {
-    // alert("empty");
-  }
 
-  console.log('water 5 urlparamsDelist', urlParams);
+  }
 
   if (!(urlParams == "")) {
     urlParams = "?" + urlParams.replace('&', '');
   }
 
-  console.log('water 6', urlParams);
 
   try {
-    console.log("inside try");
-    const data = yield call(request,
+    const data = yield call(request,host_url +
 
-      // `http://172.20.244.141:8000/api/product_impact_chart${urlParams}`);
-      `http://172.20.246.143:8000/api/product_impact_chart${urlParams}`);
+      // `http://172.20.244.238:8000/api/product_impact_chart${urlParams}`);
+      `/api/product_impact_chart${urlParams}`);
 
     let spinnerCheck = 1;
     yield put(WaterfallValueChartSuccess(data));
@@ -600,10 +447,8 @@ export function* generateTable() {
   try {
     urlParamsString = urlParamsString.replace('commercial_director', 'commerical_director');
 
-    const data = yield call(request, `http://172.20.246.146:8000/ranging/product_impact_table/?${urlParamsString}`);
-    // const data = yield call(request, `http://172.20.246.146:8000/ranging/product_impact_table/?${urlParamsString}`);
-    // const data = yield call(request, `http://172.20.246.140:8000/ranging/product_impact_table/?${urlParamsString}`);
-    // const data = yield call(request, `http://172.20.78.87:8080/ranging/product_impact/filter_data&${urlParamsString}`);
+    const data = yield call(request, host_url + `/ranging/product_impact_table/?${urlParamsString}`);
+
     yield put(generateTableSuccess(data));
   } catch (err) {
     // console.log(err);
@@ -627,8 +472,8 @@ export function* generateSideFilter() {
   try {
     // todo: update url
 
-    // const data = yield call(request, `http://172.20.244.141:8000/api/product_impact/filter_data/?${urlParamsString}`);
-    const data = yield call(request, `http://172.20.246.143:8000/api/product_impact/filter_data/?${urlParamsString}`);
+    const data = yield call(request, host_url + `/api/product_impact/filter_data/?${urlParamsString}`);
+    // const data = yield call(request, `http://172.20.247.16:8000/api/product_impact/filter_data/?${urlParamsString}`);
 
 
     yield put(generateSideFilterSuccess(data));
@@ -648,10 +493,9 @@ export function* doGenerateSideFilter() {
 export function* generateSideFilterReset() {
   try {
     // todo: update url
-    // const data = yield call(request, 'http://172.20.247.17:8000/ranging/product_impact/filter_data');
-    // const data = yield call(request, `http://172.20.246.146:8000/ranging/product_impact/filter_data/`);
-    const data = yield call(request, `http://172.20.244.141:8000/api/product_impact/filter_data/`);
-    // const data = yield call(request, `http://10.1.161.82:8000/api/product_impact/filter_data/`);
+
+    // const data = yield call(request, `http://172.20.244.141:8000/api/product_impact/filter_data/`);
+    const data = yield call(request, host_url + `/api/product_impact/filter_data/`);
 
     yield put(generateSideFilterSuccess(data));
   } catch (err) {
@@ -677,9 +521,9 @@ export function* generateAjaxFetch() {
   });
   paramstring = paramstring.replace('&', '');
   try {
-    const data = yield call(request,
-      // `http://172.20.246.140:8000/ranging/product_impact_table?${paramstring}`);
-      `http://172.20.246.146:8000/ranging/product_impact_table?${paramstring}`);
+    const data = yield call(request,host_url +
+      `/ranging/product_impact_table?${paramstring}`);
+      // `http://172.20.246.146:8000/ranging/product_impact_table?${paramstring}`);
     yield put(ajaxFetchSuccess(data));
   } catch (err) {
     // console.log(err);
@@ -697,16 +541,15 @@ export function* doAjaxFetch() {
 export function* generateRefreshedData() {
   const urlName = yield select(selectDelistContainerDomain());
   const urlParams = urlName.get('dataUrlparams');
-  // console.log("url data", urlParams)
   let paramstring = '';
   Object.keys(urlParams).map((obj) => {
     paramstring += `&${obj}=${urlParams[obj]}`;
   });
   paramstring = paramstring.replace('&', '');
   try {
-    const data = yield call(request,
-      // `http://172.20.246.140:8000/ranging/product_impact_table?${paramstring}`);
-      `http://172.20.246.146:8000/ranging/product_impact_table`);
+    const data = yield call(request,host_url +
+      `/ranging/product_impact_table?${paramstring}`);
+      // `http://172.20.246.146:8000/ranging/product_impact_table`);
     yield put(ajaxFetchSuccess(data));
   } catch (err) {
     // console.log(err);

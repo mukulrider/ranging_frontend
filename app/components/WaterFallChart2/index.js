@@ -437,7 +437,7 @@ class WaterFallChart2 extends React.PureComponent { // eslint-disable-line react
       .attr('y', (d) =>{ return (y((((d.end - d.start > 0 )? d.end:d.start )))-5)})
       // .attr('dy', (d) => `${(d.class == 'negative') ? '-' : ''}.75em`)
       // .text((d) => ((d.end - d.start)/1000));
-      .text((d,i) => ((formatSales((d.end - d.start), id,i))))
+      .text((d,i) => ((formatSales(Math.abs((d.end - d.start)), id,3))))
       .style("font-size", "10px")
       .style('fill', 'black');
 

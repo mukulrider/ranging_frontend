@@ -118,13 +118,13 @@ export class DelistContainer extends React.PureComponent { // eslint-disable-lin
       activePage: 1,
       activePageDelist: 1,
       activePageSupplierPopup: 1,
-      activePageDelistPopup: 1,
       activeKey: "1",
       activeKey2: "4",
     };
   }
 
   render() {
+    console.log('hi',this.props);
 
     let formatSales = (i) => {
       if (i >= 1000 || i <= -1000) {
@@ -162,6 +162,12 @@ export class DelistContainer extends React.PureComponent { // eslint-disable-lin
     // }
     return (
 <div>
+  <Helmet
+    title="Delist View"
+    meta={[
+      {name: 'description', content: 'Description of Delist View'},
+    ]}
+  />
 
       {/*Page title*/}
     <div className="pageTitle">DELIST IMPACT</div>
@@ -971,10 +977,11 @@ export class DelistContainer extends React.PureComponent { // eslint-disable-lin
                       activePage={this.state.activePageSupplierPopup}
                       onSelect={(e) => {
                         this.setState({activePageSupplierPopup: e})
-                        let supplierPopupPaginationData = "supplier_popup_page=" + e;
-                        this.props.onsupplierPopupPagination(supplierPopupPaginationData);
-                        this.props.onTableType("supplier_popup");
-                        this.props.onSupplierImpactTableClick(this.props.DelistContainer.supplierPopupTableData);
+                        this.props.onSupplierImpactTableSpinner();
+                        let supplierPaginationData = "supplier_page=" + e;
+                        this.props.onsupplierPagination(supplierPaginationData);
+                        this.props.onTableType("supplier");
+                        this.props.onApiFetch();
                       }}
                     />
                   }
@@ -1186,13 +1193,14 @@ export class DelistContainer extends React.PureComponent { // eslint-disable-lin
                       boundaryLinks
                       items={this.props.DelistContainer.substitutesTableData.pagination_count}
                       maxButtons={5}
-                      activePage={this.state.activePageDelistPopup}
+                      activePage={this.state.activePagedELISTpOPI}
                       onSelect={(e) => {
-                        this.setState({activePageDelistPopup: e})
-                        let delistPopupPaginationData = "delist_popup_page=" + e;
-                        this.props.ondelistPopupPagination(delistPopupPaginationData);
-                        this.props.onTableType("delist_popup");
-                        this.props.onSubstitutesClick(this.props.DelistContainer.substitutesData);
+                        this.setState({activePage: e})
+                        this.props.onSupplierImpactTableSpinner();
+                        let supplierPaginationData = "supplier_page=" + e;
+                        this.props.onsupplierPagination(supplierPaginationData);
+                        this.props.onTableType("supplier");
+                        this.props.onApiFetch();
                       }}
                     />
                   }
