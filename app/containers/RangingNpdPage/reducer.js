@@ -15,7 +15,8 @@ import {
   TABLE_PAGE_CHANGE,
   GENERATE_SIDE_FILTER_SUCCESS,CHECKBOX_CHANGE,
   GENERATE_URL_PARAMS,
-  GENERATE_URL_PARAMS_STRING
+  GENERATE_URL_PARAMS_STRING,
+  UPDATE_BREADCRUMBS,SELECT_FILTER_INDICATOR,
 } from './constants';
 
 const initialState = fromJS({
@@ -24,6 +25,9 @@ const initialState = fromJS({
   urlParamsString: '',
   filter_selection:'',
   textBoxQueryString:'',
+  showSelectFilterIndicator:true,
+  breadCrumbs:'',
+
   // data: [{competitor_product_desc: "Prod1", retailer: "ret1", asp: 1},
   //   {
   //     competitor_product_desc: "Prod2", retailer: "ret2", asp: 2
@@ -216,7 +220,15 @@ function rangingNpdPageReducer(state = initialState, action) {
     case GENERATE_URL_PARAMS_STRING:
       return state.set('urlParamsString', action.data);
 
-      case GENERATE_TEXTBOX_QUERY_STRING:
+
+    case UPDATE_BREADCRUMBS:
+      // console.log(UPDATE_BREADCRUMBS, 'reducer', action);
+      return state.set('breadCrumbs', action.data);
+    case SELECT_FILTER_INDICATOR:
+      return state.set('showSelectFilterIndicator', action.data);
+
+
+    case GENERATE_TEXTBOX_QUERY_STRING:
       return state.set('textBoxQueryString', action.data);
     default:
       return state;
