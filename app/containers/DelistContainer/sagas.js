@@ -38,9 +38,11 @@ import {
   WaterfallSpinnerSuccess,
   WaterfallProfitSpinnerSuccess,
   SubstitutesClickSuccess,
+  DelistPopupTableSpinnerSuccess,
   ajaxFetchSuccess,
   DelistPopupTableDataFetchSuccess,
   SupplierPopupTableDataFetchSuccess,
+  SupplierPopupTableSpinnerSuccess,
   delistTableSuccess,
 
 } from 'containers/DelistContainer/actions';
@@ -48,7 +50,9 @@ export function* defaultSaga() {
   // See example in containers/HomePage/sagas.js
 }
 
-let host_url = "http://172.20.244.238:8000"
+// let host_url = "http://172.20.246.196:8000"
+// let host_url = "http://172.20.244.238:8000"
+let host_url = "http://172.20.246.196:8000"
 
 // All sagas to be loaded
 export function* generateApiFetch() {
@@ -205,12 +209,14 @@ export function* generateSubstitutesFetch() {
 
   try {
     const data = yield call(request,host_url +
-      // `http://172.20.246.143:8000/api/delist_table_popup?delist_product=${urlParams}`);
       `/api/delist_table_popup?delist_product=${urlParams}`);
-
+    let spinnerCheck = 1;
     yield put(SubstitutesClickSuccess(data));
+    yield put(DelistPopupTableSpinnerSuccess(spinnerCheck));
   } catch (err) {
     // console.log(err);
+    let spinnerCheck = 1;
+    yield put(DelistPopupTableSpinnerSuccess(spinnerCheck));
   }
 }
 
@@ -249,10 +255,13 @@ export function* generateSupplierPopupTableFetch() {
     const data = yield call(request,host_url +
       // `http://172.20.246.143:8000/api/supplier_table_popup?supplier=${urlParams}`);
       `/api/supplier_table_popup?supplier=${urlParams}`);
-
+    let spinnerCheck = 1;
     yield put(SupplierPopupTableDataFetchSuccess(data));
+    yield put(SupplierPopupTableSpinnerSuccess(spinnerCheck));
   } catch (err) {
     // console.log(err);
+    let spinnerCheck = 2;
+    yield put(SupplierPopupTableSpinnerSuccess(spinnerCheck));
   }
 }
 

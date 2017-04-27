@@ -29,7 +29,10 @@ import {
   WATERFALL_SPINNER_SUCCESS,
   WATERFALL_PROFIT_SPINNER_SUCCESS,
   SUPPLIER_IMPACT_SPINNER_SUCCESS,
+  SUPPLIER_POPUP_SPINNER_SUCCESS,
   DELIST_PRODUCT_SPINNER_SUCCESS,
+  DELIST_POPUP_SPINNER_SUCCESS,
+  DELIST_DEFAULT_VIEW,
   SPINNER_STARTED,
   TEST_AJAX,
   TEST_AJAX_SUCCESS,
@@ -294,6 +297,15 @@ export function SupplierImpactTableSpinnerSuccess(spinnerCheck) {
   };
 }
 
+// SUPPLIER POPUP TABLE - SPINNER
+export function SupplierPopupTableSpinnerSuccess(spinnerCheck) {
+  console.log("SUPPLIER POPUP TABLE---------------------------", spinnerCheck);
+  return {
+    type: SUPPLIER_POPUP_SPINNER_SUCCESS,
+    spinnerCheck,
+  };
+}
+
 // DELIST PRODUCT TABLE - SPINNER
 export function DelistProductTableSpinnerSuccess(spinnerCheck) {
   console.log("DELIST PRODUCT TABLE---------------------------", spinnerCheck);
@@ -302,6 +314,25 @@ export function DelistProductTableSpinnerSuccess(spinnerCheck) {
     spinnerCheck,
   };
 }
+
+// DELIST POPUP TABLE - SPINNER
+export function DelistPopupTableSpinnerSuccess(spinnerCheck) {
+  console.log("DELIST POPUP TABLE---------------------------", spinnerCheck);
+  return {
+    type: DELIST_POPUP_SPINNER_SUCCESS,
+    spinnerCheck,
+  };
+}
+
+// DELIST DEFAULT VIEW
+export function onDelistDefaultView(defaultViewCheck) {
+  console.log("DELIST DEFAULT VIEW---------------------------", defaultViewCheck);
+  return {
+    type: DELIST_DEFAULT_VIEW,
+    defaultViewCheck,
+  };
+}
+
 
 
 

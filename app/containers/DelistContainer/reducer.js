@@ -27,7 +27,10 @@ import {
   WATERFALL_SPINNER_SUCCESS,
   WATERFALL_PROFIT_SPINNER_SUCCESS,
   SUPPLIER_IMPACT_SPINNER_SUCCESS,
+  SUPPLIER_POPUP_SPINNER_SUCCESS,
   DELIST_PRODUCT_SPINNER_SUCCESS,
+  DELIST_POPUP_SPINNER_SUCCESS,
+  DELIST_DEFAULT_VIEW,
   TEST_AJAX_SUCCESS,
   DELIST_POPUP_TABLE_DATA_FETCH_SUCCESS,
   SUPPLIER_POPUP_TABLE_DATA_FETCH_SUCCESS,
@@ -184,10 +187,25 @@ function delistContainerReducer(state = initialState, action) {
       console.log('SUPPLIER IMPACT TABLE SPINNER');
       return state.set('supplierImpactTableSpinner', action.spinnerCheck);
 
-      // DELIST PRODUCT TABLE - SPINNER SUCCESS
+    // SUPPLIER POPUP TABLE - SPINNER SUCCESS
+    case SUPPLIER_POPUP_SPINNER_SUCCESS:
+      console.log('SUPPLIER POPUP TABLE SPINNER');
+      return state.set('supplierPopupTableSpinner', action.spinnerCheck);
+
+    // DELIST PRODUCT TABLE - SPINNER SUCCESS
     case DELIST_PRODUCT_SPINNER_SUCCESS:
       console.log('DELIST PRODUCT TABLE SPINNER');
       return state.set('delistProductTableSpinner', action.spinnerCheck);
+
+ // DELIST POPUP TABLE - SPINNER SUCCESS
+    case DELIST_POPUP_SPINNER_SUCCESS:
+      console.log('DELIST POPUP TABLE SPINNER');
+      return state.set('delistPopupTableSpinner', action.spinnerCheck);
+
+// DELIST DEFAULT VIEW CHECK
+    case DELIST_DEFAULT_VIEW:
+      console.log('DELIST DEFAULT VIEW CHECK');
+      return state.set('delistDefaultView', action.defaultViewCheck);
 
 
     // URL PARAMS
