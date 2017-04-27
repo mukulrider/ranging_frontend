@@ -67,13 +67,13 @@ const initialState = fromJS({
   dataStoreUrlParams: 'store_type=Main Estate',
   dataWeekUrlParams: '',
   dataBubbleUrlParams: '',
-  dataBubbleUrlParams2: '[]',
   dataPageUrlParams:'page=1',
   sideFilterParams:'',
   textBoxQueryString:'',
   resetUrlParams:'',
   checkedList: [],
-
+ prodArrayTable: '[]',
+ prodArrayOpacity: '[]',
   x:'["base_product_number=67696064","base_product_number=60147616"]'
 
 });
@@ -83,21 +83,21 @@ function rangingNegotiationPageReducer(state = initialState, action) {
 
     //For table
     case GENERATE_TABLE_SUCCESS:
-      console.log(GENERATE_TABLE_SUCCESS, 'reducer', action);
+      // console.log(GENERATE_TABLE_SUCCESS, 'reducer', action);
       return state.set('data', action.data);
 //For graph
     case GRAPH_FETCH_SUCCESS:
-      console.log(GRAPH_FETCH_SUCCESS, 'reducer', action);
+      // console.log(GRAPH_FETCH_SUCCESS, 'reducer', action);
       return state.set('chartData', action.data);
 
     //This will keep the changed state of the url when anything is clicked
     //For performance filters
     case FILTER_FETCH:
-      console.log(FILTER_FETCH, 'reducer', action);
+      // console.log(FILTER_FETCH, 'reducer', action);
       return state.set('filterType', action.data);
 
     case FILTER_FETCH_SUCCESS:
-      console.log(FILTER_FETCH_SUCCESS, 'reducer', action);
+      // console.log(FILTER_FETCH_SUCCESS, 'reducer', action);
       return state.set('filteredData', action.data);
 
     case SAVE_PERF_PARAM:
@@ -112,11 +112,12 @@ function rangingNegotiationPageReducer(state = initialState, action) {
       return state.set('dataWeekUrlParams', action.data);
     case SAVE_BUBBLE_PARAM:
       console.log("Bubble array in reducer", action.data);
-      return state.set('dataBubbleUrlParams', action.data);
+      // return state.set('dataBubbleUrlParams', action.data);
+      return state.set('prodArrayTable', action.data);
 
     case SAVE_BUBBLE_PARAM2:
-      console.log("Bubble array in reducer", action.data);
-      return state.set('dataBubbleUrlParams2', action.data);
+      console.log("Bubble array in reducer2", action.data);
+      return state.set('prodArrayOpacity', action.data);
 
     case SAVE_SIDE_FILTER_PARAM:
       //console.log("Updated the Store state in Reducer", action.data);
@@ -133,10 +134,10 @@ function rangingNegotiationPageReducer(state = initialState, action) {
 
 //For side filters
     case URL_PARAM:
-      console.log("Updated url params Reducer", action.data);
+      // console.log("Updated url params Reducer", action.data);
       return state.set('urldata', action.data);
     case WEEK_FETCH:
-      console.log(WEEK_FETCH, 'reducer', action);
+      // console.log(WEEK_FETCH, 'reducer', action);
       return state.set('weekNumber', action.data);
 
     case GENERATE_SIDE_FILTER_SUCCESS:

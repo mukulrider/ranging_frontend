@@ -20,7 +20,7 @@ export function defaultAction() {
 
 
 export function WeekClick(data) {
-    console.log('Nego data fetch action');
+    // console.log('Nego data fetch action');
     return {
         type: WEEK_FETCH, data
     };
@@ -30,7 +30,7 @@ export function WeekClick(data) {
 
 
 export function fetchDataSuccess(data) {
-    console.log('apiFetchSuccess action', data);
+    // console.log('apiFetchSuccess action', data);
     return {
         type: FETCH_DATA_SUCCESS,
         data
@@ -38,7 +38,7 @@ export function fetchDataSuccess(data) {
 }
 
 export function urlDataSuccess(data) {
-    console.log('checking url params', data);
+    // console.log('checking url params', data);
     return {
         type: URL_PARAM,
         data
@@ -60,7 +60,7 @@ export function generateTable() {
 }
 
 export function generateTableSuccess(data) {
-    console.log('generateTableSuccess', data);
+    // console.log('generateTableSuccess', data);
     return {
     type: GENERATE_TABLE_SUCCESS,
     data
@@ -74,7 +74,7 @@ export function onGenerateUrlParamsData() {
 }
 
 export function onGenerateUrlParamsDataSuccess(data) {
-    console.log('generateTableSuccess', data);
+    // console.log('generateTableSuccess', data);
     return {
     type: GENERATE_URL_PARAMS_DATA_SUCCESS,
     data
@@ -110,7 +110,7 @@ export function generateUrlParamsString(data) {
 }
 
 export function fetchGraph() {
-  console.log('fetchGraph');
+  // console.log('fetchGraph');
   return {
     type: GRAPH_FETCH
   }
@@ -124,7 +124,7 @@ export function fetchGraphSuccess(data) {
   }
 }
 export function fetchPerformanceFilter(data) {
-  console.log("action saving state");
+  // console.log("action saving state");
   console.log(data);
   return {
     type: FILTER_FETCH,
@@ -162,7 +162,7 @@ export function SaveBubbleParam(data) {
     };
 }
 export function SaveBubbleParam2(data) {
-  console.log("bubble data in action",data);
+  console.log("bubble array for opacity-tab",data);
   return {
         type: SAVE_BUBBLE_PARAM2 ,
         data
@@ -170,7 +170,7 @@ export function SaveBubbleParam2(data) {
 }
 
 export function SavePageParam(data) {
-  console.log("bubble data in action",data);
+  // console.log("bubble data in action",data);
   return {
         type: SAVE_PAGE_PARAM ,
         data
@@ -178,7 +178,7 @@ export function SavePageParam(data) {
 }
 
 export function SaveSideFilterParam(data) {
-  console.log("Filter data in action",data);
+  // console.log("Filter data in action",data);
   return {
         type: SAVE_SIDE_FILTER_PARAM ,
         data
@@ -186,13 +186,13 @@ export function SaveSideFilterParam(data) {
 }
 
 export function generateTextBoxQueryString(data) {
-  console.log("Search in action for "+data);
+  // console.log("Search in action for "+data);
   return {
     type: GENERATE_TEXTBOX_QUERY_STRING,
     data
   }
 }export function ResetClickParam(data) {
-  console.log("Search in action for "+data);
+  // console.log("Search in action for "+data);
   return {
     type: RESET_CLICKED,
     data
