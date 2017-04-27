@@ -7,8 +7,41 @@
   //font-size: 16px;
 }
 
+.pageTitle{
+  font-family: Tesco;
+  font-size: 20px;
+  text-align: center;
+  width: 100%;
+  padding: 0px;
+  color:#00294f !important;
+  background-color: #e5e8ea;
+}
+
+
+.breadCrumbs{
+  font-family: Tesco;
+  line-height: 20px;
+  font-size: 17px;
+  height: 20px;
+  text-align: left;
+  font-weight: 500;
+  width: 100%;
+  padding-left: 10px;
+  margin-top: 10px;
+  color:#00539f !important;
+  background-color: #f6f6f6;
+}
+
 .center-this{
   text-align: center;
+}
+
+.loading-indicator{
+  text-align: center;
+  font-size: 15px;
+  height: 200px;
+  line-height: 200px;
+  vertical-align: middle;
 }
 
 .pageModuleTitle{
@@ -55,6 +88,19 @@
   //padding-top: 3%;
 
 }
+
+.selectAttrituteIndicator{
+  font:Tesco;
+  font-size: 30px;
+  font-weight: 700;
+  text-align: center;
+  height: 1000px;
+  width: 100%;
+  background-color: lightgray;
+  color: #00539f;
+  margin-top: 24px;
+}
+
 
 .cannibalization-perc-number{
 

@@ -30,61 +30,39 @@ export function* generateDataFetch() {
   let urlParams = urlName.get('dataUrlParms');
 
   let weekParams = urlName.get('dataWeekUrlParams');
-  let npdFirstHalfSelections = urlName.get('npdFirstHalfSelections');
   let searchParams = urlName.get('searchTable2');
   let pageParams = urlName.get('dataTable2PageUrlParams');
 
-  // let paramString = '';
-  // Object.keys(urlParams).map(obj => {
-  //   //console.log(obj,urlParams[obj]);
-  //   paramString += `&${obj}=${urlParams[obj]}`
-  // // });
-  // paramString = paramString.replace('&', '');
-  //
-  // console.log('searchParams', searchParams);
-  // if (searchParams !== '' && paramString !== '') {
-  //   console.log('searchParams inside if ', searchParams);
-  //   searchParams = "&search1=" + searchParams;
-  // } else if (searchParams !== '') {
-  //   searchParams = "search1=" + searchParams;
-  //
-  // }
 
-  // searchParams = "search1=" + searchParams;
-  let WeekState = '';
+  let AJAX_args = '';
 
-  if (weekParams !== '') {
-    WeekState= WeekState + '&' + weekParams
+  if (urlParams !== '') {
+    AJAX_args= AJAX_args + '&' + urlParams
   }
-  WeekState = WeekState.replace('&', '');
-  console.log('Getting data from http://172.20.244.141:8000/api/npd_impact_view_bubble_table');
+  if (weekParams !== '') {
+    AJAX_args= AJAX_args + '&' + weekParams
+  }
+  if (searchParams !== '') {
+    AJAX_args= AJAX_args + '&search1=' + searchParams
+  }
+  if (pageParams !== '') {
+    AJAX_args= AJAX_args + '&' + pageParams
+  }
 
-  // if(urlParams !==''){
-  //   paramString="&"+urlParams;
-  // }
-  // // if(searchParams !==''){
-  // //   paramString="&"+searchParams;
-  // // }
-  //   if(weekParams !==''){
-  //   paramString="&"+weekParams;
-  // }
-  // if(pageParams !==''){
-  //   paramString="&"+pageParams;
-  // }
 
-/*
-  paramString = paramString.replace('&', '');
-  console.log('Getting data from http://172.20.244.141:8000/api/npd_impact_view_bubble_table' + paramString);
-*/
+  AJAX_args = AJAX_args.replace('&', '');
+  console.log('Getting data from http://172.20.244.238:8000/api/npd_impact_view_bubble_table?'+AJAX_args);
+
 
   try {
     // Table data
-    const bubble_table = yield call(request,`http://172.20.244.141:8000/api/npd_impact_view_bubble_table?` + urlParams +"&"+ WeekState+"&"+ pageParams);
+    const bubble_table = yield call(request,`http://172.20.244.238:8000/api/npd_impact_view_bubble_table?` + AJAX_args);
+    // const bubble_table = yield call(request,`http://172.20.244.238:8000/api/npd_impact_view_bubble_table?buying_controller=Meat%20Fish%20and%20Veg&buyer=Meat%20and%20Poultry&junior_buyer=Coated%20Poultry&product_sub_group_description=FROZEN%20COATED%20POULTRY&parent_supplier=1247.%20-%20LOCKWOODS%20LTD&brand_name=TESCO&package_type=BOX&measure_type=G&till_roll_description=KIEVS&merchandise_group_code_description=FROZEN%20POULTRY%20PRODUCTS&range_space_break_code=F&asp=1.98&acp=1.45&size=500&week_flag=Latest%2013%20Weeks`);
 
     yield put(dataFetchOnBubbleTableSuccess(bubble_table));
 
   } catch (err) {
-    //console.log(err);
+
   }
 }
 
@@ -101,32 +79,28 @@ export function* generateBubbleChartDataFetch() {
 
   let urlName = yield select(selectRangingNpdImpactPageDomain());
   let urlParams = urlName.get('dataUrlParms');
-
   let weekParams = urlName.get('dataWeekUrlParams');
-  console.log("bubble chart url params");
-  console.log(urlParams);
-  let npdFirstHalfSelections = urlName.get('npdFirstHalfSelections');
-  // let paramString = 'parent_supplier=1190.%20-%20MARITIME%20-%20JDM%20PRODUCE%20LIMITED&buying_controller=Meat%20Fish%20and%20Veg'
-  let WeekState = '';
 
+
+  let AJAX_args = '';
+
+  if (urlParams !== '') {
+    AJAX_args= AJAX_args + '&' + urlParams
+  }
   if (weekParams !== '') {
-    WeekState= WeekState + '&' + weekParams
+    AJAX_args= AJAX_args + '&' + weekParams
   }
 
-  WeekState = WeekState.replace('&', '');
-  // let paramString = '';
-  // Object.keys(urlParams).map(obj => {
-  //   //console.log(obj,urlParams[obj]);
-  //   paramString += `&${obj}=${urlParams[obj]}`
-  // });
-  // paramString = paramString.replace('&', '');
-  // console.log("logging_bubble_url");
-  // console.log('http://172.20.244.141:8000/api/npd_impact_view_bubble_chart?' + paramString);
+  AJAX_args = AJAX_args.replace('&', '');
+  console.log(`http://172.20.244.238:8000/api/npd_impact_view_bubble_chart?`+AJAX_args);
+
   try {
 
     // Bubble chart data
     const bubble_chart = yield call(request,
-      `http://172.20.244.141:8000/api/npd_impact_view_bubble_chart?`+ urlParams +"&"+ WeekState);
+      `http://172.20.244.238:8000/api/npd_impact_view_bubble_chart?`+AJAX_args);
+    // const bubble_chart = yield call(request,
+    //   `http://172.20.244.238:8000/api/npd_impact_view_bubble_chart?buying_controller=Meat%20Fish%20and%20Veg&buyer=Meat%20and%20Poultry&junior_buyer=Coated%20Poultry&product_sub_group_description=FROZEN%20COATED%20POULTRY&parent_supplier=1247.%20-%20LOCKWOODS%20LTD&brand_name=TESCO&package_type=BOX&measure_type=G&till_roll_description=KIEVS&merchandise_group_code_description=FROZEN%20POULTRY%20PRODUCTS&range_space_break_code=F&asp=1.98&acp=1.45&size=500&week_flag=Latest%2013%20Weeks`);
     yield put(dataFetchOnBubbleDataSuccess(bubble_chart));
 
   } catch (err) {
@@ -148,50 +122,36 @@ export function* generateProdCanniTableDataFetch() {
   let urlName = yield select(selectRangingNpdImpactPageDomain());
   let urlParams = urlName.get('dataUrlParms');
   let weekParams = urlName.get('dataWeekUrlParams');
-  // let npdFirstHalfSelections = urlName.get('npdFirstHalfSelections');
   let searchParams = urlName.get('searchTable1');
-  console.log('search');
+  let pageParams = urlName.get('dataTable1PageUrlParams');
 
-/*
-  let paramString = '';
 
-  paramString = paramString.replace('&', '');
-*/
+  // let searchParams = urlName.get('searchTable1');
 
-  let WeekState = '';
+  let AJAX_args = '';
 
+  if (typeof (urlParams)==="string" && urlParams !== '') {
+    AJAX_args= AJAX_args + '&' + urlParams;
+  }
   if (weekParams !== '') {
-    WeekState= WeekState + '&' + weekParams
+    AJAX_args= AJAX_args + '&' + weekParams
+  }
+  if (searchParams !== '') {
+    AJAX_args= AJAX_args + '&search=' + searchParams
+  }
+  if (pageParams !== '') {
+    AJAX_args= AJAX_args + '&' + pageParams
   }
 
-  console.log("week params in sagas",weekParams);
-  if (searchParams !== '' && paramString !== '') {
-    console.log('searchParams inside if ', searchParams);
-    searchParams = "&search=" + searchParams;
-  } else if (searchParams !== '') {
-    searchParams = "search=" + searchParams;
 
-  }
-
-  WeekState = WeekState.replace('&', '');
-
-  console.log('checking call in sagas');
-  console.log('printing url params in sagas', urlParams);
-  console.log('http://172.20.244.141:8000/api/npd_impact_view_table?' + WeekState);
+  AJAX_args = AJAX_args.replace('&', '');
+  console.log('http://172.20.244.238:8000/api/npd_impact_view_forecast?'+AJAX_args);
 
   try {
-    // if (WeekState != '' ) {
-      let canni_table = yield call(request, `http://172.20.244.141:8000/api/npd_impact_view_forecast?` + urlParams +"&"+ WeekState);
+
+      let canni_table = yield call(request, `http://172.20.244.238:8000/api/npd_impact_view_forecast?` + AJAX_args);
+      // let canni_table = yield call(request, `http://172.20.244.238:8000/api/npd_impact_view_forecast?buying_controller=Meat%20Fish%20and%20Veg&buyer=Meat%20and%20Poultry&junior_buyer=Coated%20Poultry&product_sub_group_description=FROZEN%20COATED%20POULTRY&parent_supplier=1247.%20-%20LOCKWOODS%20LTD&brand_name=TESCO&package_type=BOX&measure_type=G&till_roll_description=KIEVS&merchandise_group_code_description=FROZEN%20POULTRY%20PRODUCTS&range_space_break_code=F&asp=1.98&acp=1.45&size=500&`+ AJAX_args);
       yield put(dataFetchCanniProdTableSuccess(canni_table));
-    //}
-    // else if(searchParams !='' & WeekState != '') {
-    //   const canni_table = yield call(request, `http://172.20.244.141:8000/api/npd_impact_view_forecast?` + urlParams +"&"+searchParams+"&"+ WeekState);
-    //   yield put(dataFetchCanniProdTableSuccess(canni_table));
-    // }
-    // // Cannibalization table data
-    // const canni_table = yield call(request,
-    //   `http://172.20.244.141:8000/api/npd_impact_view_forecast?` + WeekState );
-    // yield put(dataFetchCanniProdTableSuccess(canni_table));
 
   } catch (err) {
     //console.log(err);
@@ -199,36 +159,49 @@ export function* generateProdCanniTableDataFetch() {
 }
 
 export function* doProdCanniTableDataFetch() {
-  console.log('doProdCanniTableDataFetch');
+
   const watcher = yield takeLatest(CANNIBALIZED_PROD_TABLE_DATA_FETCH, generateProdCanniTableDataFetch);
   yield take(LOCATION_CHANGE);
   yield cancel(watcher);
 }
 
 //------------------------------- Waterfall chart data Load ------------------------------------------
+
 export function* generateWaterFallChartDataFetch() {
   // console.log('generateWaterFallChartDataFetch saga');
 
   let urlName = yield select(selectRangingNpdImpactPageDomain());
   let urlParams = urlName.get('dataUrlParms');
-  let npdFirstHalfSelections = urlName.get('npdFirstHalfSelections');
-
-  // let paramString = 'buying_controller=Meat%20Fish%20and%20Veg&buyer=Meat%20and%20Poultry&junior_buyer=Coated%20Poultry&package_type=BOX&product_sub_group_description=FROZEN%20COATED%20POULTRY&measure_type=G&asp=1.967819549&acp=0.5&Size=300&brand_name=TESCO&till_roll_description=S/FRIED%20STRI&merchandise_group_code_description=FROZEN%20FISH&range_space_break_code=P&parent_supplier=1190. - MARITIME - JDM PRODUCE LIMITED&week_flag=Latest%2013%20Weeks';
-  // let paramString = 'buying_controller=Meat%20Fish%20and%20Veg&buyer=Meat%20and%20Poultry&junior_buyer=Coated%20Poultry&package_type=BOX&product_sub_group_description=FROZEN%20COATED%20POULTRY&measure_type=G&asp=1.674&acp=1.264&Size=300&brand_name=Birds eye&till_roll_description=S/FRIED%20STRI&merchandise_group_code_description=FROZEN%20FISH&range_space_break_code=P&parent_supplier=1190. - MARITIME - JDM PRODUCE LIMITED&week_flag=Latest%2013%20Weeks';
+  let weekParams = urlName.get('dataWeekUrlParams');
 
 
-  let paramString = '';
-  Object.keys(urlParams).map(obj => {
-    //console.log(obj,urlParams[obj]);
-    paramString += `&${obj}=${urlParams[obj]}`
-  });
-  paramString = paramString.replace('&', '');
-  console.log('http://172.20.244.141:8000/api/npd_impact_view_waterfall?' + paramString);
+  let AJAX_args = '';
+
+  if (urlParams !== '') {
+    AJAX_args= AJAX_args + '&' + urlParams
+  }
+  if (weekParams !== '') {
+    AJAX_args= AJAX_args + '&' + weekParams
+  }
+
+  AJAX_args = AJAX_args.replace('&', '');
+  console.log('http://172.20.244.238:8000/api/npd_impact_view_waterfall?'+AJAX_args);
+
+  // let paramString = '';
+  // Object.keys(urlParams).map(obj => {
+  //
+  //   paramString += `&${obj}=${urlParams[obj]}`
+  // });
+  // paramString = paramString.replace('&', '');
+
+
   try {
 
     // Waterfall chart table data
-    const waterfallchart = yield call(request,
-      `http://172.20.244.141:8000/api/npd_impact_view_forecast?` + paramString);
+    // const waterfallchart = yield call(request,
+    //   `http://172.20.244.238:8000/api/npd_impact_view_forecast?` + AJAX_args);
+    // const waterfallchart = yield call(request,
+    //   `http://172.20.244.238:8000/api/npd_impact_view_forecast?buying_controller=Meat%20Fish%20and%20Veg&buyer=Meat%20and%20Poultry&junior_buyer=Coated%20Poultry&product_sub_group_description=FROZEN%20COATED%20POULTRY&parent_supplier=1247.%20-%20LOCKWOODS%20LTD&brand_name=TESCO&package_type=BOX&measure_type=G&till_roll_description=KIEVS&merchandise_group_code_description=FROZEN%20POULTRY%20PRODUCTS&range_space_break_code=F&asp=1.98&acp=1.45&size=500&week_flag=Latest%2013%20Weeks`);
     yield put(dataFetchOnWaterFallChartSuccess(waterfallchart));
 
 
@@ -249,23 +222,22 @@ export function* doWaterFallChartDataFetch() {
 export function* generateSideFilter() {
   try {
     // todo: update url
-    // const data = yield call(request, `http://localhost:8090/wash/?format=json`);
-    // const data = yield call(request, `http://172.20.244.141:8000/api/npd_impact_view/filter_data`);
 
     let urlName = yield select(selectRangingNpdImpactPageDomain());
-    // let urlParams = urlName.get('filter_selection');
     let urlParams = urlName.get('filterSelectionsTillNow');
 
 
-    console.log('http://172.20.244.141:8000/api/npd_impact_view/filter_data?' + urlParams);
+    console.log('http://172.20.244.238:8000/api/npd_impact_view/filter_data?' + urlParams);
     let data = '';
+
     if (urlParams) {
-      // data = yield call(request, `http://172.20.244.141:8000/api/npd_impact_view/filter_data?` + urlParams);
-      data = yield call(request, `http://172.20.244.141:8000/api/npd_impact_view/filter_data?` + urlParams);
+
+      data = yield call(request, `http://172.20.244.238:8000/api/npd_impact_view/filter_data?` + urlParams);
     } else {
-      // data = yield call(request, `http://172.20.244.141:8000/api/npd_impact_view/filter_data`);
-      data = yield call(request, `http://172.20.244.141:8000/api/npd_impact_view/filter_data`);
+
+      data = yield call(request, `http://172.20.244.238:8000/api/npd_impact_view/filter_data`);
     }
+    // data = yield call(request, `http://172.20.244.238:8000/api/npd_impact_view/filter_data?buying_controller=Meat%20Fish%20and%20Veg&buyer=Meat%20and%20Poultry&junior_buyer=Coated%20Poultry&product_sub_group_description=FROZEN%20COATED%20POULTRY&parent_supplier=1247.%20-%20LOCKWOODS%20LTD&brand_name=TESCO&package_type=BOX&measure_type=G&till_roll_description=KIEVS&merchandise_group_code_description=FROZEN%20POULTRY%20PRODUCTS&range_space_break_code=F&asp=1.98&acp=1.45&size=500&week_flag=Latest%2013%20Weeks`);
 
     yield put(generateSideFilterSuccess(data));
 

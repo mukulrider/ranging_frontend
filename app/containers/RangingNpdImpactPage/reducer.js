@@ -8,8 +8,8 @@ import {fromJS} from 'immutable';
 import {
   DEFAULT_ACTION, BUBBLE_CHART_TABLE_SUCCESS, BUBBLE_CHART_DATA_SUCCESS, CANNIBALIZED_PROD_TABLE_DATA_SUCCESS,WATERFALL_CHART_DATA_SUCCESS,
   GENERATE_SIDE_FILTER_SUCCESS, GENERATE_URL_PARAMS, GENERATE_URL_PARAMS_STRING,CHECKBOX_CHANGE,
-  SEND_URL_PARAMS, SAVE_WEEK_PARAM, SAVE_T1_PAGE_PARAM,SAVE_T2_PAGE_PARAM,FROM_NPD_FIRST,SAVE_SEARCH_TABLE2,SAVE_SEARCH_TABLE1,
-  SAVE_ASP,SAVE_ACP,SAVE_SIZE,SAVE_FILTER_SELECTIONS_TILL_NOW,
+  SEND_URL_PARAMS, SAVE_WEEK_PARAM, SAVE_T1_PAGE_PARAM,SAVE_T2_PAGE_PARAM,SAVE_SEARCH_TABLE2,SAVE_SEARCH_TABLE1,
+  SAVE_ASP,SAVE_ACP,SAVE_SIZE,SAVE_FILTER_SELECTIONS_TILL_NOW,UPDATE_BREADCRUMBS,SELECT_FILTER_INDICATOR,
 } from './constants';
 
 const initialState = fromJS({
@@ -25,6 +25,9 @@ const initialState = fromJS({
   ACP_field_entry:'',
   Size_field_entry:'',
   filterSelectionsTillNow:'',
+  showSelectFilterIndicator:true,
+  breadCrumbs:'',
+  dataUrlParms:'',
   // waterFallChartData: {
   //   "impact": {"perc_impact_psg": '--', "Cannibilization_perc": '--'}
   //   // "data": [{"name": "NPD_Volume", "value": 140}, {"name": "Cannibilization_perc", "value": -40}]
@@ -124,29 +127,33 @@ function rangingNpdImpactPageReducer(state = initialState, action) {
     case GENERATE_SIDE_FILTER_SUCCESS :
       return state.set('sideFilter', action.data);
     case CHECKBOX_CHANGE:
-      console.log(CHECKBOX_CHANGE, 'reducer', action);
+      // console.log(CHECKBOX_CHANGE, 'reducer', action);
       return state.set('filter_selection', action.data);
    case SAVE_ASP:
-        console.log(SAVE_ASP, 'reducer', action);
+        // console.log(SAVE_ASP, 'reducer', action);
         return state.set('ASP_field_entry', action.data);
    case SAVE_ACP:
-        console.log(SAVE_ACP, 'reducer', action);
+        // console.log(SAVE_ACP, 'reducer', action);
         return state.set('ACP_field_entry', action.data);
    case SAVE_SIZE:
-        console.log(SAVE_SIZE, 'size in reducer', action);
+        // console.log(SAVE_SIZE, 'size in reducer', action);
         return state.set('Size_field_entry', action.data);
    case SAVE_FILTER_SELECTIONS_TILL_NOW:
-        console.log(SAVE_FILTER_SELECTIONS_TILL_NOW, 'reducer', action);
+        // console.log(SAVE_FILTER_SELECTIONS_TILL_NOW, 'reducer', action);
         return state.set('filterSelectionsTillNow', action.data);
 
+    case UPDATE_BREADCRUMBS:
+        // console.log(UPDATE_BREADCRUMBS, 'reducer', action);
+        return state.set('breadCrumbs', action.data);
+    case SELECT_FILTER_INDICATOR:
+      return state.set('showSelectFilterIndicator', action.data);
 
     case GENERATE_URL_PARAMS:
       return state.set('urlParams', action.data);
     case GENERATE_URL_PARAMS_STRING:
       return state.set('urlParamsString', action.data);
 
-    case FROM_NPD_FIRST:
-      return state.set('npdFirstHalfSelections', action.data);
+
 
     default:
       return state;
