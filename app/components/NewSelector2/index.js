@@ -9,7 +9,7 @@ import {browserHistory} from 'react-router';
 import Checkbox from 'components/checkbox';
 import RadioButton from 'components/radio_button';
 // import Panel from 'components/panel';
-import {Accordion,PanelGroup, Panel} from 'react-bootstrap';
+import {Accordion, PanelGroup, Panel} from 'react-bootstrap';
 import Button from 'components/button';
 // import styled from 'styled-components';
 import styles from './style.scss';
@@ -37,6 +37,9 @@ class NewSelector2 extends React.PureComponent { // eslint-disable-line react/pr
     // alert(queryString);
     // APPEND URL PARAMS
     this.props.onGenerateUrlParamsString(queryString);
+    let filterParam = this.props.onGenerateUrlParamsString(queryString);
+    console.log("aaa", this.props.onGenerateUrlParamsString(queryString));
+    console.log("buying_controller=Meat Fish and Veg&long_description=3 BIRD RST WITH C/BERRY, DATE and ORNG S/FING - 79631889", this.props.onGenerateUrlParamsString(queryString));
     this.props.onGenerateFilterParamsString(queryString);
     // this.props.onGenerateUrlParamsData();
     // this.updateNewState(newUrl + '?' + queryString);
@@ -54,7 +57,7 @@ class NewSelector2 extends React.PureComponent { // eslint-disable-line react/pr
     // this.props.onGenerateTable();
   };
 
-  clearFilter = ()=>{
+  clearFilter = () => {
     this.props.onGenerateFilterParamsString('');
     this.props.onGenerateUrlParamsString('');
     // this.props.onGenerateUrlParamsData();
@@ -72,7 +75,7 @@ class NewSelector2 extends React.PureComponent { // eslint-disable-line react/pr
               position: 'fixed',
               /* padding-right: 5px; */
               overflowX: 'hidden',
-              overflowY: 'scroll' ,
+              overflowY: 'scroll',
               borderTop: '1px solid #ccc',
             }}>
               {/*<div id="style-7" style={{*/}
@@ -83,13 +86,14 @@ class NewSelector2 extends React.PureComponent { // eslint-disable-line react/pr
               {/*paddingRight: '5px',*/}
               {/*overflowX: 'hidden',*/}
               {/*borderTop: '1px solid #ccc',*/}
-            {/*}}>*/}
+              {/*}}>*/}
 
               <PanelGroup defaultActiveKey="1" accordion>
                 {this.props.sideFilter.checkbox_list.map((item, key) => {
                   var panelHeader = (
-                    <div  className="text-capitalize">
-                      {item.title.replace(/_/g, ' ')}&nbsp;{item.required ? <span style={{color: 'red'}}>*</span> : '' } &nbsp;
+                    <div className="text-capitalize">
+                      {item.title.replace(/_/g, ' ')}&nbsp;{item.required ?
+                      <span style={{color: 'red'}}>*</span> : '' } &nbsp;
                       <span className="accordion-toggle" style={{float: 'right'}}></span>
                     </div>
                   );
@@ -138,7 +142,8 @@ class NewSelector2 extends React.PureComponent { // eslint-disable-line react/pr
                                                     isDisabled={!obj.highlighted}
                                 />
                               }
-                              return <Checkbox style="font-size:12px;" id={item.id + '__' + item.category_director + '__' + obj.title}
+                              return <Checkbox style="font-size:12px;"
+                                               id={item.id + '__' + item.category_director + '__' + obj.title}
                                                label={obj.title}
                                                valid={true}
                                                key={item.id + '__' + obj.title}
@@ -167,15 +172,16 @@ class NewSelector2 extends React.PureComponent { // eslint-disable-line react/pr
                                                     isDisabled={!obj.highlighted}
                                 />
                               }
-                              return <Checkbox  style="font-size:12px,width:230px;" id={item.id + '__' + item.category_director + '__' + obj.title}
-                                                label={obj.title} valid={true}
-                                                key={item.id + '__' + obj.title}
-                                                name={obj.title.toLowerCase() }
-                                                onChange={() => {
-                                                  this.updateUrl(item.category_director)
-                                                }}
-                                                checked={obj.resource.selected}
-                                                isDisabled={!obj.highlighted}
+                              return <Checkbox style="font-size:12px,width:230px;"
+                                               id={item.id + '__' + item.category_director + '__' + obj.title}
+                                               label={obj.title} valid={true}
+                                               key={item.id + '__' + obj.title}
+                                               name={obj.title.toLowerCase() }
+                                               onChange={() => {
+                                                 this.updateUrl(item.category_director)
+                                               }}
+                                               checked={obj.resource.selected}
+                                               isDisabled={!obj.highlighted}
                               />
                             }
                           })}
@@ -187,24 +193,21 @@ class NewSelector2 extends React.PureComponent { // eslint-disable-line react/pr
               </PanelGroup>
               <div className="text-center">
                 <Button onClick={() => {
-                  {/*let week_no = "time_period=13_weeks";*/}
-                  {/*this.props.onWeekClick(week_no);*/}
-                  this.props.onwaterfallSpinner(0);
-                  this.props.onwaterfallProfitSpinner(0);
-                  this.props.onSupplierImpactTableSpinner(0);
-                  this.props.onDelistProductTableSpinner(0);
-                  this.props.onDelistDefaultView(1);
-                  this.props.onWaterfall();
-
-                  {/*setTimeout(() => {*/}
-                    {/*this.props.onApiFetch();*/}
-                    {/*this.props.ondelist();}, 20000);*/}
-
-                  {/*this.props.onApiFetch();*/}
-                  {/*this.props.ondelist();*/}
-                  {/*this.props.onApiFetch();*/}
-                  {/*this.props.ondelistTable();*/}
-                  {/*this.props.onWeekTabClick("Week: 13 weeks ");*/}
+                  let filterData = this.props.filterUrlParamString;
+                  if (filterData.includes("buying_controller") && filterData.includes("long_description")) {
+                    alert(filterData.includes("buying_controller"));
+                    alert(filterData.includes("buying_controller"));
+                    alert("if");
+                    this.props.onwaterfallSpinner(0);
+                    this.props.onwaterfallProfitSpinner(0);
+                    this.props.onSupplierImpactTableSpinner(0);
+                    this.props.onDelistProductTableSpinner(0);
+                    this.props.onDelistDefaultView(1);
+                    this.props.onWaterfall();
+                  } else {
+                    alert("else");
+                    alert("Please Select the Mandatory Filter - 'Buying Controller' & 'Long Description'.")
+                  }
                 }}>Apply</Button></div>
               {/*<Button onClick={() => {*/}
               {/*/!*this.props.onFilterReset();*!/*/}

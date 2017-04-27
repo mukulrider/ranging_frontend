@@ -121,6 +121,7 @@ export class DelistContainer extends React.PureComponent { // eslint-disable-lin
       activePage: 1,
       activePageDelist: 1,
       activePageSupplierPopup: 1,
+      activePageDelistPopup: 1,
       activeKey: "1",
       activeKey2: "4",
     };
@@ -209,6 +210,7 @@ export class DelistContainer extends React.PureComponent { // eslint-disable-lin
                                 onSupplierImpactTableSpinner={this.props.onSupplierImpactTableSpinner}
                                 onDelistProductTableSpinner={this.props.onDelistProductTableSpinner}
                                 onDelistDefaultView={this.props.onDelistDefaultView}
+                                filterUrlParamString={this.props.DelistContainer.urlParamsString}
                   />
                 )
               } else {
@@ -452,10 +454,10 @@ export class DelistContainer extends React.PureComponent { // eslint-disable-lin
                                                          data={ this.props.DelistContainer.waterfallValue.sales_chart }/>
                                       </div>
                                     </div>
-
                                     {/*Impact number*/}
-                                    <div className="col-xs-6 impactNumbers">
-                                      {/*<div className="col-xs-6 text-center" style={{marginLeft: '25%'}}>*/}
+                                    {/*<div className="col-xs-6 text-center" style={{marginLeft: '25%'}}>*/}
+
+                                    <div className="col-xs-5 impactNumbers" style={{float: 'left'}}>
                                       <Panel>
                                         {/*<div style={{textAlign: 'center', color: '#00539f', fontWeight: 'bold', fontSize: '16px'}}>*/}
                                         <div>
@@ -481,10 +483,36 @@ export class DelistContainer extends React.PureComponent { // eslint-disable-lin
 
                                         </div>
                                       </Panel>
-                                      {/*</div>*/}
-
                                     </div>
+                                    {/*<div className="col-xs-2 impactNumbers">*/}
+                                    {/*</div>*/}
+                                    <div className="col-xs-5 impactNumbers" style={{float: 'right'}}>
+                                      <Panel>
+                                        {/*<div style={{textAlign: 'center', color: '#00539f', fontWeight: 'bold', fontSize: '16px'}}>*/}
+                                        <div>
+                                          Total Demand Transfer:
 
+                                          <span
+                                            className={(() => {
+                                              if (this.props.DelistContainer.waterfallValue.bc_sales_contri > 0) {
+                                                {/*alert(this.props.DelistContainer.waterfallValue.bc_sales_contri)*/
+                                                }
+                                                {/*alert(this.props.DelistContainer.waterfallValue.bc_sales_contri)*/
+                                                }
+                                                return "glyphicon glyphicon-chevron-up waterfallCalloutsPositive"
+                                              }
+                                              else if (this.props.DelistContainer.waterfallValue.bc_sales_contri < 0) {
+                                                return "glyphicon glyphicon-chevron-down waterfallCalloutsNegative"
+                                              } else {
+                                                return "glyphicon glyphicon-minus-sign waterfallCalloutsNeutral"
+                                              }
+                                            })()}>&nbsp;
+                                            {this.props.DelistContainer.waterfallValue.bc_sales_contri}%
+                                </span>
+
+                                        </div>
+                                      </Panel>
+                                    </div>
                                   </div>
 
                                 </div>
@@ -547,11 +575,34 @@ export class DelistContainer extends React.PureComponent { // eslint-disable-lin
                                     </div>
 
                                     {/*impact number*/}
-                                    <div className="col-xs-6 impactNumbers">
+                                    <div className="col-xs-5 impactNumbers" style={{float: 'left'}}>
 
                                       <Panel>
                                         <div>
-                                          Impact to Buying Controller
+                                          Impact to Buying Controller:
+
+                                          <span
+                                            className={(() => {
+                                              if (this.props.DelistContainer.waterfallValue.bc_vols_contri > 0) {
+                                                return "glyphicon glyphicon-chevron-up waterfallCalloutsPositive"
+                                              }
+                                              else if (this.props.DelistContainer.waterfallValue.bc_vols_contri < 0) {
+                                                return "glyphicon glyphicon-chevron-down waterfallCalloutsNegative"
+                                              } else {
+                                                return "glyphicon glyphicon-minus-sign waterfallCalloutsNeutral"
+                                              }
+                                            })()}>&nbsp;
+                                            {this.props.DelistContainer.waterfallValue.bc_vols_contri} %
+                              </span>
+                                        </div>
+                                      </Panel>
+
+                                    </div>
+                                    <div className="col-xs-5 impactNumbers" style={{float: 'right'}}>
+
+                                      <Panel>
+                                        <div>
+                                          Total Demand Transfer:
 
                                           <span
                                             className={(() => {
@@ -675,10 +726,10 @@ export class DelistContainer extends React.PureComponent { // eslint-disable-lin
 
 
                                     {/*Impact numbers*/}
-                                    <div className="col-xs-6 impactNumbers">
+                                    <div className="col-xs-5 impactNumbers" style={{float: 'left'}}>
                                       <Panel>
                                         <div>
-                                          Impact to Buying Controller
+                                          Impact to Buying Controller:
                                         </div>
                                         <span
                                           className={(() => {
@@ -695,6 +746,28 @@ export class DelistContainer extends React.PureComponent { // eslint-disable-lin
                             </span>
                                       </Panel>
                                     </div>
+
+                                    <div className="col-xs-5 impactNumbers" style={{float: 'right'}}>
+                                      <Panel>
+                                        <div>
+                                          Total Demand Transfer:
+                                        </div>
+                                        <span
+                                          className={(() => {
+                                            if (this.props.DelistContainer.waterfallValue.bc_cgm_contri > 0) {
+                                              return "glyphicon glyphicon-chevron-up waterfallCalloutsPositive"
+                                            }
+                                            else if (this.props.DelistContainer.waterfallValue.bc_cgm_contri < 0) {
+                                              return "glyphicon glyphicon-chevron-down waterfallCalloutsNegative"
+                                            } else {
+                                              return "glyphicon glyphicon-minus-sign waterfallCalloutsNeutral"
+                                            }
+                                          })()}>&nbsp;
+                                          {this.props.DelistContainer.waterfallValue.bc_cgm_contri}%
+                            </span>
+                                      </Panel>
+                                    </div>
+
                                   </div>
                                 </div>
                               </div>
@@ -756,10 +829,31 @@ export class DelistContainer extends React.PureComponent { // eslint-disable-lin
 
 
                                     {/*Impact number*/}
-                                    <div className="col-xs-6 impactNumbers">
+                                    <div className="col-xs-5 impactNumbers" style={{float: 'left'}}>
                                       <Panel>
                                         <div>
-                                          Impact to Buying Controller
+                                          Impact to Buying Controller:
+                                        </div>
+                                        <span
+                                          className={(() => {
+                                            if (this.props.DelistContainer.waterfallValue.bc_cgm_contri > 0) {
+                                              return "glyphicon glyphicon-chevron-up waterfallCalloutsPositive"
+                                            }
+                                            else if (this.props.DelistContainer.waterfallValue.bc_cgm_contri < 0) {
+                                              return "glyphicon glyphicon-chevron-down waterfallCalloutsNegative"
+                                            } else {
+                                              return "glyphicon glyphicon-minus-sign waterfallCalloutsNeutral"
+                                            }
+                                          })()}>&nbsp;
+                                          {this.props.DelistContainer.waterfallValue.bc_cgm_contri}%
+                              </span>
+
+                                      </Panel>
+                                    </div>
+                                    <div className="col-xs-5 impactNumbers" style={{float: 'right'}}>
+                                      <Panel>
+                                        <div>
+                                          Total Demand Transfer:
                                         </div>
                                         <span
                                           className={(() => {
@@ -1288,9 +1382,9 @@ export class DelistContainer extends React.PureComponent { // eslint-disable-lin
                                 boundaryLinks
                                 items={this.props.DelistContainer.substitutesTableData.pagination_count}
                                 maxButtons={5}
-                                activePage={this.state.activePagedELISTpOPI}
+                                activePage={this.state.activePageDelistPopup}
                                 onSelect={(e) => {
-                                  this.setState({activePage: e})
+                                  this.setState({activePageDelistPopup: e})
                                   this.props.onDelistPopupTableSpinnerSuccess(0);
                                   let delistPopupPaginationData = "delist_popup_page=" + e;
                                   this.props.ondelistPopupPagination(delistPopupPaginationData);
@@ -1314,7 +1408,7 @@ export class DelistContainer extends React.PureComponent { // eslint-disable-lin
               return (
                 <div className="selectAttrituteIndicator">
                   <div>
-                    <div style={{marginTop:'25%'}}> ----- Please select the filters to get started ------</div>
+                    <div style={{marginTop: '25%'}}> ----- Please select the filters to get started ------</div>
                   </div>
                 </div>
 
