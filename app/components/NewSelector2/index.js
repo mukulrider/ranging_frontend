@@ -195,9 +195,6 @@ class NewSelector2 extends React.PureComponent { // eslint-disable-line react/pr
                 <Button onClick={() => {
                   let filterData = this.props.filterUrlParamString;
                   if (filterData.includes("buying_controller") && filterData.includes("long_description")) {
-                    alert(filterData.includes("buying_controller"));
-                    alert(filterData.includes("buying_controller"));
-                    alert("if");
                     this.props.onwaterfallSpinner(0);
                     this.props.onwaterfallProfitSpinner(0);
                     this.props.onSupplierImpactTableSpinner(0);
