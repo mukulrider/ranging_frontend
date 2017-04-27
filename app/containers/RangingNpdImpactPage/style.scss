@@ -11,11 +11,104 @@
   text-align: center;
 }
 
+.pageModuleTitle{
+
+  width: 100%;
+  line-height: 28px;
+  font-size: 18px;
+  height: 28px;
+  color: #00539f !important;
+  //font-weight: bold;
+  font-weight: 500;
+  //color: #666666 !important;
+  text-align: center;
+  padding-left: 1%;
+
+}
+
+.pageModuleMainTitle{
+  width: 100%;
+  line-height: 28px;
+  font-size: 18px;
+  height: 28px;
+  color: #00539f !important;
+  background-color:#e5e8ea !important;
+  font-weight: bold;
+  //font-weight: 500;
+  //color: #666666 !important;
+  text-align: center;
+  padding-left: 1%;
+  vertical-align: middle;
+
+}
+
+.pageModuleSubTitle{
+  width: 100%;
+  line-height: 28px;
+  font-size: 18px;
+  height: 30px;
+  color: #00539f !important;
+  font-weight: 500;
+  text-align: center;
+  vertical-align: middle;
+  padding-left: 3%;
+  //padding-top: 3%;
+
+}
+
 .cannibalization-perc-number{
 
   font-size: 15px;
 }
+td {
+  font-size: 12px;
+  vertical-align: middle !important;
+  text-align: center;
+  font-family:Tesco;
+}
+th {
+  font-size: 15px;
+  height: 15px ;
+  font-family:Tesco;
+  text-align: center;
+  color: #333333;
+  background-color: #e5e5e5;
+  vertical-align: middle !important;
+}
 
+.impactNumbers{
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  height: 70px;
+  font-size: 15px;
+  font-weight: 600;
+  //margin-top: 10px;
+  font-family: 'Tesco';
+  color: #333333;
+  text-align: center;
+  margin-left: 4%;
+}
+
+.impactHeading{
+  margin-top: -5px;
+  margin-bottom: 0px;
+}
+
+.valueNumbers{
+  padding:30px;
+
+}
+
+.table-body-format{
+  font-size: 14px;
+  font-family:Tesco;
+}
+.table-header-format{
+  font-size: 16px;
+  font-family:Tesco;
+  text-align: center;
+  color: #333333;
+  background-color: #e5e5e5;
+}
 .dashed-border{
   border-bottom: dashed;
   border-width: thin;
@@ -44,6 +137,12 @@
 
 }
 
+.ts-blk-proview {
+  margin-top: 20px;
+  height: 500px;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  //
+}
 //NEW CSS - FORMATTED
 
 .tabsCustom {
@@ -85,8 +184,14 @@
 
 .tabsCustomList span.tab_label{
   padding: 12px 8px;
-  color: #048EC3;
+  //color: #048EC3;
+  //font-weight: 600;
   font-weight: 600;
+  font-family: Tesco;
+  color: #00539f;
+  font-size: 16px;
+  vertical-align: middle;
+
 }
 
 

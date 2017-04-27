@@ -326,6 +326,7 @@ export class RangingNpdPage extends React.PureComponent { // eslint-disable-line
                         })()}
                         </tbody>
 
+
                       </table>
 
                       {/*pagination*/}

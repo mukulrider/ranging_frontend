@@ -159,7 +159,7 @@ class CascadedFilterNpdImpact extends React.PureComponent { // eslint-disable-li
   render() {
     return (
         <div id="style-7" style={{
-          height: '52%',
+          height: '80%',
           width: '20%',
           position: 'fixed',
           overflow: 'scroll',
@@ -273,10 +273,16 @@ class CascadedFilterNpdImpact extends React.PureComponent { // eslint-disable-li
                         {/*this.saveHierarchySelections();*/
                         }
                         return (
+
                           this.props.sideFilter.product_information.map((obj,key1) => {
 
                             var panelHeader = (
-                              <div className="text-capitalize">{obj.name.replace(/_/g, ' ')} <span style={{color: "red"}}>*</span>&nbsp;
+                              <div className="text-capitalize"
+                                   style={{
+                                     fontWeight: '700',
+                                     fontSize: '16px',
+                                     // borderBottom: '1px solid #ddd'
+                                   }}>{obj.name.replace(/_/g, ' ')} <span style={{color: "red"}}>*</span>&nbsp;
                                 <span className="accordion-toggle" style={{float: 'right'}}></span></div>
                             );
 
@@ -350,6 +356,8 @@ class CascadedFilterNpdImpact extends React.PureComponent { // eslint-disable-li
                               </Panel>
                             )
                           })
+
+
                         )
                       }
                     }
@@ -361,61 +369,74 @@ class CascadedFilterNpdImpact extends React.PureComponent { // eslint-disable-li
 
             {/*ASP,ACP and Size*/}
 
-            {/*Size*/}
-            <div style={{marginBottom: "15px"}}>
-              <InputField type={"number"}
-                          placeholder="Enter Size"
-                          value={this.props.Size_field_entry}
-                          onChange={(e) => {
-                            this.props.onSaveSizeFilterData(e);
-                            {/*this.props.onDataFetchOnPageLoad();*/
-                            }
-                          }}
-              />
+            {(() => {
+              if (this.props.sideFilter) {
+                if (this.props.sideFilter.product_information) {
+                   return (
+                     <div>
+                  {/*Size*/}
+                  <div style={{marginBottom: "15px"}}>
+                    <InputField type={"number"}
+                                placeholder="Enter Size"
+                                value={this.props.Size_field_entry}
+                                onChange={(e) => {
+                                  this.props.onSaveSizeFilterData(e);
+                                  {/*this.props.onDataFetchOnPageLoad();*/
+                                  }
+                                }}
+                    />
 
-            </div>
+                  </div>
 
-            {/*ASP*/}
-            <div style={{marginBottom: "15px"}}>
-              <InputField type={"number" }
-                          placeholder="Enter ASP"
-                          value={this.props.ASP_field_entry}
-                          onChange={(e) => {
-                            this.props.onSaveAspFilterData(e);
-                            {/*this.props.onDataFetchOnPageLoad();*/
-                            }
-                          }}
-              />
+                  {/*ASP*/}
+                  <div style={{marginBottom: "15px"}}>
+                    <InputField type={"number" }
+                                placeholder="Enter ASP"
+                                value={this.props.ASP_field_entry}
+                                onChange={(e) => {
+                                  this.props.onSaveAspFilterData(e);
+                                  {/*this.props.onDataFetchOnPageLoad();*/
+                                  }
+                                }}
+                    />
 
-            </div>
+                  </div>
 
-            {/*ACP*/}
-            <div style={{marginBottom: "15px"}}>
-              <InputField type={"number"}
-                          placeholder="Enter ACP"
-                          value={this.props.ACP_field_entry}
-                          onChange={(e) => {
-                            this.props.onSaveAcpFilterData(e);
-                            {/*this.props.onDataFetchOnPageLoad();*/
-                            }
-                          }}
-              />
+                  {/*ACP*/}
+                  <div style={{marginBottom: "15px"}}>
+                    <InputField type={"number"}
+                                placeholder="Enter ACP"
+                                value={this.props.ACP_field_entry}
+                                onChange={(e) => {
+                                  this.props.onSaveAcpFilterData(e);
+                                  {/*this.props.onDataFetchOnPageLoad();*/
+                                  }
+                                }}
+                    />
 
-            </div>
+
+                  </div>
+                  </div>
+                )
+                }
+              }
+            })()}
 
 
           </div>
         </div>
 
-        <Button
+          <div style={{textAlign:"center"}}>
+            <Button style={{marginTop:"5px"}}
           onClick={() => {
 
             this.applyButtonFunctionality();
 
 
-          }}>Apply Filters</Button>
+          }}>Apply Filters</Button></div>
         {/*<div/>*/}
-        <Button
+          <div style={{textAlign:"center"}}>
+            <Button style={{marginTop:"5px"}}
           onClick={() => {
             //To un check all the buttons
             let selection = '';
@@ -425,7 +446,7 @@ class CascadedFilterNpdImpact extends React.PureComponent { // eslint-disable-li
             {/*this.resetButtonFunctionality();*/
             }
 
-          }}>Reset</Button>
+          }}>Reset</Button></div>
       </div>
 
 
