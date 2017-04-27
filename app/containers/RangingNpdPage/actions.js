@@ -14,7 +14,8 @@ import {
   UPDATE_DATA,CHECKBOX_CHANGE,GENERATE_TEXTBOX_QUERY_STRING,
   GENERATE_SIDE_FILTER,GENERATE_SIDE_FILTER_SUCCESS ,
   GENERATE_URL_PARAMS,GENERATE_URL_PARAMS_STRING,
-  GENERATE_TABLE,GENERATE_TABLE_SUCCESS
+  SELECT_FILTER_INDICATOR,UPDATE_BREADCRUMBS,
+
 } from './constants';
 
 export function defaultAction() {
@@ -166,9 +167,32 @@ export function savePageParam(data) {
 //----------------------pagination
 
 export function generateTextBoxQueryString(data) {
-  console.log("Search in action for "+data);
+  // console.log("Search in action for "+data);
   return {
     type: GENERATE_TEXTBOX_QUERY_STRING,
     data
   }
 }
+
+
+
+//--------------------- WHEN PAGE IS LOADED -------------------------------
+
+export function pageLoadSelectFilterIndicator(data) {
+  // console.log('Saving url params in action',data);
+  return {
+    type: SELECT_FILTER_INDICATOR,
+    data
+
+  };
+}
+//--------------------- BREADCRUMBS -------------------------------
+
+export function updateBreadCrumbs(data) {
+  // console.log('Saving url params in action',data);
+  return {
+    type: UPDATE_BREADCRUMBS ,
+    data
+  };
+};
+

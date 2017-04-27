@@ -14,7 +14,7 @@ import {
   SAVE_T1_PAGE_PARAM,SAVE_T2_PAGE_PARAM,SAVE_SEARCH_TABLE2,SAVE_SEARCH_TABLE1,
   WATERFALL_CHART_DATA_FETCH,WATERFALL_CHART_DATA_SUCCESS,
   CANNIBALIZED_PROD_TABLE_DATA_FETCH,CANNIBALIZED_PROD_TABLE_DATA_SUCCESS,
-  FROM_NPD_FIRST,
+  SELECT_FILTER_INDICATOR,UPDATE_BREADCRUMBS,
   SAVE_ASP,SAVE_ACP,SAVE_SIZE,SAVE_FILTER_SELECTIONS_TILL_NOW,
 
 
@@ -31,7 +31,7 @@ export function defaultAction() {
 //--------------------- DATA FETCH BUBBLE CHART TABLE -------------------------------
 
 export function dataFetchOnPageLoad() {
-  console.log('dataFetchOnPageLoad action');
+  // console.log('dataFetchOnPageLoad action');
   return {
     type: DATA_FETCH_ON_PAGE_LOAD,
   };
@@ -39,7 +39,7 @@ export function dataFetchOnPageLoad() {
 
 
 export function dataFetchOnBubbleTableSuccess(data) {
-  console.log('dataFetchOnPageLoadSuccess action', data);
+  // console.log('dataFetchOnPageLoadSuccess action', data);
   return {
     type: BUBBLE_CHART_TABLE_SUCCESS ,
     data
@@ -228,13 +228,23 @@ export function saveTable2SearchParam(data) {
 
 
 
-//--------------------- WHEN PAGE IS LOADED FROM NPD FIRST HALF -------------------------------
+//--------------------- WHEN PAGE IS LOADED -------------------------------
 
-export function loadFromNpdFirst(data) {
+export function pageLoadSelectFilterIndicator(data) {
   // console.log('Saving url params in action',data);
   return {
-    type: FROM_NPD_FIRST ,
+    type: SELECT_FILTER_INDICATOR,
     data
+
   };
 }
+//--------------------- BREADCRUMBS -------------------------------
+
+export function updateBreadCrumbs(data) {
+  // console.log('Saving url params in action',data);
+  return {
+    type: UPDATE_BREADCRUMBS ,
+    data
+  };
+};
 

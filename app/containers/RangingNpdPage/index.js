@@ -26,7 +26,7 @@ import {NavItem} from 'react-bootstrap';
 
 import {
   unmatchedProdTable,skuChartFetch,outPerformanceChartFetch,priceGravityFetch,
-  sendUrlParams, saveWeekParam,savePageParam,generateTextBoxQueryString,
+  sendUrlParams, saveWeekParam,savePageParam,generateTextBoxQueryString,pageLoadSelectFilterIndicator,updateBreadCrumbs
   // generateSideFilter,generateUrlParams, generateUrlParamsString,
 } from './actions';
 import SelectorNpd from 'components/SelectorNpd';
@@ -50,10 +50,10 @@ export class RangingNpdPage extends React.PureComponent { // eslint-disable-line
     // console.log("printing coooooooooookkkkiiiiiiieeeeeessssssss",x);
 
 
-    this.props.onUnmatchedProdTable();
-    this.props.onSkuChartFetch();
-    this.props.onOutPerformanceChartFetch();
-    this.props.onPriceGravityFetch();
+    // this.props.onUnmatchedProdTable();
+    // this.props.onSkuChartFetch();
+    // this.props.onOutPerformanceChartFetch();
+    // this.props.onPriceGravityFetch();
     this.props.onGenerateSideFilter();
   };
 
@@ -138,259 +138,295 @@ export class RangingNpdPage extends React.PureComponent { // eslint-disable-line
                          dataWeekUrlParams={dataWeekUrlParams}
                          dataPageUrlParams={dataPageUrlParams}
                          dataFilterUrlParams={dataPageUrlParams}
-                        />
+
+                         onPageLoadSelectFilterIndicator={this.props.onPageLoadSelectFilterIndicator}
+                         onUpdateBreadCrumbs={this.props.onUpdateBreadCrumbs}
+            />
           </div>
 
           {/*Content*/}
-          {/*<div className="col-xs-10">*/}
-          <div className="flexright" style={{marginLeft: "1%",marginTop:"24px"}}>
 
-                <Nav bsStyle="tabs" activeKey={this.state.activeKey} onSelect={this.handleSelect} className="tabsCustom"  style={{marginBottom:"-30px"}}>
-                  <NavItem className="tabsCustomList" eventKey="1" onClick={() => {
-                    this.setState({activeKey: "1"});
-                    dataWeekUrlParams="week_flag=Latest 13 Weeks";
+          {(()=>{
 
-                    this.props.onSaveWeekParam(dataWeekUrlParams);
-
-                    if (dataFilterUrlParams!==''&& dataPageUrlParams!=='') {
-                      browserHistory.push(this.props.location.pathname+"?"+dataWeekUrlParams+"&"+dataFilterUrlParams+"&"+dataPageUrlParams);
-                    } else if (dataFilterUrlParams!==''|| dataPageUrlParams!=='') {
-                      browserHistory.push(this.props.location.pathname+"?"+dataWeekUrlParams+"&"+dataFilterUrlParams+dataPageUrlParams);
-                    }
-                    else{
-                      browserHistory.push(this.props.location.pathname+"?"+dataWeekUrlParams);
-                    }
-
-
-                  }}><span className="tab_label">13 Weeks</span></NavItem>
-
-                  <NavItem className="tabsCustomList" eventKey="2" onClick={() => {
-                    this.setState({activeKey: "2"});
-                    browserHistory.push(this.props.location.pathname + "?week_flag=Latest 26 Weeks")
-
-                    dataWeekUrlParams="week_flag=Latest 26 Weeks";
-                    this.props.onSaveWeekParam(dataWeekUrlParams);
-                    if (dataFilterUrlParams!==''&& dataPageUrlParams!=='') {
-                      browserHistory.push(this.props.location.pathname+"?"+dataWeekUrlParams+"&"+dataFilterUrlParams+"&"+dataPageUrlParams);
-                    } else if (dataFilterUrlParams!==''|| dataPageUrlParams!=='') {
-                      browserHistory.push(this.props.location.pathname+"?"+dataWeekUrlParams+"&"+dataFilterUrlParams+dataPageUrlParams);
-                    }
-                    else{
-                      browserHistory.push(this.props.location.pathname+"?"+dataWeekUrlParams);
-                    }
-
-
-                  }}><span className="tab_label">26 Weeks</span></NavItem>
-
-                  <NavItem className="tabsCustomList" eventKey="3" onClick={() => {
-                    this.setState({activeKey: "3"});
-                    {/*browserHistory.push(this.props.location.pathname + "?week_flag=Latest 52 Weeks")*/}
-
-                    dataWeekUrlParams="week_flag=Latest 52 Weeks";
-                    this.props.onSaveWeekParam(dataWeekUrlParams);
-                    if (dataFilterUrlParams!==''&& dataPageUrlParams!=='') {
-                      browserHistory.push(this.props.location.pathname+"?"+dataWeekUrlParams+"&"+dataFilterUrlParams+"&"+dataPageUrlParams);
-                    } else if (dataFilterUrlParams!==''|| dataPageUrlParams!=='') {
-                      browserHistory.push(this.props.location.pathname+"?"+dataWeekUrlParams+"&"+dataFilterUrlParams+dataPageUrlParams);
-                    }
-                    else{
-                      browserHistory.push(this.props.location.pathname+"?"+dataWeekUrlParams);
-                    }
-
-                  }}><span className="tab_label">52 Weeks</span></NavItem>
-                </Nav>
-
-                {/*<div className="breadcrumb">*/}
-                  {/*<span className="label">&nbsp;13 Weeks</span>*/}
-
-                {/*</div>*/}
-
-               <Panel>
-
-
-              {/*Outperformance and SKU distribution*/}
-              <div className="row">
-
-                {/*Outperformance*/}
-                <div className="col-xs-12 col-md-6">
-                  <div className="ts-blk-proview">
-                    <h4 className="pageModuleTitle">Product sub-group sales outperformance</h4>
-
-
-                      {/*<MultiSeriesHoriBarChart data={this.props.RangingNpdPage.multiHoriBarChartData}/>*/}
-
-                      {(() => {
-                        if (this.props.RangingNpdPage.multiHoriBarChartData) {
-                          return(
-                            <MultiSeriesHoriBarChart data={this.props.RangingNpdPage.multiHoriBarChartData}/>
-                          )
-                        }
-                      })()}
+            if(this.props.RangingNpdPage.showSelectFilterIndicator){
+              return(
+                <div className="flexright" style={{marginLeft: "1%"}}>
+                <div className="selectAttrituteIndicator">
+                  <div>
+                    <div style={{marginTop:'25%'}}> ----- Please select the attributes ------</div>
                   </div>
                 </div>
-
-                {/*SKU distribution*/}
-                <div className="col-xs-12 col-md-6">
-                  <div className="ts-blk-proview">
-                    <h4 className="pageModuleTitle">SKU distribution across retailers</h4>
-                    <div id="table">
-                      {(() => {
-                        if (this.props.RangingNpdPage.multiBarChartData) {
-                          return(
-                          <MultiseriesBarChart2 data={this.props.RangingNpdPage.multiBarChartData }/>
-                          )
-                        }
-                      })()}
-
-                      {/*<MultiseriesBarChart2 data={this.props.RangingNpdPage.multiBarChartData }/>*/}
-                    </div>
-                  </div>
                 </div>
+              )
+            }
+            else{
+              return(
 
-              </div>
+                <div className="flexright" style={{marginLeft: "1%",marginTop:"5px"}}>
+
+                  <Nav bsStyle="tabs" activeKey={this.state.activeKey} onSelect={this.handleSelect} className="tabsCustom" >
+                    <NavItem className="tabsCustomList" eventKey="1" onClick={() => {
+                      this.setState({activeKey: "1"});
+                      dataWeekUrlParams="week_flag=Latest 13 Weeks";
+
+                      this.props.onSaveWeekParam(dataWeekUrlParams);
+
+                      if (dataFilterUrlParams!==''&& dataPageUrlParams!=='') {
+                        browserHistory.push(this.props.location.pathname+"?"+dataWeekUrlParams+"&"+dataFilterUrlParams+"&"+dataPageUrlParams);
+                      } else if (dataFilterUrlParams!==''|| dataPageUrlParams!=='') {
+                        browserHistory.push(this.props.location.pathname+"?"+dataWeekUrlParams+"&"+dataFilterUrlParams+dataPageUrlParams);
+                      }
+                      else{
+                        browserHistory.push(this.props.location.pathname+"?"+dataWeekUrlParams);
+                      }
 
 
-              {/*price gravity and Table*/}
-              <div className="row">
+                    }}><span className="tab_label">13 Weeks</span></NavItem>
 
-                {/*Price gravity*/}
-                <div className="col-xs-12 col-md-6">
-                  <div className="ts-blk-proview">
-                    <h4 className="pageModuleTitle">Price gravity across retailers</h4>
+                    <NavItem className="tabsCustomList" eventKey="2" onClick={() => {
+                      this.setState({activeKey: "2"});
+                      browserHistory.push(this.props.location.pathname + "?week_flag=Latest 26 Weeks")
 
-                    <div id="table">
-                      {(() => {
-                        if (this.props.RangingNpdPage.price_gravity_data) {
-                          return(
-                            <MultilineOrdinalChart data={[{chart_data:price_gravity_data,xaxis_col_name:'price_gravity',yaxis_col_name:'sku_gravity',series_col_name:'id',xaxis_bands:price_gravity_axis_bands,color_order:price_gravity_comp_color},"id2",'£ ']}/>
-                          )
-                        }
-                      })()}
-
-
+                      dataWeekUrlParams="week_flag=Latest 26 Weeks";
+                      this.props.onSaveWeekParam(dataWeekUrlParams);
+                      if (dataFilterUrlParams!==''&& dataPageUrlParams!=='') {
+                        browserHistory.push(this.props.location.pathname+"?"+dataWeekUrlParams+"&"+dataFilterUrlParams+"&"+dataPageUrlParams);
+                      } else if (dataFilterUrlParams!==''|| dataPageUrlParams!=='') {
+                        browserHistory.push(this.props.location.pathname+"?"+dataWeekUrlParams+"&"+dataFilterUrlParams+dataPageUrlParams);
+                      }
+                      else{
+                        browserHistory.push(this.props.location.pathname+"?"+dataWeekUrlParams);
+                      }
 
 
-                    </div>
+                    }}><span className="tab_label">26 Weeks</span></NavItem>
 
-                  </div>
-                </div>
+                    <NavItem className="tabsCustomList" eventKey="3" onClick={() => {
+                      this.setState({activeKey: "3"});
+                      {/*browserHistory.push(this.props.location.pathname + "?week_flag=Latest 52 Weeks")*/}
 
-                {/*table*/}
-                <div className="col-xs-12 col-md-6">
-                  <div className="ts-blk-proview">
-                    <h4 className="pageModuleTitle">Unmatched products with retailers </h4>
-                    <div id="table">
+                      dataWeekUrlParams="week_flag=Latest 52 Weeks";
+                      this.props.onSaveWeekParam(dataWeekUrlParams);
+                      if (dataFilterUrlParams!==''&& dataPageUrlParams!=='') {
+                        browserHistory.push(this.props.location.pathname+"?"+dataWeekUrlParams+"&"+dataFilterUrlParams+"&"+dataPageUrlParams);
+                      } else if (dataFilterUrlParams!==''|| dataPageUrlParams!=='') {
+                        browserHistory.push(this.props.location.pathname+"?"+dataWeekUrlParams+"&"+dataFilterUrlParams+dataPageUrlParams);
+                      }
+                      else{
+                        browserHistory.push(this.props.location.pathname+"?"+dataWeekUrlParams);
+                      }
 
-                    {/*Search*/}
-                      <div className="col-xs-12 col-xs-5" style={{marginBottom:"10px"}}>
-                        <InputField type={'string'}
-                                    placeholder="Search Retailer"
-                                    value={this.props.textBoxQueryString}
-                                    onChange={(e)=>{
-                                      this.props.onGenerateTextBoxQueryString(e);
-                                      this.props.onUnmatchedProdTable();
-                                    }}
-                        />
-                      </div>
-                      <div className="col-xs-0 col-xs-7 " style={{textAlign:"right"}}>
-                        {/*<a style={{fontSize:"15px",verticalAlign:"centre"}} onClick={()=>{*/}
-                          {/*this.props.onGenerateTextBoxQueryString('');*/}
-                          {/*this.props.onUnmatchedProdTable();*/}
-                          {/*}}> Clear </a>*/}
+                    }}><span className="tab_label">52 Weeks</span></NavItem>
+                  </Nav>
+
+                  {/*BreadCrumbs*/}
+                  {(()=> {
+                      if(this.props.RangingNpdPage.breadCrumbs!=='')
+                      { return (
+                        <div className="breadCrumbs">
+                          {this.props.RangingNpdPage.breadCrumbs}
+                        </div>
+                      )
+                      }
+                    }
+                  )()}
+
+
+                  <Panel>
+
+
+                    {/*Outperformance and SKU distribution*/}
+                    <div className="row">
+
+                      {/*Outperformance*/}
+                      <div className="col-xs-12 col-md-6">
+                        <div className="ts-blk-proview">
+                          <h4 className="pageModuleTitle">Product sub-group sales outperformance</h4>
+
+
+                          {/*<MultiSeriesHoriBarChart data={this.props.RangingNpdPage.multiHoriBarChartData}/>*/}
+
+                          {(() => {
+                            if (this.props.RangingNpdPage.multiHoriBarChartData) {
+                              return(
+                                <MultiSeriesHoriBarChart data={this.props.RangingNpdPage.multiHoriBarChartData}/>
+                              )
+                            }
+                          })()}
+                        </div>
                       </div>
 
+                      {/*SKU distribution*/}
+                      <div className="col-xs-12 col-md-6">
+                        <div className="ts-blk-proview">
+                          <h4 className="pageModuleTitle">SKU distribution across retailers</h4>
+                          <div id="table">
+                            {(() => {
+                              if (this.props.RangingNpdPage.multiBarChartData) {
+                                return(
+                                  <MultiseriesBarChart2 data={this.props.RangingNpdPage.multiBarChartData }/>
+                                )
+                              }
+                            })()}
+
+                            {/*<MultiseriesBarChart2 data={this.props.RangingNpdPage.multiBarChartData }/>*/}
+                          </div>
+                        </div>
+                      </div>
+
+                    </div>
+
+
+                    {/*price gravity and Table*/}
+                    <div className="row">
+
+                      {/*Price gravity*/}
+                      <div className="col-xs-12 col-md-6">
+                        <div className="ts-blk-proview">
+                          <h4 className="pageModuleTitle">Price gravity across retailers</h4>
+
+                          <div id="table">
+                            {(() => {
+                              if (this.props.RangingNpdPage.price_gravity_data) {
+                                return(
+                                  <MultilineOrdinalChart data={[{chart_data:price_gravity_data,xaxis_col_name:'price_gravity',yaxis_col_name:'sku_gravity',series_col_name:'id',xaxis_bands:price_gravity_axis_bands,color_order:price_gravity_comp_color},"id2",'£ ']}/>
+                                )
+                              }
+                            })()}
+
+
+
+
+                          </div>
+
+                        </div>
+                      </div>
 
                       {/*table*/}
-                      <table className="table table-hover table-bordered " width="100%">
-                        <thead>
-                        <tr>
-                          <th className="table-header-format">Product description</th>
-                          <th className="table-header-format">Retailer</th>
-                          <th className="table-header-format">ASP</th>
-                        </tr>
-                        </thead>
-                        <tbody className="table-body-format">
-                        {(() => {
-                          if (this.props.RangingNpdPage.data) {
-                            return this.props.RangingNpdPage.data.table.map(obj => {
+                      <div className="col-xs-12 col-md-6">
+                        <div className="ts-blk-proview">
+                          <h4 className="pageModuleTitle">Unmatched products with retailers </h4>
+                          <div id="table">
 
-                              return (
-                                <tr key={Math.random() + Date.now()}>
-                                  <td>{obj.competitor_product_desc}</td>
-                                  <td>{obj.retailer}</td>
-                                  <td>£{obj.asp}</td>
-                                </tr>
-                              )
-                            })
-                          }
-                        })()}
-                        </tbody>
+                            {/*Search*/}
+                            <div className="col-xs-12 col-xs-5" style={{marginBottom:"10px"}}>
+                              <InputField type={'string'}
+                                          placeholder="Search Retailer"
+                                          value={this.props.textBoxQueryString}
+                                          onChange={(e)=>{
+                                            this.props.onGenerateTextBoxQueryString(e);
+                                            this.props.onUnmatchedProdTable();
+                                          }}
+                              />
+                            </div>
+                            <div className="col-xs-0 col-xs-7 " style={{textAlign:"right"}}>
+                              {/*<a style={{fontSize:"15px",verticalAlign:"centre"}} onClick={()=>{*/}
+                              {/*this.props.onGenerateTextBoxQueryString('');*/}
+                              {/*this.props.onUnmatchedProdTable();*/}
+                              {/*}}> Clear </a>*/}
+                            </div>
 
 
-                      </table>
+                            {/*table*/}
+                            <table className="table table-hover table-bordered " width="100%">
+                              <thead>
+                              <tr>
+                                <th className="table-header-format">Product description</th>
+                                <th className="table-header-format">Retailer</th>
+                                <th className="table-header-format">ASP</th>
+                              </tr>
+                              </thead>
+                              <tbody className="table-body-format">
+                              {(() => {
+                                if (this.props.RangingNpdPage.data) {
+                                  return this.props.RangingNpdPage.data.table.map(obj => {
 
-                      {/*pagination*/}
-
-                      {(() => {
-                          if (this.props.RangingNpdPage.data && this.props.RangingNpdPage.data.count) {
-
-                            return <Pagination
-                              prev
-                              next
-                              first
-                              last
-                              ellipsis
-                              boundaryLinks
-                              items={this.props.RangingNpdPage.data.pagination_count}
-                              maxButtons={5}
-                              activePage={this.state.activePage}
-                              onSelect={(e) => {
-
-                                this.setState({activePage: e})
-
-                                dataPageUrlParams = "page=" + e;
-                                this.props.onSavePageParam(dataPageUrlParams);
-                                {/**/
+                                    return (
+                                      <tr key={Math.random() + Date.now()}>
+                                        <td>{obj.competitor_product_desc}</td>
+                                        <td>{obj.retailer}</td>
+                                        <td>£{obj.asp}</td>
+                                      </tr>
+                                    )
+                                  })
                                 }
-                                if (dataFilterUrlParams !== '' && dataWeekUrlParams !== '') {
-                                  browserHistory.push(this.props.location.pathname + "?" + dataWeekUrlParams + "&" + dataFilterUrlParams + "&" + dataPageUrlParams);
-                                } else if (dataFilterUrlParams !== '' || dataWeekUrlParams !== '') {
-                                  browserHistory.push(this.props.location.pathname + "?" + dataWeekUrlParams + dataFilterUrlParams + "&" + dataPageUrlParams);
+                              })()}
+                              </tbody>
+
+
+                            </table>
+
+                            {/*pagination*/}
+
+                            {(() => {
+                                if (this.props.RangingNpdPage.data && this.props.RangingNpdPage.data.count) {
+
+                                  return <Pagination
+                                    prev
+                                    next
+                                    first
+                                    last
+                                    ellipsis
+                                    boundaryLinks
+                                    items={this.props.RangingNpdPage.data.pagination_count}
+                                    maxButtons={5}
+                                    activePage={this.state.activePage}
+                                    onSelect={(e) => {
+
+                                      this.setState({activePage: e})
+
+                                      dataPageUrlParams = "page=" + e;
+                                      this.props.onSavePageParam(dataPageUrlParams);
+                                      {/**/
+                                      }
+                                      if (dataFilterUrlParams !== '' && dataWeekUrlParams !== '') {
+                                        browserHistory.push(this.props.location.pathname + "?" + dataWeekUrlParams + "&" + dataFilterUrlParams + "&" + dataPageUrlParams);
+                                      } else if (dataFilterUrlParams !== '' || dataWeekUrlParams !== '') {
+                                        browserHistory.push(this.props.location.pathname + "?" + dataWeekUrlParams + dataFilterUrlParams + "&" + dataPageUrlParams);
+                                      }
+                                      else {
+                                        browserHistory.push(this.props.location.pathname + "?" + dataPageUrlParams);
+                                      }
+                                    }}
+                                  />
+
                                 }
-                                else {
-                                  browserHistory.push(this.props.location.pathname + "?" + dataPageUrlParams);
-                                }
-                              }}
-                            />
-
-                          }
-                        }
-                      )()}
+                              }
+                            )()}
 
 
+
+                          </div>
+                        </div>
+                      </div>
 
                     </div>
-                  </div>
+
+                    {/*NPD impact view navigation button*/}
+                    <div style={{textAlign:"right"}}>
+                      <Button buttonType={'primary'}
+                              style={{marginTop:"5px"}}
+                              onClick={() => {
+
+                                let objString = '/ranging/npd-impact';
+                                window.location = objString;
+
+                              }}>Click to add new products</Button>
+                    </div>
+
+                  </Panel>
+
                 </div>
 
-             </div>
+              );
+            }
 
-              {/*NPD impact view navigation button*/}
-              <div style={{textAlign:"right"}}>
-                 <Button buttonType={'primary'}
-                         style={{marginTop:"5px"}}
-                         onClick={() => {
+          })()}
 
-                           let objString = '/ranging/npd-impact';
-                            window.location = objString;
 
-                         }}>Click to add new products</Button>
-              </div>
 
-            </Panel>
 
-          </div>
-       </div>
+        </div>
     </div>
     );
   }
@@ -428,6 +464,8 @@ function mapDispatchToProps(dispatch) {
     onSaveWeekParam: (e) => dispatch(saveWeekParam(e)),
     onSavePageParam: (e) => dispatch(savePageParam(e)),
 
+    onPageLoadSelectFilterIndicator: (e) => dispatch(pageLoadSelectFilterIndicator(e)),
+    onUpdateBreadCrumbs: (e) => dispatch(updateBreadCrumbs(e)),
 
 
   };
