@@ -223,7 +223,7 @@ export class DelistContainer extends React.PureComponent { // eslint-disable-lin
           {(() => {
             if ((!(this.props.location.search == "")) || (this.props.DelistContainer.delistDefaultView == 1)) {
               return (
-                <div className="flexright" style={{marginLeft: "1%"}}>
+                <div className="flexright" style={{marginLeft: "3%"}}>
 
                   <Nav bsStyle="tabs" activeKey={this.state.activeKey} onSelect={this.handleSelect}
                        className="tabsCustom">
@@ -1314,7 +1314,7 @@ export class DelistContainer extends React.PureComponent { // eslint-disable-lin
               return (
                 <div className="selectAttrituteIndicator">
                   <div>
-                    <div style={{marginTop:'25%'}}> ----- Please select the attributes ------</div>
+                    <div style={{marginTop:'25%'}}> ----- Please select the filters to get started ------</div>
                   </div>
                 </div>
 
