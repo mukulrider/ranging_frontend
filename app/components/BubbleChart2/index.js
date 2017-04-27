@@ -11,15 +11,25 @@ import {browserHistory} from 'react-router';
 
 
 class BubbleChart2 extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
-  createChart = (data2, path, selprod, bubbleFunc, bubbleFunc2, makeTable, dataUrlParams2) => {
-    console.log('create chart called');
+  createChart = (data2, forTable, forOpacity, bubbleFunc, bubbleFunc2, makeTable) => {
+    // console.log('create chart called');
     let dataBubbleUrlParams = '';
-    let productSelected = '';
     let prodArr = [];
-    let prodArr2 = [];
+    let deselectArr = [];
+    let deselectBub = [];
+
+
+    console.log("in d3", forTable);
+
+    forTable = JSON.parse(forTable);
+    // console.log("in d3", forTable);
+
+    forOpacity = JSON.parse(forOpacity);
+    console.log("in d3 forOpacity", forOpacity);
+    // console.log("in d3 forOpacity.length", forOpacity.length);
+
 
     //Chart configurations
-    console.log("in d3 code printing array of selected products", selprod);
     //Removing '' from the array
     let margin = {top: 20, right: 20, bottom: 40, left: 30};
     let width = 750 - margin.left - margin.right,
@@ -28,10 +38,10 @@ class BubbleChart2 extends React.PureComponent { // eslint-disable-line react/pr
     let svg = d3.select('#svgg');
 
     let colorArray = ['#00838f', '#33691e'];
-    let opacity = [1, 0.2];
+    let opacity = [1, 0.4];
 
     svg.selectAll("*").remove();
-      //Adjusting position of the svg area
+    //Adjusting position of the svg area
     let chart = svg.append("g").attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
 
@@ -78,57 +88,133 @@ class BubbleChart2 extends React.PureComponent { // eslint-disable-line react/pr
       .attr("cy", function (d) {
         return (yScale(d.pps));
       })
+
       .on('click', function (d) {
+        //Bubble opacity
+        let dataBubbleUrlParams2 = d.base_product_number;
+        let deselectBubFlag = 0;
+
+        // Will be used to just store the product number to decide the opacity
+        for (let i = 0; i < forOpacity.length; i++) {
+          if (forOpacity[i] !== dataBubbleUrlParams2) {
+            console.log("comparing-=-=-=-=",forOpacity[i],dataBubbleUrlParams2)
+            deselectBub.push(forOpacity[i]);
+          }
+          else{
+            console.log("DESELECTION OF BUBBLE")
+            deselectBubFlag=1;
+          }
+        }
+
+        if(deselectBubFlag===0){
+          console.log("NOT DESELECTION OF BUBBLE"+deselectBubFlag)
+          deselectBub.push(dataBubbleUrlParams2);
+        }
+
+        let dejsonBub = JSON.stringify(deselectBub);
+        bubbleFunc2(dejsonBub);
+        console.log("--------------------------------------");
+
+        //For updating table below
+
         let dataBubbleUrlParams = "base_product_number=" + d.base_product_number;
-        // let productSelected = d.base_product_number;
-        prodArr.push(dataBubbleUrlParams);
-        console.log("product selected", dataBubbleUrlParams);
-        console.log("consoling prod array", prodArr);
-        var myJSON = JSON.stringify(prodArr);
-        bubbleFunc(myJSON);
-        // console.log('dataUrlParams2>>>>>>>>>>>>>>>>>>>>>>>', dataUrlParams2);
-        // let myJson2 = JSON.parse(dataUrlParams2);
-        // myJson2.push(d.base_product_number);
-        // bubbleFunc2(JSON.stringify(myJson2));
+        let deselect=0;
+
+        for (let i = 0; i < forTable.length; i++) {
+            if (forTable[i] !== dataBubbleUrlParams) {
+              deselectArr.push(forTable[i]);
+            }else{
+              deselect=1;
+          }
+          }
+
+        if(deselect==0){
+          deselectArr.push(dataBubbleUrlParams);
+        }
+
+        let dejsonTable = JSON.stringify(deselectArr);
+        bubbleFunc(dejsonTable);
         makeTable();
-        d3.select(this)
-          .style("opacity", 1);
-        // d3.select(this)
-        // .style("opacity", function () {
-        //   console.log("in_opacity_function",productSelected);
-        //   if (d.base_product_number == productSelected) {
-        //     return opacity[0];
+        console.log("============================")
+
+        // --------------------------------------------------------------------------------------------
+        // let dataBubbleUrlParams = "base_product_number=" + d.base_product_number;
+        // forTable.push(dataBubbleUrlParams);
+        //
+        //   for (let i = 0; i < forTable.length; i++) {
+        //
+        //     if (forTable[i] !== dataBubbleUrlParams) {
+        //       deselectArr.push(forTable[i]);
+        //     }
+        //     let dejsonTable = JSON.stringify(deselectArr);
+        //     bubbleFunc(dejsonTable);
+        //     makeTable();
+        //
         //   }
-        //   else {
-        //     return opacity[1];
-        //   }
-        // })
-        //makeChart();
-        //makeTable();
+        //
+        // console.log("whats there in dselect array", deselectArr);
+        //
+        //   //Will be used to call sagas and update table
+        //   let dejsonTable = JSON.stringify(forTable);
+        //   bubbleFunc(dejsonTable);
+        //   makeTable();
+        //   // let jsonTable = JSON.stringify(forTable);
+        //   // bubbleFunc(jsonTable);
+
+        // makeTable();
+
+
+
+
+          // forOpacity.push(dataBubbleUrlParams2);
+          // let jsonOpacity = JSON.stringify(forOpacity);
+        //   //Saving both the states
+        //   bubbleFunc2(jsonOpacity);
+        //   //Logic for deselecting the product
+        //   console.log("printing if selected again", dataBubbleUrlParams);
+
+
+
+
+
       })
+
       .attr("r", 0)
       .transition()
-      .duration(1000)
+      .duration(500)
       .attr("r", function (d) {
         return (rScale(d.rate_of_sale));
       })
-      // .style("opacity", function (d) {
-      //   console.log("in_opacity_function",dataBubbleUrlParams);
-      //   if (d.base_product_number == productSelected) {
-      //     return opacity[0];
-      //   }
-      //   else {
-      //     return opacity[1];
-      //   }
-      // })
       .style("opacity", 0.4)
       .style("fill", function (d) {
-        console.log("in_color_function", colorArray[0]);
+        // console.log("in_color_function", colorArray[0]);
         if (d.brand_ind == "Brand") {
           return colorArray[1];
         }
         else {
           return colorArray[0];
+        }
+      })
+      .style("opacity", function (d) {
+
+        let selected = 0;
+        if (forOpacity.length > 0) {
+          for (let i = 0; i < forOpacity.length; i++) {
+            if (d.base_product_number == forOpacity[i]) {
+              return opacity[0];
+            }
+            else {
+              selected = 0;
+              // return opacity[1];
+            }
+          }
+
+          if (selected == 0) {
+            return (opacity[1]);
+          }
+        }
+        else {
+          return opacity[0];
         }
       });
 
@@ -183,26 +269,26 @@ class BubbleChart2 extends React.PureComponent { // eslint-disable-line react/pr
   };
 
   componentDidMount = () => {
-    this.createChart(this.props.data, this.props.path, this.props.selectedBubble, this.props.onSaveBubbleParam, this.props.onSaveBubbleParam2,
-      this.props.onGenerateTable,this.props.selectedBubble2)
-
+    this.createChart(this.props.data, this.props.selectedBubbleTable, this.props.selectedBubbleOpacity, this.props.onSaveBubbleParam, this.props.onSaveBubbleParam2,
+      this.props.onGenerateTable)
   };
 
   componentDidUpdate = () => {
-    this.createChart(this.props.data, this.props.path, this.props.selectedBubble, this.props.onSaveBubbleParam, this.props.onSaveBubbleParam2,
-      this.props.onGenerateTable, this.props.selectedBubble2);
-    console.log('component Did Update', this.props.selectedBubble2);
+    this.createChart(this.props.data, this.props.selectedBubbleTable, this.props.selectedBubbleOpacity, this.props.onSaveBubbleParam, this.props.onSaveBubbleParam2,
+      this.props.onGenerateTable);
   };
 
   render() {
-
 
     return (
       <div>
         <svg id="svgg" width="900" height="600" fontFamily="sans-serif" fontSize="10"
              textAnchor="middle"></svg>
         {/*<Button onClick={() => {*/}
-        {/*/!*this.props.onSaveBubbleParam(prodArr);*!/*/}
+        {/*let jsonTable = JSON.stringify(selectedBubbleTable);*/}
+        {/*let jsonOpacity = JSON.stringify(selectedBubbleOpacity);*/}
+        {/*this.props.onSaveBubbleParam(jsonTable);*/}
+        {/*this.props.onSaveBubbleParam2(jsonOpacity);*/}
         {/*this.props.onFetchGraph();*/}
         {/*this.props.onGenerateTable();*/}
         {/*}}>Update chart</Button>*/}

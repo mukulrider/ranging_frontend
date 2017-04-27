@@ -239,9 +239,8 @@ export class RangingNegotiationPage extends React.PureComponent { // eslint-disa
                   <div className="row" >
                     <div className="col-xs-12 col-md-8" style = {{marginTop:'2%'}}>
                       <BubbleChart2 data={this.props.RangingNegotiationPage.chartData}
-                                    path={this.props.location}
-                                    // selectedBubble={this.props.RangingNegotiationPage.x}
-                                    // selectedBubble2={this.props.RangingNegotiationPage.dataBubbleUrlParams2}
+                                      selectedBubbleTable={this.props.RangingNegotiationPage.prodArrayTable}
+                                      selectedBubbleOpacity={this.props.RangingNegotiationPage.prodArrayOpacity}
                                     onSaveBubbleParam={this.props.onSaveBubbleParam}
                                     onSaveBubbleParam2={this.props.onSaveBubbleParam2}
                                     onFetchGraph={this.props.onFetchGraph}
@@ -250,18 +249,13 @@ export class RangingNegotiationPage extends React.PureComponent { // eslint-disa
                       <i style={{fontSize:'12px'}}>*Size of the bubble corresponds to Rate of Sales</i>
 
                       <div className="resetButton" onClick={() => {
-                        //let resetUrlParams = "reset_clicked";
-                        //this.props.onResetClickParam(resetUrlParams);
-                        //let dataPageUrlParams = '';
                         dataPerformanceUrlParams = '';
-                        let dataBubbleUrlParams = '';
                         this.props.onSavePageParam("page=1");
                         this.props.onSavePFilterParam(dataPerformanceUrlParams);
-                        this.props.onSaveBubbleParam(dataBubbleUrlParams);
                         this.props.onFetchGraph();
                         this.props.onGenerateTable();
 
-                      }}><p>Reset Chart</p></div>
+                      }}><p>View Selections</p></div>
                     </div>
 
                     <div className="col-xs-12 col-md-4" style = {{marginTop:'2%',fontSize:'14px'}}>
@@ -278,8 +272,6 @@ export class RangingNegotiationPage extends React.PureComponent { // eslint-disa
                                        label={'Low CPS/Low Profit'}
                                        valid={true}
                                        onChange={() => {
-                                         let dataBubbleUrlParams = '';
-                                         this.props.onSaveBubbleParam(dataBubbleUrlParams);
                                          dataPerformanceUrlParams = "performance_quartile=Low CPS/Low Profit";
                                          this.props.onSavePFilterParam(dataPerformanceUrlParams);
                                          this.props.onFetchGraph();
@@ -298,9 +290,7 @@ export class RangingNegotiationPage extends React.PureComponent { // eslint-disa
                                        label={'Low CPS/High Profit'}
                                        valid={true}
                                        onChange={() => {
-                                         let dataBubbleUrlParams = '';
                                          dataPerformanceUrlParams = "performance_quartile=Low CPS/High Profit";
-                                         this.props.onSaveBubbleParam(dataBubbleUrlParams);
                                          this.props.onSavePFilterParam(dataPerformanceUrlParams);
                                          this.props.onFetchGraph();
                                          this.props.onGenerateTable();
@@ -323,9 +313,7 @@ export class RangingNegotiationPage extends React.PureComponent { // eslint-disa
                                        label={'Med CPS/Med Profit'}
                                        valid={true}
                                        onChange={() => {
-                                         let dataBubbleUrlParams = '';
                                          dataPerformanceUrlParams = "performance_quartile=Med CPS/Med Profit";
-                                         this.props.onSaveBubbleParam(dataBubbleUrlParams);
                                          this.props.onSavePFilterParam(dataPerformanceUrlParams);
                                          this.props.onFetchGraph();
                                          this.props.onGenerateTable();
@@ -347,9 +335,6 @@ export class RangingNegotiationPage extends React.PureComponent { // eslint-disa
                                        valid={true}
                                        onChange={() => {
                                          dataPerformanceUrlParams = "performance_quartile=High CPS/High Profit"
-
-                                         let dataBubbleUrlParams = '';
-                                         this.props.onSaveBubbleParam(dataBubbleUrlParams);
                                          this.props.onSavePFilterParam(dataPerformanceUrlParams);
                                          this.props.onFetchGraph();
                                          this.props.onGenerateTable();
@@ -370,9 +355,6 @@ export class RangingNegotiationPage extends React.PureComponent { // eslint-disa
                                        valid={true}
                                        onChange={() => {
                                          dataPerformanceUrlParams = "performance_quartile=High CPS/Low Profit"
-
-                                         let dataBubbleUrlParams = '';
-                                         this.props.onSaveBubbleParam(dataBubbleUrlParams);
                                          this.props.onSavePFilterParam(dataPerformanceUrlParams);
                                          this.props.onFetchGraph();
                                          this.props.onGenerateTable();
@@ -423,7 +405,7 @@ export class RangingNegotiationPage extends React.PureComponent { // eslint-disa
                   <th style={{textAlign:'center'}}>Rate of Sale</th>
                   <th style={{textAlign:'center'}}>Store Count</th>
                   <th style={{textAlign:'center'}}>ASP</th>
-</tr>
+        </tr>
                   </thead>
                   <tbody className="table-body-format" >
 
@@ -445,7 +427,7 @@ export class RangingNegotiationPage extends React.PureComponent { // eslint-disa
                             <td style={{textAlign: "center"}}>
                               <Checkbox isDisabled={false} id={Math.random() + Date.now()}
                                         onChange={(e) => {
-                                          console.log('checked');
+
                                           this.inputUpdate(e.target.checked, obj.base_product_number)
                                         }}
                                         checked={(() => {
@@ -503,7 +485,7 @@ export class RangingNegotiationPage extends React.PureComponent { // eslint-disa
                           this.setState({activePage: e})
 
                           let dataPageUrlParams = "page=" + e;
-                          console.log("dataPageUrlParams",dataPageUrlParams)
+                          {/*console.log("dataPageUrlParams",dataPageUrlParams)*/}
                           this.props.onSavePageParam(dataPageUrlParams);
                           this.props.onGenerateTable();
 
@@ -517,7 +499,7 @@ export class RangingNegotiationPage extends React.PureComponent { // eslint-disa
                 <div className="delistButton">
                   <Button buttonType={'primary'}
                           onClick={() => {
-                            console.log('done')
+                            {/*console.log('done')*/}
                             {/*document.cookie = 'saved=' + JSON.stringify(this.props.RangingNegotiationPage.checkedList)*/
                             }
                             {/*document.cookie = "username=John Doe";*/
@@ -533,7 +515,7 @@ export class RangingNegotiationPage extends React.PureComponent { // eslint-disa
                             })
                             {/*objString.substring(0, objString.length - 1);*/}
                             objString = objString.slice(0,objString.length-1);
-                            console.log(objString);
+                            {/*console.log(objString);*/}
 
 
                             window.location = objString;

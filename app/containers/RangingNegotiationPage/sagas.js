@@ -50,8 +50,8 @@ export function* generateWeekFetch() {
   paramString = paramString.replace('&', '');
 
   try {
-    // const data = yield call(request, `http://172.20.244.141:8000/ranging/default_data_for_nego_charts?` + paramString);
-    const data = yield call(request, `http://172.20.244.141:8000/api/nego_chart?` + paramString);
+    // const data = yield call(request, `http://172.20.246.203:8000/ranging/default_data_for_nego_charts?` + paramString);
+    const data = yield call(request, `http://172.20.246.203:8000/api/nego_chart?` + paramString);
     yield put(fetchDataSuccess(data));
   } catch (err) {
     // console.log(err);
@@ -75,12 +75,12 @@ export function* generateSideFilter() {
     // todo: update url
     let data = '';
     if (urlParams){
-      // data = yield call(request, `http://172.20.244.141:8000/ranging/nego/filter_data?` + urlParams);
-      data = yield call(request, `http://172.20.244.141:8000/api/nego/filter_data?` + urlParams);
+      // data = yield call(request, `http://172.20.246.203:8000/ranging/nego/filter_data?` + urlParams);
+      data = yield call(request, `http://172.20.246.203:8000/api/nego/filter_data?` + urlParams);
 
     }else{
-      // data = yield call(request, `http://172.20.244.141:8000/ranging/nego/filter_data`);
-      data = yield call(request, `http://172.20.244.141:8000/api/nego/filter_data`);
+      // data = yield call(request, `http://172.20.246.203:8000/ranging/nego/filter_data`);
+      data = yield call(request, `http://172.20.246.203:8000/api/nego/filter_data`);
     }
     // // console.log(data);
     yield put(generateSideFilterSuccess(data));
@@ -97,45 +97,33 @@ export function* doGenerateSideFilter() {
 
 /* GENERATE TABLE */
 export function* generateTable() {
-  console.log("ingenerategraph");
-  // let urlParamsString = yield select(makeUrlParamsString());
-  // urlParamsString = urlParamsString.urlParamsString;
-  // console.log("urlParamsString in graph",urlParamsString);
+
   let urlName = yield select(selectRangingNegotiationPageDomain());
 
   let urlParams = urlName.get('urlParamsString');
-  //  console.log("Getting url params from ",urlParams);
-  //
-  // let paramString = '';
-  // Object.keys(urlParams).map(obj => {
-  //   console.log(obj, urlParams[obj]);
-  //   paramString += `&${obj}=${urlParams[obj]}`
-  // })
-  //
-  // //paramString = paramString + '&week=' + urlParams;
-  // paramString = paramString.replace('&', '');
 
   let weekParams = urlName.get('dataWeekUrlParams');
-  console.log("Getting weekParams", weekParams);
+  // console.log("Getting weekParams", weekParams);
 
   let storeParams = urlName.get('dataStoreUrlParams');
-  console.log("Getting storeparams", storeParams);
+  // console.log("Getting storeparams", storeParams);
 
   let performanceParams = urlName.get('dataPerformanceUrlParams');
-  console.log("Getting performanceparams", performanceParams);
+  // console.log("Getting performanceparams", performanceParams);
 
 
-  let bubbleParams = urlName.get('dataBubbleUrlParams');
-  console.log("Getting bubbleparams", bubbleParams);
+  // let bubbleParams = urlName.get('dataBubbleUrlParams');
+  let bubbleParams = urlName.get('prodArrayTable');
+  // console.log("Getting bubbleparams", bubbleParams);
 
 
   var treated_bubble_params = bubbleParams.replace(/[^=,\w\s]/gi, '');
   var treated_bubble_params2 =treated_bubble_params.replace(/,/g , "&");
   // console.log("regex treated string",desired);
-  console.log("regex treated2 string",treated_bubble_params2);
+  // console.log("regex treated2 string",treated_bubble_params2);
 
   let pageParams = urlName.get('dataPageUrlParams');
-  console.log("Getting pageParams", pageParams);
+  // console.log("Getting pageParams", pageParams);
 
   let searchParams =urlName.get('textBoxQueryString');
   //searchParams = "search="+searchParams
@@ -171,50 +159,20 @@ export function* generateTable() {
   if (searchParams!== '') {
     SelectionState = SelectionState + '&' + "search="+searchParams
   }
-  console.log("performance for table",performanceParams);
-
   //Removing "&"
   let ajaxSelection = '';
   ajaxSelection = SelectionState.replace('&', '');
-  console.log("final url for table",ajaxSelection);
+  console.log(`http://172.20.246.203:8000/api/nego_table?` + ajaxSelection+"&"+urlParams);
   if (ajaxSelection != '') {
-    // const data = yield call(request, `http://172.20.244.141:8000/ranging/nego_bubble_table?` + ajaxSelection+"&"+urlParams);
-    const data = yield call(request, `http://172.20.244.141:8000/api/nego_table?` + ajaxSelection+"&"+urlParams);
+    // const data = yield call(request, `http://172.20.246.203:8000/ranging/nego_bubble_table?` + ajaxSelection+"&"+urlParams);
+    const data = yield call(request, `http://172.20.246.203:8000/api/nego_table?` + ajaxSelection+"&"+urlParams);
     yield put(generateTableSuccess(data));
   }
   else {
-    // const data = yield call(request, `http://172.20.244.141:8000/ranging/nego_bubble_table?`+urlParams);
-    const data = yield call(request, `http://172.20.244.141:8000/api/nego_table?`+urlParams);
+    // const data = yield call(request, `http://172.20.246.203:8000/ranging/nego_bubble_table?`+urlParams);
+    const data = yield call(request, `http://172.20.246.203:8000/api/nego_table?`+urlParams);
     yield put(generateTableSuccess(data));
   }
-
-  resetParams = ''
-//This will get the object which will contain all the data saved in the reducer. It will have chart data, urlParamsString,urlData,Table data, sidefilter
-//   let urlParamsString = yield select(makeUrlParamsString());
-//   console.log("finally getting to know urlParamsString", urlParamsString);
-//
-//   //To fetch the specific urlParamsString
-//   urlParamsString = urlParamsString.urlParamsString;
-//
-//   let urlName = yield select(selectRangingNegotiationPageDomain());
-//
-//   let urlParams = urlName.get('urldata');
-//
-//   let paramString = '';
-//   Object.keys(urlParams).map(obj => {
-//     console.log(obj, urlParams[obj]);
-//     paramString += `&${obj}=${urlParams[obj]}`
-//   })
-//
-//   paramString = paramString.replace('&', '');
-//
-//
-//   try {
-//     const data = yield call(request, `http://172.20.244.141:8000/ranging/nego_bubble_table?${paramString}`);
-//     yield put(generateTableSuccess(data));
-//   } catch (err) {
-//     // console.log(err);
-//   }
 }
 
 export function* doGenerateTable() {
@@ -225,12 +183,12 @@ export function* doGenerateTable() {
 /* GENERATE GRAPH */
 
 export function* generateGraph() {
-  console.log("ok in generate graph sagas");
+  // console.log("ok in generate graph sagas");
   // let urlParamsString = yield select(makeUrlParamsString());
   // urlParamsString = urlParamsString.urlParamsString;
   // console.log("urlParamsString in graph",urlParamsString);
   let urlName = yield select(selectRangingNegotiationPageDomain());
-  console.log("urlName in graph", urlName);
+  // console.log("urlName in graph", urlName);
 
 //  Getting the url parameters for filters
   let urlParams = urlName.get('urlParamsString');
@@ -249,21 +207,21 @@ export function* generateGraph() {
   // console.log("Getting weekParams", weekParams);
 
   let weekParams = urlName.get('dataWeekUrlParams');
-  console.log("Getting weekParams", weekParams);
+  // console.log("Getting weekParams", weekParams);
 
   let storeParams = urlName.get('dataStoreUrlParams');
-  console.log("Getting storeparams", storeParams);
+  // console.log("Getting storeparams", storeParams);
 
   let performanceParams = urlName.get('dataPerformanceUrlParams');
-  console.log("Getting performanceparams", performanceParams);
+  // console.log("Getting performanceparams", performanceParams);
 
   let bubbleParams = urlName.get('dataBubbleUrlParams');
-  console.log("Bubbleparams in sagas", bubbleParams);
+  // console.log("Bubbleparams in sagas", bubbleParams);
 
   var treated_bubble_params = bubbleParams.replace(/[^=,\w\s]/gi, '');
   var treated_bubble_params2 =treated_bubble_params.replace(/,/g , "&");
   // console.log("regex treated string",desired);
-  console.log("regex treated2 string",treated_bubble_params2);
+  // console.log("regex treated2 string",treated_bubble_params2);
   //Replace , in desired with &
 
 
@@ -300,15 +258,15 @@ export function* generateGraph() {
   //Removing "&"
   let ajaxSelection = '';
   ajaxSelection = SelectionState.replace('&', '');
-  console.log("final url for graph",ajaxSelection);
+  console.log(`http://172.20.246.203:8000/api/nego_chart?` + urlParams +"&"+ ajaxSelection);
   if (ajaxSelection != '') {
-    // const data = yield call(request, `http://172.20.244.141:8000/ranging/nego_bubble_chart?` + urlParams +"&"+ ajaxSelection);
-    const data = yield call(request, `http://172.20.244.141:8000/api/nego_chart?` + urlParams +"&"+ ajaxSelection);
+    // const data = yield call(request, `http://172.20.246.203:8000/ranging/nego_bubble_chart?` + urlParams +"&"+ ajaxSelection);
+    const data = yield call(request, `http://172.20.246.203:8000/api/nego_chart?` + urlParams +"&"+ ajaxSelection);
     yield put(fetchGraphSuccess(data));
   }
   else {
-    // const data = yield call(request, `http://172.20.244.141:8000/ranging/nego_bubble_chart?`+urlParams );
-    const data = yield call(request, `http://172.20.244.141:8000/api/nego_chart?`+urlParams );
+    // const data = yield call(request, `http://172.20.246.203:8000/ranging/nego_bubble_chart?`+urlParams );
+    const data = yield call(request, `http://172.20.246.203:8000/api/nego_chart?`+urlParams );
     yield put(fetchGraphSuccess(data));
   }
   //Once all the parameters are obtained, remove the first instance of & and then make a call to url with all param appended
@@ -317,7 +275,7 @@ export function* generateGraph() {
   // try {
   //      console.log('Checking params for graph under try', urlParamsString);
   //
-  //      const data = yield call(request, `http://172.20.244.141:8000/ranging/nego_bubble_chart?`+ paramString);
+  //      const data = yield call(request, `http://172.20.246.203:8000/ranging/nego_bubble_chart?`+ paramString);
   //      yield put(fetchGraphSuccess(data));
   //  } catch (err) {
   //      // console.log(err);
