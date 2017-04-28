@@ -35,25 +35,11 @@ import CascadedFilterNpd from 'components/CascadedFilterNpd';
 import {
   generateSideFilter, generateUrlParams, generateUrlParamsString, checkboxChange
 } from './actions';
-// import {
-//   makeSideFilter, makeUrlParams, makeUrlParamsString
-// } from './selectors';
 
 export class RangingNpdPage extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
 
   componentDidMount = () => {
     this.props.onSendUrlParams(this.props.location.query);
-
-    //   let selection=this.props.RangingNpdPage.urlParamsString;
-    // this.setCookie(selection);
-    // let x = document.cookie;
-    // console.log("printing coooooooooookkkkiiiiiiieeeeeessssssss",x);
-
-
-    // this.props.onUnmatchedProdTable();
-    // this.props.onSkuChartFetch();
-    // this.props.onOutPerformanceChartFetch();
-    // this.props.onPriceGravityFetch();
     this.props.onGenerateSideFilter();
   };
 
@@ -61,36 +47,20 @@ export class RangingNpdPage extends React.PureComponent { // eslint-disable-line
     this.props.onSendUrlParams(this.props.location.query);
 
 
-    // let selection=this.props.RangingNpdPage.urlParamsString;
-    // this.setCookie(selection);
-    // let x = document.cookie;
-    // console.log("printing coooooooooookkkkiiiiiiieeeeeessssssss",x);
-    //
-
-
   };
 
   constructor(props) {
     super(props);
     this.state = {
-      smShow: false,
-      lgShow: false,
-      supplierImpactInfo: false,
-      salesImpactVolumeInfo: false,
-      profitImpactInfo: false,
-      profitImpactCtsInfo: false,
-      spplierImpactTableInfo: false,
-      delistImpactTableInfo: false,
       activeKey: "1",
-      activeKey2: "11",
       activePage: 1,
+      showInfoModalFlag:false,
+      infoModalHeader:'',
+      infoModalHelpText:'',
+
+
     };
   }
-
-  setCookie =(filter_selections)=>{
-
-    document.cookie = filter_selections;
-  };
 
 
 
@@ -150,12 +120,15 @@ export class RangingNpdPage extends React.PureComponent { // eslint-disable-line
 
             if(this.props.RangingNpdPage.showSelectFilterIndicator){
               return(
+
                 <div className="flexright" style={{marginLeft: "1%"}}>
+
                 <div className="selectAttrituteIndicator">
                   <div>
                     <div style={{marginTop:'25%'}}> ----- Please select the attributes ------</div>
                   </div>
                 </div>
+
                 </div>
               )
             }
@@ -232,6 +205,31 @@ export class RangingNpdPage extends React.PureComponent { // eslint-disable-line
                   )()}
 
 
+                  {/*Info Modal*/}
+                  <Modal show={this.state.showInfoModalFlag} bsSize="lg" style={{marginTop:'10%'}}
+                         aria-labelledby="contained-modal-title-lg"
+                  >
+                    <Modal.Header>
+
+                      <Modal.Title id="contained-modal-title-sm" className="pageModuleTitle">
+                        <span className="pageModuleTitle"><b>{this.state.infoModalHeader}</b>
+                         <span style={{textAlign: 'right', float: 'right'}}
+                              onClick={() =>
+                              {this.setState({showInfoModalFlag: false})
+                              }}>
+                          <b>X</b></span></span>
+                        <div style={{textAlign: 'center'}}>
+                          <div style={{textAlign: 'right'}}>
+                          </div>
+                        </div>
+                      </Modal.Title>
+
+                    </Modal.Header>
+                    <Modal.Body className="infoModalText">
+                      {this.state.infoModalHelpText}
+                    </Modal.Body>
+                  </Modal>
+
                   <Panel>
 
 
@@ -241,7 +239,22 @@ export class RangingNpdPage extends React.PureComponent { // eslint-disable-line
                       {/*Outperformance*/}
                       <div className="col-xs-12 col-md-6">
                         <div className="ts-blk-proview">
-                          <h4 className="pageModuleTitle">Product sub-group sales outperformance</h4>
+
+                          {/*Heading and info button*/}
+                          <div className="row">
+                           <div className="col-xs-11">
+                            <h4 className="pageModuleTitle">Product sub-group sales outperformance</h4>
+                            </div>
+                            <div className="col-xs-1">
+                              <span className="glyphicon glyphicon-info-sign pull-right infoButton"
+
+                                onClick={() => {
+                                  this.setState({showInfoModalFlag: true});
+                                  this.setState({infoModalHeader: "Product sub-group sales outperformance"});
+                                  this.setState({infoModalHelpText: "Tesco’s outperformance wrt the Market at a Product Subgroup level"});
+                                }}> </span>
+                            </div>
+                          </div>
 
 
                           {/*<MultiSeriesHoriBarChart data={this.props.RangingNpdPage.multiHoriBarChartData}/>*/}
@@ -259,8 +272,26 @@ export class RangingNpdPage extends React.PureComponent { // eslint-disable-line
                       {/*SKU distribution*/}
                       <div className="col-xs-12 col-md-6">
                         <div className="ts-blk-proview">
-                          <h4 className="pageModuleTitle">SKU distribution across retailers</h4>
-                          <div id="table">
+
+
+                          {/*Heading and info button*/}
+                          <div className="row">
+                            <div className="col-xs-11">
+                              <h4 className="pageModuleTitle">SKU distribution across retailers</h4>
+                            </div>
+                            <div className="col-xs-1">
+                              <span className="glyphicon glyphicon-info-sign pull-right infoButton"
+
+                                    onClick={() => {
+                                      this.setState({showInfoModalFlag: true});
+                                      this.setState({infoModalHeader: "SKU distribution across retailers"});
+                                      this.setState({infoModalHelpText: "Comparison of the number of products in each product subgroup between Tesco and its competitors"});
+                                    }}> </span>
+                            </div>
+                          </div>
+
+
+                        <div id="table">
                             {(() => {
                               if (this.props.RangingNpdPage.multiBarChartData) {
                                 return(
@@ -283,7 +314,24 @@ export class RangingNpdPage extends React.PureComponent { // eslint-disable-line
                       {/*Price gravity*/}
                       <div className="col-xs-12 col-md-6">
                         <div className="ts-blk-proview">
-                          <h4 className="pageModuleTitle">Price gravity across retailers</h4>
+
+
+                          {/*Heading and info button*/}
+                          <div className="row">
+                            <div className="col-xs-11">
+                              <h4 className="pageModuleTitle">Price gravity across retailers</h4>
+                            </div>
+                            <div className="col-xs-1">
+                              <span className="glyphicon glyphicon-info-sign pull-right infoButton"
+
+                                    onClick={() => {
+                                      this.setState({showInfoModalFlag: true});
+                                      this.setState({infoModalHeader: "Price gravity across retailers"});
+                                      this.setState({infoModalHelpText: "Comparison of the number of products in each price bucket between Tesco and its competitors, for the selected product subgroup"});
+                                    }}> </span>
+                            </div>
+                          </div>
+
 
                           <div id="table">
                             {(() => {
@@ -305,7 +353,26 @@ export class RangingNpdPage extends React.PureComponent { // eslint-disable-line
                       {/*table*/}
                       <div className="col-xs-12 col-md-6">
                         <div className="ts-blk-proview">
-                          <h4 className="pageModuleTitle">Unmatched products with retailers </h4>
+
+
+                          {/*Heading and info button*/}
+                          <div className="row">
+                            <div className="col-xs-11">
+                              <h4 className="pageModuleTitle">Unmatched products with retailers </h4>
+                            </div>
+                            <div className="col-xs-1">
+                              <span className="glyphicon glyphicon-info-sign pull-right infoButton"
+
+                                    onClick={() => {
+                                      this.setState({showInfoModalFlag: true});
+                                      this.setState({infoModalHeader: "Unmatched products with retailers"});
+                                      this.setState({infoModalHelpText: "List of Similar products (based on Buying controller, Buyer, Junior Buyer and Product subgroup selected) that are not present in Tesco’s current assortment, but are present in competitor stores"});
+                                    }}> </span>
+                            </div>
+                          </div>
+
+
+
                           <div id="table">
 
                             {/*Search*/}
