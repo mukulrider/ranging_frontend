@@ -494,20 +494,20 @@ export class DelistContainer extends React.PureComponent { // eslint-disable-lin
 
                                           <span
                                             className={(() => {
-                                              if (this.props.DelistContainer.waterfallValue.bc_sales_contri > 0) {
+                                              if (this.props.DelistContainer.waterfallValue.sales_tot_transfer > 0) {
                                                 {/*alert(this.props.DelistContainer.waterfallValue.bc_sales_contri)*/
                                                 }
                                                 {/*alert(this.props.DelistContainer.waterfallValue.bc_sales_contri)*/
                                                 }
                                                 return "glyphicon glyphicon-chevron-up waterfallCalloutsPositive"
                                               }
-                                              else if (this.props.DelistContainer.waterfallValue.bc_sales_contri < 0) {
+                                              else if (this.props.DelistContainer.waterfallValue.sales_tot_transfer < 0) {
                                                 return "glyphicon glyphicon-chevron-down waterfallCalloutsNegative"
                                               } else {
                                                 return "glyphicon glyphicon-minus-sign waterfallCalloutsNeutral"
                                               }
                                             })()}>&nbsp;
-                                            {this.props.DelistContainer.waterfallValue.bc_sales_contri}%
+                                            {this.props.DelistContainer.waterfallValue.sales_tot_transfer}%
                                 </span>
 
                                         </div>
@@ -606,16 +606,16 @@ export class DelistContainer extends React.PureComponent { // eslint-disable-lin
 
                                           <span
                                             className={(() => {
-                                              if (this.props.DelistContainer.waterfallValue.bc_vols_contri > 0) {
+                                              if (this.props.DelistContainer.waterfallValue.vol_tot_transfer > 0) {
                                                 return "glyphicon glyphicon-chevron-up waterfallCalloutsPositive"
                                               }
-                                              else if (this.props.DelistContainer.waterfallValue.bc_vols_contri < 0) {
+                                              else if (this.props.DelistContainer.waterfallValue.vol_tot_transfer < 0) {
                                                 return "glyphicon glyphicon-chevron-down waterfallCalloutsNegative"
                                               } else {
                                                 return "glyphicon glyphicon-minus-sign waterfallCalloutsNeutral"
                                               }
                                             })()}>&nbsp;
-                                            {this.props.DelistContainer.waterfallValue.bc_vols_contri} %
+                                            {this.props.DelistContainer.waterfallValue.vol_tot_transfer} %
                               </span>
                                         </div>
                                       </Panel>
@@ -754,16 +754,16 @@ export class DelistContainer extends React.PureComponent { // eslint-disable-lin
                                         </div>
                                         <span
                                           className={(() => {
-                                            if (this.props.DelistContainer.waterfallValue.bc_cgm_contri > 0) {
+                                            if (this.props.DelistContainer.waterfallValue.cgm_tot_transfer > 0) {
                                               return "glyphicon glyphicon-chevron-up waterfallCalloutsPositive"
                                             }
-                                            else if (this.props.DelistContainer.waterfallValue.bc_cgm_contri < 0) {
+                                            else if (this.props.DelistContainer.waterfallValue.cgm_tot_transfer < 0) {
                                               return "glyphicon glyphicon-chevron-down waterfallCalloutsNegative"
                                             } else {
                                               return "glyphicon glyphicon-minus-sign waterfallCalloutsNeutral"
                                             }
                                           })()}>&nbsp;
-                                          {this.props.DelistContainer.waterfallValue.bc_cgm_contri}%
+                                          {this.props.DelistContainer.waterfallValue.cgm_tot_transfer}%
                             </span>
                                       </Panel>
                                     </div>
@@ -857,16 +857,16 @@ export class DelistContainer extends React.PureComponent { // eslint-disable-lin
                                         </div>
                                         <span
                                           className={(() => {
-                                            if (this.props.DelistContainer.waterfallValue.bc_cgm_contri > 0) {
+                                            if (this.props.DelistContainer.waterfallValue.cts_tot_transfer > 0) {
                                               return "glyphicon glyphicon-chevron-up waterfallCalloutsPositive"
                                             }
-                                            else if (this.props.DelistContainer.waterfallValue.bc_cgm_contri < 0) {
+                                            else if (this.props.DelistContainer.waterfallValue.cts_tot_transfer < 0) {
                                               return "glyphicon glyphicon-chevron-down waterfallCalloutsNegative"
                                             } else {
                                               return "glyphicon glyphicon-minus-sign waterfallCalloutsNeutral"
                                             }
                                           })()}>&nbsp;
-                                          {this.props.DelistContainer.waterfallValue.bc_cgm_contri}%
+                                          {this.props.DelistContainer.waterfallValue.cts_tot_transfer}%
                               </span>
 
                                       </Panel>
