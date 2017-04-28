@@ -194,7 +194,8 @@ class SelectorNegotiation2 extends React.PureComponent { // eslint-disable-line 
 
                 }}>Apply Filters</Button>
 
-              <Button style={{marginTop:"4px", marginLeft:"40px"}}
+              <Button style={{marginTop:"4px", marginLeft:"40px"}} buttonType={'secondary'}
+
                 onClick={() => {
                   this.props.onGenerateUrlParamsString('');
                   this.props.onGenerateUrlParamsData();
