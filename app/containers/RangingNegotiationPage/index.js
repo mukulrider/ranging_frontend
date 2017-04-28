@@ -94,7 +94,7 @@ export class RangingNegotiationPage extends React.PureComponent { // eslint-disa
     console.log('inputupdate');
     this.props.onGenerateCheckedList(checked, base_product_number)
   };
-
+  //after commiting
   render() {
     // console.log("------- table data ------- ",this.props.RangingNegotiationPage.data);
     //For url parameters
