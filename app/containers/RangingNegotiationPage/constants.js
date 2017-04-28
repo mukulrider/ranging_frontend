@@ -23,6 +23,7 @@ export const SAVE_SIDE_FILTER_PARAM= 'app/RangingNpdPage/SAVE_SIDE_FILTER_PARAM'
 export const SAVE_PAGE_PARAM = 'app/RangingNpdPage/SAVE_PAGE_PARAM';
 export const GENERATE_TEXTBOX_QUERY_STRING = 'app/RangingNpdPage/GENERATE_TEXTBOX_QUERY_STRING';
 export const RESET_CLICKED = 'app/RangingNpdPage/RESET_CLICKED';
+export const RADIO_CHECK_PARAM = 'app/RangingNpdPage/RADIO_CHECK_PARAM';
 
 
 // FOR FILTERS

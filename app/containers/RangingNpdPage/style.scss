@@ -54,6 +54,21 @@
 }
 
 
+.infoButton{
+  line-height: 28px;
+  font-size: 17px;
+  height: 28px;
+  color:#00539f;
+  right:10px;
+  top:12px;
+
+}
+
+.infoModalText{
+  font-size: 15px;
+}
+
+
 .selectAttrituteIndicator{
   font:Tesco;
   font-size: 30px;
@@ -61,6 +76,7 @@
   text-align: center;
   height: 1000px;
   width: 100%;
+  opacity: 1;
   background-color: lightgray;
   color: #00539f;
   margin-top: 24px;

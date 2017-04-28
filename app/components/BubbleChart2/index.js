@@ -12,25 +12,17 @@ import {browserHistory} from 'react-router';
 
 class BubbleChart2 extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
   createChart = (data2, forTable, forOpacity, bubbleFunc, bubbleFunc2, makeTable) => {
-    // console.log('create chart called');
     let dataBubbleUrlParams = '';
     let prodArr = [];
     let deselectArr = [];
     let deselectBub = [];
 
 
-    console.log("in d3", forTable);
-
     forTable = JSON.parse(forTable);
-    // console.log("in d3", forTable);
 
     forOpacity = JSON.parse(forOpacity);
-    console.log("in d3 forOpacity", forOpacity);
-    // console.log("in d3 forOpacity.length", forOpacity.length);
-
 
     //Chart configurations
-    //Removing '' from the array
     let margin = {top: 20, right: 20, bottom: 40, left: 30};
     let width = 750 - margin.left - margin.right,
       height = 600 - margin.top - margin.bottom;
@@ -42,8 +34,8 @@ class BubbleChart2 extends React.PureComponent { // eslint-disable-line react/pr
 
     svg.selectAll("*").remove();
     //Adjusting position of the svg area
-    let chart = svg.append("g").attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
+    let chart = svg.append("g").attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
     let xScale = d3.scaleLinear().domain([0, 100]).range([0, width]);
 
@@ -95,40 +87,38 @@ class BubbleChart2 extends React.PureComponent { // eslint-disable-line react/pr
         let deselectBubFlag = 0;
 
         // Will be used to just store the product number to decide the opacity
-        for (let i = 0; i < forOpacity.length; i++) {
+          for (let i = 0; i < forOpacity.length; i++) {
           if (forOpacity[i] !== dataBubbleUrlParams2) {
-            console.log("comparing-=-=-=-=",forOpacity[i],dataBubbleUrlParams2)
+            console.log("comparing-=-=-=-=", forOpacity[i], dataBubbleUrlParams2)
             deselectBub.push(forOpacity[i]);
           }
-          else{
-            console.log("DESELECTION OF BUBBLE")
-            deselectBubFlag=1;
+          else {
+              console.log("DESELECTION OF BUBBLE")
+            deselectBubFlag = 1;
           }
         }
 
-        if(deselectBubFlag===0){
-          console.log("NOT DESELECTION OF BUBBLE"+deselectBubFlag)
+        if (deselectBubFlag === 0) {
+          console.log("NOT DESELECTION OF BUBBLE" + deselectBubFlag)
           deselectBub.push(dataBubbleUrlParams2);
         }
-
+        console.log("selecting for the first time",deselectBub);
         let dejsonBub = JSON.stringify(deselectBub);
         bubbleFunc2(dejsonBub);
-        console.log("--------------------------------------");
 
         //For updating table below
-
         let dataBubbleUrlParams = "base_product_number=" + d.base_product_number;
-        let deselect=0;
+        let deselect = 0;
 
         for (let i = 0; i < forTable.length; i++) {
-            if (forTable[i] !== dataBubbleUrlParams) {
-              deselectArr.push(forTable[i]);
-            }else{
-              deselect=1;
+          if (forTable[i] !== dataBubbleUrlParams) {
+            deselectArr.push(forTable[i]);
+          } else {
+            deselect = 1;
           }
-          }
+        }
 
-        if(deselect==0){
+        if (deselect == 0) {
           deselectArr.push(dataBubbleUrlParams);
         }
 
@@ -136,46 +126,6 @@ class BubbleChart2 extends React.PureComponent { // eslint-disable-line react/pr
         bubbleFunc(dejsonTable);
         makeTable();
         console.log("============================")
-
-        // --------------------------------------------------------------------------------------------
-        // let dataBubbleUrlParams = "base_product_number=" + d.base_product_number;
-        // forTable.push(dataBubbleUrlParams);
-        //
-        //   for (let i = 0; i < forTable.length; i++) {
-        //
-        //     if (forTable[i] !== dataBubbleUrlParams) {
-        //       deselectArr.push(forTable[i]);
-        //     }
-        //     let dejsonTable = JSON.stringify(deselectArr);
-        //     bubbleFunc(dejsonTable);
-        //     makeTable();
-        //
-        //   }
-        //
-        // console.log("whats there in dselect array", deselectArr);
-        //
-        //   //Will be used to call sagas and update table
-        //   let dejsonTable = JSON.stringify(forTable);
-        //   bubbleFunc(dejsonTable);
-        //   makeTable();
-        //   // let jsonTable = JSON.stringify(forTable);
-        //   // bubbleFunc(jsonTable);
-
-        // makeTable();
-
-
-
-
-          // forOpacity.push(dataBubbleUrlParams2);
-          // let jsonOpacity = JSON.stringify(forOpacity);
-        //   //Saving both the states
-        //   bubbleFunc2(jsonOpacity);
-        //   //Logic for deselecting the product
-        //   console.log("printing if selected again", dataBubbleUrlParams);
-
-
-
-
 
       })
 
@@ -185,9 +135,8 @@ class BubbleChart2 extends React.PureComponent { // eslint-disable-line react/pr
       .attr("r", function (d) {
         return (rScale(d.rate_of_sale));
       })
-      .style("opacity", 0.4)
+
       .style("fill", function (d) {
-        // console.log("in_color_function", colorArray[0]);
         if (d.brand_ind == "Brand") {
           return colorArray[1];
         }
@@ -196,20 +145,19 @@ class BubbleChart2 extends React.PureComponent { // eslint-disable-line react/pr
         }
       })
       .style("opacity", function (d) {
-
         let selected = 0;
         if (forOpacity.length > 0) {
           for (let i = 0; i < forOpacity.length; i++) {
-            if (d.base_product_number == forOpacity[i]) {
+            if (d.base_product_number === forOpacity[i]) {
               return opacity[0];
             }
             else {
               selected = 0;
-              // return opacity[1];
+
             }
           }
 
-          if (selected == 0) {
+          if (selected === 0) {
             return (opacity[1]);
           }
         }
@@ -235,6 +183,7 @@ class BubbleChart2 extends React.PureComponent { // eslint-disable-line react/pr
       .style("font-size", "10px")
       .text("Profit per store percentile (CGM)");
 
+    //This is for getting legends
     let series_type_values = ["OL", "Brand"];
 
     let legend = chart.append("g")
@@ -283,15 +232,7 @@ class BubbleChart2 extends React.PureComponent { // eslint-disable-line react/pr
     return (
       <div>
         <svg id="svgg" width="900" height="600" fontFamily="sans-serif" fontSize="10"
-             textAnchor="middle"></svg>
-        {/*<Button onClick={() => {*/}
-        {/*let jsonTable = JSON.stringify(selectedBubbleTable);*/}
-        {/*let jsonOpacity = JSON.stringify(selectedBubbleOpacity);*/}
-        {/*this.props.onSaveBubbleParam(jsonTable);*/}
-        {/*this.props.onSaveBubbleParam2(jsonOpacity);*/}
-        {/*this.props.onFetchGraph();*/}
-        {/*this.props.onGenerateTable();*/}
-        {/*}}>Update chart</Button>*/}
+             textAnchor="middle"> </svg>
       </div>
     );
   }
