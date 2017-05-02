@@ -50,7 +50,7 @@ export function* defaultSaga() {
   // See example in containers/HomePage/sagas.js
 }
 
-let host_url = "http://172.20.244.238:8000"
+let host_url = "http://dvcmpapp00002uk.dev.global.tesco.org"
 // let host_url = "http://172.20.246.196:8000"
 
 // All sagas to be loaded
@@ -424,7 +424,7 @@ let filterParamsString = "";
   try {
     const data = yield call(request,host_url +
 
-      // `http://172.20.244.238:8000/api/product_impact_chart${urlParams}`);
+      // `http://dvcmpapp00002uk.dev.global.tesco.org/api/product_impact_chart${urlParams}`);
       `/api/product_impact_chart${urlParams}`);
 
     let spinnerCheck = 1;
