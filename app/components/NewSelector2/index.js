@@ -9,7 +9,7 @@ import {browserHistory} from 'react-router';
 import Checkbox from 'components/checkbox';
 import RadioButton from 'components/radio_button';
 // import Panel from 'components/panel';
-import {Accordion, PanelGroup, Panel} from 'react-bootstrap';
+import {Accordion, PanelGroup, Panel, Modal} from 'react-bootstrap';
 import Button from 'components/button';
 // import styled from 'styled-components';
 import styles from './style.scss';
@@ -57,6 +57,12 @@ class NewSelector2 extends React.PureComponent { // eslint-disable-line react/pr
     // this.props.onGenerateTable();
   };
 
+  constructor(props) {
+    super(props);
+    this.state = {alertShow: false,alertmsg:"Please Select the Mandatory Filter - 'Buying Controller' & 'Long Description'."};
+
+  }
+
   clearFilter = () => {
     this.props.onGenerateFilterParamsString('');
     this.props.onGenerateUrlParamsString('');
@@ -70,13 +76,7 @@ class NewSelector2 extends React.PureComponent { // eslint-disable-line react/pr
         {(() => {
           return (
             <div id="style-7" style={{
-              height: '90%',
-              width: '21%',
-              position: 'fixed',
-              /* padding-right: 5px; */
-              overflowX: 'hidden',
-              overflowY: 'scroll',
-              borderTop: '1px solid #ccc',
+
             }}>
               {/*<div id="style-7" style={{*/}
               {/*height: '52%',*/}
@@ -191,19 +191,53 @@ class NewSelector2 extends React.PureComponent { // eslint-disable-line react/pr
                   )
                 })}
               </PanelGroup>
+
+              <Modal show={this.state.alertShow} bsSize="large" aria-labelledby="contained-modal-title-sm">
+                <Modal.Header>
+                <Modal.Title id="contained-modal-title-sm"
+                             style={{textAlign: 'center', fontSize: '18px'}}><span
+                  style={{textAlign: 'center', fontSize: '14px'}}><b>Mandatory Filter Selection Missing</b><span
+                  style={{textAlign: 'right', float: 'right'}}
+                  onClick={() => this.setState({alertShow: false})}><b>X</b></span></span>
+                  <div style={{textAlign: 'center'}}>
+                    <div style={{textAlign: 'right'}}>
+                    </div>
+                  </div>
+                </Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+
+                  <div className="row">
+                    <div className="col-xs-12 alertMadatoryFilter" style={{fontSize: '14px',  textAlign: 'center'}}>
+                      {this.state.alertmsg}
+                    </div>
+                  </div>
+
+
+                </Modal.Body>
+                {/*<Modal.Footer>*/}
+                  {/*<Button*/}
+                    {/*onClick={() => {*/}
+                      {/*this.setState({alertShow: false})*/}
+                    {/*}}*/}
+                    {/*style={{display: 'block', margin: '0 auto'}}>Close</Button>*/}
+                {/*</Modal.Footer>*/}
+              </Modal>
+
               <div className="text-center">
                 <Button onClick={() => {
                   let filterData = this.props.filterUrlParamString;
-                  if (filterData.includes("buying_controller") && filterData.includes("long_description")) {
+                  console.log('filterData',filterData);
+                  if(!(typeof(filterData) == "undefined")){
+                  if (filterData.includes("buying_controller") && filterData.includes("long_description") ) {
                     this.props.onwaterfallSpinner(0);
                     this.props.onwaterfallProfitSpinner(0);
                     this.props.onSupplierImpactTableSpinner(0);
                     this.props.onDelistProductTableSpinner(0);
                     this.props.onDelistDefaultView(1);
                     this.props.onWaterfall();
-                  } else {
-                    alert("else");
-                    alert("Please Select the Mandatory Filter - 'Buying Controller' & 'Long Description'.")
+                  } }else {
+                    this.setState({alertShow: true});
                   }
                 }}>Apply</Button></div>
               {/*<Button onClick={() => {*/}

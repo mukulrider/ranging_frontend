@@ -76,15 +76,7 @@ class SelectorNegotiation2 extends React.PureComponent { // eslint-disable-line 
       <div ref={'selector'}>
         {(() => {
           return (
-            <div id="style-7" style={{
-              height: '90%',
-              width: '18%',
-              position: 'fixed',
-              overflow: 'scroll',
-              paddingRight: '5px',
-              overflowX: 'hidden',
-              borderTop: '1px solid #ccc',
-            }}>
+            <div id="style-7" >
 
               <PanelGroup defaultActiveKey="1" accordion>
                 {console.log('this.props.sideFilter.checkbox_list',this.props.sideFilter.checkbox_list)}
@@ -187,14 +179,15 @@ class SelectorNegotiation2 extends React.PureComponent { // eslint-disable-line 
 
               </PanelGroup>
 
-              <Button style={{marginLeft:"40px"}}
+              <Button style={{marginLeft:"0 auto"}}
                 onClick={() => {
 
                   this.applyButtonFunctionality();
 
                 }}>Apply Filters</Button>
 
-              <Button style={{marginTop:"4px", marginLeft:"40px"}}
+              <Button style={{marginTop:"4px", marginLeft:"0 auto"}} buttonType={'secondary'}
+
                 onClick={() => {
                   this.props.onGenerateUrlParamsString('');
                   this.props.onGenerateUrlParamsData();

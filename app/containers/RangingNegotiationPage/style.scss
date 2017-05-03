@@ -197,21 +197,31 @@ float:right;
 
 
 
-.FlexContainer.Row {
-  -ms-flex-direction: row;
-  -webkit-box-orient: horizontal;
-  -webkit-box-direction: normal;
-  flex-direction: row;
-}
-
-.FlexContainer.Column {
-  -ms-flex-direction: column;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-  flex-direction: column;
-}
-.container-left{
+.FlexContainer {
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
   display: flex;
+
+  -webkit-flex-flow: row wrap;
+  flex-flow: row wrap;
+}
+.flexleft{
+  width:10%
+}
+.flexright {
+  width: 90%;
+}
+.btn{
+  border-radius: 15px;
+}
+@media screen and (max-width: 1024px){
+  .ui-component__button,
+  .ui-component__button--secondary{
+    margin-left: 0px !important;
+    min-width: 150px !important;
+  }
 }
 
 ////For radio button

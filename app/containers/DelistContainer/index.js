@@ -177,9 +177,20 @@ export class DelistContainer extends React.PureComponent { // eslint-disable-lin
         <div className="pageTitle">DELIST IMPACT</div>
 
 
-        <div className="flextcontent">
+        <div className="row" style={{
+          marginLeft: '0px',
+          marginRight: '0px'
+        }}>
 
-          <div className="flexleft" style={{flexBasis: '300px', marginTop: "24px"}}>
+          <div style={{
+            height: '100%',
+            position: 'fixed',
+            width: '20%',
+            /* padding-right: 5px; */
+            overflowX: 'hidden',
+            overflowY: 'scroll',
+            borderTop: '1px solid #ccc'
+          }}>
 
             {/*<Panel>*/}
             {/*<SelectorDelist sideFilter={this.props.DelistContainer.sideFilter}*/}
@@ -225,95 +236,97 @@ export class DelistContainer extends React.PureComponent { // eslint-disable-lin
           {(() => {
             if ((!(this.props.location.search == "")) || (this.props.DelistContainer.delistDefaultView == 1)) {
               return (
-                <div className="flexright" style={{marginLeft: "3%"}}>
-
-                  <Nav bsStyle="tabs" activeKey={this.state.activeKey} onSelect={this.handleSelect}
-                       className="tabsCustom">
-                    <NavItem className="tabsCustomList" eventKey="1" onClick={() => {
-                      this.setState({activeKey: "1"});
-                      let week_no = "time_period=13_weeks";
-                      this.props.onwaterfallSpinner();
-                      this.props.onwaterfallProfitSpinner();
-                      this.props.onSupplierImpactTableSpinner();
-                      this.props.onDelistProductTableSpinner();
-                      this.props.onWeekClick(week_no);
-                      this.props.onWaterfallValueChart();
-                      {/*setTimeout(() => {*/
-                      }
-                      {/*// alert("time");*/
-                      }
-                      {/*this.props.onApiFetch();*/
-                      }
-                      {/*console.log("5onApiFetch");*/
-                      }
-                      {/*this.props.ondelistTable();*/
-                      }
-                      {/*}, 20000);*/
-                      }
-
-
-                      {/*this.props.onApiFetch();*/
-                      }
-                      {/*this.props.ondelistTable();*/
-                      }
-                      this.props.onWeekTabClick("Week: 13 weeks ")
-                    }}><span className="tab_label">13 Weeks</span></NavItem>
-                    <NavItem className="tabsCustomList" eventKey="2" onClick={() => {
-                      this.setState({activeKey: "2"});
-                      let week_no = "time_period=26_weeks";
-                      this.props.onwaterfallSpinner();
-                      this.props.onwaterfallProfitSpinner();
-                      this.props.onSupplierImpactTableSpinner();
-                      this.props.onDelistProductTableSpinner();
-                      this.props.onWeekClick(week_no);
-                      this.props.onWaterfallValueChart();
-
-                      {/*setTimeout(() => {*/
-                      }
-                      {/*this.props.onApiFetch();*/
-                      }
-                      {/*this.props.ondelistTable();*/
-                      }
-                      {/*}, 20000);*/
-                      }
-
-                      {/*this.props.onApiFetch();*/
-                      }
-                      {/*this.props.ondelistTable();*/
-                      }
-                      this.props.onWeekTabClick("Week: 26 weeks ")
-                    }}><span className="tab_label">26 Weeks</span></NavItem>
-                    <NavItem className="tabsCustomList" eventKey="3" onClick={() => {
-                      this.setState({activeKey: "3"});
-                      let week_no = "time_period=52_weeks";
-                      this.props.onwaterfallSpinner();
-                      this.props.onwaterfallProfitSpinner();
-                      this.props.onSupplierImpactTableSpinner();
-                      this.props.onDelistProductTableSpinner();
-                      this.props.onWeekClick(week_no);
-                      this.props.onWaterfallValueChart();
-
-                      {/*setTimeout(() => {*/
-                      }
-                      {/*this.props.onApiFetch();*/
-                      }
-                      {/*this.props.ondelistTable();*/
-                      }
-                      {/*}, 20000);*/
-                      }
-
-                      {/*this.props.onApiFetch();*/
-                      }
-                      {/*this.props.ondelistTable();*/
-                      }
-                      this.props.onWeekTabClick("Week: 52 weeks ")
-                    }}><span className="tab_label">52 weeks</span></NavItem>
-                  </Nav>
-
+                <div style={{
+                  width: '78%',
+                  marginLeft: '22%'
+                }}>
                   <div className="row" style={{marginLeft: "0.5%", paddingTop: "-5px"}}>
                     <div className="col-md-12 content-wrap">
 
+                      <Nav bsStyle="tabs" activeKey={this.state.activeKey} onSelect={this.handleSelect}
+                           className="tabsCustom">
+                        <NavItem className="tabsCustomList" eventKey="1" onClick={() => {
+                          this.setState({activeKey: "1"});
+                          let week_no = "time_period=13_weeks";
+                          this.props.onwaterfallSpinner();
+                          this.props.onwaterfallProfitSpinner();
+                          this.props.onSupplierImpactTableSpinner();
+                          this.props.onDelistProductTableSpinner();
+                          this.props.onWeekClick(week_no);
+                          this.props.onWaterfallValueChart();
+                          {/*setTimeout(() => {*/
+                          }
+                          {/*// alert("time");*/
+                          }
+                          {/*this.props.onApiFetch();*/
+                          }
+                          {/*console.log("5onApiFetch");*/
+                          }
+                          {/*this.props.ondelistTable();*/
+                          }
+                          {/*}, 20000);*/
+                          }
 
+
+                          {/*this.props.onApiFetch();*/
+                          }
+                          {/*this.props.ondelistTable();*/
+                          }
+                          this.props.onWeekTabClick("Week: 13 weeks ")
+                        }}><span className="tab_label">13 Weeks</span></NavItem>
+                        <NavItem className="tabsCustomList" eventKey="2" onClick={() => {
+                          this.setState({activeKey: "2"});
+                          let week_no = "time_period=26_weeks";
+                          this.props.onwaterfallSpinner();
+                          this.props.onwaterfallProfitSpinner();
+                          this.props.onSupplierImpactTableSpinner();
+                          this.props.onDelistProductTableSpinner();
+                          this.props.onWeekClick(week_no);
+                          this.props.onWaterfallValueChart();
+
+                          {/*setTimeout(() => {*/
+                          }
+                          {/*this.props.onApiFetch();*/
+                          }
+                          {/*this.props.ondelistTable();*/
+                          }
+                          {/*}, 20000);*/
+                          }
+
+                          {/*this.props.onApiFetch();*/
+                          }
+                          {/*this.props.ondelistTable();*/
+                          }
+                          this.props.onWeekTabClick("Week: 26 weeks ")
+                        }}><span className="tab_label">26 Weeks</span></NavItem>
+                        <NavItem className="tabsCustomList" eventKey="3" onClick={() => {
+                          this.setState({activeKey: "3"});
+                          let week_no = "time_period=52_weeks";
+                          this.props.onwaterfallSpinner();
+                          this.props.onwaterfallProfitSpinner();
+                          this.props.onSupplierImpactTableSpinner();
+                          this.props.onDelistProductTableSpinner();
+                          this.props.onWeekClick(week_no);
+                          this.props.onWaterfallValueChart();
+
+                          {/*setTimeout(() => {*/
+                          }
+                          {/*this.props.onApiFetch();*/
+                          }
+                          {/*this.props.ondelistTable();*/
+                          }
+                          {/*}, 20000);*/
+                          }
+
+                          {/*this.props.onApiFetch();*/
+                          }
+                          {/*this.props.ondelistTable();*/
+                          }
+                          this.props.onWeekTabClick("Week: 52 weeks ")
+                        }}><span className="tab_label">52 weeks</span></NavItem>
+                      </Nav>
+
+                      <div style={{height: '0px', width: '100%'}}>&nbsp;</div>
                       <Nav bsStyle="tabs" className="tabsCustom tabsCustomInner" activeKey={this.state.activeKey2}
                            onSelect={this.handleSelect}>
                         <NavItem className="tabsCustomList" eventKey="4" onClick={() => {
@@ -466,10 +479,6 @@ export class DelistContainer extends React.PureComponent { // eslint-disable-lin
                                           <span
                                             className={(() => {
                                               if (this.props.DelistContainer.waterfallValue.bc_sales_contri > 0) {
-                                                {/*alert(this.props.DelistContainer.waterfallValue.bc_sales_contri)*/
-                                                }
-                                                {/*alert(this.props.DelistContainer.waterfallValue.bc_sales_contri)*/
-                                                }
                                                 return "glyphicon glyphicon-chevron-up waterfallCalloutsPositive"
                                               }
                                               else if (this.props.DelistContainer.waterfallValue.bc_sales_contri < 0) {
@@ -494,20 +503,20 @@ export class DelistContainer extends React.PureComponent { // eslint-disable-lin
 
                                           <span
                                             className={(() => {
-                                              if (this.props.DelistContainer.waterfallValue.bc_sales_contri > 0) {
+                                              if (this.props.DelistContainer.waterfallValue.sales_tot_transfer > 0) {
                                                 {/*alert(this.props.DelistContainer.waterfallValue.bc_sales_contri)*/
                                                 }
                                                 {/*alert(this.props.DelistContainer.waterfallValue.bc_sales_contri)*/
                                                 }
                                                 return "glyphicon glyphicon-chevron-up waterfallCalloutsPositive"
                                               }
-                                              else if (this.props.DelistContainer.waterfallValue.bc_sales_contri < 0) {
+                                              else if (this.props.DelistContainer.waterfallValue.sales_tot_transfer < 0) {
                                                 return "glyphicon glyphicon-chevron-down waterfallCalloutsNegative"
                                               } else {
                                                 return "glyphicon glyphicon-minus-sign waterfallCalloutsNeutral"
                                               }
                                             })()}>&nbsp;
-                                            {this.props.DelistContainer.waterfallValue.bc_sales_contri}%
+                                            {this.props.DelistContainer.waterfallValue.sales_tot_transfer}%
                                 </span>
 
                                         </div>
@@ -606,16 +615,16 @@ export class DelistContainer extends React.PureComponent { // eslint-disable-lin
 
                                           <span
                                             className={(() => {
-                                              if (this.props.DelistContainer.waterfallValue.bc_vols_contri > 0) {
+                                              if (this.props.DelistContainer.waterfallValue.vol_tot_transfer > 0) {
                                                 return "glyphicon glyphicon-chevron-up waterfallCalloutsPositive"
                                               }
-                                              else if (this.props.DelistContainer.waterfallValue.bc_vols_contri < 0) {
+                                              else if (this.props.DelistContainer.waterfallValue.vol_tot_transfer < 0) {
                                                 return "glyphicon glyphicon-chevron-down waterfallCalloutsNegative"
                                               } else {
                                                 return "glyphicon glyphicon-minus-sign waterfallCalloutsNeutral"
                                               }
                                             })()}>&nbsp;
-                                            {this.props.DelistContainer.waterfallValue.bc_vols_contri} %
+                                            {this.props.DelistContainer.waterfallValue.vol_tot_transfer} %
                               </span>
                                         </div>
                                       </Panel>
@@ -754,16 +763,16 @@ export class DelistContainer extends React.PureComponent { // eslint-disable-lin
                                         </div>
                                         <span
                                           className={(() => {
-                                            if (this.props.DelistContainer.waterfallValue.bc_cgm_contri > 0) {
+                                            if (this.props.DelistContainer.waterfallValue.cgm_tot_transfer > 0) {
                                               return "glyphicon glyphicon-chevron-up waterfallCalloutsPositive"
                                             }
-                                            else if (this.props.DelistContainer.waterfallValue.bc_cgm_contri < 0) {
+                                            else if (this.props.DelistContainer.waterfallValue.cgm_tot_transfer < 0) {
                                               return "glyphicon glyphicon-chevron-down waterfallCalloutsNegative"
                                             } else {
                                               return "glyphicon glyphicon-minus-sign waterfallCalloutsNeutral"
                                             }
                                           })()}>&nbsp;
-                                          {this.props.DelistContainer.waterfallValue.bc_cgm_contri}%
+                                          {this.props.DelistContainer.waterfallValue.cgm_tot_transfer}%
                             </span>
                                       </Panel>
                                     </div>
@@ -857,16 +866,16 @@ export class DelistContainer extends React.PureComponent { // eslint-disable-lin
                                         </div>
                                         <span
                                           className={(() => {
-                                            if (this.props.DelistContainer.waterfallValue.bc_cgm_contri > 0) {
+                                            if (this.props.DelistContainer.waterfallValue.cts_tot_transfer > 0) {
                                               return "glyphicon glyphicon-chevron-up waterfallCalloutsPositive"
                                             }
-                                            else if (this.props.DelistContainer.waterfallValue.bc_cgm_contri < 0) {
+                                            else if (this.props.DelistContainer.waterfallValue.cts_tot_transfer < 0) {
                                               return "glyphicon glyphicon-chevron-down waterfallCalloutsNegative"
                                             } else {
                                               return "glyphicon glyphicon-minus-sign waterfallCalloutsNeutral"
                                             }
                                           })()}>&nbsp;
-                                          {this.props.DelistContainer.waterfallValue.bc_cgm_contri}%
+                                          {this.props.DelistContainer.waterfallValue.cts_tot_transfer}%
                               </span>
 
                                       </Panel>
@@ -1236,7 +1245,7 @@ export class DelistContainer extends React.PureComponent { // eslint-disable-lin
                                       <td>{formatSales(obj.predicted_value)}</td>
                                       <td>{formatVolume(obj.predicted_volume)}</td>
                                       <td>{formatSales(obj.predicted_cgm)}</td>
-                                      <td><Button style={{minWidth: '10px', height: '50px'}} onClick={() => {
+                                      <td><Button className="btn btn-primary" onClick={() => {
 
                                         this.props.onSubstitutesClick(obj.productcode);
                                         this.props.onSubstitutesClickSendLongDesc(obj.long_description);
@@ -1401,6 +1410,7 @@ export class DelistContainer extends React.PureComponent { // eslint-disable-lin
                       </Modal>
                     </div>
                   </div>
+
                 </div>
               )
             }
