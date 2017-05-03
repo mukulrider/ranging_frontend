@@ -1416,9 +1416,12 @@ export class DelistContainer extends React.PureComponent { // eslint-disable-lin
             }
             else {
               return (
-                <div className="selectAttrituteIndicator">
+                <div className="selectAttrituteIndicator" style={{
+                  width: '78%',
+                  marginLeft: '22%'
+                }}>
                   <div>
-                    <div style={{marginTop: '25%'}}> ----- Please select the filters to get started ------</div>
+                    <div style={{lineHeight: '20'}}> ----- Please select the filters to get started ------</div>
                   </div>
                 </div>
 
