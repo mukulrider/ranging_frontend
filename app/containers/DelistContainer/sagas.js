@@ -50,7 +50,8 @@ export function* defaultSaga() {
   // See example in containers/HomePage/sagas.js
 }
 
-let host_url = "http://172.20.246.203:8000"
+let host_url = "http://172.20.244.236:8000"
+// let host_url = "http://172.20.246.203:8000"
 // let host_url = "http://172.20.246.196:8000"
 
 // All sagas to be loaded
@@ -480,6 +481,8 @@ export function* generateSideFilter() {
   try {
     // todo: update url
 
+    // const data = yield call(request, host_url + `/api/product_impact/filter_data/?`+'long_description=3 BIRD RST WITH C/BERRY, DATE and ORNG S/FING - 79631889');
+    // const data = yield call(request, host_url + `/api/product_impact/filter_data/?`+'long_description=73589188');
     const data = yield call(request, host_url + `/api/product_impact/filter_data/?${urlParamsString}`);
     // const data = yield call(request, `http://172.20.247.16:8000/api/product_impact/filter_data/?${urlParamsString}`);
 

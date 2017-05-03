@@ -145,9 +145,14 @@ export class RangingNegotiationPage extends React.PureComponent { // eslint-disa
 
     return (
       <div>
-        <div className="pageTitle">Negotiation Opportunity</div>
-        <div className="flextcontent">
-          <div className="flexleft" style={{flexBasis: '300px', marginTop: '24px'}}>
+        <div className="pageTitle" style={{width:'78%',float:'right'}}>Negotiation Opportunity</div>
+        <div className="">
+          <div style={{height: '100%',
+            position: 'fixed',
+            width:'20%',
+            /* padding-right: 5px; */
+            overflowX: 'hidden',
+            overflowY: 'scroll'}}>
             {/*<Panel>*/}
 
             {(() => {
@@ -175,45 +180,49 @@ export class RangingNegotiationPage extends React.PureComponent { // eslint-disa
 
           {/*</div>*/}
 
-          <div className="flexright" style={{marginLeft: "3%", marginTop: '-3px'}}>
+          <div  style={{width:'78%',
+            marginLeft:'22%'}}>
 
 
-            <Nav bsStyle="tabs" activeKey={this.state.activeKey} onSelect={this.handleSelect} className="tabsCustom">
-              <NavItem className="tabsCustomList" eventKey="1" onClick={() => {
-                this.setState({activeKey: "1"});
-                {/*let text = "WEEK : Last 13 weeks";*/
-                }
-                {/*this.updateText(text);*/
-                }
-                dataWeekUrlParams = "time_period=Last 13 weeks"
-                this.props.onSaveWeekParam(dataWeekUrlParams);
-                this.props.onFetchGraph();
-                this.props.onGenerateTable();
-              }}><span className="tab_label">Last 13 Weeks</span></NavItem>
-
-
-              <NavItem className="tabsCustomList" eventKey="2" onClick={() => {
-                this.setState({activeKey: "2"});
-
-                dataWeekUrlParams = "time_period=Last 26 weeks"
-                this.props.onSaveWeekParam(dataWeekUrlParams);
-                this.props.onFetchGraph();
-                this.props.onGenerateTable();
-              }}><span className="tab_label">Last 26 Weeks</span></NavItem>
-
-
-              <NavItem className="tabsCustomList" eventKey="3" onClick={() => {
-                this.setState({activeKey: "3"});
-                dataWeekUrlParams = "time_period=Last 52 weeks"
-                this.props.onSaveWeekParam(dataWeekUrlParams);
-                this.props.onFetchGraph();
-                this.props.onGenerateTable();
-              }}><span className="tab_label">Last 52 Weeks</span></NavItem>
-
-
-            </Nav>
             <div className="row">
               <div className="col-md-12 content-wrap">
+
+                <Nav bsStyle="tabs" activeKey={this.state.activeKey} onSelect={this.handleSelect} className="tabsCustom">
+                  <NavItem className="tabsCustomList" eventKey="1" onClick={() => {
+                    this.setState({activeKey: "1"});
+                    {/*let text = "WEEK : Last 13 weeks";*/
+                    }
+                    {/*this.updateText(text);*/
+                    }
+                    dataWeekUrlParams = "time_period=Last 13 weeks"
+                    this.props.onSaveWeekParam(dataWeekUrlParams);
+                    this.props.onFetchGraph();
+                    this.props.onGenerateTable();
+                  }}><span className="tab_label">Last 13 Weeks</span></NavItem>
+
+
+                  <NavItem className="tabsCustomList" eventKey="2" onClick={() => {
+                    this.setState({activeKey: "2"});
+
+                    dataWeekUrlParams = "time_period=Last 26 weeks"
+                    this.props.onSaveWeekParam(dataWeekUrlParams);
+                    this.props.onFetchGraph();
+                    this.props.onGenerateTable();
+                  }}><span className="tab_label">Last 26 Weeks</span></NavItem>
+
+
+                  <NavItem className="tabsCustomList" eventKey="3" onClick={() => {
+                    this.setState({activeKey: "3"});
+                    dataWeekUrlParams = "time_period=Last 52 weeks"
+                    this.props.onSaveWeekParam(dataWeekUrlParams);
+                    this.props.onFetchGraph();
+                    this.props.onGenerateTable();
+                  }}><span className="tab_label">Last 52 Weeks</span></NavItem>
+
+
+                </Nav>
+
+                <div style={{height:'0px',width:'100%'}}>&nbsp;</div>
                 <Nav bsStyle="tabs" className="tabsCustom" activeKey={this.state.activeKey2}
                      onSelect={this.handleSelect}>
                   <NavItem className="tabsCustomList" eventKey="4" onClick={() => {
@@ -238,7 +247,7 @@ export class RangingNegotiationPage extends React.PureComponent { // eslint-disa
                 {/*<Panel>*/}
 
                 <div className="row">
-                  <div className="col-xs-12 col-md-8" style={{marginTop: '2%'}}>
+                  <div className="col-xs-7 col-md-7" style={{marginTop: '2%',width:'800px',overflow:'scroll'}}>
 
                     <BubbleChart2 data={this.props.RangingNegotiationPage.chartData}
 
@@ -270,7 +279,7 @@ export class RangingNegotiationPage extends React.PureComponent { // eslint-disa
                     }}><p>View Selections</p></div>
                   </div>
 
-                  <div className="col-xs-12 col-md-4" style={{marginTop: '2%', fontSize: '14px'}}>
+                  <div className="col-xs-2 col-md-2 col-lg-3" style={{marginTop: '2%', fontSize: '14px'}}>
 
                     <h4>
                       Please select a negotiation strategy below to filter
@@ -338,7 +347,6 @@ export class RangingNegotiationPage extends React.PureComponent { // eslint-disa
                         profits – Low importance to customers
                       </div>
                     </div>
-
 
                     <div className="panel panel-warning">
                       <div className="medProfit"

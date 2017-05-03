@@ -76,13 +76,7 @@ class NewSelector2 extends React.PureComponent { // eslint-disable-line react/pr
         {(() => {
           return (
             <div id="style-7" style={{
-              height: '90%',
-              width: '21%',
-              position: 'fixed',
-              /* padding-right: 5px; */
-              overflowX: 'hidden',
-              overflowY: 'scroll',
-              borderTop: '1px solid #ccc',
+
             }}>
               {/*<div id="style-7" style={{*/}
               {/*height: '52%',*/}
@@ -233,7 +227,8 @@ class NewSelector2 extends React.PureComponent { // eslint-disable-line react/pr
               <div className="text-center">
                 <Button onClick={() => {
                   let filterData = this.props.filterUrlParamString;
-                  if(!(typeof(urlParamsString) == "undefined")){
+                  console.log('filterData',filterData);
+                  if(!(typeof(filterData) == "undefined")){
                   if (filterData.includes("buying_controller") && filterData.includes("long_description") ) {
                     this.props.onwaterfallSpinner(0);
                     this.props.onwaterfallProfitSpinner(0);
