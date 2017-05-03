@@ -49,7 +49,14 @@ export const SAVE_FILTER_SELECTIONS_TILL_NOW= 'app/RangingNpdImpactPage/SAVE_FIL
 
 //On page load and bread crumb
 export const SELECT_FILTER_INDICATOR = 'app/RangingNpdImpactPage/SELECT_FILTER_INDICATOR';
+export const SHOW_APPLY_LOADING = 'app/RangingNpdImpactPage/SHOW_APPLY_LOADING';
+export const SHOW_TAB_CHANGE_LOADING = 'app/RangingNpdImpactPage/SHOW_TAB_CHANGE_LOADING';
+export const SHOW_PAGE_AFTER_LOADING = 'app/RangingNpdImpactPage/SHOW_PAGE_AFTER_LOADING';
+
+
 export const UPDATE_BREADCRUMBS = 'app/RangingNpdImpactPage/UPDATE_BREADCRUMBS';
+
+
 
 
 

@@ -9,7 +9,8 @@ import {
   DEFAULT_ACTION, BUBBLE_CHART_TABLE_SUCCESS, BUBBLE_CHART_DATA_SUCCESS, CANNIBALIZED_PROD_TABLE_DATA_SUCCESS,WATERFALL_CHART_DATA_SUCCESS,
   GENERATE_SIDE_FILTER_SUCCESS, GENERATE_URL_PARAMS, GENERATE_URL_PARAMS_STRING,CHECKBOX_CHANGE,
   SEND_URL_PARAMS, SAVE_WEEK_PARAM, SAVE_T1_PAGE_PARAM,SAVE_T2_PAGE_PARAM,SAVE_SEARCH_TABLE2,SAVE_SEARCH_TABLE1,
-  SAVE_ASP,SAVE_ACP,SAVE_SIZE,SAVE_FILTER_SELECTIONS_TILL_NOW,UPDATE_BREADCRUMBS,SELECT_FILTER_INDICATOR,
+  SAVE_ASP,SAVE_ACP,SAVE_SIZE,SAVE_FILTER_SELECTIONS_TILL_NOW,UPDATE_BREADCRUMBS,
+  SELECT_FILTER_INDICATOR,SHOW_APPLY_LOADING,SHOW_TAB_CHANGE_LOADING,SHOW_PAGE_AFTER_LOADING
 } from './constants';
 
 const initialState = fromJS({
@@ -26,8 +27,12 @@ const initialState = fromJS({
   Size_field_entry:'',
   filterSelectionsTillNow:'',
   showSelectFilterIndicator:true,
+  showApplyButtonLoading:false,
+  showTabChangeLoading:false,
+  showPageAfterLoading:false,
   breadCrumbs:'',
   dataUrlParms:'',
+
   // waterFallChartData: {
   //   "impact": {"perc_impact_psg": '--', "Cannibilization_perc": '--'}
   //   // "data": [{"name": "NPD_Volume", "value": 140}, {"name": "Cannibilization_perc", "value": -40}]
@@ -146,13 +151,18 @@ function rangingNpdImpactPageReducer(state = initialState, action) {
         // console.log(UPDATE_BREADCRUMBS, 'reducer', action);
         return state.set('breadCrumbs', action.data);
     case SELECT_FILTER_INDICATOR:
-      return state.set('showSelectFilterIndicator', action.data);
+        return state.set('showSelectFilterIndicator', action.data);
+     case SHOW_APPLY_LOADING:
+          return state.set('showApplyButtonLoading', action.data);
+     case SHOW_TAB_CHANGE_LOADING:
+          return state.set('showTabChangeLoading', action.data);
+     case SHOW_PAGE_AFTER_LOADING:
+          return state.set('showPageAfterLoading', action.data);
 
     case GENERATE_URL_PARAMS:
       return state.set('urlParams', action.data);
     case GENERATE_URL_PARAMS_STRING:
       return state.set('urlParamsString', action.data);
-
 
 
     default:
