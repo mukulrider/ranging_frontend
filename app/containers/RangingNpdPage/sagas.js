@@ -48,10 +48,10 @@ export function* generateUnmatchedTableFetch() {
 
 
   try {
-  console.log('---------------------http://172.20.244.223:8000/api/npd/unmatchedprod?'+paramString+searchParams);
+  console.log('---------------------http://dvcmpapp00002uk.dev.global.tesco.org/api/npd/unmatchedprod?'+paramString+searchParams);
       // Table data
         const data = yield call(request,
-          `http://172.20.244.223:8000/api/npd/unmatchedprod?`+paramString+searchParams);
+          `http://dvcmpapp00002uk.dev.global.tesco.org/api/npd/unmatchedprod?`+paramString+searchParams);
         yield put(unmatchedProdTableSuccess(data));
 
 } catch (err) {
@@ -80,11 +80,11 @@ export function* generateSkuChartDataFetch() {
 try {
 
 
-  console.log('---------------------http://172.20.244.223:8000/api/npd/psgskudistribution?'+paramString);
+  console.log('---------------------http://dvcmpapp00002uk.dev.global.tesco.org/api/npd/psgskudistribution?'+paramString);
 
    // Sku chart data
       const sku_chart = yield call(request,
-      `http://172.20.244.223:8000/api/npd/psgskudistribution?`+paramString);
+      `http://dvcmpapp00002uk.dev.global.tesco.org/api/npd/psgskudistribution?`+paramString);
         yield put(skuChartSuccess(sku_chart));
 
 
@@ -113,13 +113,13 @@ export function* generateOutPerformanceChartFetch() {
 
     paramString=paramString.replace('&','');
 
-  console.log('---------------------http://172.20.244.223:8000/api/npd/outperformance?'+paramString);
+  console.log('---------------------http://dvcmpapp00002uk.dev.global.tesco.org/api/npd/outperformance?'+paramString);
 
 
   try {
 
       // Out performance data
-      const out_performance= yield call(request,`http://172.20.244.223:8000/api/npd/outperformance?`+paramString);
+      const out_performance= yield call(request,`http://dvcmpapp00002uk.dev.global.tesco.org/api/npd/outperformance?`+paramString);
 
       yield put(outPerformanceChartSuccess(out_performance));
 
@@ -151,10 +151,10 @@ export function* generatePriceGravityFetch() {
 
 try {
 
-  console.log('---------------------http://172.20.244.223:8000/api/npd/pricebucket?'+paramString);
+  console.log('---------------------http://dvcmpapp00002uk.dev.global.tesco.org/api/npd/pricebucket?'+paramString);
 
       // Price gravity chart data
-      const price_gravity = yield call(request,`http://172.20.244.223:8000/api/npd/pricebucket?`+paramString);
+      const price_gravity = yield call(request,`http://dvcmpapp00002uk.dev.global.tesco.org/api/npd/pricebucket?`+paramString);
       yield put(priceGravitySuccess(price_gravity));
 
 
@@ -178,9 +178,9 @@ export function* generateSideFilter() {
 
     let urlName=yield select(selectRangingNpdPageDomain());
     let urlParams = urlName.get('filter_selection');
-    console.log(`http://172.20.244.223:8000/api/npd_view1/filter_data?` + urlParams);
+    console.log(`http://dvcmpapp00002uk.dev.global.tesco.org/api/npd_view1/filter_data?` + urlParams);
 
-    const data = yield call(request, `http://172.20.244.223:8000/api/npd_view1/filter_data?` + urlParams);
+    const data = yield call(request, `http://dvcmpapp00002uk.dev.global.tesco.org/api/npd_view1/filter_data?` + urlParams);
     yield put(generateSideFilterSuccess(data));
 
   } catch (err) {

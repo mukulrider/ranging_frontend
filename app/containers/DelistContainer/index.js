@@ -155,15 +155,6 @@ export class DelistContainer extends React.PureComponent { // eslint-disable-lin
 
     };
 
-    // let abc = 1;
-    // while (abc) {
-    //   this.props.onApiFetch();
-    //   console.log("5onApiFetch");
-    //   this.props.ondelistTable();
-    //   console.log("6ondelistTable");
-    //   abc = 0;
-    //   // alert(abc);
-    // }
     return (
       <div>
         <Helmet

@@ -3,7 +3,7 @@ import {take, call, put, select, cancel, takeLatest} from 'redux-saga/effects';
 import {LOCATION_CHANGE} from 'react-router-redux';
 import request from 'utils/request';
 import {
-  DEFAULT_ACTION, FETCH_FORECAST_SCENARIO_DATA, 
+  DEFAULT_ACTION, FETCH_FORECAST_SCENARIO_DATA,
   FORECAST_SCENARIO_DATA_SUCCESS, FETCH_FORECAST_EVENT_DATA, UPDATE_SCENARIO_DATA,
   GENERATE_PRICE_GRAVITY_CHART
 } from './constants';
@@ -34,7 +34,7 @@ export function* generateForecastScenarioData() {
   scenario_id.pop();
   try {
     const data = yield call(request,
-      `http://10.1.161.82:8000/api/pricing/scenario2-result-overview/?scenario_id=${scenario_id.join('-')}`);
+      `http://dvcmpapp00002uk.dev.global.tesco.org/api/pricing/scenario2-result-overview/?scenario_id=${scenario_id.join('-')}`);
     yield put(ForecastScenarioDataSuccess(data));
   } catch (err) {
     // console.log(err);
@@ -56,7 +56,7 @@ export function* generateForecastEventData() {
 
   try {
     const data = yield call(request,
-      `http://10.1.161.82:8000/api/pricing/event2/?id=${event_id.split('-').pop()}`);
+      `http://dvcmpapp00002uk.dev.global.tesco.org/api/pricing/event2/?id=${event_id.split('-').pop()}`);
     yield put(forecastEventDataSuccess(data));
   } catch (err) {
     // console.log(err);
@@ -78,7 +78,7 @@ export function* generateScenarioData() {
 
   try {
     const data = yield call(request,
-      `http://10.1.161.82:8000/api/pricing/scenario2-obj/?id=${event_id.split('-').pop()}`);
+      `http://dvcmpapp00002uk.dev.global.tesco.org/api/pricing/scenario2-obj/?id=${event_id.split('-').pop()}`);
     yield put(updateScenarioDataSuccess(data));
   } catch (err) {
     // console.log(err);
@@ -94,7 +94,7 @@ export function* doGenerateScenarioData() {
 /* GENERATE SIDE FILTER*/
 export function* generatePriceGravityChart() {
   try {
-    const data = yield call(request, `http://10.1.161.82:8000/api/xxx/`);
+    const data = yield call(request, `http://dvcmpapp00002uk.dev.global.tesco.org/api/xxx/`);
     yield put(generatePriceGravityChartSuccess(data));
   } catch (err) {
     // console.log(err);
