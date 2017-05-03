@@ -85,9 +85,14 @@ export class RangingNpdPage extends React.PureComponent { // eslint-disable-line
         <div className="pageTitle">NPD Opportunity</div>
 
         {/*Filters and content*/}
-        <div className="flextcontent">
+        <div className="">
 
-          <div className="flexleft"  style={{ flexBasis: '300px',marginTop:"24px"}}>
+          <div style={{height: '100%',
+            position: 'fixed',
+            width:'20%',
+            /* padding-right: 5px; */
+            overflowX: 'hidden',
+            overflowY: 'scroll'}}>
 
           {/*----------------Filters---------------------*/}
             <CascadedFilterNpd sideFilter={this.props.RangingNpdPage.sideFilter}
@@ -121,11 +126,12 @@ export class RangingNpdPage extends React.PureComponent { // eslint-disable-line
             if(this.props.RangingNpdPage.showSelectFilterIndicator){
               return(
 
-                <div className="flexright" style={{marginLeft: "1%"}}>
+                <div style={{width:'78%',
+                  marginLeft:'22%'}}>
 
                 <div className="selectAttrituteIndicator">
                   <div>
-                    <div style={{marginTop:'25%'}}> ----- Please select the attributes ------</div>
+                    <div style={{lineHeight: '20'}}> ----- Please select the attributes ------</div>
                   </div>
                 </div>
 
@@ -135,7 +141,8 @@ export class RangingNpdPage extends React.PureComponent { // eslint-disable-line
             else{
               return(
 
-                <div className="flexright" style={{marginLeft: "1%",marginTop:"5px"}}>
+                <div style={{width:'78%',
+                  marginLeft:'22%'}}>
 
                   <Nav bsStyle="tabs" activeKey={this.state.activeKey} onSelect={this.handleSelect} className="tabsCustom" >
                     <NavItem className="tabsCustomList" eventKey="1" onClick={() => {
