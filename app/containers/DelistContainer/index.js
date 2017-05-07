@@ -69,11 +69,13 @@ import {
   WeekTabClick,
   StoreTabClick,
   UrlParams,
+  saveScenarioFlag,saveScenarioName,
 } from './actions';
 
 import styles from './style.scss';
 
 export class DelistContainer extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
+
   componentDidMount = () => {
     this.props.onGenerateUrlParamsString();
     this.props.onGenerateFilterParamsString();
@@ -124,6 +126,13 @@ export class DelistContainer extends React.PureComponent { // eslint-disable-lin
       activePageDelistPopup: 1,
       activeKey: "1",
       activeKey2: "4",
+
+
+      saveScenarioStatus:'',
+      showSaveScenarioSuccessModalFlag:false,
+      showSaveScenarioModalFlag: false,
+      showSaveScenarioOverwriteConfirmationModalFlag: false,
+
     };
   }
 
@@ -175,6 +184,110 @@ export class DelistContainer extends React.PureComponent { // eslint-disable-lin
 
         {/*Page title*/}
         <div className="pageTitle">DELIST IMPACT</div>
+
+
+        {/*Save Scenario Modal*/}
+        <Modal show={this.state.showSaveScenarioModalFlag} bsSize="lg" style={{marginTop: '10%'}}
+               aria-labelledby="contained-modal-title-lg">
+          <Modal.Header>
+            <Modal.Title id="contained-modal-title-sm" className="pageModuleTitle">
+                                  <span className="pageModuleTitle"><b>Save Scenario</b>
+                                  <span style={{textAlign: 'right', float: 'right'}}
+                                        onClick={() => {
+
+                                          this.setState({showSaveScenarioModalFlag: false});
+
+
+                                        }}>
+                                  <b>X</b></span></span>
+              <div style={{textAlign: 'center'}}>
+                <div style={{textAlign: 'right'}}>
+                </div>
+              </div>
+            </Modal.Title>
+          </Modal.Header>
+          <Modal.Body className="infoModalText">
+
+            <div className="row formattedText">
+
+
+              <div className="col-xs-12">
+
+                <div className="col-xs-2"></div>
+                <div className="col-xs-4">
+                  Scenario Name:
+                </div>
+                <div className="col-xs-4">
+                  <InputField type="text"
+                              placeholder="Enter Scenario Type"
+                              value={this.props.DelistContainer.scenarioName}
+                              onChange={(e) => {
+                                this.props.onSaveScenarioName(e);
+                              }}
+
+                  />
+                </div>
+                <div className="col-xs-2"></div>
+              </div>
+
+            </div>
+
+
+            <div className="row" style={{marginTop:'10px'}}>
+
+              <Button onClick={() => {
+                if(this.props.DelistContainer.scenarioName===''){
+                  alert("Enter scenario name!");
+                }else{
+                  document.body.style.cursor='wait';
+                  this.props.onSaveScenarioFlag();
+                }
+
+              }}
+                      style={{display: 'block', marginTop:"1%",marginLeft:'39%'}}>Save</Button>
+
+            </div>
+
+          </Modal.Body>
+        </Modal>
+
+        {/*Saving Success modal*/}
+        <Modal show={this.state.showSaveScenarioSuccessModalFlag} bsSize="lg" style={{marginTop: '10%'}}
+               aria-labelledby="contained-modal-title-lg">
+
+          <Modal.Body className="infoModalText">
+
+
+
+            <div className="center-this" style={{color:'Green',fontSize:'20px',lineHeight:'28px'}}>
+              <i>Scenario '{this.props.DelistContainer.scenarioName}' has been saved successfully!</i><br/>
+              <br/>
+              What do you wish to do next?
+            </div>
+
+
+            <div className="row" style={{marginTop:'2%'}}>
+              <div className="col-xs-6">
+                <Button onClick={() => {
+                  this.setState({showSaveScenarioSuccessModalFlag: false});
+
+                }}
+                        style={{display: 'block', marginTop:"1%",marginLeft:'35%'}}>Create New Scenario</Button>
+              </div>
+              <div className="col-xs-6">
+                <Button onClick={() => {
+                  let page='/ranging/scenario-tracker?';
+
+                  let objString = page;
+                  window.location = objString;
+
+                }}
+                        style={{display: 'block', marginTop:"1%",marginLeft:'28%'}}>Go to Scenario Tracker</Button>
+              </div>
+            </div>
+
+          </Modal.Body>
+        </Modal>
 
 
         <div className="row" style={{
@@ -391,6 +504,15 @@ export class DelistContainer extends React.PureComponent { // eslint-disable-lin
                         }}><span className="tab_label">Express</span></NavItem>
 
                       </Nav>
+
+                      {/*Save Scenario*/}
+                      <div className="row" style={{textAlign:'right',marginRight:'2%'}}>
+                        <Button  onClick={() => {
+                          this.setState({showSaveScenarioModalFlag: true});
+                        }}
+                                 style={{marginTop:'2%'}}>Save Scenario</Button>
+                      </div>
+
 
                       {/*<div className="breadcrumb">*/}
                       {/*<span className="label">&nbsp;{this.props.DelistContainer.weekBreadcrumb ? this.props.DelistContainer.weekBreadcrumb:'Week 13'}</span>*/}
@@ -1418,7 +1540,7 @@ export class DelistContainer extends React.PureComponent { // eslint-disable-lin
               return (
                 <div className="selectAttrituteIndicator">
                   <div>
-                    <div style={{marginTop: '25%'}}> ----- Please select the filters to get started ------</div>
+                    <div> ----- Please select the filters to get started ------</div>
                   </div>
                 </div>
 
@@ -1523,6 +1645,10 @@ function mapDispatchToProps(dispatch) {
     onUrlParamsData: (e) => dispatch(urlParamsData(e)),
     onGenerateUrlParamsData: (e) => dispatch(generateUrlParamsData(e)),
     onApplyClick: (e) => dispatch(ApplyClick(e)),
+
+    //Saving scenario
+    onSaveScenarioName: (e) => dispatch(saveScenarioName(e.target.value)),
+    onSaveScenarioFlag: (e) => dispatch(saveScenarioFlag(e)),
 
   };
 }

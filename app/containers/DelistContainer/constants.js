@@ -114,3 +114,10 @@ export const APPLY_BTN_CLICK = 'app/DelistContainer/APPLY_BTN_CLICK';
 //TESTING AJAX CALLS
 export const TEST_AJAX = 'app/DelistContainer/TEST_AJAX';
 export const TEST_AJAX_SUCCESS = 'app/DelistContainer/TEST_AJAX_SUCCESS';
+
+
+//Save scenario related
+export const SAVE_SCENARIO = 'app/RangingNpdImpactPage/SAVE_SCENARIO';
+export const SAVE_SCENARIO_NAME= 'app/RangingNpdImpactPage/SAVE_SCENARIO_NAME';
+export const SAVE_SCENARIO_RESPONSE= 'app/RangingNpdImpactPage/SAVE_SCENARIO_RESPONSE';
+
