@@ -12,6 +12,7 @@ import {
 } from 'containers/RangingScenarioTrackerPage/actions';
 
 import {
+  makeUrlParamsString,selectRangingScenarioTrackerPageDomain,
 } from 'containers/RangingScenarioTrackerPage/selectors';
 
 
@@ -24,11 +25,23 @@ export function* defaultSaga() {
 //------------------------------- Scenario List ------------------------------------------
 export function* generateAllScenarioList() {
 
+  let urlName = yield select(selectRangingScenarioTrackerPageDomain());
+  let selectedTab = urlName.get('selectedTab');
+
   try {
     // Table data
-    const scenario_list= yield call(request,`http://172.20.246.140:8000/api/npd_impact_list_scenario?user_id=sachin123`);
 
-    yield put(fetchRangingAllScenarioDataSuccess(scenario_list));
+
+    if(selectedTab==="npd"){
+      const scenario_list= yield call(request,`http://172.20.246.140:8000/api/npd_impact_list_scenario?user_id=sachin123`);
+      yield put(fetchRangingAllScenarioDataSuccess(scenario_list));
+    }else{
+      const scenario_list= yield call(request,`http://172.20.246.140:8000/api/delist_list_scenario?user_id=Tanaya`);
+      yield put(fetchRangingAllScenarioDataSuccess(scenario_list));
+    }
+
+
+
 
   } catch (err) {
 

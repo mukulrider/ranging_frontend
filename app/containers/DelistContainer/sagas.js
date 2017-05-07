@@ -472,6 +472,8 @@ export function* doGenerateTable() {
 
 /* GENERATE SIDE FILTER*/
 export function* generateSideFilter() {
+
+  console.log("Fetching filter data-----")
   let urlName = yield select(selectDelistContainerDomain());
   let urlParamsString = urlName.get('urlParamsString');
 
@@ -484,6 +486,7 @@ export function* generateSideFilter() {
 
     // const data = yield call(request, host_url + `/api/product_impact/filter_data/?`+'long_description=3 BIRD RST WITH C/BERRY, DATE and ORNG S/FING - 79631889');
     // const data = yield call(request, host_url + `/api/product_impact/filter_data/?`+'long_description=73589188');
+  console.log(host_url + `/api/product_impact/filter_data/?${urlParamsString}`);
     const data = yield call(request, host_url + `/api/product_impact/filter_data/?${urlParamsString}`);
     // const data = yield call(request, `http://172.20.247.16:8000/api/product_impact/filter_data/?${urlParamsString}`);
 

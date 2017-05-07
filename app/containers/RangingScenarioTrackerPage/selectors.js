@@ -19,6 +19,13 @@ const makeSelectRangingScenarioTrackerPage = () => createSelector(
   (substate) => substate.toJS()
 );
 
+
+const makeUrlParamsString = () => createSelector(
+  selectRangingScenarioTrackerPageDomain(),
+  (substate) => substate.toJS()
+);
+
+
 export default makeSelectRangingScenarioTrackerPage;
 export {
   selectRangingScenarioTrackerPageDomain,

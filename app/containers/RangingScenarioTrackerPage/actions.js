@@ -5,7 +5,7 @@
  */
 
 import {
-  DEFAULT_ACTION,ALL_SCENARIO_TABLE_FETCH,ALL_SCENARIO_TABLE_SUCCESS,VIEW_A_SCENARIO
+  DEFAULT_ACTION,ALL_SCENARIO_TABLE_FETCH,ALL_SCENARIO_TABLE_SUCCESS,TAB_CHANGE
 } from './constants';
 
 export function defaultAction() {
@@ -22,6 +22,7 @@ export function fetchRangingAllScenarioData() {
     type: ALL_SCENARIO_TABLE_FETCH,
   };
 }
+
 export function fetchRangingAllScenarioDataSuccess(data) {
   return {
     type: ALL_SCENARIO_TABLE_SUCCESS,
@@ -30,3 +31,10 @@ export function fetchRangingAllScenarioDataSuccess(data) {
 }
 
 //--------------------Fetching default data on page load---------------------
+
+export function tabChange(data) {
+  return {
+    type: TAB_CHANGE,
+    data
+  };
+}

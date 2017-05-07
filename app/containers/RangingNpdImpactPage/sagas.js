@@ -245,8 +245,8 @@ export function* generateSideFilter() {
     console.log('http://172.20.246.140:8000/api/npd_impact_view/filter_data?' + urlParams);
     let data = '';
 
-      // data = yield call(request, `http://172.20.246.140:8000/api/npd_impact_view/filter_data?` + urlParams);
-    data = yield call(request, `http://172.20.246.140:8000/api/npd_impact_view/filter_data?buying_controller=Meat%20Fish%20and%20Veg&buyer=Meat%20and%20Poultry&junior_buyer=Coated%20Poultry&product_sub_group_description=FROZEN%20COATED%20POULTRY&parent_supplier=1247.%20-%20LOCKWOODS%20LTD&brand_name=TESCO&package_type=BOX&measure_type=G&till_roll_description=KIEVS&merchandise_group_code_description=FROZEN%20POULTRY%20PRODUCTS&range_space_break_code=F&week_flag=Latest%2013%20Weeks`);
+      data = yield call(request, `http://172.20.246.140:8000/api/npd_impact_view/filter_data?` + urlParams);
+    // data = yield call(request, `http://172.20.246.140:8000/api/npd_impact_view/filter_data?buying_controller=Meat%20Fish%20and%20Veg&buyer=Meat%20and%20Poultry&junior_buyer=Coated%20Poultry&product_sub_group_description=FROZEN%20COATED%20POULTRY&parent_supplier=1247.%20-%20LOCKWOODS%20LTD&brand_name=TESCO&package_type=BOX&measure_type=G&till_roll_description=KIEVS&merchandise_group_code_description=FROZEN%20POULTRY%20PRODUCTS&range_space_break_code=F&week_flag=Latest%2013%20Weeks`);
 
     yield put(generateSideFilterSuccess(data));
 

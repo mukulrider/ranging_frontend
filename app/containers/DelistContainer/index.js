@@ -79,16 +79,16 @@ export class DelistContainer extends React.PureComponent { // eslint-disable-lin
   componentDidMount = () => {
     this.props.onGenerateUrlParamsString();
     this.props.onGenerateFilterParamsString();
-    console.log("1onGenerateUrlParamsString");
+    // console.log("1onGenerateUrlParamsString");
     this.props.onDataUrlParams(this.props.location.query);
-    console.log("2onDataUrlParams");
+    // console.log("2onDataUrlParams");
     this.props.onUrlParams(this.props.location.search);
-    console.log("3onUrlParams");
+    // console.log("3onUrlParams");
 
-    this.props.onWaterfallValueChart();
+    // this.props.onWaterfallValueChart();
     // this.props.onWaterfallValueChart();
 
-    console.log("4onWaterfallValueChart");
+    // console.log("4onWaterfallValueChart");
     // setTimeout(() => {
     //   // alert("time");
     //   this.props.onApiFetch();
