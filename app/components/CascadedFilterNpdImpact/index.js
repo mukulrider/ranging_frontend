@@ -190,15 +190,7 @@ class CascadedFilterNpdImpact extends React.PureComponent { // eslint-disable-li
 
   render() {
     return (
-      <div id="style-7" style={{
-        height: '80%',
-        width: '20%',
-        position: 'fixed',
-        overflow: 'scroll',
-        paddingRight: '5px',
-        overflowX: 'hidden',
-        borderTop: '1px solid #ccc',
-      }}>
+      <div id="style-7">
 
         {/*Filter*/}
         <div className="row" ref={'npdImpactFilters'}>
@@ -303,7 +295,7 @@ class CascadedFilterNpdImpact extends React.PureComponent { // eslint-disable-li
                     if (this.props.sideFilter) {
                       if (this.props.sideFilter.product_information) {
 
-                        console.log("Inside the info loop");
+                        {/*console.log("Inside the info loop");*/}
                         {/*this.saveHierarchySelections();*/
                         }
                         return (

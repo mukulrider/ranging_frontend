@@ -311,6 +311,46 @@ export default function createRoutes(store) {
         importModules.catch(errorLoading);
       },
     }, {
+      path: '/ranging/scenario-tracker',
+      name: 'rangingScenarioTrackerPage',
+      getComponent(nextState, cb) {
+        const importModules = Promise.all([
+        import('containers/RangingScenarioTrackerPage/reducer'),
+        import('containers/RangingScenarioTrackerPage/sagas'),
+        import('containers/RangingScenarioTrackerPage'),
+      ]);
+
+        const renderRoute = loadModule(cb);
+
+        importModules.then(([reducer, sagas, component]) => {
+          injectReducer('rangingScenarioTrackerPage', reducer.default);
+          injectSagas(sagas.default);
+          renderRoute(component);
+        });
+
+        importModules.catch(errorLoading);
+      },
+    }, {
+      path: '/ranging/view-scenario',
+      name: 'rangingViewScenarioPage',
+      getComponent(nextState, cb) {
+        const importModules = Promise.all([
+        import('containers/RangingViewScenarioPage/reducer'),
+        import('containers/RangingViewScenarioPage/sagas'),
+        import('containers/RangingViewScenarioPage'),
+      ]);
+
+        const renderRoute = loadModule(cb);
+
+        importModules.then(([reducer, sagas, component]) => {
+          injectReducer('rangingViewScenarioPage', reducer.default);
+          injectSagas(sagas.default);
+          renderRoute(component);
+        });
+
+        importModules.catch(errorLoading);
+      },
+    }, {
       path: '*',
       name: 'notfound',
       getComponent(nextState, cb) {

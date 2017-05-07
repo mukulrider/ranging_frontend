@@ -10,7 +10,9 @@ import {
   GENERATE_SIDE_FILTER_SUCCESS, GENERATE_URL_PARAMS, GENERATE_URL_PARAMS_STRING,CHECKBOX_CHANGE,
   SEND_URL_PARAMS, SAVE_WEEK_PARAM, SAVE_T1_PAGE_PARAM,SAVE_T2_PAGE_PARAM,SAVE_SEARCH_TABLE2,SAVE_SEARCH_TABLE1,
   SAVE_ASP,SAVE_ACP,SAVE_SIZE,SAVE_FILTER_SELECTIONS_TILL_NOW,UPDATE_BREADCRUMBS,
-  SELECT_FILTER_INDICATOR,SHOW_APPLY_LOADING,SHOW_TAB_CHANGE_LOADING,SHOW_PAGE_AFTER_LOADING
+  SELECT_FILTER_INDICATOR,SHOW_APPLY_LOADING,SHOW_TAB_CHANGE_LOADING,SHOW_PAGE_AFTER_LOADING,
+  SAVE_SCENARIO_NAME,SAVE_EVENT_NAME,SAVE_SCENARIO_RESPONSE,
+  SAVE_EDITED_FORECAST,SAVE_EDIT_FORECAST_API,MODIFIED_FLAG
 } from './constants';
 
 const initialState = fromJS({
@@ -32,6 +34,13 @@ const initialState = fromJS({
   showPageAfterLoading:false,
   breadCrumbs:'',
   dataUrlParms:'',
+  scenarioName:'',
+  eventName:'',
+  saveScenarioResponse:'',
+  modifiedVolumeForecast:'',
+  modifiedFlag:0,
+  editForecastApi:"modified_flag=0&modified_forecast=0&Cannibalization_perc=0",
+
 
   // waterFallChartData: {
   //   "impact": {"perc_impact_psg": '--', "Cannibilization_perc": '--'}
@@ -163,6 +172,21 @@ function rangingNpdImpactPageReducer(state = initialState, action) {
       return state.set('urlParams', action.data);
     case GENERATE_URL_PARAMS_STRING:
       return state.set('urlParamsString', action.data);
+
+    case SAVE_EVENT_NAME:
+      return state.set('eventName', action.data);
+    case SAVE_SCENARIO_NAME:
+      return state.set('scenarioName', action.data);
+    case SAVE_SCENARIO_RESPONSE:
+      return state.set('saveScenarioResponse', action.data);
+
+    case SAVE_EDITED_FORECAST:
+      return state.set('modifiedVolumeForecast', action.data);
+    case SAVE_EDIT_FORECAST_API:
+      console.log("Saved the api in reducer",action.data)
+      return state.set('editForecastApi', action.data);
+    case MODIFIED_FLAG:
+      return state.set('modifiedFlag', action.data);
 
 
     default:

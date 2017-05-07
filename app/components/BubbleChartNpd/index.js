@@ -108,7 +108,7 @@ class BubbleChartNpd extends React.PureComponent { // eslint-disable-line react/
                 return (rScale(d[radius_metric]/100));
             })
           .style("fill", function (d) {
-            console.log("in_color_function", colorArray[0]);
+            // console.log("in_color_function", colorArray[0]);
             if (d.brand_indicator == "Brand") {
               return colorArray[1];
             }
@@ -170,12 +170,12 @@ class BubbleChartNpd extends React.PureComponent { // eslint-disable-line react/
     };
 
     componentDidMount = () => {
-        console.log('printing inside bubble chart', this.props.data);
+        // console.log('printing inside bubble chart', this.props.data);
         this.createBubbleChart(this.props.data)
     };
 
     componentDidUpdate = () => {
-      console.log('printing inside bubble chart update function', this.props.data);
+      // console.log('printing inside bubble chart update function', this.props.data);
         this.createBubbleChart(this.props.data)
     };
 

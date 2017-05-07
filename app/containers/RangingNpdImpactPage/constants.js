@@ -57,6 +57,16 @@ export const SHOW_PAGE_AFTER_LOADING = 'app/RangingNpdImpactPage/SHOW_PAGE_AFTER
 export const UPDATE_BREADCRUMBS = 'app/RangingNpdImpactPage/UPDATE_BREADCRUMBS';
 
 
+//Save scenario related
+export const SAVE_SCENARIO = 'app/RangingNpdImpactPage/SAVE_SCENARIO';
+export const SAVE_SCENARIO_RESPONSE = 'app/RangingNpdImpactPage/SAVE_SCENARIO_RESPONSE';
+export const SAVE_SCENARIO_NAME= 'app/RangingNpdImpactPage/SAVE_SCENARIO_NAME';
+export const SAVE_EVENT_NAME = 'app/RangingNpdImpactPage/SAVE_EVENT_NAME';
+
+//Edit forecast
+export const SAVE_EDITED_FORECAST  = 'app/RangingNpdImpactPage/SAVE_EDITED_FORECAST';
+export const SAVE_EDIT_FORECAST_API  = 'app/RangingNpdImpactPage/SAVE_EDIT_FORECAST_API';
+export const MODIFIED_FLAG  = 'app/RangingNpdImpactPage/MODIFIED_FLAG';
 
 
 
