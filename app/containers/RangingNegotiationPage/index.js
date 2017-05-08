@@ -114,10 +114,14 @@ export class RangingNegotiationPage extends React.PureComponent { // eslint-disa
     this.props.onGenerateCheckedList(checked, base_product_number)
   };
   render() {
+
     let dataFilterUrlParams = this.props.RangingNegotiationPage.urlParamsString;
     let dataPerformanceUrlParams = this.props.RangingNegotiationPage.dataPerformanceUrlParams;
     let dataStoreUrlParams = this.props.RangingNegotiationPage.dataStoreUrlParams;
     let dataWeekUrlParams = this.props.RangingNegotiationPage.dataWeekUrlParams;
+
+    console.log("selected performance quartile "+dataPerformanceUrlParams )
+
     //Formatting sales value in the table
     let formatSales = (i) => {
       if (i >= 1000 || i <= -1000) {
@@ -147,13 +151,14 @@ export class RangingNegotiationPage extends React.PureComponent { // eslint-disa
       <div>
         <div className="pageTitle" style={{width:'78%',float:'right'}}>Negotiation Opportunity</div>
         <div className="">
+
+          {/*Fitlers*/}
           <div style={{height: '100%',
             position: 'fixed',
             width:'20%',
             /* padding-right: 5px; */
             overflowX: 'hidden',
             overflowY: 'scroll'}}>
-            {/*<Panel>*/}
 
             {(() => {
               if (this.props.RangingNegotiationPage.sideFilter) {
@@ -173,12 +178,9 @@ export class RangingNegotiationPage extends React.PureComponent { // eslint-disa
                 return (<div>Loading</div>)
               }
             })()}
-            {/*</Panel>*/}
-          </div>
-          {/*Defining the area for the content on right to the filters */}
-          {/*<div className="wrapper">*/}
 
-          {/*</div>*/}
+          </div>
+
 
           <div  style={{width:'78%',
             marginLeft:'22%'}}>
@@ -187,6 +189,7 @@ export class RangingNegotiationPage extends React.PureComponent { // eslint-disa
             <div className="row">
               <div className="col-md-12 content-wrap">
 
+                {/*Week tabs*/}
                 <Nav bsStyle="tabs" activeKey={this.state.activeKey} onSelect={this.handleSelect} className="tabsCustom">
                   <NavItem className="tabsCustomList" eventKey="1" onClick={() => {
                     this.setState({activeKey: "1"});
@@ -223,6 +226,8 @@ export class RangingNegotiationPage extends React.PureComponent { // eslint-disa
                 </Nav>
 
                 <div style={{height:'0px',width:'100%'}}>&nbsp;</div>
+
+                {/*Store tabs*/}
                 <Nav bsStyle="tabs" className="tabsCustom" activeKey={this.state.activeKey2}
                      onSelect={this.handleSelect}>
                   <NavItem className="tabsCustomList" eventKey="4" onClick={() => {
@@ -244,16 +249,20 @@ export class RangingNegotiationPage extends React.PureComponent { // eslint-disa
 
                 </Nav>
 
-                {/*<Panel>*/}
 
+               {/*Chart & Performance quartile*/}
                 <div className="row">
-                  <div className="col-xs-7 col-md-7" style={{marginTop: '2%',width:'800px',overflow:'scroll'}}>
+
+                  {/*Chart*/}
+                  {/*<div className="col-xs-9 col-md-9" style={{marginTop: '2%',width:'800px',overflow:'scroll'}}>*/}
+                  <div className="col-xs-8 col-md-8" style={{marginTop: '2%'}}>
 
                     <BubbleChart2 data={this.props.RangingNegotiationPage.chartData}
 
                                   //Passing array which updates table
                                   selectedBubbleTable={this.props.RangingNegotiationPage.prodArrayTable}
                                   //Passing array which updates opacity
+
                                   selectedBubbleOpacity={this.props.RangingNegotiationPage.prodArrayOpacity}
 
                                   //Ajax calls to save prodArrayTable in state
@@ -279,6 +288,7 @@ export class RangingNegotiationPage extends React.PureComponent { // eslint-disa
                     }}><p>View Selections</p></div>
                   </div>
 
+                  {/*Performance quartile*/}
                   <div className="col-xs-2 col-md-2 col-lg-3" style={{marginTop: '2%', fontSize: '14px'}}>
 
                     <h4>
@@ -288,26 +298,56 @@ export class RangingNegotiationPage extends React.PureComponent { // eslint-disa
                     </h4>
 
                     <div className="panel">
-                      <div className="lowProfit" style={{height: '35px', backgroundColor: '#c74a52', opacity: '0.8'}}>
-                        <RadioButton id={'1'}
-                                     checked={(() => {
-                                       if (this.props.RangingNegotiationPage.radioChecked === '1') {
-                                         return true
-                                       }
-                                       else {
-                                         return false
-                                       }
-                                     })()}
-                                     label={'Low CPS/Low Profit'}
-                                     valid={true}
-                                     onChange={() => {
-                                       dataPerformanceUrlParams = "performance_quartile=Low CPS/Low Profit";
-                                       this.props.onSavePFilterParam(dataPerformanceUrlParams);
-                                       this.props.onFetchGraph();
-                                       this.props.onGenerateTable();
-                                       this.props.onRadioChecked('1');
-                                     }}
-                                     name="x"
+                      <div className="lowProfit" style={{height: '35px', backgroundColor: '#c74a52', opacity: '0.8',color:'white !Important'}}>
+                        <Checkbox id="PQ1"
+                                  label={'Low CPS/Low Profit'}
+                                  valid={true}
+                                  onChange={() => {
+
+
+                                    console.log("entered"+dataPerformanceUrlParams);
+
+                                    let pqCurrentSelection="Low CPS/Low Profit";
+                                    let deselect=0;
+                                    let pqApendUrl='';
+                                    let newSelections='';
+
+
+                                    if(dataPerformanceUrlParams !==''){
+                                      dataPerformanceUrlParams="start&"+dataPerformanceUrlParams;
+                                      let pqSelections = dataPerformanceUrlParams.split('&performance_quartile=');
+
+                                      for(let i=1;i<pqSelections.length;i++){
+
+                                        if(pqSelections[i]!==pqCurrentSelection){
+
+                                          {/*console.log(pqSelections[i] +"==="+pqCurrentSelection)*/}
+
+                                          newSelections=newSelections+"&performance_quartile="+pqSelections[i];
+                                       }else{
+
+                                          deselect=1;
+
+                                        }
+                                      }
+
+                                      if(deselect==0){
+
+                                        newSelections=newSelections+"&performance_quartile="+pqCurrentSelection;
+
+                                      }
+
+                                      let pq_ajax_param = newSelections.replace('&', '');
+                                      this.props.onSavePFilterParam(pq_ajax_param);
+                                    }
+                                    else{
+
+                                      let pq_ajax_param = "performance_quartile="+pqCurrentSelection;
+                                      this.props.onSavePFilterParam(pq_ajax_param);
+                                   }
+                                    this.props.onFetchGraph();
+                                    this.props.onGenerateTable();
+                                  }}
                         />
                       </div>
                       <div className="panel-body" style={{marginTop: '2%'}}>
@@ -317,28 +357,52 @@ export class RangingNegotiationPage extends React.PureComponent { // eslint-disa
                     <div className="panel panel-default">
                       <div className="default"
                            style={{height: '35px', backgroundColor: '#6e6767', opacity: '0.8', fontColor: 'white'}}>
-                        <RadioButton id={'2'}
-                                     checked={(() => {
-                                       if (this.props.RangingNegotiationPage.radioChecked == '2') {
-                                         return true
-                                       }
-                                       else {
-                                         return false
-                                       }
-                                     })()}
+                        <Checkbox id="PQ2"
+                                  label={'Low CPS/High Profit'}
+                                  valid={true}
+                                  onChange={() => {
 
-                                     label={'Low CPS/High Profit'}
-                                     valid={true}
-                                     onChange={() => {
-                                       dataPerformanceUrlParams = "performance_quartile=Low CPS/High Profit";
-                                       this.props.onSavePFilterParam(dataPerformanceUrlParams);
-                                       this.props.onFetchGraph();
-                                       this.props.onGenerateTable();
-                                       this.props.onRadioChecked('2');
+                                    let pqCurrentSelection="Low CPS/High Profit";
+                                    let deselect=0;
+                                    let pqApendUrl='';
+                                    let newSelections='';
 
-                                     }}
-                                     name="x"
+                                    if(dataPerformanceUrlParams !==''){
+                                      dataPerformanceUrlParams="start&"+dataPerformanceUrlParams;
+                                      let pqSelections = dataPerformanceUrlParams.split('&performance_quartile=');
+                                      for(let i=1;i<pqSelections.length;i++){
+
+                                        if(pqSelections[i]!==pqCurrentSelection){
+
+                                          newSelections=newSelections+"&performance_quartile="+pqSelections[i];
+                                        }else{
+
+                                          deselect=1;
+
+                                        }
+                                      }
+
+                                      if(deselect==0){
+
+                                        newSelections=newSelections+"&performance_quartile="+pqCurrentSelection;
+
+                                      }
+
+                                      let pq_ajax_param = newSelections.replace('&', '');
+                                      console.log("6.ajax urls"+pq_ajax_param);
+                                      this.props.onSavePFilterParam(pq_ajax_param);
+                                    }
+                                    else{
+
+                                      let pq_ajax_param = "performance_quartile="+pqCurrentSelection;
+                                      this.props.onSavePFilterParam(pq_ajax_param);
+                                    }
+
+                                    this.props.onFetchGraph();
+                                    this.props.onGenerateTable();
+                                  }}
                         />
+
                       </div>
                       <div className="panel-body" style={{height: '65px', marginTop: '3%'}}>
                         Hard
@@ -351,27 +415,51 @@ export class RangingNegotiationPage extends React.PureComponent { // eslint-disa
                     <div className="panel panel-warning">
                       <div className="medProfit"
                            style={{height: '35px', backgroundColor: '#ffa626', opacity: '0.8', fontColor: 'white'}}>
-                        <RadioButton id={'3'}
-                                     label={'Med CPS/Med Profit'}
-                                     valid={true}
-                                     checked={(() => {
-                                       if (this.props.RangingNegotiationPage.radioChecked == '3') {
-                                         return true
-                                       }
-                                       else {
-                                         return false
-                                       }
-                                     })()}
-                                     onChange={() => {
-                                       dataPerformanceUrlParams = "performance_quartile=Med CPS/Med Profit";
-                                       this.props.onSavePFilterParam(dataPerformanceUrlParams);
-                                       this.props.onFetchGraph();
-                                       this.props.onGenerateTable();
-                                       this.props.onRadioChecked('3');
 
-                                     }}
-                                     name="x"
+                        <Checkbox id="PQ3"
+                                  label={'Med CPS/Med Profit'}
+                                  valid={true}
+                                  onChange={() => {
+
+                                    let pqCurrentSelection="Med CPS/Med Profit";
+                                    let deselect=0;
+                                    let pqApendUrl='';
+                                    let newSelections='';
+
+                                    if(dataPerformanceUrlParams !==''){
+                                      dataPerformanceUrlParams="start&"+dataPerformanceUrlParams;
+                                      let pqSelections = dataPerformanceUrlParams.split('&performance_quartile=');
+                                      for(let i=1;i<pqSelections.length;i++){
+
+                                        if(pqSelections[i]!==pqCurrentSelection){
+
+                                          newSelections=newSelections+"&performance_quartile="+pqSelections[i];
+                                        }else{
+
+                                          deselect=1;
+
+                                        }
+                                      }
+
+                                      if(deselect==0){
+
+                                        newSelections=newSelections+"&performance_quartile="+pqCurrentSelection;
+
+                                      }
+
+                                      let pq_ajax_param = newSelections.replace('&', '');
+                                      this.props.onSavePFilterParam(pq_ajax_param);
+                                    }
+                                    else{
+
+                                      let pq_ajax_param = "performance_quartile="+pqCurrentSelection;
+                                      this.props.onSavePFilterParam(pq_ajax_param);
+                                    }
+                                    this.props.onFetchGraph();
+                                    this.props.onGenerateTable();
+                                  }}
                         />
+
                       </div>
                       <div className="panel-body" style={{height: '60px', marginTop: '3%'}}>Area of
                         opportunity. Concession
@@ -383,27 +471,52 @@ export class RangingNegotiationPage extends React.PureComponent { // eslint-disa
                     <div className="panel panel-success">
                       <div className="highProfit"
                            style={{height: '35px', backgroundColor: '#69b24a', opacity: '0.8', fontColor: 'white'}}>
-                        <RadioButton id={'4'}
-                                     label={'High CPS/High Profit'}
-                                     valid={true}
-                                     checked={(() => {
-                                       if (this.props.RangingNegotiationPage.radioChecked == '4') {
-                                         return true
-                                       }
-                                       else {
-                                         return false
-                                       }
-                                     })()}
-                                     onChange={() => {
-                                       dataPerformanceUrlParams = "performance_quartile=High CPS/High Profit"
-                                       this.props.onSavePFilterParam(dataPerformanceUrlParams);
-                                       this.props.onFetchGraph();
-                                       this.props.onGenerateTable();
-                                       this.props.onRadioChecked('4');
 
-                                     }}
-                                     name="x"
+                        <Checkbox id="PQ4"
+                                  label={'High CPS/High Profit'}
+                                  valid={true}
+                                  onChange={() => {
+
+                                    let pqCurrentSelection="High CPS/High Profit";
+                                    let deselect=0;
+                                    let pqApendUrl='';
+                                    let newSelections='';
+
+                                    if(dataPerformanceUrlParams !==''){
+                                      dataPerformanceUrlParams="start&"+dataPerformanceUrlParams;
+                                      let pqSelections = dataPerformanceUrlParams.split('&performance_quartile=');
+                                      for(let i=1;i<pqSelections.length;i++){
+
+                                        if(pqSelections[i]!==pqCurrentSelection){
+
+                                          newSelections=newSelections+"&performance_quartile="+pqSelections[i];
+                                        }else{
+
+                                          deselect=1;
+
+                                        }
+                                      }
+
+                                      if(deselect==0){
+
+                                        newSelections=newSelections+"&performance_quartile="+pqCurrentSelection;
+
+                                      }
+
+                                      let pq_ajax_param = newSelections.replace('&', '');
+                                      console.log("6.ajax urls"+pq_ajax_param);
+                                      this.props.onSavePFilterParam(pq_ajax_param);
+                                    }
+                                    else{
+
+                                      let pq_ajax_param = "performance_quartile="+pqCurrentSelection;
+                                      this.props.onSavePFilterParam(pq_ajax_param);
+                                    }
+                                    this.props.onFetchGraph();
+                                    this.props.onGenerateTable();
+                                  }}
                         />
+
                       </div>
                       <div className="panel-body" style={{height: '50px', marginTop: '3%'}}>Build
                         Win-Win
@@ -413,27 +526,53 @@ export class RangingNegotiationPage extends React.PureComponent { // eslint-disa
                     </div>
                     <div className="panel">
                       <div className="highCps" style={{height: '35px', backgroundColor: '#99d9e5'}}>
-                        <RadioButton id={'5'}
-                                     label={'High CPS/Low Profit'}
-                                     valid={true}
-                                     checked={(() => {
-                                       if (this.props.RangingNegotiationPage.radioChecked == '5') {
-                                         return true
-                                       }
-                                       else {
-                                         return false
-                                       }
-                                     })()}
-                                     onChange={() => {
-                                       dataPerformanceUrlParams = "performance_quartile=High CPS/Low Profit"
-                                       this.props.onSavePFilterParam(dataPerformanceUrlParams);
-                                       this.props.onFetchGraph();
-                                       this.props.onGenerateTable();
-                                       this.props.onRadioChecked('5');
 
-                                     }}
-                                     name="x"
+
+                        <Checkbox id="PQ5"
+                                  label={'High CPS/Low Profit'}
+                                  valid={true}
+                                  onChange={() => {
+
+                                    let pqCurrentSelection="High CPS/Low Profit";
+                                    let deselect=0;
+                                    let pqApendUrl='';
+                                    let newSelections='';
+
+                                    if(dataPerformanceUrlParams !==''){
+                                      dataPerformanceUrlParams="start&"+dataPerformanceUrlParams;
+                                      let pqSelections = dataPerformanceUrlParams.split('&performance_quartile=');
+                                      for(let i=1;i<pqSelections.length;i++){
+
+                                        if(pqSelections[i]!==pqCurrentSelection){
+
+                                          newSelections=newSelections+"&performance_quartile="+pqSelections[i];
+                                        }else{
+
+                                          deselect=1;
+
+                                        }
+                                      }
+
+                                      if(deselect==0){
+
+                                        newSelections=newSelections+"&performance_quartile="+pqCurrentSelection;
+
+                                      }
+
+                                      let pq_ajax_param = newSelections.replace('&', '');
+                                      console.log("6.ajax urls"+pq_ajax_param);
+                                      this.props.onSavePFilterParam(pq_ajax_param);
+                                    }
+                                    else{
+
+                                      let pq_ajax_param = "performance_quartile="+pqCurrentSelection;
+                                      this.props.onSavePFilterParam(pq_ajax_param);
+                                    }
+                                    this.props.onFetchGraph();
+                                    this.props.onGenerateTable();
+                                  }}
                         />
+
                       </div>
                       <div className="panel-body" style={{marginTop: '5%'}}>Work
                         collaboratively to jointly
@@ -442,13 +581,17 @@ export class RangingNegotiationPage extends React.PureComponent { // eslint-disa
                     </div>
 
                   </div>
+
                 </div>
-                {/*</Panel>*/}
 
 
+                {/*Bubble Table*/}
                 <Panel>
                   <div>
-                    <div className="col-xs-12 col-xs-5" style={{marginBottom: "10px", marginLeft: "-14px"}}>
+
+                    {/*Search*/}
+                    <div className="col-xs-5" style={{marginBottom: "10px", marginLeft: "-14px"}}>
+
 
                       <InputField type={'string'}
                                   placeholder="Search for Product Description ..."
@@ -462,6 +605,8 @@ export class RangingNegotiationPage extends React.PureComponent { // eslint-disa
                       />
                     </div>
 
+
+                    {/*table*/}
                     <table className="table table-hover table-bordered" width="100%">
 
                       <thead style={{fontWeight: '700', fontSize: '12px', textAlign: 'center'}}>
@@ -491,22 +636,67 @@ export class RangingNegotiationPage extends React.PureComponent { // eslint-disa
                                 {/**/}
                                 <td style={{textAlign: "center"}}>
                                   <Checkbox isDisabled={false} id={Math.random() + Date.now()}
-                                            onChange={(e) => {
-                                              this.inputUpdate(e.target.checked, obj.base_product_number)
-                                              this.tableProductUpdate(e.target.checked,obj.base_product_number);
+                                            onChange={() => {
+
+                                              let selected=this.props.RangingNegotiationPage.prodArrayOpacity;
+                                              let forOpacity = JSON.parse(selected);
+                                              console.log("-=-=-=current selection"+forOpacity);
+
+                                              let selectedRow = obj.base_product_number;
+                                              let deselectBubFlag = 0;
+                                              let latestUpdatedArray = [];
+
+
+                                              // Will be used to just store the product number to decide the opacity
+                                              for (let i = 0; i < forOpacity.length; i++) {
+                                                if (forOpacity[i] !== selectedRow) {
+
+                                                  latestUpdatedArray.push(forOpacity[i]);
+                                                }
+                                                else {
+                                                  console.log("DESELECTION OF BUBBLE")
+                                                  deselectBubFlag = 1;
+                                                }
+                                              }
+
+                                              if (deselectBubFlag === 0) {
+                                                latestUpdatedArray.push(selectedRow);
+                                              }
+
+                                              console.log("------",latestUpdatedArray)
+                                              let jsonSelection = JSON.stringify(latestUpdatedArray);
+                                              this.props.onSaveBubbleParam2(jsonSelection);
+
+
+
+                                              {/*this.inputUpdate(e.target.checked, obj.base_product_number)*/}
+                                              {/*this.tableProductUpdate(e.target.checked,obj.base_product_number);*/}
 
                                             }}
                                             checked={(() => {
-                                              let checked = false;
-                                              let base_product_number = obj.base_product_number.toString();
-                                              this.props.RangingNegotiationPage.checkedList.map(obj2 => {
-                                                if (obj2.checked) {
-                                                  if (obj2.productId == base_product_number) {
-                                                    checked = true
-                                                  }
+
+                                              let selected=this.props.RangingNegotiationPage.prodArrayOpacity;
+                                              let forOpacity = JSON.parse(selected);
+                                              let checkedOrNot=false;
+
+                                              for(let i=0;i<forOpacity.length;i++){
+                                                if(forOpacity[i]==obj.base_product_number){
+                                                  checkedOrNot=true;
                                                 }
-                                              });
-                                              return checked
+                                              }
+                                              return checkedOrNot;
+
+
+                                              {/*let checked = false;*/}
+                                              {/*let base_product_number = obj.base_product_number.toString();*/}
+                                              {/*this.props.RangingNegotiationPage.checkedList.map(obj2 => {*/}
+                                                {/*if (obj2.checked) {*/}
+                                                  {/*if (obj2.productId == base_product_number) {*/}
+                                                    {/*checked = true*/}
+                                                  {/*}*/}
+                                                {/*}*/}
+                                              {/*});*/}
+                                              {/*return checked*/}
                                             })()}
                                             valid={true}/>
                                 </td>
@@ -595,6 +785,7 @@ export class RangingNegotiationPage extends React.PureComponent { // eslint-disa
                   </div>
 
                 </Panel>
+
               </div>
             </div>
           </div>

@@ -106,24 +106,25 @@ class BubbleChart2 extends React.PureComponent { // eslint-disable-line react/pr
         let dejsonBub = JSON.stringify(deselectBub);
         bubbleFunc2(dejsonBub);
 
-        //For updating table below
-        let dataBubbleUrlParams = "base_product_number=" + d.base_product_number;
-        let deselect = 0;
-
-        for (let i = 0; i < forTable.length; i++) {
-          if (forTable[i] !== dataBubbleUrlParams) {
-            deselectArr.push(forTable[i]);
-          } else {
-            deselect = 1;
-          }
-        }
-
-        if (deselect == 0) {
-          deselectArr.push(dataBubbleUrlParams);
-        }
-
-        let dejsonTable = JSON.stringify(deselectArr);
-        bubbleFunc(dejsonTable);
+        //
+        // //For updating table below
+        // let dataBubbleUrlParams = "base_product_number=" + d.base_product_number;
+        // let deselect = 0;
+        //
+        // for (let i = 0; i < forTable.length; i++) {
+        //   if (forTable[i] !== dataBubbleUrlParams) {
+        //     deselectArr.push(forTable[i]);
+        //   } else {
+        //     deselect = 1;
+        //   }
+        // }
+        //
+        // if (deselect == 0) {
+        //   deselectArr.push(dataBubbleUrlParams);
+        // }
+        //
+        // let dejsonTable = JSON.stringify(deselectArr);
+        // bubbleFunc(dejsonTable);
         makeTable();
         console.log("============================")
 

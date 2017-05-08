@@ -138,7 +138,7 @@ class SelectorNegotiation2 extends React.PureComponent { // eslint-disable-line 
                                              onChange={() => {
                                                this.updateUrl(item.id)
                                              }}
-                                             checked={obj.resource.selected}
+                                             checked={()=>obj.resource.selected}
                                              isDisabled={!obj.highlighted}
                             />
                           }

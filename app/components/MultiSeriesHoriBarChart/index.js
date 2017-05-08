@@ -75,7 +75,7 @@ class MultiSeriesHoriBarChart extends React.PureComponent { // eslint-disable-li
 
 
     //------------- Axis
-      let color = ["#7F297B","#009688"];
+      let color = ["#00838f","#5c2957"];
 
 
     let minDomain = (data) =>{
