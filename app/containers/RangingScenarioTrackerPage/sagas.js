@@ -22,7 +22,7 @@ export function* defaultSaga() {
   // See example in containers/HomePage/sagas.js
 }
 
-let host_url_rangingScenario=`http://172.20.246.40:8000`
+let host_url_rangingScenario=`http://172.20.244.220:8000`
 
 //------------------------------- Scenario List ------------------------------------------
 export function* generateAllScenarioList() {

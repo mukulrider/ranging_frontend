@@ -20,7 +20,7 @@ export function* defaultSaga() {
 export function* generateApiFetch() {
     console.log('generateApiFetch saga');
     try {
-        const data = yield call(request, `http://172.20.247.24:8000/ranging/npd_view/unmatchedprod`);
+        const data = yield call(request, `http://172.20.244.220:8000/ranging/npd_view/unmatchedprod`);
         yield put(apiFetchSuccess(data));
     } catch (err) {
         // console.log(err);

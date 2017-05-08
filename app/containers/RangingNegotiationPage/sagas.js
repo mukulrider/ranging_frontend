@@ -29,6 +29,8 @@ export function* defaultSaga() {
 
 
 //------------------------------- Bubble Chart TableLoad ------------------------------------------
+//const host_url='http://172.20.244.220:8000'
+const host_url='http://172.20.244.220:8000'
 export function* generateWeekFetch() {
 
   let urlName = yield select(selectRangingNegotiationPageDomain());

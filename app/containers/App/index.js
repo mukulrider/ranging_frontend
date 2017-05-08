@@ -38,10 +38,10 @@ export default class App extends React.PureComponent { // eslint-disable-line re
 
   render() {
     const links = [
-      { text: 'Sales Reporting', icon: 'home', href: '/sales-reporting/' },
-      { text: 'Ranging', icon: 'home', href: '/ranging/negotiation' },
-      { text: 'Pricing', icon: 'home', href: '/pricing/' },
-      { text: 'Pricing Scenario Tracker', icon: 'home', href: '/pricing/scenario-tracker'},
+      { text: 'Sales Reporting', icon: 'home', href: 'http://dvcmpweb00001uk.dev.global.tesco.org' },
+      { text: 'Ranging', icon: 'home', href: 'http://dvcmpweb00001uk.dev.global.tesco.org:81/ranging/negotiation' },
+      { text: 'Pricing', icon: 'home', href: 'http://dvcmpweb00001uk.dev.global.tesco.org:82/pricing/' },
+      { text: 'Pricing Scenario Tracker', icon: 'home', href: 'http://dvcmpweb00001uk.dev.global.tesco.org:82/pricing/scenario-tracker'},
       { text: 'Tesco.com', icon: 'home', href: 'http://www.tesco.com/' },
       { text: 'Contact us', icon: 'telephone', href: 'http://www.tesco.com/help/contact/' },
       { text: 'Help', icon: 'help', href: 'http://www.tesco.com/help/' }];
