@@ -19,6 +19,7 @@ import {
   DELIST_TABLE,
   GENERATE_URL_PARAMS_STRING,
   SIDE_FILTER_RESET,
+  SAVE_SCENARIO,
 } from './constants';
 
 import {
@@ -44,13 +45,14 @@ import {
   SupplierPopupTableDataFetchSuccess,
   SupplierPopupTableSpinnerSuccess,
   delistTableSuccess,
+  updateSaveScenarioResponse
 
 } from 'containers/DelistContainer/actions';
 export function* defaultSaga() {
   // See example in containers/HomePage/sagas.js
 }
 
-let host_url = "http://172.20.244.236:8000"
+let host_url = "http://127.0.0.1:8000"
 // let host_url = "http://172.20.246.203:8000"
 // let host_url = "http://172.20.246.196:8000"
 
@@ -573,10 +575,42 @@ export function* doAjaxApplyBtn() {
 }
 
 
+//------------------------------- Saving scenario ------------------------------------------
+/* GENERATE SIDE FILTER*/
+export function* generateSaveScenario() {
+  try {
+    // todo: update url
+    console.log("Trying to save scenario")
+    let urlName = yield select(selectDelistContainerDomain());
+    let urlParams = urlName.get('urlParamsString');
+    let user_id = "user_id=tan1";
+    let scenarioName= urlName.get('scenarioName');
+    let sessionID= "session_id=2";
+
+    let AJAX_args =urlParams+"&scenario_name="+scenarioName+"&"+user_id+"&"+sessionID ;
+
+    console.log(host_url+'/api/npd_impact_save_scenario?' + AJAX_args);
+    let data = yield call(request, host_url+'/api/delist_scenario?' + AJAX_args);
+    yield put(updateSaveScenarioResponse(data));
+
+  } catch (err) {
+    //console.log(err);
+  }
+}
+
+export function* doSaveScenario() {
+  const watcher = yield takeLatest(SAVE_SCENARIO, generateSaveScenario);
+  yield take(LOCATION_CHANGE);
+  yield cancel(watcher)
+}
+
+
+
 // All sagas to be loaded
 export default [
   defaultSaga,
   doApiFetch,
+  doSaveScenario,
   // doWeekFetch,
   // doTableFetch,
   doWaterfallChartValueFetch,

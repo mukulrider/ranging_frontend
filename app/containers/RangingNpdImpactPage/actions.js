@@ -14,8 +14,10 @@ import {
   SAVE_T1_PAGE_PARAM,SAVE_T2_PAGE_PARAM,SAVE_SEARCH_TABLE2,SAVE_SEARCH_TABLE1,
   WATERFALL_CHART_DATA_FETCH,WATERFALL_CHART_DATA_SUCCESS,
   CANNIBALIZED_PROD_TABLE_DATA_FETCH,CANNIBALIZED_PROD_TABLE_DATA_SUCCESS,
-  SELECT_FILTER_INDICATOR,UPDATE_BREADCRUMBS,
+  SELECT_FILTER_INDICATOR,SHOW_APPLY_LOADING,SHOW_TAB_CHANGE_LOADING,SHOW_PAGE_AFTER_LOADING,UPDATE_BREADCRUMBS,
   SAVE_ASP,SAVE_ACP,SAVE_SIZE,SAVE_FILTER_SELECTIONS_TILL_NOW,
+  SAVE_SCENARIO,SAVE_SCENARIO_NAME,SAVE_EVENT_NAME,SAVE_SCENARIO_RESPONSE,
+  SAVE_EDITED_FORECAST,SAVE_EDIT_FORECAST_API,MODIFIED_FLAG
 
 
 } from './constants';
@@ -238,12 +240,108 @@ export function pageLoadSelectFilterIndicator(data) {
 
   };
 }
+
+export function showApplyButtonLoadingIndication(data) {
+  // console.log('Saving url params in action',data);
+  return {
+    type: SHOW_APPLY_LOADING,
+    data
+
+  };
+}
+
+export function showTabChangeLoadingIndication(data) {
+  // console.log('Saving url params in action',data);
+  return {
+    type: SHOW_TAB_CHANGE_LOADING,
+    data
+
+  };
+}
+
+export function showPageContentAfterLoading(data) {
+  // console.log('Saving url params in action',data);
+  return {
+    type: SHOW_PAGE_AFTER_LOADING,
+    data
+
+  };
+}
+
+
 //--------------------- BREADCRUMBS -------------------------------
 
 export function updateBreadCrumbs(data) {
   // console.log('Saving url params in action',data);
   return {
     type: UPDATE_BREADCRUMBS ,
+    data
+  };
+};
+
+
+//--------------------- SAVE SCENARIO -------------------------------
+
+export function saveScenarioFlag() {
+  console.log('Saving url params in action');
+  return {
+    type: SAVE_SCENARIO
+  };
+};
+
+export function updateSaveScenarioResponse(data) {
+  // console.log('Saving url params in action',data);
+  return {
+    type: SAVE_SCENARIO_RESPONSE ,
+    data
+
+  };
+};
+
+
+export function saveScenarioName(data) {
+  // console.log('Saving saveScenarioName in action',data);
+  return {
+    type: SAVE_SCENARIO_NAME ,
+    data
+  };
+};
+
+
+export function saveEventName(data) {
+  console.log('Saving saveEventName in action',data);
+  return {
+    type: SAVE_EVENT_NAME ,
+    data
+  };
+};
+
+
+
+//--------------------- EDIT FORECAST -------------------------------
+
+export function saveModifiedVolumeForecast(data) {
+  console.log('Saving saveEventName in action',data);
+  return {
+    type: SAVE_EDITED_FORECAST,
+    data
+  };
+};
+
+
+export function saveEditForecastApi(data) {
+  console.log('API saving',data);
+  return {
+    type: SAVE_EDIT_FORECAST_API,
+    data
+  };
+};
+
+
+export function saveModifiedFlag(data) {
+  // console.log('Saving saveEventName in action',data);
+  return {
+    type: MODIFIED_FLAG,
     data
   };
 };

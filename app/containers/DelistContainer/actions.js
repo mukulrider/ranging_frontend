@@ -53,6 +53,9 @@ import {
   GENERATE_URL_PARAMS_DATA,
   URL_PARAMS,
   SIDE_FILTER_RESET,
+  SAVE_SCENARIO_RESPONSE,
+
+  SAVE_SCENARIO,SAVE_SCENARIO_NAME,
   } from './constants';
 
 export function defaultAction() {
@@ -432,3 +435,33 @@ export function ApplyClick() {
     type: APPLY_BTN_CLICK,
   };
 }
+
+
+//--------------------- SAVE SCENARIO -------------------------------
+
+export function saveScenarioFlag() {
+  console.log('Saving url params in action');
+  return {
+    type: SAVE_SCENARIO
+  };
+};
+
+export function saveScenarioName(data) {
+  // console.log('Saving saveScenarioName in action',data);
+  return {
+    type: SAVE_SCENARIO_NAME ,
+    data
+  };
+};
+
+
+export function updateSaveScenarioResponse(data) {
+  // console.log('Saving url params in action',data);
+  return {
+    type: SAVE_SCENARIO_RESPONSE ,
+    data
+
+  };
+};
+
+

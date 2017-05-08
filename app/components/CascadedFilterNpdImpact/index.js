@@ -147,6 +147,7 @@ class CascadedFilterNpdImpact extends React.PureComponent { // eslint-disable-li
 
       this.props.onUpdateBreadCrumbs(completeBreadcrumb);
       this.props.onPageLoadSelectFilterIndicator(false);
+      this.props.onUpdateApplyButtonLoadingIndication(true);
       this.props.onSendUrlParams(completeSelections);
       this.props.onDataFetchCanniProdTable();
       this.props.onDataFetchOnPageLoad();
@@ -189,15 +190,7 @@ class CascadedFilterNpdImpact extends React.PureComponent { // eslint-disable-li
 
   render() {
     return (
-      <div id="style-7" style={{
-        height: '80%',
-        width: '20%',
-        position: 'fixed',
-        overflow: 'scroll',
-        paddingRight: '5px',
-        overflowX: 'hidden',
-        borderTop: '1px solid #ccc',
-      }}>
+      <div id="style-7">
 
         {/*Filter*/}
         <div className="row" ref={'npdImpactFilters'}>
@@ -302,7 +295,7 @@ class CascadedFilterNpdImpact extends React.PureComponent { // eslint-disable-li
                     if (this.props.sideFilter) {
                       if (this.props.sideFilter.product_information) {
 
-                        console.log("Inside the info loop");
+                        {/*console.log("Inside the info loop");*/}
                         {/*this.saveHierarchySelections();*/
                         }
                         return (
@@ -410,11 +403,11 @@ class CascadedFilterNpdImpact extends React.PureComponent { // eslint-disable-li
                       {/*Size*/}
                       <div className="row">
                         <div className="col-xs-2">
-                          <div style={{color: '#00539f', fontWeight: '700', marginTop: "10px", fontSize: '16px'}}>Size
+                          <div style={{color: '#00539f', fontWeight: '700', marginTop: "10px",marginRight: "0px", fontSize: '16px'}}>Pack Size
                           </div>
                         </div>
                         <div className="col-xs-10">
-                          <div style={{marginBottom: "15px", width: "200px"}}>
+                          <div style={{marginBottom: "15px", marginLeft: "0px",width: "200px"}}>
 
                             <InputField type={"number"}
                                         placeholder="Enter Size"

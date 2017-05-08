@@ -21,6 +21,8 @@ export function* defaultSaga() {
   // See example in containers/HomePage/sagas.js
 }
 
+const host_url="http://dvcmpapp00002uk.dev.global.tesco.org"
+//const host_url="http://127.0.0.1:8000"
 // All sagas to be loaded
 
 //------------------------------- Unmatched products table Page Load ------------------------------------------
@@ -51,7 +53,7 @@ export function* generateUnmatchedTableFetch() {
   console.log('---------------------http://dvcmpapp00002uk.dev.global.tesco.org/api/npd/unmatchedprod?'+paramString+searchParams);
       // Table data
         const data = yield call(request,
-          `http://dvcmpapp00002uk.dev.global.tesco.org/api/npd/unmatchedprod?`+paramString+searchParams);
+          `${host_url}/api/npd/unmatchedprod?`+paramString+searchParams);
         yield put(unmatchedProdTableSuccess(data));
 
 } catch (err) {
@@ -84,7 +86,7 @@ try {
 
    // Sku chart data
       const sku_chart = yield call(request,
-      `http://dvcmpapp00002uk.dev.global.tesco.org/api/npd/psgskudistribution?`+paramString);
+        `${host_url}/api/npd/psgskudistribution?`+paramString);
         yield put(skuChartSuccess(sku_chart));
 
 
@@ -119,7 +121,7 @@ export function* generateOutPerformanceChartFetch() {
   try {
 
       // Out performance data
-      const out_performance= yield call(request,`http://dvcmpapp00002uk.dev.global.tesco.org/api/npd/outperformance?`+paramString);
+      const out_performance= yield call(request,`${host_url}/api/npd/outperformance?`+paramString);
 
       yield put(outPerformanceChartSuccess(out_performance));
 
@@ -154,7 +156,7 @@ try {
   console.log('---------------------http://dvcmpapp00002uk.dev.global.tesco.org/api/npd/pricebucket?'+paramString);
 
       // Price gravity chart data
-      const price_gravity = yield call(request,`http://dvcmpapp00002uk.dev.global.tesco.org/api/npd/pricebucket?`+paramString);
+      const price_gravity = yield call(request,`${host_url}/api/npd/pricebucket?`+paramString);
       yield put(priceGravitySuccess(price_gravity));
 
 
@@ -180,7 +182,7 @@ export function* generateSideFilter() {
     let urlParams = urlName.get('filter_selection');
     console.log(`http://dvcmpapp00002uk.dev.global.tesco.org/api/npd_view1/filter_data?` + urlParams);
 
-    const data = yield call(request, `http://dvcmpapp00002uk.dev.global.tesco.org/api/npd_view1/filter_data?` + urlParams);
+    const data = yield call(request,`${host_url}/api/npd_view1/filter_data?` + urlParams);
     yield put(generateSideFilterSuccess(data));
 
   } catch (err) {
