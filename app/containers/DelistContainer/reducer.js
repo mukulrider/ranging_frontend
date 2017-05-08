@@ -65,6 +65,7 @@ const initialState = fromJS(
     weekBreadcrumb: "",
     storeBreadcrumb: "",
     scenarioName:'',
+    saveScenarioResponse:'',
     waterFallChart2Data_1: [{name: ' Product Revenue ', value: 420000},
       {name: ' Services Revenue ', value: 210000},
       {name: ' Employee Revenue ', value: 190000},

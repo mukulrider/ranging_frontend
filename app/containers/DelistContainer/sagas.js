@@ -45,13 +45,14 @@ import {
   SupplierPopupTableDataFetchSuccess,
   SupplierPopupTableSpinnerSuccess,
   delistTableSuccess,
+  updateSaveScenarioResponse
 
 } from 'containers/DelistContainer/actions';
 export function* defaultSaga() {
   // See example in containers/HomePage/sagas.js
 }
 
-let host_url = "http://172.20.246.141:8000"
+let host_url = "http://172.20.246.40:8000"
 // let host_url = "http://172.20.246.203:8000"
 // let host_url = "http://172.20.246.196:8000"
 
@@ -585,15 +586,15 @@ export function* generateSaveScenario() {
     console.log("Trying to save scenario")
     let urlName = yield select(selectDelistContainerDomain());
     let urlParams = urlName.get('urlParamsString');
-    let user_id = "user_id=Tanaya";
+    let user_id = "user_id=tan1";
     let scenarioName= urlName.get('scenarioName');
     let sessionID= "session_id=2";
 
     let AJAX_args =urlParams+"&scenario_name="+scenarioName+"&"+user_id+"&"+sessionID ;
 
-    console.log('http://172.20.246.141:8000/api/npd_impact_save_scenario?' + AJAX_args);
-    let data = yield call(request, 'http://172.20.246.141:8000/api/delist_scenario?' + AJAX_args);
-    // yield put(updateSaveScenarioResponse(data));
+    console.log(host_url+'/api/npd_impact_save_scenario?' + AJAX_args);
+    let data = yield call(request, host_url+'/api/delist_scenario?' + AJAX_args);
+    yield put(updateSaveScenarioResponse(data));
 
   } catch (err) {
     //console.log(err);

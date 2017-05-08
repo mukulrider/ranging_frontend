@@ -38,6 +38,7 @@ export class RangingScenarioTrackerPage extends React.PureComponent { // eslint-
     super(props);
     this.state = {
       activeScenarioListTable: 1,
+      activeKey:1,
 
     };
 
@@ -99,14 +100,7 @@ export class RangingScenarioTrackerPage extends React.PureComponent { // eslint-
                       <div className="col-xs-12">
                         <div className="scenarioTitle">Select the scenario to be viewed</div>
                       </div>
-                      {/*<div className="col-xs-1">*/}
-                      {/*<span className="glyphicon glyphicon-info-sign pull-right infoButton"*/}
-                      {/*onClick={() => {*/}
-                      {/*this.setState({showInfoModalFlag: true});*/}
-                      {/*this.setState({infoModalHeader: "Product sub-group sales outperformance"});*/}
-                      {/*this.setState({infoModalHelpText: "Tesco’s outperformance wrt the Market at a Product Subgroup level"});*/}
-                      {/*}}> </span>*/}
-                      {/*</div>*/}
+
                     </div>
 
 

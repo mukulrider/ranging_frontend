@@ -37,9 +37,7 @@ class NewSelector2 extends React.PureComponent { // eslint-disable-line react/pr
     // alert(queryString);
     // APPEND URL PARAMS
     this.props.onGenerateUrlParamsString(queryString);
-    let filterParam = this.props.onGenerateUrlParamsString(queryString);
-    console.log("aaa", this.props.onGenerateUrlParamsString(queryString));
-    console.log("buying_controller=Meat Fish and Veg&long_description=3 BIRD RST WITH C/BERRY, DATE and ORNG S/FING - 79631889", this.props.onGenerateUrlParamsString(queryString));
+    // let filterParam = this.props.onGenerateUrlParamsString(queryString);
     this.props.onGenerateFilterParamsString(queryString);
     // this.props.onGenerateUrlParamsData();
     // this.updateNewState(newUrl + '?' + queryString);

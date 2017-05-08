@@ -22,8 +22,11 @@ export function* defaultSaga() {
   // See example in containers/HomePage/sagas.js
 }
 
+let host_url_rangingScenario=`http://172.20.246.40:8000`
+
 //------------------------------- Scenario List ------------------------------------------
 export function* generateAllScenarioList() {
+
 
   let urlName = yield select(selectRangingScenarioTrackerPageDomain());
   let selectedTab = urlName.get('selectedTab');
@@ -33,10 +36,12 @@ export function* generateAllScenarioList() {
 
 
     if(selectedTab==="npd"){
-      const scenario_list= yield call(request,`http://172.20.246.140:8000/api/npd_impact_list_scenario?user_id=sachin123`);
+      console.log(host_url_rangingScenario+`/api/npd_impact_list_scenario?user_id=sachin123`)
+      const scenario_list= yield call(request,host_url_rangingScenario+`/api/npd_impact_list_scenario?user_id=sachin123`);
       yield put(fetchRangingAllScenarioDataSuccess(scenario_list));
     }else{
-      const scenario_list= yield call(request,`http://172.20.246.140:8000/api/delist_list_scenario?user_id=Tanaya`);
+      console.log(host_url_rangingScenario+`/api/delist_list_scenario?user_id=tan1`);
+      const scenario_list= yield call(request,host_url_rangingScenario+`/api/delist_list_scenario?user_id=tan1`);
       yield put(fetchRangingAllScenarioDataSuccess(scenario_list));
     }
 

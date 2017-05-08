@@ -69,7 +69,7 @@ import {
   WeekTabClick,
   StoreTabClick,
   UrlParams,
-  saveScenarioFlag,saveScenarioName,
+  saveScenarioFlag,saveScenarioName,updateSaveScenarioResponse,
 } from './actions';
 
 import styles from './style.scss';
@@ -512,6 +512,27 @@ export class DelistContainer extends React.PureComponent { // eslint-disable-lin
                         }}
                                  style={{marginTop:'2%'}}>Save Scenario</Button>
                       </div>
+
+
+                      {/*Saving scenario modal call-conditions*/}
+                      {(()=>{
+                        if(this.props.DelistContainer.saveScenarioResponse!=='') {
+                          if (this.props.DelistContainer.saveScenarioResponse.save_scenario === "SUCCESS") {
+                            console.log("entered success function");
+                            document.body.style.cursor='default';
+                            this.props.onSaveScenarioResponse('');
+                            this.setState({showSaveScenarioModalFlag: false});
+                            this.setState({showSaveScenarioSuccessModalFlag: true});
+
+                          }
+
+                        }
+
+
+
+                      })()}
+
+
 
 
                       {/*<div className="breadcrumb">*/}
@@ -1649,6 +1670,7 @@ function mapDispatchToProps(dispatch) {
     //Saving scenario
     onSaveScenarioName: (e) => dispatch(saveScenarioName(e.target.value)),
     onSaveScenarioFlag: (e) => dispatch(saveScenarioFlag(e)),
+    onSaveScenarioResponse: (e) => dispatch(updateSaveScenarioResponse(e)),
 
   };
 }
