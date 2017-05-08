@@ -85,23 +85,6 @@ export class DelistContainer extends React.PureComponent { // eslint-disable-lin
     this.props.onDataUrlParams(this.props.location.query);
     // console.log("2onDataUrlParams");
     this.props.onUrlParams(this.props.location.search);
-    // console.log("3onUrlParams");
-
-    // this.props.onWaterfallValueChart();
-    // this.props.onWaterfallValueChart();
-
-    // console.log("4onWaterfallValueChart");
-    // setTimeout(() => {
-    //   // alert("time");
-    //   this.props.onApiFetch();
-    //   console.log("5onApiFetch");
-    //   this.props.ondelistTable();
-    //   console.log("6ondelistTable");
-    // }, 10000);
-    // this.props.onApiFetch();
-    // console.log("5onApiFetch");
-    // this.props.ondelistTable();
-    // console.log("6ondelistTable");
     this.props.onGenerateSideFilter();
     console.log("7onGenerateSideFilter");
   };
@@ -124,27 +107,15 @@ export class DelistContainer extends React.PureComponent { // eslint-disable-lin
     )
   }
 
-  onRowSelect=(row)=>{
-    console.log("Inside OnClick Row of bootstrap Table:");
-    console.log(row);
-    console.log(row.parent_supplier);
-    console.log(this);
-    console.log(this.props);
+/*  supplierPopUpProduct=(cell,row)=> {
+  console.log("Inside Pop Up table Success!")
+  console.log(row)
+  return row.productcode + '-' + row.productdescription;
 }
-/*
-  const selectRowProp = {
-  console.log("Inside OnSelect Row of bootstrap Table:");
-  console.log(row);
-  console.log(e);
-  console.log(row.parent_supplier);
-  console.log(this);
-  console.log(this.props);
-  onSelect: onRowSelect
-};*/
-  // componentDidUpdate = () => {
-  //   // this.props.onDataUrlParams(this.props.location.query);
-  //   this.props.onUrlParams(this.props.location.search);
-  // };
+
+  supplierPopUpSubsProduct=(cell,row) => {
+  return row.substituteproductcode + '-' + row.substituteproductdescription;
+}*/
 
   constructor(props) {
     super(props);
@@ -174,23 +145,8 @@ export class DelistContainer extends React.PureComponent { // eslint-disable-lin
   }
 
   render() {
-    const selectRowProp = {
-    onSelect: this.onRowSelect.bind(this)
-  }
     //For url parameters
     const options = {
- /*     onRowClick: (row,e) => {
-        console.log("Inside OnClick Row of bootstrap Table:");
-        console.log(row);
-        console.log(e);
-        console.log(row.parent_supplier);
-        console.log(this);
-        console.log(this.props);
-        this.props.onSupplierImpactTableClick(row.parent_supplier);
-        this.setState({smShow: true});
-        this.props.onSupplierPopupTableSpinner(0);
-
-      },*/
       page: 1,  // which page you want to show as default
       sizePerPageList: [ {
         text: '5', value: 5
@@ -216,6 +172,14 @@ export class DelistContainer extends React.PureComponent { // eslint-disable-lin
       // withFirstAndLast: false > Hide the going to First and Last page button
     };
 
+    const rowOptions = {
+      onRowClick: (row,e) => {
+        this.props.onSupplierImpactTableClick(row.parent_supplier);
+        this.setState({smShow: true});
+        this.props.onSupplierPopupTableSpinner(0);
+
+      }
+  }
     console.log('hi', this.props);
 
     let formatSales = (cell) =>{
@@ -228,9 +192,6 @@ export class DelistContainer extends React.PureComponent { // eslint-disable-lin
       }
     }
 
-
-
-
     let formatVolume = (cell) => {
       if (cell >= 1000 || cell <= -1000) {
         let rounded = Math.round(cell / 1000);
@@ -239,19 +200,18 @@ export class DelistContainer extends React.PureComponent { // eslint-disable-lin
       } else {
         return (Math.round(cell));
       }
-
-
     };
 
-    // let abc = 1;
-    // while (abc) {
-    //   this.props.onApiFetch();
-    //   console.log("5onApiFetch");
-    //   this.props.ondelistTable();
-    //   console.log("6ondelistTable");
-    //   abc = 0;
-    //   // alert(abc);
-    // }
+    let supplierPopUpProduct=(cell,row)=> {
+      console.log("Inside Pop Up table Success!")
+      console.log(row)
+      return row.productcode + '-' + row.productdescription;
+    }
+
+    let supplierPopUpSubsProduct=(cell,row) => {
+      return row.substituteproductcode + '-' + row.substituteproductdescription;
+    }
+
     return (
       <div>
         <Helmet
@@ -1159,13 +1119,13 @@ export class DelistContainer extends React.PureComponent { // eslint-disable-lin
                         <div>
                           {
                             (() => {
-                              if (this.props.DelistContainer.data && this.props.DelistContainer.data.sup_sales_table) {
+                              if (this.props.DelistContainer.data && this.props.DelistContainer.data.sup_sales_table && (this.props.DelistContainer.supplierImpactTableSpinner == 1)) {
 
 
                                 return (
                                   <div>
                                     <BootstrapTable
-                                      data={this.props.DelistContainer.data.sup_sales_table} options={options} onRowClick={this.onRowSelect.bind(this)}
+                                      data={this.props.DelistContainer.data.sup_sales_table} options={Object.assign({},options,rowOptions)}
                                       striped={true}
                                       hover
                                       condensed
@@ -1230,14 +1190,13 @@ export class DelistContainer extends React.PureComponent { // eslint-disable-lin
                             <div>
                           {
                             (() => {
-                            // if (this.props.ProductPage.data) {
                             if (this.props.DelistContainer.supplierPopuptableDataSuccess && (this.props.DelistContainer.supplierPopupTableSpinner == 1)) {
 
 
                             return (
                             <div>
                             <BootstrapTable
-                            data={this.props.DelistContainer.supplierPopuptableDataSuccess.table} options={options} /*tableStyle={ { width: '80%',marginLeft:'10%' }}*/
+                            data={this.props.DelistContainer.supplierPopuptableDataSuccess.table} options={options}
                             striped={true}
                             hover
                             condensed
@@ -1245,13 +1204,13 @@ export class DelistContainer extends React.PureComponent { // eslint-disable-lin
                             search={true}
                             exportCSV={true}
                             >
-                            <TableHeaderColumn dataField="${productcode}${productdescription}" isKey={true} dataSort={true} dataAlign="center">Delisted product</TableHeaderColumn>
+                            <TableHeaderColumn dataField="productcode" dataFormat={supplierPopUpProduct} isKey={true} dataSort={true} dataAlign="center">Delisted product</TableHeaderColumn>
                             <TableHeaderColumn dataField="delist_pred_value" dataFormat={formatSales} dataSort={true} dataAlign="center" width="9%">Predicted Value</TableHeaderColumn>
                             <TableHeaderColumn dataField="delist_pred_vol" dataFormat={formatVolume} dataSort={true} dataAlign="center" width="9%">Predicted Volume</TableHeaderColumn>
                             <TableHeaderColumn dataField="delist_value_loss" dataFormat={formatSales} dataSort={true} dataAlign="center" width="8%">Value loss</TableHeaderColumn>
                             <TableHeaderColumn dataField="delist_vol_loss" dataFormat={formatVolume} dataSort={true} dataAlign="center">Volume loss</TableHeaderColumn>
                             <TableHeaderColumn dataField="substitute_supplier" dataSort={true} dataAlign="center">Substituting Supplier</TableHeaderColumn>
-                            <TableHeaderColumn dataField="substituteproductcode" dataSort={true} dataAlign="center" width="9%">Substituting Product</TableHeaderColumn>
+                            <TableHeaderColumn dataField="substituteproductcode" dataFormat={supplierPopUpSubsProduct} dataSort={true} dataAlign="center" width="9%">Substituting Product</TableHeaderColumn>
                             <TableHeaderColumn dataField="substitute_value_gain" dataFormat={formatSales} dataSort={true} dataAlign="center" width="9%">Value gain due to
                             substitution</TableHeaderColumn>
                             <TableHeaderColumn dataField="substitute_vol_gain" dataFormat={formatVolume} dataSort={true} dataAlign="center">Volume gain due to

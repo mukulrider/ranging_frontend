@@ -7,6 +7,7 @@
 import React, {PropTypes} from 'react';
 import {connect} from 'react-redux';
 import Helmet from 'react-helmet';
+import { BootstrapTable, TableHeaderColumn } from 'react-bootstrap-table';
 import {FormattedMessage} from 'react-intl';
 import {createStructuredSelector} from 'reselect';
 import makeSelectRangingScenarioTrackerPage from './selectors';
@@ -19,6 +20,8 @@ import Button from 'components/button';
 import InputField from 'components/input_field';
 import {Modal, Nav, NavItem, MenuItem, NavDropdown} from 'react-bootstrap';
 import {Pagination, Accordion} from 'react-bootstrap';
+require('react-bootstrap-table/css/react-bootstrap-table.css')
+
 import {
   fetchRangingAllScenarioData, tabChange
 } from './actions';
@@ -34,6 +37,43 @@ export class RangingScenarioTrackerPage extends React.PureComponent { // eslint-
     // this.props.onFetchRangingAllScenarioData();
   };
 
+  cellButton=(cell, row,enumObject, rowIndex)=>{
+    return (
+      <button
+        type="button"
+        className="btn btn-primary"
+        onClick={() =>{
+          let page, attributes;
+          if (this.props.RangingScenarioTrackerPage.selectedTab === "npd") {
+            page = '/ranging/view-scenario?';
+
+            attributes = 'user_id=sachin123' + "&scenario_name=" + row.scenario_name;
+
+
+          } else {
+            page = '/ranging/view-scenario_delist?';
+            attributes = 'user_id=Tanaya' + "&scenario_name=" + row.scenario_name;
+
+          }
+          let objString = page + attributes;
+          window.location = objString;
+        }}
+      >
+        View
+      </button>
+    )
+  }
+
+  cellButton2=(cell,row)=>{
+    return (
+      <button
+        type="button"
+        className="btn btn-primary">
+        Delete
+      </button>
+    )
+
+  }
   constructor(props) {
     super(props);
     this.state = {
@@ -46,6 +86,32 @@ export class RangingScenarioTrackerPage extends React.PureComponent { // eslint-
 
 
   render() {
+    const options = {
+      page: 1,  // which page you want to show as default
+      sizePerPageList: [ {
+        text: '5', value: 5
+      }, {
+        text: '10', value: 10
+      }, {
+        text: '15', value: 15
+      }, {
+        text: 'All', value: 25
+      } ], // you can change the dropdown list for size per page
+      sizePerPage: 5,  // which size per page you want to locate as default
+      pageStartIndex: 1, // where to start counting the pages
+      paginationSize: 5,  // the pagination bar size.
+      prePage: 'Prev', // Previous page button text
+      nextPage: 'Next', // Next page button text
+      firstPage: 'First', // First page button text
+      lastPage: 'Last', // Last page button text
+      paginationShowsTotal: this.renderShowsTotal,  // Accept bool or function
+      paginationPosition: 'bottom',  // default is bottom, top and both is all available
+      expandRowBgColor: 'rgb(242, 255, 163)'
+      // hideSizePerPage: true > You can hide the dropdown for sizePerPage
+      // alwaysShowAllBtns: true // Always show next and previous button
+      // withFirstAndLast: false > Hide the going to First and Last page button
+    };
+
     return (
       <div>
         <Helmet
@@ -102,116 +168,46 @@ export class RangingScenarioTrackerPage extends React.PureComponent { // eslint-
                       </div>
 
                     </div>
-
-
-                    <div id="table">
-
-                      {/*Search*/}
-                      <div className="col-xs-12 col-xs-5" style={{marginBottom: "10px"}}>
-                        <InputField type={'string'}
-                                    placeholder="Search scenario name"
-                                    value={this.props.RangingScenarioTrackerPage.scenarioName}
-                                    onChange={(e) => {
-                                      {/*this.props.onSaveTable1SearchParam(e);*/
-                                      }
-                                      {/*this.props.onDataFetchCanniProdTable();*/
-                                      }
-                                    }}
-                        />
-                      </div>
-
-
-                      {/*table*/}
-                      <table className="table table-hover table-bordered " width="100%">
-                        <thead>
-                        <tr className="table-header-format"
-                            style={{fontSize: "16px", fontFamily: "Tesco"}}>
-                          <th>Date</th>
-                          {/*<th>Event Name</th>*/}
-                          <th>Scenario Name</th>
-                          <th></th>
-                          <th></th>
-                        </tr>
-                        </thead>
-                        <tbody className="table-body-format">
-                        {(() => {
+                    <div>
+                      {
+                        (() => {
                           if (this.props.RangingScenarioTrackerPage.allScenarioList) {
 
-                            return this.props.RangingScenarioTrackerPage.allScenarioList.map(obj => {
 
-                              return (
-                                <tr key={Math.random() + Date.now()}>
-                                  {/*<td>{obj.brand_name}</td>*/}
-                                  <td style={{width: '20%'}}>{obj.system_time}</td>
-                                  {/*<td style={{width:'30%'}}>{obj.event_name}</td>*/}
-                                  <td style={{width: '40%'}}>{obj.scenario_name}</td>
-                                  <td style={{width: '20%'}}>
+                            return (
+                              <div>
+                                <BootstrapTable
+                                  data={this.props.RangingScenarioTrackerPage.allScenarioList} options={options}
+                                  striped={true}
+                                  hover
+                                  condensed
+                                  pagination={ true }
+                                  search={true}
+                                  exportCSV={true}
+                                >
+                                  <TableHeaderColumn dataField="system_time" isKey={true} dataSort={true} dataAlign="center" width="20%">Date</TableHeaderColumn>
+                                  <TableHeaderColumn dataField="scenario_name" dataSort={true} dataAlign="center" width="40%">Scenario Name</TableHeaderColumn>
+                                  <TableHeaderColumn dataFormat={this.cellButton} dataSort={true} dataAlign="center" width="20%"></TableHeaderColumn>
+                                  <TableHeaderColumn dataFormat={this.cellButton2} dataSort={true} dataAlign="center" width="20%"></TableHeaderColumn>
+                                </BootstrapTable>
 
-                                    <Button onClick={() => {
-                                      let page, attributes;
-                                      if (this.props.RangingScenarioTrackerPage.selectedTab === "npd") {
-                                        page = '/ranging/view-scenario?';
+                              </div>
+                            );
 
-                                        attributes = 'user_id=sachin123' + "&scenario_name=" + obj.scenario_name;
-
-
-                                      } else {
-                                        page = '/ranging/view-scenario_delist?';
-                                        attributes = 'user_id=Tanaya' + "&scenario_name=" + obj.scenario_name;
-
-                                      }
-                                      let objString = page + attributes;
-                                      window.location = objString;
-                                    }}>View</Button></td>
-                                  <td style={{width: '20%'}}><Button>Delete</Button></td>
-                                </tr>
-                              )
-
-                            })
                           }
+                          else {
+                            return (
 
-                        })()}
-                        </tbody>
-                      </table>
+                              <div className="text-center" colSpan="11"><Spinner />Please Wait a Moment....!</div>
 
-                      {/*pagination*/}
-
-                      {(() => {
-
-                        if (this.props.RangingScenarioTrackerPage.allScenarioList && this.props.RangingScenarioTrackerPage.allScenarioList.count) {
-
-                          return <Pagination
-                            prev
-                            next
-                            first
-                            last
-                            ellipsis
-                            boundaryLinks
-                            items={this.props.RangingScenarioTrackerPage.allScenarioList.pagination_count}
-                            maxButtons={5}
-                            activeScenarioListTable={this.state.activeScenarioListTable}
-                            onSelect={(e) => {
-                              alert(e);
-
-                              this.setState({activeScenarioListTable: e})
-
-                              let dataTablePageUrlParamsNew = "page=" + e;
-                              alert(dataTablePageUrlParamsNew);
-
-                              {/*this.props.onSaveTable1PageParam(dataTable1PageUrlParamsNew);*/
-                              }
-                              {/*this.props.onDataFetchCanniProdTable();*/
-                              }
-
-                            }}
-                          />
-
-                        }
-
-
-                      })()}
+                            );
+                          }
+                        })()
+                      }
 
                     </div>
+
+
 
 
                   </div>

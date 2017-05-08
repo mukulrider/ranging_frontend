@@ -8,7 +8,10 @@ import React, {PropTypes} from 'react';
 import {connect} from 'react-redux';
 import {FormattedMessage} from 'react-intl';
 import Helmet from 'react-helmet';
+import { BootstrapTable, TableHeaderColumn } from 'react-bootstrap-table';
 // import messages from './messages';
+require('react-bootstrap-table/css/react-bootstrap-table.css')
+
 import {browserHistory} from 'react-router';
 import {createStructuredSelector} from 'reselect';
 import makeSelectRangingNpdPage from './selectors';
@@ -65,6 +68,31 @@ export class RangingNpdPage extends React.PureComponent { // eslint-disable-line
 
 
   render() {
+    const options = {
+      page: 1,  // which page you want to show as default
+      sizePerPageList: [ {
+        text: '5', value: 5
+      }, {
+        text: '10', value: 10
+      }, {
+        text: '15', value: 15
+      }, {
+        text: 'All', value: 25
+      } ], // you can change the dropdown list for size per page
+      sizePerPage: 5,  // which size per page you want to locate as default
+      pageStartIndex: 1, // where to start counting the pages
+      paginationSize: 5,  // the pagination bar size.
+      prePage: 'Prev', // Previous page button text
+      nextPage: 'Next', // Next page button text
+      firstPage: 'First', // First page button text
+      lastPage: 'Last', // Last page button text
+      paginationShowsTotal: this.renderShowsTotal,  // Accept bool or function
+      paginationPosition: 'bottom',  // default is bottom, top and both is all available
+      expandRowBgColor: 'rgb(242, 255, 163)'
+      // hideSizePerPage: true > You can hide the dropdown for sizePerPage
+      // alwaysShowAllBtns: true // Always show next and previous button
+      // withFirstAndLast: false > Hide the going to First and Last page button
+    };
 
     const price_gravity_axis_bands= this.props.RangingNpdPage.price_gravity_data.price_bucket;
     const price_gravity_data= this.props.RangingNpdPage.price_gravity_data.data;
@@ -77,6 +105,16 @@ export class RangingNpdPage extends React.PureComponent { // eslint-disable-line
     let dataFilterUrlParams=this.props.RangingNpdPage.urlParamsString;
 // console.log('previous selection',this.props.RangingNpdPage.filter_selection);
 
+    let formatSales = (i) => {
+      if (i >= 1000 || i <= -1000) {
+        let rounded = Math.round(i / 1000);
+        return ('£ ' + rounded.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + 'K');
+      }
+
+      else {
+        return ('£ ' + Math.round(i));
+      }
+    };
 
   return (
       <div>
@@ -377,100 +415,46 @@ export class RangingNpdPage extends React.PureComponent { // eslint-disable-line
                                     }}> </span>
                             </div>
                           </div>
-
-
-
-                          <div id="table">
-
-                            {/*Search*/}
-                            <div className="col-xs-12 col-xs-5" style={{marginBottom:"10px"}}>
-                              <InputField type={'string'}
-                                          placeholder="Search Retailer"
-                                          value={this.props.textBoxQueryString}
-                                          onChange={(e)=>{
-                                            this.props.onGenerateTextBoxQueryString(e);
-                                            this.props.onUnmatchedProdTable();
-                                          }}
-                              />
-                            </div>
-                            <div className="col-xs-0 col-xs-7 " style={{textAlign:"right"}}>
-                              {/*<a style={{fontSize:"15px",verticalAlign:"centre"}} onClick={()=>{*/}
-                              {/*this.props.onGenerateTextBoxQueryString('');*/}
-                              {/*this.props.onUnmatchedProdTable();*/}
-                              {/*}}> Clear </a>*/}
-                            </div>
-
-
-                            {/*table*/}
-                            <table className="table table-hover table-bordered " width="100%">
-                              <thead>
-                              <tr>
-                                <th className="table-header-format">Product description</th>
-                                <th className="table-header-format">Retailer</th>
-                                <th className="table-header-format">ASP</th>
-                              </tr>
-                              </thead>
-                              <tbody className="table-body-format">
-                              {(() => {
+                          <div>
+                            {
+                              (() => {
                                 if (this.props.RangingNpdPage.data) {
-                                  return this.props.RangingNpdPage.data.table.map(obj => {
-
-                                    return (
-                                      <tr key={Math.random() + Date.now()}>
-                                        <td>{obj.competitor_product_desc}</td>
-                                        <td>{obj.retailer}</td>
-                                        <td>£{obj.asp}</td>
-                                      </tr>
-                                    )
-                                  })
-                                }
-                              })()}
-                              </tbody>
 
 
-                            </table>
+                                  return (
+                                    <div>
+                                      <BootstrapTable
+                                        data={this.props.RangingNpdPage.data.table} options={options}
+                                        striped={true}
+                                        hover
+                                        condensed
+                                        pagination={ true }
+                                        search={true}
+                                        exportCSV={true}
+                                      >
+                                        <TableHeaderColumn dataField="competitor_product_desc" isKey={true} dataSort={true} dataAlign="center">Product Description</TableHeaderColumn>
+                                        <TableHeaderColumn dataField="retailer" dataSort={true} dataAlign="center">Retailer</TableHeaderColumn>
+                                        <TableHeaderColumn dataField="asp" dataFormat={formatSales} dataSort={true} dataAlign="center">ASP</TableHeaderColumn>
+                                      </BootstrapTable>
 
-                            {/*pagination*/}
-
-                            {(() => {
-                                if (this.props.RangingNpdPage.data && this.props.RangingNpdPage.data.count) {
-
-                                  return <Pagination
-                                    prev
-                                    next
-                                    first
-                                    last
-                                    ellipsis
-                                    boundaryLinks
-                                    items={this.props.RangingNpdPage.data.pagination_count}
-                                    maxButtons={5}
-                                    activePage={this.state.activePage}
-                                    onSelect={(e) => {
-
-                                      this.setState({activePage: e})
-
-                                      dataPageUrlParams = "page=" + e;
-                                      this.props.onSavePageParam(dataPageUrlParams);
-                                      {/**/
-                                      }
-                                      if (dataFilterUrlParams !== '' && dataWeekUrlParams !== '') {
-                                        browserHistory.push(this.props.location.pathname + "?" + dataWeekUrlParams + "&" + dataFilterUrlParams + "&" + dataPageUrlParams);
-                                      } else if (dataFilterUrlParams !== '' || dataWeekUrlParams !== '') {
-                                        browserHistory.push(this.props.location.pathname + "?" + dataWeekUrlParams + dataFilterUrlParams + "&" + dataPageUrlParams);
-                                      }
-                                      else {
-                                        browserHistory.push(this.props.location.pathname + "?" + dataPageUrlParams);
-                                      }
-                                    }}
-                                  />
+                                    </div>
+                                  );
 
                                 }
-                              }
-                            )()}
+                                else {
+                                  return (
 
+                                    <div className="text-center" colSpan="11"><Spinner />Please Wait a Moment....!</div>
 
+                                  );
+                                }
+                              })()
+                            }
 
                           </div>
+
+
+
                         </div>
                       </div>
 

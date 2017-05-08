@@ -7,6 +7,7 @@
 import React, {PropTypes} from 'react';
 import {connect} from 'react-redux';
 import Helmet from 'react-helmet';
+import { BootstrapTable, TableHeaderColumn } from 'react-bootstrap-table';
 import {FormattedMessage} from 'react-intl';
 import {createStructuredSelector} from 'reselect';
 import makeSelectRangingViewScenarioPage from './selectors';
@@ -20,6 +21,8 @@ import WaterFallChartNpd from 'components/WaterFallChartNpd';
 import InputField from 'components/input_field';
 import {Modal, Nav, NavItem, MenuItem, NavDropdown} from 'react-bootstrap';
 import {Pagination, Accordion} from 'react-bootstrap';
+require('react-bootstrap-table/css/react-bootstrap-table.css')
+
 import {
   fetchRangingScenarioData,sendUrlParams
 } from './actions';
@@ -58,29 +61,50 @@ export class RangingViewScenarioPage extends React.PureComponent { // eslint-dis
   }
 
   render() {
-
-    console.log("rendered");
-    let formatSales = (i) => {
-      if (i >= 1000 || i <= -1000) {
-        let rounded = Math.round(i / 1000);
-        return ('£ ' + rounded.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + 'K');
-      }
-
-      else {
-        return ('£ ' + Math.round(i));
-      }
+    const options = {
+      page: 1,  // which page you want to show as default
+      sizePerPageList: [ {
+        text: '5', value: 5
+      }, {
+        text: '10', value: 10
+      }, {
+        text: '15', value: 15
+      }, {
+        text: 'All', value: 25
+      } ], // you can change the dropdown list for size per page
+      sizePerPage: 10,  // which size per page you want to locate as default
+      pageStartIndex: 1, // where to start counting the pages
+      paginationSize: 5,  // the pagination bar size.
+      prePage: 'Prev', // Previous page button text
+      nextPage: 'Next', // Next page button text
+      firstPage: 'First', // First page button text
+      lastPage: 'Last', // Last page button text
+      paginationShowsTotal: this.renderShowsTotal,  // Accept bool or function
+      paginationPosition: 'bottom',  // default is bottom, top and both is all available
+      expandRowBgColor: 'rgb(242, 255, 163)'
+      // hideSizePerPage: true > You can hide the dropdown for sizePerPage
+      // alwaysShowAllBtns: true // Always show next and previous button
+      // withFirstAndLast: false > Hide the going to First and Last page button
     };
 
-    let formatVolume = (i) => {
-      if (i >= 1000 || i <= -1000) {
-        let rounded = Math.round(i / 1000)
+    let formatSales = (cell) =>{
+      if (cell >= 1000 || cell <= -1000) {
+        let rounded = Math.round(cell / 1000);
+        return ('£ ' + rounded.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + 'K');
+      }
+      else {
+        return ('£ ' + Math.round(cell));
+      }
+    }
+
+    let formatVolume = (cell) => {
+      if (cell >= 1000 || cell <= -1000) {
+        let rounded = Math.round(cell / 1000);
         return (rounded.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + 'K');
 
       } else {
-        return (Math.round(i));
+        return (Math.round(cell));
       }
-
-
     };
 
     let user_attributes,week_13_chart,week_26_chart,week_52_chart,week_13_table,week_26_table,week_52_table,chart_data_to_be_used,table_data_to_be_used;
@@ -449,105 +473,45 @@ export class RangingViewScenarioPage extends React.PureComponent { // eslint-dis
                               }}> </span>
                                   </div>
                                 </div>
-
-
-                                <div id="table">
-
-                                  {/*Search*/}
-                                  <div className="col-xs-12 col-xs-5" style={{marginBottom: "10px"}}>
-                                    <InputField type={'string'}
-                                                placeholder="Search Product Description"
-                                                value={this.props.searchTable1}
-                                                onChange={(e) => {
-                                                  {/*this.props.onSaveTable1SearchParam(e);*/
-                                                  }
-                                                  {/*this.props.onDataFetchCanniProdTable();*/
-                                                  }
-                                                }}
-                                    />
-                                  </div>
-
-                                  <div className="col-xs-0 col-xs-7 " style={{textAlign: "right"}}>
-                                    {/*<a style={{fontSize:"15px",verticalAlign:"centre"}} onClick={()=>{*/}
-                                    {/*this.props.onGenerateTextBoxQueryString('');*/}
-                                    {/*this.props.onUnmatchedProdTable();*/}
-                                    {/*}}> Clear </a>*/}
-                                  </div>
-
-
-                                  {/*table*/}
-                                  <table className="table table-hover table-bordered " width="100%">
-                                    <thead>
-                                    <tr className="table-header-format"
-                                        style={{fontSize: "16px", fontFamily: "Tesco"}}>
-                                      {/*<th>Branded Name</th>*/}
-                                      <th>Brand Indicator</th>
-                                      <th>Products Description</th>
-                                      <th>Volume</th>
-                                      <th>Sales Value</th>
-                                    </tr>
-                                    </thead>
-                                    <tbody className="table-body-format">
-                                    {(() => {
-                                      if (true) {
+                                <div>
+                                  {
+                                    (() => {
+                                      if (this.props.RangingViewScenarioPage.canniProdTableData) {
+                                        console.log("this.props.RangingViewScenarioPage.canniProdTableData:",this.props.RangingViewScenarioPage.canniProdTableData)
 
                                         return (
-                                          table_data_to_be_used.df.map(obj => {
+                                          <div>
+                                            <BootstrapTable
+                                              data={this.props.RangingViewScenarioPage.canniProdTableData} options={options}
+                                              striped={true}
+                                              hover
+                                              condensed
+                                              pagination={ true }
+                                              search={true}
+                                              exportCSV={true}
+                                            >
+                                              <TableHeaderColumn dataField="productcode" isKey={true} dataSort={true} dataAlign="center">Brand Indicator</TableHeaderColumn>
+                                              <TableHeaderColumn dataField="long_description" dataSort={true} dataAlign="center" width="9%">Products Description</TableHeaderColumn>
+                                              <TableHeaderColumn dataField="predicted_volume" dataFormat={formatVolume} dataSort={true} dataAlign="center" width="9%">Volume</TableHeaderColumn>
+                                              <TableHeaderColumn dataField="predicted_sales" dataFormat={formatSales} dataSort={true} dataAlign="center" width="8%">Sales Value</TableHeaderColumn>
+                                            </BootstrapTable>
 
-                                            return (
-                                              <tr key={Math.random() + Date.now()}>
-                                                {/*<td>{obj.brand_name}</td>*/}
-                                                <td>{obj.brand_indicator}</td>
-                                                <td>{obj.long_description}</td>
-                                                <td>{formatVolume(obj.predicted_volume)}</td>
-                                                <td>{formatSales(obj.predicted_sales)}</td>
-                                              </tr>
-                                            )
+                                          </div>
+                                        );
 
-                                          })
-                                        )
                                       }
-                                    })()}
-                                    </tbody>
-                                  </table>
+                                      else {
+                                        return (
 
-                                  {/*pagination*/}
+                                          <div className="text-center" colSpan="11"><Spinner />Please Wait a Moment....!</div>
 
-                                  {(() => {
-
-                                    if (this.props.RangingViewScenarioPage.canniProdTableData && this.props.RangingViewScenarioPage.canniProdTableData.similar_product_table.count) {
-
-                                      return <Pagination
-                                        prev
-                                        next
-                                        first
-                                        last
-                                        ellipsis
-                                        boundaryLinks
-                                        items={this.props.RangingViewScenarioPage.canniProdTableData.similar_product_table.pagination_count}
-                                        maxButtons={5}
-                                        activePageSupTable={this.state.activePageSupTable}
-                                        onSelect={(e) => {
-                                          alert(e);
-
-                                          this.setState({activePageSupTable: e})
-
-                                          let dataTable1PageUrlParamsNew = "page=" + e;
-                                          alert(dataTable1PageUrlParamsNew);
-                                          {/*console.log("printing pagination for bubble table", dataTable2PageUrlParamsNew);*/
-                                          }
-                                          this.props.onSaveTable1PageParam(dataTable1PageUrlParamsNew);
-                                          this.props.onDataFetchCanniProdTable();
-
-                                        }}
-                                      />
-
-                                    }
-
-
-                                  })()}
+                                        );
+                                      }
+                                    })()
+                                  }
 
                                 </div>
+
 
                               </div>
                             </div>

@@ -8,9 +8,11 @@ import React, {PropTypes} from 'react';
 import {connect} from 'react-redux';
 import Helmet from 'react-helmet';
 import {FormattedMessage} from 'react-intl';
+import { BootstrapTable, TableHeaderColumn } from 'react-bootstrap-table';
 import {createStructuredSelector} from 'reselect';
 import makeSelectRangingNpdImpactPage from './selectors';
 import messages from './messages';
+require('react-bootstrap-table/css/react-bootstrap-table.css')
 // -----------------------------------------
 import {browserHistory} from 'react-router';
 import Button from 'components/button';
@@ -96,7 +98,31 @@ export class RangingNpdImpactPage extends React.PureComponent { // eslint-disabl
 
 
   render() {
-
+    const options = {
+      page: 1,  // which page you want to show as default
+      sizePerPageList: [ {
+        text: '5', value: 5
+      }, {
+        text: '10', value: 10
+      }, {
+        text: '15', value: 15
+      }, {
+        text: 'All', value: 25
+      } ], // you can change the dropdown list for size per page
+      sizePerPage: 10,  // which size per page you want to locate as default
+      pageStartIndex: 1, // where to start counting the pages
+      paginationSize: 5,  // the pagination bar size.
+      prePage: 'Prev', // Previous page button text
+      nextPage: 'Next', // Next page button text
+      firstPage: 'First', // First page button text
+      lastPage: 'Last', // Last page button text
+      paginationShowsTotal: this.renderShowsTotal,  // Accept bool or function
+      paginationPosition: 'bottom',  // default is bottom, top and both is all available
+      expandRowBgColor: 'rgb(242, 255, 163)'
+      // hideSizePerPage: true > You can hide the dropdown for sizePerPage
+      // alwaysShowAllBtns: true // Always show next and previous button
+      // withFirstAndLast: false > Hide the going to First and Last page button
+    };
 
     //For url parameters
     let dataWeekUrlParams = this.props.RangingNpdImpactPage.dataWeekUrlParams;
@@ -763,102 +789,46 @@ export class RangingNpdImpactPage extends React.PureComponent { // eslint-disabl
                               }}> </span>
                                           </div>
                                         </div>
-
-
-                                        <div id="table">
-
-                                          {/*Search*/}
-                                          <div className="col-xs-12 col-xs-5" style={{marginBottom: "10px"}}>
-                                            <InputField type={'string'}
-                                                        placeholder="Search Product Description"
-                                                        value={this.props.searchTable1}
-                                                        onChange={(e) => {
-                                                          this.props.onSaveTable1SearchParam(e);
-                                                          this.props.onDataFetchCanniProdTable();
-                                                        }}
-                                            />
-                                          </div>
-
-                                          <div className="col-xs-0 col-xs-7 " style={{textAlign: "right"}}>
-                                            {/*<a style={{fontSize:"15px",verticalAlign:"centre"}} onClick={()=>{*/}
-                                            {/*this.props.onGenerateTextBoxQueryString('');*/}
-                                            {/*this.props.onUnmatchedProdTable();*/}
-                                            {/*}}> Clear </a>*/}
-                                          </div>
-
-
-                                          {/*table*/}
-                                          <table className="table table-hover table-bordered " width="100%">
-                                            <thead>
-                                            <tr className="table-header-format"
-                                                style={{fontSize: "16px", fontFamily: "Tesco"}}>
-                                              {/*<th>Branded Name</th>*/}
-                                              <th>Brand Indicator</th>
-                                              <th>Products Description</th>
-                                              <th>Volume</th>
-                                              <th>Sales Value</th>
-                                            </tr>
-                                            </thead>
-                                            <tbody className="table-body-format">
-                                            {(() => {
+                                        <div>
+                                          {
+                                            (() => {
                                               if (this.props.RangingNpdImpactPage.canniProdTableData) {
 
-                                                return this.props.RangingNpdImpactPage.canniProdTableData.similar_product_table.df.map(obj => {
 
-                                                  return (
-                                                    <tr key={Math.random() + Date.now()}>
-                                                      {/*<td>{obj.brand_name}</td>*/}
-                                                      <td>{obj.brand_indicator}</td>
-                                                      <td>{obj.long_description}</td>
-                                                      <td>{formatVolume(obj.predicted_volume)}</td>
-                                                      <td>{formatSales(obj.predicted_sales)}</td>
-                                                    </tr>
-                                                  )
+                                                return (
+                                                  <div>
+                                                    <BootstrapTable
+                                                      data={this.props.RangingNpdImpactPage.canniProdTableData.similar_product_table.df} options={options}
+                                                      striped={true}
+                                                      hover
+                                                      condensed
+                                                      pagination={ true }
+                                                      search={true}
+                                                      exportCSV={true}
+                                                    >
+                                                      <TableHeaderColumn dataField="brand_indicator" isKey={true} dataSort={true} dataAlign="center">Brand Indicator</TableHeaderColumn>
+                                                      <TableHeaderColumn dataField="long_description" dataSort={true} dataAlign="center">Products Description</TableHeaderColumn>
+                                                      <TableHeaderColumn dataField="predicted_volume" dataFormat={formatVolume} dataSort={true} dataAlign="center">Volume</TableHeaderColumn>
+                                                      <TableHeaderColumn dataField="predicted_sales" dataFormat={formatSales} dataSort={true} dataAlign="center">Sales Value</TableHeaderColumn>
+                                                    </BootstrapTable>
 
-                                                })
+                                                  </div>
+                                                );
+
                                               }
+                                              else {
+                                                return (
 
-                                            })()}
-                                            </tbody>
-                                          </table>
+                                                  <div className="text-center" colSpan="11"><Spinner />Please Wait a Moment....!</div>
 
-                                          {/*pagination*/}
-
-                                          {(() => {
-
-                                            if (this.props.RangingNpdImpactPage.canniProdTableData && this.props.RangingNpdImpactPage.canniProdTableData.similar_product_table.count) {
-
-                                              return <Pagination
-                                                prev
-                                                next
-                                                first
-                                                last
-                                                ellipsis
-                                                boundaryLinks
-                                                items={this.props.RangingNpdImpactPage.canniProdTableData.similar_product_table.pagination_count}
-                                                maxButtons={5}
-                                                activePageSupTable={this.state.activePageSupTable}
-                                                onSelect={(e) => {
-                                                  alert(e);
-
-                                                  this.setState({activePageSupTable: e})
-
-                                                  let dataTable1PageUrlParamsNew = "page=" + e;
-                                                  alert(dataTable1PageUrlParamsNew);
-                                                  {/*console.log("printing pagination for bubble table", dataTable2PageUrlParamsNew);*/
-                                                  }
-                                                  this.props.onSaveTable1PageParam(dataTable1PageUrlParamsNew);
-                                                  this.props.onDataFetchCanniProdTable();
-
-                                                }}
-                                              />
-
-                                            }
-
-
-                                          })()}
+                                                );
+                                              }
+                                            })()
+                                          }
 
                                         </div>
+
+
 
                                       </div>
                                     </div>
@@ -910,96 +880,41 @@ export class RangingNpdImpactPage extends React.PureComponent { // eslint-disabl
 
                                         {/*Bubble Table*/}
                                         <div className="col-xs-6">
-                                          <div id="table">
+                                          {
+                                            (() => {
+                                              if (this.props.RangingNpdImpactPage.npd_bubble_table_data) {
 
 
-                                            {/*Search*/}
-                                            <div className="col-xs-12 col-xs-5" style={{marginBottom: "10px"}}>
-                                              <InputField type={'string'}
-                                                          dataTable2PageUrlParamsNew="page1=1"
-                                                          placeholder="Search Product Description"
-                                                          value={this.props.searchTable2}
-                                                          onChange={(e) => {
+                                                return (
+                                                  <div>
+                                                    <BootstrapTable
+                                                      data={this.props.RangingNpdImpactPage.npd_bubble_table_data.table} options={options} /*tableStyle={ { width: '80%',marginLeft:'10%' }}*/
+                                                      striped={true}
+                                                      hover
+                                                      condensed
+                                                      pagination={ true }
+                                                      search={true}
+                                                      exportCSV={true}
+                                                    >
+                                                      <TableHeaderColumn dataField="base_product_number" isKey={true} dataSort={true} dataAlign="center">BPN</TableHeaderColumn>
+                                                      <TableHeaderColumn dataField="long_description" dataSort={true} dataAlign="center">Description</TableHeaderColumn>
+                                                      <TableHeaderColumn dataField="cps" dataSort={true} dataAlign="center">CPS</TableHeaderColumn>
+                                                      <TableHeaderColumn dataField="pps" dataSort={true} dataAlign="center">Profit / Store</TableHeaderColumn>
+                                                    </BootstrapTable>
 
-                                                            this.props.onSaveTable2SearchParam(e);
-                                                            this.props.onDataFetchOnPageLoad();
-                                                            this.props.onSaveTable2PageParam(dataTable2PageUrlParamsNew);
-                                                          }}
-                                              />
-                                            </div>
-                                            <div className="col-xs-0 col-xs-7 " style={{textAlign: "right"}}>
-                                              {/*<a style={{fontSize:"15px",verticalAlign:"centre"}} onClick={()=>{*/}
-                                              {/*this.props.onGenerateTextBoxQueryString('');*/}
-                                              {/*this.props.onUnmatchedProdTable();*/}
-                                              {/*}}> Clear </a>*/}
-                                            </div>
-
-                                            {/*Table*/}
-                                            <table className="table table-hover table-bordered " width="100%">
-                                              <thead>
-                                              <tr className="table-header-format"
-                                                  style={{fontSize: "16px", fontFamily: "Tesco", textAlign: 'center'}}
-                                                  key={Math.random() + Date.now()}>
-                                                <th>BPN</th>
-                                                <th>Description</th>
-                                                <th>CPS</th>
-                                                <th>Profit / Store</th>
-                                              </tr>
-                                              </thead>
-                                              <tbody className="table-body-format">
-                                              {(() => {
-                                                if (this.props.RangingNpdImpactPage.npd_bubble_table_data) {
-                                                  return this.props.RangingNpdImpactPage.npd_bubble_table_data.table.map(obj => {
-
-                                                    return (
-                                                      <tr key={obj.base_product_number}>
-                                                        <td>{obj.base_product_number}</td>
-                                                        <td>{obj.long_description}</td>
-                                                        <td>{obj.cps}</td>
-                                                        <td>{obj.pps}</td>
-                                                      </tr>
-                                                    )
-                                                  })
-                                                }
-                                              })()}
-                                              </tbody>
-                                            </table>
-
-                                            {/*pagination*/}
-
-
-                                            {(() => {
-                                              if (this.props.RangingNpdImpactPage.npd_bubble_table_data && this.props.RangingNpdImpactPage.npd_bubble_table_data.count) {
-
-                                                return <Pagination
-                                                  prev
-                                                  next
-                                                  first
-                                                  last
-                                                  ellipsis
-                                                  boundaryLinks
-                                                  items={this.props.RangingNpdImpactPage.npd_bubble_table_data.pagination_count}
-                                                  maxButtons={5}
-                                                  activePage={this.state.activePage}
-                                                  onSelect={(e) => {
-
-                                                    this.setState({activePage: e})
-
-                                                    let dataTable2PageUrlParamsNew = "page1=" + e;
-                                                    {/*console.log("printing pagination for bubble table", dataTable2PageUrlParamsNew);*/
-                                                    }
-                                                    this.props.onSaveTable2PageParam(dataTable2PageUrlParamsNew);
-                                                    this.props.onDataFetchOnPageLoad();
-
-
-                                                  }}
-                                                />
+                                                  </div>
+                                                );
 
                                               }
-                                            })()}
+                                              else {
+                                                return (
 
+                                                  <div className="text-center" colSpan="11"><Spinner />Please Wait a Moment....!</div>
 
-                                          </div>
+                                                );
+                                              }
+                                            })()
+                                          }
                                         </div>
 
                                       </div>
@@ -1417,98 +1332,42 @@ export class RangingNpdImpactPage extends React.PureComponent { // eslint-disabl
                                       </div>
 
 
-                                      <div id="table">
-
-                                        {/*Search*/}
-                                        <div className="col-xs-12 col-xs-5" style={{marginBottom: "10px"}}>
-                                          <InputField type={'string'}
-                                                      placeholder="Search Product Description"
-                                                      value={this.props.searchTable1}
-                                                      onChange={(e) => {
-                                                        this.props.onSaveTable1SearchParam(e);
-                                                        this.props.onDataFetchCanniProdTable();
-                                                      }}
-                                          />
-                                        </div>
-
-                                        <div className="col-xs-0 col-xs-7 " style={{textAlign: "right"}}>
-                                          {/*<a style={{fontSize:"15px",verticalAlign:"centre"}} onClick={()=>{*/}
-                                          {/*this.props.onGenerateTextBoxQueryString('');*/}
-                                          {/*this.props.onUnmatchedProdTable();*/}
-                                          {/*}}> Clear </a>*/}
-                                        </div>
-
-
-                                        {/*table*/}
-                                        <table className="table table-hover table-bordered " width="100%">
-                                          <thead>
-                                          <tr className="table-header-format"
-                                              style={{fontSize: "16px", fontFamily: "Tesco"}}>
-                                            {/*<th>Branded Name</th>*/}
-                                            <th>Brand Indicator</th>
-                                            <th>Products Description</th>
-                                            <th>Volume</th>
-                                            <th>Sales Value</th>
-                                          </tr>
-                                          </thead>
-                                          <tbody className="table-body-format">
-                                          {(() => {
+                                      <div>
+                                        {
+                                          (() => {
                                             if (this.props.RangingNpdImpactPage.canniProdTableData) {
 
-                                              return this.props.RangingNpdImpactPage.canniProdTableData.similar_product_table.df.map(obj => {
 
-                                                return (
-                                                  <tr key={Math.random() + Date.now()}>
-                                                    {/*<td>{obj.brand_name}</td>*/}
-                                                    <td>{obj.brand_indicator}</td>
-                                                    <td>{obj.long_description}</td>
-                                                    <td>{formatVolume(obj.predicted_volume)}</td>
-                                                    <td>{formatSales(obj.predicted_sales)}</td>
-                                                  </tr>
-                                                )
+                                              return (
+                                                <div>
+                                                  <BootstrapTable
+                                                    data={this.props.RangingNpdImpactPage.canniProdTableData.similar_product_table.df} options={options} /*tableStyle={ { width: '80%',marginLeft:'10%' }}*/
+                                                    striped={true}
+                                                    hover
+                                                    condensed
+                                                    pagination={ true }
+                                                    search={true}
+                                                    exportCSV={true}
+                                                  >
+                                                    <TableHeaderColumn dataField="brand_indicator" isKey={true} dataSort={true} dataAlign="center">Brand Indicator</TableHeaderColumn>
+                                                    <TableHeaderColumn dataField="long_description" dataSort={true} dataAlign="center">Products Description</TableHeaderColumn>
+                                                    <TableHeaderColumn dataField="predicted_volume" dataFormat={formatVolume} dataSort={true} dataAlign="center">Volume</TableHeaderColumn>
+                                                    <TableHeaderColumn dataField="predicted_sales" dataFormat={formatSales} dataSort={true} dataAlign="center">Sales Value</TableHeaderColumn>
+                                                  </BootstrapTable>
 
-                                              })
+                                                </div>
+                                              );
+
                                             }
+                                            else {
+                                              return (
 
-                                          })()}
-                                          </tbody>
-                                        </table>
+                                                <div className="text-center" colSpan="11"><Spinner />Please Wait a Moment....!</div>
 
-                                        {/*pagination*/}
-
-                                        {(() => {
-
-                                          if (this.props.RangingNpdImpactPage.canniProdTableData && this.props.RangingNpdImpactPage.canniProdTableData.similar_product_table.count) {
-
-                                            return <Pagination
-                                              prev
-                                              next
-                                              first
-                                              last
-                                              ellipsis
-                                              boundaryLinks
-                                              items={this.props.RangingNpdImpactPage.canniProdTableData.similar_product_table.pagination_count}
-                                              maxButtons={5}
-                                              activePageSupTable={this.state.activePageSupTable}
-                                              onSelect={(e) => {
-                                                alert(e);
-
-                                                this.setState({activePageSupTable: e})
-
-                                                let dataTable1PageUrlParamsNew = "page=" + e;
-                                                alert(dataTable1PageUrlParamsNew);
-                                                {/*console.log("printing pagination for bubble table", dataTable2PageUrlParamsNew);*/
-                                                }
-                                                this.props.onSaveTable1PageParam(dataTable1PageUrlParamsNew);
-                                                this.props.onDataFetchCanniProdTable();
-
-                                              }}
-                                            />
-
-                                          }
-
-
-                                        })()}
+                                              );
+                                            }
+                                          })()
+                                        }
 
                                       </div>
 
@@ -1562,96 +1421,42 @@ export class RangingNpdImpactPage extends React.PureComponent { // eslint-disabl
 
                                       {/*Bubble Table*/}
                                       <div className="col-xs-6">
-                                        <div id="table">
+                                        {
+                                          (() => {
+                                            if (this.props.RangingNpdImpactPage.npd_bubble_table_data) {
 
 
-                                          {/*Search*/}
-                                          <div className="col-xs-12 col-xs-5" style={{marginBottom: "10px"}}>
-                                            <InputField type={'string'}
-                                                        dataTable2PageUrlParamsNew="page1=1"
-                                                        placeholder="Search Product Description"
-                                                        value={this.props.searchTable2}
-                                                        onChange={(e) => {
+                                              return (
+                                                <div>
+                                                  <BootstrapTable
+                                                    data={this.props.RangingNpdImpactPage.npd_bubble_table_data.table} options={options} /*tableStyle={ { width: '80%',marginLeft:'10%' }}*/
+                                                    striped={true}
+                                                    hover
+                                                    condensed
+                                                    pagination={ true }
+                                                    search={true}
+                                                    exportCSV={true}
+                                                  >
+                                                    <TableHeaderColumn dataField="base_product_number" isKey={true} dataSort={true} dataAlign="center">BPN</TableHeaderColumn>
+                                                    <TableHeaderColumn dataField="long_description" dataSort={true} dataAlign="center">Description</TableHeaderColumn>
+                                                    <TableHeaderColumn dataField="cps" dataSort={true} dataAlign="center">CPS</TableHeaderColumn>
+                                                    <TableHeaderColumn dataField="pps" dataSort={true} dataAlign="center">Profit / Store</TableHeaderColumn>
+                                                  </BootstrapTable>
 
-                                                          this.props.onSaveTable2SearchParam(e);
-                                                          this.props.onDataFetchOnPageLoad();
-                                                          this.props.onSaveTable2PageParam(dataTable2PageUrlParamsNew);
-                                                        }}
-                                            />
-                                          </div>
-                                          <div className="col-xs-0 col-xs-7 " style={{textAlign: "right"}}>
-                                            {/*<a style={{fontSize:"15px",verticalAlign:"centre"}} onClick={()=>{*/}
-                                            {/*this.props.onGenerateTextBoxQueryString('');*/}
-                                            {/*this.props.onUnmatchedProdTable();*/}
-                                            {/*}}> Clear </a>*/}
-                                          </div>
-
-                                          {/*Table*/}
-                                          <table className="table table-hover table-bordered " width="100%">
-                                            <thead>
-                                            <tr className="table-header-format"
-                                                style={{fontSize: "16px", fontFamily: "Tesco", textAlign: 'center'}}
-                                                key={Math.random() * Date.now()}>
-                                              <th>BPN</th>
-                                              <th>Description</th>
-                                              <th>CPS</th>
-                                              <th>Profit / Store</th>
-                                            </tr>
-                                            </thead>
-                                            <tbody className="table-body-format">
-                                            {(() => {
-                                              if (this.props.RangingNpdImpactPage.npd_bubble_table_data) {
-                                                return this.props.RangingNpdImpactPage.npd_bubble_table_data.table.map(obj => {
-
-                                                  return (
-                                                    <tr key={obj.base_product_number}>
-                                                      <td>{obj.base_product_number}</td>
-                                                      <td>{obj.long_description}</td>
-                                                      <td>{obj.cps}</td>
-                                                      <td>{obj.pps}</td>
-                                                    </tr>
-                                                  )
-                                                })
-                                              }
-                                            })()}
-                                            </tbody>
-                                          </table>
-
-                                          {/*pagination*/}
-
-
-                                          {(() => {
-                                            if (this.props.RangingNpdImpactPage.npd_bubble_table_data && this.props.RangingNpdImpactPage.npd_bubble_table_data.count) {
-
-                                              return <Pagination
-                                                prev
-                                                next
-                                                first
-                                                last
-                                                ellipsis
-                                                boundaryLinks
-                                                items={this.props.RangingNpdImpactPage.npd_bubble_table_data.pagination_count}
-                                                maxButtons={5}
-                                                activePage={this.state.activePage}
-                                                onSelect={(e) => {
-
-                                                  this.setState({activePage: e})
-
-                                                  let dataTable2PageUrlParamsNew = "page1=" + e;
-                                                  {/*console.log("printing pagination for bubble table", dataTable2PageUrlParamsNew);*/
-                                                  }
-                                                  this.props.onSaveTable2PageParam(dataTable2PageUrlParamsNew);
-                                                  this.props.onDataFetchOnPageLoad();
-
-
-                                                }}
-                                              />
+                                                </div>
+                                              );
 
                                             }
-                                          })()}
+                                            else {
+                                              return (
 
+                                                <div className="text-center" colSpan="11"><Spinner />Please Wait a Moment....!</div>
 
-                                        </div>
+                                              );
+                                            }
+                                          })()
+                                        }
+
                                       </div>
 
                                     </div>
