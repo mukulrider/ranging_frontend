@@ -25,7 +25,9 @@ import {
   GENERATE_TEXTBOX_QUERY_STRING,
   RESET_CLICKED,
   GENERATE_CHECKED_LIST,
-  RADIO_CHECK_PARAM
+  LOADING_INDICATION,
+  RADIO_CHECK_PARAM,
+  LOADING_INDICATION_TEXT
 
 } from './constants';
 
@@ -78,6 +80,8 @@ const initialState = fromJS({
   prodArrayTable: '[]',
   prodArrayOpacity: '[]',
   tableDeselectBub: '[]',
+  showLoading:false,
+  loadingText:"Please wait while your product is being added to the list"
 });
 
 function rangingNegotiationPageReducer(state = initialState, action) {
@@ -105,11 +109,11 @@ function rangingNegotiationPageReducer(state = initialState, action) {
     case SAVE_WEEK_PARAM:
       return state.set('dataWeekUrlParams', action.data);
     case SAVE_BUBBLE_PARAM:
-      console.log("Bubble array in reducer", action.data);
+      //console.log("Bubble array in reducer", action.data);
       return state.set('prodArrayTable', action.data);
 
     case SAVE_BUBBLE_PARAM2:
-      console.log("Bubble array in reducer2", action.data);
+      //console.log("Bubble array in reducer2", action.data);
       return state.set('prodArrayOpacity', action.data);
 
     case SAVE_SIDE_FILTER_PARAM:
@@ -123,7 +127,7 @@ function rangingNegotiationPageReducer(state = initialState, action) {
       return state.set('resetUrlParams', action.data);
 
     case RADIO_CHECK_PARAM:
-      console.log("RADIO_CHECK_PARAM", action.data);
+      //console.log("RADIO_CHECK_PARAM", action.data);
       return state.set('radioChecked', action.data);
 
 
@@ -139,6 +143,11 @@ function rangingNegotiationPageReducer(state = initialState, action) {
       return state.set('urlParams', action.data);
     case GENERATE_URL_PARAMS_STRING:
       return state.set('urlParamsString', action.data);
+
+    case LOADING_INDICATION:
+          return state.set('showLoading', action.flag);
+case LOADING_INDICATION_TEXT:
+          return state.set('loadingText', action.data);
 
 
     case GENERATE_CHECKED_LIST:

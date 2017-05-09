@@ -59,6 +59,9 @@ class SelectorNegotiation2 extends React.PureComponent { // eslint-disable-line 
 
 
   applyButtonFunctionality = () => {
+
+    this.props.onUpdateLoadingIndicationText("Please do not refresh. Filters are being applied")
+    this.props.onUpdateLoadingIndicationStatus(true);
     this.props.onGenerateTable();
     this.props.onFetchGraph();
 
@@ -138,7 +141,7 @@ class SelectorNegotiation2 extends React.PureComponent { // eslint-disable-line 
                                              onChange={() => {
                                                this.updateUrl(item.id)
                                              }}
-                                             checked={()=>obj.resource.selected}
+                                             checked={obj.resource.selected}
                                              isDisabled={!obj.highlighted}
                             />
                           }
@@ -178,7 +181,7 @@ class SelectorNegotiation2 extends React.PureComponent { // eslint-disable-line 
               }
 
               </PanelGroup>
-
+              <div style={{textAlign: "center"}}>
               <Button style={{marginLeft:"0 auto"}}
                 onClick={() => {
 
@@ -192,6 +195,7 @@ class SelectorNegotiation2 extends React.PureComponent { // eslint-disable-line 
                   this.props.onGenerateUrlParamsString('');
                   this.props.onGenerateUrlParamsData();
                 }}>Clear Filters Selection</Button>
+            </div>
             </div>
           )
         })()}

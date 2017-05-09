@@ -52,7 +52,7 @@ export function* defaultSaga() {
   // See example in containers/HomePage/sagas.js
 }
 
-let host_url = "http://172.20.244.220:8000"
+let host_url = "http://172.20.244.219:8000"
 // let host_url = "http://172.20.246.203:8000"
 // let host_url = "http://172.20.246.196:8000"
 

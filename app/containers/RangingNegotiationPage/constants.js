@@ -42,3 +42,7 @@ export const GENERATE_URL_PARAMS_STRING = 'app/RangingNegotiationPage/GENERATE_U
 export const GENERATE_URL_PARAMS_DATA = 'app/RangingNegotiationPage/GENERATE_URL_PARAMS_DATA';
 export const GENERATE_URL_PARAMS_DATA_SUCCESS = 'app/RangingNegotiationPage/GENERATE_URL_PARAMS_DATA_SUCCESS';
 export const GENERATE_CHECKED_LIST = 'app/RangingNegotiationPage/GENERATE_CHECKED_LIST';
+
+
+export const LOADING_INDICATION= 'app/RangingNegotiationPage/LOADING_INDICATION';
+export const LOADING_INDICATION_TEXT= 'app/RangingNegotiationPage/LOADING_INDICATION_TEXT';
