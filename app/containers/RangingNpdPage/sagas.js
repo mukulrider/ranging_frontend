@@ -21,8 +21,8 @@ export function* defaultSaga() {
   // See example in containers/HomePage/sagas.js
 }
 
-const host_url="http://172.20.244.220:8000"
-//const host_url="http://172.20.244.220:8000"
+const host_url="http://172.20.244.219:8000"
+//const host_url="http://172.20.244.219:8000"
 // All sagas to be loaded
 
 //------------------------------- Unmatched products table Page Load ------------------------------------------
@@ -50,7 +50,7 @@ export function* generateUnmatchedTableFetch() {
 
 
   try {
-  console.log('---------------------http://172.20.244.220:8000/api/npd/unmatchedprod?'+paramString+searchParams);
+  console.log('---------------------http://172.20.244.219:8000/api/npd/unmatchedprod?'+paramString+searchParams);
       // Table data
         const data = yield call(request,
           `${host_url}/api/npd/unmatchedprod?`+paramString+searchParams);
@@ -82,7 +82,7 @@ export function* generateSkuChartDataFetch() {
 try {
 
 
-  console.log('---------------------http://172.20.244.220:8000/api/npd/psgskudistribution?'+paramString);
+  console.log('---------------------http://172.20.244.219:8000/api/npd/psgskudistribution?'+paramString);
 
    // Sku chart data
       const sku_chart = yield call(request,
@@ -115,7 +115,7 @@ export function* generateOutPerformanceChartFetch() {
 
     paramString=paramString.replace('&','');
 
-  console.log('---------------------http://172.20.244.220:8000/api/npd/outperformance?'+paramString);
+  console.log('---------------------http://172.20.244.219:8000/api/npd/outperformance?'+paramString);
 
 
   try {
@@ -153,7 +153,7 @@ export function* generatePriceGravityFetch() {
 
 try {
 
-  console.log('---------------------http://172.20.244.220:8000/api/npd/pricebucket?'+paramString);
+  console.log('---------------------http://172.20.244.219:8000/api/npd/pricebucket?'+paramString);
 
       // Price gravity chart data
       const price_gravity = yield call(request,`${host_url}/api/npd/pricebucket?`+paramString);
@@ -180,7 +180,7 @@ export function* generateSideFilter() {
 
     let urlName=yield select(selectRangingNpdPageDomain());
     let urlParams = urlName.get('filter_selection');
-    console.log(`http://172.20.244.220:8000/api/npd_view1/filter_data?` + urlParams);
+    console.log(`http://172.20.244.219:8000/api/npd_view1/filter_data?` + urlParams);
 
     const data = yield call(request,`${host_url}/api/npd_view1/filter_data?` + urlParams);
     yield put(generateSideFilterSuccess(data));

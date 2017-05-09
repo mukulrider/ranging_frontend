@@ -22,7 +22,7 @@ export function* defaultSaga() {
   // See example in containers/HomePage/sagas.js
 }
 
-let host_url_rangingScenario=`http://172.20.244.220:8000`
+let host_url_rangingScenario=`http://172.20.244.219:8000`
 
 //------------------------------- Scenario List ------------------------------------------
 export function* generateAllScenarioList() {
@@ -40,8 +40,8 @@ export function* generateAllScenarioList() {
       const scenario_list= yield call(request,host_url_rangingScenario+`/api/npd_impact_list_scenario?user_id=sachin123`);
       yield put(fetchRangingAllScenarioDataSuccess(scenario_list));
     }else{
-      console.log(host_url_rangingScenario+`/api/delist_list_scenario?user_id=tan1`);
-      const scenario_list= yield call(request,host_url_rangingScenario+`/api/delist_list_scenario?user_id=tan1`);
+      console.log(host_url_rangingScenario+`/api/delist_list_scenario?user_id=bc`);
+      const scenario_list= yield call(request,host_url_rangingScenario+`/api/delist_list_scenario?user_id=bc`);
       yield put(fetchRangingAllScenarioDataSuccess(scenario_list));
     }
 

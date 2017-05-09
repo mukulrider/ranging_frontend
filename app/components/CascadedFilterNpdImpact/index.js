@@ -515,13 +515,14 @@ class CascadedFilterNpdImpact extends React.PureComponent { // eslint-disable-li
                     //To un check all the buttons
                     let selection = '';
                     this.props.onCheckboxChange(selection);
+                    this.props.onSendUrlParams(selection);
                     this.props.onGenerateSideFilter();
 
                     {/*this.resetButtonFunctionality();*/
                     }
 
                   }}>Reset</Button></div>
-      </div>
+       </div>
 
 
     );

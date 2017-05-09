@@ -51,7 +51,7 @@ export class RangingScenarioTrackerPage extends React.PureComponent { // eslint-
 
 
           } else {
-            page = '/ranging/view-scenario_delist?';
+            page = '/ranging/view-delist-scenario?';
             attributes = 'user_id=Tanaya' + "&scenario_name=" + row.scenario_name;
 
           }
