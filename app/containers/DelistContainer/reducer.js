@@ -47,7 +47,7 @@ import {
   STORE_BREADCRUMB,
   URL_PARAMS,
   SAVE_SCENARIO_RESPONSE,
-  SAVE_SCENARIO_NAME
+  SAVE_SCENARIO_NAME,SAVE_TAG_NAME
 } from './constants';
 
 const initialState = fromJS(
@@ -65,6 +65,7 @@ const initialState = fromJS(
     weekBreadcrumb: "",
     storeBreadcrumb: "",
     scenarioName:'',
+    tagName:'',
     saveScenarioResponse:'',
     waterFallChart2Data_1: [{name: ' Product Revenue ', value: 420000},
       {name: ' Services Revenue ', value: 210000},
@@ -237,6 +238,8 @@ function delistContainerReducer(state = initialState, action) {
       return state.set('scenarioName', action.data);
     case SAVE_SCENARIO_RESPONSE:
       return state.set('saveScenarioResponse', action.data);
+    case SAVE_TAG_NAME:
+      return state.set('tagName', action.data);
 
     default:
       return state;

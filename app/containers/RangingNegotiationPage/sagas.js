@@ -20,7 +20,7 @@ import {
 } from './constants';
 
 
-let nego_host_url="http://172.20.244.219:8000";
+let nego_host_url="http://172.20.244.230:8000";
 
 // Individual exports for testing
 export function* defaultSaga() {

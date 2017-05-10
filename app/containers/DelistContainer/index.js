@@ -71,7 +71,7 @@ import {
   WeekTabClick,
   StoreTabClick,
   UrlParams,
-  saveScenarioFlag,saveScenarioName,updateSaveScenarioResponse,
+  saveScenarioFlag,saveScenarioName,updateSaveScenarioResponse,saveTagName,
 } from './actions';
 
 import styles from './style.scss';
@@ -251,8 +251,7 @@ export class DelistContainer extends React.PureComponent { // eslint-disable-lin
 
             <div className="row formattedText">
 
-
-              <div className="col-xs-12">
+             <div className="col-xs-12">
 
                 <div className="col-xs-2"></div>
                 <div className="col-xs-4">
@@ -1498,6 +1497,7 @@ function mapDispatchToProps(dispatch) {
     onSaveScenarioName: (e) => dispatch(saveScenarioName(e.target.value)),
     onSaveScenarioFlag: (e) => dispatch(saveScenarioFlag(e)),
     onSaveScenarioResponse: (e) => dispatch(updateSaveScenarioResponse(e)),
+    onSaveTagName: (e) => dispatch(saveTagName(e.target.value)),
 
   };
 }

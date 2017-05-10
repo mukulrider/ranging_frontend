@@ -16,8 +16,8 @@ import {
   selectRangingNpdImpactPageDomain, makeUrlParamsString
 } from 'containers/RangingNpdImpactPage/selectors';
 
-// const host_url="http://172.20.244.219:8000"
-const host_url="http://172.20.244.219:8000"
+// const host_url="http://172.20.244.230:8000"
+const host_url="http://172.20.244.230:8000"
 // Individual exports for testing
 export function* defaultSaga() {
   // See example in containers/HomePage/sagas.js
@@ -60,7 +60,7 @@ export function* generateDataFetch() {
   try {
     // Table data
     const bubble_table = yield call(request,`${host_url}/api/npd_impact_view_bubble_table?` + AJAX_args);
-    // const bubble_table = yield call(request,`http://172.20.244.219:8000/api/npd_impact_view_bubble_table?buying_controller=Meat%20Fish%20and%20Veg&buyer=Meat%20and%20Poultry&junior_buyer=Coated%20Poultry&product_sub_group_description=FROZEN%20COATED%20POULTRY&parent_supplier=1247.%20-%20LOCKWOODS%20LTD&brand_name=TESCO&package_type=BOX&measure_type=G&till_roll_description=KIEVS&merchandise_group_code_description=FROZEN%20POULTRY%20PRODUCTS&range_space_break_code=F&asp=1.98&acp=1.45&size=500&week_flag=Latest%2013%20Weeks`);
+    // const bubble_table = yield call(request,`http://172.20.244.230:8000/api/npd_impact_view_bubble_table?buying_controller=Meat%20Fish%20and%20Veg&buyer=Meat%20and%20Poultry&junior_buyer=Coated%20Poultry&product_sub_group_description=FROZEN%20COATED%20POULTRY&parent_supplier=1247.%20-%20LOCKWOODS%20LTD&brand_name=TESCO&package_type=BOX&measure_type=G&till_roll_description=KIEVS&merchandise_group_code_description=FROZEN%20POULTRY%20PRODUCTS&range_space_break_code=F&asp=1.98&acp=1.45&size=500&week_flag=Latest%2013%20Weeks`);
 
     yield put(dataFetchOnBubbleTableSuccess(bubble_table));
 
@@ -104,7 +104,7 @@ export function* generateBubbleChartDataFetch() {
     const bubble_chart = yield call(request,
       `${host_url}/api/npd_impact_view_bubble_chart?`+AJAX_args);
     // const bubble_chart = yield call(request,
-    //   `http://172.20.244.219:8000/api/npd_impact_view_bubble_chart?buying_controller=Meat%20Fish%20and%20Veg&buyer=Meat%20and%20Poultry&junior_buyer=Coated%20Poultry&product_sub_group_description=FROZEN%20COATED%20POULTRY&parent_supplier=1247.%20-%20LOCKWOODS%20LTD&brand_name=TESCO&package_type=BOX&measure_type=G&till_roll_description=KIEVS&merchandise_group_code_description=FROZEN%20POULTRY%20PRODUCTS&range_space_break_code=F&asp=1.98&acp=1.45&size=500&week_flag=Latest%2013%20Weeks`);
+    //   `http://172.20.244.230:8000/api/npd_impact_view_bubble_chart?buying_controller=Meat%20Fish%20and%20Veg&buyer=Meat%20and%20Poultry&junior_buyer=Coated%20Poultry&product_sub_group_description=FROZEN%20COATED%20POULTRY&parent_supplier=1247.%20-%20LOCKWOODS%20LTD&brand_name=TESCO&package_type=BOX&measure_type=G&till_roll_description=KIEVS&merchandise_group_code_description=FROZEN%20POULTRY%20PRODUCTS&range_space_break_code=F&asp=1.98&acp=1.45&size=500&week_flag=Latest%2013%20Weeks`);
     yield put(dataFetchOnBubbleDataSuccess(bubble_chart));
 
   } catch (err) {
@@ -245,15 +245,8 @@ export function* generateSideFilter() {
 
 
     console.log('${host_url}/api/npd_impact_view/filter_data?' + urlParams);
-    let data = '';
+    let data = yield call(request, `${host_url}/api/npd_impact_view/filter_data?` + urlParams);
 
-    if (urlParams) {
-
-      data = yield call(request, `${host_url}/api/npd_impact_view/filter_data?` + urlParams);
-    } else {
-
-      data = yield call(request, `${host_url}/api/npd_impact_view/filter_data`);
-    }
     // data = yield call(request, `${host_url}/api/npd_impact_view/filter_data?buying_controller=Meat%20Fish%20and%20Veg&buyer=Meat%20and%20Poultry&junior_buyer=Coated%20Poultry&product_sub_group_description=FROZEN%20COATED%20POULTRY&parent_supplier=1247.%20-%20LOCKWOODS%20LTD&brand_name=TESCO&package_type=BOX&measure_type=G&till_roll_description=KIEVS&merchandise_group_code_description=FROZEN%20POULTRY%20PRODUCTS&range_space_break_code=F&asp=1.98&acp=1.45&size=500&week_flag=Latest%2013%20Weeks`);
 
     yield put(generateSideFilterSuccess(data));
@@ -277,21 +270,20 @@ export function* generateSaveScenario() {
     console.log("Trying to save scenario")
     let urlName = yield select(selectRangingNpdImpactPageDomain());
     let urlParams = urlName.get('dataUrlParms');
-    // let urlParams = "buying_controller=Meat%20Fish%20and%20Veg&buyer=Meat%20and%20Poultry&junior_buyer=Coated%20Poultry&product_sub_group_description=FROZEN%20COATED%20POULTRY&parent_supplier=1247.%20-%20LOCKWOODS%20LTD&brand_name=TESCO&package_type=BOX&measure_type=G&till_roll_description=KIEVS&merchandise_group_code_description=FROZEN%20POULTRY%20PRODUCTS&range_space_break_code=F&asp=1.98&acp=1.45&size=500&week_flag=Latest%2013%20Weeks&user_id=123aeiou";
-    // let modified = "modified_flag=0";
-    let user_id = "user_id=sachin123";
-    // let eventName= urlName.get('eventName');
+    let user_id = "user_id=vrushali123";
+    let tagName= urlName.get('tagName');
     let scenarioName= urlName.get('scenarioName');
     let sessionID= "session_id=user_1234";
     let editForecastAPI = urlName.get('editForecastApi');
     let weekParams = urlName.get('dataWeekUrlParams');
 
 
-    let AJAX_args =urlParams+"&scenario_name="+scenarioName+"&"+user_id+"&"+editForecastAPI+"&"+sessionID+"&"+weekParams  ;
-    // let AJAX_args =urlParams+'&event_name='+eventName+"&scenario_name="+scenarioName+"&"+user_id+"&"+modified+"&"+sessionID ;
+    // let AJAX_args =urlParams+"&scenario_name="+scenarioName+"&"+user_id+"&"+editForecastAPI+"&"+sessionID+"&"+weekParams  ;
+    let AJAX_args =urlParams+'&scenario_tag='+tagName+"&scenario_name="+scenarioName+"&"+user_id+"&"+editForecastAPI+"&"+sessionID+"&"+weekParams  ;
 
-    console.log('http://172.20.244.219:8000/api/npd_impact_save_scenario?' + AJAX_args);
-    let data = yield call(request, 'http://172.20.244.219:8000/api/npd_impact_save_scenario?' + AJAX_args);
+
+    console.log('http://172.20.244.230:8000/api/npd_impact_save_scenario?' + AJAX_args);
+    let data = yield call(request, 'http://172.20.244.230:8000/api/npd_impact_save_scenario?' + AJAX_args);
     yield put(updateSaveScenarioResponse(data));
 
   } catch (err) {

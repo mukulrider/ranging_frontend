@@ -52,7 +52,7 @@ export function* defaultSaga() {
   // See example in containers/HomePage/sagas.js
 }
 
-let host_url = "http://172.20.244.219:8000"
+let host_url = "http://172.20.244.230:8000"
 // let host_url = "http://172.20.246.203:8000"
 // let host_url = "http://172.20.246.196:8000"
 
@@ -586,8 +586,11 @@ export function* generateSaveScenario() {
     let user_id = "user_id=tan1";
     let scenarioName= urlName.get('scenarioName');
     let sessionID= "session_id=2";
+    let tagName= urlName.get('tagName');
 
     let AJAX_args =urlParams+"&scenario_name="+scenarioName+"&"+user_id+"&"+sessionID ;
+    // let AJAX_args =urlParams+"&scenario_name="+scenarioName+'&scenario_tag='+tagName+"&"+user_id+"&"+sessionID ;
+
 
     console.log(host_url+'/api/npd_impact_save_scenario?' + AJAX_args);
     let data = yield call(request, host_url+'/api/delist_scenario?' + AJAX_args);

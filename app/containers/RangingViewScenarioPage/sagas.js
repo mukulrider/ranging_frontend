@@ -40,7 +40,7 @@ export function* generateDefaultScenarioData() {
     // console.log('---------------------http://172.20.244.223:8000/api/npd/psgskudistribution?'+paramString);
 
     // Scenario data
-    const scenario_data = yield call(request,`http://172.20.244.219:8000/api/npd_impact_view_scenario?`+paramString);
+    const scenario_data = yield call(request,`http://172.20.244.230:8000/api/npd_impact_view_scenario?`+paramString);
     yield put(fetchRangingScenarioDataSuccess(scenario_data));
 
 

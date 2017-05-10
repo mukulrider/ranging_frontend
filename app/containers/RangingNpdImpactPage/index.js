@@ -47,7 +47,7 @@ import {
   saveSizeFilterData,
   saveFilterSelectionsTillNow,
   updateBreadCrumbs,
-  saveScenarioFlag,saveScenarioName,saveEventName,updateSaveScenarioResponse,
+  saveScenarioFlag,saveScenarioName,saveTagName,updateSaveScenarioResponse,
   saveModifiedVolumeForecast,saveEditForecastApi,saveModifiedFlag
 } from './actions';
 import CascadedFilterNpdImpact from 'components/CascadedFilterNpdImpact';
@@ -171,7 +171,7 @@ export class RangingNpdImpactPage extends React.PureComponent { // eslint-disabl
                                   <span className="pageModuleTitle"><b>Save Scenario</b>
                                   <span style={{textAlign: 'right', float: 'right'}}
                                         onClick={() => {
-                                          {/*this.props.onSaveEventName('');*/}
+                                          {/*this.props.onSaveTagName('');*/}
                                           {/*this.props.onSaveScenarioName('');*/}
                                           {/*this.props.onSaveScenarioResponse('');*/}
                                           this.setState({showSaveScenarioModalFlag: false});
@@ -189,31 +189,16 @@ export class RangingNpdImpactPage extends React.PureComponent { // eslint-disabl
 
             <div className="row formattedText">
 
-              {/*<div className="col-xs-6">*/}
-                {/*<div className="col-xs-6">*/}
-                  {/*Event Name:*/}
-                {/*</div>*/}
-                {/*<div className="col-xs-6">*/}
-                  {/*<InputField type="text"*/}
-                              {/*placeholder="Enter Event Type"*/}
-                              {/*value={this.props.RangingNpdImpactPage.eventName}*/}
-                              {/*onChange={(e) => {*/}
-                                {/*this.props.onSaveEventName(e);*/}
-                              {/*}}*/}
+              <div className="col-xs-1"></div>
+              <div className="col-xs-5">
 
-                  {/*/>*/}
-                {/*</div>*/}
-              {/*</div>*/}
 
-              <div className="col-xs-12">
-
-                <div className="col-xs-2"></div>
-                <div className="col-xs-4">
+                <div className="col-xs-6">
                   Scenario Name:
                 </div>
-                <div className="col-xs-4">
+                <div className="col-xs-6">
                   <InputField type="text"
-                              placeholder="Enter Scenario Type"
+                              placeholder="Enter Scenario Name"
                               value={this.props.RangingNpdImpactPage.scenarioName}
                               onChange={(e) => {
                                 this.props.onSaveScenarioName(e);
@@ -221,9 +206,26 @@ export class RangingNpdImpactPage extends React.PureComponent { // eslint-disabl
 
                   />
                 </div>
-                <div className="col-xs-2"></div>
+                {/*<div className="col-xs-2"></div>*/}
               </div>
 
+              <div className="col-xs-5">
+                <div className="col-xs-6">
+                  Tag Name:
+                </div>
+                <div className="col-xs-6">
+                  <InputField type="text"
+                              placeholder="Enter scenario tag"
+                              value={this.props.RangingNpdImpactPage.tagName}
+                              onChange={(e) => {
+                                this.props.onSaveTagName(e);
+                              }}
+
+                  />
+                </div>
+              </div>
+
+              <div className="col-xs-1"></div>
             </div>
 
 
@@ -254,7 +256,7 @@ export class RangingNpdImpactPage extends React.PureComponent { // eslint-disabl
 
 
             <div className="center-this" style={{color:'Green',fontSize:'20px',lineHeight:'28px'}}>
-              {/*<i>Scenario '{this.props.RangingNpdImpactPage.scenarioName}' of Event '{this.props.RangingNpdImpactPage.eventName}' has been saved successfully!</i><br/>*/}
+              {/*<i>Scenario '{this.props.RangingNpdImpactPage.scenarioName}' of Tag '{this.props.RangingNpdImpactPage.tagName}' has been saved successfully!</i><br/>*/}
               <i>Scenario '{this.props.RangingNpdImpactPage.scenarioName}' has been saved successfully!</i><br/>
             <br/>
               What do you wish to do next?
@@ -272,9 +274,10 @@ export class RangingNpdImpactPage extends React.PureComponent { // eslint-disabl
               <div className="col-xs-6">
                 <Button onClick={() => {
                   let page='/ranging/scenario-tracker?';
-                  {/*let attributes='userid=sachin123'+"&scenario_name="+obj.scenario_name+"&event_name="+obj.event_name;*/}
+                  let user_id="vrushali123";
+                  {/*let attributes='userid=sachin123'+"&scenario_name="+obj.scenario_name+"&tag_name="+obj.tag_name;*/}
 
-                  let objString = page;
+                  let objString = page+"user_id="+user_id;
                   window.location = objString;
 
                 }}
@@ -306,7 +309,7 @@ export class RangingNpdImpactPage extends React.PureComponent { // eslint-disabl
 
             <div className="row">
               <div className="center-this" style={{color:'red',fontSize:'20px',lineHeight:'28px'}}>
-                <b>Scenario '{this.props.RangingNpdImpactPage.scenarioName}' under '{this.props.RangingNpdImpactPage.eventName}' event is already exist.Please save under another scenario name.</b><br/><br/>
+                <b>Scenario '{this.props.RangingNpdImpactPage.scenarioName}' under '{this.props.RangingNpdImpactPage.tagName}' tag is already exist.Please save under another scenario name.</b><br/><br/>
                 <i>If you want to review the existing scenario. Please check in the scenario tracker.</i>
               </div>
             </div>
@@ -324,7 +327,7 @@ export class RangingNpdImpactPage extends React.PureComponent { // eslint-disabl
               <div className="col-xs-6">
                 <Button onClick={() => {
                   let page='/ranging/scenario-tracker?';
-                  {/*let attributes='userid=sachin123'+"&scenario_name="+obj.scenario_name+"&event_name="+obj.event_name;*/}
+                  {/*let attributes='userid=sachin123'+"&scenario_name="+obj.scenario_name+"&tag_name="+obj.tag_name;*/}
 
                   let objString = page;
                   window.location = objString;
@@ -1537,7 +1540,8 @@ function mapDispatchToProps(dispatch) {
 
     //Save scenario
     onSaveScenarioName: (e) => dispatch(saveScenarioName(e.target.value)),
-    onSaveEventName: (e) => dispatch(saveEventName(e.target.value)),
+    onSaveTagName: (e) => dispatch(saveTagName(e.target.value)),
+
     onSaveScenarioFlag: (e) => dispatch(saveScenarioFlag(e)),
     onSaveScenarioResponse: (e) => dispatch(updateSaveScenarioResponse(e)),
 
