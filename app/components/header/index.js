@@ -5,6 +5,7 @@ import Logo from '../logo';
 import RoundedIconButton from '../rounded_icon_button';
 import Grid from '../grid';
 import tesco from './../../assets/images/tesco.svg';
+import Button from 'components/button';
 
 function renderBackLink(backLink) {
   return backLink ?
@@ -174,6 +175,31 @@ class Header extends Component {
               }
               <div className="ui-component__header__content--right">
                 <RoundedIconButton icon="menu" onClick={this.handleClick} label="Menu" />
+              </div>
+              <div>
+                {(() => {
+                  const getCookie = (name) => {
+                    const value = `; ${document.cookie}`;
+                    const parts = value.split(`; ${name}=`);
+                    if (parts.length === 2) {
+                      return parts.pop().split(';').shift();
+                    }
+                  };
+                  const token = getCookie('token');
+
+                  return token ?
+                    <div>
+                      <br/>
+                      <Button
+                        buttonType={'primary'}
+                        style={{ float: 'right' }}
+                        onClick={() => {
+                          console.log('loggingOut');
+                          document.cookie = 'token' + '=;expires=Thu, 01 Jan 1970 00:00:01 GMT;domain=localhost;Path=/;';
+                          window.location = 'http://localhost:3000/login/';
+                        }}
+                      >Logout</Button></div> : '';
+                })()};
               </div>
             </div>
           </Grid>

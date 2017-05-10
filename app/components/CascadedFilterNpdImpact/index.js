@@ -510,10 +510,12 @@ class CascadedFilterNpdImpact extends React.PureComponent { // eslint-disable-li
                   }}>Apply Filters</Button></div>
 
         <div style={{textAlign: "center"}}>
-          <Button style={{marginTop: "5px"}}
+          <Button buttonType={'secondary'}
+                  style={{marginTop: "5px"}}
                   onClick={() => {
                     //To un check all the buttons
                     let selection = '';
+                    this.props.onSaveFilterSelectionsTillNow(selection);
                     this.props.onCheckboxChange(selection);
                     this.props.onSendUrlParams(selection);
                     this.props.onGenerateSideFilter();
@@ -521,7 +523,7 @@ class CascadedFilterNpdImpact extends React.PureComponent { // eslint-disable-li
                     {/*this.resetButtonFunctionality();*/
                     }
 
-                  }}>Reset</Button></div>
+                  }}>Clear Filter Selections</Button></div>
        </div>
 
 

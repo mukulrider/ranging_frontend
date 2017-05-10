@@ -24,6 +24,28 @@ export function* defaultSaga() {
 }
 
 
+let gettingUserDetails = () =>{
+  let getCookie = (name) => {
+    const value = `; ${document.cookie}`;
+    const parts = value.split(`; ${name}=`);
+    if (parts.length === 2) {
+      return parts.pop().split(';').shift();
+    }
+  };
+
+  const user_id = getCookie('token');
+  const user_name = getCookie('user');
+  const designation = getCookie('designation');
+  const sessionID = getCookie('login_timestamp')
+  const buying_controller = getCookie('buying_controller');
+  const buyer = getCookie('buyer');
+
+  let cookie_params="user_id="+user_id+"&user_name="+user_name+"&designation="+designation+"&session_id="+sessionID+"&buying_controller_header="+buying_controller+"&buyer_header="+buyer;
+
+  return(cookie_params);
+
+}
+
 //------------------------------- Bubble Chart TableLoad ------------------------------------------
 export function* generateDataFetch() {
   console.log('generateDataFetch saga');
@@ -39,6 +61,7 @@ export function* generateDataFetch() {
 
   let AJAX_args = '';
 
+
   if (urlParams !== '') {
     AJAX_args= AJAX_args + '&' + urlParams
   }
@@ -53,7 +76,12 @@ export function* generateDataFetch() {
   }
 
   AJAX_args=AJAX_args+"&"+editForecastAPI;
+
+  //Adding the user information
+  let cookie_params=gettingUserDetails();
+  AJAX_args =AJAX_args +"&"+cookie_params;
   AJAX_args = AJAX_args.replace('&', '');
+
   console.log('Getting data from ${host_url}/api/npd_impact_view_bubble_table?'+AJAX_args);
 
 
@@ -96,6 +124,14 @@ export function* generateBubbleChartDataFetch() {
 
   AJAX_args=AJAX_args+"&"+editForecastAPI;
   AJAX_args = AJAX_args.replace('&', '');
+
+
+  //Adding the user information
+  let cookie_params=gettingUserDetails();
+  AJAX_args =AJAX_args +"&"+cookie_params;
+
+
+
   console.log(`${host_url}/api/npd_impact_view_bubble_chart?`+AJAX_args);
 
   try {
@@ -148,6 +184,13 @@ export function* generateProdCanniTableDataFetch() {
 
   AJAX_args=AJAX_args+"&"+editForecastAPI;
   AJAX_args = AJAX_args.replace('&', '');
+
+
+  //Adding the user information
+  let cookie_params=gettingUserDetails();
+  AJAX_args =AJAX_args +"&"+cookie_params;
+
+
   console.log('${host_url}/api/npd_impact_view_forecast?'+AJAX_args);
 
   try {
@@ -182,7 +225,7 @@ export function* doProdCanniTableDataFetch() {
   yield cancel(watcher);
 }
 
-//------------------------------- Waterfall chart data Load ------------------------------------------
+//------------------------------- Waterfall chart data Load -NOT USED ------------------------------------------
 
 export function* generateWaterFallChartDataFetch() {
   // console.log('generateWaterFallChartDataFetch saga');
@@ -202,15 +245,14 @@ export function* generateWaterFallChartDataFetch() {
   }
 
   AJAX_args = AJAX_args.replace('&', '');
+
+
+  //Adding the user information
+  let cookie_params=gettingUserDetails();
+  AJAX_args =AJAX_args +"&"+cookie_params;
+
+
   console.log('${host_url}/api/npd_impact_view_waterfall?'+AJAX_args);
-
-  // let paramString = '';
-  // Object.keys(urlParams).map(obj => {
-  //
-  //   paramString += `&${obj}=${urlParams[obj]}`
-  // });
-  // paramString = paramString.replace('&', '');
-
 
   try {
 
@@ -243,11 +285,21 @@ export function* generateSideFilter() {
     let urlName = yield select(selectRangingNpdImpactPageDomain());
     let urlParams = urlName.get('filterSelectionsTillNow');
 
+    let AJAX_args='';
+
+    if (urlParams !== '') {
+      AJAX_args=urlParams;
+    }
+
+    let cookie_params=gettingUserDetails();
+
+    AJAX_args =AJAX_args +"&"+cookie_params;
+
 
     console.log('${host_url}/api/npd_impact_view/filter_data?' + urlParams);
-    let data = yield call(request, `${host_url}/api/npd_impact_view/filter_data?` + urlParams);
 
-    // data = yield call(request, `${host_url}/api/npd_impact_view/filter_data?buying_controller=Meat%20Fish%20and%20Veg&buyer=Meat%20and%20Poultry&junior_buyer=Coated%20Poultry&product_sub_group_description=FROZEN%20COATED%20POULTRY&parent_supplier=1247.%20-%20LOCKWOODS%20LTD&brand_name=TESCO&package_type=BOX&measure_type=G&till_roll_description=KIEVS&merchandise_group_code_description=FROZEN%20POULTRY%20PRODUCTS&range_space_break_code=F&asp=1.98&acp=1.45&size=500&week_flag=Latest%2013%20Weeks`);
+    let data = yield call(request, `${host_url}/api/npd_impact_view/filter_data?` + AJAX_args);
+    // let data = yield call(request, `${host_url}/api/npd_impact_view/filter_data?buying_controller=Meat%20Fish%20and%20Veg&buyer=Meat%20and%20Poultry&junior_buyer=Coated%20Poultry&product_sub_group_description=FROZEN%20COATED%20POULTRY&parent_supplier=1247.%20-%20LOCKWOODS%20LTD&brand_name=TESCO&package_type=BOX&measure_type=G&till_roll_description=KIEVS&merchandise_group_code_description=FROZEN%20POULTRY%20PRODUCTS&range_space_break_code=F&asp=1.98&acp=1.45&size=500&week_flag=Latest%2013%20Weeks`);
 
     yield put(generateSideFilterSuccess(data));
 
@@ -270,20 +322,40 @@ export function* generateSaveScenario() {
     console.log("Trying to save scenario")
     let urlName = yield select(selectRangingNpdImpactPageDomain());
     let urlParams = urlName.get('dataUrlParms');
-    let user_id = "user_id=vrushali123";
+    // let user_id = "user_id=vrushali123";
     let tagName= urlName.get('tagName');
     let scenarioName= urlName.get('scenarioName');
-    let sessionID= "session_id=user_1234";
+    // let sessionID= "session_id=user_1234";
     let editForecastAPI = urlName.get('editForecastApi');
     let weekParams = urlName.get('dataWeekUrlParams');
 
 
-    // let AJAX_args =urlParams+"&scenario_name="+scenarioName+"&"+user_id+"&"+editForecastAPI+"&"+sessionID+"&"+weekParams  ;
-    let AJAX_args =urlParams+'&scenario_tag='+tagName+"&scenario_name="+scenarioName+"&"+user_id+"&"+editForecastAPI+"&"+sessionID+"&"+weekParams  ;
+    let getCookie = (name) => {
+      const value = `; ${document.cookie}`;
+      const parts = value.split(`; ${name}=`);
+      if (parts.length === 2) {
+        return parts.pop().split(';').shift();
+      }
+    };
 
+    const user_id = getCookie('token');
+    const user_name = getCookie('user');
+    const designation = getCookie('designation');
+    const sessionID = getCookie('login_timestamp')
+    const buying_controller = getCookie('buying_controller');
+    const buyer = getCookie('buyer');
+
+    let cookie_params="user_id="+user_id+"&user_name="+user_name+"&designation="+designation+"&session_id="+sessionID+"&buying_controller_header="+buying_controller+"&buyer_header="+buyer;
+    let AJAX_args =urlParams+'&scenario_tag='+tagName+"&scenario_name="+scenarioName+"&"+editForecastAPI+"&"+weekParams+"&"+cookie_params;
 
     console.log('http://172.20.244.230:8000/api/npd_impact_save_scenario?' + AJAX_args);
     let data = yield call(request, 'http://172.20.244.230:8000/api/npd_impact_save_scenario?' + AJAX_args);
+    // let data = yield call(request, 'http://172.20.244.230:8000/api/npd_impact_save_scenario?' + AJAX_args,
+    //   {
+    //     headers: {
+    //       Authorization: authorization_details
+    //     }
+    //   });
     yield put(updateSaveScenarioResponse(data));
 
   } catch (err) {

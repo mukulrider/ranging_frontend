@@ -24,6 +24,30 @@ export function* defaultSaga() {
 
 let host_url_rangingScenario=`http://172.20.244.230:8000`
 
+
+let gettingUserDetails = () =>{
+  let getCookie = (name) => {
+    const value = `; ${document.cookie}`;
+    const parts = value.split(`; ${name}=`);
+    if (parts.length === 2) {
+      return parts.pop().split(';').shift();
+    }
+  };
+
+  const user_id = getCookie('token');
+  const user_name = getCookie('user');
+  const designation = getCookie('designation');
+  const sessionID = getCookie('login_timestamp')
+  const buying_controller = getCookie('buying_controller');
+  const buyer = getCookie('buyer');
+
+  let cookie_params="user_id="+user_id+"&user_name="+user_name+"&designation="+designation+"&session_id="+sessionID+"&buying_controller_header="+buying_controller+"&buyer_header="+buyer;
+
+  return(cookie_params);
+
+}
+
+
 //------------------------------- Scenario List ------------------------------------------
 export function* generateAllScenarioList() {
 
@@ -31,18 +55,18 @@ export function* generateAllScenarioList() {
   let urlName = yield select(selectRangingScenarioTrackerPageDomain());
   let selectedTab = urlName.get('selectedTab');
   let deletedScenario = urlName.get('deletedScenario');
-  let user_id = "user_id=vrushali123";
+  // let user_id = "user_id=nita";
 
   let API_params='';
-
-  if(user_id!==''){
-    API_params=API_params+"&"+user_id;
-  }
 
   if(deletedScenario!==''){
     API_params=API_params+"&"+deletedScenario;
   }
 
+
+
+  let cookie_params=gettingUserDetails();
+  API_params  =API_params +"&"+cookie_params;
   API_params = API_params.replace('&', '');
 
   try {
@@ -52,7 +76,7 @@ export function* generateAllScenarioList() {
       const scenario_list= yield call(request,host_url_rangingScenario+`/api/npd_impact_list_scenario?`+API_params);
       yield put(fetchRangingAllScenarioDataSuccess(scenario_list));
     }else{
-      const scenario_list= yield call(request,host_url_rangingScenario+`/api/delist_list_scenario?user_id=bc`);
+      const scenario_list= yield call(request,host_url_rangingScenario+`/api/delist_list_scenario?`+API_params);
       yield put(fetchRangingAllScenarioDataSuccess(scenario_list));
     }
 

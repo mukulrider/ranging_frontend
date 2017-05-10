@@ -22,15 +22,39 @@ export function* defaultSaga() {
 }
 
 const host_url="http://172.20.244.230:8000"
-//const host_url="http://172.20.244.230:8000"
-// All sagas to be loaded
+
+//getting user details from cookies
+let gettingUserDetails = () =>{
+  let getCookie = (name) => {
+    const value = `; ${document.cookie}`;
+    const parts = value.split(`; ${name}=`);
+    if (parts.length === 2) {
+      return parts.pop().split(';').shift();
+    }
+  };
+
+  const user_id = getCookie('token');
+  const user_name = getCookie('user');
+  const designation = getCookie('designation');
+  const sessionID = getCookie('login_timestamp')
+  const buying_controller = getCookie('buying_controller');
+  const buyer = getCookie('buyer');
+
+  let cookie_params="user_id="+user_id+"&user_name="+user_name+"&designation="+designation+"&session_id="+sessionID+"&buying_controller_header="+buying_controller+"&buyer_header="+buyer;
+
+  return(cookie_params);
+
+}
 
 //------------------------------- Unmatched products table Page Load ------------------------------------------
 export function* generateUnmatchedTableFetch() {
     //console.log('generateUnmatchedTableFetch saga');
     let urlName=yield select(selectRangingNpdPageDomain());
     let urlParams = urlName.get('dataUrlParms');
+    let urlParamsString = urlName.get('urlParamsString');
+  let dataWeekUrlParams =urlName.get('dataWeekUrlParams');
     let searchParams =urlName.get('textBoxQueryString');
+
 
     let paramString='';
     Object.keys(urlParams).map(obj => {
@@ -39,21 +63,34 @@ export function* generateUnmatchedTableFetch() {
     });
     paramString=paramString.replace('&','');
 
-  console.log('searchParams',searchParams);
-  if(searchParams!=='' && paramString!==''){
-    console.log('searchParams inside if ',searchParams);
-    searchParams="&search="+searchParams;
-  } else if(searchParams!=='') {
-    searchParams="search=" +searchParams;
+    let AJAX_args=''
 
-  }
+    // if(paramString!==''){
+    //   AJAX_args= AJAX_args + '&' + paramString
+    // }
+    if(urlParamsString!==''){
+      AJAX_args= AJAX_args + '&' + urlParamsString
+    }
+    if(searchParams!==''){
+      AJAX_args= AJAX_args + '&search=' + searchParams
+    }
+    if(dataWeekUrlParams!==''){
+      AJAX_args= AJAX_args + '&' + dataWeekUrlParams
+    }
+
+
+  //Adding the user information
+  let cookie_params=gettingUserDetails();
+  AJAX_args =AJAX_args +"&"+cookie_params;
+  AJAX_args = AJAX_args.replace('&', '');
+
 
 
   try {
-  console.log('---------------------http://172.20.244.230:8000/api/npd/unmatchedprod?'+paramString+searchParams);
+  console.log('---------------------http://172.20.244.230:8000/api/npd/unmatchedprod?'+AJAX_args);
       // Table data
         const data = yield call(request,
-          `${host_url}/api/npd/unmatchedprod?`+paramString+searchParams);
+          `${host_url}/api/npd/unmatchedprod?`+AJAX_args);
         yield put(unmatchedProdTableSuccess(data));
 
 } catch (err) {
@@ -72,22 +109,31 @@ export function* generateSkuChartDataFetch() {
     //console.log('generateUnmatchedTableFetch saga');
     let urlName=yield select(selectRangingNpdPageDomain());
     let urlParams = urlName.get('dataUrlParms');
-
-    let paramString='';
-    Object.keys(urlParams).map(obj => {
-      paramString += `&${obj}=${urlParams[obj]}`
-    });
-    paramString=paramString.replace('&','');
-
-try {
+    let urlParamsString = urlName.get('urlParamsString');
+    let dataWeekUrlParams =urlName.get('dataWeekUrlParams');
 
 
-  console.log('---------------------http://172.20.244.230:8000/api/npd/psgskudistribution?'+paramString);
+  let AJAX_args=''
 
+  if(urlParamsString!==''){
+    AJAX_args= AJAX_args + '&' + urlParamsString
+  }
+
+  if(dataWeekUrlParams!==''){
+    AJAX_args= AJAX_args + '&' + dataWeekUrlParams
+  }
+
+  //Adding the user information
+  let cookie_params=gettingUserDetails();
+  AJAX_args =AJAX_args +"&"+cookie_params;
+  AJAX_args = AJAX_args.replace('&', '');
+
+  try {
+
+    console.log('---------------------http://172.20.244.230:8000/api/npd/psgskudistribution?'+AJAX_args);
    // Sku chart data
-      const sku_chart = yield call(request,
-        `${host_url}/api/npd/psgskudistribution?`+paramString);
-        yield put(skuChartSuccess(sku_chart));
+      const sku_chart = yield call(request,`${host_url}/api/npd/psgskudistribution?`+AJAX_args);
+      yield put(skuChartSuccess(sku_chart));
 
 
 } catch (err) {
@@ -105,23 +151,34 @@ export function* doSkuChartDataFetch() {
 export function* generateOutPerformanceChartFetch() {
     //console.log('generateUnmatchedTableFetch saga');
     let urlName=yield select(selectRangingNpdPageDomain());
-    let urlParams = urlName.get('dataUrlParms');
+    let urlParamsString = urlName.get('urlParamsString');
+    let dataWeekUrlParams =urlName.get('dataWeekUrlParams');
 
-    let paramString='';
-    Object.keys(urlParams).map(obj => {
-      //console.log(obj,urlParams[obj]);
-      paramString += `&${obj}=${urlParams[obj]}`
-    });
+    let AJAX_args=''
 
-    paramString=paramString.replace('&','');
+    if(urlParamsString!==''){
+      AJAX_args= AJAX_args + '&' + urlParamsString
+    }
 
-  console.log('---------------------http://172.20.244.230:8000/api/npd/outperformance?'+paramString);
+    if(dataWeekUrlParams!==''){
+      AJAX_args= AJAX_args + '&' + dataWeekUrlParams
+    }
+
+
+  //Adding the user information
+    let cookie_params=gettingUserDetails();
+    AJAX_args =AJAX_args +"&"+cookie_params;
+    AJAX_args = AJAX_args.replace('&', '');
+
+
+
+  console.log('---------------------http://172.20.244.230:8000/api/npd/outperformance?'+AJAX_args);
 
 
   try {
 
       // Out performance data
-      const out_performance= yield call(request,`${host_url}/api/npd/outperformance?`+paramString);
+      const out_performance= yield call(request,`${host_url}/api/npd/outperformance?`+AJAX_args);
 
       yield put(outPerformanceChartSuccess(out_performance));
 
@@ -140,23 +197,31 @@ export function* doOutPerformanceChartFetch() {
 export function* generatePriceGravityFetch() {
     //console.log('generateUnmatchedTableFetch saga');
     let urlName=yield select(selectRangingNpdPageDomain());
-    let urlParams = urlName.get('dataUrlParms');
+    let urlParamsString = urlName.get('urlParamsString');
+    let dataWeekUrlParams =urlName.get('dataWeekUrlParams');
+
+    let AJAX_args=''
+
+    if(urlParamsString!==''){
+      AJAX_args= AJAX_args + '&' + urlParamsString
+    }
+
+    if(dataWeekUrlParams!==''){
+      AJAX_args= AJAX_args + '&' + dataWeekUrlParams
+    }
+
+  //Adding the user information
+    let cookie_params=gettingUserDetails();
+    AJAX_args =AJAX_args +"&"+cookie_params;
+    AJAX_args = AJAX_args.replace('&', '');
 
 
-    let paramString='';
-    Object.keys(urlParams).map(obj => {
-      //console.log(obj,urlParams[obj]);
-      paramString += `&${obj}=${urlParams[obj]}`
-    });
-    paramString=paramString.replace('&','');
+  try {
 
-
-try {
-
-  console.log('---------------------http://172.20.244.230:8000/api/npd/pricebucket?'+paramString);
+  console.log('---------------------http://172.20.244.230:8000/api/npd/pricebucket?'+AJAX_args);
 
       // Price gravity chart data
-      const price_gravity = yield call(request,`${host_url}/api/npd/pricebucket?`+paramString);
+      const price_gravity = yield call(request,`${host_url}/api/npd/pricebucket?`+AJAX_args);
       yield put(priceGravitySuccess(price_gravity));
 
 
@@ -176,13 +241,24 @@ export function* doPriceGravityFetch() {
 /* GENERATE SIDE FILTER*/
 export function* generateSideFilter() {
   try {
-    // todo: update url
 
     let urlName=yield select(selectRangingNpdPageDomain());
     let urlParams = urlName.get('filter_selection');
-    console.log(`http://172.20.244.230:8000/api/npd_view1/filter_data?` + urlParams);
 
-    const data = yield call(request,`${host_url}/api/npd_view1/filter_data?` + urlParams);
+    let AJAX_args=''
+
+    if(urlParams!==''){
+      AJAX_args= AJAX_args + '&' + urlParams
+    }
+
+    //Adding the user information
+    let cookie_params=gettingUserDetails();
+    AJAX_args =AJAX_args +"&"+cookie_params;
+    AJAX_args = AJAX_args.replace('&', '');
+
+     console.log(`http://172.20.244.230:8000/api/npd_view1/filter_data?` + AJAX_args);
+
+    const data = yield call(request,`${host_url}/api/npd_view1/filter_data?` + AJAX_args);
     yield put(generateSideFilterSuccess(data));
 
   } catch (err) {

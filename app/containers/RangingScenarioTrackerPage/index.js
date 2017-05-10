@@ -48,12 +48,12 @@ export class RangingScenarioTrackerPage extends React.PureComponent { // eslint-
             page = '/ranging/view-scenario?';
             {/*let user_id=this.props.RangingScenarioTrackerPage.user_id;*/}
 
-            attributes = 'user_id=sachin123' + "&scenario_name=" + row.scenario_name+"&scenario_tag=" + row.scenario_tag;
+            attributes = "&scenario_name=" + row.scenario_name+"&scenario_tag=" + row.scenario_tag;
 
 
           } else {
             page = '/ranging/view-delist-scenario?';
-            attributes = 'user_id=Tanaya' + "&scenario_name=" + row.scenario_name;
+            attributes = "&scenario_name=" + row.scenario_name;
 
           }
           let objString = page + attributes;
@@ -122,6 +122,8 @@ export class RangingScenarioTrackerPage extends React.PureComponent { // eslint-
       // alwaysShowAllBtns: true // Always show next and previous button
       // withFirstAndLast: false > Hide the going to First and Last page button
     };
+
+
 
     return (
       <div>

@@ -24,6 +24,7 @@ import WaterFallChartNpd from 'components/WaterFallChartNpd';
 import InputField from 'components/input_field';
 import {Modal, Nav, NavItem, MenuItem, NavDropdown} from 'react-bootstrap';
 import {Pagination, Accordion} from 'react-bootstrap';
+import RadioButton from 'components/radio_button';
 import {
   dataFetchOnPageLoad,
   dataFetchOnBubbleData,
@@ -87,6 +88,7 @@ export class RangingNpdImpactPage extends React.PureComponent { // eslint-disabl
       showSaveScenarioSuccessModalFlag:false,
       showSaveScenarioModalFlag: false,
       showSaveScenarioOverwriteConfirmationModalFlag: false,
+      afterScenarioOption:0,
 
       showEditForecastModal:false,
       showEditForecastSuccessModal:false,
@@ -189,9 +191,8 @@ export class RangingNpdImpactPage extends React.PureComponent { // eslint-disabl
 
             <div className="row formattedText">
 
-              <div className="col-xs-1"></div>
-              <div className="col-xs-5">
-
+              {/*<div className="col-xs-1"></div>*/}
+              <div className="col-xs-6">
 
                 <div className="col-xs-6">
                   Scenario Name:
@@ -209,13 +210,13 @@ export class RangingNpdImpactPage extends React.PureComponent { // eslint-disabl
                 {/*<div className="col-xs-2"></div>*/}
               </div>
 
-              <div className="col-xs-5">
+              <div className="col-xs-6">
                 <div className="col-xs-6">
                   Tag Name:
                 </div>
                 <div className="col-xs-6">
                   <InputField type="text"
-                              placeholder="Enter scenario tag"
+                              placeholder="Enter tag"
                               value={this.props.RangingNpdImpactPage.tagName}
                               onChange={(e) => {
                                 this.props.onSaveTagName(e);
@@ -225,7 +226,7 @@ export class RangingNpdImpactPage extends React.PureComponent { // eslint-disabl
                 </div>
               </div>
 
-              <div className="col-xs-1"></div>
+              {/*<div className="col-xs-1"></div>*/}
             </div>
 
 
@@ -260,8 +261,60 @@ export class RangingNpdImpactPage extends React.PureComponent { // eslint-disabl
               <i>Scenario '{this.props.RangingNpdImpactPage.scenarioName}' has been saved successfully!</i><br/>
             <br/>
               What do you wish to do next?
-            </div>
+            {/*<div style={{backgroundColor:'white',opacity:'0.8',color:'black'}}>*/}
+              {/*<RadioButton id={'1'}*/}
+                           {/*label={'Add new product'}*/}
+                           {/*valid={true}*/}
+                           {/*onChange={() => {*/}
+                             {/*this.setState({afterScenarioOption:1});*/}
+                           {/*}}*/}
+                           {/*name="x"*/}
+              {/*/>*/}
+              {/*<RadioButton id={'2'}*/}
+                           {/*label={'Make pricing changes'}*/}
+                           {/*valid={true}*/}
+                           {/*onChange={() => {*/}
+                             {/*this.setState({afterScenarioOption:2});*/}
+                           {/*}}*/}
+                           {/*name="x"*/}
+              {/*/>*/}
+              {/*<RadioButton id={'3'}*/}
+                           {/*label={'View scenarios'}*/}
+                           {/*valid={true}*/}
+                           {/*onChange={() => {*/}
+                             {/*this.setState({afterScenarioOption:3});*/}
+                           {/*}}*/}
+                           {/*name="x"*/}
+              {/*/>*/}
 
+            {/*</div>*/}
+          </div>
+
+            {/*<div className="row">*/}
+            {/*<div className="col-xs-12 center-this">*/}
+              {/*<Button onClick={() => {*/}
+
+                {/*if(this.state.afterScenarioOption===1){*/}
+                  {/*this.setState({showSaveScenarioSuccessModalFlag: false});*/}
+                {/*}else if(this.state.afterScenarioOption===2){*/}
+                  {/*let page='/pricing/';*/}
+
+                  {/*let objString = page;*/}
+                  {/*window.location = objString;*/}
+
+                {/*}else if(this.state.afterScenarioOption===2){*/}
+                  {/*let page='/ranging/scenario-tracker?';*/}
+                  {/*let user_id="vrushali123";*/}
+
+                  {/*let objString = page+"user_id="+user_id;*/}
+                  {/*window.location = objString;*/}
+
+                {/*}*/}
+
+              {/*}}*/}
+               {/*style={{display: 'block', marginTop:"1%",marginLeft:'35%'}}>Proceed</Button>*/}
+            {/*</div>*/}
+    {/*</div>*/}
 
             <div className="row" style={{marginTop:'2%'}}>
               <div className="col-xs-6">
@@ -274,10 +327,8 @@ export class RangingNpdImpactPage extends React.PureComponent { // eslint-disabl
               <div className="col-xs-6">
                 <Button onClick={() => {
                   let page='/ranging/scenario-tracker?';
-                  let user_id="vrushali123";
-                  {/*let attributes='userid=sachin123'+"&scenario_name="+obj.scenario_name+"&tag_name="+obj.tag_name;*/}
 
-                  let objString = page+"user_id="+user_id;
+                  let objString = page;
                   window.location = objString;
 
                 }}

@@ -28,14 +28,6 @@ class CascadedFilterNpd extends React.PureComponent { // eslint-disable-line rea
     this.props.onGenerateUrlParams(urlParams);
     this.props.onSendUrlParams(urlParams);
 
-    this.props.onUnmatchedProdTable();
-    this.props.onSkuChartFetch();
-    this.props.onOutPerformanceChartFetch();
-    this.props.onPriceGravityFetch();
-
-
-
-
   };
 
   constructor(props) {
@@ -85,15 +77,21 @@ class CascadedFilterNpd extends React.PureComponent { // eslint-disable-line rea
       this.props.onGenerateUrlParamsString(queryString);
 
 
-      if (this.props.dataPageUrlParams !== '' && this.props.dataWeekUrlParams !== '') {
-        browserHistory.push(newUrl + "?" + this.props.dataWeekUrlParams + "&" + queryString + "&" + this.props.dataPageUrlParams);
-      } else if (this.props.dataPageUrlParams !== '' || this.props.dataWeekUrlParams !== '') {
-        browserHistory.push(newUrl + "?" + this.props.dataWeekUrlParams + this.props.dataPageUrlParams + "&" + queryString);
-      }
-      else {
-        browserHistory.push(newUrl + '?' + queryString);
-      }
+      // if (this.props.dataPageUrlParams !== '' && this.props.dataWeekUrlParams !== '') {
+      //   browserHistory.push(newUrl + "?" + this.props.dataWeekUrlParams + "&" + queryString + "&" + this.props.dataPageUrlParams);
+      // } else if (this.props.dataPageUrlParams !== '' || this.props.dataWeekUrlParams !== '') {
+      //   browserHistory.push(newUrl + "?" + this.props.dataWeekUrlParams + this.props.dataPageUrlParams + "&" + queryString);
+      // }
+      // else {
+      //   browserHistory.push(newUrl + '?' + queryString);
+      // }
+      this.props.onUnmatchedProdTable();
+      this.props.onSkuChartFetch();
+      this.props.onOutPerformanceChartFetch();
+      this.props.onPriceGravityFetch();
+
     }
+
 
   };
 
@@ -257,17 +255,18 @@ class CascadedFilterNpd extends React.PureComponent { // eslint-disable-line rea
 
           }}>Apply Filters</Button>
 
-        <Button style={{marginTop:"5px"}}
-          onClick={() => {
-            //To un check all the buttons
-            let selection='';
-            this.props.onCheckboxChange(selection);
-            this.props.onGenerateSideFilter();
+        <Button buttonType={'secondary'}
+                style={{marginTop:"5px"}}
+                onClick={() => {
+                  //To un check all the buttons
+                  let selection='';
+                  this.props.onCheckboxChange(selection);
+                  this.props.onGenerateSideFilter();
 
-            {/*this.resetButtonFunctionality();*/}
+                  {/*this.resetButtonFunctionality();*/}
 
 
-          }}>Clear Filter Selections</Button>
+                }}>Clear Filter Selections</Button>
 
         {/*<Button style={{marginTop:"5px"}}*/}
           {/*onClick={() => {*/}

@@ -33,7 +33,7 @@ import {Modal, Nav, NavItem, MenuItem, NavDropdown} from 'react-bootstrap';
 
 export class PricingForecastScenario extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
   componentDidMount = () => {
-    console.log('componentDidMount and printing whole data from reducer');
+    console.log('componentDidMount andfd printing whole data from reducer');
     if (this.props.params.eventId && this.props.params.scenarioId) {
       this.props.onUpdateEventId(this.props.params.eventId);
       this.props.onUpdateScenarioId(this.props.params.scenarioId);

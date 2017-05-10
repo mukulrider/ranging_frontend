@@ -22,6 +22,29 @@ import {
 
 let nego_host_url="http://172.20.244.230:8000";
 
+let gettingUserDetails = () =>{
+  let getCookie = (name) => {
+    const value = `; ${document.cookie}`;
+    const parts = value.split(`; ${name}=`);
+    if (parts.length === 2) {
+      return parts.pop().split(';').shift();
+    }
+  };
+
+  const user_id = getCookie('token');
+  const user_name = getCookie('user');
+  const designation = getCookie('designation');
+  const sessionID = getCookie('login_timestamp')
+  const buying_controller = getCookie('buying_controller');
+  const buyer = getCookie('buyer');
+
+  let cookie_params="user_id="+user_id+"&user_name="+user_name+"&designation="+designation+"&session_id="+sessionID+"&buying_controller_header="+buying_controller+"&buyer_header="+buyer;
+
+  return(cookie_params);
+
+}
+
+
 // Individual exports for testing
 export function* defaultSaga() {
   // See example in containers/HomePage/sagas.js
@@ -87,9 +110,14 @@ export function* generateTable() {
   }
 
   //Removing "&"
-  let ajaxSelection = SelectionState.replace('&', '');
-  console.log(nego_host_url+`/api/nego_table?` + ajaxSelection)
-  const data = yield call(request, nego_host_url+`/api/nego_table?` + ajaxSelection);
+  let AJAX_args=SelectionState;
+  let cookie_params=gettingUserDetails();
+  AJAX_args =AJAX_args +"&"+cookie_params;
+  AJAX_args = AJAX_args.replace('&', '');
+
+
+  console.log(nego_host_url+`/api/nego_table?` + AJAX_args)
+  const data = yield call(request, nego_host_url+`/api/nego_table?` + AJAX_args);
   yield put(generateTableSuccess(data));
 
 
@@ -130,11 +158,16 @@ export function* generateGraph() {
     SelectionState = SelectionState + '&' + performanceParams
   }
 
-
   //Removing "&"
-  let ajaxSelection = SelectionState.replace('&', '');
-  console.log(nego_host_url+`/api/nego_chart?` +ajaxSelection);
-  const data = yield call(request, nego_host_url+`/api/nego_chart?`+ajaxSelection);
+  let AJAX_args=SelectionState;
+  let cookie_params=gettingUserDetails();
+  AJAX_args =AJAX_args +"&"+cookie_params;
+  AJAX_args = AJAX_args.replace('&', '');
+
+
+
+  console.log(nego_host_url+`/api/nego_chart?` +AJAX_args);
+  const data = yield call(request, nego_host_url+`/api/nego_chart?`+AJAX_args );
   yield put(fetchGraphSuccess(data));
 
 
@@ -152,9 +185,19 @@ export function* generateSideFilter() {
   let urlName = yield select(selectRangingNegotiationPageDomain());
   let urlParams = urlName.get('urlParamsString');
 
+  let AJAX_args='';
+  if(urlParams!==''){
+    AJAX_args=AJAX_args+"&"+urlParams;
+  }
+
+  let cookie_params=gettingUserDetails();
+  AJAX_args =AJAX_args +"&"+cookie_params;
+  AJAX_args = AJAX_args.replace('&', '');
+
+
   try {
 
-    let filterData = yield call(request, nego_host_url+`/api/nego/filter_data?` + urlParams);
+    let filterData = yield call(request, nego_host_url+`/api/nego/filter_data?` + AJAX_args);
     yield put(generateSideFilterSuccess(filterData));
 
   } catch (err) {
