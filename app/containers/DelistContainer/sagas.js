@@ -53,6 +53,7 @@ export function* defaultSaga() {
 }
 
 let host_url = "http://172.20.246.47:8000"
+// let host_url = "http://172.20.246.47:8000"
 
 // let host_url = "http://172.20.246.196:8000"
 
@@ -583,7 +584,7 @@ export function* generateSaveScenario() {
     console.log("Trying to save scenario")
     let urlName = yield select(selectDelistContainerDomain());
     let urlParams = urlName.get('urlParamsString');
-    let user_id = "user_id=tan1";
+    let user_id = "user_id=bc";
     let scenarioName= urlName.get('scenarioName');
     let sessionID= "session_id=2";
 

@@ -1342,6 +1342,8 @@ export class DelistContainer extends React.PureComponent { // eslint-disable-lin
                                       <TableHeaderColumn dataField="predicted_cgm" dataFormat={formatSales}
                                                          dataSort={true} dataAlign="center">Predicted
                                         Cgm</TableHeaderColumn>
+                                      <TableHeaderColumn dataField="per_value_transfer" dataFormat={formatSales} dataSort={true} dataAlign="center">Value Transfer</TableHeaderColumn>
+                                      <TableHeaderColumn dataField="per_vol_transfer" dataFormat={formatVolume} dataSort={true} dataAlign="center">Volume Transfer</TableHeaderColumn>
                                       <TableHeaderColumn dataFormat={this.cellButton} dataAlign="center">View
                                         Substitutes</TableHeaderColumn>
                                     </BootstrapTable>
