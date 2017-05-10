@@ -24,44 +24,26 @@ export default class App extends React.PureComponent { // eslint-disable-line re
     children: React.PropTypes.node,
   };
 
-  generateSlector = (selectArray) => {
-    return (
-      <select style={{width: '100px'}}>
-        {selectArray.map(obj => {
-          return (
-            <option key={Date.now() + Math.random()} value={obj}>{obj}</option>
-          )
-        })}
-      </select>
-    )
-  };
+  componentWillMount() {
+    let getCookie;
+    getCookie = (name) => {
+      const value = `; ${document.cookie}`;
+      const parts = value.split(`; ${name}=`);
+      if (parts.length === 2) return parts.pop().split(';').shift();
+    };
+    const token = getCookie('token');
+    if (token && this.props.location.pathname.includes('login')) {
+      window.location = 'http://dvcmpweb00001uk.dev.global.tesco.org'
+    }
+    if (!token && !this.props.location.pathname.includes('login')) {
+      window.location = 'http://dvcmpweb00001uk.dev.global.tesco.org/login/'
+    }
+  }
 
   render() {
-    const links = [
-      { text: 'Sales Reporting', icon: 'home', href: 'http://dvcmpweb00001uk.dev.global.tesco.org' },
-      { text: 'Ranging', icon: 'home', href: 'http://dvcmpweb00001uk.dev.global.tesco.org:81/ranging/negotiation' },
-      { text: 'Pricing', icon: 'home', href: 'http://dvcmpweb00001uk.dev.global.tesco.org:82/pricing/' },
-      { text: 'Pricing Scenario Tracker', icon: 'home', href: 'http://dvcmpweb00001uk.dev.global.tesco.org:82/pricing/scenario-tracker'},
-      { text: 'Tesco.com', icon: 'home', href: 'http://www.tesco.com/' },
-      { text: 'Contact us', icon: 'telephone', href: 'http://www.tesco.com/help/contact/' },
-      { text: 'Help', icon: 'help', href: 'http://www.tesco.com/help/' }];
     return (
       <div>
-        {/*<nav className="navbar navbar-default">*/}
-          {/*<div className="container-fluid">*/}
-            {/*<div className="navbar-header">*/}
-              {/*<a className="navbar-brand" href="#"><FormattedMessage {...messages.header} /></a>*/}
-            {/*</div>*/}
-            {/*<ul className="nav navbar-nav">*/}
-              {/*<li className="active"><a href="#">Event*/}
-                {/*Name</a> {this.generateSlector(['Price Change Event1', 'Price Change Event 2'])}</li>*/}
-              {/*<li><a href="#">Store Format</a> {this.generateSlector(['Express', 'Main Estate'])}</li>*/}
-              {/*<li><a href="#">Start Date</a> <input type="date"/></li>*/}
-              {/*<li><a href="#">Number of Weeks</a> {this.generateSlector([4, 8, 13, 52, 'YTD'])}</li>*/}
-            {/*</ul>*/}
-          {/*</div>*/}
-        {/*</nav>*/}
-        <Header links={links} />
+        <Header />
         <div className="container-fluid" style={{marginTop: '120px'}}>
           {React.Children.toArray(this.props.children)}
         </div>

@@ -14,14 +14,12 @@ import {
   selectRangingNpdPageDomain, makeUrlParamsString
 } from 'containers/RangingNpdPage/selectors';
 
-
-
 // Individual exports for testing
 export function* defaultSaga() {
   // See example in containers/HomePage/sagas.js
 }
 
-const host_url="http://172.20.244.220:8000"
+const host_url="http://dvcmpapp00002uk.dev.global.tesco.org"
 //const host_url="http://172.20.244.220:8000"
 // All sagas to be loaded
 
@@ -175,6 +173,17 @@ export function* doPriceGravityFetch() {
 //------------------------------- Side Filters - Data Fetch------------------------------------------
 /* GENERATE SIDE FILTER*/
 export function* generateSideFilter() {
+
+  let getCookie;
+  getCookie = (name) => {
+    const value = `; ${document.cookie}`;
+    const parts = value.split(`; ${name}=`);
+    if (parts.length === 2) return parts.pop().split(';').shift();
+  };
+  const user_token = getCookie('token');
+  const buyer = getCookie('buyer');
+  const token = user_token.concat('___').concat(buyer)
+
   try {
     // todo: update url
 
@@ -182,7 +191,12 @@ export function* generateSideFilter() {
     let urlParams = urlName.get('filter_selection');
     console.log(`http://172.20.244.220:8000/api/npd_view1/filter_data?` + urlParams);
 
-    const data = yield call(request,`${host_url}/api/npd_view1/filter_data?` + urlParams);
+    const data = yield call(request,`${host_url}/api/npd_view1/filter_data?` + urlParams,
+      {
+        headers: {
+          Authorization: token
+        }
+      });
     yield put(generateSideFilterSuccess(data));
 
   } catch (err) {

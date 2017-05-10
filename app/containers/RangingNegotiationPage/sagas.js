@@ -20,7 +20,7 @@ import {
 } from './constants';
 
 
-let nego_host_url="http://172.20.244.219:8000";
+let nego_host_url="http://dvcmpapp00002uk.dev.global.tesco.org";
 
 // Individual exports for testing
 export function* defaultSaga() {
@@ -86,10 +86,27 @@ export function* generateTable() {
     SelectionState = SelectionState + '&' + "search="+searchParams
   }
 
+
+  let getCookie;
+  getCookie = (name) => {
+    const value = `; ${document.cookie}`;
+    const parts = value.split(`; ${name}=`);
+    if (parts.length === 2) return parts.pop().split(';').shift();
+  };
+  const user_token = getCookie('token');
+  const buyer = getCookie('buyer');
+  const token = user_token.concat('___').concat(buyer)
+  console.log(token)
+
   //Removing "&"
   let ajaxSelection = SelectionState.replace('&', '');
   console.log(nego_host_url+`/api/nego_table?` + ajaxSelection)
-  const data = yield call(request, nego_host_url+`/api/nego_table?` + ajaxSelection);
+  const data = yield call(request, nego_host_url+`/api/nego_table?` + ajaxSelection,
+    {
+      headers: {
+        Authorization: token
+      }
+    });
   yield put(generateTableSuccess(data));
 
 
@@ -130,11 +147,25 @@ export function* generateGraph() {
     SelectionState = SelectionState + '&' + performanceParams
   }
 
+  let getCookie;
+  getCookie = (name) => {
+    const value = `; ${document.cookie}`;
+    const parts = value.split(`; ${name}=`);
+    if (parts.length === 2) return parts.pop().split(';').shift();
+  };
+  const user_token = getCookie('token');
+  const buyer = getCookie('buyer');
+  const token = user_token.concat('___').concat(buyer)
 
   //Removing "&"
   let ajaxSelection = SelectionState.replace('&', '');
   console.log(nego_host_url+`/api/nego_chart?` +ajaxSelection);
-  const data = yield call(request, nego_host_url+`/api/nego_chart?`+ajaxSelection);
+  const data = yield call(request, nego_host_url+`/api/nego_chart?`+ajaxSelection,
+    {
+      headers: {
+        Authorization: token
+      }
+    });
   yield put(fetchGraphSuccess(data));
 
 
@@ -152,9 +183,24 @@ export function* generateSideFilter() {
   let urlName = yield select(selectRangingNegotiationPageDomain());
   let urlParams = urlName.get('urlParamsString');
 
+  let getCookie;
+  getCookie = (name) => {
+    const value = `; ${document.cookie}`;
+    const parts = value.split(`; ${name}=`);
+    if (parts.length === 2) return parts.pop().split(';').shift();
+  };
+  const user_token = getCookie('token');
+  const buyer = getCookie('buyer');
+  const token = user_token.concat('___').concat(buyer)
+
   try {
 
-    let filterData = yield call(request, nego_host_url+`/api/nego/filter_data?` + urlParams);
+    let filterData = yield call(request, nego_host_url+`/api/nego/filter_data?` + urlParams,
+      {
+        headers: {
+          Authorization: token
+        }
+      });
     yield put(generateSideFilterSuccess(filterData));
 
   } catch (err) {

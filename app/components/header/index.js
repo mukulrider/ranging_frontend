@@ -5,6 +5,7 @@ import Logo from '../logo';
 import RoundedIconButton from '../rounded_icon_button';
 import Grid from '../grid';
 import tesco from './../../assets/images/tesco.svg';
+import Button from 'components/button';
 
 function renderBackLink(backLink) {
   return backLink ?
@@ -46,13 +47,13 @@ class Header extends Component {
 
   static defaultProps = {
     links: [
-      { text: 'Home', icon: 'home', href: '/' },
-      { text: 'Sales Reporting', icon: 'home', href: '/sales-reporting/' },
-      { text: 'Ranging', icon: 'home', href: '/ranging/' },
-      { text: 'Pricing', icon: 'home', href: '/pricing/' },
+      { text: 'Login', icon: 'login', href: 'http://dvcmpweb00001uk.dev.global.tesco.org/login/' },
+      { text: 'Reporting', icon: 'reporting', href: 'http://dvcmpweb00001uk.dev.global.tesco.org:81/sales/competitor' },
+      { text: 'Pricing', icon: 'pricing', href: 'http://dvcmpweb00001uk.dev.global.tesco.org:83/pricing/' },
+      { text: 'Ranging', icon: 'ranging', href: 'http://dvcmpweb00001uk.dev.global.tesco.org:82/ranging' },
       { text: 'Tesco.com', icon: 'home', href: 'http://www.tesco.com/' },
       { text: 'Contact us', icon: 'telephone', href: 'http://www.tesco.com/help/contact/' },
-      { text: 'Help', icon: 'help', href: 'http://www.tesco.com/help/' },
+      { text: 'Help', icon: 'help', href: 'http://www.tesco.com/help/' }
     ],
     logo: {
       href: 'http://www.tesco.com',
@@ -174,6 +175,31 @@ class Header extends Component {
               }
               <div className="ui-component__header__content--right">
                 <RoundedIconButton icon="menu" onClick={this.handleClick} label="Menu" />
+              </div>
+              <div>
+                {(() => {
+                  const getCookie = (name) => {
+                    const value = `; ${document.cookie}`;
+                    const parts = value.split(`; ${name}=`);
+                    if (parts.length === 2) {
+                      return parts.pop().split(';').shift();
+                    }
+                  };
+                  const token = getCookie('token');
+
+                  return token ?
+                    <div>
+                      <br/>
+                      <Button
+                        buttonType={'primary'}
+                        style={{ float: 'right' }}
+                        onClick={() => {
+                          console.log('loggingOut');
+                          document.cookie = 'token'+'=;expires=Thu, 01 Jan 1970 00:00:01 GMT;domain=dvcmpweb00001uk.dev.global.tesco.org;path=/;';
+                          window.location = 'http://dvcmpweb00001uk.dev.global.tesco.org/login/';
+                        }}
+                      >Logout</Button></div> : '';
+                })()};
               </div>
             </div>
           </Grid>

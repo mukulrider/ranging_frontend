@@ -52,7 +52,7 @@ export function* defaultSaga() {
   // See example in containers/HomePage/sagas.js
 }
 
-let host_url = "http://172.20.244.219:8000"
+let host_url = "http://dvcmpapp00002uk.dev.global.tesco.org"
 // let host_url = "http://172.20.246.203:8000"
 // let host_url = "http://172.20.246.196:8000"
 
@@ -476,6 +476,16 @@ export function* generateSideFilter() {
   let urlName = yield select(selectDelistContainerDomain());
   let urlParamsString = urlName.get('urlParamsString');
 
+  let getCookie;
+  getCookie = (name) => {
+    const value = `; ${document.cookie}`;
+    const parts = value.split(`; ${name}=`);
+    if (parts.length === 2) return parts.pop().split(';').shift();
+  };
+  const user_token = getCookie('token');
+  const buyer = getCookie('buyer');
+  const token = user_token.concat('___').concat(buyer)
+
   if (typeof(urlParamsString) == "undefined") {
     urlParamsString = "";
   }
@@ -485,7 +495,12 @@ export function* generateSideFilter() {
 
     // const data = yield call(request, host_url + `/api/product_impact/filter_data/?`+'long_description=3 BIRD RST WITH C/BERRY, DATE and ORNG S/FING - 79631889');
     // const data = yield call(request, host_url + `/api/product_impact/filter_data/?`+'long_description=73589188');
-    const data = yield call(request, host_url + `/api/product_impact/filter_data/?${urlParamsString}`);
+    const data = yield call(request, host_url + `/api/product_impact/filter_data/?${urlParamsString}`,
+      {
+        headers: {
+          Authorization: token
+        }
+      });
     // const data = yield call(request, `http://172.20.247.16:8000/api/product_impact/filter_data/?${urlParamsString}`);
 
 
