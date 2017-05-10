@@ -53,8 +53,30 @@ export function* defaultSaga() {
 }
 
 let host_url = "http://172.20.244.230:8000"
-// let host_url = "http://172.20.246.203:8000"
-// let host_url = "http://172.20.246.196:8000"
+
+//getting user info from cookies
+let gettingUserDetails = () =>{
+  let getCookie = (name) => {
+    const value = `; ${document.cookie}`;
+    const parts = value.split(`; ${name}=`);
+    if (parts.length === 2) {
+      return parts.pop().split(';').shift();
+    }
+  };
+
+  const user_id = getCookie('token');
+  const user_name = getCookie('user');
+  const designation = getCookie('designation');
+  const sessionID = getCookie('login_timestamp')
+  const buying_controller = getCookie('buying_controller');
+  const buyer = getCookie('buyer');
+
+  let cookie_params="user_id="+user_id+"&user_name="+user_name+"&designation="+designation+"&session_id="+sessionID+"&buying_controller_header="+buying_controller+"&buyer_header="+buyer;
+
+  return(cookie_params);
+
+}
+
 
 // All sagas to be loaded
 export function* generateApiFetch() {
