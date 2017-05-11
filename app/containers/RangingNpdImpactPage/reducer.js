@@ -11,7 +11,7 @@ import {
   SEND_URL_PARAMS, SAVE_WEEK_PARAM, SAVE_T1_PAGE_PARAM,SAVE_T2_PAGE_PARAM,SAVE_SEARCH_TABLE2,SAVE_SEARCH_TABLE1,
   SAVE_ASP,SAVE_ACP,SAVE_SIZE,SAVE_FILTER_SELECTIONS_TILL_NOW,UPDATE_BREADCRUMBS,
   SELECT_FILTER_INDICATOR,SHOW_APPLY_LOADING,SHOW_TAB_CHANGE_LOADING,SHOW_PAGE_AFTER_LOADING,
-  SAVE_SCENARIO_NAME,SAVE_EVENT_NAME,SAVE_SCENARIO_RESPONSE,
+  SAVE_SCENARIO_NAME,SAVE_TAG_NAME,SAVE_SCENARIO_RESPONSE,
   SAVE_EDITED_FORECAST,SAVE_EDIT_FORECAST_API,MODIFIED_FLAG
 } from './constants';
 
@@ -24,12 +24,12 @@ const initialState = fromJS({
   npdFirstHalfSelections:'',
   searchTable1:'',
   searchTable2:'',
-  // ASP_field_entry:'',
-  // ACP_field_entry:'',
-  // Size_field_entry:'',
-  ASP_field_entry:1.98,
-  ACP_field_entry:1.45,
-  Size_field_entry:500,
+  ASP_field_entry:'',
+  ACP_field_entry:'',
+  Size_field_entry:'',
+  // ASP_field_entry:1.98,
+  // ACP_field_entry:1.45,
+  // Size_field_entry:500,
   filterSelectionsTillNow:'',
   showSelectFilterIndicator:true,
   showApplyButtonLoading:false,
@@ -38,7 +38,7 @@ const initialState = fromJS({
   breadCrumbs:'',
   dataUrlParms:'',
   scenarioName:'',
-  eventName:'',
+  tagName:'',
   saveScenarioResponse:'',
   modifiedVolumeForecast:'',
   modifiedFlag:0,
@@ -176,8 +176,8 @@ function rangingNpdImpactPageReducer(state = initialState, action) {
     case GENERATE_URL_PARAMS_STRING:
       return state.set('urlParamsString', action.data);
 
-    case SAVE_EVENT_NAME:
-      return state.set('eventName', action.data);
+    case SAVE_TAG_NAME:
+      return state.set('tagName', action.data);
     case SAVE_SCENARIO_NAME:
       return state.set('scenarioName', action.data);
     case SAVE_SCENARIO_RESPONSE:

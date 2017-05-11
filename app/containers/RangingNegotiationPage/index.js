@@ -114,6 +114,7 @@ export class RangingNegotiationPage extends React.PureComponent { // eslint-disa
     this.props.onSaveBubbleParam2(tableJSON);
     this.props.onGenerateCheckedList(checked, base_product_number)
   };
+
   render() {
 
     let dataFilterUrlParams = this.props.RangingNegotiationPage.urlParamsString;
@@ -313,10 +314,10 @@ export class RangingNegotiationPage extends React.PureComponent { // eslint-disa
 
                 <div className="row" style={{marginTop:'1%',marginLeft:'1%'}}>
 
-                  <div className="col-xs-2 center-this">
+                  {/*Low CPS/Low Profit*/}
+                  <div className="col-xs-2 center-this input">
                     <label style={{fontSize:"18px",fontFamily:'tesco',color:'#c74a52',width:'100%'}}>
-                      <input title="test"
-                             type="checkbox"
+                      <input type="checkbox"
                              id="PQ1"
                              style={{marginRight:'5%'}}
                              onChange={() => {
@@ -366,12 +367,13 @@ export class RangingNegotiationPage extends React.PureComponent { // eslint-disa
                         this.props.onGenerateTable();
                              }}
                       />
+                      <span className="tooltip">Delist Products</span>
                        Low CPS/Low Profit
                     </label>
-
                   </div>
 
-                  <div className="col-xs-2 center-this">
+                  {/*Low CPS/High Profit*/}
+                  <div className="col-xs-2 center-this input">
                     <label style={{fontSize:"18px",fontFamily:'tesco',color:'#6e6767',width:'100%'}}>
                       <input type="checkbox"
                              id="PQ2"
@@ -423,12 +425,14 @@ export class RangingNegotiationPage extends React.PureComponent { // eslint-disa
                                this.props.onGenerateTable();
                              }}
                       />
+                      <span className="tooltip">Hard Bargaining’ for stronger profits – Low importance to customers</span>
                       Low CPS/High Profit
                     </label>
 
                   </div>
 
-                  <div className="col-xs-2 center-this">
+                  {/*Med CPS/Med Profit*/}
+                  <div className="col-xs-2 center-this input">
                     <label style={{fontSize:"18px",fontFamily:'tesco',color:'#ffa626',width:'100%'}}>
                       <input type="checkbox"
                              id="PQ3"
@@ -480,12 +484,14 @@ export class RangingNegotiationPage extends React.PureComponent { // eslint-disa
                                this.props.onGenerateTable();
                              }}
                       />
+                      <span className="tooltip">Area of opportunity. Concession trading – Subs/Ranging/Price. Reduce range to drive</span>
                       Med CPS/Med Profit
                     </label>
 
                   </div>
 
-                  <div className="col-xs-2 center-this">
+                  {/*High CPS/Low Profit*/}
+                  <div className="col-xs-2 center-this input">
                     <label style={{fontSize:"18px",fontFamily:'tesco',color:'#69b24a',width:'100%'}}>
                       <input type="checkbox"
                              id="PQ4"
@@ -537,12 +543,15 @@ export class RangingNegotiationPage extends React.PureComponent { // eslint-disa
                                this.props.onGenerateTable();
                              }}
                       />
+                      <span className="tooltip">Win-Win relationship with supplier to share further profit gains</span>
                       High CPS/Low Profit
                     </label>
 
+
                   </div>
 
-                  <div className="col-xs-2 center-this">
+                  {/*High CPS/High Profit*/}
+                  <div className="col-xs-2 center-this input">
                     <label style={{fontSize:"18px",fontFamily:'tesco',color:'#2B7294',width:'100%'}}>
                       <input type="checkbox"
                              id="PQ5"
@@ -594,6 +603,7 @@ export class RangingNegotiationPage extends React.PureComponent { // eslint-disa
                                this.props.onGenerateTable();
                              }}
                       />
+                      <span className="tooltip">Work collaboratively to jointly solve low profitability</span>
                       High CPS/High Profit
                     </label>
 

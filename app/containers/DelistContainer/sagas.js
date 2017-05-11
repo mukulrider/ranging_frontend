@@ -52,9 +52,31 @@ export function* defaultSaga() {
   // See example in containers/HomePage/sagas.js
 }
 
-let host_url = "http://dvcmpapp00002uk.dev.global.tesco.org"
-// let host_url = "http://172.20.246.203:8000"
-// let host_url = "http://172.20.246.196:8000"
+let host_url = "http://172.20.244.230:8000"
+
+//getting user info from cookies
+let gettingUserDetails = () =>{
+  let getCookie = (name) => {
+    const value = `; ${document.cookie}`;
+    const parts = value.split(`; ${name}=`);
+    if (parts.length === 2) {
+      return parts.pop().split(';').shift();
+    }
+  };
+
+  const user_id = getCookie('token');
+  const user_name = getCookie('user');
+  const designation = getCookie('designation');
+  const sessionID = getCookie('login_timestamp')
+  const buying_controller = getCookie('buying_controller');
+  const buyer = getCookie('buyer');
+
+  let cookie_params="user_id="+user_id+"&user_name="+user_name+"&designation="+designation+"&session_id="+sessionID+"&buying_controller_header="+buying_controller+"&buyer_header="+buyer;
+
+  return(cookie_params);
+
+}
+
 
 // All sagas to be loaded
 export function* generateApiFetch() {
@@ -476,16 +498,6 @@ export function* generateSideFilter() {
   let urlName = yield select(selectDelistContainerDomain());
   let urlParamsString = urlName.get('urlParamsString');
 
-  let getCookie;
-  getCookie = (name) => {
-    const value = `; ${document.cookie}`;
-    const parts = value.split(`; ${name}=`);
-    if (parts.length === 2) return parts.pop().split(';').shift();
-  };
-  const user_token = getCookie('token');
-  const buyer = getCookie('buyer');
-  const token = user_token.concat('___').concat(buyer)
-
   if (typeof(urlParamsString) == "undefined") {
     urlParamsString = "";
   }
@@ -495,12 +507,7 @@ export function* generateSideFilter() {
 
     // const data = yield call(request, host_url + `/api/product_impact/filter_data/?`+'long_description=3 BIRD RST WITH C/BERRY, DATE and ORNG S/FING - 79631889');
     // const data = yield call(request, host_url + `/api/product_impact/filter_data/?`+'long_description=73589188');
-    const data = yield call(request, host_url + `/api/product_impact/filter_data/?${urlParamsString}`,
-      {
-        headers: {
-          Authorization: token
-        }
-      });
+    const data = yield call(request, host_url + `/api/product_impact/filter_data/?${urlParamsString}`);
     // const data = yield call(request, `http://172.20.247.16:8000/api/product_impact/filter_data/?${urlParamsString}`);
 
 
@@ -601,8 +608,11 @@ export function* generateSaveScenario() {
     let user_id = "user_id=tan1";
     let scenarioName= urlName.get('scenarioName');
     let sessionID= "session_id=2";
+    let tagName= urlName.get('tagName');
 
     let AJAX_args =urlParams+"&scenario_name="+scenarioName+"&"+user_id+"&"+sessionID ;
+    // let AJAX_args =urlParams+"&scenario_name="+scenarioName+'&scenario_tag='+tagName+"&"+user_id+"&"+sessionID ;
+
 
     console.log(host_url+'/api/npd_impact_save_scenario?' + AJAX_args);
     let data = yield call(request, host_url+'/api/delist_scenario?' + AJAX_args);

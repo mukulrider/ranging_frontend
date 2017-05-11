@@ -20,12 +20,12 @@ import MultiseriesBarChart2 from 'components/MultiseriesBarChart2';
 import MultiSeriesHoriBarChart from 'components/MultiSeriesHoriBarChart';
 import MultilineOrdinalChart from 'components/MultilineOrdinalChart';
 import InputField from 'components/input_field';
+import {saveImage,saveDataAsCSV} from './../../utils/exportFunctions';
 
 import './style.scss';
 import Panel from 'components/panel';
-import {Modal, Pagination,Accordion} from 'react-bootstrap';
-import {Nav} from 'react-bootstrap';
-import {NavItem} from 'react-bootstrap';
+import { Pagination,Accordion} from 'react-bootstrap';
+import { Modal,Nav,NavItem,DropdownButton, MenuItem } from 'react-bootstrap';
 
 import {
   unmatchedProdTable,skuChartFetch,outPerformanceChartFetch,priceGravityFetch,
@@ -189,32 +189,26 @@ export class RangingNpdPage extends React.PureComponent { // eslint-disable-line
 
                       this.props.onSaveWeekParam(dataWeekUrlParams);
 
-                      if (dataFilterUrlParams!==''&& dataPageUrlParams!=='') {
-                        browserHistory.push(this.props.location.pathname+"?"+dataWeekUrlParams+"&"+dataFilterUrlParams+"&"+dataPageUrlParams);
-                      } else if (dataFilterUrlParams!==''|| dataPageUrlParams!=='') {
-                        browserHistory.push(this.props.location.pathname+"?"+dataWeekUrlParams+"&"+dataFilterUrlParams+dataPageUrlParams);
-                      }
-                      else{
-                        browserHistory.push(this.props.location.pathname+"?"+dataWeekUrlParams);
-                      }
+                      this.props.onUnmatchedProdTable();
+                      this.props.onSkuChartFetch();
+                      this.props.onOutPerformanceChartFetch();
+                      this.props.onPriceGravityFetch();
+
 
 
                     }}><span className="tab_label">13 Weeks</span></NavItem>
 
                     <NavItem className="tabsCustomList" eventKey="2" onClick={() => {
                       this.setState({activeKey: "2"});
-                      browserHistory.push(this.props.location.pathname + "?week_flag=Latest 26 Weeks")
+
 
                       dataWeekUrlParams="week_flag=Latest 26 Weeks";
                       this.props.onSaveWeekParam(dataWeekUrlParams);
-                      if (dataFilterUrlParams!==''&& dataPageUrlParams!=='') {
-                        browserHistory.push(this.props.location.pathname+"?"+dataWeekUrlParams+"&"+dataFilterUrlParams+"&"+dataPageUrlParams);
-                      } else if (dataFilterUrlParams!==''|| dataPageUrlParams!=='') {
-                        browserHistory.push(this.props.location.pathname+"?"+dataWeekUrlParams+"&"+dataFilterUrlParams+dataPageUrlParams);
-                      }
-                      else{
-                        browserHistory.push(this.props.location.pathname+"?"+dataWeekUrlParams);
-                      }
+
+                      this.props.onUnmatchedProdTable();
+                      this.props.onSkuChartFetch();
+                      this.props.onOutPerformanceChartFetch();
+                      this.props.onPriceGravityFetch();
 
 
                     }}><span className="tab_label">26 Weeks</span></NavItem>
@@ -225,14 +219,12 @@ export class RangingNpdPage extends React.PureComponent { // eslint-disable-line
 
                       dataWeekUrlParams="week_flag=Latest 52 Weeks";
                       this.props.onSaveWeekParam(dataWeekUrlParams);
-                      if (dataFilterUrlParams!==''&& dataPageUrlParams!=='') {
-                        browserHistory.push(this.props.location.pathname+"?"+dataWeekUrlParams+"&"+dataFilterUrlParams+"&"+dataPageUrlParams);
-                      } else if (dataFilterUrlParams!==''|| dataPageUrlParams!=='') {
-                        browserHistory.push(this.props.location.pathname+"?"+dataWeekUrlParams+"&"+dataFilterUrlParams+dataPageUrlParams);
-                      }
-                      else{
-                        browserHistory.push(this.props.location.pathname+"?"+dataWeekUrlParams);
-                      }
+
+                      this.props.onUnmatchedProdTable();
+                      this.props.onSkuChartFetch();
+                      this.props.onOutPerformanceChartFetch();
+                      this.props.onPriceGravityFetch();
+
 
                     }}><span className="tab_label">52 Weeks</span></NavItem>
                   </Nav>
@@ -307,7 +299,21 @@ export class RangingNpdPage extends React.PureComponent { // eslint-disable-line
                           {(() => {
                             if (this.props.RangingNpdPage.multiHoriBarChartData) {
                               return(
-                                <MultiSeriesHoriBarChart data={this.props.RangingNpdPage.multiHoriBarChartData}/>
+                                <div>
+                                  <MultiSeriesHoriBarChart ref='MultiSeriesHoriBarChart' data={this.props.RangingNpdPage.multiHoriBarChartData}/>
+                                  {/*<div style={{float:"right"}}>*/}
+                                    {/*<DropdownButton title="Save Image/CSV" style={{backgroundColor:"#449d44", borderColor:"#398439",color:"#fff"}} id="dropButtonId">*/}
+                                        {/*<MenuItem onClick={() => {*/}
+                                        {/*saveImage(this.refs.MultiSeriesHoriBarChart.refs.outPerformance,"line_chart")*/}
+                                      {/*}*/}
+                                    {/*}>Save As JPEG</MenuItem>*/}
+                                      {/*<MenuItem onClick={() => {*/}
+                                        {/*saveDataAsCSV(this.props.RangingNpdPage.data.multiHoriBarChartData,"multiHoriBarChartData.csv")*/}
+                                      {/*}*/}
+                                    {/*}>Download CSV</MenuItem>*/}
+                                      {/*</DropdownButton>*/}
+                                      {/*</div>*/}
+                                </div>
                               )
                             }
                           })()}
@@ -432,9 +438,9 @@ export class RangingNpdPage extends React.PureComponent { // eslint-disable-line
                                         search={true}
                                         exportCSV={true}
                                       >
-                                        <TableHeaderColumn dataField="competitor_product_desc" isKey={true} dataSort={true} dataAlign="center">Product Description</TableHeaderColumn>
-                                        <TableHeaderColumn dataField="retailer" dataSort={true} dataAlign="center">Retailer</TableHeaderColumn>
-                                        <TableHeaderColumn dataField="asp" dataFormat={formatSales} dataSort={true} dataAlign="center">ASP</TableHeaderColumn>
+                                        <TableHeaderColumn dataField="competitor_product_desc" width="50%" thStyle={{fontSize:'14px'}} tdStyle={{whiteSpace:'normal',fontSize:'12px'}} isKey={true} dataSort={true} dataAlign="left" headerAlign="center">Product Description</TableHeaderColumn>
+                                        <TableHeaderColumn dataField="retailer" width="25%" dataSort={true} dataAlign="center">Retailer</TableHeaderColumn>
+                                        <TableHeaderColumn dataField="asp" width="25%" dataFormat={formatSales} dataSort={true} dataAlign="center">ASP</TableHeaderColumn>
                                       </BootstrapTable>
 
                                     </div>

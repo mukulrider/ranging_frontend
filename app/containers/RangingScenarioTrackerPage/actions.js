@@ -5,7 +5,7 @@
  */
 
 import {
-  DEFAULT_ACTION,ALL_SCENARIO_TABLE_FETCH,ALL_SCENARIO_TABLE_SUCCESS,TAB_CHANGE
+  DEFAULT_ACTION,ALL_SCENARIO_TABLE_FETCH,ALL_SCENARIO_TABLE_SUCCESS,TAB_CHANGE,DELETE_SCENARIO
 } from './constants';
 
 export function defaultAction() {
@@ -30,7 +30,8 @@ export function fetchRangingAllScenarioDataSuccess(data) {
   };
 }
 
-//--------------------Fetching default data on page load---------------------
+
+//--------------------On tab change---------------------
 
 export function tabChange(data) {
   return {
@@ -38,3 +39,14 @@ export function tabChange(data) {
     data
   };
 }
+
+
+//--------------------Delete scenario---------------------
+
+export function deleteScenario(data) {
+  return {
+    type: DELETE_SCENARIO,
+    data
+  };
+}
+

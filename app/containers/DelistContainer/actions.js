@@ -53,7 +53,7 @@ import {
   GENERATE_URL_PARAMS_DATA,
   URL_PARAMS,
   SIDE_FILTER_RESET,
-  SAVE_SCENARIO_RESPONSE,
+  SAVE_SCENARIO_RESPONSE,SAVE_TAG_NAME,
 
   SAVE_SCENARIO,SAVE_SCENARIO_NAME,
   } from './constants';
@@ -461,6 +461,16 @@ export function updateSaveScenarioResponse(data) {
     type: SAVE_SCENARIO_RESPONSE ,
     data
 
+  };
+};
+
+
+
+export function saveTagName(data) {
+  // console.log('Saving saveTagName in action',data);
+  return {
+    type: SAVE_TAG_NAME ,
+    data
   };
 };
 

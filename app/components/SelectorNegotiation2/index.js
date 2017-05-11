@@ -194,6 +194,12 @@ class SelectorNegotiation2 extends React.PureComponent { // eslint-disable-line 
                 onClick={() => {
                   this.props.onGenerateUrlParamsString('');
                   this.props.onGenerateUrlParamsData();
+
+                  this.props.onUpdateLoadingIndicationText("Clearing you filter selections")
+                  this.props.onUpdateLoadingIndicationStatus(true);
+                  this.props.onGenerateTable();
+                  this.props.onFetchGraph();
+
                 }}>Clear Filters Selection</Button>
             </div>
             </div>

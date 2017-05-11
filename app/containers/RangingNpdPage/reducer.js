@@ -21,7 +21,7 @@ import {
 
 const initialState = fromJS({
   dataPageUrlParams: '',
-  dataWeekUrlParams: '',
+  dataWeekUrlParams: 'week_flag=Latest 13 Weeks',
   urlParamsString: '',
   filter_selection:'',
   textBoxQueryString:'',

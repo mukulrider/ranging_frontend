@@ -23,7 +23,7 @@ import {Pagination, Accordion} from 'react-bootstrap';
 require('react-bootstrap-table/css/react-bootstrap-table.css')
 
 import {
-  fetchRangingAllScenarioData, tabChange
+  fetchRangingAllScenarioData, tabChange,deleteScenario
 } from './actions';
 
 export class RangingScenarioTrackerPage extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
@@ -46,13 +46,14 @@ export class RangingScenarioTrackerPage extends React.PureComponent { // eslint-
           let page, attributes;
           if (this.props.RangingScenarioTrackerPage.selectedTab === "npd") {
             page = '/ranging/view-scenario?';
+            {/*let user_id=this.props.RangingScenarioTrackerPage.user_id;*/}
 
-            attributes = 'user_id=sachin123' + "&scenario_name=" + row.scenario_name;
+            attributes = "&scenario_name=" + row.scenario_name+"&scenario_tag=" + row.scenario_tag;
 
 
           } else {
-            page = '/ranging/view-scenario_delist?';
-            attributes = 'user_id=Tanaya' + "&scenario_name=" + row.scenario_name;
+            page = '/ranging/view-delist-scenario?';
+            attributes = "&scenario_name=" + row.scenario_name;
 
           }
           let objString = page + attributes;
@@ -68,8 +69,18 @@ export class RangingScenarioTrackerPage extends React.PureComponent { // eslint-
     return (
       <button
         type="button"
-        className="btn btn-primary">
-        Delete
+        className="btn btn-primary"
+        onClick={() =>{
+          if (this.props.RangingScenarioTrackerPage.selectedTab === "npd") {
+            let scenario_details = "&scenario_name=" + row.scenario_name + "&scenario_tag=" + row.scenario_tag+"&delete=1";
+            this.props.onDeleteScenario(scenario_details);
+            this.props.onFetchRangingAllScenarioData();
+          }else{
+            let scenario_details = "&scenario_name=" + row.scenario_name+"&delete=1";
+            this.props.onDeleteScenario(scenario_details);
+            this.props.onFetchRangingAllScenarioData();
+          }
+        }}><span className="glyphicon glyphicon-trash"/>
       </button>
     )
 
@@ -111,6 +122,8 @@ export class RangingScenarioTrackerPage extends React.PureComponent { // eslint-
       // alwaysShowAllBtns: true // Always show next and previous button
       // withFirstAndLast: false > Hide the going to First and Last page button
     };
+
+
 
     return (
       <div>
@@ -171,10 +184,35 @@ export class RangingScenarioTrackerPage extends React.PureComponent { // eslint-
                     <div>
                       {
                         (() => {
-                          if (this.props.RangingScenarioTrackerPage.allScenarioList) {
 
+                            if (this.props.RangingScenarioTrackerPage.selectedTab === "npd") {
+                              return (
+                                <div>
+                                  <BootstrapTable
+                                    data={this.props.RangingScenarioTrackerPage.allScenarioList} options={options}
+                                    striped={true}
+                                    hover
+                                    condensed
+                                    pagination={ true }
+                                    search={true}
+                                    exportCSV={true}
+                                  >
+                                    <TableHeaderColumn dataField="system_time" isKey={true} dataSort={true}
+                                                       dataAlign="center" width="20%">Date</TableHeaderColumn>
+                                    <TableHeaderColumn dataField="scenario_name" dataSort={true} dataAlign="center"
+                                                       width="40%">Scenario Name</TableHeaderColumn>
+                                    <TableHeaderColumn dataField="scenario_tag" dataSort={true} dataAlign="center"
+                                                       width="40%">Scenario Tag</TableHeaderColumn>
+                                    <TableHeaderColumn dataFormat={this.cellButton} dataSort={true} dataAlign="center"
+                                                       width="20%"></TableHeaderColumn>
+                                    <TableHeaderColumn dataFormat={this.cellButton2} dataSort={true} dataAlign="center"
+                                                       width="20%"></TableHeaderColumn>
+                                  </BootstrapTable>
 
-                            return (
+                                </div>
+                              )
+                            }else{
+                              return(
                               <div>
                                 <BootstrapTable
                                   data={this.props.RangingScenarioTrackerPage.allScenarioList} options={options}
@@ -185,25 +223,23 @@ export class RangingScenarioTrackerPage extends React.PureComponent { // eslint-
                                   search={true}
                                   exportCSV={true}
                                 >
-                                  <TableHeaderColumn dataField="system_time" isKey={true} dataSort={true} dataAlign="center" width="20%">Date</TableHeaderColumn>
-                                  <TableHeaderColumn dataField="scenario_name" dataSort={true} dataAlign="center" width="40%">Scenario Name</TableHeaderColumn>
-                                  <TableHeaderColumn dataFormat={this.cellButton} dataSort={true} dataAlign="center" width="20%"></TableHeaderColumn>
-                                  <TableHeaderColumn dataFormat={this.cellButton2} dataSort={true} dataAlign="center" width="20%"></TableHeaderColumn>
+                                  <TableHeaderColumn dataField="system_time" isKey={true} dataSort={true}
+                                                     dataAlign="center" width="20%">Date</TableHeaderColumn>
+                                  <TableHeaderColumn dataField="scenario_name" dataSort={true} dataAlign="center"
+                                                     width="40%">Scenario Name</TableHeaderColumn>
+                                  <TableHeaderColumn dataFormat={this.cellButton} dataSort={true} dataAlign="center"
+                                                     width="20%"></TableHeaderColumn>
+                                  <TableHeaderColumn dataFormat={this.cellButton2} dataSort={true} dataAlign="center"
+                                                     width="20%"></TableHeaderColumn>
                                 </BootstrapTable>
 
                               </div>
-                            );
+                              )
+                            }
 
-                          }
-                          else {
-                            return (
 
-                              <div className="text-center" colSpan="11"><Spinner />Please Wait a Moment....!</div>
 
-                            );
-                          }
-                        })()
-                      }
+                        })()}
 
                     </div>
 
@@ -260,6 +296,7 @@ function mapDispatchToProps(dispatch) {
   return {
     onFetchRangingAllScenarioData: (e) => dispatch(fetchRangingAllScenarioData(e)),
     onTabChange: (e) => dispatch(tabChange(e)),
+    onDeleteScenario: (e) => dispatch(deleteScenario(e)),
   };
 }
 

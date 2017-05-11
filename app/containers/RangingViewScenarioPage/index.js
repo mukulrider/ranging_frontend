@@ -183,15 +183,17 @@ export class RangingViewScenarioPage extends React.PureComponent { // eslint-dis
                     window.location = objString;
 
                   }}><span className="glyphicon glyphicon-arrow-left"/> Go back to Scenario tracker</Button></div>
-                  <div className="col-xs-8 breadCrumbsScenario">{user_attributes.product_sub_group_description} > {user_attributes.brand_name} <b>|</b>  {user_attributes.till_roll_description} <b>|</b> {user_attributes.package_type} <b>|</b> {user_attributes.size}{user_attributes.measure_type}   </div>
-                  <div className="col-xs-2"><Button onClick={() => {
-                    let page='/ranging/npd-impact?';
-                    {/*let attributes='userid=sachin123'+"&scenario_name="+obj.scenario_name+"&event_name="+obj.event_name;*/}
+                  <div className="col-xs-10 breadCrumbsScenario">{user_attributes.product_sub_group_description} > {user_attributes.brand_name} <b>|</b>  {user_attributes.till_roll_description} <b>|</b> {user_attributes.package_type} <b>|</b> {user_attributes.size}{user_attributes.measure_type}   </div>
 
-                    let objString = page;
-                    window.location = objString;
+                  {/*<div className="col-xs-2"><Button onClick={() => {*/}
+                    {/*let page='/ranging/npd-impact?';*/}
+                    {/*/!*let attributes='userid=sachin123'+"&scenario_name="+obj.scenario_name+"&event_name="+obj.event_name;*!/*/}
 
-                  }}>NPD Opportunity<span className="glyphicon glyphicon-arrow-right"/></Button></div>
+                    {/*let objString = page;*/}
+                    {/*window.location = objString;*/}
+
+                  {/*}}>NPD Opportunity<span className="glyphicon glyphicon-arrow-right"/></Button></div>*/}
+
                 </div>
 
                 {/*ASP,ACP & Size*/}
@@ -199,7 +201,7 @@ export class RangingViewScenarioPage extends React.PureComponent { // eslint-dis
                 <div className="row">
 
 
-                  <div className="col-xs-2"></div>
+                  <div className="col-xs-3"></div>
 
                   {/*ASP*/}
                   <div className="col-xs-2 overview-blk">
@@ -230,20 +232,20 @@ export class RangingViewScenarioPage extends React.PureComponent { // eslint-dis
                   </div>
 
 
-                  <div className="col-xs-2 overview-blk ">
-                    <div style={{marginTop:'15%'}}>
-                      <Button style={{marginTop: "5px"}}
-                              onClick={() => {
-
-                              }}>Edit    <span className="glyphicon glyphicon-edit"/></Button>
+                  {/*<div className="col-xs-2 overview-blk ">*/}
+                    {/*<div style={{marginTop:'15%'}}>*/}
                       {/*<Button style={{marginTop: "5px"}}*/}
                               {/*onClick={() => {*/}
 
-                              {/*}}>Refresh    <span className="glyphicon glyphicon-refresh"/></Button>*/}
-                    </div>
+                              {/*}}>Edit    <span className="glyphicon glyphicon-edit"/></Button>*/}
+                      {/*/!*<Button style={{marginTop: "5px"}}*!/*/}
+                              {/*/!*onClick={() => {*!/*/}
+
+                              {/*/!*}}>Refresh    <span className="glyphicon glyphicon-refresh"/></Button>*!/*/}
+                    {/*</div>*/}
 
 
-                  </div>
+                  {/*</div>*/}
 
 
 

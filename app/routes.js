@@ -351,6 +351,26 @@ export default function createRoutes(store) {
         importModules.catch(errorLoading);
       },
     }, {
+      path: '/ranging/view-delist-scenario',
+      name: 'rangingViewDelistScenarioPage',
+      getComponent(nextState, cb) {
+        const importModules = Promise.all([
+          import('containers/RangingViewDelistScenarioPage/reducer'),
+          import('containers/RangingViewDelistScenarioPage/sagas'),
+          import('containers/RangingViewDelistScenarioPage'),
+        ]);
+
+        const renderRoute = loadModule(cb);
+
+        importModules.then(([reducer, sagas, component]) => {
+          injectReducer('rangingViewDelistScenarioPage', reducer.default);
+          injectSagas(sagas.default);
+          renderRoute(component);
+        });
+
+        importModules.catch(errorLoading);
+      },
+    }, {
       path: '*',
       name: 'notfound',
       getComponent(nextState, cb) {

@@ -40,6 +40,22 @@ export default class App extends React.PureComponent { // eslint-disable-line re
     }
   }
 
+  componentWillMount() {
+    let getCookie;
+    getCookie = (name) => {
+      const value = `; ${document.cookie}`;
+      const parts = value.split(`; ${name}=`);
+      if (parts.length === 2) return parts.pop().split(';').shift();
+    };
+    const token = getCookie('token');
+    if (token && this.props.location.pathname.includes('login')) {
+      window.location = 'http://localhost:3001'
+    }
+    if (!token && !this.props.location.pathname.includes('login')) {
+      window.location = 'http://localhost:3000/login/'
+    }
+  }
+
   render() {
     return (
       <div>

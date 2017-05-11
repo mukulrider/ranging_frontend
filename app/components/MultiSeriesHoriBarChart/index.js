@@ -272,7 +272,7 @@ class MultiSeriesHoriBarChart extends React.PureComponent { // eslint-disable-li
   render() {
     return (
 
-        <svg id="chart" className="multilineChart"></svg>
+        <svg id="chart" ref='outPerformance' className="multilineChart"></svg>
 
     );
   }

@@ -71,7 +71,7 @@ import {
   WeekTabClick,
   StoreTabClick,
   UrlParams,
-  saveScenarioFlag,saveScenarioName,updateSaveScenarioResponse,
+  saveScenarioFlag,saveScenarioName,updateSaveScenarioResponse,saveTagName,
 } from './actions';
 
 import styles from './style.scss';
@@ -138,8 +138,8 @@ export class DelistContainer extends React.PureComponent { // eslint-disable-lin
       activeKey2: "4",
 
 
-      saveScenarioStatus:'',
-      showSaveScenarioSuccessModalFlag:false,
+      saveScenarioStatus: '',
+      showSaveScenarioSuccessModalFlag: false,
       showSaveScenarioModalFlag: false,
       showSaveScenarioOverwriteConfirmationModalFlag: false,
 
@@ -150,7 +150,7 @@ export class DelistContainer extends React.PureComponent { // eslint-disable-lin
     //For url parameters
     const options = {
       page: 1,  // which page you want to show as default
-      sizePerPageList: [ {
+      sizePerPageList: [{
         text: '5', value: 5
       }, {
         text: '10', value: 10
@@ -158,7 +158,7 @@ export class DelistContainer extends React.PureComponent { // eslint-disable-lin
         text: '15', value: 15
       }, {
         text: 'All', value: 25
-      } ], // you can change the dropdown list for size per page
+      }], // you can change the dropdown list for size per page
       sizePerPage: 10,  // which size per page you want to locate as default
       pageStartIndex: 1, // where to start counting the pages
       paginationSize: 5,  // the pagination bar size.
@@ -175,20 +175,20 @@ export class DelistContainer extends React.PureComponent { // eslint-disable-lin
     };
 
     const rowOptions = {
-      onRowClick: (row,e) => {
+      onRowClick: (row, e) => {
         this.props.onSupplierImpactTableClick(row.parent_supplier);
         this.setState({smShow: true});
         this.props.onSupplierPopupTableSpinner(0);
 
       }
-  }
+    }
     console.log('hi', this.props);
 
-    let formatSales = (cell) =>{
+    let formatSales = (cell) => {
       if (cell >= 1000 || cell <= -1000) {
         let rounded = Math.round(cell / 1000);
         return ('£ ' + rounded.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + 'K');
-    }
+      }
       else {
         return ('£ ' + Math.round(cell));
       }
@@ -204,13 +204,13 @@ export class DelistContainer extends React.PureComponent { // eslint-disable-lin
       }
     };
 
-    let supplierPopUpProduct=(cell,row)=> {
+    let supplierPopUpProduct = (cell, row) => {
       console.log("Inside Pop Up table Success!")
       console.log(row)
       return row.productcode + '-' + row.productdescription;
     }
 
-    let supplierPopUpSubsProduct=(cell,row) => {
+    let supplierPopUpSubsProduct = (cell, row) => {
       return row.substituteproductcode + '-' + row.substituteproductdescription;
     }
 
@@ -251,8 +251,7 @@ export class DelistContainer extends React.PureComponent { // eslint-disable-lin
 
             <div className="row formattedText">
 
-
-              <div className="col-xs-12">
+             <div className="col-xs-12">
 
                 <div className="col-xs-2"></div>
                 <div className="col-xs-4">
@@ -274,18 +273,18 @@ export class DelistContainer extends React.PureComponent { // eslint-disable-lin
             </div>
 
 
-            <div className="row" style={{marginTop:'10px'}}>
+            <div className="row" style={{marginTop: '10px'}}>
 
               <Button onClick={() => {
-                if(this.props.DelistContainer.scenarioName===''){
+                if (this.props.DelistContainer.scenarioName === '') {
                   alert("Enter scenario name!");
-                }else{
-                  document.body.style.cursor='wait';
+                } else {
+                  document.body.style.cursor = 'wait';
                   this.props.onSaveScenarioFlag();
                 }
 
               }}
-                      style={{display: 'block', marginTop:"1%",marginLeft:'39%'}}>Save</Button>
+                      style={{display: 'block', marginTop: "1%", marginLeft: '39%'}}>Save</Button>
 
             </div>
 
@@ -299,31 +298,30 @@ export class DelistContainer extends React.PureComponent { // eslint-disable-lin
           <Modal.Body className="infoModalText">
 
 
-
-            <div className="center-this" style={{color:'Green',fontSize:'20px',lineHeight:'28px'}}>
+            <div className="center-this" style={{color: 'Green', fontSize: '20px', lineHeight: '28px'}}>
               <i>Scenario '{this.props.DelistContainer.scenarioName}' has been saved successfully!</i><br/>
               <br/>
               What do you wish to do next?
             </div>
 
 
-            <div className="row" style={{marginTop:'2%'}}>
+            <div className="row" style={{marginTop: '2%'}}>
               <div className="col-xs-6">
                 <Button onClick={() => {
                   this.setState({showSaveScenarioSuccessModalFlag: false});
 
                 }}
-                        style={{display: 'block', marginTop:"1%",marginLeft:'35%'}}>Create New Scenario</Button>
+                        style={{display: 'block', marginTop: "1%", marginLeft: '35%'}}>Create New Scenario</Button>
               </div>
               <div className="col-xs-6">
                 <Button onClick={() => {
-                  let page='/ranging/scenario-tracker?';
+                  let page = '/ranging/scenario-tracker?';
 
                   let objString = page;
                   window.location = objString;
 
                 }}
-                        style={{display: 'block', marginTop:"1%",marginLeft:'28%'}}>Go to Scenario Tracker</Button>
+                        style={{display: 'block', marginTop: "1%", marginLeft: '28%'}}>Go to Scenario Tracker</Button>
               </div>
             </div>
 
@@ -570,10 +568,7 @@ export class DelistContainer extends React.PureComponent { // eslint-disable-lin
                         }
 
 
-
                       })()}
-
-
 
 
                       {/*<div className="breadcrumb">*/}
@@ -1127,7 +1122,8 @@ export class DelistContainer extends React.PureComponent { // eslint-disable-lin
                                 return (
                                   <div>
                                     <BootstrapTable
-                                      data={this.props.DelistContainer.data.sup_sales_table} options={Object.assign({},options,rowOptions)}
+                                      data={this.props.DelistContainer.data.sup_sales_table}
+                                      options={Object.assign({}, options, rowOptions)}
                                       striped={true}
                                       hover
                                       condensed
@@ -1135,23 +1131,46 @@ export class DelistContainer extends React.PureComponent { // eslint-disable-lin
                                       search={true}
                                       exportCSV={true}
                                     >
-                                      <TableHeaderColumn row="0" rowSpan="3" dataField="parent_supplier" isKey={true} dataAlign="center" dataSort={true}>Supplier</TableHeaderColumn>
-                                      <TableHeaderColumn row="0" colSpan="5" dataSort={true} dataAlign="center">Value</TableHeaderColumn>
-                                      <TableHeaderColumn row="1" dataSort={true} dataAlign="center">Before</TableHeaderColumn>
-                                      <TableHeaderColumn row="1" colSpan="4" dataSort={true} dataAlign="center">After</TableHeaderColumn>
-                                      <TableHeaderColumn row="2" dataField="predicted_value_share" dataFormat={formatSales} dataAlign="center">Total value from supplier</TableHeaderColumn>
-                                      <TableHeaderColumn row="2" dataField="value_loss_share" dataFormat={formatSales} dataAlign="center">Direct value loss from delisted products</TableHeaderColumn>
-                                      <TableHeaderColumn row="2" dataField="value_gain_share" dataFormat={formatSales} dataAlign="center">Value gained from substitution</TableHeaderColumn>
-                                      <TableHeaderColumn row="2" dataField="value_impact" dataFormat={formatSales} dataAlign="center">Net Impact</TableHeaderColumn>
-                                      <TableHeaderColumn row="2" dataField="value_impact_per" dataAlign="center">Net Impact %</TableHeaderColumn>
-                                      <TableHeaderColumn row="0" colSpan="5" dataAlign="center">Volume</TableHeaderColumn>
-                                      <TableHeaderColumn row="1" dataSort={true} dataAlign="center">Before</TableHeaderColumn>
-                                      <TableHeaderColumn row="1" colSpan="4" dataSort={true} dataAlign="center">After</TableHeaderColumn>
-                                      <TableHeaderColumn row="2" dataField="predicted_volume_share" dataFormat={formatVolume} dataAlign="center">Total value from supplier</TableHeaderColumn>
-                                      <TableHeaderColumn row="2" dataField="vols_loss_share" dataFormat={formatVolume} dataAlign="center">Direct value loss from delisted products</TableHeaderColumn>
-                                      <TableHeaderColumn row="2" dataField="vols_gain_share" dataFormat={formatVolume} dataAlign="center">Value gained from substitution</TableHeaderColumn>
-                                      <TableHeaderColumn row="2" dataField="vol_impact" dataFormat={formatVolume} dataAlign="center">Net Impact</TableHeaderColumn>
-                                      <TableHeaderColumn row="2" dataField="vol_impact_per" dataAlign="center">Net Impact %</TableHeaderColumn>
+                                      <TableHeaderColumn row="0" rowSpan="3" dataField="parent_supplier" isKey={true}
+                                                         dataAlign="center" dataSort={true}>Supplier</TableHeaderColumn>
+                                      <TableHeaderColumn row="0" colSpan="5" dataSort={true}
+                                                         dataAlign="center">Value</TableHeaderColumn>
+                                      <TableHeaderColumn row="1" dataSort={true}
+                                                         dataAlign="center">Before</TableHeaderColumn>
+                                      <TableHeaderColumn row="1" colSpan="4" dataSort={true}
+                                                         dataAlign="center">After</TableHeaderColumn>
+                                      <TableHeaderColumn row="2" dataField="predicted_value_share"
+                                                         dataFormat={formatSales} dataAlign="center">Total value from
+                                        supplier</TableHeaderColumn>
+                                      <TableHeaderColumn row="2" dataField="value_loss_share" dataFormat={formatSales}
+                                                         dataAlign="center">Direct value loss from delisted
+                                        products</TableHeaderColumn>
+                                      <TableHeaderColumn row="2" dataField="value_gain_share" dataFormat={formatSales}
+                                                         dataAlign="center">Value gained from
+                                        substitution</TableHeaderColumn>
+                                      <TableHeaderColumn row="2" dataField="value_impact" dataFormat={formatSales}
+                                                         dataAlign="center">Net Impact</TableHeaderColumn>
+                                      <TableHeaderColumn row="2" dataField="value_impact_per" dataAlign="center">Net
+                                        Impact %</TableHeaderColumn>
+                                      <TableHeaderColumn row="0" colSpan="5"
+                                                         dataAlign="center">Volume</TableHeaderColumn>
+                                      <TableHeaderColumn row="1" dataSort={true}
+                                                         dataAlign="center">Before</TableHeaderColumn>
+                                      <TableHeaderColumn row="1" colSpan="4" dataSort={true}
+                                                         dataAlign="center">After</TableHeaderColumn>
+                                      <TableHeaderColumn row="2" dataField="predicted_volume_share"
+                                                         dataFormat={formatVolume} dataAlign="center">Total value from
+                                        supplier</TableHeaderColumn>
+                                      <TableHeaderColumn row="2" dataField="vols_loss_share" dataFormat={formatVolume}
+                                                         dataAlign="center">Direct value loss from delisted
+                                        products</TableHeaderColumn>
+                                      <TableHeaderColumn row="2" dataField="vols_gain_share" dataFormat={formatVolume}
+                                                         dataAlign="center">Value gained from
+                                        substitution</TableHeaderColumn>
+                                      <TableHeaderColumn row="2" dataField="vol_impact" dataFormat={formatVolume}
+                                                         dataAlign="center">Net Impact</TableHeaderColumn>
+                                      <TableHeaderColumn row="2" dataField="vol_impact_per" dataAlign="center">Net
+                                        Impact %</TableHeaderColumn>
                                     </BootstrapTable>
 
                                   </div>
@@ -1168,7 +1187,7 @@ export class DelistContainer extends React.PureComponent { // eslint-disable-lin
                             })()
                           }
 
-                            </div>
+                        </div>
                       </Panel>
 
                       {/*MODAL FOR SUPPLIER IMPACT TABLE*/}
@@ -1189,53 +1208,71 @@ export class DelistContainer extends React.PureComponent { // eslint-disable-lin
                           </Modal.Title>
                         </Modal.Header>
                         <Modal.Body>
-                            <div>
-                          {
-                            (() => {
-                            if (this.props.DelistContainer.supplierPopuptableDataSuccess && (this.props.DelistContainer.supplierPopupTableSpinner == 1)) {
+                          <div>
+                            {
+                              (() => {
+                                if (this.props.DelistContainer.supplierPopuptableDataSuccess && (this.props.DelistContainer.supplierPopupTableSpinner == 1)) {
 
 
-                            return (
-                            <div>
-                            <BootstrapTable
-                            data={this.props.DelistContainer.supplierPopuptableDataSuccess.table} options={options}
-                            striped={true}
-                            hover
-                            condensed
-                            pagination={ true }
-                            search={true}
-                            exportCSV={true}
-                            >
-                            <TableHeaderColumn dataField="productcode" dataFormat={supplierPopUpProduct} isKey={true} dataSort={true} dataAlign="center">Delisted product</TableHeaderColumn>
-                            <TableHeaderColumn dataField="delist_pred_value" dataFormat={formatSales} dataSort={true} dataAlign="center" width="9%">Predicted Value</TableHeaderColumn>
-                            <TableHeaderColumn dataField="delist_pred_vol" dataFormat={formatVolume} dataSort={true} dataAlign="center" width="9%">Predicted Volume</TableHeaderColumn>
-                            <TableHeaderColumn dataField="delist_value_loss" dataFormat={formatSales} dataSort={true} dataAlign="center" width="8%">Value loss</TableHeaderColumn>
-                            <TableHeaderColumn dataField="delist_vol_loss" dataFormat={formatVolume} dataSort={true} dataAlign="center">Volume loss</TableHeaderColumn>
-                            <TableHeaderColumn dataField="substitute_supplier" dataSort={true} dataAlign="center">Substituting Supplier</TableHeaderColumn>
-                            <TableHeaderColumn dataField="substituteproductcode" dataFormat={supplierPopUpSubsProduct} dataSort={true} dataAlign="center" width="9%">Substituting Product</TableHeaderColumn>
-                            <TableHeaderColumn dataField="substitute_value_gain" dataFormat={formatSales} dataSort={true} dataAlign="center" width="9%">Value gain due to
-                            substitution</TableHeaderColumn>
-                            <TableHeaderColumn dataField="substitute_vol_gain" dataFormat={formatVolume} dataSort={true} dataAlign="center">Volume gain due to
-                            substitution</TableHeaderColumn>
+                                  return (
+                                    <div>
+                                      <BootstrapTable
+                                        data={this.props.DelistContainer.supplierPopuptableDataSuccess.table}
+                                        options={options}
+                                        striped={true}
+                                        hover
+                                        condensed
+                                        pagination={ true }
+                                        search={true}
+                                        exportCSV={true}
+                                      >
+                                        <TableHeaderColumn dataField="productcode" dataFormat={supplierPopUpProduct}
+                                                           isKey={true} dataSort={true} dataAlign="center">Delisted
+                                          product</TableHeaderColumn>
+                                        <TableHeaderColumn dataField="delist_pred_value" dataFormat={formatSales}
+                                                           dataSort={true} dataAlign="center" width="9%">Predicted
+                                          Value</TableHeaderColumn>
+                                        <TableHeaderColumn dataField="delist_pred_vol" dataFormat={formatVolume}
+                                                           dataSort={true} dataAlign="center" width="9%">Predicted
+                                          Volume</TableHeaderColumn>
+                                        <TableHeaderColumn dataField="delist_value_loss" dataFormat={formatSales}
+                                                           dataSort={true} dataAlign="center" width="8%">Value
+                                          loss</TableHeaderColumn>
+                                        <TableHeaderColumn dataField="delist_vol_loss" dataFormat={formatVolume}
+                                                           dataSort={true} dataAlign="center">Volume
+                                          loss</TableHeaderColumn>
+                                        <TableHeaderColumn dataField="substitute_supplier" dataSort={true}
+                                                           dataAlign="center">Substituting Supplier</TableHeaderColumn>
+                                        <TableHeaderColumn dataField="substituteproductcode"
+                                                           dataFormat={supplierPopUpSubsProduct} dataSort={true}
+                                                           dataAlign="center" width="9%">Substituting
+                                          Product</TableHeaderColumn>
+                                        <TableHeaderColumn dataField="substitute_value_gain" dataFormat={formatSales}
+                                                           dataSort={true} dataAlign="center" width="9%">Value gain due
+                                          to
+                                          substitution</TableHeaderColumn>
+                                        <TableHeaderColumn dataField="substitute_vol_gain" dataFormat={formatVolume}
+                                                           dataSort={true} dataAlign="center">Volume gain due to
+                                          substitution</TableHeaderColumn>
 
 
-                            </BootstrapTable>
+                                      </BootstrapTable>
 
-                            </div>
-                            );
+                                    </div>
+                                  );
 
-                          }
-                            else {
-                            return (
+                                }
+                                else {
+                                  return (
 
-                            <div className="text-center" colSpan="11"><Spinner />Please Wait a Moment....!</div>
+                                    <div className="text-center" colSpan="11"><Spinner />Please Wait a Moment....!</div>
 
-                            );
-                          }
-                          })()
-                          }
+                                  );
+                                }
+                              })()
+                            }
 
-                            </div>
+                          </div>
                         </Modal.Body>
                       </Modal>
 
@@ -1270,47 +1307,60 @@ export class DelistContainer extends React.PureComponent { // eslint-disable-lin
                       </Modal>
 
                       <Panel>
-                            <div>
-                            {
-                              (() => {
-                                if (this.props.DelistContainer.delisttableData && this.props.DelistContainer.delisttableData.delist_prod_table && (this.props.DelistContainer.delistProductTableSpinner == 1)) {
+                        <div>
+                          {
+                            (() => {
+                              if (this.props.DelistContainer.delisttableData && this.props.DelistContainer.delisttableData.delist_prod_table && (this.props.DelistContainer.delistProductTableSpinner == 1)) {
 
 
-                                  return (
-                                    <div>
-                                      <BootstrapTable
-                                        data={this.props.DelistContainer.delisttableData.delist_prod_table} options={options}
-                                        striped={true}
-                                        hover
-                                        condensed
-                                        pagination={ true }
-                                        search={true}
-                                        exportCSV={true}
-                                      >
-                                        <TableHeaderColumn dataField="productcode" isKey={true} dataSort={true} dataAlign="center">Product Code</TableHeaderColumn>
-                                        <TableHeaderColumn dataField="long_description" dataSort={true} dataAlign="center">Product Description</TableHeaderColumn>
-                                        <TableHeaderColumn dataField="no_of_stores" dataSort={true} dataAlign="center" width="9%">No of Stores</TableHeaderColumn>
-                                        <TableHeaderColumn dataField="predicted_value" dataFormat={formatSales} dataSort={true} dataAlign="center" width="9%">Predicted Value</TableHeaderColumn>
-                                        <TableHeaderColumn dataField="predicted_volume" dataFormat={formatVolume} dataSort={true} dataAlign="center" width="8%">Predicted Volume</TableHeaderColumn>
-                                        <TableHeaderColumn dataField="predicted_cgm" dataFormat={formatSales} dataSort={true} dataAlign="center">Predicted Cgm</TableHeaderColumn>
-                                        <TableHeaderColumn dataFormat={this.cellButton} dataAlign="center">View Substitutes</TableHeaderColumn>
-                                      </BootstrapTable>
+                                return (
+                                  <div>
+                                    <BootstrapTable
+                                      data={this.props.DelistContainer.delisttableData.delist_prod_table}
+                                      options={options}
+                                      striped={true}
+                                      hover
+                                      condensed
+                                      pagination={ true }
+                                      search={true}
+                                      exportCSV={true}
+                                    >
+                                      <TableHeaderColumn dataField="productcode" isKey={true} dataSort={true}
+                                                         dataAlign="center">Product Code</TableHeaderColumn>
+                                      <TableHeaderColumn dataField="long_description" dataSort={true}
+                                                         dataAlign="center">Product Description</TableHeaderColumn>
+                                      <TableHeaderColumn dataField="no_of_stores" dataSort={true} dataAlign="center"
+                                                         width="9%">No of Stores</TableHeaderColumn>
+                                      <TableHeaderColumn dataField="predicted_value" dataFormat={formatSales}
+                                                         dataSort={true} dataAlign="center" width="9%">Predicted
+                                        Value</TableHeaderColumn>
+                                      <TableHeaderColumn dataField="predicted_volume" dataFormat={formatVolume}
+                                                         dataSort={true} dataAlign="center" width="8%">Predicted
+                                        Volume</TableHeaderColumn>
+                                      <TableHeaderColumn dataField="predicted_cgm" dataFormat={formatSales}
+                                                         dataSort={true} dataAlign="center">Predicted
+                                        Cgm</TableHeaderColumn>
+                                      <TableHeaderColumn dataField="per_value_transfer" dataFormat={formatSales} dataSort={true} dataAlign="center">Value Transfer</TableHeaderColumn>
+                                      <TableHeaderColumn dataField="per_vol_transfer" dataFormat={formatVolume} dataSort={true} dataAlign="center">Volume Transfer</TableHeaderColumn>
+                                      <TableHeaderColumn dataFormat={this.cellButton} dataAlign="center">View
+                                        Substitutes</TableHeaderColumn>
+                                    </BootstrapTable>
 
-                                    </div>
-                                  );
+                                  </div>
+                                );
 
-                                }
-                                else {
-                                  return (
+                              }
+                              else {
+                                return (
 
-                                    <div className="text-center" colSpan="11"><Spinner />Please Wait a Moment....!</div>
+                                  <div className="text-center" colSpan="11"><Spinner />Please Wait a Moment....!</div>
 
-                                  );
-                                }
-                              })()
-                            }
+                                );
+                              }
+                            })()
+                          }
 
-                              </div>
+                        </div>
                       </Panel>
                       {/*MODAL FOR PRODUCT IMPACT TABLE*/
                       }
@@ -1328,166 +1378,173 @@ export class DelistContainer extends React.PureComponent { // eslint-disable-lin
                           </Modal.Title>
                         </Modal.Header>
                         <Modal.Body className="modal-dialog modal-lg">
-                            <div>
+                          <div>
                             {
                               (() => {
-                              // if (this.props.ProductPage.data) {
-                              if (this.props.DelistContainer.substitutesTableData && (this.props.DelistContainer.delistPopupTableSpinner == 1)) {
+                                if (this.props.DelistContainer.substitutesTableData && (this.props.DelistContainer.delistPopupTableSpinner == 1)) {
 
 
-                              return (
-                              <div>
-                              <BootstrapTable
-                              data={this.props.DelistContainer.substitutesTableData.table} options={options} /*tableStyle={ { width: '80%',marginLeft:'10%' }}*/
-                              striped={true}
-                              hover
-                              condensed
-                              pagination={ true }
-                              search={true}
-                              exportCSV={true}
-                              >
-                              <TableHeaderColumn dataField="substituteproductcode" width="80px" isKey={true} dataSort={true} dataAlign="center">Substitute Product Code</TableHeaderColumn>
-                              <TableHeaderColumn dataField="substituteproductdescription" dataSort={true} dataAlign="left" width="9%">Substitute Product Description</TableHeaderColumn>
+                                  return (
+                                    <div>
+                                      <BootstrapTable
+                                        data={this.props.DelistContainer.substitutesTableData.table}
+                                        options={options} /*tableStyle={ { width: '80%',marginLeft:'10%' }}*/
+                                        striped={true}
+                                        hover
+                                        condensed
+                                        pagination={ true }
+                                        search={true}
+                                        exportCSV={true}
+                                      >
+                                        <TableHeaderColumn dataField="substituteproductcode" width="80px" isKey={true}
+                                                           dataSort={true} dataAlign="center">Substitute Product
+                                          Code</TableHeaderColumn>
+                                        <TableHeaderColumn dataField="substituteproductdescription" dataSort={true}
+                                                           dataAlign="left" width="9%">Substitute Product
+                                          Description</TableHeaderColumn>
 
 
-                              </BootstrapTable>
+                                      </BootstrapTable>
+
+                                    </div>
+                                  );
+
+                                } else if (this.props.DelistContainer.delistPopupTableSpinner == 2) {
+                                  let abcd = 1;
+                                  return (
+                                    <tr>
+                                      <td className="text-center" colSpan="7">Something went wrong. Please reload the
+                                        page....!
+                                      </td>
+                                    </tr>
+                                  )
+                                }
+                                else {
+                                  return (
+
+                                    <div className="text-center" colSpan="11"><Spinner />Please Wait a Moment....!</div>
+
+                                  );
+                                }
+                              })()
+                            }
+                              </div>
+                              </Modal.Body>
+
+                              </Modal>
+                              </div>
+                              </div>
 
                               </div>
-                              );
-
-                            }else if (this.props.DelistContainer.delistPopupTableSpinner == 2) {
-                              let abcd = 1;
-                              return (
-                              <tr>
-                              <td className="text-center" colSpan="7">Something went wrong. Please reload the
-                              page....!
-                              </td>
-                              </tr>
                               )
-                            }
-                              else {
-                              return (
-
-                              <div className="text-center" colSpan="11"><Spinner />Please Wait a Moment....!</div>
-
-                              );
-                            }
-                            })()
-                            }
+                              }
+                            else {
+                            return (
+                            <div className="selectAttrituteIndicator" style={{
+                              width: '78%',
+                              marginLeft: '22%'
+                            }}>
+                            <div>
+                            <div> ----- Please select the filters to get started ------</div>
                             </div>
-                        </Modal.Body>
+                            </div>
 
-                      </Modal>
+                            )
+                          }
+                            })()}
+
+
+                          </div>
+
                     </div>
-                  </div>
 
-                </div>
-              )
-            }
-            else {
-              return (
-                <div className="selectAttrituteIndicator">
-                  <div>
-                    <div> ----- Please select the filters to get started ------</div>
-                  </div>
-                </div>
+                    )
+                    }
+          }
 
-              )
-            }
-          })()}
+          DelistContainer.propTypes = {
+          dispatch: PropTypes.func.isRequired,
+        };
 
+          const mapStateToProps = createStructuredSelector({
+          DelistContainer: makeSelectDelistContainer(),
+        });
 
-        </div>
+          function mapDispatchToProps(dispatch) {
+          return {
+          onApiFetch: (e) => dispatch(apiFetch(e)),
+          onDataUrlParams: (e) => dispatch(dataUrlParams(e)),
+          onUrlParams: (e) => dispatch(UrlParams(e)),
 
-      </div>
+          //TABS
+          onWeekClick: (e) => dispatch(WeekClick(e)),
+          onStoreClick: (e) => dispatch(StoreClick(e)),
 
-    )
-  }
-}
+          //BREADCRUMBS
+          onWeekTabClick: (e) => dispatch(WeekTabClick(e)),
+          onStoreTabClick: (e) => dispatch(StoreTabClick(e)),
 
-DelistContainer.propTypes = {
-  dispatch: PropTypes.func.isRequired,
-};
+          //SEARCH RESULT FOR SUPPLIER TABLE
+          onGenerateTextBoxQueryString: (e) => dispatch(GenerateTextBoxQueryString(e.target.value)),
 
-const mapStateToProps = createStructuredSelector({
-  DelistContainer: makeSelectDelistContainer(),
-});
+          //SEARCH RESULT FOR DELIST TABLE
+          onGenerateTextBoxQueryStringDelist: (e) => dispatch(GenerateTextBoxQueryStringDelist(e.target.value)),
 
-function mapDispatchToProps(dispatch) {
-  return {
-    onApiFetch: (e) => dispatch(apiFetch(e)),
-    onDataUrlParams: (e) => dispatch(dataUrlParams(e)),
-    onUrlParams: (e) => dispatch(UrlParams(e)),
+          //TABLE TYPE FOR DELIST
+          onTableType: (e) => dispatch(tableType(e)),
 
-    //TABS
-    onWeekClick: (e) => dispatch(WeekClick(e)),
-    onStoreClick: (e) => dispatch(StoreClick(e)),
+          //DELIST PAGINATION TABLE
+          ondelistTable: (e) => dispatch(delistTable(e)),
 
-    //BREADCRUMBS
-    onWeekTabClick: (e) => dispatch(WeekTabClick(e)),
-    onStoreTabClick: (e) => dispatch(StoreTabClick(e)),
+          //SUPPLIER PAGINATION TABLE
+          onsupplierPagination: (e) => dispatch(supplierPagination(e)),
 
-    //SEARCH RESULT FOR SUPPLIER TABLE
-    onGenerateTextBoxQueryString: (e) => dispatch(GenerateTextBoxQueryString(e.target.value)),
+          //SUPPLIER POPUP PAGINATION TABLE
+          onsupplierPopupPagination: (e) => dispatch(supplierPopupPagination(e)),
 
-    //SEARCH RESULT FOR DELIST TABLE
-    onGenerateTextBoxQueryStringDelist: (e) => dispatch(GenerateTextBoxQueryStringDelist(e.target.value)),
+          //DELIST PAGINATION TABLE
+          ondelistPagination: (e) => dispatch(delistPagination(e)),
 
-    //TABLE TYPE FOR DELIST
-    onTableType: (e) => dispatch(tableType(e)),
+          //DELIST POPUP PAGINATION TABLE
+          ondelistPopupPagination: (e) => dispatch(delistPopupPagination(e)),
 
-    //DELIST PAGINATION TABLE
-    ondelistTable: (e) => dispatch(delistTable(e)),
+          onTableDataFetch: (e) => dispatch(tableDataFetch(e)),
 
-    //SUPPLIER PAGINATION TABLE
-    onsupplierPagination: (e) => dispatch(supplierPagination(e)),
+          // POPUP FOR SUBSTITUTE TABLE
+          onSubstitutesClick: (e) => dispatch(SubstitutesClick(e)),
+          onSubstitutesClickSendLongDesc: (e) => dispatch(SubstitutesClickSendLongDesc(e)),
 
-    //SUPPLIER POPUP PAGINATION TABLE
-    onsupplierPopupPagination: (e) => dispatch(supplierPopupPagination(e)),
+          // POPUP FOR SUPPLIER IMPACT TABLE TABLE
+          onSupplierImpactTableClick: (e) => dispatch(SupplierImpactTableClick(e)),
 
-    //DELIST PAGINATION TABLE
-    ondelistPagination: (e) => dispatch(delistPagination(e)),
+          onWaterfallValueChart: (e) => dispatch(WaterfallValueChart(e)),
 
-    //DELIST POPUP PAGINATION TABLE
-    ondelistPopupPagination: (e) => dispatch(delistPopupPagination(e)),
+          // onGenerateTable: (e) => dispatch(generateTable(e)),
+          onGenerateSideFilter: (e) => dispatch(generateSideFilter(e)),
+          onFilterReset: (e) => dispatch(generateSideFilterReset(e)),
+          onGenerateUrlParams: (e) => dispatch(generateUrlParams(e)),
+          onGenerateUrlParamsString: (e) => dispatch(generateUrlParamsString(e)),
 
-    onTableDataFetch: (e) => dispatch(tableDataFetch(e)),
+          onGenerateFilterParamsString: (e) => dispatch(generateFilterParamsString(e)),
 
-    // POPUP FOR SUBSTITUTE TABLE
-    onSubstitutesClick: (e) => dispatch(SubstitutesClick(e)),
-    onSubstitutesClickSendLongDesc: (e) => dispatch(SubstitutesClickSendLongDesc(e)),
+          onWaterfall: (e) => dispatch(WaterfallValueChart(e)),
+          ondelist: (e) => dispatch(delistTable(e)),
+          onwaterfallSpinner: (e) => dispatch(WaterfallSpinnerSuccess(e)),
+          onwaterfallProfitSpinner: (e) => dispatch(WaterfallProfitSpinnerSuccess(e)),
+          onSupplierImpactTableSpinner: (e) => dispatch(SupplierImpactTableSpinnerSuccess(e)),
 
-    // POPUP FOR SUPPLIER IMPACT TABLE TABLE
-    onSupplierImpactTableClick: (e) => dispatch(SupplierImpactTableClick(e)),
+          //SUPPLIER POPUP SPINNER
+          onSupplierPopupTableSpinner: (e) => dispatch(SupplierPopupTableSpinnerSuccess(e)),
+          onDelistProductTableSpinner: (e) => dispatch(DelistProductTableSpinnerSuccess(e)),
 
-    onWaterfallValueChart: (e) => dispatch(WaterfallValueChart(e)),
+          //DELIST DEFAULT VIEW - EMPTY SCREEN
+          onDelistDefaultView: (e) => dispatch(onDelistDefaultView(e)),
 
-    // onGenerateTable: (e) => dispatch(generateTable(e)),
-    onGenerateSideFilter: (e) => dispatch(generateSideFilter(e)),
-    onFilterReset: (e) => dispatch(generateSideFilterReset(e)),
-    onGenerateUrlParams: (e) => dispatch(generateUrlParams(e)),
-    onGenerateUrlParamsString: (e) => dispatch(generateUrlParamsString(e)),
+          //DELIST POPUP TABLE SPINNER
+          onDelistPopupTableSpinnerSuccess: (e) => dispatch(DelistPopupTableSpinnerSuccess(e)),
 
-    onGenerateFilterParamsString: (e) => dispatch(generateFilterParamsString(e)),
-
-    onWaterfall: (e) => dispatch(WaterfallValueChart(e)),
-    ondelist: (e) => dispatch(delistTable(e)),
-    onwaterfallSpinner: (e) => dispatch(WaterfallSpinnerSuccess(e)),
-    onwaterfallProfitSpinner: (e) => dispatch(WaterfallProfitSpinnerSuccess(e)),
-    onSupplierImpactTableSpinner: (e) => dispatch(SupplierImpactTableSpinnerSuccess(e)),
-
-    //SUPPLIER POPUP SPINNER
-    onSupplierPopupTableSpinner: (e) => dispatch(SupplierPopupTableSpinnerSuccess(e)),
-    onDelistProductTableSpinner: (e) => dispatch(DelistProductTableSpinnerSuccess(e)),
-
-    //DELIST DEFAULT VIEW - EMPTY SCREEN
-    onDelistDefaultView: (e) => dispatch(onDelistDefaultView(e)),
-
-    //DELIST POPUP TABLE SPINNER
-    onDelistPopupTableSpinnerSuccess: (e) => dispatch(DelistPopupTableSpinnerSuccess(e)),
-
-    //TESTING AJAX     //PAGINATION FOR DEMO TABLE
-    onAjaxClick: (e) => dispatch(ajaxClick(e)),
+          //TESTING AJAX     //PAGINATION FOR DEMO TABLE
+          onAjaxClick: (e) => dispatch(ajaxClick(e)),
 
     //CASCADING FILTERS
     onUrlParamsData: (e) => dispatch(urlParamsData(e)),
@@ -1498,8 +1555,9 @@ function mapDispatchToProps(dispatch) {
     onSaveScenarioName: (e) => dispatch(saveScenarioName(e.target.value)),
     onSaveScenarioFlag: (e) => dispatch(saveScenarioFlag(e)),
     onSaveScenarioResponse: (e) => dispatch(updateSaveScenarioResponse(e)),
+    onSaveTagName: (e) => dispatch(saveTagName(e.target.value)),
 
-  };
-}
+        };
+        }
 
-export default connect(mapStateToProps, mapDispatchToProps)(DelistContainer);
+          export default connect(mapStateToProps, mapDispatchToProps)(DelistContainer);

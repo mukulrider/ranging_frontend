@@ -117,7 +117,7 @@ export const TEST_AJAX_SUCCESS = 'app/DelistContainer/TEST_AJAX_SUCCESS';
 
 
 //Save scenario related
-export const SAVE_SCENARIO = 'app/RangingNpdImpactPage/SAVE_SCENARIO';
-export const SAVE_SCENARIO_NAME= 'app/RangingNpdImpactPage/SAVE_SCENARIO_NAME';
-export const SAVE_SCENARIO_RESPONSE= 'app/RangingNpdImpactPage/SAVE_SCENARIO_RESPONSE';
-
+export const SAVE_SCENARIO = 'app/DelistContainer/SAVE_SCENARIO';
+export const SAVE_SCENARIO_NAME= 'app/DelistContainer/SAVE_SCENARIO_NAME';
+export const SAVE_SCENARIO_RESPONSE= 'app/DelistContainer/SAVE_SCENARIO_RESPONSE';
+export const SAVE_TAG_NAME = 'app/DelistContainer/SAVE_TAG_NAME';

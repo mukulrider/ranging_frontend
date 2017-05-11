@@ -16,7 +16,7 @@ import {
   CANNIBALIZED_PROD_TABLE_DATA_FETCH,CANNIBALIZED_PROD_TABLE_DATA_SUCCESS,
   SELECT_FILTER_INDICATOR,SHOW_APPLY_LOADING,SHOW_TAB_CHANGE_LOADING,SHOW_PAGE_AFTER_LOADING,UPDATE_BREADCRUMBS,
   SAVE_ASP,SAVE_ACP,SAVE_SIZE,SAVE_FILTER_SELECTIONS_TILL_NOW,
-  SAVE_SCENARIO,SAVE_SCENARIO_NAME,SAVE_EVENT_NAME,SAVE_SCENARIO_RESPONSE,
+  SAVE_SCENARIO,SAVE_SCENARIO_NAME,SAVE_TAG_NAME,SAVE_SCENARIO_RESPONSE,
   SAVE_EDITED_FORECAST,SAVE_EDIT_FORECAST_API,MODIFIED_FLAG
 
 
@@ -308,10 +308,10 @@ export function saveScenarioName(data) {
 };
 
 
-export function saveEventName(data) {
-  console.log('Saving saveEventName in action',data);
+export function saveTagName(data) {
+  // console.log('Saving saveTagName in action',data);
   return {
-    type: SAVE_EVENT_NAME ,
+    type: SAVE_TAG_NAME ,
     data
   };
 };
@@ -321,7 +321,7 @@ export function saveEventName(data) {
 //--------------------- EDIT FORECAST -------------------------------
 
 export function saveModifiedVolumeForecast(data) {
-  console.log('Saving saveEventName in action',data);
+  // console.log('Saving saveTagName in action',data);
   return {
     type: SAVE_EDITED_FORECAST,
     data
@@ -339,7 +339,7 @@ export function saveEditForecastApi(data) {
 
 
 export function saveModifiedFlag(data) {
-  // console.log('Saving saveEventName in action',data);
+  // console.log('Saving saveTagName in action',data);
   return {
     type: MODIFIED_FLAG,
     data
