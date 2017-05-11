@@ -52,7 +52,8 @@ export function* defaultSaga() {
   // See example in containers/HomePage/sagas.js
 }
 
-let host_url = "http://172.20.244.230:8000"
+let host_url = "http://172.20.246.47:8000"
+// let host_url = "http://172.20.246.47:8000"
 
 //getting user info from cookies
 let gettingUserDetails = () =>{
@@ -84,6 +85,10 @@ export function* generateApiFetch() {
   let urlName = yield select(selectDelistContainerDomain());
   // let urlParams = urlName.get("dataUrlparams");
   let urlParams = "";
+
+  //Adding the user information
+  let cookie_params=gettingUserDetails();
+  urlParams =urlParams +"&"+cookie_params;
 
   function isEmpty(obj) {
     for (var key in obj) {
@@ -195,6 +200,10 @@ export function* generateSubstitutesFetch() {
   const urlName = yield select(selectDelistContainerDomain());
   let urlParams = urlName.get('substitutesData');
 
+  //Adding the user information
+  let cookie_params=gettingUserDetails();
+  urlParams =urlParams +"&"+cookie_params;
+
   function isEmpty(obj) {
     for (var key in obj) {
       if (obj.hasOwnProperty(key))
@@ -255,6 +264,10 @@ export function* generateSupplierPopupTableFetch() {
   const urlName = yield select(selectDelistContainerDomain());
   let urlParams = urlName.get('supplierPopupTableData');
 
+  //Adding the user information
+  let cookie_params=gettingUserDetails();
+  urlParams =urlParams +"&"+cookie_params;
+
   function isEmpty(obj) {
     for (var key in obj) {
       if (obj.hasOwnProperty(key))
@@ -301,6 +314,10 @@ export function* doSupplierPopupTableFetch() {
 export function* generateDelistTableFetch() {
   let urlName = yield select(selectDelistContainerDomain());
   let urlParams = "";
+
+  //Adding the user information
+  let cookie_params=gettingUserDetails();
+  urlParams =urlParams +"&"+cookie_params;
 
   let pagination_data = "";
   if (!(urlName.get('delistTablePagination') == "")) {
@@ -395,6 +412,10 @@ export function* generateWaterfallValueFetch() {
 
   let urlParams = "";
 
+  //Adding the user information
+  let cookie_params=gettingUserDetails();
+  urlParams =urlParams +"&"+cookie_params;
+
   let week_no_data = "";
   if (!(urlName.get('weekNumber') == "")) {
     week_no_data = urlName.get('weekNumber');
@@ -477,6 +498,7 @@ export function* doWaterfallChartValueFetch() {
 export function* generateTable() {
   let urlParamsString = yield select(makeUrlParamsString());
   urlParamsString = urlParamsString.urlParamsString;
+
   try {
     urlParamsString = urlParamsString.replace('commercial_director', 'commerical_director');
 
@@ -500,10 +522,20 @@ export function* generateSideFilter() {
 
   if (typeof(urlParamsString) == "undefined") {
     urlParamsString = "";
+
+    //Adding the user information
+    let cookie_params=gettingUserDetails();
+    urlParamsString =cookie_params;
+
+  } else {
+    //Adding the user information
+    let cookie_params=gettingUserDetails();
+    urlParamsString =urlParamsString +"&"+cookie_params;
   }
   // alert(urlParamsString);
   try {
     // todo: update url
+
 
     // const data = yield call(request, host_url + `/api/product_impact/filter_data/?`+'long_description=3 BIRD RST WITH C/BERRY, DATE and ORNG S/FING - 79631889');
     // const data = yield call(request, host_url + `/api/product_impact/filter_data/?`+'long_description=73589188');
@@ -605,7 +637,7 @@ export function* generateSaveScenario() {
     console.log("Trying to save scenario")
     let urlName = yield select(selectDelistContainerDomain());
     let urlParams = urlName.get('urlParamsString');
-    let user_id = "user_id=tan1";
+    let user_id = "user_id=bc";
     let scenarioName= urlName.get('scenarioName');
     let sessionID= "session_id=2";
     let tagName= urlName.get('tagName');
@@ -613,6 +645,9 @@ export function* generateSaveScenario() {
     let AJAX_args =urlParams+"&scenario_name="+scenarioName+"&"+user_id+"&"+sessionID ;
     // let AJAX_args =urlParams+"&scenario_name="+scenarioName+'&scenario_tag='+tagName+"&"+user_id+"&"+sessionID ;
 
+    //Adding the user information
+    let cookie_params=gettingUserDetails();
+    AJAX_args =AJAX_args +"&"+cookie_params;
 
     console.log(host_url+'/api/npd_impact_save_scenario?' + AJAX_args);
     let data = yield call(request, host_url+'/api/delist_scenario?' + AJAX_args);

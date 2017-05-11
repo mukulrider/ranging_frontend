@@ -7,7 +7,7 @@
 import React, {PropTypes} from 'react';
 import {connect} from 'react-redux';
 import Helmet from 'react-helmet';
-import { BootstrapTable, TableHeaderColumn } from 'react-bootstrap-table';
+import {BootstrapTable, TableHeaderColumn} from 'react-bootstrap-table';
 import {FormattedMessage} from 'react-intl';
 import {createStructuredSelector} from 'reselect';
 import makeSelectRangingViewScenarioPage from './selectors';
@@ -24,7 +24,7 @@ import {Pagination, Accordion} from 'react-bootstrap';
 require('react-bootstrap-table/css/react-bootstrap-table.css')
 
 import {
-  fetchRangingScenarioData,sendUrlParams
+  fetchRangingScenarioData, sendUrlParams
 } from './actions';
 
 
@@ -63,7 +63,7 @@ export class RangingViewScenarioPage extends React.PureComponent { // eslint-dis
   render() {
     const options = {
       page: 1,  // which page you want to show as default
-      sizePerPageList: [ {
+      sizePerPageList: [{
         text: '5', value: 5
       }, {
         text: '10', value: 10
@@ -71,7 +71,7 @@ export class RangingViewScenarioPage extends React.PureComponent { // eslint-dis
         text: '15', value: 15
       }, {
         text: 'All', value: 25
-      } ], // you can change the dropdown list for size per page
+      }], // you can change the dropdown list for size per page
       sizePerPage: 10,  // which size per page you want to locate as default
       pageStartIndex: 1, // where to start counting the pages
       paginationSize: 5,  // the pagination bar size.
@@ -87,7 +87,7 @@ export class RangingViewScenarioPage extends React.PureComponent { // eslint-dis
       // withFirstAndLast: false > Hide the going to First and Last page button
     };
 
-    let formatSales = (cell) =>{
+    let formatSales = (cell) => {
       if (cell >= 1000 || cell <= -1000) {
         let rounded = Math.round(cell / 1000);
         return ('£ ' + rounded.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + 'K');
@@ -107,9 +107,10 @@ export class RangingViewScenarioPage extends React.PureComponent { // eslint-dis
       }
     };
 
-    let user_attributes,week_13_chart,week_26_chart,week_52_chart,week_13_table,week_26_table,week_52_table,chart_data_to_be_used,table_data_to_be_used;
+    let user_attributes, week_13_chart, week_26_chart, week_52_chart, week_13_table, week_26_table, week_52_table,
+      chart_data_to_be_used, table_data_to_be_used;
 
-    if(this.props.RangingViewScenarioPage.scenarioData) {
+    if (this.props.RangingViewScenarioPage.scenarioData) {
 
       user_attributes = this.props.RangingViewScenarioPage.scenarioData.user_attributes;
       user_attributes = user_attributes.replace(/'/g, '"');
@@ -144,13 +145,12 @@ export class RangingViewScenarioPage extends React.PureComponent { // eslint-dis
       week_52_table = week_52_table.replace(/'/g, '"');
       week_52_table = JSON.parse(week_52_table);
 
-      console.log("-=-=-=user=",user_attributes);
+      console.log("-=-=-=user=", user_attributes);
     }
 
 
     return (
       <div>
-
 
 
         <Helmet
@@ -161,8 +161,8 @@ export class RangingViewScenarioPage extends React.PureComponent { // eslint-dis
         />
 
 
-        {(()=>{
-          if(this.props.RangingViewScenarioPage.scenarioData){
+        {(() => {
+          if (this.props.RangingViewScenarioPage.scenarioData) {
 
             return (
               <div>
@@ -176,21 +176,25 @@ export class RangingViewScenarioPage extends React.PureComponent { // eslint-dis
                 {/*Breadcrumbs*/}
                 <div className="row">
                   <div className="col-xs-2"><Button onClick={() => {
-                    let page='/ranging/scenario-tracker?';
-                    {/*let attributes='userid=sachin123'+"&scenario_name="+obj.scenario_name+"&event_name="+obj.event_name;*/}
+                    let page = '/ranging/scenario-tracker?';
+                    {/*let attributes='userid=sachin123'+"&scenario_name="+obj.scenario_name+"&event_name="+obj.event_name;*/
+                    }
 
                     let objString = page;
                     window.location = objString;
 
                   }}><span className="glyphicon glyphicon-arrow-left"/> Go back to Scenario tracker</Button></div>
-                  <div className="col-xs-10 breadCrumbsScenario">{user_attributes.product_sub_group_description} > {user_attributes.brand_name} <b>|</b>  {user_attributes.till_roll_description} <b>|</b> {user_attributes.package_type} <b>|</b> {user_attributes.size}{user_attributes.measure_type}   </div>
+                  <div className="col-xs-10 breadCrumbsScenario">{user_attributes.product_sub_group_description}
+                    > {user_attributes.brand_name} <b>|</b> {user_attributes.till_roll_description}
+                    <b>|</b> {user_attributes.package_type}
+                    <b>|</b> {user_attributes.size}{user_attributes.measure_type}   </div>
 
                   {/*<div className="col-xs-2"><Button onClick={() => {*/}
-                    {/*let page='/ranging/npd-impact?';*/}
-                    {/*/!*let attributes='userid=sachin123'+"&scenario_name="+obj.scenario_name+"&event_name="+obj.event_name;*!/*/}
+                  {/*let page='/ranging/npd-impact?';*/}
+                  {/*/!*let attributes='userid=sachin123'+"&scenario_name="+obj.scenario_name+"&event_name="+obj.event_name;*!/*/}
 
-                    {/*let objString = page;*/}
-                    {/*window.location = objString;*/}
+                  {/*let objString = page;*/}
+                  {/*window.location = objString;*/}
 
                   {/*}}>NPD Opportunity<span className="glyphicon glyphicon-arrow-right"/></Button></div>*/}
 
@@ -233,20 +237,19 @@ export class RangingViewScenarioPage extends React.PureComponent { // eslint-dis
 
 
                   {/*<div className="col-xs-2 overview-blk ">*/}
-                    {/*<div style={{marginTop:'15%'}}>*/}
-                      {/*<Button style={{marginTop: "5px"}}*/}
-                              {/*onClick={() => {*/}
+                  {/*<div style={{marginTop:'15%'}}>*/}
+                  {/*<Button style={{marginTop: "5px"}}*/}
+                  {/*onClick={() => {*/}
 
-                              {/*}}>Edit    <span className="glyphicon glyphicon-edit"/></Button>*/}
-                      {/*/!*<Button style={{marginTop: "5px"}}*!/*/}
-                              {/*/!*onClick={() => {*!/*/}
+                  {/*}}>Edit    <span className="glyphicon glyphicon-edit"/></Button>*/}
+                  {/*/!*<Button style={{marginTop: "5px"}}*!/*/}
+                  {/*/!*onClick={() => {*!/*/}
 
-                              {/*/!*}}>Refresh    <span className="glyphicon glyphicon-refresh"/></Button>*!/*/}
-                    {/*</div>*/}
+                  {/*/!*}}>Refresh    <span className="glyphicon glyphicon-refresh"/></Button>*!/*/}
+                  {/*</div>*/}
 
 
                   {/*</div>*/}
-
 
 
                 </div>
@@ -296,22 +299,22 @@ export class RangingViewScenarioPage extends React.PureComponent { // eslint-dis
 
                 {/*Content*/}
 
-                {(()=>{
+                {(() => {
 
-                  if(this.state.activeKey=='1'){
+                  if (this.state.activeKey == '1') {
 
-                    chart_data_to_be_used=week_13_chart;
-                    table_data_to_be_used=week_13_table;
-                  }else if(this.state.activeKey=='2'){
-                    chart_data_to_be_used=week_26_chart;
-                    table_data_to_be_used=week_26_table;
-                  }else{
-                    chart_data_to_be_used=week_52_chart;
-                    table_data_to_be_used=week_52_table;
+                    chart_data_to_be_used = week_13_chart;
+                    table_data_to_be_used = week_13_table;
+                  } else if (this.state.activeKey == '2') {
+                    chart_data_to_be_used = week_26_chart;
+                    table_data_to_be_used = week_26_table;
+                  } else {
+                    chart_data_to_be_used = week_52_chart;
+                    table_data_to_be_used = week_52_table;
                   }
 
 
-                  if(true) {
+                  if (true) {
                     return (
                       <Panel>
                         {/*Net Impact (Waterfall chart and impact numbers)*/}
@@ -476,41 +479,31 @@ export class RangingViewScenarioPage extends React.PureComponent { // eslint-dis
                                   </div>
                                 </div>
                                 <div>
-                                  {
-                                    (() => {
-                                      if (this.props.RangingViewScenarioPage.canniProdTableData) {
-                                        console.log("this.props.RangingViewScenarioPage.canniProdTableData:",this.props.RangingViewScenarioPage.canniProdTableData)
 
-                                        return (
-                                          <div>
-                                            <BootstrapTable
-                                              data={this.props.RangingViewScenarioPage.canniProdTableData} options={options}
-                                              striped={true}
-                                              hover
-                                              condensed
-                                              pagination={ true }
-                                              search={true}
-                                              exportCSV={true}
-                                            >
-                                              <TableHeaderColumn dataField="productcode" isKey={true} dataSort={true} dataAlign="center">Brand Indicator</TableHeaderColumn>
-                                              <TableHeaderColumn dataField="long_description" dataSort={true} dataAlign="center" width="9%">Products Description</TableHeaderColumn>
-                                              <TableHeaderColumn dataField="predicted_volume" dataFormat={formatVolume} dataSort={true} dataAlign="center" width="9%">Volume</TableHeaderColumn>
-                                              <TableHeaderColumn dataField="predicted_sales" dataFormat={formatSales} dataSort={true} dataAlign="center" width="8%">Sales Value</TableHeaderColumn>
-                                            </BootstrapTable>
+                                  <div>
+                                    <BootstrapTable
+                                      data={this.props.RangingViewScenarioPage.canniProdTableData} options={options}
+                                      striped={true}
+                                      hover
+                                      condensed
+                                      pagination={ true }
+                                      search={true}
+                                      exportCSV={true}
+                                    >
+                                      <TableHeaderColumn dataField="productcode" isKey={true} dataSort={true}
+                                                         dataAlign="center">Brand Indicator</TableHeaderColumn>
+                                      <TableHeaderColumn dataField="long_description" dataSort={true} dataAlign="center"
+                                                         width="9%">Products Description</TableHeaderColumn>
+                                      <TableHeaderColumn dataField="predicted_volume" dataFormat={formatVolume}
+                                                         dataSort={true} dataAlign="center"
+                                                         width="9%">Volume</TableHeaderColumn>
+                                      <TableHeaderColumn dataField="predicted_sales" dataFormat={formatSales}
+                                                         dataSort={true} dataAlign="center" width="8%">Sales
+                                        Value</TableHeaderColumn>
+                                    </BootstrapTable>
 
-                                          </div>
-                                        );
+                                  </div>
 
-                                      }
-                                      else {
-                                        return (
-
-                                          <div className="text-center" colSpan="11"><Spinner />Please Wait a Moment....!</div>
-
-                                        );
-                                      }
-                                    })()
-                                  }
 
                                 </div>
 
@@ -525,39 +518,36 @@ export class RangingViewScenarioPage extends React.PureComponent { // eslint-dis
                 })()}
 
 
-
-
-
-
               </div>
             )
 
-          }else{
-            return(
+          } else {
+            return (
               <div>
                 {/*page title*/}
                 <div className="pageTitle">View Scenario</div>
 
                 <div className="loading-scenario">
                   {/*{(()=>{*/}
-                    {/*document.body.style.cursor='wait';*/}
+                  {/*document.body.style.cursor='wait';*/}
 
-                    {/*let dots = window.setInterval( function() {*/}
-                      {/*let wait = document.getElementById("wait");*/}
-                      {/*if ( wait.innerHTML.length > 9 )*/}
-                        {/*wait.innerHTML = "Loading";*/}
-                      {/*else*/}
-                        {/*wait.innerHTML += ".";*/}
-                    {/*}, 1500);*/}
+                  {/*let dots = window.setInterval( function() {*/}
+                  {/*let wait = document.getElementById("wait");*/}
+                  {/*if ( wait.innerHTML.length > 9 )*/}
+                  {/*wait.innerHTML = "Loading";*/}
+                  {/*else*/}
+                  {/*wait.innerHTML += ".";*/}
+                  {/*}, 1500);*/}
 
                   {/*})()}*/}
 
                   {/*<Spinner/>*/}
-                  <div  id="wait" style={{marginLeft:'47%'}}>Loading...</div>
+                  <div id="wait" style={{marginLeft: '47%'}}>Loading...</div>
 
                 </div>
               </div>
-            )}
+            )
+          }
         })()}
 
       </div>
@@ -565,9 +555,7 @@ export class RangingViewScenarioPage extends React.PureComponent { // eslint-dis
   }
 }
 
-RangingViewScenarioPage.propTypes = {
-
-};
+RangingViewScenarioPage.propTypes = {};
 
 const mapStateToProps = createStructuredSelector({
   RangingViewScenarioPage: makeSelectRangingViewScenarioPage(),

@@ -52,7 +52,7 @@ export function* generateUrlParamsData() {
     // console.log(newScenarioStartDate);
     // let params = getUrlVars(urlParams);
     // console.log(params);
-    const data = yield call(request, `http://172.20.244.220:8000/api/filters4/?${urlParams}`);
+    const data = yield call(request, `http://172.20.244.219:8000/api/filters4/?${urlParams}`);
     console.log('data********', data);
     yield put(generateUrlParamsData2Success(data));
   } catch (err) {
@@ -77,7 +77,7 @@ export function* generateUrlParamsData2() {
     // let newScenarioStoreFormat = yield select(makeNewScenarioStoreFormat());
     // let newScenarioStartDate = yield select(makeNewScenarioStartDate());
     // console.log(newScenarioStartDate);
-    const data = yield call(request, `http://172.20.244.220:8000/api/filters4/?${urlParams}`);
+    const data = yield call(request, `http://172.20.244.219:8000/api/filters4/?${urlParams}`);
     console.log('data********', data);
     yield put(generateUrlParamsData2Success(data));
   } catch (err) {

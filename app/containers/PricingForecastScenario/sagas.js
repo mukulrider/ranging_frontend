@@ -34,7 +34,7 @@ export function* generateForecastScenarioData() {
   scenario_id.pop();
   try {
     const data = yield call(request,
-      `http://172.20.244.220:8000/api/pricing/scenario2-result-overview/?scenario_id=${scenario_id.join('-')}`);
+      `http://172.20.244.219:8000/api/pricing/scenario2-result-overview/?scenario_id=${scenario_id.join('-')}`);
     yield put(ForecastScenarioDataSuccess(data));
   } catch (err) {
     // console.log(err);
@@ -56,7 +56,7 @@ export function* generateForecastEventData() {
 
   try {
     const data = yield call(request,
-      `http://172.20.244.220:8000/api/pricing/event2/?id=${event_id.split('-').pop()}`);
+      `http://172.20.244.219:8000/api/pricing/event2/?id=${event_id.split('-').pop()}`);
     yield put(forecastEventDataSuccess(data));
   } catch (err) {
     // console.log(err);
@@ -78,7 +78,7 @@ export function* generateScenarioData() {
 
   try {
     const data = yield call(request,
-      `http://172.20.244.220:8000/api/pricing/scenario2-obj/?id=${event_id.split('-').pop()}`);
+      `http://172.20.244.219:8000/api/pricing/scenario2-obj/?id=${event_id.split('-').pop()}`);
     yield put(updateScenarioDataSuccess(data));
   } catch (err) {
     // console.log(err);
@@ -94,7 +94,7 @@ export function* doGenerateScenarioData() {
 /* GENERATE SIDE FILTER*/
 export function* generatePriceGravityChart() {
   try {
-    const data = yield call(request, `http://172.20.244.220:8000/api/xxx/`);
+    const data = yield call(request, `http://172.20.244.219:8000/api/xxx/`);
     yield put(generatePriceGravityChartSuccess(data));
   } catch (err) {
     // console.log(err);
