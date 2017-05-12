@@ -6,6 +6,8 @@ import RoundedIconButton from '../rounded_icon_button';
 import Grid from '../grid';
 import tesco from './../../assets/images/tesco.svg';
 import Button from 'components/button';
+import { Nav } from 'react-bootstrap';
+import { NavItem } from 'react-bootstrap';
 
 function renderBackLink(backLink) {
   return backLink ?
@@ -165,18 +167,39 @@ class Header extends Component {
         </div>
         <div className={contentClasses}>
           <Grid>
-            <div className={contentClass}>
-              {
-                (logo,
-                  <div className="ui-component__header__tesco-logo">
-                    <Logo {...logo} id="logo" />
-                  </div>
-                )
-              }
-              <div className="ui-component__header__content--right">
-                <RoundedIconButton icon="menu" onClick={this.handleClick} label="Menu" />
+            <div className="Row" >
+              <div className="col-md-2">
+                {
+                  (logo,
+                      <div className="ui-component__header__tesco-logo">
+                        <Logo {...logo} id="logo" />
+                      </div>
+                  )
+                }
               </div>
-              <div>
+              {/*<div className="ui-component__header__content--right">*/}
+              {/*<RoundedIconButton icon="menu" onClick={this.handleClick} label="Menu" />*/}
+              {/*</div>*/}
+              <div className="col-md-8">
+                <Nav bsStyle="tabs" className="tabsCustom" style={{marginWidth:"5%"}}>
+                  <NavItem
+                    className="tabsCustomList" style={{marginTop:"3px"}} onClick={() => {
+                    window.location = 'http://dvcmpweb00001uk.dev.global.tesco.org:82/ranging/negotiation';
+                  }}
+                  >Negotiation</NavItem>
+                  <NavItem
+                    className="tabsCustomList" style={{marginTop:"3px",marginLeft:"2px",fontSize: "12px"}} onClick={() => {
+                    window.location = 'http://dvcmpweb00001uk.dev.global.tesco.org:82/ranging/delist/';
+                  }}
+                  >Product Impact</NavItem>
+                  <NavItem
+                    className="tabsCustomList" style={{marginTop:"3px",marginLeft:"2px",fontSize: "12px"}} onClick={() => {
+                    window.location = 'http://dvcmpweb00001uk.dev.global.tesco.org:82/ranging/npd/';
+                  }}
+                  >NPD</NavItem>
+                </Nav>
+              </div>
+              <div className="col-md-2">
                 {(() => {
                   const getCookie = (name) => {
                     const value = `; ${document.cookie}`;
@@ -188,20 +211,21 @@ class Header extends Component {
                   const token = getCookie('token');
 
                   return token ?
-                    <div>
-                      <br/>
+                    <div >
+                      <br />
                       <Button
                         buttonType={'primary'}
-                        style={{ float: 'right' }}
+                        style={{ minWidth: '175px',marginTop: '6px'}}
                         onClick={() => {
                           console.log('loggingOut');
-                          document.cookie = 'token'+'=;expires=Thu, 01 Jan 1970 00:00:01 GMT;domain=dvcmpweb00001uk.dev.global.tesco.org;path=/;';
+                          document.cookie = 'token' + '=;expires=Thu, 01 Jan 1970 00:00:01 GMT;domain=dvcmpweb00001uk.dev.global.tesco.org;Path=/;';
                           window.location = 'http://dvcmpweb00001uk.dev.global.tesco.org/login/';
                         }}
                       >Logout</Button></div> : '';
                 })()};
               </div>
             </div>
+
           </Grid>
         </div>
         {this.renderMobileMenu()}

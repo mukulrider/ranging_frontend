@@ -22,7 +22,7 @@ export function* defaultSaga() {
   // See example in containers/HomePage/sagas.js
 }
 
-let host_url_rangingScenario=`http://172.20.244.230:8000`
+let host_url_rangingScenario=`http://dvcmpapp00002uk.dev.global.tesco.org`
 
 
 let gettingUserDetails = () =>{

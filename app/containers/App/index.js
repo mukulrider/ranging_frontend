@@ -40,34 +40,30 @@ export default class App extends React.PureComponent { // eslint-disable-line re
     }
   }
 
-  componentWillMount() {
-    let getCookie;
-    getCookie = (name) => {
-      const value = `; ${document.cookie}`;
-      const parts = value.split(`; ${name}=`);
-      if (parts.length === 2) return parts.pop().split(';').shift();
-    };
-    const token = getCookie('token');
-    if (token && this.props.location.pathname.includes('login')) {
-      window.location = 'http://localhost:3001'
-    }
-    if (!token && !this.props.location.pathname.includes('login')) {
-      window.location = 'http://localhost:3000/login/'
-    }
-  }
+  // componentWillMount() {
+  //   let getCookie;
+  //   getCookie = (name) => {
+  //     const value = `; ${document.cookie}`;
+  //     const parts = value.split(`; ${name}=`);
+  //     if (parts.length === 2) return parts.pop().split(';').shift();
+  //   };
+  //   const token = getCookie('token');
+  //   if (token && this.props.location.pathname.includes('login')) {
+  //     window.location = 'http://localhost:3001'
+  //   }
+  //   if (!token && !this.props.location.pathname.includes('login')) {
+  //     window.location = 'http://localhost:3000/login/'
+  //   }
+  // }
 
   render() {
     return (
       <div>
         <Header />
-        <div className="container-fluid" style={{marginTop: '120px'}}>
+        <div className="container-fluid" style={{marginTop: '160px'}}>
           {React.Children.toArray(this.props.children)}
         </div>
-        <Footer footerLinks={[
-          {linkTitle: 'Negotiation', linkHref: '/ranging/negotiation'},
-          {linkTitle: 'Product Impact', linkHref: '/ranging/delist'},
-          {linkTitle: 'NPD', linkHref: '/ranging/npd'}
-          ]}/>
+        <Footer footerLinks={[]}/>
       </div>
     );
   }

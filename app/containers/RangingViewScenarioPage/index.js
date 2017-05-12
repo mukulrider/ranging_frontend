@@ -304,13 +304,13 @@ export class RangingViewScenarioPage extends React.PureComponent { // eslint-dis
                   if (this.state.activeKey == '1') {
 
                     chart_data_to_be_used = week_13_chart;
-                    table_data_to_be_used = week_13_table;
+                    table_data_to_be_used = week_13_table.df;
                   } else if (this.state.activeKey == '2') {
                     chart_data_to_be_used = week_26_chart;
-                    table_data_to_be_used = week_26_table;
+                    table_data_to_be_used = week_26_table.df;
                   } else {
                     chart_data_to_be_used = week_52_chart;
-                    table_data_to_be_used = week_52_table;
+                    table_data_to_be_used = week_52_table.df;
                   }
 
 
@@ -482,7 +482,7 @@ export class RangingViewScenarioPage extends React.PureComponent { // eslint-dis
 
                                   <div>
                                     <BootstrapTable
-                                      data={this.props.RangingViewScenarioPage.canniProdTableData} options={options}
+                                      data={table_data_to_be_used} options={options}
                                       striped={true}
                                       hover
                                       condensed
@@ -490,15 +490,15 @@ export class RangingViewScenarioPage extends React.PureComponent { // eslint-dis
                                       search={true}
                                       exportCSV={true}
                                     >
-                                      <TableHeaderColumn dataField="productcode" isKey={true} dataSort={true}
-                                                         dataAlign="center">Brand Indicator</TableHeaderColumn>
+                                      <TableHeaderColumn dataField="brand_indicator" isKey={true} dataSort={true}
+                                                         dataAlign="center"  width="10%">Brand Indicator</TableHeaderColumn>
                                       <TableHeaderColumn dataField="long_description" dataSort={true} dataAlign="center"
-                                                         width="9%">Products Description</TableHeaderColumn>
+                                                        >Products Description</TableHeaderColumn>
                                       <TableHeaderColumn dataField="predicted_volume" dataFormat={formatVolume}
                                                          dataSort={true} dataAlign="center"
-                                                         width="9%">Volume</TableHeaderColumn>
+                                                         width="15%">Volume</TableHeaderColumn>
                                       <TableHeaderColumn dataField="predicted_sales" dataFormat={formatSales}
-                                                         dataSort={true} dataAlign="center" width="8%">Sales
+                                                         dataSort={true} dataAlign="center" width="15%">Sales
                                         Value</TableHeaderColumn>
                                     </BootstrapTable>
 

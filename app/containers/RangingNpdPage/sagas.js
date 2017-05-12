@@ -21,7 +21,7 @@ export function* defaultSaga() {
   // See example in containers/HomePage/sagas.js
 }
 
-const host_url="http://172.20.244.230:8000"
+const host_url="http://dvcmpapp00002uk.dev.global.tesco.org"
 
 //getting user details from cookies
 let gettingUserDetails = () =>{
@@ -87,7 +87,7 @@ export function* generateUnmatchedTableFetch() {
 
 
   try {
-  console.log('---------------------http://172.20.244.230:8000/api/npd/unmatchedprod?'+AJAX_args);
+  console.log('---------------------http://dvcmpapp00002uk.dev.global.tesco.org/api/npd/unmatchedprod?'+AJAX_args);
       // Table data
         const data = yield call(request,
           `${host_url}/api/npd/unmatchedprod?`+AJAX_args);
@@ -130,7 +130,7 @@ export function* generateSkuChartDataFetch() {
 
   try {
 
-    console.log('---------------------http://172.20.244.230:8000/api/npd/psgskudistribution?'+AJAX_args);
+    console.log('---------------------http://dvcmpapp00002uk.dev.global.tesco.org/api/npd/psgskudistribution?'+AJAX_args);
    // Sku chart data
       const sku_chart = yield call(request,`${host_url}/api/npd/psgskudistribution?`+AJAX_args);
       yield put(skuChartSuccess(sku_chart));
@@ -172,7 +172,7 @@ export function* generateOutPerformanceChartFetch() {
 
 
 
-  console.log('---------------------http://172.20.244.230:8000/api/npd/outperformance?'+AJAX_args);
+  console.log('---------------------http://dvcmpapp00002uk.dev.global.tesco.org/api/npd/outperformance?'+AJAX_args);
 
 
   try {
@@ -218,7 +218,7 @@ export function* generatePriceGravityFetch() {
 
   try {
 
-  console.log('---------------------http://172.20.244.230:8000/api/npd/pricebucket?'+AJAX_args);
+  console.log('---------------------http://dvcmpapp00002uk.dev.global.tesco.org/api/npd/pricebucket?'+AJAX_args);
 
       // Price gravity chart data
       const price_gravity = yield call(request,`${host_url}/api/npd/pricebucket?`+AJAX_args);
@@ -256,7 +256,7 @@ export function* generateSideFilter() {
     AJAX_args =AJAX_args +"&"+cookie_params;
     AJAX_args = AJAX_args.replace('&', '');
 
-     console.log(`http://172.20.244.230:8000/api/npd_view1/filter_data?` + AJAX_args);
+     console.log(`http://dvcmpapp00002uk.dev.global.tesco.org/api/npd_view1/filter_data?` + AJAX_args);
 
     const data = yield call(request,`${host_url}/api/npd_view1/filter_data?` + AJAX_args);
     yield put(generateSideFilterSuccess(data));

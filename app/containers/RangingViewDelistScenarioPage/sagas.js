@@ -20,7 +20,7 @@ export function* defaultSaga() {
   // See example in containers/HomePage/sagas.js
 }
 
-let host_url = "http://172.20.246.47:8000"
+let host_url = "http://dvcmpapp00002uk.dev.global.tesco.org"
 
 // WATERFALL CHART - VALIUE
 export function* generateWaterfallValueFetch() {

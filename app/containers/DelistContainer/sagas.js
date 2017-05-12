@@ -52,8 +52,7 @@ export function* defaultSaga() {
   // See example in containers/HomePage/sagas.js
 }
 
-let host_url = "http://172.20.246.47:8000"
-// let host_url = "http://172.20.246.47:8000"
+let host_url = "http://dvcmpapp00002uk.dev.global.tesco.org"
 
 //getting user info from cookies
 let gettingUserDetails = () =>{
@@ -536,7 +535,6 @@ export function* generateSideFilter() {
   try {
     // todo: update url
 
-
     // const data = yield call(request, host_url + `/api/product_impact/filter_data/?`+'long_description=3 BIRD RST WITH C/BERRY, DATE and ORNG S/FING - 79631889');
     // const data = yield call(request, host_url + `/api/product_impact/filter_data/?`+'long_description=73589188');
     const data = yield call(request, host_url + `/api/product_impact/filter_data/?${urlParamsString}`);
@@ -637,12 +635,12 @@ export function* generateSaveScenario() {
     console.log("Trying to save scenario")
     let urlName = yield select(selectDelistContainerDomain());
     let urlParams = urlName.get('urlParamsString');
-    let user_id = "user_id=bc";
+    // let user_id = "user_id=bc";
     let scenarioName= urlName.get('scenarioName');
-    let sessionID= "session_id=2";
+    // let sessionID= "session_id=2";
     let tagName= urlName.get('tagName');
 
-    let AJAX_args =urlParams+"&scenario_name="+scenarioName+"&"+user_id+"&"+sessionID ;
+    let AJAX_args =urlParams+"&scenario_name="+scenarioName;
     // let AJAX_args =urlParams+"&scenario_name="+scenarioName+'&scenario_tag='+tagName+"&"+user_id+"&"+sessionID ;
 
     //Adding the user information
