@@ -52,34 +52,31 @@ export function* defaultSaga() {
   // See example in containers/HomePage/sagas.js
 }
 
-let host_url = "http://dvcmpapp00002uk.dev.global.tesco.org"
-
 //getting user info from cookies
-let gettingUserDetails = () =>{
+let gettingUserDetails = () => {
   let getCookie = (name) => {
     const value = `; ${document.cookie}`;
     const parts = value.split(`; ${name}=`);
     if (parts.length === 2) {
       return parts.pop().split(';').shift();
     }
-  };
-
+  }
   const user_id = getCookie('token');
   const user_name = getCookie('user');
   const designation = getCookie('designation');
   const sessionID = getCookie('login_timestamp')
   const buying_controller = getCookie('buying_controller');
-  let cookie_params="user_id="+user_id+"&user_name="+user_name+"&designation="+designation+"&session_id="+sessionID+"&buying_controller_header="+buying_controller;
+  let cookie_params = "user_id=" + user_id + "&user_name=" + user_name + "&designation=" + designation + "&session_id=" + sessionID + "&buying_controller_header=" + buying_controller;
 
-  if(designation==='Buyer' || designation==='buyer'){
+  if (designation === 'Buyer' || designation === 'buyer') {
     const buyer = getCookie('buyer');
-    cookie_params=cookie_params+"&buyer_header="+buyer;
+    cookie_params = cookie_params + "&buyer_header=" + buyer;
   }
 
-  return(cookie_params);
-
+  return (cookie_params);
 }
 
+let host_url = "http://172.20.246.210:8000"
 
 // All sagas to be loaded
 export function* generateApiFetch() {
@@ -500,7 +497,6 @@ export function* doWaterfallChartValueFetch() {
 export function* generateTable() {
   let urlParamsString = yield select(makeUrlParamsString());
   urlParamsString = urlParamsString.urlParamsString;
-
   try {
     urlParamsString = urlParamsString.replace('commercial_director', 'commerical_director');
 
@@ -537,11 +533,12 @@ export function* generateSideFilter() {
   // alert(urlParamsString);
   try {
     // todo: update url
+    //COMMENT THE BELOW - USED FOR TESTING - SALES REPORTING FILTERS - FOR TESTING PURPOSE
+    // const data = yield call(request,`http://172.20.244.225:8000/api/reporting/competitor_filter_data?${urlParamsString}`);
+    // const data = yield call(request, host_url + `/api/reporting/competitor_filter_data?${urlParamsString}`);
 
-    // const data = yield call(request, host_url + `/api/product_impact/filter_data/?`+'long_description=3 BIRD RST WITH C/BERRY, DATE and ORNG S/FING - 79631889');
-    // const data = yield call(request, host_url + `/api/product_impact/filter_data/?`+'long_description=73589188');
+    //UNCOMMENT BELOW - USED FOR TESTING
     const data = yield call(request, host_url + `/api/product_impact/filter_data/?${urlParamsString}`);
-    // const data = yield call(request, `http://172.20.247.16:8000/api/product_impact/filter_data/?${urlParamsString}`);
 
 
     yield put(generateSideFilterSuccess(data));
@@ -637,13 +634,22 @@ export function* generateSaveScenario() {
     // todo: update url
     console.log("Trying to save scenario")
     let urlName = yield select(selectDelistContainerDomain());
-    let urlParams = urlName.get('urlParamsString');
+    let urlParamsString = urlName.get('urlParamsString');
+    let urlparamsDelist = urlName.get('urlparamsDelist');
     // let user_id = "user_id=bc";
-    let scenarioName= urlName.get('scenarioName');
+    let scenarioName = urlName.get('scenarioName');
     // let sessionID= "session_id=2";
-    let tagName= urlName.get('tagName');
+    let tagName = urlName.get('tagName');
 
-    let AJAX_args =urlParams+"&scenario_name="+scenarioName;
+    let params = "";
+
+    if ((typeof(urlParamsString) == "undefined") || (urlParamsString == "")) {
+      params = urlparamsDelist.replace('?', '');
+    } else {
+      params = urlParamsString;
+  }
+
+    let AJAX_args =params+"&scenario_name="+scenarioName;
     // let AJAX_args =urlParams+"&scenario_name="+scenarioName+'&scenario_tag='+tagName+"&"+user_id+"&"+sessionID ;
 
     //Adding the user information
