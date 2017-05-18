@@ -25,7 +25,7 @@ export class RangingHomePage extends React.PureComponent { // eslint-disable-lin
         return (
             <div style={{fontSize: '14px'}}>
 
-              <b style={{textAlign:'center'}}>Welcome to Ranging Modulue! <br/>Please select options on the bottom of the page to get started.</b>
+              <b style={{textAlign:'center'}}>Welcome to Ranging Modulue ! <br/>Please select options on the top of the page to get started.</b>
 
             </div>
         );

@@ -1028,20 +1028,21 @@ export class DelistContainer extends React.PureComponent { // eslint-disable-lin
                                         </div>
                                         <span
                                           className={(() => {
-                                            if (this.props.DelistContainer.waterfallValue.bc_cgm_contri > 0) {
+                                            if (this.props.DelistContainer.waterfallValue.bc_cts_contri > 0) {
                                               return "glyphicon glyphicon-chevron-up waterfallCalloutsPositive"
                                             }
-                                            else if (this.props.DelistContainer.waterfallValue.bc_cgm_contri < 0) {
+                                            else if (this.props.DelistContainer.waterfallValue.bc_cts_contri < 0) {
                                               return "glyphicon glyphicon-chevron-down waterfallCalloutsNegative"
                                             } else {
                                               return "glyphicon glyphicon-minus-sign waterfallCalloutsNeutral"
                                             }
                                           })()}>&nbsp;
-                                          {this.props.DelistContainer.waterfallValue.bc_cgm_contri}%
+                                          {this.props.DelistContainer.waterfallValue.bc_cts_contri}%
                               </span>
 
                                       </Panel>
                                     </div>
+
                                     <div className="col-xs-5 impactNumbers" style={{float: 'right'}}>
                                       <Panel>
                                         <div>
@@ -1346,6 +1347,7 @@ export class DelistContainer extends React.PureComponent { // eslint-disable-lin
                                         Cgm</TableHeaderColumn>
                                       <TableHeaderColumn dataField="per_value_transfer" dataFormat={addingPercentage} dataSort={true} dataAlign="center">Value Transfer</TableHeaderColumn>
                                       <TableHeaderColumn dataField="per_vol_transfer" dataFormat={addingPercentage} dataSort={true} dataAlign="center">Volume Transfer</TableHeaderColumn>
+                                      <TableHeaderColumn dataField="psg_value_impact" dataSort={true} dataAlign="center">Product Sub Group Value Impact(%)</TableHeaderColumn>
                                       <TableHeaderColumn dataFormat={this.cellButton} dataAlign="center">View
                                         Substitutes</TableHeaderColumn>
                                     </BootstrapTable>

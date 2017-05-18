@@ -168,6 +168,10 @@ export class RangingNegotiationPage extends React.PureComponent { // eslint-disa
                   <SelectorNegotiation2 sideFilter={this.props.RangingNegotiationPage.sideFilter}
                                         onGenerateTable={this.props.onGenerateTable}
                                         onFetchGraph={this.props.onFetchGraph}
+                                        onSavePFilterParam={this.props.onSavePFilterParam}
+                                        onSaveBubbleParam2={this.props.onSaveBubbleParam2}
+                                        onSavePageParam={this.props.onSavePageParam}
+
                                         onGenerateUrlParams={this.props.onGenerateUrlParams}
                                         onURLRequest={this.props.onURLRequest}
                                         onGenerateUrlParamsString={this.props.onGenerateUrlParamsString}
@@ -1033,6 +1037,7 @@ export class RangingNegotiationPage extends React.PureComponent { // eslint-disa
                         <th style={{textAlign: 'center'}}>Rate of Sale</th>
                         <th style={{textAlign: 'center'}}>Store Count</th>
                         <th style={{textAlign: 'center'}}>ASP</th>
+                        <th style={{textAlign: 'center'}}>Product Sub Group Value Impact(%)</th>
                       </tr>
                       </thead>
                       <tbody className="table-body-format">
@@ -1133,9 +1138,11 @@ export class RangingNegotiationPage extends React.PureComponent { // eslint-disa
                                 <td style={{
                                   textAlign: 'center',
                                   verticalAlign: 'center'
-                                }}>{formatSales(obj.rate_of_sale)}</td>
+                                }}>{obj.rate_of_sale}</td>
                                 <td style={{textAlign: 'center', verticalAlign: 'center'}}>{obj.store_count}</td>
                                 <td style={{textAlign: 'center', verticalAlign: 'center'}}>£ {obj.rsp}</td>
+                                <td style={{textAlign: 'center', verticalAlign: 'center'}}>{obj.psg_value_impact}</td>
+
                               </tr>
                             )
                           })

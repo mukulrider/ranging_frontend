@@ -60,8 +60,20 @@ class SelectorNegotiation2 extends React.PureComponent { // eslint-disable-line 
 
   applyButtonFunctionality = () => {
 
+    document.getElementById("PQ1").checked = false;
+    document.getElementById("PQ2").checked = false;
+    document.getElementById("PQ3").checked = false;
+    document.getElementById("PQ4").checked = false;
+    document.getElementById("PQ5").checked = false;
+
+
     this.props.onUpdateLoadingIndicationText("Please do not refresh. Filters are being applied")
     this.props.onUpdateLoadingIndicationStatus(true);
+
+    this.props.onSavePFilterParam('');
+    this.props.onSaveBubbleParam2('[]');
+    this.props.onSavePageParam("page=1");
+
     this.props.onGenerateTable();
     this.props.onFetchGraph();
 
@@ -195,8 +207,19 @@ class SelectorNegotiation2 extends React.PureComponent { // eslint-disable-line 
                   this.props.onGenerateUrlParamsString('');
                   this.props.onGenerateUrlParamsData();
 
-                  this.props.onUpdateLoadingIndicationText("Clearing you filter selections")
+                  this.props.onUpdateLoadingIndicationText("Clearing filter selections")
                   this.props.onUpdateLoadingIndicationStatus(true);
+
+                  this.props.onSavePFilterParam('');
+                  this.props.onSaveBubbleParam2('[]');
+                  this.props.onSavePageParam("page=1");
+
+                  document.getElementById("PQ1").checked = false;
+                  document.getElementById("PQ2").checked = false;
+                  document.getElementById("PQ3").checked = false;
+                  document.getElementById("PQ4").checked = false;
+                  document.getElementById("PQ5").checked = false;
+
                   this.props.onGenerateTable();
                   this.props.onFetchGraph();
 

@@ -153,7 +153,7 @@ class BubbleChart2 extends React.PureComponent { // eslint-disable-line react/pr
       })
       .on('mouseover', function(d) {
         // console.log("------d"+d);
-        tooltip.html(d.base_product_number +" - "+d.long_description+"<br/>"+"CPS : "+d.cps+"<br/>"+"PPS : "+d.pps);
+        tooltip.html(d.base_product_number +" - "+d.long_description+"<br/>"+"CPS : "+d.cps_value+"<br/>"+"PPS : "+d.pps_value);
         tooltip.style("visibility", "visible");
       })
       .on('mousemove', function() {

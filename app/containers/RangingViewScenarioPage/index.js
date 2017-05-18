@@ -169,9 +169,9 @@ export class RangingViewScenarioPage extends React.PureComponent { // eslint-dis
 
                 {/*Page title*/}
                 <div className="pageTitle">
-                  Event
-                  : {this.props.RangingViewScenarioPage.scenarioData.event_name} | Scenario
-                  : {this.props.RangingViewScenarioPage.scenarioData.scenario_name} </div>
+                   Scenario
+                  : {this.props.RangingViewScenarioPage.scenarioData.scenario_name} | Tag
+                  : {this.props.RangingViewScenarioPage.scenarioData.scenario_tag} </div>
 
                 {/*Breadcrumbs*/}
                 <div className="row">
@@ -499,7 +499,8 @@ export class RangingViewScenarioPage extends React.PureComponent { // eslint-dis
                                                          width="15%">Volume</TableHeaderColumn>
                                       <TableHeaderColumn dataField="predicted_sales" dataFormat={formatSales}
                                                          dataSort={true} dataAlign="center" width="15%">Sales
-                                        Value</TableHeaderColumn>
+                                        Value</TableHeaderColumn><TableHeaderColumn dataField="similarity_score"
+                                                         dataSort={true} dataAlign="center" width="15%">Similarity Score</TableHeaderColumn>
                                     </BootstrapTable>
 
                                   </div>

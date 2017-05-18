@@ -338,6 +338,15 @@ export function saveEditForecastApi(data) {
 };
 
 
+export function saveEditForecastApiOnReset(data) {
+  console.log('API saving on reset',data);
+  return {
+    type: SAVE_EDIT_FORECAST_API,
+    data
+  };
+};
+
+
 export function saveModifiedFlag(data) {
   // console.log('Saving saveTagName in action',data);
   return {

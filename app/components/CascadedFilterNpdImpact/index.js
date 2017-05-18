@@ -145,8 +145,11 @@ class CascadedFilterNpdImpact extends React.PureComponent { // eslint-disable-li
 
       console.log("just_before_ajax");
 
+      this.props.onSaveEditForecastApiOnReset("modified_flag=0&modified_forecast=0&Cannibalization_perc=0");
       this.props.onUpdateBreadCrumbs(completeBreadcrumb);
       this.props.onPageLoadSelectFilterIndicator(false);
+
+
       this.props.onUpdateApplyButtonLoadingIndication(true);
       this.props.onSendUrlParams(completeSelections);
       this.props.onDataFetchCanniProdTable();
@@ -514,8 +517,10 @@ class CascadedFilterNpdImpact extends React.PureComponent { // eslint-disable-li
                   style={{marginTop: "5px"}}
                   onClick={() => {
                     //To un check all the buttons
+                    this.props.onSaveEditForecastApiOnReset("modified_flag=0&modified_forecast=0&Cannibalization_perc=0");
                     let selection = '';
                     this.props.onSaveFilterSelectionsTillNow(selection);
+
                     this.props.onCheckboxChange(selection);
                     this.props.onSendUrlParams(selection);
                     this.props.onGenerateSideFilter();
@@ -524,6 +529,9 @@ class CascadedFilterNpdImpact extends React.PureComponent { // eslint-disable-li
                     }
 
                   }}>Clear Filter Selections</Button></div>
+      <br/>
+      <br/>
+      <br/>
        </div>
 
 

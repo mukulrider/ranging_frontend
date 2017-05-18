@@ -49,7 +49,7 @@ import {
   saveFilterSelectionsTillNow,
   updateBreadCrumbs,
   saveScenarioFlag,saveScenarioName,saveTagName,updateSaveScenarioResponse,
-  saveModifiedVolumeForecast,saveEditForecastApi,saveModifiedFlag
+  saveModifiedVolumeForecast,saveEditForecastApi,saveEditForecastApiOnReset,saveModifiedFlag
 } from './actions';
 import CascadedFilterNpdImpact from 'components/CascadedFilterNpdImpact';
 
@@ -424,7 +424,7 @@ export class RangingNpdImpactPage extends React.PureComponent { // eslint-disabl
                 </div>
                 <div className="col-xs-4">
                   <InputField type="text"
-                              placeholder="Enter forecast%"
+                              placeholder="Enter forecast"
                               value={this.props.RangingNpdImpactPage.modifiedVolumeForecast}
                               onChange={(e) => {
                                 this.props.onSaveModifiedVolumeForecast(e);
@@ -445,9 +445,9 @@ export class RangingNpdImpactPage extends React.PureComponent { // eslint-disabl
                   alert("Enter updated forecast!");
                 }else{
                   {/*document.body.style.cursor='wait';*/}
-
-                  let modified_api="modified_flag=1&modified_forecast="+this.props.RangingNpdImpactPage.modifiedVolumeForecast+"&Cannibalization_perc="+this.props.RangingNpdImpactPage.canniProdTableData.volume_chart.impact.Cannibilization_perc;
-                  alert(modified_api);
+                  let canni_perc=this.props.RangingNpdImpactPage.canniProdTableData.volume_chart.impact.Cannibilization_perc/100;
+                  let modified_api="modified_flag=1&modified_forecast="+this.props.RangingNpdImpactPage.modifiedVolumeForecast+"&Cannibalization_perc="+canni_perc;
+                  // alert(modified_api);
                   this.props.onUpdateApplyButtonLoadingIndication(true);
                   this.setState({showEditForecastModal: false});
                   this.props.onSaveEditForecastApi(modified_api);
@@ -470,7 +470,7 @@ export class RangingNpdImpactPage extends React.PureComponent { // eslint-disabl
         <div className="">
 
           {/*Filters*/}
-          <div style={{height: '100%',
+          <div style={{height: '75%',
             position: 'fixed',
             width:'20%',
             /* padding-right: 5px; */
@@ -499,6 +499,8 @@ export class RangingNpdImpactPage extends React.PureComponent { // eslint-disabl
                                        onUpdateBreadCrumbs={this.props.onUpdateBreadCrumbs}
                                        onUpdateApplyButtonLoadingIndication={this.props.onUpdateApplyButtonLoadingIndication}
                                        onPageLoadSelectFilterIndicator={this.props.onPageLoadSelectFilterIndicator}
+
+                                       onSaveEditForecastApiOnReset={this.props.onSaveEditForecastApiOnReset}
 
 
                                        onSaveAspFilterData={this.props.onSaveAspFilterData}
@@ -864,6 +866,7 @@ export class RangingNpdImpactPage extends React.PureComponent { // eslint-disabl
                                                       <TableHeaderColumn dataField="long_description" dataSort={true} dataAlign="center">Products Description</TableHeaderColumn>
                                                       <TableHeaderColumn dataField="predicted_volume" dataFormat={formatVolume} dataSort={true} dataAlign="center">Volume</TableHeaderColumn>
                                                       <TableHeaderColumn dataField="predicted_sales" dataFormat={formatSales} dataSort={true} dataAlign="center">Sales Value</TableHeaderColumn>
+                                                      <TableHeaderColumn dataField="similarity_score" dataSort={true} dataAlign="center">Similarity Score</TableHeaderColumn>
                                                     </BootstrapTable>
 
                                                   </div>
@@ -1599,6 +1602,7 @@ function mapDispatchToProps(dispatch) {
     // Edit forecast.
     onSaveModifiedVolumeForecast: (e) => dispatch(saveModifiedVolumeForecast(e.target.value)),
     onSaveEditForecastApi: (e) => dispatch(saveEditForecastApi(e)),
+    onSaveEditForecastApiOnReset: (e) => dispatch(saveEditForecastApiOnReset(e)),
     onSaveModifiedFlag: (e) => dispatch(saveModifiedFlag(e)),
   };
 }

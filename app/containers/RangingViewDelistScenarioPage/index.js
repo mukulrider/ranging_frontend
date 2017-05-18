@@ -118,23 +118,35 @@ export class RangingViewDelistScenarioPage extends React.PureComponent { // esli
       }
     };
 
-
+    let addingPercentage = (cell) => {
+      return (cell + '%');
+    }
     console.log('this.props', this.props);
     let week_13_chart, week_13_chart_cgm_chart, week_13_chart_cgm_tot_transfer, week_13_chart_cts_chart,
       week_13_chart_cts_tot_transfer, week_13_chart_sales_chart, week_13_chart_sales_tot_transfer,
-      week_13_chart_vols_chart, week_13_chart_vol_tot_transfer, week_13_supplier_table, week_13_delist_table;
+      week_13_chart_vols_chart, week_13_chart_vol_tot_transfer, week_13_supplier_table, week_13_delist_table,
+      week_13_chart_cgm_tot_transfer_impact, week_13_chart_vol_tot_transfer_impact, week_13_chart_cts_tot_transfer_impact,
+      week_13_chart_sales_tot_transfer_impact;
 
     let week_26_chart, week_26_chart_cgm_chart, week_26_chart_cgm_tot_transfer, week_26_chart_cts_chart,
       week_26_chart_cts_tot_transfer, week_26_chart_sales_chart, week_26_chart_sales_tot_transfer,
-      week_26_chart_vols_chart, week_26_chart_vol_tot_transfer, week_26_supplier_table, week_26_delist_table;
+      week_26_chart_vols_chart, week_26_chart_vol_tot_transfer, week_26_supplier_table, week_26_delist_table,
+      week_26_chart_cgm_tot_transfer_impact, week_26_chart_vol_tot_transfer_impact, week_26_chart_cts_tot_transfer_impact,
+      week_26_chart_sales_tot_transfer_impact;
+
 
     let week_52_chart, week_52_chart_cgm_chart, week_52_chart_cgm_tot_transfer, week_52_chart_cts_chart,
       week_52_chart_cts_tot_transfer, week_52_chart_sales_chart, week_52_chart_sales_tot_transfer,
-      week_52_chart_vols_chart, week_52_chart_vol_tot_transfer, week_52_supplier_table, week_52_delist_table;
+      week_52_chart_vols_chart, week_52_chart_vol_tot_transfer, week_52_supplier_table, week_52_delist_table,
+      week_52_chart_cgm_tot_transfer_impact, week_52_chart_vol_tot_transfer_impact, week_52_chart_cts_tot_transfer_impact,
+      week_52_chart_sales_tot_transfer_impact;
+
 
     let week_chart, week_chart_cgm_chart, week_chart_cgm_tot_transfer, week_chart_cts_chart,
       week_chart_cts_tot_transfer, week_chart_sales_chart, week_chart_sales_tot_transfer,
-      week_chart_vols_chart, week_chart_vol_tot_transfer, week_supplier_table, week_delist_table;
+      week_chart_vols_chart, week_chart_vol_tot_transfer, week_supplier_table, week_delist_table,
+      week_chart_cgm_tot_transfer_impact, week_chart_vol_tot_transfer_impact, week_chart_cts_tot_transfer_impact,
+      week_chart_sales_tot_transfer_impact;
 
     let scenario_name;
 
@@ -164,41 +176,53 @@ export class RangingViewDelistScenarioPage extends React.PureComponent { // esli
       //13 WEEKS
       week_13_chart_cgm_chart = week_13_chart.cgm_chart;
       week_13_chart_cgm_tot_transfer = week_13_chart.cgm_tot_transfer;
+      week_13_chart_cgm_tot_transfer_impact = week_13_chart.bc_cgm_contri;
 
       week_13_chart_cts_chart = week_13_chart.cts_chart;
       week_13_chart_cts_tot_transfer = week_13_chart.cts_tot_transfer;
+      week_13_chart_cts_tot_transfer_impact = week_13_chart.bc_cts_contri;
 
       week_13_chart_sales_chart = week_13_chart.sales_chart;
       week_13_chart_sales_tot_transfer = week_13_chart.sales_tot_transfer;
+      week_13_chart_sales_tot_transfer_impact = week_13_chart.bc_sales_contri;
 
       week_13_chart_vols_chart = week_13_chart.vols_chart;
       week_13_chart_vol_tot_transfer = week_13_chart.vol_tot_transfer;
+      week_13_chart_vol_tot_transfer_impact = week_13_chart.bc_vols_contri;
 
       //26 WEEKS
       week_26_chart_cgm_chart = week_26_chart.cgm_chart;
       week_26_chart_cgm_tot_transfer = week_26_chart.cgm_tot_transfer;
+      week_26_chart_cgm_tot_transfer_impact = week_13_chart.bc_cgm_contri;
 
       week_26_chart_cts_chart = week_26_chart.cts_chart;
       week_26_chart_cts_tot_transfer = week_26_chart.cts_tot_transfer;
+      week_26_chart_cts_tot_transfer_impact = week_26_chart.bc_cts_contri;
 
       week_26_chart_sales_chart = week_26_chart.sales_chart;
       week_26_chart_sales_tot_transfer = week_26_chart.sales_tot_transfer;
+      week_26_chart_sales_tot_transfer_impact = week_26_chart.bc_sales_contri;
 
       week_26_chart_vols_chart = week_26_chart.vols_chart;
       week_26_chart_vol_tot_transfer = week_26_chart.vol_tot_transfer;
+      week_26_chart_vol_tot_transfer_impact = week_26_chart.bc_vols_contri;
 
       //52 WEEKS
       week_52_chart_cgm_chart = week_52_chart.cgm_chart;
       week_52_chart_cgm_tot_transfer = week_52_chart.cgm_tot_transfer;
+      week_52_chart_cgm_tot_transfer_impact = week_52_chart.bc_cgm_contri;
 
       week_52_chart_cts_chart = week_52_chart.cts_chart;
       week_52_chart_cts_tot_transfer = week_52_chart.cts_tot_transfer;
+      week_52_chart_cts_tot_transfer_impact = week_52_chart.bc_cts_contri;
 
       week_52_chart_sales_chart = week_52_chart.sales_chart;
       week_52_chart_sales_tot_transfer = week_52_chart.sales_tot_transfer;
+      week_52_chart_sales_tot_transfer_impact = week_52_chart.bc_sales_contri;
 
       week_52_chart_vols_chart = week_52_chart.vols_chart;
       week_52_chart_vol_tot_transfer = week_52_chart.vol_tot_transfer;
+      week_52_chart_vol_tot_transfer_impact = week_52_chart.bc_vols_contri;
 
 
       //****************************************************************************************************
@@ -262,12 +286,16 @@ export class RangingViewDelistScenarioPage extends React.PureComponent { // esli
 
       week_chart_cgm_chart = week_13_chart_cgm_chart;
       week_chart_cgm_tot_transfer = week_13_chart_cgm_tot_transfer;
+      week_chart_cgm_tot_transfer_impact = week_13_chart_cgm_tot_transfer_impact;
       week_chart_cts_chart = week_13_chart_cts_chart;
       week_chart_cts_tot_transfer = week_13_chart_cts_tot_transfer;
+      week_chart_cts_tot_transfer_impact = week_13_chart_cts_tot_transfer_impact;
       week_chart_sales_chart = week_13_chart_sales_chart;
       week_chart_sales_tot_transfer = week_13_chart_sales_tot_transfer;
+      week_chart_sales_tot_transfer_impact = week_13_chart_sales_tot_transfer_impact;
       week_chart_vols_chart = week_13_chart_vols_chart;
       week_chart_vol_tot_transfer = week_13_chart_vol_tot_transfer;
+      week_chart_vol_tot_transfer_impact = week_13_chart_vol_tot_transfer_impact;
       week_supplier_table = week_13_supplier_table;
       week_delist_table = week_13_delist_table
 
@@ -500,34 +528,46 @@ export class RangingViewDelistScenarioPage extends React.PureComponent { // esli
 
                   week_chart_cgm_chart = week_13_chart_cgm_chart;
                   week_chart_cgm_tot_transfer = week_13_chart_cgm_tot_transfer;
+                  week_chart_cgm_tot_transfer_impact = week_13_chart_cgm_tot_transfer_impact;
                   week_chart_cts_chart = week_13_chart_cts_chart;
                   week_chart_cts_tot_transfer = week_13_chart_cts_tot_transfer;
+                  week_chart_cts_tot_transfer_impact = week_13_chart_cts_tot_transfer_impact;
                   week_chart_sales_chart = week_13_chart_sales_chart;
                   week_chart_sales_tot_transfer = week_13_chart_sales_tot_transfer;
+                  week_chart_sales_tot_transfer_impact = week_13_chart_sales_tot_transfer_impact;
                   week_chart_vols_chart = week_13_chart_vols_chart;
                   week_chart_vol_tot_transfer = week_13_chart_vol_tot_transfer;
+                  week_chart_vol_tot_transfer_impact = week_13_chart_vol_tot_transfer_impact;
                   week_supplier_table = week_13_supplier_table;
                   week_delist_table = week_13_delist_table
                 } else if (this.state.activeKey == '2') {
                   week_chart_cgm_chart = week_26_chart_cgm_chart;
                   week_chart_cgm_tot_transfer = week_26_chart_cgm_tot_transfer;
+                  week_chart_cgm_tot_transfer_impact = week_26_chart_cgm_tot_transfer_impact;
                   week_chart_cts_chart = week_26_chart_cts_chart;
                   week_chart_cts_tot_transfer = week_26_chart_cts_tot_transfer;
+                  week_chart_cts_tot_transfer_impact = week_26_chart_cts_tot_transfer_impact;
                   week_chart_sales_chart = week_26_chart_sales_chart;
                   week_chart_sales_tot_transfer = week_26_chart_sales_tot_transfer;
+                  week_chart_sales_tot_transfer_impact = week_26_chart_sales_tot_transfer_impact;
                   week_chart_vols_chart = week_26_chart_vols_chart;
                   week_chart_vol_tot_transfer = week_26_chart_vol_tot_transfer;
+                  week_chart_vol_tot_transfer_impact = week_26_chart_vol_tot_transfer_impact;
                   week_supplier_table = week_26_supplier_table;
                   week_delist_table = week_26_delist_table
                 } else {
                   week_chart_cgm_chart = week_52_chart_cgm_chart;
                   week_chart_cgm_tot_transfer = week_52_chart_cgm_tot_transfer;
+                  week_chart_cgm_tot_transfer_impact = week_52_chart_cgm_tot_transfer_impact;
                   week_chart_cts_chart = week_52_chart_cts_chart;
                   week_chart_cts_tot_transfer = week_52_chart_cts_tot_transfer;
+                  week_chart_cts_tot_transfer_impact = week_52_chart_cts_tot_transfer_impact;
                   week_chart_sales_chart = week_52_chart_sales_chart;
                   week_chart_sales_tot_transfer = week_52_chart_sales_tot_transfer;
+                  week_chart_sales_tot_transfer_impact = week_52_chart_sales_tot_transfer_impact;
                   week_chart_vols_chart = week_52_chart_vols_chart;
                   week_chart_vol_tot_transfer = week_52_chart_vol_tot_transfer;
+                  week_chart_vol_tot_transfer_impact = week_52_chart_vol_tot_transfer_impact;
                   week_supplier_table = week_52_supplier_table;
                   week_delist_table = week_52_delist_table
                 }
@@ -574,16 +614,16 @@ export class RangingViewDelistScenarioPage extends React.PureComponent { // esli
 
                                   <span
                                     className={(() => {
-                                      if (week_chart_sales_tot_transfer > 0) {
+                                      if (week_chart_sales_tot_transfer_impact > 0) {
                                         return "glyphicon glyphicon-chevron-up waterfallCalloutsPositive"
                                       }
-                                      else if (week_chart_sales_tot_transfer < 0) {
+                                      else if (week_chart_sales_tot_transfer_impact < 0) {
                                         return "glyphicon glyphicon-chevron-down waterfallCalloutsNegative"
                                       } else {
                                         return "glyphicon glyphicon-minus-sign waterfallCalloutsNeutral"
                                       }
                                     })()}>&nbsp;
-                                    {week_chart_sales_tot_transfer}%
+                                    {week_chart_sales_tot_transfer_impact}%
                                 </span>
 
                                 </div>
@@ -688,16 +728,16 @@ export class RangingViewDelistScenarioPage extends React.PureComponent { // esli
 
                                   <span
                                     className={(() => {
-                                      if (week_chart_vol_tot_transfer > 0) {
+                                      if (week_chart_vol_tot_transfer_impact > 0) {
                                         return "glyphicon glyphicon-chevron-up waterfallCalloutsPositive"
                                       }
-                                      else if (week_chart_vol_tot_transfer < 0) {
+                                      else if (week_chart_vol_tot_transfer_impact < 0) {
                                         return "glyphicon glyphicon-chevron-down waterfallCalloutsNegative"
                                       } else {
                                         return "glyphicon glyphicon-minus-sign waterfallCalloutsNeutral"
                                       }
                                     })()}>&nbsp;
-                                    {week_chart_vol_tot_transfer} %
+                                    {week_chart_vol_tot_transfer_impact} %
                               </span>
                                 </div>
                               </Panel>
@@ -870,16 +910,16 @@ export class RangingViewDelistScenarioPage extends React.PureComponent { // esli
                                 </div>
                                 <span
                                   className={(() => {
-                                    if (week_chart_cgm_tot_transfer > 0) {
+                                    if (week_chart_cgm_tot_transfer_impact > 0) {
                                       return "glyphicon glyphicon-chevron-up waterfallCalloutsPositive"
                                     }
-                                    else if (week_chart_cgm_tot_transfer < 0) {
+                                    else if (week_chart_cgm_tot_transfer_impact < 0) {
                                       return "glyphicon glyphicon-chevron-down waterfallCalloutsNegative"
                                     } else {
                                       return "glyphicon glyphicon-minus-sign waterfallCalloutsNeutral"
                                     }
                                   })()}>&nbsp;
-                                  {week_chart_cgm_tot_transfer}%
+                                  {week_chart_cgm_tot_transfer_impact}%
                             </span>
                               </Panel>
                             </div>
@@ -973,16 +1013,16 @@ export class RangingViewDelistScenarioPage extends React.PureComponent { // esli
                                 </div>
                                 <span
                                   className={(() => {
-                                    if (week_chart_cts_tot_transfer > 0) {
+                                    if (week_chart_cts_tot_transfer_impact > 0) {
                                       return "glyphicon glyphicon-chevron-up waterfallCalloutsPositive"
                                     }
-                                    else if (week_chart_cts_tot_transfer < 0) {
+                                    else if (week_chart_cts_tot_transfer_impact < 0) {
                                       return "glyphicon glyphicon-chevron-down waterfallCalloutsNegative"
                                     } else {
                                       return "glyphicon glyphicon-minus-sign waterfallCalloutsNeutral"
                                     }
                                   })()}>&nbsp;
-                                  {week_chart_cts_tot_transfer}%
+                                  {week_chart_cts_tot_transfer_impact}%
                               </span>
 
                               </Panel>
@@ -1278,6 +1318,9 @@ export class RangingViewDelistScenarioPage extends React.PureComponent { // esli
                               <TableHeaderColumn dataField="predicted_cgm" dataFormat={formatSales}
                                                  dataSort={true} dataAlign="center">Predicted
                                 Cgm</TableHeaderColumn>
+                              <TableHeaderColumn dataField="per_value_transfer" dataFormat={addingPercentage} dataSort={true} dataAlign="center">Value Transfer</TableHeaderColumn>
+                              <TableHeaderColumn dataField="per_vol_transfer" dataFormat={addingPercentage} dataSort={true} dataAlign="center">Volume Transfer</TableHeaderColumn>
+                              <TableHeaderColumn dataField="psg_value_impact" dataSort={true} dataAlign="center">Product Sub Group Value Impact(%)</TableHeaderColumn>
                             </BootstrapTable>
 
                           </div>

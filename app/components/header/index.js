@@ -6,8 +6,7 @@ import RoundedIconButton from '../rounded_icon_button';
 import Grid from '../grid';
 import tesco from './../../assets/images/tesco.svg';
 import Button from 'components/button';
-import { Nav } from 'react-bootstrap';
-import { NavItem } from 'react-bootstrap';
+import { Nav, NavItem, DropdownButton, MenuItem } from 'react-bootstrap';
 
 function renderBackLink(backLink) {
   return backLink ?
@@ -50,9 +49,10 @@ class Header extends Component {
   static defaultProps = {
     links: [
       { text: 'Login', icon: 'login', href: 'http://dvcmpweb00001uk.dev.global.tesco.org/login/' },
-      { text: 'Reporting', icon: 'reporting', href: 'http://dvcmpweb00001uk.dev.global.tesco.org:81/sales/competitor' },
-      { text: 'Pricing', icon: 'pricing', href: 'http://dvcmpweb00001uk.dev.global.tesco.org:83/pricing/' },
+      { text: 'Reporting', icon: 'reporting', href: 'http://dvcmpweb00001uk.dev.global.tesco.org:81/sales/executive/' },
+      { text: 'Pricing', icon: 'pricing', href: 'http://dvcmpweb00001uk.dev.global.tesco.org:83/pricing/home' },
       { text: 'Ranging', icon: 'ranging', href: 'http://dvcmpweb00001uk.dev.global.tesco.org:82/ranging' },
+      { text: 'Scenario Comparison', icon: 'scenario_compare', href: 'http://dvcmpweb00001uk.dev.global.tesco.org:86/scenario/compare' },
       { text: 'Tesco.com', icon: 'home', href: 'http://www.tesco.com/' },
       { text: 'Contact us', icon: 'telephone', href: 'http://www.tesco.com/help/contact/' },
       { text: 'Help', icon: 'help', href: 'http://www.tesco.com/help/' }
@@ -182,50 +182,50 @@ class Header extends Component {
               {/*</div>*/}
               <div className="col-md-8">
                 <Nav bsStyle="tabs" className="tabsCustom" style={{marginWidth:"5%"}}>
-                  <NavItem
-                    className="tabsCustomList" style={{marginTop:"3px"}} onClick={() => {
-                    window.location = 'http://dvcmpweb00001uk.dev.global.tesco.org:82/ranging/negotiation';
-                  }}
-                  >Negotiation</NavItem>
-                  <NavItem
-                    className="tabsCustomList" style={{marginTop:"3px",marginLeft:"2px",fontSize: "12px"}} onClick={() => {
-                    window.location = 'http://dvcmpweb00001uk.dev.global.tesco.org:82/ranging/delist/';
-                  }}
-                  >Product Impact</NavItem>
-                  <NavItem
-                    className="tabsCustomList" style={{marginTop:"3px",marginLeft:"2px",fontSize: "12px"}} onClick={() => {
-                    window.location = 'http://dvcmpweb00001uk.dev.global.tesco.org:82/ranging/npd/';
-                  }}
-                  >NPD</NavItem>
+                  <NavItem className="tabsNavPanelList" href="http://dvcmpweb00001uk.dev.global.tesco.org:82/ranging/negotiation">Negotiation</NavItem>
+                  <NavItem className="tabsNavPanelList" href="http://dvcmpweb00001uk.dev.global.tesco.org:82/ranging/delist/">Product Impact</NavItem>
+                  <NavItem className="tabsNavPanelList" href="http://dvcmpweb00001uk.dev.global.tesco.org:82/ranging/npd/">NPD</NavItem>
+                  <NavItem className="tabsNavPanelLogoutList" style={{ float: 'right', marginTop: '-8px' }}>
+                    <span>
+                      <span>
+                      <DropdownButton className="	glyphicon glyphicon-user"
+                                      pullRight style={{ backgroundColor: 'transparent', borderColor: 'transparent', color: '#00539f', fontSize:"18px"}}>
+                        <MenuItem style={{textDecoration:"none"}}><span ><b>Hi,User</b></span></MenuItem>
+                        <MenuItem onClick={() => {
+                          const getCookie = (name) => {
+                            const value = `; ${document.cookie}`;
+                            const parts = value.split(`; ${name}=`);
+                            if (parts.length === 2) {
+                              return parts.pop().split(';').shift();
+                            }
+                          };
+                          const token = getCookie('token');
+                          const hostName = 'dvcmpweb00001uk.dev.global.tesco.org';
+                          const hostPort = '80';
+                          document.cookie = 'token'.concat(`=;expires=Thu, 01 Jan 1970 00:00:01 GMT;domain=${hostName};Path=/;`);
+                          document.cookie = 'buyer'.concat(`=;expires=Thu, 01 Jan 1970 00:00:01 GMT;domain=${hostName};Path=/;`);
+                          document.cookie = 'buying_controller'.concat(`=;expires=Thu, 01 Jan 1970 00:00:01 GMT;domain=${hostName};Path=/;`);
+                          document.cookie = 'category_director'.concat(`=;expires=Thu, 01 Jan 1970 00:00:01 GMT;domain=${hostName};Path=/;`);
+                          document.cookie = 'commercial_director'.concat(`=;expires=Thu, 01 Jan 1970 00:00:01 GMT;domain=${hostName};Path=/;`);
+                          document.cookie = 'designation'.concat(`=;expires=Thu, 01 Jan 1970 00:00:01 GMT;domain=${hostName};Path=/;`);
+                          document.cookie = 'email_id'.concat(`=;expires=Thu, 01 Jan 1970 00:00:01 GMT;domain=${hostName};Path=/;`);
+                          document.cookie = 'first_name'.concat(`=;expires=Thu, 01 Jan 1970 00:00:01 GMT;domain=${hostName};Path=/;`);
+                          document.cookie = 'junior_buyer'.concat(`=;expires=Thu, 01 Jan 1970 00:00:01 GMT;domain=${hostName};Path=/;`);
+                          document.cookie = 'key'.concat(`=;expires=Thu, 01 Jan 1970 00:00:01 GMT;domain=${hostName};Path=/;`);
+                          document.cookie = 'last_name'.concat(`=;expires=Thu, 01 Jan 1970 00:00:01 GMT;domain=${hostName};Path=/;`);
+                          document.cookie = 'login_timestamp'.concat(`=;expires=Thu, 01 Jan 1970 00:00:01 GMT;domain=${hostName};Path=/;`);
+                          document.cookie = 'middle_name'.concat(`=;expires=Thu, 01 Jan 1970 00:00:01 GMT;domain=${hostName};Path=/;`);
+                          document.cookie = 'product_sub_group_description'.concat(`=;expires=Thu, 01 Jan 1970 00:00:01 GMT;domain=${hostName};Path=/;`);
+                          document.cookie = 'token'.concat(`=;expires=Thu, 01 Jan 1970 00:00:01 GMT;domain=${hostName};Path=/;`);
+                          document.cookie = 'tpx_id'.concat(`=;expires=Thu, 01 Jan 1970 00:00:01 GMT;domain=${hostName};Path=/;`);
+                          document.cookie = 'user'.concat(`=;expires=Thu, 01 Jan 1970 00:00:01 GMT;domain=${hostName};Path=/;`);
+                          window.location = `http://${hostName}:${hostPort}/login/`;
+                        }}>Logout</MenuItem>
+                      </DropdownButton></span>
+                    </span></NavItem>
                 </Nav>
               </div>
-              <div className="col-md-2">
-                {(() => {
-                  const getCookie = (name) => {
-                    const value = `; ${document.cookie}`;
-                    const parts = value.split(`; ${name}=`);
-                    if (parts.length === 2) {
-                      return parts.pop().split(';').shift();
-                    }
-                  };
-                  const token = getCookie('token');
-
-                  return token ?
-                    <div >
-                      <br />
-                      <Button
-                        buttonType={'primary'}
-                        style={{ minWidth: '175px',marginTop: '6px'}}
-                        onClick={() => {
-                          console.log('loggingOut');
-                          document.cookie = 'token' + '=;expires=Thu, 01 Jan 1970 00:00:01 GMT;domain=dvcmpweb00001uk.dev.global.tesco.org;Path=/;';
-                          window.location = 'http://dvcmpweb00001uk.dev.global.tesco.org/login/';
-                        }}
-                      >Logout</Button></div> : '';
-                })()};
-              </div>
             </div>
-
           </Grid>
         </div>
         {this.renderMobileMenu()}

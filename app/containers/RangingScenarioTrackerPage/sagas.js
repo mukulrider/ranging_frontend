@@ -39,9 +39,12 @@ let gettingUserDetails = () =>{
   const designation = getCookie('designation');
   const sessionID = getCookie('login_timestamp')
   const buying_controller = getCookie('buying_controller');
-  const buyer = getCookie('buyer');
+  let cookie_params="user_id="+user_id+"&user_name="+user_name+"&designation="+designation+"&session_id="+sessionID+"&buying_controller_header="+buying_controller;
 
-  let cookie_params="user_id="+user_id+"&user_name="+user_name+"&designation="+designation+"&session_id="+sessionID+"&buying_controller_header="+buying_controller+"&buyer_header="+buyer;
+  if(designation==='Buyer' || designation==='buyer'){
+    const buyer = getCookie('buyer');
+    cookie_params=cookie_params+"&buyer_header="+buyer;
+  }
 
   return(cookie_params);
 
