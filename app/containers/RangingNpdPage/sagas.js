@@ -8,7 +8,7 @@ import {
 } from './constants';
 import {
   unmatchedProdTableSuccess, generateSideFilterSuccess, generateTableSuccess,skuChartSuccess,outPerformanceChartSuccess,
-  priceGravitySuccess
+  priceGravitySuccess,pageLoadSelectFilterIndicator
 } from 'containers/RangingNpdPage/actions';
 import {
   selectRangingNpdPageDomain, makeUrlParamsString
@@ -21,7 +21,7 @@ export function* defaultSaga() {
   // See example in containers/HomePage/sagas.js
 }
 
-const host_url="http://dvcmpapp00002uk.dev.global.tesco.org"
+const host_url="http://172.20.181.16:8000"
 
 //getting user details from cookies
 let gettingUserDetails = () =>{
@@ -182,6 +182,8 @@ export function* generateOutPerformanceChartFetch() {
       const out_performance= yield call(request,`${host_url}/api/npd/outperformance?`+AJAX_args);
 
       yield put(outPerformanceChartSuccess(out_performance));
+
+    yield put(pageLoadSelectFilterIndicator(false));
 
 } catch (err) {
         //console.log(err);

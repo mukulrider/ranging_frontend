@@ -73,7 +73,7 @@ class CascadedFilterNpd extends React.PureComponent { // eslint-disable-line rea
     //Validation for mandatory filters
     if (validFilters == 1) {
       this.props.onUpdateBreadCrumbs(breadcrumb)
-      this.props.onPageLoadSelectFilterIndicator(false);
+      // this.props.onPageLoadSelectFilterIndicator(false);
       this.props.onGenerateUrlParamsString(queryString);
 
 
@@ -259,6 +259,7 @@ class CascadedFilterNpd extends React.PureComponent { // eslint-disable-line rea
                 style={{marginTop:"5px"}}
                 onClick={() => {
                   //To un check all the buttons
+                  this.props.onPageLoadSelectFilterIndicator(true);
                   let selection='';
                   this.props.onCheckboxChange(selection);
                   this.props.onGenerateSideFilter();
