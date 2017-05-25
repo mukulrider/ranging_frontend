@@ -345,7 +345,8 @@ export class DelistContainer extends React.PureComponent { // eslint-disable-lin
             /* padding-right: 5px; */
             overflowX: 'hidden',
             overflowY: 'scroll',
-            borderTop: '1px solid #ccc'
+            borderTop: '1px solid #ccc',
+            marginTop: '-3.9%'
           }}>
 
             {/*<Panel>*/}
@@ -682,7 +683,7 @@ export class DelistContainer extends React.PureComponent { // eslint-disable-lin
                                       <Panel>
                                         {/*<div style={{textAlign: 'center', color: '#00539f', fontWeight: 'bold', fontSize: '16px'}}>*/}
                                         <div>
-                                          Total Demand Transfer:
+                                          Total Value Transfer:
 
                                           <span
                                             className={(() => {
@@ -794,7 +795,7 @@ export class DelistContainer extends React.PureComponent { // eslint-disable-lin
 
                                       <Panel>
                                         <div>
-                                          Total Demand Transfer:
+                                          Total Volume Transfer:
 
                                           <span
                                             className={(() => {
@@ -942,7 +943,7 @@ export class DelistContainer extends React.PureComponent { // eslint-disable-lin
                                     <div className="col-xs-5 impactNumbers" style={{float: 'right'}}>
                                       <Panel>
                                         <div>
-                                          Total Demand Transfer:
+                                          Total Profit Transfer:
                                         </div>
                                         <span
                                           className={(() => {
@@ -1014,7 +1015,7 @@ export class DelistContainer extends React.PureComponent { // eslint-disable-lin
                                       <div className="col-xs-12 chartwrap">
                                         <WaterFallChart2 id="waterfallChart_4" yAxisName="CTS" formatter="formatSales"
                                                          positive_text='negative' negative_text='positive'
-                                                         total_text='total1'
+                                                         total_text='total'
                                                          data={ this.props.DelistContainer.waterfallValue.cts_chart }/>
                                       </div>
                                     </div>
@@ -1046,7 +1047,7 @@ export class DelistContainer extends React.PureComponent { // eslint-disable-lin
                                     <div className="col-xs-5 impactNumbers" style={{float: 'right'}}>
                                       <Panel>
                                         <div>
-                                          Total Demand Transfer:
+                                          Total CTS Transfer:
                                         </div>
                                         <span
                                           className={(() => {
@@ -1347,7 +1348,7 @@ export class DelistContainer extends React.PureComponent { // eslint-disable-lin
                                         Cgm</TableHeaderColumn>
                                       <TableHeaderColumn dataField="per_value_transfer" dataFormat={addingPercentage} dataSort={true} dataAlign="center">Value Transfer</TableHeaderColumn>
                                       <TableHeaderColumn dataField="per_vol_transfer" dataFormat={addingPercentage} dataSort={true} dataAlign="center">Volume Transfer</TableHeaderColumn>
-                                      <TableHeaderColumn dataField="psg_value_impact" dataSort={true} dataAlign="center">Product Sub Group Value Impact(%)</TableHeaderColumn>
+                                      <TableHeaderColumn dataField="psg_value_impact" dataFormat={addingPercentage} dataSort={true} dataAlign="center">Product Sub Group Value Impact(%)</TableHeaderColumn>
                                       <TableHeaderColumn dataFormat={this.cellButton} dataAlign="center">View
                                         Substitutes</TableHeaderColumn>
                                     </BootstrapTable>
