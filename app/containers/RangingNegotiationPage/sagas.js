@@ -204,7 +204,8 @@ export function* generateSideFilter() {
 
   try {
 
-    let filterData = yield call(request, nego_host_url+`/api/nego/filter_data?` + AJAX_args);
+    let filterData = yield call(request, nego_host_url+`/api/nego/filter_new?` + AJAX_args);
+    // let filterData = yield call(request, nego_host_url+`/api/nego/filter_data?` + AJAX_args);
     yield put(generateSideFilterSuccess(filterData));
 
   } catch (err) {
