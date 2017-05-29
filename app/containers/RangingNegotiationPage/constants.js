@@ -46,3 +46,4 @@ export const GENERATE_CHECKED_LIST = 'app/RangingNegotiationPage/GENERATE_CHECKE
 
 export const LOADING_INDICATION= 'app/RangingNegotiationPage/LOADING_INDICATION';
 export const LOADING_INDICATION_TEXT= 'app/RangingNegotiationPage/LOADING_INDICATION_TEXT';
+export const OPEN_MODAL= 'app/RangingNegotiationPage/OPEN_MODAL';

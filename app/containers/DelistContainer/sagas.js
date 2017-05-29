@@ -76,7 +76,7 @@ let gettingUserDetails = () => {
   return (cookie_params);
 }
 
-let host_url = "http://172.20.181.16:8000"
+let host_url = "http://172.20.181.88:8000"
 
 // All sagas to be loaded
 export function* generateApiFetch() {
@@ -538,8 +538,8 @@ export function* generateSideFilter() {
     // const data = yield call(request, host_url + `/api/reporting/competitor_filter_data?${urlParamsString}`);
 
     //UNCOMMENT BELOW - USED FOR TESTING
-    const data = yield call(request, host_url + `/api/product_impact/filter_new/?${urlParamsString}`);
-    // const data = yield call(request, host_url + `/api/product_impact/filter_data/?${urlParamsString}`);
+    const data = yield call(request, host_url + `/api/product_impact/filter_new?${urlParamsString}`);
+    // const data = yield call(request, host_url + `/api/product_impact/filter_data?${urlParamsString}`);
 
 
     yield put(generateSideFilterSuccess(data));
