@@ -325,7 +325,7 @@ export class RangingViewDelistScenarioPage extends React.PureComponent { // esli
                   let page = '/ranging/scenario-tracker?';
                   let objString = page;
                   window.location = objString;
-                }}><span className="glyphicon glyphicon-arrow-left"/><span style={{fontSize: '11px'}}> Go back to Scenario tracker</span>
+                }}><span className="glyphicon glyphicon-arrow-left"/><span>Go back to Scenario tracker</span>
                 </button>
               </div>
               <div className="col-xs-8">
@@ -345,8 +345,8 @@ export class RangingViewDelistScenarioPage extends React.PureComponent { // esli
                 })()}
               </div>
 
-              <div className="col-xs-2" style={{float: 'right',marginBottom: '1%', marginTop: '-1%'}}>
-                <button type="button" style={{fontSize: '11px'}}
+              <div className="col-xs-2" style={{float: 'right',marginBottom: '1%', marginTop: '-1.2%'}}>
+                <button type="button"
                         className="btn btn-primary"
                         onClick={() => {
                           let page = '/ranging/delist?';
