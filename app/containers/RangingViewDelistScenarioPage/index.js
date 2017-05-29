@@ -125,20 +125,23 @@ export class RangingViewDelistScenarioPage extends React.PureComponent { // esli
     let week_13_chart, week_13_chart_cgm_chart, week_13_chart_cgm_tot_transfer, week_13_chart_cts_chart,
       week_13_chart_cts_tot_transfer, week_13_chart_sales_chart, week_13_chart_sales_tot_transfer,
       week_13_chart_vols_chart, week_13_chart_vol_tot_transfer, week_13_supplier_table, week_13_delist_table,
-      week_13_chart_cgm_tot_transfer_impact, week_13_chart_vol_tot_transfer_impact, week_13_chart_cts_tot_transfer_impact,
+      week_13_chart_cgm_tot_transfer_impact, week_13_chart_vol_tot_transfer_impact,
+      week_13_chart_cts_tot_transfer_impact,
       week_13_chart_sales_tot_transfer_impact;
 
     let week_26_chart, week_26_chart_cgm_chart, week_26_chart_cgm_tot_transfer, week_26_chart_cts_chart,
       week_26_chart_cts_tot_transfer, week_26_chart_sales_chart, week_26_chart_sales_tot_transfer,
       week_26_chart_vols_chart, week_26_chart_vol_tot_transfer, week_26_supplier_table, week_26_delist_table,
-      week_26_chart_cgm_tot_transfer_impact, week_26_chart_vol_tot_transfer_impact, week_26_chart_cts_tot_transfer_impact,
+      week_26_chart_cgm_tot_transfer_impact, week_26_chart_vol_tot_transfer_impact,
+      week_26_chart_cts_tot_transfer_impact,
       week_26_chart_sales_tot_transfer_impact;
 
 
     let week_52_chart, week_52_chart_cgm_chart, week_52_chart_cgm_tot_transfer, week_52_chart_cts_chart,
       week_52_chart_cts_tot_transfer, week_52_chart_sales_chart, week_52_chart_sales_tot_transfer,
       week_52_chart_vols_chart, week_52_chart_vol_tot_transfer, week_52_supplier_table, week_52_delist_table,
-      week_52_chart_cgm_tot_transfer_impact, week_52_chart_vol_tot_transfer_impact, week_52_chart_cts_tot_transfer_impact,
+      week_52_chart_cgm_tot_transfer_impact, week_52_chart_vol_tot_transfer_impact,
+      week_52_chart_cts_tot_transfer_impact,
       week_52_chart_sales_tot_transfer_impact;
 
 
@@ -309,7 +312,6 @@ export class RangingViewDelistScenarioPage extends React.PureComponent { // esli
             {name: 'description', content: 'Description of RangingViewDelistScenarioPage'},
           ]}
         />
-
         <div style={{
           width: '80%',
           marginLeft: '10%'
@@ -318,11 +320,14 @@ export class RangingViewDelistScenarioPage extends React.PureComponent { // esli
           {/*Page title*/}
           <div className="pageTitle">
             <div className="row">
-              <div className="col-xs-2" style={{marginLeft:'1.2%', top: '16px'}}><Button onClick={() => {
-                let page = '/ranging/scenario-tracker?';
-                let objString = page;
-                window.location = objString;
-              }}><span className="glyphicon glyphicon-arrow-left" /><span style={{fontSize: '11px'}}> Go back to Scenario tracker</span></Button></div>
+              <div className="col-xs-2" style={{marginLeft: '1.2%', marginBottom: '1%', marginTop: '1%'}}>
+                <button type="button" className="btn btn-primary" onClick={() => {
+                  let page = '/ranging/scenario-tracker?';
+                  let objString = page;
+                  window.location = objString;
+                }}><span className="glyphicon glyphicon-arrow-left"/><span style={{fontSize: '11px'}}> Go back to Scenario tracker</span>
+                </button>
+              </div>
               <div className="col-xs-8">
                 Scenario:
                 {(() => {
@@ -340,13 +345,17 @@ export class RangingViewDelistScenarioPage extends React.PureComponent { // esli
                 })()}
               </div>
 
-              <div className="col-xs-2" style={{float:'right',top: '-35px', marginRight: '4%'}}><Button onClick={() => {
-                let page = '/ranging/delist?';
+              <div className="col-xs-2" style={{float: 'right',marginBottom: '1%', marginTop: '-1%'}}>
+                <button type="button" style={{fontSize: '11px'}}
+                        className="btn btn-primary"
+                        onClick={() => {
+                          let page = '/ranging/delist?';
 
-                let objString = page;
-                window.location = objString;
+                          let objString = page;
+                          window.location = objString;
 
-              }}>DELIST<span className="glyphicon glyphicon-arrow-right"/></Button></div>
+                        }}>Delist<span className="glyphicon glyphicon-arrow-right"/></button>
+              </div>
             </div>
 
           </div>
@@ -1318,9 +1327,12 @@ export class RangingViewDelistScenarioPage extends React.PureComponent { // esli
                               <TableHeaderColumn dataField="predicted_cgm" dataFormat={formatSales}
                                                  dataSort={true} dataAlign="center">Predicted
                                 Cgm</TableHeaderColumn>
-                              <TableHeaderColumn dataField="per_value_transfer" dataFormat={addingPercentage} dataSort={true} dataAlign="center">Value Transfer</TableHeaderColumn>
-                              <TableHeaderColumn dataField="per_vol_transfer" dataFormat={addingPercentage} dataSort={true} dataAlign="center">Volume Transfer</TableHeaderColumn>
-                              <TableHeaderColumn dataField="psg_value_impact" dataSort={true} dataAlign="center">Product Sub Group Value Impact(%)</TableHeaderColumn>
+                              <TableHeaderColumn dataField="per_value_transfer" dataFormat={addingPercentage}
+                                                 dataSort={true} dataAlign="center">Value Transfer</TableHeaderColumn>
+                              <TableHeaderColumn dataField="per_vol_transfer" dataFormat={addingPercentage}
+                                                 dataSort={true} dataAlign="center">Volume Transfer</TableHeaderColumn>
+                              <TableHeaderColumn dataField="psg_value_impact" dataSort={true} dataAlign="center">Product
+                                Sub Group Value Impact(%)</TableHeaderColumn>
                             </BootstrapTable>
 
                           </div>
