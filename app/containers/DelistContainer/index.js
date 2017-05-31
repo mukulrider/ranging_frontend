@@ -228,7 +228,7 @@ export class DelistContainer extends React.PureComponent { // eslint-disable-lin
         />
 
         {/*Page title*/}
-        <div className="pageTitle">DELIST IMPACT</div>
+        <div className="pageTitle" style={{marginTop:'-1%'}}>DELIST IMPACT</div>
 
 
         {/*Save Scenario Modal*/}
@@ -335,7 +335,8 @@ export class DelistContainer extends React.PureComponent { // eslint-disable-lin
 
         <div className="row" style={{
           marginLeft: '0px',
-          marginRight: '0px'
+          marginRight: '0px',
+          marginTop: '-1%',
         }}>
 
           <div style={{
@@ -346,8 +347,9 @@ export class DelistContainer extends React.PureComponent { // eslint-disable-lin
             overflowX: 'hidden',
             overflowY: 'scroll',
             borderTop: '1px solid #ccc',
-            marginTop: '-3.9%'
+            marginTop: '1.5%'
           }}>
+
 
             {/*<Panel>*/}
             {/*<SelectorDelist sideFilter={this.props.DelistContainer.sideFilter}*/}
@@ -389,6 +391,7 @@ export class DelistContainer extends React.PureComponent { // eslint-disable-lin
             })()}
             {/*</Panel>*/}
           </div>
+
 
           {(() => {
             if ((!(this.props.location.search == "")) || (this.props.DelistContainer.delistDefaultView == 1)) {
@@ -581,6 +584,94 @@ export class DelistContainer extends React.PureComponent { // eslint-disable-lin
                       {/*<span className="label">&gt;&nbsp;&nbsp;&nbsp;&nbsp;{this.props.DelistContainer.storeBreadcrumb?this.props.DelistContainer.storeBreadcrumb:'Overview'}</span>*/}
 
                       {/*</div>*/}
+
+                      <h2 className="pageModuleMainTitle"><b
+                        style={{verticalAlign: 'middle'}}>DELIST PRODUCT TABLE</b> <span
+                        className="glyphicon glyphicon-info-sign pull-right"
+                        style={{right: '4px', fontSize: '17px', top: '4px'}}
+                        onClick={() => {
+                          this.setState({delistImpactTableInfo: true});
+                        }}></span></h2>
+
+                      {/*MODAL FOR DELIST PRODUCT TABLE INFO ICON */}
+
+
+                      <Modal show={this.state.delistImpactTableInfo} bsSize="lg"
+                             aria-labelledby="contained-modal-title-lg">
+                        <Modal.Header>
+                          <Modal.Title id="contained-modal-title-sm"
+                                       style={{textAlign: 'center', fontSize: '14px'}}><span
+                            style={{textAlign: 'center', fontSize: '14px'}}><b> Delisted Products</b><span
+                            style={{textAlign: 'right', float: 'right'}}
+                            onClick={() => this.setState({delistImpactTableInfo: false})}><b>X</b></span></span>
+                            <div style={{textAlign: 'center'}}>
+                              <div style={{textAlign: 'right'}}>
+                              </div>
+                            </div>
+                          </Modal.Title>
+                        </Modal.Header>
+                        <Modal.Body style={{fontSize: '14px'}}>
+                          This table provides more details about the delisted products.
+                        </Modal.Body>
+                      </Modal>
+
+                      <Panel>
+                        <div>
+                          {
+                            (() => {
+                              if (this.props.DelistContainer.delisttableData && this.props.DelistContainer.delisttableData.delist_prod_table && (this.props.DelistContainer.delistProductTableSpinner == 1)) {
+
+
+                                return (
+                                  <div>
+                                    <BootstrapTable
+                                      data={this.props.DelistContainer.delisttableData.delist_prod_table}
+                                      options={options}
+                                      striped={true}
+                                      hover
+                                      condensed
+                                      pagination={ true }
+                                      search={true}
+                                      exportCSV={true}
+                                    >
+                                      <TableHeaderColumn dataField="productcode" isKey={true} dataSort={true}
+                                                         dataAlign="center">Product Code</TableHeaderColumn>
+                                      <TableHeaderColumn dataField="long_description" dataSort={true}
+                                                         dataAlign="center">Product Description</TableHeaderColumn>
+                                      <TableHeaderColumn dataField="no_of_stores" dataSort={true} dataAlign="center"
+                                                         width="9%">No of Stores</TableHeaderColumn>
+                                      <TableHeaderColumn dataField="predicted_value" dataFormat={formatSales}
+                                                         dataSort={true} dataAlign="center" width="9%">Predicted
+                                        Value</TableHeaderColumn>
+                                      <TableHeaderColumn dataField="predicted_volume" dataFormat={formatVolume}
+                                                         dataSort={true} dataAlign="center" width="8%">Predicted
+                                        Volume</TableHeaderColumn>
+                                      <TableHeaderColumn dataField="predicted_cgm" dataFormat={formatSales}
+                                                         dataSort={true} dataAlign="center">Predicted
+                                        Cgm</TableHeaderColumn>
+                                      <TableHeaderColumn dataField="per_value_transfer" dataFormat={addingPercentage} dataSort={true} dataAlign="center">Value Transfer</TableHeaderColumn>
+                                      <TableHeaderColumn dataField="per_vol_transfer" dataFormat={addingPercentage} dataSort={true} dataAlign="center">Volume Transfer</TableHeaderColumn>
+                                      <TableHeaderColumn dataField="psg_value_impact" dataFormat={addingPercentage} dataSort={true} dataAlign="center">Product Sub Group Value Impact(%)</TableHeaderColumn>
+                                      <TableHeaderColumn dataFormat={this.cellButton} dataAlign="center">View
+                                        Substitutes</TableHeaderColumn>
+                                    </BootstrapTable>
+
+                                  </div>
+                                );
+
+                              }
+                              else {
+                                return (
+
+                                  <div className="text-center" colSpan="11"><Spinner />Please Wait a Moment....!</div>
+
+                                );
+                              }
+                            })()
+                          }
+
+                        </div>
+                      </Panel>
 
                       <h2 className="pageModuleMainTitle">SALES IMPACT</h2>
 
@@ -1282,94 +1373,8 @@ export class DelistContainer extends React.PureComponent { // eslint-disable-lin
                         </Modal.Body>
                       </Modal>
 
-                      <h2 className="pageModuleMainTitle"><b
-                        style={{verticalAlign: 'middle'}}>DELIST PRODUCT TABLE</b> <span
-                        className="glyphicon glyphicon-info-sign pull-right"
-                        style={{right: '4px', fontSize: '17px', top: '4px'}}
-                        onClick={() => {
-                          this.setState({delistImpactTableInfo: true});
-                        }}></span></h2>
 
-                      {/*MODAL FOR DELIST PRODUCT TABLE INFO ICON */}
-
-
-                      <Modal show={this.state.delistImpactTableInfo} bsSize="lg"
-                             aria-labelledby="contained-modal-title-lg">
-                        <Modal.Header>
-                          <Modal.Title id="contained-modal-title-sm"
-                                       style={{textAlign: 'center', fontSize: '14px'}}><span
-                            style={{textAlign: 'center', fontSize: '14px'}}><b> Delisted Products</b><span
-                            style={{textAlign: 'right', float: 'right'}}
-                            onClick={() => this.setState({delistImpactTableInfo: false})}><b>X</b></span></span>
-                            <div style={{textAlign: 'center'}}>
-                              <div style={{textAlign: 'right'}}>
-                              </div>
-                            </div>
-                          </Modal.Title>
-                        </Modal.Header>
-                        <Modal.Body style={{fontSize: '14px'}}>
-                          This table provides more details about the delisted products.
-                        </Modal.Body>
-                      </Modal>
-
-                      <Panel>
-                        <div>
-                          {
-                            (() => {
-                              if (this.props.DelistContainer.delisttableData && this.props.DelistContainer.delisttableData.delist_prod_table && (this.props.DelistContainer.delistProductTableSpinner == 1)) {
-
-
-                                return (
-                                  <div>
-                                    <BootstrapTable
-                                      data={this.props.DelistContainer.delisttableData.delist_prod_table}
-                                      options={options}
-                                      striped={true}
-                                      hover
-                                      condensed
-                                      pagination={ true }
-                                      search={true}
-                                      exportCSV={true}
-                                    >
-                                      <TableHeaderColumn dataField="productcode" isKey={true} dataSort={true}
-                                                         dataAlign="center">Product Code</TableHeaderColumn>
-                                      <TableHeaderColumn dataField="long_description" dataSort={true}
-                                                         dataAlign="center">Product Description</TableHeaderColumn>
-                                      <TableHeaderColumn dataField="no_of_stores" dataSort={true} dataAlign="center"
-                                                         width="9%">No of Stores</TableHeaderColumn>
-                                      <TableHeaderColumn dataField="predicted_value" dataFormat={formatSales}
-                                                         dataSort={true} dataAlign="center" width="9%">Predicted
-                                        Value</TableHeaderColumn>
-                                      <TableHeaderColumn dataField="predicted_volume" dataFormat={formatVolume}
-                                                         dataSort={true} dataAlign="center" width="8%">Predicted
-                                        Volume</TableHeaderColumn>
-                                      <TableHeaderColumn dataField="predicted_cgm" dataFormat={formatSales}
-                                                         dataSort={true} dataAlign="center">Predicted
-                                        Cgm</TableHeaderColumn>
-                                      <TableHeaderColumn dataField="per_value_transfer" dataFormat={addingPercentage} dataSort={true} dataAlign="center">Value Transfer</TableHeaderColumn>
-                                      <TableHeaderColumn dataField="per_vol_transfer" dataFormat={addingPercentage} dataSort={true} dataAlign="center">Volume Transfer</TableHeaderColumn>
-                                      <TableHeaderColumn dataField="psg_value_impact" dataFormat={addingPercentage} dataSort={true} dataAlign="center">Product Sub Group Value Impact(%)</TableHeaderColumn>
-                                      <TableHeaderColumn dataFormat={this.cellButton} dataAlign="center">View
-                                        Substitutes</TableHeaderColumn>
-                                    </BootstrapTable>
-
-                                  </div>
-                                );
-
-                              }
-                              else {
-                                return (
-
-                                  <div className="text-center" colSpan="11"><Spinner />Please Wait a Moment....!</div>
-
-                                );
-                              }
-                            })()
-                          }
-
-                        </div>
-                      </Panel>
-                      {/*MODAL FOR PRODUCT IMPACT TABLE*/
+                      {/*MODAL FOR PRODUCT IMPACT TABLE UP*/
                       }
 
 

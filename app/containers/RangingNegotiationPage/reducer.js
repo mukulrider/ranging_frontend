@@ -11,7 +11,7 @@ import {
   FETCH_DATA_SUCCESS,
   URL_PARAM,
   WEEK_FETCH,
-  GENERATE_SIDE_FILTER_SUCCESS,SAVE_BUBBLE_PARAM2,
+  GENERATE_SIDE_FILTER_SUCCESS, SAVE_BUBBLE_PARAM2,
   GENERATE_URL_PARAMS_STRING,
   GRAPH_FETCH_SUCCESS,
   FILTER_FETCH,
@@ -27,7 +27,8 @@ import {
   GENERATE_CHECKED_LIST,
   LOADING_INDICATION,
   RADIO_CHECK_PARAM,
-  LOADING_INDICATION_TEXT
+  LOADING_INDICATION_TEXT,
+  OPEN_MODAL,
 
 } from './constants';
 
@@ -71,17 +72,17 @@ const initialState = fromJS({
   dataStoreUrlParams: 'store_type=Main Estate',
   dataWeekUrlParams: '',
   dataBubbleUrlParams: '',
-  dataPageUrlParams:'page=1',
-  sideFilterParams:'',
-  textBoxQueryString:'',
-  resetUrlParams:'',
+  dataPageUrlParams: 'page=1',
+  sideFilterParams: '',
+  textBoxQueryString: '',
+  resetUrlParams: '',
   checkedList: [],
   radioChecked: '',
   prodArrayTable: '[]',
   prodArrayOpacity: '[]',
   tableDeselectBub: '[]',
-  showLoading:false,
-  loadingText:"Please wait while your product is being added to the list"
+  showLoading: false,
+  loadingText: "Please wait while your product is being added to the list"
 });
 
 function rangingNegotiationPageReducer(state = initialState, action) {
@@ -123,7 +124,7 @@ function rangingNegotiationPageReducer(state = initialState, action) {
     case GENERATE_TEXTBOX_QUERY_STRING:
       return state.set('textBoxQueryString', action.data);
 
-      case RESET_CLICKED:
+    case RESET_CLICKED:
       return state.set('resetUrlParams', action.data);
 
     case RADIO_CHECK_PARAM:
@@ -145,13 +146,16 @@ function rangingNegotiationPageReducer(state = initialState, action) {
       return state.set('urlParamsString', action.data);
 
     case LOADING_INDICATION:
-          return state.set('showLoading', action.flag);
-case LOADING_INDICATION_TEXT:
-          return state.set('loadingText', action.data);
+      return state.set('showLoading', action.flag);
+    case LOADING_INDICATION_TEXT:
+      return state.set('loadingText', action.data);
+
+    case OPEN_MODAL:
+      return state.set('openModal', action.data);
 
 
     case GENERATE_CHECKED_LIST:
-      return state.set('checkedList', (()=>{
+      return state.set('checkedList', (() => {
         // console.log(state.get('checkedList'));
         let entireChangedPrices = state.get('checkedList');
         const toDelete = new Set([action.base_product_number]);

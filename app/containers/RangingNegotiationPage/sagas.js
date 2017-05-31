@@ -7,7 +7,7 @@ import {
   ajaxRequest, ajaxRequestSuccess, ajaxRequestError,
   generateTableSuccess, generateSideFilterSuccess,
   fetchDataSuccess, fetchGraphSuccess, fetchPerformanceFilterSuccess,
-  updateLoadingIndicationStatus
+  updateLoadingIndicationStatus, openModal
 } from 'containers/RangingNegotiationPage/actions';
 import {
   makeUrlParams, makeUrlParamsString, makeTextBoxQueryString,selectRangingNegotiationPageDomain,
@@ -20,8 +20,8 @@ import {
 } from './constants';
 
 
-let nego_host_url="http://dvcmpapp00002uk.dev.global.tesco.org";
 // let nego_host_url="http://dvcmpapp00002uk.dev.global.tesco.org";
+let nego_host_url="http://172.20.181.88:8000";
 
 let gettingUserDetails = () =>{
   let getCookie = (name) => {
@@ -177,6 +177,12 @@ export function* generateGraph() {
   const data = yield call(request, nego_host_url+`/api/nego_chart?`+AJAX_args );
   yield put(fetchGraphSuccess(data));
 
+  if(JSON.stringify(data) === '[]'){
+    yield put(openModal(1));
+  } else {
+    yield put(openModal(0));
+  }
+
 
 }
 
@@ -212,6 +218,7 @@ export function* generateSideFilter() {
 
   }
 }
+
 
 export function* doGenerateSideFilter() {
   const watcher = yield takeLatest(GENERATE_SIDE_FILTER, generateSideFilter);

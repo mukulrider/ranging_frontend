@@ -20,7 +20,8 @@ import SelectorNegotiation2 from 'components/SelectorNegotiation2';
 import {browserHistory} from 'react-router';
 import InputField from 'components/input_field';
 import {Nav} from 'react-bootstrap';
-import {NavItem, Pagination} from 'react-bootstrap';
+import {Modal,NavItem, Pagination} from 'react-bootstrap';
+
 
 import {
   SaveBubbleParam2,
@@ -39,6 +40,7 @@ import {
   generateTable,
   generateCheckedList,
   RadioChecked,
+  openModal,
   updateLoadingIndicationStatus,updateLoadingIndicationText
 } from './actions';
 import {
@@ -75,8 +77,10 @@ export class RangingNegotiationPage extends React.PureComponent { // eslint-disa
       activeKey: "1",
       activeKey2: "4",
       activePage: 1,
+      noDataforChart: 0,
     };
   }
+
 
   componentDidUpdate = () => {
     //this.props.onURLRequest(this.props.location.query);
@@ -84,7 +88,7 @@ export class RangingNegotiationPage extends React.PureComponent { // eslint-disa
 
 
   inputUpdate = (checked, base_product_number) => {
-    console.log('inputupdate', base_product_number);
+    console.log('inputupdates', base_product_number);
     this.props.onGenerateCheckedList(checked, base_product_number)
   };
 
@@ -194,7 +198,6 @@ export class RangingNegotiationPage extends React.PureComponent { // eslint-disa
           <div  style={{width:'78%',
             marginLeft:'22%'}}>
 
-
             <div className="row">
               <div className="col-md-12 content-wrap">
 
@@ -202,7 +205,7 @@ export class RangingNegotiationPage extends React.PureComponent { // eslint-disa
                 <Nav bsStyle="tabs" activeKey={this.state.activeKey} onSelect={this.handleSelect} className="tabsCustom">
                   <NavItem className="tabsCustomList" eventKey="1" onClick={() => {
                     this.setState({activeKey: "1"});
-                    {/*let text = "WEEK : Last 13 weeks";*/
+                    {/*let text = "WEEK : Last 13 weeks";;*/
                     }
                     {/*this.updateText(text);*/
                     }
@@ -670,9 +673,44 @@ export class RangingNegotiationPage extends React.PureComponent { // eslint-disa
 
                     <i style={{fontSize: '12px'}}>*Size of the bubble corresponds to Rate of Sales</i><br/>
 
-
-
                   </div>
+
+                  {(() => {
+                    if(this.props.RangingNegotiationPage.openModal == 1){
+                      console.log("bubble data--",(JSON.stringify(this.props.RangingNegotiationPage.chartData) === '[]'));
+                      this.setState({noDataforChart: 1});
+                    } else {
+                      console.log("bubble2 data",(JSON.stringify(this.props.RangingNegotiationPage.chartData) === '[]'));
+                      this.setState({noDataforChart: 0});
+                    }
+
+                  })()}
+
+                  <Modal show={this.state.noDataforChart} bsSize="lg"
+                         aria-labelledby="contained-modal-title-lg"
+                  >
+                    <Modal.Header>
+
+                      <Modal.Title id="contained-modal-title-sm"
+                                   style={{textAlign: 'center', fontSize: '14px'}}><span
+                        style={{textAlign: 'center', fontSize: '14px'}}><b>Negotiation Chart and Table Data Info</b><span
+                        style={{textAlign: 'right', float: 'right'}}
+                        onClick={() =>{
+                          this.props.openModal(0);
+                          this.setState({noDataforChart: 0}); }
+                        }><b>X</b></span></span>
+                        <div style={{textAlign: 'center'}}>
+                          <div style={{textAlign: 'right'}}>
+                          </div>
+                        </div>
+                      </Modal.Title>
+
+                    </Modal.Header>
+                    <Modal.Body style={{fontSize: '14px'}}>
+                      There is no data for "Negotiation Chart and Table" to displayed
+                    </Modal.Body>
+                  </Modal>
+
 
                   {/*Performance quartile*/}
                   {/*<div className="col-xs-2 col-md-2 col-lg-3" style={{marginTop: '2%', fontSize: '14px'}}>*/}
@@ -1253,6 +1291,7 @@ function mapDispatchToProps(dispatch) {
     onSaveBubbleParam2: (e) => dispatch(SaveBubbleParam2(e)),
     onSavePageParam: (e) => dispatch(SavePageParam(e)),
     onRadioChecked: (e) => dispatch(RadioChecked(e)),
+    openModal: (e) => dispatch(openModal(e)),
     onSaveSideFilterParam: (e) => dispatch(SaveSideFilterParam(e)),
     onGenerateTextBoxQueryString: (e) => dispatch(generateTextBoxQueryString(e.target.value)),
     onResetClickParam: (e) => dispatch(ResetClickParam(e)),

@@ -238,9 +238,13 @@ class NewSelector2 extends React.PureComponent { // eslint-disable-line react/pr
                     this.setState({alertShow: true});
                   }
                 }}>Apply</Button></div>
-              {/*<Button onClick={() => {*/}
-              {/*/!*this.props.onFilterReset();*!/*/}
-              {/*}}>Reset Filters</Button>&nbsp;&nbsp;*/}
+              <div style={{height:'15px'}}></div>
+
+              <div className="text-center">
+              <Button onClick={() => {
+              this.clearFilter();
+              }}>Reset Filters</Button>&nbsp;&nbsp;
+              </div>
             </div>
           )
         })()}
