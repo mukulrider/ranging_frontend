@@ -69,6 +69,7 @@ export const SAVE_EDIT_FORECAST_API  = 'app/RangingNpdImpactPage/SAVE_EDIT_FOREC
 export const MODIFIED_FLAG  = 'app/RangingNpdImpactPage/MODIFIED_FLAG';
 
 
+//For edit scenario
 
-
+export const EDIT_SCENARIO_OVER_WRITE= 'app/RangingNpdImpactPage/EDIT_SCENARIO_OVER_WRITE';
 

@@ -69,13 +69,14 @@ export class RangingScenarioTrackerPage extends React.PureComponent { // eslint-
     return (
       <button
         type="button"
-        className="btn btn-primary"
+        className="btn btn-danger"
         onClick={() =>{
           if (this.props.RangingScenarioTrackerPage.selectedTab === "npd") {
             let scenario_details = "&scenario_name=" + row.scenario_name + "&scenario_tag=" + row.scenario_tag+"&delete=1";
             this.props.onDeleteScenario(scenario_details);
             this.props.onFetchRangingAllScenarioData();
           }else{
+
             let scenario_details = "&scenario_name=" + row.scenario_name+"&delete=1";
             this.props.onDeleteScenario(scenario_details);
             this.props.onFetchRangingAllScenarioData();
@@ -124,7 +125,10 @@ export class RangingScenarioTrackerPage extends React.PureComponent { // eslint-
     };
 
 
-
+        let formatName=(scenario_detail)=>{
+          scenario_detail = scenario_detail.replace("_*_", "'");
+        return scenario_detail;
+        }
     return (
       <div>
         <Helmet
@@ -199,9 +203,9 @@ export class RangingScenarioTrackerPage extends React.PureComponent { // eslint-
                                   >
                                     <TableHeaderColumn dataField="system_time" isKey={true} dataSort={true}
                                                        dataAlign="center" width="20%">Date</TableHeaderColumn>
-                                    <TableHeaderColumn dataField="scenario_name" dataSort={true} dataAlign="center"
+                                    <TableHeaderColumn dataField="scenario_name" dataSort={true} dataFormat={formatName} dataAlign="center"
                                                        width="40%">Scenario Name</TableHeaderColumn>
-                                    <TableHeaderColumn dataField="scenario_tag" dataSort={true} dataAlign="center"
+                                    <TableHeaderColumn dataField="scenario_tag" dataFormat={formatName}dataSort={true} dataAlign="center"
                                                        width="40%">Scenario Tag</TableHeaderColumn>
                                     <TableHeaderColumn dataFormat={this.cellButton} dataSort={true} dataAlign="center"
                                                        width="20%"></TableHeaderColumn>

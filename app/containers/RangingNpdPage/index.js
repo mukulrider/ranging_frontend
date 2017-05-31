@@ -121,10 +121,9 @@ export class RangingNpdPage extends React.PureComponent { // eslint-disable-line
 
           <div style={{height: '100%',
             position: 'fixed',
-            width:'20%',
-            /* padding-right: 5px; */
-            overflowX: 'hidden',
-            overflowY: 'scroll'}}>
+            width:'19%',
+            overflowX: 'hidden'
+            }}>
 
           {/*----------------Filters---------------------*/}
             <CascadedFilterNpd sideFilter={this.props.RangingNpdPage.sideFilter}
@@ -461,16 +460,16 @@ export class RangingNpdPage extends React.PureComponent { // eslint-disable-line
                     </div>
 
                     {/*NPD impact view navigation button*/}
-                    <div style={{textAlign:"right"}}>
-                      <Button buttonType={'primary'}
-                              style={{marginTop:"5px"}}
-                              onClick={() => {
+                    {/*<div style={{textAlign:"right"}}>*/}
+                      {/*<Button buttonType={'primary'}*/}
+                              {/*style={{marginTop:"5px"}}*/}
+                              {/*onClick={() => {*/}
 
-                                let objString = '/ranging/npd-impact';
-                                window.location = objString;
+                                {/*let objString = '/ranging/npd-impact';*/}
+                                {/*window.location = objString;*/}
 
-                              }}>Click to add new products</Button>
-                    </div>
+                              {/*}}>Click to add new products</Button>*/}
+                    {/*</div>*/}
 
                   </Panel>
 
@@ -481,7 +480,27 @@ export class RangingNpdPage extends React.PureComponent { // eslint-disable-line
 
           })()}
 
+          {/*Fixed footer*/}
+          <div style={{
+            width: '100%',
+            background: '#e5e5e5',
+            bottom: '0',
+            textAlign: 'center',
+            left: '0',
+            position: 'fixed',
+            zIndex: 100,
+            boxShadow: '0px -4px 8px 0 rgba(0, 0, 0, 0.3), 0 6px 20px 0 rgba(0, 0, 0, 0.19)',
+            height:'55px'
+          }}>
+            <Button buttonType={'primary'}
+                    style={{marginTop:"7px"}}
+                    onClick={() => {
 
+                      let objString = '/ranging/npd-impact';
+                      window.location = objString;
+
+                    }}>Click to add new products</Button>
+          </div>
 
 
         </div>

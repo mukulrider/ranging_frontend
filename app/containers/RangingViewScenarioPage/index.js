@@ -107,14 +107,45 @@ export class RangingViewScenarioPage extends React.PureComponent { // eslint-dis
       }
     };
 
+    let gettingUserDetails = () =>{
+      let getCookie = (name) => {
+        const value = `; ${document.cookie}`;
+        const parts = value.split(`; ${name}=`);
+        if (parts.length === 2) {
+          return parts.pop().split(';').shift();
+        }
+      };
+
+      const user_id = getCookie('token');
+      const user_name = getCookie('user');
+      const designation = getCookie('designation');
+      const sessionID = getCookie('login_timestamp')
+      const buying_controller = getCookie('buying_controller');
+      let cookie_params="user_id="+user_id+"&user_name="+user_name+"&designation="+designation+"&session_id="+sessionID+"&buying_controller_header="+buying_controller;
+
+      if(designation==='Buyer' || designation==='buyer'){
+        const buyer = getCookie('buyer');
+        cookie_params=cookie_params+"&buyer_header="+buyer;
+      }
+
+      return(cookie_params);
+
+    }
+
+
     let user_attributes, week_13_chart, week_26_chart, week_52_chart, week_13_table, week_26_table, week_52_table,
-      chart_data_to_be_used, table_data_to_be_used;
+      chart_data_to_be_used, table_data_to_be_used,scenario_name,scenario_tag;
 
     if (this.props.RangingViewScenarioPage.scenarioData) {
 
       user_attributes = this.props.RangingViewScenarioPage.scenarioData.user_attributes;
       user_attributes = user_attributes.replace(/'/g, '"');
       user_attributes = JSON.parse(user_attributes);
+
+      scenario_name = this.props.RangingViewScenarioPage.scenarioData.scenario_name;
+      scenario_name = scenario_name.replace("_*_", "'");
+      scenario_tag = this.props.RangingViewScenarioPage.scenarioData.scenario_tag;
+      scenario_tag = scenario_tag.replace("_*_", "'");
 
       week_13_chart = this.props.RangingViewScenarioPage.scenarioData.week_13.forecast_data;
       week_13_chart = week_13_chart.replace(/'/g, '"');
@@ -170,8 +201,8 @@ export class RangingViewScenarioPage extends React.PureComponent { // eslint-dis
                 {/*Page title*/}
                 <div className="pageTitle">
                    Scenario
-                  : {this.props.RangingViewScenarioPage.scenarioData.scenario_name} | Tag
-                  : {this.props.RangingViewScenarioPage.scenarioData.scenario_tag} </div>
+                  : {scenario_name} | Tag
+                  : {scenario_tag} </div>
 
                 {/*Breadcrumbs*/}
                 <div className="row">
@@ -202,10 +233,10 @@ export class RangingViewScenarioPage extends React.PureComponent { // eslint-dis
 
                 {/*ASP,ACP & Size*/}
 
-                <div className="row">
+                <div className="row" style={{marginLeft:'15%'}}>
 
 
-                  <div className="col-xs-3"></div>
+                  <div className="col-xs-1"></div>
 
                   {/*ASP*/}
                   <div className="col-xs-2 overview-blk">
@@ -236,20 +267,49 @@ export class RangingViewScenarioPage extends React.PureComponent { // eslint-dis
                   </div>
 
 
-                  {/*<div className="col-xs-2 overview-blk ">*/}
-                  {/*<div style={{marginTop:'15%'}}>*/}
+                  <div className="col-xs-2 overview-blk ">
+                  <div style={{marginTop:'15%'}}>
+                  <Button style={{marginTop: "5px"}}
+                  onClick={() => {
+                    let bc_cookie="buying_controller="+user_attributes.buying_controller;
+                    let buyer_cookie="&buyer="+user_attributes.buyer;
+                    let jb_cookie="&junior_buyer="+user_attributes.junior_buyer;
+                    let psg_cookie="&product_sub_group_description="+user_attributes.product_sub_group_description;
+                    let par_sup_cookie="&parent_supplier="+user_attributes.parent_supplier;
+                    let bn_cookie="&brand_name="+user_attributes.brand_name;
+                    let packageType_cookie="&package_type="+user_attributes.package_type;
+                    let tillRoll_cookie="&till_roll_description="+user_attributes.till_roll_description;
+                    let measureType_cookie="&measure_type="+user_attributes.measure_type;
+                    let merchendise_cookie="&merchandise_group_description="+user_attributes.merchandise_group_description;
+                    let range_class_cookie="&range_class="+user_attributes.range_class;
+                    let acp_cookie=user_attributes.acp;
+                    let asp_cookie=user_attributes.asp;
+                    let size_cookie=user_attributes.size;
+                    let scenario_name=this.props.RangingViewScenarioPage.scenarioData.scenario_name
+                    let scenario_tag=this.props.RangingViewScenarioPage.scenarioData.scenario_tag
+
+
+                    {/*let user_details=gettingUserDetails();*/}
+
+                    let filterPreSelection=bc_cookie+buyer_cookie+jb_cookie+psg_cookie+par_sup_cookie+bn_cookie+packageType_cookie+tillRoll_cookie+measureType_cookie+merchendise_cookie+range_class_cookie;
+                    document.cookie = `Preselection=1;domain=localhost;path=/;`;
+                    document.cookie = `filterPreSelection=${filterPreSelection};domain=localhost;path=/;`;
+                    document.cookie = `ASP_PreSelection=${asp_cookie};domain=localhost;path=/;`;
+                    document.cookie = `ACP_PreSelection=${acp_cookie};domain=localhost;path=/;`;
+                    document.cookie = `Size_PreSelection=${size_cookie};domain=localhost;path=/;`;
+                    document.cookie = `scenario_name_PreSelection=${scenario_name};domain=localhost;path=/;`;
+                    document.cookie = `scenario_tag_PreSelection=${scenario_tag};domain=localhost;path=/;`;
+
+                    window.location = '/ranging/npd-impact/';
+                  }}>Edit    <span className="glyphicon glyphicon-edit"/></Button>
                   {/*<Button style={{marginTop: "5px"}}*/}
                   {/*onClick={() => {*/}
 
-                  {/*}}>Edit    <span className="glyphicon glyphicon-edit"/></Button>*/}
-                  {/*/!*<Button style={{marginTop: "5px"}}*!/*/}
-                  {/*/!*onClick={() => {*!/*/}
-
-                  {/*/!*}}>Refresh    <span className="glyphicon glyphicon-refresh"/></Button>*!/*/}
-                  {/*</div>*/}
+                  {/*}}>Delete <span className="glyphicon glyphicon-refresh"/></Button>*/}
+                  </div>
 
 
-                  {/*</div>*/}
+                  </div>
 
 
                 </div>

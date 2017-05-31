@@ -145,7 +145,7 @@ class CascadedFilterNpdImpact extends React.PureComponent { // eslint-disable-li
 
       console.log("just_before_ajax");
 
-      this.props.onSaveEditForecastApiOnReset("modified_flag=0&modified_forecast=0&Cannibalization_perc=0");
+      this.props.onSaveEditForecastApiOnReset("modified_flag=0&modified_forecast=0&Cannibalization_perc=0&modified_week=0");
       this.props.onUpdateBreadCrumbs(completeBreadcrumb);
       this.props.onPageLoadSelectFilterIndicator(false);
 

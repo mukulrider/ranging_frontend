@@ -11,7 +11,7 @@ import {
   SEND_URL_PARAMS, SAVE_WEEK_PARAM, SAVE_T1_PAGE_PARAM,SAVE_T2_PAGE_PARAM,SAVE_SEARCH_TABLE2,SAVE_SEARCH_TABLE1,
   SAVE_ASP,SAVE_ACP,SAVE_SIZE,SAVE_FILTER_SELECTIONS_TILL_NOW,UPDATE_BREADCRUMBS,
   SELECT_FILTER_INDICATOR,SHOW_APPLY_LOADING,SHOW_TAB_CHANGE_LOADING,SHOW_PAGE_AFTER_LOADING,
-  SAVE_SCENARIO_NAME,SAVE_TAG_NAME,SAVE_SCENARIO_RESPONSE,
+  SAVE_SCENARIO_NAME,SAVE_TAG_NAME,SAVE_SCENARIO_RESPONSE,EDIT_SCENARIO_OVER_WRITE,
   SAVE_EDITED_FORECAST,SAVE_EDIT_FORECAST_API,MODIFIED_FLAG
 } from './constants';
 
@@ -42,7 +42,8 @@ const initialState = fromJS({
   saveScenarioResponse:'',
   modifiedVolumeForecast:'',
   modifiedFlag:0,
-  editForecastApi:"modified_flag=0&modified_forecast=0&Cannibalization_perc=0",
+  editForecastApi:"modified_flag=0&modified_forecast=0&Cannibalization_perc=0&modified_week=0",
+  editScenarioOverWrite:"overwrite=0"
 
 
   // waterFallChartData: {
@@ -190,6 +191,8 @@ function rangingNpdImpactPageReducer(state = initialState, action) {
       return state.set('editForecastApi', action.data);
     case MODIFIED_FLAG:
       return state.set('modifiedFlag', action.data);
+    case EDIT_SCENARIO_OVER_WRITE:
+      return state.set('editScenarioOverWrite', action.data);
 
 
     default:

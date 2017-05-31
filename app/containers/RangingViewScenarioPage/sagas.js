@@ -46,7 +46,7 @@ let gettingUserDetails = () =>{
 
 }
 
-
+const host_url="http://172.20.181.88:8000";
 //------------------------------- Scenario Data Fetch Page Load ------------------------------------------
 export function* generateDefaultScenarioData() {
   //console.log('generateUnmatchedTableFetch saga');
@@ -74,10 +74,8 @@ export function* generateDefaultScenarioData() {
   try {
 
 
-    // console.log('---------------------http://172.20.244.223:8000/api/npd/psgskudistribution?'+paramString);
-
     // Scenario data
-    const scenario_data = yield call(request,`http://dvcmpapp00002uk.dev.global.tesco.org/api/npd_impact_view_scenario?`+API_params);
+    const scenario_data = yield call(request,host_url+`/api/npd_impact_view_scenario?`+API_params);
     yield put(fetchRangingScenarioDataSuccess(scenario_data));
 
 

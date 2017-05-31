@@ -22,8 +22,8 @@ export function* defaultSaga() {
   // See example in containers/HomePage/sagas.js
 }
 
-let host_url_rangingScenario=`http://dvcmpapp00002uk.dev.global.tesco.org`
-
+// let host_url_rangingScenario=`http://dvcmpapp00002uk.dev.global.tesco.org`
+let host_url_rangingScenario="http://172.20.181.88:8000";
 
 let gettingUserDetails = () =>{
   let getCookie = (name) => {

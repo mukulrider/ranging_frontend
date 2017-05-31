@@ -33,10 +33,10 @@ export default class App extends React.PureComponent { // eslint-disable-line re
     };
     const token = getCookie('token');
     if (token && this.props.location.pathname.includes('login')) {
-      window.location = 'http://dvcmpweb00001uk.dev.global.tesco.org'
+      // window.location = 'http://localhost:3000'
     }
     if (!token && !this.props.location.pathname.includes('login')) {
-      window.location = 'http://dvcmpweb00001uk.dev.global.tesco.org/login/'
+      // window.location = 'http://localhost:3001/login/'
     }
   }
 

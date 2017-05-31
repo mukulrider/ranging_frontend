@@ -39,17 +39,15 @@ import {
   showApplyButtonLoadingIndication,
   showTabChangeLoadingIndication,
   showPageContentAfterLoading,
-  saveTable2SearchParam,
-  saveTable1SearchParam,
-  saveTable2PageParam,
-  saveTable1PageParam,
+  editScenarioOverWrite,
   saveAspFilterData,
   saveAcpFilterData,
   saveSizeFilterData,
   saveFilterSelectionsTillNow,
   updateBreadCrumbs,
   saveScenarioFlag,saveScenarioName,saveTagName,updateSaveScenarioResponse,
-  saveModifiedVolumeForecast,saveEditForecastApi,saveEditForecastApiOnReset,saveModifiedFlag
+  saveModifiedVolumeForecast,saveEditForecastApi,saveEditForecastApiOnReset,saveModifiedFlag,
+
 } from './actions';
 import CascadedFilterNpdImpact from 'components/CascadedFilterNpdImpact';
 
@@ -59,16 +57,51 @@ export class RangingNpdImpactPage extends React.PureComponent { // eslint-disabl
 
   componentDidMount = () => {
     console.log("Mounted");
-    // this.props.onSendUrlParams(this.props.location.query);
-    // this.props.onDataFetchOnBubbleData();
-    // this.props.onDataFetchCanniProdTable();
-    // this.props.onDataFetchOnPageLoad();
+
+    let  getCookie = (name) => {
+      const value = `; ${document.cookie}`;
+      const parts = value.split(`; ${name}=`);
+      if (parts.length === 2) {
+        return parts.pop().split(';').shift();
+      }
+    };
+
+    //for preselection of filters
+    let Preselection=getCookie('Preselection');
+
+    if(Preselection){
+      this.setState({edit_scenario: true});
+      let filterPreSelection=getCookie('filterPreSelection');
+      let scenario_name_PreSelection=getCookie('scenario_name_PreSelection');
+      let scenario_tag_PreSelection=getCookie('scenario_tag_PreSelection');
+      let ASP_PreSelection=getCookie('ASP_PreSelection');
+      let Size_PreSelection=getCookie('Size_PreSelection');
+      let ACP_PreSelection=getCookie('ACP_PreSelection');
+
+      this.props.onSaveFilterSelectionsTillNow(filterPreSelection);
+      this.props.onUpdateOrClearScenarioName(scenario_name_PreSelection);
+      this.props.onUpdateOrClearScenarioTag(scenario_tag_PreSelection);
+      this.props.onUpdateOrClearAcp(ACP_PreSelection);
+      this.props.onUpdateOrClearAsp(ASP_PreSelection);
+      this.props.onUpdateOrClearSize(Size_PreSelection);
+      this.props.onEditScenarioOverWrite("overwrite=1");
+
+      document.cookie = 'filterPreSelection'+'=;expires=Thu, 01 Jan 1970 00:00:01 GMT;domain=localhost;path=/;';
+      document.cookie = 'scenario_name_PreSelection'+'=;expires=Thu, 01 Jan 1970 00:00:01 GMT;domain=localhost;path=/;';
+      document.cookie = 'scenario_tag_PreSelection'+'=;expires=Thu, 01 Jan 1970 00:00:01 GMT;domain=localhost;path=/;';
+      document.cookie = 'ASP_PreSelection'+'=;expires=Thu, 01 Jan 1970 00:00:01 GMT;domain=localhost;path=/;';
+      document.cookie = 'ACP_PreSelection'+'=;expires=Thu, 01 Jan 1970 00:00:01 GMT;domain=localhost;path=/;';
+      document.cookie = 'Size_PreSelection'+'=;expires=Thu, 01 Jan 1970 00:00:01 GMT;domain=localhost;path=/;';
+
+      this.props.onGenerateSideFilter()
+    }
 
   };
 
   componentDidUpdate = () => {
 
   };
+
 
   constructor(props) {
     super(props);
@@ -93,10 +126,14 @@ export class RangingNpdImpactPage extends React.PureComponent { // eslint-disabl
       showEditForecastModal:false,
       showEditForecastSuccessModal:false,
 
+      edit_scenario:false,
+
+      edited_week:"Latest 13 weeks"
+
+
     };
 
   }
-
 
 
   render() {
@@ -128,12 +165,10 @@ export class RangingNpdImpactPage extends React.PureComponent { // eslint-disabl
 
     //For url parameters
     let dataWeekUrlParams = this.props.RangingNpdImpactPage.dataWeekUrlParams;
-    let dataPageUrlParams = this.props.RangingNpdImpactPage.dataPageUrlParams;
     let dataFilterUrlParams = this.props.RangingNpdImpactPage.urlParamsString;
-    let dataTable1PageUrlParams = this.props.RangingNpdImpactPage.dataTable1PageUrlParams;
-    let dataTable2PageUrlParams = this.props.RangingNpdImpactPage.dataTable2PageUrlParams;
 
     console.log("rendered");
+    console.log(this.state.edited_week);
     let formatSales = (i) => {
       if (i >= 1000 || i <= -1000) {
         let rounded = Math.round(i / 1000);
@@ -189,51 +224,105 @@ export class RangingNpdImpactPage extends React.PureComponent { // eslint-disabl
           </Modal.Header>
           <Modal.Body className="infoModalText">
 
-            <div className="row formattedText">
+            {/*Scenario name*/}
+            {(()=>{
+              if(this.state.edit_scenario){
+              return(
 
-              {/*<div className="col-xs-1"></div>*/}
-              <div className="col-xs-6">
+                  <div className="row center-this">
 
-                <div className="col-xs-6">
-                  Scenario Name:
-                </div>
-                <div className="col-xs-6">
-                  <InputField type="text"
-                              placeholder="Enter Scenario Name"
-                              value={this.props.RangingNpdImpactPage.scenarioName}
-                              onChange={(e) => {
-                                this.props.onSaveScenarioName(e);
-                              }}
+                    <div className="col-xs-6">
 
-                  />
-                </div>
-                {/*<div className="col-xs-2"></div>*/}
-              </div>
+                      <span style={{color:'#00539f',fontSize:'22px',fontWeight:'600'}}>Scenario Name : </span>
+                      <span style={{color:'#333333',fontSize:'20px'}}>{this.props.RangingNpdImpactPage.scenarioName}</span>
 
-              <div className="col-xs-6">
-                <div className="col-xs-6">
-                  Tag Name:
-                </div>
-                <div className="col-xs-6">
-                  <InputField type="text"
-                              placeholder="Enter tag"
-                              value={this.props.RangingNpdImpactPage.tagName}
-                              onChange={(e) => {
-                                this.props.onSaveTagName(e);
-                              }}
+                    </div>
 
-                  />
-                </div>
-              </div>
+                    <div className="col-xs-6">
 
-              {/*<div className="col-xs-1"></div>*/}
-            </div>
+                      <span style={{color:'#00539f',fontSize:'22px',fontWeight:'600'}}>Scenario Tag : </span>
+                      <span style={{color:'#333333',fontSize:'20px'}}>{this.props.RangingNpdImpactPage.tagName}</span>
 
+                    </div>
 
+                    {/*<div className="col-xs-6">*/}
+
+                      {/*<div className="col-xs-6">*/}
+                        {/*Scenario Name:*/}
+                      {/*</div>*/}
+                      {/*<div className="col-xs-6">*/}
+                        {/*/!*{this.props.RangingNpdImpactPage.scenarioName}*!/*/}
+                        {/*Sample Scenario Name*/}
+                      {/*</div>*/}
+
+                    {/*</div>*/}
+
+                    {/*<div className="col-xs-6">*/}
+                      {/*<div className="col-xs-6">*/}
+                        {/*Tag Name:*/}
+                      {/*</div>*/}
+                      {/*<div className="col-xs-6">*/}
+                      {/*/!*{this.props.RangingNpdImpactPage.tagName}*!/*/}
+                        {/*Sample Scenario Tag*/}
+                      {/*</div>*/}
+                    {/*</div>*/}
+
+                  </div>
+              )
+
+              }else{
+                return(
+
+                    <div className="row formattedText">
+
+                      {/*<div className="col-xs-1"></div>*/}
+                      <div className="col-xs-6">
+
+                        <div className="col-xs-6">
+                          Scenario Name:
+                        </div>
+                        <div className="col-xs-6">
+                          <InputField type="text"
+                                      placeholder="Enter Scenario Name"
+                                      value={this.props.RangingNpdImpactPage.scenarioName}
+                                      onChange={(e) => {
+                                        this.props.onSaveScenarioName(e);
+                                      }}
+
+                          />
+                        </div>
+                        {/*<div className="col-xs-2"></div>*/}
+                      </div>
+
+                      <div className="col-xs-6">
+                        <div className="col-xs-6">
+                          Tag Name:
+                        </div>
+                        <div className="col-xs-6">
+                          <InputField type="text"
+                                      placeholder="Enter tag"
+                                      value={this.props.RangingNpdImpactPage.tagName}
+                                      onChange={(e) => {
+                                        this.props.onSaveTagName(e);
+                                      }}
+
+                          />
+                        </div>
+                      </div>
+
+                      {/*<div className="col-xs-1"></div>*/}
+                    </div>
+
+                )
+              }
+
+            })()}
+
+            {/*Button*/}
             <div className="row" style={{marginTop:'10px'}}>
 
               <Button onClick={() => {
-             if(this.props.RangingNpdImpactPage.scenarioName===''){
+                if(this.props.RangingNpdImpactPage.scenarioName===''){
                   alert("Enter scenario name!");
                 }else{
                   document.body.style.cursor='wait';
@@ -254,71 +343,44 @@ export class RangingNpdImpactPage extends React.PureComponent { // eslint-disabl
 
           <Modal.Body className="infoModalText">
 
+              {(()=>{
+                if(this.state.edit_scenario){
+                  return(
+                    <div className="center-this" style={{color:'Green',fontSize:'20px',lineHeight:'28px'}}>
+                    <i>Scenario '{this.props.RangingNpdImpactPage.scenarioName}' has been edited successfully!</i><br/>
+                      <br/>
+                      What do you wish to do next?
+
+                    </div>
+
+                  )
+
+                }else{
+                  return(
+                    <div className="center-this" style={{color:'Green',fontSize:'20px',lineHeight:'28px'}}>
+                      <i>Scenario '{this.props.RangingNpdImpactPage.scenarioName}' has been saved successfully!</i><br/>
+                      <br/>
+                      What do you wish to do next?
+
+                    </div>
+
+                  )
+                }
+
+              })()}
 
 
-            <div className="center-this" style={{color:'Green',fontSize:'20px',lineHeight:'28px'}}>
-              {/*<i>Scenario '{this.props.RangingNpdImpactPage.scenarioName}' of Tag '{this.props.RangingNpdImpactPage.tagName}' has been saved successfully!</i><br/>*/}
-              <i>Scenario '{this.props.RangingNpdImpactPage.scenarioName}' has been saved successfully!</i><br/>
-            <br/>
-              What do you wish to do next?
-            {/*<div style={{backgroundColor:'white',opacity:'0.8',color:'black'}}>*/}
-              {/*<RadioButton id={'1'}*/}
-                           {/*label={'Add new product'}*/}
-                           {/*valid={true}*/}
-                           {/*onChange={() => {*/}
-                             {/*this.setState({afterScenarioOption:1});*/}
-                           {/*}}*/}
-                           {/*name="x"*/}
-              {/*/>*/}
-              {/*<RadioButton id={'2'}*/}
-                           {/*label={'Make pricing changes'}*/}
-                           {/*valid={true}*/}
-                           {/*onChange={() => {*/}
-                             {/*this.setState({afterScenarioOption:2});*/}
-                           {/*}}*/}
-                           {/*name="x"*/}
-              {/*/>*/}
-              {/*<RadioButton id={'3'}*/}
-                           {/*label={'View scenarios'}*/}
-                           {/*valid={true}*/}
-                           {/*onChange={() => {*/}
-                             {/*this.setState({afterScenarioOption:3});*/}
-                           {/*}}*/}
-                           {/*name="x"*/}
-              {/*/>*/}
 
-            {/*</div>*/}
-          </div>
-
-            {/*<div className="row">*/}
-            {/*<div className="col-xs-12 center-this">*/}
-              {/*<Button onClick={() => {*/}
-
-                {/*if(this.state.afterScenarioOption===1){*/}
-                  {/*this.setState({showSaveScenarioSuccessModalFlag: false});*/}
-                {/*}else if(this.state.afterScenarioOption===2){*/}
-                  {/*let page='/pricing/';*/}
-
-                  {/*let objString = page;*/}
-                  {/*window.location = objString;*/}
-
-                {/*}else if(this.state.afterScenarioOption===2){*/}
-                  {/*let page='/ranging/scenario-tracker?';*/}
-                  {/*let user_id="vrushali123";*/}
-
-                  {/*let objString = page+"user_id="+user_id;*/}
-                  {/*window.location = objString;*/}
-
-                {/*}*/}
-
-              {/*}}*/}
-               {/*style={{display: 'block', marginTop:"1%",marginLeft:'35%'}}>Proceed</Button>*/}
-            {/*</div>*/}
-    {/*</div>*/}
 
             <div className="row" style={{marginTop:'2%'}}>
               <div className="col-xs-6">
                 <Button onClick={() => {
+                  this.setState({edit_scenario:false});
+                  document.cookie = 'Preselection'+'=;expires=Thu, 01 Jan 1970 00:00:01 GMT;domain=localhost;path=/;';
+                  this.props.onUpdateOrClearScenarioName('');
+                  this.props.onUpdateOrClearScenarioTag('');
+                  this.props.onEditScenarioOverWrite("overwrite=0");
+
                   this.setState({showSaveScenarioSuccessModalFlag: false});
 
                 }}
@@ -326,6 +388,9 @@ export class RangingNpdImpactPage extends React.PureComponent { // eslint-disabl
               </div>
               <div className="col-xs-6">
                 <Button onClick={() => {
+
+                  document.cookie = 'Preselection'+'=;expires=Thu, 01 Jan 1970 00:00:01 GMT;domain=localhost;path=/;';
+
                   let page='/ranging/scenario-tracker?';
 
                   let objString = page;
@@ -366,7 +431,7 @@ export class RangingNpdImpactPage extends React.PureComponent { // eslint-disabl
             </div>
 
             <div className="row">
-              <div className="col-xs-6">
+              <div className="col-xs-4">
                 <Button onClick={() => {
                   this.props.onSaveScenarioResponse('rename');
                   {/*this.setState({showSaveScenarioOverwriteConfirmationModalFlag: false});*/}
@@ -375,7 +440,17 @@ export class RangingNpdImpactPage extends React.PureComponent { // eslint-disabl
                 }}
                         style={{display: 'block', marginTop:"1%",marginLeft:'35%'}}>Save As</Button>
               </div>
-              <div className="col-xs-6">
+              <div className="col-xs-4">
+                <Button onClick={() => {
+                  this.props.onEditScenarioOverWrite("overwrite=1");
+                  document.body.style.cursor='wait';
+                  this.props.onSaveScenarioFlag();
+
+
+                }}
+                  style={{display: 'block', marginTop:"1%",marginLeft:'35%'}}>Overwrite</Button>
+              </div>
+              <div className="col-xs-4">
                 <Button onClick={() => {
                   let page='/ranging/scenario-tracker?';
                   {/*let attributes='userid=sachin123'+"&scenario_name="+obj.scenario_name+"&tag_name="+obj.tag_name;*/}
@@ -446,7 +521,11 @@ export class RangingNpdImpactPage extends React.PureComponent { // eslint-disabl
                 }else{
                   {/*document.body.style.cursor='wait';*/}
                   let canni_perc=this.props.RangingNpdImpactPage.canniProdTableData.volume_chart.impact.Cannibilization_perc/100;
-                  let modified_api="modified_flag=1&modified_forecast="+this.props.RangingNpdImpactPage.modifiedVolumeForecast+"&Cannibalization_perc="+canni_perc;
+                  let selected_week_api=this.props.RangingNpdImpactPage.dataWeekUrlParams;
+                  let selected_week=selected_week_api.split('=');
+
+
+                  let modified_api="modified_flag=1&modified_forecast="+this.props.RangingNpdImpactPage.modifiedVolumeForecast+"&Cannibalization_perc="+canni_perc+"&modified_week="+selected_week[1];
                   // alert(modified_api);
                   this.props.onUpdateApplyButtonLoadingIndication(true);
                   this.setState({showEditForecastModal: false});
@@ -582,6 +661,7 @@ export class RangingNpdImpactPage extends React.PureComponent { // eslint-disabl
 
                                 <NavItem className="tabsCustomList" eventKey="1" onClick={() => {
                                   this.setState({activeKey: "1"});
+                                  this.setState({edited_week: "Latest 13 Weeks"});
                                   dataWeekUrlParams = "week_flag=Latest 13 Weeks";
 
                                   this.props.onUpdateTabChangeLoadingIndication(true);
@@ -594,6 +674,7 @@ export class RangingNpdImpactPage extends React.PureComponent { // eslint-disabl
 
                                 <NavItem className="tabsCustomList" eventKey="2" onClick={() => {
                                   this.setState({activeKey: "2"});
+                                  this.setState({edited_week: "Latest 26 Weeks"});
                                   dataWeekUrlParams = "week_flag=Latest 26 Weeks";
 
                                   this.props.onUpdateTabChangeLoadingIndication(true);
@@ -608,6 +689,7 @@ export class RangingNpdImpactPage extends React.PureComponent { // eslint-disabl
                                   dataWeekUrlParams = "week_flag=Latest 52 Weeks";
 
                                   this.setState({activeKey: "3"});
+                                  this.setState({edited_week: "Latest 52 Weeks"});
                                   this.props.onUpdateTabChangeLoadingIndication(true);
                                   this.props.onSaveWeekParam(dataWeekUrlParams);
                                   this.props.onDataFetchCanniProdTable();
@@ -1561,12 +1643,11 @@ function mapDispatchToProps(dispatch) {
     onDataFetchOnPageLoad: (e) => dispatch(dataFetchOnPageLoad(e)),
     onDataFetchOnBubbleData: (e) => dispatch(dataFetchOnBubbleData(e)),
     onDataFetchCanniProdTable: (e) => dispatch(dataFetchCanniProdTable(e)),
-    // onDataFetchOnWaterFallChart: (e) => dispatch(dataFetchOnWaterFallChart(e)),
+
 
 
     //----Filter data----
     onGenerateSideFilter: (e) => dispatch(generateSideFilter(e)),
-
     onSendUrlParams: (e) => dispatch(sendUrlParams(e)),
     onGenerateUrlParams: (e) => dispatch(generateUrlParams(e)),
     onGenerateUrlParamsString: (e) => dispatch(generateUrlParamsString(e)),
@@ -1577,13 +1658,7 @@ function mapDispatchToProps(dispatch) {
     onUpdateTabChangeLoadingIndication: (e) => dispatch(showTabChangeLoadingIndication(e)),
     onUpdatePageContentAfterLoading: (e) => dispatch(showPageContentAfterLoading(e)),
     onUpdateBreadCrumbs: (e) => dispatch(updateBreadCrumbs(e)),
-
-
     onSaveWeekParam: (e) => dispatch(saveWeekParam(e)),
-    onSaveTable2SearchParam: (e) => dispatch(saveTable2SearchParam(e.target.value)),
-    onSaveTable1SearchParam: (e) => dispatch(saveTable1SearchParam(e.target.value)),
-    onSaveTable2PageParam: (e) => dispatch(saveTable2PageParam(e)),
-    onSaveTable1PageParam: (e) => dispatch(saveTable1PageParam(e)),
 
     //Filters selections
     onCheckboxChange: (e) => dispatch(checkboxChange(e)),
@@ -1596,6 +1671,15 @@ function mapDispatchToProps(dispatch) {
     onSaveScenarioName: (e) => dispatch(saveScenarioName(e.target.value)),
     onSaveTagName: (e) => dispatch(saveTagName(e.target.value)),
 
+
+    onUpdateOrClearScenarioName: (e) => dispatch(saveScenarioName(e)),
+    onUpdateOrClearScenarioTag: (e) => dispatch(saveTagName(e)),
+    onUpdateOrClearAcp: (e) => dispatch(saveAcpFilterData(e)),
+    onUpdateOrClearAsp: (e) => dispatch(saveAspFilterData(e)),
+    onUpdateOrClearSize: (e) => dispatch(saveSizeFilterData(e)),
+
+
+
     onSaveScenarioFlag: (e) => dispatch(saveScenarioFlag(e)),
     onSaveScenarioResponse: (e) => dispatch(updateSaveScenarioResponse(e)),
 
@@ -1604,6 +1688,8 @@ function mapDispatchToProps(dispatch) {
     onSaveEditForecastApi: (e) => dispatch(saveEditForecastApi(e)),
     onSaveEditForecastApiOnReset: (e) => dispatch(saveEditForecastApiOnReset(e)),
     onSaveModifiedFlag: (e) => dispatch(saveModifiedFlag(e)),
+
+    onEditScenarioOverWrite: (e) => dispatch(editScenarioOverWrite(e)),
   };
 }
 
