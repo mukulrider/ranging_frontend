@@ -110,12 +110,12 @@ export class DelistContainer extends React.PureComponent { // eslint-disable-lin
     } else {
 
       let nego_selection=this.props.location.search;
-      alert(nego_selection)
+
       nego_selection=nego_selection.replace('?', '');
-      alert(nego_selection)
+
       this.props.onGenerateUrlParamsString(nego_selection);
       this.props.onWaterfallValueChart();
-      alert("done")
+
     }
 
 
