@@ -110,10 +110,21 @@ export class DelistContainer extends React.PureComponent { // eslint-disable-lin
     } else {
 
       let nego_selection=this.props.location.search;
-
       nego_selection=nego_selection.replace('?', '');
 
       this.props.onGenerateUrlParamsString(nego_selection);
+      nego_selection=nego_selection.replace('base_product_number=', '');
+      nego_selection=nego_selection.split('&base_product_number=').join(",");
+      let npd_selection=nego_selection.split(',')
+
+      let npd_selection1=[];
+      npd_selection.map((obj) =>{
+        npd_selection1.push(parseInt(obj))
+      })
+      npd_selection1=JSON.stringify(npd_selection1)
+
+      this.props.onGenerateFilterParamsString(npd_selection1);
+
       this.props.onWaterfallValueChart();
 
     }
@@ -706,12 +717,29 @@ export class DelistContainer extends React.PureComponent { // eslint-disable-lin
                       </Nav>
 
                       {/*Save Scenario*/}
-                      <div className="row" style={{textAlign: 'right', marginRight: '2%'}}>
+                      <div className="row" >
+
+                        <div className="col-xs-6" style={{textAlign: 'left', paddingLeft: '2%'}}>
+                        <Button onClick={() => {
+
+                          let bubblePreselectionNPD=this.props.DelistContainer.filterParamsString;
+                          let domain="localhost";
+                          document.cookie = `bubblePreselection=1;domain=${domain};path=/;`;
+                          document.cookie = `bubblePreselectionData=${bubblePreselectionNPD};domain=${domain};path=/;`;
+
+                          window.location = '/ranging/negotiation/';
+
+
+                        }}
+                         style={{marginTop: '2%'}}><span className="glyphicon glyphicon-arrow-left"/> Back to Negotiation</Button>
+                        </div>
+                        <div className="col-xs-6" style={{textAlign: 'right', paddingRight: '2%'}}>
                         <Button onClick={() => {
                           this.setState({showSaveScenarioModalFlag: true});
                         }}
-                                style={{marginTop: '2%'}}>Save Scenario</Button>
-                      </div>
+                         style={{marginTop: '2%'}}>Save Scenario</Button>
+                        </div>
+                        </div>
 
 
                       {/*Saving scenario modal call-conditions*/}
@@ -1092,7 +1120,7 @@ export class DelistContainer extends React.PureComponent { // eslint-disable-lin
                               <h2 className="text-center">Something went wrong. Please reload the page....!</h2>
                             </div>
                           )
-                        } else if (this.props.DelistContainer.waterfallValue.message) {
+                        } else if (this.props.DelistContainer.waterfallValue && this.props.DelistContainer.waterfallValue.message) {
                           let abcd = 1;
                           return (
                             <div>
@@ -1343,7 +1371,7 @@ export class DelistContainer extends React.PureComponent { // eslint-disable-lin
                               <h2 className="text-center">Something went wrong. Please reload the page....!</h2>
                             </div>
                           )
-                        } else if (this.props.DelistContainer.waterfallValue.message) {
+                        } else if (this.props.DelistContainer.waterfallValue && this.props.DelistContainer.waterfallValue.message) {
                           let abcd = 1;
                           return (
                             <div>

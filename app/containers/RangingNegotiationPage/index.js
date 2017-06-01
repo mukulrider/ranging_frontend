@@ -51,6 +51,28 @@ export class RangingNegotiationPage extends React.PureComponent { // eslint-disa
   componentDidMount = () => {
     //For sending and saving url params
 
+    let getCookie = (name) => {
+      const value = `; ${document.cookie}`;
+      const parts = value.split(`; ${name}=`);
+      if (parts.length === 2) {
+        return parts.pop().split(';').shift();
+      }
+    };
+
+    //for preselection of filters--edit scenario
+    let bubblePreselection = getCookie('bubblePreselection');
+
+    if (bubblePreselection) {
+      let bubblePreselectionData = getCookie('bubblePreselectionData');
+
+
+      document.cookie = 'bubblePreselectionData' + '=;expires=Thu, 01 Jan 1970 00:00:01 GMT;domain=localhost;path=/;';
+      document.cookie = 'bubblePreselection' + '=;expires=Thu, 01 Jan 1970 00:00:01 GMT;domain=localhost;path=/;';
+
+      this.props.onSaveBubbleParam2(bubblePreselectionData);
+
+    }
+    
     //FOR TABLE
     this.props.onURLRequest(this.props.location.query);
 

@@ -18,15 +18,19 @@ class NewSelector2 extends React.PureComponent { // eslint-disable-line react/pr
 
   updateUrl = (category) => {
     let queryString = '';
+    let product_selection_for_nego=[];
     [...this.refs.selector.querySelectorAll('input')].map(obj => {
       if (obj.checked == true) {
         let category = obj.id.split('__');
 
       if (category[0] === 'long_description') {
 
-          let product_code=category[2].slice(-8);
+          let product_code= parseInt(category[2].slice(-8));
+
           queryString = queryString + `base_product_number=${product_code}&`;
-        }else {
+          product_selection_for_nego.push(product_code);
+
+      }else {
           queryString = queryString + `${category[0]}=${category[category.length - 1]}&`;
         }
         // queryString = queryString + `${category[0]}=${category[category.length - 1]}&`;
@@ -38,7 +42,8 @@ class NewSelector2 extends React.PureComponent { // eslint-disable-line react/pr
 
     // APPEND URL PARAMS
     this.props.onGenerateUrlParamsString(queryString);
-    this.props.onGenerateFilterParamsString(queryString);
+    product_selection_for_nego=JSON.stringify(product_selection_for_nego);
+    this.props.onGenerateFilterParamsString(product_selection_for_nego);
   };
 
   componentDidMount = () => {
@@ -235,9 +240,12 @@ class NewSelector2 extends React.PureComponent { // eslint-disable-line react/pr
 
               <div className="text-center">
               <Button onClick={() => {
+                browserHistory.push(this.props.location.pathname);
               this.props.onGenerateUrlParamsString('');
+              this.props.onGenerateFilterParamsString('[]');
               this.props.onDelistDefaultView(0);
               this.clearFilter();
+
               }}>Reset Filters</Button>&nbsp;&nbsp;
               </div>
             </div>

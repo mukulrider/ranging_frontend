@@ -12,14 +12,7 @@ import {browserHistory} from 'react-router';
 
 class BubbleChart2 extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
   createChart = (data2, forTable, forOpacity, bubbleFunc, bubbleFunc2, makeTable,onUpdateLoadingIndicationText,onUpdateLoadingIndicationStatus) => {
-    let dataBubbleUrlParams = '';
-    let prodArr = [];
-    let deselectArr = [];
     let deselectBub = [];
-
-// console.log("-=-=-data2 chart",data2)
-    forTable = JSON.parse(forTable);
-
     forOpacity = JSON.parse(forOpacity);
 
     //Chart configurations

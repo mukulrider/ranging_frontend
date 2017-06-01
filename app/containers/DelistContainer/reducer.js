@@ -56,6 +56,7 @@ const initialState = fromJS(
     barChart2Data: [{letter: 'A', frequency: 100}, {letter: 'B', frequency: 200}],
     dataUrlparams: "",
     supplierPopupTablePagination: "",
+    filterParamsString:'[]',
     weekNumber: "",
     storeType: "",
     supplierTablePagination: "",

@@ -48,6 +48,8 @@ import {
   updateSaveScenarioResponse
 
 } from 'containers/DelistContainer/actions';
+import {browserHistory} from 'react-router';
+
 export function* defaultSaga() {
   // See example in containers/HomePage/sagas.js
 }
@@ -371,6 +373,7 @@ export function* generateSideFilterReset() {
     const data = yield call(request, host_url + `/api/product_impact/filter_data/`);
 
     yield put(generateSideFilterSuccess(data));
+
   } catch (err) {
     // console.log(err);
   }
