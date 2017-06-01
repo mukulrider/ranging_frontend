@@ -693,7 +693,7 @@ export class RangingNegotiationPage extends React.PureComponent { // eslint-disa
                                   onUpdateLoadingIndicationText={this.props.onUpdateLoadingIndicationText}
                     />
 
-                    <i style={{fontSize: '12px'}}>*Size of the bubble corresponds to Rate of Sales</i><br/>
+                    <i style={{fontSize: '12px'}}>*Size of the bubble corresponds to Rate of Sale</i><br/>
 
                   </div>
 
