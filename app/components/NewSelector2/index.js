@@ -240,7 +240,7 @@ class NewSelector2 extends React.PureComponent { // eslint-disable-line react/pr
 
               <div className="text-center">
               <Button onClick={() => {
-                browserHistory.push(this.props.location.pathname);
+
               this.props.onGenerateUrlParamsString('');
               this.props.onGenerateFilterParamsString('[]');
               this.props.onDelistDefaultView(0);

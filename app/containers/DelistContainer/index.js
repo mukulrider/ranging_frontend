@@ -91,9 +91,11 @@ export class DelistContainer extends React.PureComponent { // eslint-disable-lin
     };
 
     //for preselection of filters--edit scenario
-    let Preselection = getCookie('Preselection');
+    let PreselectionForEditScenario = getCookie('Preselection');
+    let PreselectionFromNego = getCookie('PreselectionFromNego');
 
-    if (Preselection) {
+
+    if (PreselectionForEditScenario) {
       this.setState({edit_scenario: true});
       let filterPreSelection = getCookie('filterPreSelection');
       let scenario_name_PreSelection = getCookie('scenario_name_PreSelection');
@@ -107,34 +109,40 @@ export class DelistContainer extends React.PureComponent { // eslint-disable-lin
       document.cookie = 'filterPreSelection' + '=;expires=Thu, 01 Jan 1970 00:00:01 GMT;domain=localhost;path=/;';
       document.cookie = 'scenario_name_PreSelection' + '=;expires=Thu, 01 Jan 1970 00:00:01 GMT;domain=localhost;path=/;';
 
-    } else {
+    }
+    else
+      {
 
-      let nego_selection=this.props.location.search;
-      nego_selection=nego_selection.replace('?', '');
+      if(PreselectionFromNego) {
+        let PreselectionFromNegoData = getCookie('PreselectionFromNegoData');
+        let nego_selection = PreselectionFromNegoData;
 
-      this.props.onGenerateUrlParamsString(nego_selection);
-      nego_selection=nego_selection.replace('base_product_number=', '');
-      nego_selection=nego_selection.split('&base_product_number=').join(",");
-      let npd_selection=nego_selection.split(',')
+        this.props.onGenerateUrlParamsString(nego_selection);
+        nego_selection = nego_selection.replace('base_product_number=', '');
+        nego_selection = nego_selection.split('&base_product_number=').join(",");
+        let npd_selection = nego_selection.split(',')
 
-      let npd_selection1=[];
-      npd_selection.map((obj) =>{
-        npd_selection1.push(parseInt(obj))
-      })
-      npd_selection1=JSON.stringify(npd_selection1)
+        let npd_selection1 = [];
+        npd_selection.map((obj) => {
+          npd_selection1.push(parseInt(obj))
+        })
+        npd_selection1 = JSON.stringify(npd_selection1)
 
-      this.props.onGenerateFilterParamsString(npd_selection1);
+        let domain="localhost";
+        document.cookie = 'PreselectionFromNegoData' + `=;expires=Thu, 01 Jan 1970 00:00:01 GMT;domain=${domain};path=/;`;
+        document.cookie = 'PreselectionFromNego' + `=;expires=Thu, 01 Jan 1970 00:00:01 GMT;domain=${domain};path=/;`;
 
-      this.props.onWaterfallValueChart();
 
+        this.props.onGenerateFilterParamsString(npd_selection1);
+        this.props.onWaterfallValueChart();
+        this.props.onDelistDefaultView(1);
+      }
+      else{
+        this.props.onGenerateUrlParamsString();
+      }
     }
 
 
-  // this.props.onDataUrlParams(this.props.location.query);
-  //   this.props.onUrlParams(this.props.location.search);
-
-    // this.props.onGenerateSideFilter();
-    // console.log("7onGenerateSideFilter");
   };
 
   cellButton = (cell, row, enumObject, rowIndex) => {
@@ -558,7 +566,7 @@ export class DelistContainer extends React.PureComponent { // eslint-disable-lin
 
 
           {(() => {
-            if ((!(this.props.location.search == "")) || (this.props.DelistContainer.delistDefaultView == 1)) {
+            if ((this.props.DelistContainer.delistDefaultView == 1)) {
               return (
                 <div style={{
                   width: '78%',

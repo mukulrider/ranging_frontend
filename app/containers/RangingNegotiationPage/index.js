@@ -72,7 +72,7 @@ export class RangingNegotiationPage extends React.PureComponent { // eslint-disa
       this.props.onSaveBubbleParam2(bubblePreselectionData);
 
     }
-    
+
     //FOR TABLE
     this.props.onURLRequest(this.props.location.query);
 
@@ -1293,20 +1293,24 @@ export class RangingNegotiationPage extends React.PureComponent { // eslint-disa
                           style={{marginTop:"7px"}}
                           onClick={() => {
 
-                            let objString = '/ranging/delist?';
+
                             let selected=this.props.RangingNegotiationPage.prodArrayOpacity;
+                              let bpn_selection=''
 
                             if(selected!=='[]'){
                               let productSelections = JSON.parse(selected);
-
-
-                              for(let i=0;i<productSelections.length;i++){
-                                objString += 'base_product_number=' + productSelections[i] + '&'
+                            for(let i=0;i<productSelections.length;i++){
+                              bpn_selection += 'base_product_number=' + productSelections[i] + '&'
                               }
 
-                              objString = objString.slice(0, objString.length - 1);
+                              bpn_selection = bpn_selection.slice(0, bpn_selection.length - 1);
 
-                              window.location = objString;
+                              let domain="localhost";
+                              document.cookie = `PreselectionFromNego=1;domain=${domain};path=/;`;
+                              document.cookie = `PreselectionFromNegoData=${bpn_selection};domain=${domain};path=/;`;
+
+                              window.location = '/ranging/delist/';
+
 
                             }else{
 
