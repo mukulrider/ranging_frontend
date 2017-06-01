@@ -313,7 +313,25 @@ export class RangingScenarioTrackerPage extends React.PureComponent { // eslint-
           }
         })()}
 
-
+        {/*Fixed footer*/}
+        <div style={{
+          width: '100%',
+          background: '#e5e5e5',
+          bottom: '0',
+          textAlign: 'center',
+          left: '0',
+          position: 'fixed',
+          zIndex: 100,
+          boxShadow: '0px -4px 8px 0 rgba(0, 0, 0, 0.3), 0 6px 20px 0 rgba(0, 0, 0, 0.19)'
+        }}>
+          <Button buttonType={'primary'} style={{margin: '5px'}}
+                  onClick={() => {
+                    let page = '/scenario/compare';
+                    window.location = page;
+                  }}>
+            Compare Scenario <b></b>
+          </Button>
+        </div>
       </div>
 
 
