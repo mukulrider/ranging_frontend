@@ -100,6 +100,7 @@ export class RangingNegotiationPage extends React.PureComponent { // eslint-disa
       activeKey2: "4",
       activePage: 1,
       noDataforChart: 0,
+      showDelistConfirmationModalFlag: false,
     };
   }
 
@@ -141,6 +142,9 @@ export class RangingNegotiationPage extends React.PureComponent { // eslint-disa
     this.props.onGenerateCheckedList(checked, base_product_number)
   };
 
+
+
+
   render() {
 
     let dataFilterUrlParams = this.props.RangingNegotiationPage.urlParamsString;
@@ -179,6 +183,24 @@ export class RangingNegotiationPage extends React.PureComponent { // eslint-disa
       <div>
         <div className="pageTitle" style={{width:'78%',float:'right'}}>Negotiation Opportunity</div>
         <div className="">
+
+          {/*Delete confirmation modal*/}
+          <Modal show={this.state.showDelistConfirmationModalFlag} style={{marginTop:'20%'}} onHide={() => {
+            this.setState({showDelistConfirmationModalFlag: false})
+          }} bsSize="large" aria-labelledby="contained-modal-title-sm">
+            <Modal.Body>
+
+              <div className="row">
+                <div className="col-xs-12 alertModalStyle">
+                  Please select atleast one product to delist
+                </div>
+              </div>
+
+
+            </Modal.Body>
+
+          </Modal>
+
 
           {/*Fitlers*/}
           <div style={{height: '100%',
@@ -733,328 +755,6 @@ export class RangingNegotiationPage extends React.PureComponent { // eslint-disa
                     </Modal.Body>
                   </Modal>
 
-
-                  {/*Performance quartile*/}
-                  {/*<div className="col-xs-2 col-md-2 col-lg-3" style={{marginTop: '2%', fontSize: '14px'}}>*/}
-
-                    {/*<h4>*/}
-                      {/*Please select a negotiation strategy below to filter*/}
-                      {/*'Negotiation*/}
-                      {/*Opportunity' chart and table*/}
-                    {/*</h4>*/}
-
-                    {/*<div className="panel">*/}
-                      {/*<div className="lowProfit" style={{height: '35px', backgroundColor: '#c74a52', opacity: '0.8',color:'white !Important'}}>*/}
-                        {/*<Checkbox id="PQ1"*/}
-                                  {/*label={'Low CPS/Low Profit'}*/}
-                                  {/*valid={true}*/}
-                                  {/*onChange={() => {*/}
-
-
-                                    {/*console.log("entered"+dataPerformanceUrlParams);*/}
-
-                                    {/*let pqCurrentSelection="Low CPS/Low Profit";*/}
-                                    {/*let deselect=0;*/}
-                                    {/*let pqApendUrl='';*/}
-                                    {/*let newSelections='';*/}
-
-
-                                    {/*if(dataPerformanceUrlParams !==''){*/}
-                                      {/*dataPerformanceUrlParams="start&"+dataPerformanceUrlParams;*/}
-                                      {/*let pqSelections = dataPerformanceUrlParams.split('&performance_quartile=');*/}
-
-                                      {/*for(let i=1;i<pqSelections.length;i++){*/}
-
-                                        {/*if(pqSelections[i]!==pqCurrentSelection){*/}
-
-                                          {/*/!*console.log(pqSelections[i] +"==="+pqCurrentSelection)*!/*/}
-
-                                          {/*newSelections=newSelections+"&performance_quartile="+pqSelections[i];*/}
-                                       {/*}else{*/}
-
-                                          {/*deselect=1;*/}
-
-                                        {/*}*/}
-                                      {/*}*/}
-
-                                      {/*if(deselect==0){*/}
-
-                                        {/*newSelections=newSelections+"&performance_quartile="+pqCurrentSelection;*/}
-
-                                      {/*}*/}
-
-                                      {/*let pq_ajax_param = newSelections.replace('&', '');*/}
-                                      {/*this.props.onSavePFilterParam(pq_ajax_param);*/}
-                                    {/*}*/}
-                                    {/*else{*/}
-
-                                      {/*let pq_ajax_param = "performance_quartile="+pqCurrentSelection;*/}
-                                      {/*this.props.onSavePFilterParam(pq_ajax_param);*/}
-                                   {/*}*/}
-
-                                    {/*this.props.onUpdateLoadingIndicationText("Applying Selections...");*/}
-                                    {/*this.props.onUpdateLoadingIndicationStatus(true)*/}
-
-                                    {/*this.props.onFetchGraph();*/}
-                                    {/*this.props.onGenerateTable();*/}
-                                  {/*}}*/}
-                        {/*/>*/}
-                      {/*</div>*/}
-                      {/*<div className="panel-body" style={{marginTop: '2%'}}>*/}
-                        {/*Delist Products*/}
-                      {/*</div>*/}
-                    {/*</div>*/}
-
-                    {/*<div className="panel panel-default">*/}
-                      {/*<div className="default"*/}
-                           {/*style={{height: '35px', backgroundColor: '#6e6767', opacity: '0.8', fontColor: 'white'}}>*/}
-                        {/*<Checkbox id="PQ2"*/}
-                                  {/*label={'Low CPS/High Profit'}*/}
-                                  {/*valid={true}*/}
-                                  {/*onChange={() => {*/}
-
-                                    {/*let pqCurrentSelection="Low CPS/High Profit";*/}
-                                    {/*let deselect=0;*/}
-                                    {/*let pqApendUrl='';*/}
-                                    {/*let newSelections='';*/}
-
-                                    {/*if(dataPerformanceUrlParams !==''){*/}
-                                      {/*dataPerformanceUrlParams="start&"+dataPerformanceUrlParams;*/}
-                                      {/*let pqSelections = dataPerformanceUrlParams.split('&performance_quartile=');*/}
-                                      {/*for(let i=1;i<pqSelections.length;i++){*/}
-
-                                        {/*if(pqSelections[i]!==pqCurrentSelection){*/}
-
-                                          {/*newSelections=newSelections+"&performance_quartile="+pqSelections[i];*/}
-                                        {/*}else{*/}
-
-                                          {/*deselect=1;*/}
-
-                                        {/*}*/}
-                                      {/*}*/}
-
-                                      {/*if(deselect==0){*/}
-
-                                        {/*newSelections=newSelections+"&performance_quartile="+pqCurrentSelection;*/}
-
-                                      {/*}*/}
-
-                                      {/*let pq_ajax_param = newSelections.replace('&', '');*/}
-                                    {/*//console.log("6.ajax urls"+pq_ajax_param);*/}
-                                      {/*this.props.onSavePFilterParam(pq_ajax_param);*/}
-                                    {/*}*/}
-                                    {/*else{*/}
-
-                                      {/*let pq_ajax_param = "performance_quartile="+pqCurrentSelection;*/}
-                                      {/*this.props.onSavePFilterParam(pq_ajax_param);*/}
-                                    {/*}*/}
-
-                                    {/*this.props.onUpdateLoadingIndicationText("Applying Selections...")*/}
-                                    {/*this.props.onUpdateLoadingIndicationStatus(true)*/}
-
-
-                                    {/*this.props.onFetchGraph();*/}
-                                    {/*this.props.onGenerateTable();*/}
-                                  {/*}}*/}
-                        {/*/>*/}
-
-                      {/*</div>*/}
-                      {/*<div className="panel-body" style={{height: '65px', marginTop: '3%'}}>*/}
-                        {/*Hard*/}
-                        {/*Bargaining’*/}
-                        {/*for stronger*/}
-                        {/*profits – Low importance to customers*/}
-                      {/*</div>*/}
-                    {/*</div>*/}
-
-                    {/*<div className="panel panel-warning">*/}
-                      {/*<div className="medProfit"*/}
-                           {/*style={{height: '35px', backgroundColor: '#ffa626', opacity: '0.8', fontColor: 'white'}}>*/}
-
-                        {/*<Checkbox id="PQ3"*/}
-                                  {/*label={'Med CPS/Med Profit'}*/}
-                                  {/*valid={true}*/}
-                                  {/*onChange={() => {*/}
-
-                                    {/*let pqCurrentSelection="Med CPS/Med Profit";*/}
-                                    {/*let deselect=0;*/}
-                                    {/*let pqApendUrl='';*/}
-                                    {/*let newSelections='';*/}
-
-                                    {/*if(dataPerformanceUrlParams !==''){*/}
-                                      {/*dataPerformanceUrlParams="start&"+dataPerformanceUrlParams;*/}
-                                      {/*let pqSelections = dataPerformanceUrlParams.split('&performance_quartile=');*/}
-                                      {/*for(let i=1;i<pqSelections.length;i++){*/}
-
-                                        {/*if(pqSelections[i]!==pqCurrentSelection){*/}
-
-                                          {/*newSelections=newSelections+"&performance_quartile="+pqSelections[i];*/}
-                                        {/*}else{*/}
-
-                                          {/*deselect=1;*/}
-
-                                        {/*}*/}
-                                      {/*}*/}
-
-                                      {/*if(deselect==0){*/}
-
-                                        {/*newSelections=newSelections+"&performance_quartile="+pqCurrentSelection;*/}
-
-                                      {/*}*/}
-
-                                      {/*let pq_ajax_param = newSelections.replace('&', '');*/}
-                                      {/*this.props.onSavePFilterParam(pq_ajax_param);*/}
-                                    {/*}*/}
-                                    {/*else{*/}
-
-                                      {/*let pq_ajax_param = "performance_quartile="+pqCurrentSelection;*/}
-                                      {/*this.props.onSavePFilterParam(pq_ajax_param);*/}
-
-                                    {/*}*/}
-
-                                    {/*this.props.onUpdateLoadingIndicationText("Applying Selections...")*/}
-                                    {/*this.props.onUpdateLoadingIndicationStatus(true)*/}
-
-
-                                    {/*this.props.onFetchGraph();*/}
-                                    {/*this.props.onGenerateTable();*/}
-                                  {/*}}*/}
-                        {/*/>*/}
-
-                      {/*</div>*/}
-                      {/*<div className="panel-body" style={{height: '60px', marginTop: '3%'}}>Area of*/}
-                        {/*opportunity. Concession*/}
-                        {/*trading – Subs/Ranging/Price. Reduce range to drive*/}
-                        {/*volume*/}
-                      {/*</div>*/}
-                    {/*</div>*/}
-
-                    {/*<div className="panel panel-success">*/}
-                      {/*<div className="highProfit"*/}
-                           {/*style={{height: '35px', backgroundColor: '#69b24a', opacity: '0.8', fontColor: 'white'}}>*/}
-
-                        {/*<Checkbox id="PQ4"*/}
-                                  {/*label={'High CPS/High Profit'}*/}
-                                  {/*valid={true}*/}
-                                  {/*onChange={() => {*/}
-
-                                    {/*let pqCurrentSelection="High CPS/High Profit";*/}
-                                    {/*let deselect=0;*/}
-                                    {/*let pqApendUrl='';*/}
-                                    {/*let newSelections='';*/}
-
-                                    {/*if(dataPerformanceUrlParams !==''){*/}
-                                      {/*dataPerformanceUrlParams="start&"+dataPerformanceUrlParams;*/}
-                                      {/*let pqSelections = dataPerformanceUrlParams.split('&performance_quartile=');*/}
-                                      {/*for(let i=1;i<pqSelections.length;i++){*/}
-
-                                        {/*if(pqSelections[i]!==pqCurrentSelection){*/}
-
-                                          {/*newSelections=newSelections+"&performance_quartile="+pqSelections[i];*/}
-                                        {/*}else{*/}
-
-                                          {/*deselect=1;*/}
-
-                                        {/*}*/}
-                                      {/*}*/}
-
-                                      {/*if(deselect==0){*/}
-
-                                        {/*newSelections=newSelections+"&performance_quartile="+pqCurrentSelection;*/}
-
-                                      {/*}*/}
-
-                                      {/*let pq_ajax_param = newSelections.replace('&', '');*/}
-                                    {/*//console.log("6.ajax urls"+pq_ajax_param);*/}
-                                      {/*this.props.onSavePFilterParam(pq_ajax_param);*/}
-                                    {/*}*/}
-                                    {/*else{*/}
-
-                                      {/*let pq_ajax_param = "performance_quartile="+pqCurrentSelection;*/}
-                                      {/*this.props.onSavePFilterParam(pq_ajax_param);*/}
-                                    {/*}*/}
-
-                                    {/*this.props.onUpdateLoadingIndicationText("Applying Selections...")*/}
-                                    {/*this.props.onUpdateLoadingIndicationStatus(true)*/}
-
-
-                                    {/*this.props.onFetchGraph();*/}
-                                    {/*this.props.onGenerateTable();*/}
-                                  {/*}}*/}
-                        {/*/>*/}
-
-                      {/*</div>*/}
-                      {/*<div className="panel-body" style={{height: '50px', marginTop: '3%'}}>Build*/}
-                        {/*Win-Win*/}
-                        {/*relationship with*/}
-                        {/*supplier to share further profit gains*/}
-                      {/*</div>*/}
-                    {/*</div>*/}
-                    {/*<div className="panel">*/}
-                      {/*<div className="highCps" style={{height: '35px', backgroundColor: '#99d9e5'}}>*/}
-
-
-                        {/*<Checkbox id="PQ5"*/}
-                                  {/*label={'High CPS/Low Profit'}*/}
-                                  {/*valid={true}*/}
-                                  {/*onChange={() => {*/}
-
-                                    {/*let pqCurrentSelection="High CPS/Low Profit";*/}
-                                    {/*let deselect=0;*/}
-                                    {/*let pqApendUrl='';*/}
-                                    {/*let newSelections='';*/}
-
-                                    {/*if(dataPerformanceUrlParams !==''){*/}
-                                      {/*dataPerformanceUrlParams="start&"+dataPerformanceUrlParams;*/}
-                                      {/*let pqSelections = dataPerformanceUrlParams.split('&performance_quartile=');*/}
-                                      {/*for(let i=1;i<pqSelections.length;i++){*/}
-
-                                        {/*if(pqSelections[i]!==pqCurrentSelection){*/}
-
-                                          {/*newSelections=newSelections+"&performance_quartile="+pqSelections[i];*/}
-                                        {/*}else{*/}
-
-                                          {/*deselect=1;*/}
-
-                                        {/*}*/}
-                                      {/*}*/}
-
-                                      {/*if(deselect==0){*/}
-
-                                        {/*newSelections=newSelections+"&performance_quartile="+pqCurrentSelection;*/}
-
-                                      {/*}*/}
-
-                                      {/*let pq_ajax_param = newSelections.replace('&', '');*/}
-                                    {/*//console.log("6.ajax urls"+pq_ajax_param);*/}
-                                      {/*this.props.onSavePFilterParam(pq_ajax_param);*/}
-                                    {/*}*/}
-                                    {/*else{*/}
-
-                                      {/*let pq_ajax_param = "performance_quartile="+pqCurrentSelection;*/}
-                                      {/*this.props.onSavePFilterParam(pq_ajax_param);*/}
-                                    {/*}*/}
-
-                                    {/*this.props.onUpdateLoadingIndicationText("Applying Selections...")*/}
-                                    {/*this.props.onUpdateLoadingIndicationStatus(true)*/}
-
-
-                                    {/*this.props.onFetchGraph();*/}
-                                    {/*this.props.onGenerateTable();*/}
-                                  {/*}}*/}
-                        {/*/>*/}
-
-                      {/*</div>*/}
-                      {/*<div className="panel-body" style={{marginTop: '5%'}}>Work*/}
-                        {/*collaboratively to jointly*/}
-                        {/*solve low profitability*/}
-                      {/*</div>*/}
-                    {/*</div>*/}
-
-                  {/*</div>*/}
-
-
-
                 </div>
 
 
@@ -1314,7 +1014,7 @@ export class RangingNegotiationPage extends React.PureComponent { // eslint-disa
 
                             }else{
 
-                              alert("You have not selected any products to delist. Are you sure you want to see the delist impact?")
+                              this.setState({showDelistConfirmationModalFlag: true})
                             }
 
                           }}>SEND TO DE-LIST</Button>
