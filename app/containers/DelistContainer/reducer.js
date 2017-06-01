@@ -47,7 +47,7 @@ import {
   STORE_BREADCRUMB,
   URL_PARAMS,
   SAVE_SCENARIO_RESPONSE,
-  SAVE_SCENARIO_NAME,SAVE_TAG_NAME,EDIT_SCENARIO_OVER_WRITE
+  SAVE_SCENARIO_NAME,SAVE_TAG_NAME,EDIT_SCENARIO_OVER_WRITE,OPEN_MODAL,OPEN_MODAL1
 } from './constants';
 
 const initialState = fromJS(
@@ -204,6 +204,7 @@ function delistContainerReducer(state = initialState, action) {
 
 // DELIST DEFAULT VIEW CHECK
     case DELIST_DEFAULT_VIEW:
+      console.log("DELIST DEFAULT VIEW Re---------------------------", action.defaultViewCheck);
       return state.set('delistDefaultView', action.defaultViewCheck);
 
 
@@ -236,6 +237,15 @@ function delistContainerReducer(state = initialState, action) {
       return state.set('tagName', action.data);
     case EDIT_SCENARIO_OVER_WRITE:
       return state.set('editScenarioOverWrite', action.data);
+
+    case OPEN_MODAL:
+      console.log('OPEN_MODAL',action.data);
+      return state.set('openModal', action.data);
+
+    case OPEN_MODAL1:
+      console.log('OPEN_MODAL1',action.data);
+      return state.set('openModal1', action.data);
+
 
     default:
       return state;

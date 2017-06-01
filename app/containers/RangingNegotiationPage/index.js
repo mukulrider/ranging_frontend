@@ -49,6 +49,21 @@ import {
 
 export class RangingNegotiationPage extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
   componentDidMount = () => {
+
+    //LOCAL STORAGE - STARTED
+    //RETRIEVING VALUES FROM LOCAL STORAGE & PASSING THEM TO FILTERS BY STORING THEM IN THE STATE
+
+    // let defaultFilterUrlParams = localStorage.getItem('RangingfilterParamsforLocalStorage');
+    //
+    // if (defaultFilterUrlParams) {
+    //   console.log('defaultFilterUrlParams  ', defaultFilterUrlParams)
+    //   this.props.onGenerateUrlParamsString(defaultFilterUrlParams);
+    // } else {
+    //   this.props.onGenerateUrlParamsString('');
+    // }
+    //
+    //LOCAL STORAGE - ENDED
+
     //For sending and saving url params
 
     let getCookie = (name) => {

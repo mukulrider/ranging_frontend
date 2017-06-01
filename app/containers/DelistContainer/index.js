@@ -72,6 +72,8 @@ import {
   StoreTabClick,
   UrlParams,
   saveScenarioFlag, saveScenarioName, updateSaveScenarioResponse, saveTagName,
+  openModal,
+  openModal1,
 } from './actions';
 
 import styles from './style.scss';
@@ -192,13 +194,13 @@ export class DelistContainer extends React.PureComponent { // eslint-disable-lin
       activeKey: "1",
       activeKey2: "4",
 
-
+      openMyModal: true,
       saveScenarioStatus: '',
       showSaveScenarioSuccessModalFlag: false,
       showSaveScenarioModalFlag: false,
       showSaveScenarioOverwriteConfirmationModalFlag: false,
-      edit_scenario:false,
-
+      edit_scenario: false,
+      noDataforChart: 0,
     };
   }
 
@@ -274,6 +276,30 @@ export class DelistContainer extends React.PureComponent { // eslint-disable-lin
 
     return (
       <div>
+        <Modal show={this.props.DelistContainer.openModal1} bsSize="lg"
+               aria-labelledby="contained-modal-title-lg">
+          <Modal.Header>
+
+            <Modal.Title id="contained-modal-title-sm"
+                         style={{textAlign: 'center', fontSize: '14px'}}><span
+              style={{textAlign: 'center', fontSize: '14px'}}><b>Delist Chart and Table Data Info</b><span
+              style={{textAlign: 'right', float: 'right'}}
+              onClick={() => {
+                this.props.openModal1(0);
+
+              }
+              }><b>X</b></span></span>
+              <div style={{textAlign: 'center'}}>
+                <div style={{textAlign: 'right'}}>
+                </div>
+              </div>
+            </Modal.Title>
+
+          </Modal.Header>
+          <Modal.Body style={{fontSize: '14px'}}>
+            There is no data for "Delist Chart and Table" to displayed
+          </Modal.Body>
+        </Modal>
 
         <Helmet
           title="Delist View"
@@ -283,7 +309,7 @@ export class DelistContainer extends React.PureComponent { // eslint-disable-lin
         />
 
         {/*Page title*/}
-        <div className="pageTitle" style={{marginTop: '-1%'}}>DELIST IMPACT</div>
+        <div className="pageTitle" style={{marginTop: '-1%', width: '78%', marginLeft: '22%'}}>DELIST IMPACT</div>
 
 
         {/*Save Scenario Modal*/}
@@ -1128,13 +1154,6 @@ export class DelistContainer extends React.PureComponent { // eslint-disable-lin
                               <h2 className="text-center">Something went wrong. Please reload the page....!</h2>
                             </div>
                           )
-                        } else if (this.props.DelistContainer.waterfallValue && this.props.DelistContainer.waterfallValue.message) {
-                          let abcd = 1;
-                          return (
-                            <div>
-                              <h2 className="text-center">{this.props.DelistContainer.waterfallValue.message}</h2>
-                            </div>
-                          )
                         }
                         else {
                           let abcd = 1;
@@ -1377,13 +1396,6 @@ export class DelistContainer extends React.PureComponent { // eslint-disable-lin
                           return (
                             <div>
                               <h2 className="text-center">Something went wrong. Please reload the page....!</h2>
-                            </div>
-                          )
-                        } else if (this.props.DelistContainer.waterfallValue && this.props.DelistContainer.waterfallValue.message) {
-                          let abcd = 1;
-                          return (
-                            <div>
-                              <h2 className="text-center">{this.props.DelistContainer.waterfallValue.message}</h2>
                             </div>
                           )
                         }
@@ -1788,6 +1800,8 @@ function mapDispatchToProps(dispatch) {
     onSaveTagName: (e) => dispatch(saveTagName(e.target.value)),
 
     onEditScenarioOverWrite: (e) => dispatch(editScenarioOverWrite(e)),
+    openModal: (e) => dispatch(openModal(e)),
+    openModal1: (e) => dispatch(openModal1(e)),
 
   };
 }
