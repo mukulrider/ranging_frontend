@@ -122,6 +122,9 @@ export class RangingViewDelistScenarioPage extends React.PureComponent { // esli
       return (cell + '%');
     }
     console.log('this.props', this.props);
+
+    let user_attributes;
+
     let week_13_chart, week_13_chart_cgm_chart, week_13_chart_cgm_tot_transfer, week_13_chart_cts_chart,
       week_13_chart_cts_tot_transfer, week_13_chart_sales_chart, week_13_chart_sales_tot_transfer,
       week_13_chart_vols_chart, week_13_chart_vol_tot_transfer, week_13_supplier_table, week_13_delist_table,
@@ -145,7 +148,7 @@ export class RangingViewDelistScenarioPage extends React.PureComponent { // esli
       week_52_chart_sales_tot_transfer_impact;
 
 
-    let week_chart, week_chart_cgm_chart, week_chart_cgm_tot_transfer, week_chart_cts_chart,
+    let  week_chart_cgm_chart, week_chart_cgm_tot_transfer, week_chart_cts_chart,
       week_chart_cts_tot_transfer, week_chart_sales_chart, week_chart_sales_tot_transfer,
       week_chart_vols_chart, week_chart_vol_tot_transfer, week_supplier_table, week_delist_table,
       week_chart_cgm_tot_transfer_impact, week_chart_vol_tot_transfer_impact, week_chart_cts_tot_transfer_impact,
@@ -156,6 +159,10 @@ export class RangingViewDelistScenarioPage extends React.PureComponent { // esli
     if (this.props.RangingViewDelistScenarioPage.data) {
 
       scenario_name = this.props.RangingViewDelistScenarioPage.data.scenario_name;
+
+      user_attributes = this.props.RangingViewDelistScenarioPage.data.user_attributes;
+      user_attributes = user_attributes.replace(/'/g, '"');
+      user_attributes = JSON.parse(user_attributes);
 
       week_13_chart = this.props.RangingViewDelistScenarioPage.data.week_13.queryset_13[0].chart_attr;
       week_13_chart = week_13_chart.replace(/'/g, '"');
@@ -320,7 +327,7 @@ export class RangingViewDelistScenarioPage extends React.PureComponent { // esli
           {/*Page title*/}
           <div className="pageTitle">
             <div className="row">
-              <div className="col-xs-2" style={{marginLeft: '1.2%', marginBottom: '1%', marginTop: '1%'}}>
+              <div className="col-xs-2" style={{marginBottom: '1%', marginTop: '1%'}}>
                 <button type="button" className="btn btn-primary" onClick={() => {
                   let page = '/ranging/scenario-tracker?';
                   let objString = page;
@@ -328,9 +335,12 @@ export class RangingViewDelistScenarioPage extends React.PureComponent { // esli
                 }}><span className="glyphicon glyphicon-arrow-left"/><span>Go back to Scenario tracker</span>
                 </button>
               </div>
+
               <div className="col-xs-8">
                 Scenario:
                 {(() => {
+
+
 
                   {
                     this.props.RangingViewDelistScenarioPage.data
@@ -345,16 +355,69 @@ export class RangingViewDelistScenarioPage extends React.PureComponent { // esli
                 })()}
               </div>
 
-              <div className="col-xs-2" style={{float: 'right',marginBottom: '1%', marginTop: '-1.2%'}}>
+              <div className="col-xs-2" style={{float: 'right',marginBottom: '1%', marginTop: '1%'}}>
                 <button type="button"
                         className="btn btn-primary"
                         onClick={() => {
+
+                          let filterUrl="";
+                          if(user_attributes.buying_controller){
+                            user_attributes.buying_controller.map((obj)=>{
+                              filterUrl=filterUrl+"buying_controller="+obj;
+                            })
+                          }
+                          if(user_attributes.parent_supplier){
+                            user_attributes.parent_supplier.map((obj)=>{
+                              filterUrl=filterUrl+"&parent_supplier="+obj;
+                            })
+                          }
+                          if(user_attributes.buyer){
+                            user_attributes.buyer.map((obj)=>{
+                              filterUrl=filterUrl+"&buyer="+obj;
+                            })
+                          }
+                          if(user_attributes.junior_buyer){
+                            user_attributes.junior_buyer.map((obj)=>{
+                              filterUrl=filterUrl+"&junior_buyer="+obj;
+                            })
+                          }
+                          if(user_attributes.brand_indicator){
+                            user_attributes.brand_indicator.map((obj)=>{
+                              filterUrl=filterUrl+"&brand_indicator="+obj;
+                            })
+                          }
+                          if(user_attributes.brand_name){
+                            user_attributes.brand_name.map((obj)=>{
+                              filterUrl=filterUrl+"&brand_name="+obj;
+                            })
+
+                          }
+                          if(user_attributes.product_sub_group_description){
+                            user_attributes.product_sub_group_description.map((obj)=>{
+                              filterUrl=filterUrl+"&product_sub_group_description="+obj;
+                            })
+                          }
+                          if(user_attributes.base_product_number){
+                            user_attributes.base_product_number.map((obj)=>{
+                              filterUrl=filterUrl+"&base_product_number="+obj;
+                            })
+                          }
+
+
+                          let scenario_name=user_attributes.scenario_name[0];
+
+
+                          {/*let filterPreSelection=bc_cookie+buyer_cookie+jb_cookie+psg_cookie+par_sup_cookie+bn_cookie+packageType_cookie+tillRoll_cookie+measureType_cookie+merchendise_cookie+range_class_cookie;*/}
+                          document.cookie = `Preselection=1;domain=localhost;path=/;`;
+                          document.cookie = `filterPreSelection=${filterUrl};domain=localhost;path=/;`;
+                          document.cookie = `scenario_name_PreSelection=${scenario_name};domain=localhost;path=/;`;
+
                           let page = '/ranging/delist?';
 
                           let objString = page;
                           window.location = objString;
 
-                        }}>Delist<span className="glyphicon glyphicon-arrow-right"/></button>
+                        }}>Edit<span className="glyphicon glyphicon-edit"/></button>
               </div>
             </div>
 

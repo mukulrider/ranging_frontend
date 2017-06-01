@@ -7,7 +7,7 @@
 import React, {PropTypes} from 'react';
 import {connect} from 'react-redux';
 import Helmet from 'react-helmet';
-import { BootstrapTable, TableHeaderColumn } from 'react-bootstrap-table';
+import {BootstrapTable, TableHeaderColumn} from 'react-bootstrap-table';
 import {FormattedMessage} from 'react-intl';
 import {createStructuredSelector} from 'reselect';
 import makeSelectDelistContainer from './selectors';
@@ -50,7 +50,7 @@ import {
   WaterfallValueChart,
   WaterfallValueChartSuccess,
   ajaxClick,
-  checkboxChange, urlParamsData, generateUrlParamsData,
+  editScenarioOverWrite, urlParamsData, generateUrlParamsData,
   ApplyClick,
   supplierPagination,
   delistPagination,
@@ -71,7 +71,7 @@ import {
   WeekTabClick,
   StoreTabClick,
   UrlParams,
-  saveScenarioFlag,saveScenarioName,updateSaveScenarioResponse,saveTagName,
+  saveScenarioFlag, saveScenarioName, updateSaveScenarioResponse, saveTagName,
 } from './actions';
 
 import styles from './style.scss';
@@ -79,45 +79,81 @@ import styles from './style.scss';
 export class DelistContainer extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
 
   componentDidMount = () => {
-    this.props.onGenerateUrlParamsString();
-    this.props.onGenerateFilterParamsString();
-    // console.log("1onGenerateUrlParamsString");
-    this.props.onDataUrlParams(this.props.location.query);
-    // console.log("2onDataUrlParams");
-    this.props.onUrlParams(this.props.location.search);
 
-    this.props.onWaterfallValueChart();
-    this.props.onGenerateSideFilter();
-    console.log("7onGenerateSideFilter");
+    console.log(this.props.location);
+
+    let getCookie = (name) => {
+      const value = `; ${document.cookie}`;
+      const parts = value.split(`; ${name}=`);
+      if (parts.length === 2) {
+        return parts.pop().split(';').shift();
+      }
+    };
+
+    //for preselection of filters--edit scenario
+    let Preselection = getCookie('Preselection');
+
+    if (Preselection) {
+      this.setState({edit_scenario: true});
+      let filterPreSelection = getCookie('filterPreSelection');
+      let scenario_name_PreSelection = getCookie('scenario_name_PreSelection');
+
+
+      this.props.onGenerateUrlParamsString(filterPreSelection);
+      this.props.onUpdateOrClearScenarioName(scenario_name_PreSelection);
+      this.props.onEditScenarioOverWrite("overwrite=1");
+      // this.props.onWaterfallValueChart();
+
+      document.cookie = 'filterPreSelection' + '=;expires=Thu, 01 Jan 1970 00:00:01 GMT;domain=localhost;path=/;';
+      document.cookie = 'scenario_name_PreSelection' + '=;expires=Thu, 01 Jan 1970 00:00:01 GMT;domain=localhost;path=/;';
+
+    } else {
+
+      let nego_selection=this.props.location.search;
+      alert(nego_selection)
+      nego_selection=nego_selection.replace('?', '');
+      alert(nego_selection)
+      this.props.onGenerateUrlParamsString(nego_selection);
+      this.props.onWaterfallValueChart();
+      alert("done")
+    }
+
+
+  // this.props.onDataUrlParams(this.props.location.query);
+  //   this.props.onUrlParams(this.props.location.search);
+
+    // this.props.onGenerateSideFilter();
+    // console.log("7onGenerateSideFilter");
   };
 
-  cellButton=(cell, row,enumObject, rowIndex)=>{
+  cellButton = (cell, row, enumObject, rowIndex) => {
     return (
-    <button
-    type="button"
-    className="btn btn-primary"
-    onClick={() =>{
-      console.log("Inside REact Button click!",this)
-      this.props.onSubstitutesClick(row.productcode);
-      this.props.onSubstitutesClickSendLongDesc(row.long_description);
-      this.props.onDelistPopupTableSpinnerSuccess(0);
-      this.setState({lgShow: true});
-    }}
-    >
-    View Substitutes
-    </button>
+      <button
+        type="button"
+        className="btn btn-primary"
+        onClick={() => {
+          {/*console.log("Inside REact Button click!",this)*/
+          }
+          this.props.onSubstitutesClick(row.productcode);
+          this.props.onSubstitutesClickSendLongDesc(row.long_description);
+          this.props.onDelistPopupTableSpinnerSuccess(0);
+          this.setState({lgShow: true});
+        }}
+      >
+        View Substitutes
+      </button>
     )
   }
 
-/*  supplierPopUpProduct=(cell,row)=> {
-  console.log("Inside Pop Up table Success!")
-  console.log(row)
-  return row.productcode + '-' + row.productdescription;
-}
+  /*  supplierPopUpProduct=(cell,row)=> {
+   console.log("Inside Pop Up table Success!")
+   console.log(row)
+   return row.productcode + '-' + row.productdescription;
+   }
 
-  supplierPopUpSubsProduct=(cell,row) => {
-  return row.substituteproductcode + '-' + row.substituteproductdescription;
-}*/
+   supplierPopUpSubsProduct=(cell,row) => {
+   return row.substituteproductcode + '-' + row.substituteproductdescription;
+   }*/
 
   constructor(props) {
     super(props);
@@ -142,6 +178,7 @@ export class DelistContainer extends React.PureComponent { // eslint-disable-lin
       showSaveScenarioSuccessModalFlag: false,
       showSaveScenarioModalFlag: false,
       showSaveScenarioOverwriteConfirmationModalFlag: false,
+      edit_scenario:false,
 
     };
   }
@@ -182,7 +219,7 @@ export class DelistContainer extends React.PureComponent { // eslint-disable-lin
 
       }
     }
-    console.log('hi', this.props);
+
 
     let formatSales = (cell) => {
       if (cell >= 1000 || cell <= -1000) {
@@ -195,7 +232,7 @@ export class DelistContainer extends React.PureComponent { // eslint-disable-lin
     }
 
     let addingPercentage = (cell) => {
-        return (cell + '%');
+      return (cell + '%');
     }
 
     let formatVolume = (cell) => {
@@ -209,8 +246,6 @@ export class DelistContainer extends React.PureComponent { // eslint-disable-lin
     };
 
     let supplierPopUpProduct = (cell, row) => {
-      console.log("Inside Pop Up table Success!")
-      console.log(row)
       return row.productcode + '-' + row.productdescription;
     }
 
@@ -220,6 +255,7 @@ export class DelistContainer extends React.PureComponent { // eslint-disable-lin
 
     return (
       <div>
+
         <Helmet
           title="Delist View"
           meta={[
@@ -228,7 +264,7 @@ export class DelistContainer extends React.PureComponent { // eslint-disable-lin
         />
 
         {/*Page title*/}
-        <div className="pageTitle" style={{marginTop:'-1%'}}>DELIST IMPACT</div>
+        <div className="pageTitle" style={{marginTop: '-1%'}}>DELIST IMPACT</div>
 
 
         {/*Save Scenario Modal*/}
@@ -253,28 +289,55 @@ export class DelistContainer extends React.PureComponent { // eslint-disable-lin
           </Modal.Header>
           <Modal.Body className="infoModalText">
 
-            <div className="row formattedText">
+            {/*Scenario name*/}
+            {(()=>{
+              if(this.state.edit_scenario){
+                return(
 
-             <div className="col-xs-12">
+                  <div className="row center-this">
 
-                <div className="col-xs-2"></div>
-                <div className="col-xs-4">
-                  Scenario Name:
-                </div>
-                <div className="col-xs-4">
-                  <InputField type="text"
-                              placeholder="Enter Scenario Type"
-                              value={this.props.DelistContainer.scenarioName}
-                              onChange={(e) => {
-                                this.props.onSaveScenarioName(e);
-                              }}
+                    <div className="col-xs-12">
 
-                  />
-                </div>
-                <div className="col-xs-2"></div>
-              </div>
+                      <span style={{color:'#00539f',fontSize:'22px',fontWeight:'600'}}>Scenario Name : </span>
+                      <span style={{color:'#333333',fontSize:'20px'}}>{this.props.DelistContainer.scenarioName}</span>
 
-            </div>
+                    </div>
+
+
+                  </div>
+
+                )
+
+              }else{
+                return(
+
+                  <div className="row formattedText">
+
+                    <div className="col-xs-12">
+
+                      <div className="col-xs-2"></div>
+                      <div className="col-xs-4">
+                        Scenario Name:
+                      </div>
+                      <div className="col-xs-4">
+                        <InputField type="text"
+                                    placeholder="Enter Scenario Type"
+                                    value={this.props.DelistContainer.scenarioName}
+                                    onChange={(e) => {
+                                      this.props.onSaveScenarioName(e);
+                                    }}
+
+                        />
+                      </div>
+                      <div className="col-xs-2"></div>
+                    </div>
+
+                  </div>
+
+                )
+              }
+
+            })()}
 
 
             <div className="row" style={{marginTop: '10px'}}>
@@ -288,7 +351,7 @@ export class DelistContainer extends React.PureComponent { // eslint-disable-lin
                 }
 
               }}
-                      style={{display: 'block', marginTop: "1%", marginLeft: '39%'}}>Save</Button>
+              style={{display: 'block', marginTop: "1%", marginLeft: '39%'}}>Save</Button>
 
             </div>
 
@@ -301,17 +364,43 @@ export class DelistContainer extends React.PureComponent { // eslint-disable-lin
 
           <Modal.Body className="infoModalText">
 
+            {(()=>{
+              if(this.state.edit_scenario){
+                return(
+                  <div className="center-this" style={{color:'Green',fontSize:'20px',lineHeight:'28px'}}>
+                    <i>Scenario '{this.props.DelistContainer.scenarioName}' has been edited successfully!</i><br/>
+                    <br/>
+                    What do you wish to do next?
 
-            <div className="center-this" style={{color: 'Green', fontSize: '20px', lineHeight: '28px'}}>
-              <i>Scenario '{this.props.DelistContainer.scenarioName}' has been saved successfully!</i><br/>
-              <br/>
-              What do you wish to do next?
-            </div>
+                  </div>
+
+                )
+
+              }else{
+                return(
+                  <div className="center-this" style={{color:'Green',fontSize:'20px',lineHeight:'28px'}}>
+                    <i>Scenario '{this.props.DelistContainer.scenarioName}' has been saved successfully!</i><br/>
+                    <br/>
+                    What do you wish to do next?
+
+                  </div>
+
+                )
+              }
+
+            })()}
+
 
 
             <div className="row" style={{marginTop: '2%'}}>
               <div className="col-xs-6">
                 <Button onClick={() => {
+
+                  this.setState({edit_scenario:false});
+                  document.cookie = 'Preselection'+'=;expires=Thu, 01 Jan 1970 00:00:01 GMT;domain=localhost;path=/;';
+                  this.props.onUpdateOrClearScenarioName('');
+                  this.props.onEditScenarioOverWrite("overwrite=0");
+
                   this.setState({showSaveScenarioSuccessModalFlag: false});
 
                 }}
@@ -319,6 +408,9 @@ export class DelistContainer extends React.PureComponent { // eslint-disable-lin
               </div>
               <div className="col-xs-6">
                 <Button onClick={() => {
+
+                  document.cookie = 'Preselection'+'=;expires=Thu, 01 Jan 1970 00:00:01 GMT;domain=localhost;path=/;';
+
                   let page = '/ranging/scenario-tracker?';
 
                   let objString = page;
@@ -328,6 +420,67 @@ export class DelistContainer extends React.PureComponent { // eslint-disable-lin
                         style={{display: 'block', marginTop: "1%", marginLeft: '28%'}}>Go to Scenario Tracker</Button>
               </div>
             </div>
+
+          </Modal.Body>
+        </Modal>
+
+        {/*Saving under same name*/}
+        <Modal show={this.state.showSaveScenarioOverwriteConfirmationModalFlag} bsSize="lg" style={{marginTop: '10%'}}
+               aria-labelledby="contained-modal-title-lg">
+          <Modal.Header>
+            <Modal.Title id="contained-modal-title-sm" className="pageModuleTitle">
+                                  <span className="pageModuleTitle"><b>Scenario Already exists!</b>
+                                  </span>
+              <div style={{textAlign: 'center'}}>
+                <div style={{textAlign: 'right'}}>
+                </div>
+              </div>
+            </Modal.Title>
+          </Modal.Header>
+          <Modal.Body className="infoModalText">
+
+            {(()=>{
+              document.body.style.cursor='default';
+            })()}
+
+            <div className="row">
+              <div className="center-this" style={{color:'red',fontSize:'20px',lineHeight:'28px'}}>
+                <b>Scenario '{this.props.DelistContainer.scenarioName}' under '{this.props.DelistContainer.tagName}' tag is already exist.Please save under another scenario name.</b><br/><br/>
+                <i>If you want to review the existing scenario. Please check in the scenario tracker.</i>
+              </div>
+            </div>
+
+            <div className="row">
+              <div className="col-xs-4">
+                <Button onClick={() => {
+                  this.props.onSaveScenarioResponse('rename');
+
+
+                }}
+                  style={{display: 'block', marginTop:"1%",marginLeft:'13%'}}>Save As</Button>
+              </div>
+              <div className="col-xs-4">
+                <Button onClick={() => {
+                  this.props.onEditScenarioOverWrite("overwrite=1");
+                  document.body.style.cursor='wait';
+                  this.props.onSaveScenarioFlag();
+
+
+                }}
+                 style={{display: 'block', marginTop:"1%",marginLeft:'13%'}}>Overwrite</Button>
+              </div>
+              <div className="col-xs-4">
+                <Button onClick={() => {
+                  let page='/ranging/scenario-tracker?';
+
+                  let objString = page;
+                  window.location = objString;
+
+                }}
+                style={{display: 'block', marginTop:"1%",marginLeft:'13%'}}>Scenario Tracker <span className="glyphicon glyphicon-arrow-right"/></Button>
+              </div>
+            </div>
+
 
           </Modal.Body>
         </Modal>
@@ -401,7 +554,7 @@ export class DelistContainer extends React.PureComponent { // eslint-disable-lin
                   marginLeft: '22%'
                 }}>
                   <div className="row" style={{marginLeft: "0.5%", paddingTop: "-5px"}}>
-                    <div className="col-md-12 content-wrap">
+                    <div className="col-md-12 content-wrap" style={{marginTop:'2%'}}>
 
                       <Nav bsStyle="tabs" activeKey={this.state.activeKey} onSelect={this.handleSelect}
                            className="tabsCustom">
@@ -553,24 +706,32 @@ export class DelistContainer extends React.PureComponent { // eslint-disable-lin
                       </Nav>
 
                       {/*Save Scenario*/}
-                      <div className="row" style={{textAlign:'right',marginRight:'2%'}}>
-                        <Button  onClick={() => {
+                      <div className="row" style={{textAlign: 'right', marginRight: '2%'}}>
+                        <Button onClick={() => {
                           this.setState({showSaveScenarioModalFlag: true});
                         }}
-                                 style={{marginTop:'2%'}}>Save Scenario</Button>
+                                style={{marginTop: '2%'}}>Save Scenario</Button>
                       </div>
 
 
                       {/*Saving scenario modal call-conditions*/}
-                      {(()=>{
-                        if(this.props.DelistContainer.saveScenarioResponse!=='') {
+                      {(() => {
+                        if (this.props.DelistContainer.saveScenarioResponse !== '') {
                           if (this.props.DelistContainer.saveScenarioResponse.save_scenario === "SUCCESS") {
-                            console.log("entered success function");
-                            document.body.style.cursor='default';
+                            {/*console.log("entered success function");*/
+                            }
+                            document.body.style.cursor = 'default';
                             this.props.onSaveScenarioResponse('');
                             this.setState({showSaveScenarioModalFlag: false});
                             this.setState({showSaveScenarioSuccessModalFlag: true});
-
+                            this.setState({showSaveScenarioOverwriteConfirmationModalFlag: false});
+                          }//Already such a event exists
+                          else if (this.props.DelistContainer.saveScenarioResponse.save_scenario === "FAILURE") {
+                            this.setState({showSaveScenarioOverwriteConfirmationModalFlag: true});
+                            this.setState({showSaveScenarioModalFlag: false});
+                          } else if(this.props.DelistContainer.saveScenarioResponse=='rename') {
+                            this.setState({showSaveScenarioOverwriteConfirmationModalFlag: false});
+                            this.setState({showSaveScenarioModalFlag: true});
                           }
 
                         }
@@ -643,15 +804,21 @@ export class DelistContainer extends React.PureComponent { // eslint-disable-lin
                                       <TableHeaderColumn dataField="predicted_value" dataFormat={formatSales}
                                                          dataSort={true} dataAlign="center" width="9%">Predicted
                                         Value</TableHeaderColumn>
-                                      <TableHeaderColumn dataField="predicted_volume" dataFormat={formatVolume}
+                                      <TableHeaderColumn dataField="predicted_volume" thStyle={{whiteSpace: 'normal'}} dataFormat={formatVolume}
                                                          dataSort={true} dataAlign="center" width="8%">Predicted
                                         Volume</TableHeaderColumn>
                                       <TableHeaderColumn dataField="predicted_cgm" dataFormat={formatSales}
                                                          dataSort={true} dataAlign="center">Predicted
                                         Cgm</TableHeaderColumn>
-                                      <TableHeaderColumn dataField="per_value_transfer" dataFormat={addingPercentage} dataSort={true} dataAlign="center">Value Transfer</TableHeaderColumn>
-                                      <TableHeaderColumn dataField="per_vol_transfer" dataFormat={addingPercentage} dataSort={true} dataAlign="center">Volume Transfer</TableHeaderColumn>
-                                      <TableHeaderColumn dataField="psg_value_impact" dataFormat={addingPercentage} dataSort={true} dataAlign="center">Product Sub Group Value Impact(%)</TableHeaderColumn>
+                                      <TableHeaderColumn dataField="per_value_transfer" dataFormat={addingPercentage}
+                                                         dataSort={true} dataAlign="center">Value
+                                        Transfer</TableHeaderColumn>
+                                      <TableHeaderColumn dataField="per_vol_transfer" dataFormat={addingPercentage}
+                                                         dataSort={true} dataAlign="center">Volume
+                                        Transfer</TableHeaderColumn>
+                                      <TableHeaderColumn dataField="psg_value_impact" thStyle={{whiteSpace: 'normal'}} dataFormat={addingPercentage}
+                                                         dataSort={true} dataAlign="center">Product Sub Group Value
+                                        Impact(%)</TableHeaderColumn>
                                       <TableHeaderColumn dataFormat={this.cellButton} dataAlign="center">View
                                         Substitutes</TableHeaderColumn>
                                     </BootstrapTable>
@@ -1213,7 +1380,7 @@ export class DelistContainer extends React.PureComponent { // eslint-disable-lin
                         <div>
                           {
                             (() => {
-                              if (this.props.DelistContainer.data && this.props.DelistContainer.data.sup_sales_table && (this.props.DelistContainer.supplierImpactTableSpinner == 1)) {
+                              if (this.props.DelistContainer.data && this.props.DelistContainer.data.sup_sales_table && (this.props.DelistContainer.supplierImpactTableSpinner == 1)) {
 
 
                                 return (
@@ -1237,12 +1404,12 @@ export class DelistContainer extends React.PureComponent { // eslint-disable-lin
                                       <TableHeaderColumn row="1" colSpan="4" dataSort={true}
                                                          dataAlign="center">After</TableHeaderColumn>
                                       <TableHeaderColumn row="2" dataField="predicted_value_share"
-                                                         dataFormat={formatSales} dataAlign="center">Total value from
+                                                         dataFormat={formatSales} thStyle={{whiteSpace: 'normal'}} dataAlign="center">Total value from
                                         supplier</TableHeaderColumn>
-                                      <TableHeaderColumn row="2" dataField="value_loss_share" dataFormat={formatSales}
+                                      <TableHeaderColumn row="2" dataField="value_loss_share" thStyle={{whiteSpace: 'normal'}} dataFormat={formatSales}
                                                          dataAlign="center">Direct value loss from delisted
                                         products</TableHeaderColumn>
-                                      <TableHeaderColumn row="2" dataField="value_gain_share" dataFormat={formatSales}
+                                      <TableHeaderColumn row="2" dataField="value_gain_share" thStyle={{whiteSpace: 'normal'}} dataFormat={formatSales}
                                                          dataAlign="center">Value gained from
                                         substitution</TableHeaderColumn>
                                       <TableHeaderColumn row="2" dataField="value_impact" dataFormat={formatSales}
@@ -1256,12 +1423,12 @@ export class DelistContainer extends React.PureComponent { // eslint-disable-lin
                                       <TableHeaderColumn row="1" colSpan="4" dataSort={true}
                                                          dataAlign="center">After</TableHeaderColumn>
                                       <TableHeaderColumn row="2" dataField="predicted_volume_share"
-                                                         dataFormat={formatVolume} dataAlign="center">Total value from
+                                                         dataFormat={formatVolume} thStyle={{whiteSpace: 'normal'}} dataAlign="center">Total value from
                                         supplier</TableHeaderColumn>
                                       <TableHeaderColumn row="2" dataField="vols_loss_share" dataFormat={formatVolume}
-                                                         dataAlign="center">Direct value loss from delisted
+                                                         thStyle={{whiteSpace: 'normal'}} dataAlign="center">Direct value loss from delisted
                                         products</TableHeaderColumn>
-                                      <TableHeaderColumn row="2" dataField="vols_gain_share" dataFormat={formatVolume}
+                                      <TableHeaderColumn row="2" thStyle={{whiteSpace: 'normal'}} dataField="vols_gain_share" dataFormat={formatVolume}
                                                          dataAlign="center">Value gained from
                                         substitution</TableHeaderColumn>
                                       <TableHeaderColumn row="2" dataField="vol_impact" dataFormat={formatVolume}
@@ -1323,32 +1490,32 @@ export class DelistContainer extends React.PureComponent { // eslint-disable-lin
                                         search={true}
                                         exportCSV={true}
                                       >
-                                        <TableHeaderColumn dataField="productcode" dataFormat={supplierPopUpProduct}
+                                        <TableHeaderColumn dataField="productcode" thStyle={{whiteSpace: 'normal'}} tdStyle={{whiteSpace: 'normal'}} dataFormat={supplierPopUpProduct}
                                                            isKey={true} dataSort={true} dataAlign="center">Delisted
                                           product</TableHeaderColumn>
-                                        <TableHeaderColumn dataField="delist_pred_value" dataFormat={formatSales}
+                                        <TableHeaderColumn dataField="delist_pred_value" thStyle={{whiteSpace: 'normal'}} dataFormat={formatSales}
                                                            dataSort={true} dataAlign="center" width="9%">Predicted
                                           Value</TableHeaderColumn>
-                                        <TableHeaderColumn dataField="delist_pred_vol" dataFormat={formatVolume}
+                                        <TableHeaderColumn dataField="delist_pred_vol" thStyle={{whiteSpace: 'normal'}} dataFormat={formatVolume}
                                                            dataSort={true} dataAlign="center" width="9%">Predicted
                                           Volume</TableHeaderColumn>
-                                        <TableHeaderColumn dataField="delist_value_loss" dataFormat={formatSales}
+                                        <TableHeaderColumn dataField="delist_value_loss" thStyle={{whiteSpace: 'normal'}} dataFormat={formatSales}
                                                            dataSort={true} dataAlign="center" width="8%">Value
                                           loss</TableHeaderColumn>
-                                        <TableHeaderColumn dataField="delist_vol_loss" dataFormat={formatVolume}
+                                        <TableHeaderColumn dataField="delist_vol_loss" thStyle={{whiteSpace: 'normal'}} dataFormat={formatVolume}
                                                            dataSort={true} dataAlign="center">Volume
                                           loss</TableHeaderColumn>
-                                        <TableHeaderColumn dataField="substitute_supplier" dataSort={true}
+                                        <TableHeaderColumn dataField="substitute_supplier" dataSort={true} tdStyle={{whiteSpace: 'normal'}}
                                                            dataAlign="center">Substituting Supplier</TableHeaderColumn>
                                         <TableHeaderColumn dataField="substituteproductcode"
-                                                           dataFormat={supplierPopUpSubsProduct} dataSort={true}
+                                                           dataFormat={supplierPopUpSubsProduct} thStyle={{whiteSpace: 'normal'}} tdStyle={{whiteSpace: 'normal'}} dataSort={true}
                                                            dataAlign="center" width="9%">Substituting
                                           Product</TableHeaderColumn>
-                                        <TableHeaderColumn dataField="substitute_value_gain" dataFormat={formatSales}
+                                        <TableHeaderColumn dataField="substitute_value_gain" thStyle={{whiteSpace: 'normal'}} dataFormat={formatSales}
                                                            dataSort={true} dataAlign="center" width="9%">Value gain due
                                           to
                                           substitution</TableHeaderColumn>
-                                        <TableHeaderColumn dataField="substitute_vol_gain" dataFormat={formatVolume}
+                                        <TableHeaderColumn dataField="substitute_vol_gain" thStyle={{whiteSpace: 'normal'}} dataFormat={formatVolume}
                                                            dataSort={true} dataAlign="center">Volume gain due to
                                           substitution</TableHeaderColumn>
 
@@ -1440,123 +1607,123 @@ export class DelistContainer extends React.PureComponent { // eslint-disable-lin
                                 }
                               })()
                             }
-                              </div>
-                              </Modal.Body>
-
-                              </Modal>
-                              </div>
-                              </div>
-
-                              </div>
-                              )
-                              }
-                            else {
-                            return (
-                            <div className="selectAttrituteIndicator" style={{
-                              width: '78%',
-                              marginLeft: '22%'
-                            }}>
-                            <div>
-                            <div> ----- Please select the filters to get started ------</div>
-                            </div>
-                            </div>
-
-                            )
-                          }
-                            })()}
-
-
                           </div>
+                        </Modal.Body>
 
+                      </Modal>
                     </div>
+                  </div>
 
-                    )
-                    }
-          }
+                </div>
+              )
+            }
+            else {
+              return (
+                <div className="selectAttrituteIndicator" style={{
+                  width: '78%',
+                  marginLeft: '22%'
+                }}>
+                  <div>
+                    <div> ----- Please select the filters to get started ------</div>
+                  </div>
+                </div>
 
-          DelistContainer.propTypes = {
-          dispatch: PropTypes.func.isRequired,
-        };
+              )
+            }
+          })()}
 
-          const mapStateToProps = createStructuredSelector({
-          DelistContainer: makeSelectDelistContainer(),
-        });
 
-          function mapDispatchToProps(dispatch) {
-          return {
-          onApiFetch: (e) => dispatch(apiFetch(e)),
-          onDataUrlParams: (e) => dispatch(dataUrlParams(e)),
-          onUrlParams: (e) => dispatch(UrlParams(e)),
+        </div>
 
-          //TABS
-          onWeekClick: (e) => dispatch(WeekClick(e)),
-          onStoreClick: (e) => dispatch(StoreClick(e)),
+      </div>
 
-          //BREADCRUMBS
-          onWeekTabClick: (e) => dispatch(WeekTabClick(e)),
-          onStoreTabClick: (e) => dispatch(StoreTabClick(e)),
+    )
+  }
+}
 
-          //SEARCH RESULT FOR SUPPLIER TABLE
-          onGenerateTextBoxQueryString: (e) => dispatch(GenerateTextBoxQueryString(e.target.value)),
+DelistContainer.propTypes = {
+  dispatch: PropTypes.func.isRequired,
+};
 
-          //SEARCH RESULT FOR DELIST TABLE
-          onGenerateTextBoxQueryStringDelist: (e) => dispatch(GenerateTextBoxQueryStringDelist(e.target.value)),
+const mapStateToProps = createStructuredSelector({
+  DelistContainer: makeSelectDelistContainer(),
+});
 
-          //TABLE TYPE FOR DELIST
-          onTableType: (e) => dispatch(tableType(e)),
+function mapDispatchToProps(dispatch) {
+  return {
+    onApiFetch: (e) => dispatch(apiFetch(e)),
+    onDataUrlParams: (e) => dispatch(dataUrlParams(e)),
+    onUrlParams: (e) => dispatch(UrlParams(e)),
 
-          //DELIST PAGINATION TABLE
-          ondelistTable: (e) => dispatch(delistTable(e)),
+    //TABS
+    onWeekClick: (e) => dispatch(WeekClick(e)),
+    onStoreClick: (e) => dispatch(StoreClick(e)),
 
-          //SUPPLIER PAGINATION TABLE
-          onsupplierPagination: (e) => dispatch(supplierPagination(e)),
+    //BREADCRUMBS
+    onWeekTabClick: (e) => dispatch(WeekTabClick(e)),
+    onStoreTabClick: (e) => dispatch(StoreTabClick(e)),
 
-          //SUPPLIER POPUP PAGINATION TABLE
-          onsupplierPopupPagination: (e) => dispatch(supplierPopupPagination(e)),
+    //SEARCH RESULT FOR SUPPLIER TABLE
+    onGenerateTextBoxQueryString: (e) => dispatch(GenerateTextBoxQueryString(e.target.value)),
 
-          //DELIST PAGINATION TABLE
-          ondelistPagination: (e) => dispatch(delistPagination(e)),
+    //SEARCH RESULT FOR DELIST TABLE
+    onGenerateTextBoxQueryStringDelist: (e) => dispatch(GenerateTextBoxQueryStringDelist(e.target.value)),
 
-          //DELIST POPUP PAGINATION TABLE
-          ondelistPopupPagination: (e) => dispatch(delistPopupPagination(e)),
+    //TABLE TYPE FOR DELIST
+    onTableType: (e) => dispatch(tableType(e)),
 
-          onTableDataFetch: (e) => dispatch(tableDataFetch(e)),
+    //DELIST PAGINATION TABLE
+    ondelistTable: (e) => dispatch(delistTable(e)),
 
-          // POPUP FOR SUBSTITUTE TABLE
-          onSubstitutesClick: (e) => dispatch(SubstitutesClick(e)),
-          onSubstitutesClickSendLongDesc: (e) => dispatch(SubstitutesClickSendLongDesc(e)),
+    //SUPPLIER PAGINATION TABLE
+    onsupplierPagination: (e) => dispatch(supplierPagination(e)),
 
-          // POPUP FOR SUPPLIER IMPACT TABLE TABLE
-          onSupplierImpactTableClick: (e) => dispatch(SupplierImpactTableClick(e)),
+    //SUPPLIER POPUP PAGINATION TABLE
+    onsupplierPopupPagination: (e) => dispatch(supplierPopupPagination(e)),
 
-          onWaterfallValueChart: (e) => dispatch(WaterfallValueChart(e)),
+    //DELIST PAGINATION TABLE
+    ondelistPagination: (e) => dispatch(delistPagination(e)),
 
-          // onGenerateTable: (e) => dispatch(generateTable(e)),
-          onGenerateSideFilter: (e) => dispatch(generateSideFilter(e)),
-          onFilterReset: (e) => dispatch(generateSideFilterReset(e)),
-          onGenerateUrlParams: (e) => dispatch(generateUrlParams(e)),
-          onGenerateUrlParamsString: (e) => dispatch(generateUrlParamsString(e)),
+    //DELIST POPUP PAGINATION TABLE
+    ondelistPopupPagination: (e) => dispatch(delistPopupPagination(e)),
 
-          onGenerateFilterParamsString: (e) => dispatch(generateFilterParamsString(e)),
+    onTableDataFetch: (e) => dispatch(tableDataFetch(e)),
 
-          onWaterfall: (e) => dispatch(WaterfallValueChart(e)),
-          ondelist: (e) => dispatch(delistTable(e)),
-          onwaterfallSpinner: (e) => dispatch(WaterfallSpinnerSuccess(e)),
-          onwaterfallProfitSpinner: (e) => dispatch(WaterfallProfitSpinnerSuccess(e)),
-          onSupplierImpactTableSpinner: (e) => dispatch(SupplierImpactTableSpinnerSuccess(e)),
+    // POPUP FOR SUBSTITUTE TABLE
+    onSubstitutesClick: (e) => dispatch(SubstitutesClick(e)),
+    onSubstitutesClickSendLongDesc: (e) => dispatch(SubstitutesClickSendLongDesc(e)),
 
-          //SUPPLIER POPUP SPINNER
-          onSupplierPopupTableSpinner: (e) => dispatch(SupplierPopupTableSpinnerSuccess(e)),
-          onDelistProductTableSpinner: (e) => dispatch(DelistProductTableSpinnerSuccess(e)),
+    // POPUP FOR SUPPLIER IMPACT TABLE TABLE
+    onSupplierImpactTableClick: (e) => dispatch(SupplierImpactTableClick(e)),
 
-          //DELIST DEFAULT VIEW - EMPTY SCREEN
-          onDelistDefaultView: (e) => dispatch(onDelistDefaultView(e)),
+    onWaterfallValueChart: (e) => dispatch(WaterfallValueChart(e)),
 
-          //DELIST POPUP TABLE SPINNER
-          onDelistPopupTableSpinnerSuccess: (e) => dispatch(DelistPopupTableSpinnerSuccess(e)),
+    // onGenerateTable: (e) => dispatch(generateTable(e)),
+    onGenerateSideFilter: (e) => dispatch(generateSideFilter(e)),
+    onFilterReset: (e) => dispatch(generateSideFilterReset(e)),
+    onGenerateUrlParams: (e) => dispatch(generateUrlParams(e)),
+    onGenerateUrlParamsString: (e) => dispatch(generateUrlParamsString(e)),
 
-          //TESTING AJAX     //PAGINATION FOR DEMO TABLE
-          onAjaxClick: (e) => dispatch(ajaxClick(e)),
+    onGenerateFilterParamsString: (e) => dispatch(generateFilterParamsString(e)),
+
+    onWaterfall: (e) => dispatch(WaterfallValueChart(e)),
+    ondelist: (e) => dispatch(delistTable(e)),
+    onwaterfallSpinner: (e) => dispatch(WaterfallSpinnerSuccess(e)),
+    onwaterfallProfitSpinner: (e) => dispatch(WaterfallProfitSpinnerSuccess(e)),
+    onSupplierImpactTableSpinner: (e) => dispatch(SupplierImpactTableSpinnerSuccess(e)),
+
+    //SUPPLIER POPUP SPINNER
+    onSupplierPopupTableSpinner: (e) => dispatch(SupplierPopupTableSpinnerSuccess(e)),
+    onDelistProductTableSpinner: (e) => dispatch(DelistProductTableSpinnerSuccess(e)),
+
+    //DELIST DEFAULT VIEW - EMPTY SCREEN
+    onDelistDefaultView: (e) => dispatch(onDelistDefaultView(e)),
+
+    //DELIST POPUP TABLE SPINNER
+    onDelistPopupTableSpinnerSuccess: (e) => dispatch(DelistPopupTableSpinnerSuccess(e)),
+
+    //TESTING AJAX     //PAGINATION FOR DEMO TABLE
+    onAjaxClick: (e) => dispatch(ajaxClick(e)),
 
     //CASCADING FILTERS
     onUrlParamsData: (e) => dispatch(urlParamsData(e)),
@@ -1565,11 +1732,14 @@ export class DelistContainer extends React.PureComponent { // eslint-disable-lin
 
     //Saving scenario
     onSaveScenarioName: (e) => dispatch(saveScenarioName(e.target.value)),
+    onUpdateOrClearScenarioName: (e) => dispatch(saveScenarioName(e)),
     onSaveScenarioFlag: (e) => dispatch(saveScenarioFlag(e)),
     onSaveScenarioResponse: (e) => dispatch(updateSaveScenarioResponse(e)),
     onSaveTagName: (e) => dispatch(saveTagName(e.target.value)),
 
-        };
-        }
+    onEditScenarioOverWrite: (e) => dispatch(editScenarioOverWrite(e)),
 
-          export default connect(mapStateToProps, mapDispatchToProps)(DelistContainer);
+  };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(DelistContainer);

@@ -46,7 +46,7 @@ let gettingUserDetails = () =>{
 
 }
 
-const host_url="http://172.20.181.88:8000";
+const host_url="http://172.20.181.16:8000";
 //------------------------------- Scenario Data Fetch Page Load ------------------------------------------
 export function* generateDefaultScenarioData() {
   //console.log('generateUnmatchedTableFetch saga');

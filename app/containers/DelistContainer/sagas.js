@@ -76,105 +76,43 @@ let gettingUserDetails = () => {
   return (cookie_params);
 }
 
-let host_url = "http://172.20.181.88:8000"
+let host_url = "http://172.20.181.16:8000"
 
 // All sagas to be loaded
+
+//------------------------------- Supplier Table------------------------------------------
 export function* generateApiFetch() {
 
   let urlName = yield select(selectDelistContainerDomain());
-  // let urlParams = urlName.get("dataUrlparams");
   let urlParams = "";
+  let week_no_data = urlName.get('weekNumber');
+  let store_type = urlName.get('storeType');
+  let urlParamsString = urlName.get('urlParamsString');
 
-  //Adding the user information
-  let cookie_params=gettingUserDetails();
-  urlParams =urlParams +"&"+cookie_params;
-
-  function isEmpty(obj) {
-    for (var key in obj) {
-      if (obj.hasOwnProperty(key))
-        return false;
-    }
-    return true;
-  }
-
-  let pagination_data = "";
-  if (!(urlName.get('supplierTablePagination') == "")) {
-    pagination_data = urlName.get('supplierTablePagination');
-
-  }
-
-  if (!(pagination_data == "")) {
-    urlParams = urlParams + "&" + pagination_data;
-  } else {
-    // alert("empty");
-  }
-
-  let search_data = "";
-  if (!(urlName.get('searchSupplierTable') == "")) {
-    search_data = urlName.get('searchSupplierTable');
-  }
-
-
-  if (!(search_data == "")) {
-    urlParams = urlParams + "&" + "supplier_search=" + search_data;
-  } else {
-    // alert("empty");
-  }
-
-  let week_no_data = "";
-  if (!(urlName.get('weekNumber') == "")) {
-    week_no_data = urlName.get('weekNumber');
-  }
 
   if (!(week_no_data == "")) {
     urlParams = urlParams + "&" + week_no_data;
-  } else {
-    // alert("empty");
-  }
-
-  let store_type = "";
-  if (!(urlName.get('storeType') == "")) {
-    store_type = urlName.get('storeType');
   }
 
   if (!(store_type == "")) {
     urlParams = urlParams + "&" + store_type;
-
-  } else {
-    // alert("empty");
-  }
-
-
-  let urlParamsString = "";
-  if (!(typeof(urlParamsString) == "undefined") && !(urlParamsString == "")) {
-    // if (!(urlName.get('urlParamsString') == "")) {
-
-    urlParamsString = urlName.get('urlParamsString');
   }
 
   if (!(urlParamsString == "")) {
     urlParams = urlParams + "&" + urlParamsString;
-  } else {
-    // alert("empty");
-  }
-
-  if (!(urlParams == "")) {
-    urlParams = "?" + urlParams.replace('&', '');
   }
 
 
+  //Adding the user information
+  let cookie_params=gettingUserDetails();
+  urlParams =urlParams +"&"+cookie_params;
+  urlParams = urlParams.replace('&', '');
 
-  // let paramstring = '';
-  // if (!(isEmpty(urlParams))) {
-  //   // console.log("generateApiFetch");
-  //   Object.keys(urlParams).map(obj => {
-  //     paramstring += `&${obj}=${urlParams[obj]}`;
-  //   })
 
 
   try {
     const data = yield call(request, host_url +
-      `/api/product_impact_supplier_table${urlParams}`);
+      `/api/product_impact_supplier_table?${urlParams}`);
       // `http://172.20.247.16:8000/api/product_impact_supplier_table${urlParams}`);
     let spinnerCheck = 1;
 
@@ -182,12 +120,10 @@ export function* generateApiFetch() {
     yield put(apiFetchSuccess(data));
     yield put(SupplierImpactTableSpinnerSuccess(spinnerCheck));
   } catch (err) {
-    // console.log(err);
     let spinnerCheck = 2;
     yield put(SupplierImpactTableSpinnerSuccess(spinnerCheck));
   }
 }
-
 
 export function* doApiFetch() {
   const watcher = yield takeLatest(API_FETCH, generateApiFetch);
@@ -195,6 +131,7 @@ export function* doApiFetch() {
   yield cancel(watcher);
 }
 
+//------------------------------- Substitute product pop up Table------------------------------------------
 export function* generateSubstitutesFetch() {
   const urlName = yield select(selectDelistContainerDomain());
   let urlParams = urlName.get('substitutesData');
@@ -203,41 +140,7 @@ export function* generateSubstitutesFetch() {
   let cookie_params=gettingUserDetails();
   urlParams =urlParams +"&"+cookie_params;
 
-  function isEmpty(obj) {
-    for (var key in obj) {
-      if (obj.hasOwnProperty(key))
-        return false;
-    }
-    return true;
-  }
 
-  let pagination_data = "";
-  if (!(urlName.get('delistPopupTablePagination') == "")) {
-    pagination_data = urlName.get('delistPopupTablePagination');
-  }
-
-  if (!(pagination_data == "")) {
-    urlParams = urlParams + "&" + pagination_data;
-  } else {
-    // alert("empty");
-  }
-
-  // let paramstring = '';
-  // if (!(isEmpty(urlParams))) {
-  //   console.log("generateApiFetch");
-  //   Object.keys(urlParams).map(obj => {
-  //     paramstring += `&${obj}=${urlParams[obj]}`;
-  //   })
-  //   paramstring = paramstring + '&id=' + urlParams;
-  //   paramstring = +'/?' + paramstring.replace('&', '') + 'delist_product=' + substitutesData + '&' + 'delist_popup_page=' + pagination_data;
-  // } else if(pagination_data != undefined){
-  //   console.log("else if of sagas");
-  //   paramstring = '/?' + paramstring.replace('&', '') + 'delist_product=' + substitutesData + '&' + 'delist_popup_page=' + pagination_data;
-  //   // paramstring = '?' + pagination_data;
-  //   alert(paramstring);
-  // } else {
-  //
-  // }
 
   try {
     const data = yield call(request,host_url +
@@ -258,7 +161,7 @@ export function* doSubstitutesFetch() {
   yield cancel(watcher);
 }
 
-// FOR SUPPLIER POPUP TABLE
+//------------------------------- Supplier Table pop up------------------------------------------
 export function* generateSupplierPopupTableFetch() {
   const urlName = yield select(selectDelistContainerDomain());
   let urlParams = urlName.get('supplierPopupTableData');
@@ -267,33 +170,17 @@ export function* generateSupplierPopupTableFetch() {
   let cookie_params=gettingUserDetails();
   urlParams =urlParams +"&"+cookie_params;
 
-  function isEmpty(obj) {
-    for (var key in obj) {
-      if (obj.hasOwnProperty(key))
-        return false;
-    }
-    return true;
-  }
-
-  let pagination_data = "";
-  if (!(urlName.get('supplierPopupTablePagination') == "")) {
-    pagination_data = urlName.get('supplierPopupTablePagination');
-  }
-
-  if (!(pagination_data == "")) {
-    urlParams = urlParams + "&" + pagination_data;
-  } else {
-    // alert("empty");
-  }
 
 
   try {
     const data = yield call(request,host_url +
       // `http://172.20.246.143:8000/api/supplier_table_popup?supplier=${urlParams}`);
       `/api/supplier_table_popup?supplier=${urlParams}`);
+
     let spinnerCheck = 1;
     yield put(SupplierPopupTableDataFetchSuccess(data));
     yield put(SupplierPopupTableSpinnerSuccess(spinnerCheck));
+
   } catch (err) {
     // console.log(err);
     let spinnerCheck = 2;
@@ -301,92 +188,52 @@ export function* generateSupplierPopupTableFetch() {
   }
 }
 
-// FOR SUPPLIER POPUP TABLE
 export function* doSupplierPopupTableFetch() {
   const watcher = yield takeLatest(SUPPLIER_IMPACT_TABLE_DATA_URL, generateSupplierPopupTableFetch);
   yield take(LOCATION_CHANGE);
   yield cancel(watcher);
 }
 
-// DELIST TABLE
+
+//------------------------------- Delist Table pop up------------------------------------------
 
 export function* generateDelistTableFetch() {
   let urlName = yield select(selectDelistContainerDomain());
   let urlParams = "";
 
-  //Adding the user information
-  let cookie_params=gettingUserDetails();
-  urlParams =urlParams +"&"+cookie_params;
+  let week_no_data = urlName.get('weekNumber');
+  let store_type = urlName.get('storeType');
+  let urlParamsString = urlName.get('urlParamsString');
 
-  let pagination_data = "";
-  if (!(urlName.get('delistTablePagination') == "")) {
-    pagination_data = urlName.get('delistTablePagination');
-  }
-
-  if (!(pagination_data == "")) {
-    urlParams = urlParams + "&" + pagination_data;
-  } else {
-    // alert("empty");
-  }
-
-  let search_data = "";
-  if (!(urlName.get('searchDelistTable') == "")) {
-    search_data = urlName.get('searchDelistTable');
-  }
-
-
-  if (!(search_data == "")) {
-    urlParams = urlParams + "&" + "delist_search=" + search_data;
-  } else {
-    // alert("empty");
-  }
-
-  let week_no_data = "";
-  if (!(urlName.get('weekNumber') == "")) {
-    week_no_data = urlName.get('weekNumber');
-  }
 
   if (!(week_no_data == "")) {
     urlParams = urlParams + "&" + week_no_data;
-  } else {
-    // alert("empty");
-  }
-
-  let store_type = "";
-  if (!(urlName.get('storeType') == "")) {
-    store_type = urlName.get('storeType');
   }
 
   if (!(store_type == "")) {
     urlParams = urlParams + "&" + store_type;
-  } else {
-    // alert("empty");
-  }
-
-  let urlParamsString = "";
-  // if (!(urlName.get('urlParamsString') == "")) {
-
-  if (!(typeof(urlParamsString) == "undefined") && !(urlParamsString == "")) {
-    urlParamsString = urlName.get('urlParamsString');
   }
 
   if (!(urlParamsString == "")) {
     urlParams = urlParams + "&" + urlParamsString;
-  } else {
-    // alert("empty");
   }
 
-  if (!(urlParams == "")) {
-    urlParams = "?" + urlParams.replace('&', '');
-  }
+
+  //Adding the user information
+  let cookie_params=gettingUserDetails();
+  urlParams =urlParams +"&"+cookie_params;
+  urlParams = urlParams.replace('&', '');
+
+
 
   try {
 
-    let data = yield call(request, host_url + `/api/product_impact_delist_table` + urlParams);
-    // let data = yield call(request, `http://172.20.247.16:8000/api/product_impact_delist_table` + urlParams);
+    let data = yield call(request, host_url + `/api/product_impact_delist_table?` + urlParams);
+    console.log("delist table",data)
     let spinnerCheck = 1;
     yield put(delistTableSuccess(data));
     yield put(DelistProductTableSpinnerSuccess(spinnerCheck));
+
   } catch (err) {
     // console.log(err);
     let spinnerCheck = 2;
@@ -394,83 +241,55 @@ export function* generateDelistTableFetch() {
   }
 }
 
-
-
 export function* doDelistTableFetch() {
-  console.log("inside delist sagas");
+
   const watcher = yield takeLatest(DELIST_TABLE, generateDelistTableFetch);
   yield take(LOCATION_CHANGE);
   yield cancel(watcher);
 }
 
 
-// WATERFALL CHART - VALIUE
+//------------------------------- Waterfall charts------------------------------------------
 export function* generateWaterfallValueFetch() {
 
   let urlName = yield select(selectDelistContainerDomain());
-
   let urlParams = "";
 
-  //Adding the user information
-  let cookie_params=gettingUserDetails();
-  urlParams =urlParams +"&"+cookie_params;
 
-  let week_no_data = "";
-  if (!(urlName.get('weekNumber') == "")) {
-    week_no_data = urlName.get('weekNumber');
-  }
+  let week_no_data = urlName.get('weekNumber');
+  let store_type = urlName.get('storeType');
+  let urlParamsString = urlName.get('urlParamsString');
+
 
   if (!(week_no_data == "")) {
     urlParams = urlParams + "&" + week_no_data;
-  } else {
-    // alert("empty");
-  }
-
-  let store_type = "";
-  if (!(urlName.get('storeType') == "")) {
-    store_type = urlName.get('storeType');
   }
 
   if (!(store_type == "")) {
     urlParams = urlParams + "&" + store_type;
-  } else {
-    // alert("empty");
   }
 
-let filterParamsString = "";
-  if (!(urlName.get('filterParamsString') == "")) {
-    filterParamsString = urlName.get('filterParamsString');
-    console.log("filterParamsString", filterParamsString);
+  if (!(urlParamsString == "")) {
+    urlParams = urlParams + "&" + urlParamsString;
   }
 
-  if (!(typeof(filterParamsString) == "undefined") && !(filterParamsString == "")) {
-    urlParams = urlParams + "&" + filterParamsString;
+  // let urlparamsDelist = "";
+  // if (!(urlName.get('urlparamsDelist') == "")) {
+  //   urlparamsDelist = urlName.get('urlparamsDelist').replace('?', '');
+  //   urlParams = urlParams + "&" + urlparamsDelist;
+  // }
 
-  } else {
-    // alert("empty");
-  }
-
-  let urlparamsDelist = "";
-  if (!(urlName.get('urlparamsDelist') == "")) {
-    urlparamsDelist = urlName.get('urlparamsDelist').replace('?', '');
-  }
-
-  if (!(urlparamsDelist == "")) {
-    urlParams = urlParams + "&" + urlparamsDelist;
-  } else {
-
-  }
-
-  if (!(urlParams == "")) {
-    urlParams = "?" + urlParams.replace('&', '');
-  }
+  //Adding the user information
+  let cookie_params=gettingUserDetails();
+  urlParams =urlParams +"&"+cookie_params;
+  urlParams = urlParams.replace('&', '');
 
 
   try {
     const data = yield call(request,host_url +
 
       // `http://172.20.244.238:8000/api/product_impact_chart${urlParams}`);
-      `/api/product_impact_chart${urlParams}`);
+      `/api/product_impact_chart?${urlParams}`);
 
     let spinnerCheck = 1;
     yield put(WaterfallValueChartSuccess(data));
@@ -479,7 +298,7 @@ let filterParamsString = "";
     yield put(apiFetch());
     yield put(delistTable());
   } catch (err) {
-    // console.log(err);
+
     let spinnerCheck = 2;
     yield put(WaterfallSpinnerSuccess(spinnerCheck));
     yield put(WaterfallProfitSpinnerSuccess(spinnerCheck));
@@ -492,14 +311,13 @@ export function* doWaterfallChartValueFetch() {
   yield cancel(watcher);
 }
 
-// FILTERS
-/* GENERATE TABLE */
+//------------------------------- Product Impact table ------------------------------------------
+
 export function* generateTable() {
   let urlParamsString = yield select(makeUrlParamsString());
   urlParamsString = urlParamsString.urlParamsString;
   try {
     urlParamsString = urlParamsString.replace('commercial_director', 'commerical_director');
-
     const data = yield call(request, host_url + `/ranging/product_impact_table/?${urlParamsString}`);
 
     yield put(generateTableSuccess(data));
@@ -507,42 +325,34 @@ export function* generateTable() {
     // console.log(err);
   }
 }
+
 export function* doGenerateTable() {
   const watcher = yield takeLatest(GENERATE_TABLE, generateTable);
   yield take(LOCATION_CHANGE);
   yield cancel(watcher);
 }
 
-/* GENERATE SIDE FILTER*/
+//------------------------------- Side Filter ------------------------------------------
 export function* generateSideFilter() {
   let urlName = yield select(selectDelistContainerDomain());
   let urlParamsString = urlName.get('urlParamsString');
+  let urlParams=""
 
-  if (typeof(urlParamsString) == "undefined") {
-    urlParamsString = "";
 
-    //Adding the user information
-    let cookie_params=gettingUserDetails();
-    urlParamsString =cookie_params;
-
-  } else {
-    //Adding the user information
-    let cookie_params=gettingUserDetails();
-    urlParamsString =urlParamsString +"&"+cookie_params;
+  if (urlParamsString !== "" && typeof(urlParamsString)!=="undefined") {
+    urlParams = urlParams + "&" + urlParamsString;
   }
-  // alert(urlParamsString);
+
+  //Adding the user information
+  let cookie_params=gettingUserDetails();
+  urlParams =urlParams +"&"+cookie_params;
+  urlParams = urlParams.replace('&', '');
+
   try {
-    // todo: update url
-    //COMMENT THE BELOW - USED FOR TESTING - SALES REPORTING FILTERS - FOR TESTING PURPOSE
-    // const data = yield call(request,`http://172.20.244.225:8000/api/reporting/competitor_filter_data?${urlParamsString}`);
-    // const data = yield call(request, host_url + `/api/reporting/competitor_filter_data?${urlParamsString}`);
+    console.log(host_url + `/api/product_impact/filter_new?${urlParams}`)
+    const data = yield call(request, host_url + `/api/product_impact/filter_new?${urlParams}`);
+  yield put(generateSideFilterSuccess(data));
 
-    //UNCOMMENT BELOW - USED FOR TESTING
-    const data = yield call(request, host_url + `/api/product_impact/filter_new?${urlParamsString}`);
-    // const data = yield call(request, host_url + `/api/product_impact/filter_data?${urlParamsString}`);
-
-
-    yield put(generateSideFilterSuccess(data));
   } catch (err) {
     // console.log(err);
   }
@@ -554,13 +364,10 @@ export function* doGenerateSideFilter() {
   yield cancel(watcher);
 }
 
-
-/* SIDE FILTER RESET*/
+/* ---- SIDE FILTER RESET*/
 export function* generateSideFilterReset() {
   try {
-    // todo: update url
 
-    // const data = yield call(request, `http://172.20.244.141:8000/api/product_impact/filter_data/`);
     const data = yield call(request, host_url + `/api/product_impact/filter_data/`);
 
     yield put(generateSideFilterSuccess(data));
@@ -569,38 +376,12 @@ export function* generateSideFilterReset() {
   }
 }
 
-
 export function* doSideFilterReset() {
   const watcher = yield takeLatest(SIDE_FILTER_RESET, generateSideFilterReset);
   yield take(LOCATION_CHANGE);
   yield cancel(watcher);
 }
 
-// TESTING AJAX
-
-export function* generateAjaxFetch() {
-  const urlName = yield select(selectDelistContainerDomain());
-  const urlParams = urlName.get('dataUrlparams');
-  let paramstring = '';
-  Object.keys(urlParams).map((obj) => {
-    paramstring += `&${obj}=${urlParams[obj]}`;
-  });
-  paramstring = paramstring.replace('&', '');
-  try {
-    const data = yield call(request,host_url +
-      `/ranging/product_impact_table?${paramstring}`);
-      // `http://172.20.246.146:8000/ranging/product_impact_table?${paramstring}`);
-    yield put(ajaxFetchSuccess(data));
-  } catch (err) {
-    // console.log(err);
-  }
-}
-
-export function* doAjaxFetch() {
-  const watcher = yield takeLatest(TEST_AJAX, generateAjaxFetch);
-  yield take(LOCATION_CHANGE);
-  yield cancel(watcher);
-}
 
 //FILTERS - APPLY BUTTON CLICK
 
@@ -608,10 +389,12 @@ export function* generateRefreshedData() {
   const urlName = yield select(selectDelistContainerDomain());
   const urlParams = urlName.get('dataUrlparams');
   let paramstring = '';
+
   Object.keys(urlParams).map((obj) => {
     paramstring += `&${obj}=${urlParams[obj]}`;
   });
   paramstring = paramstring.replace('&', '');
+
   try {
     const data = yield call(request,host_url +
       `/ranging/product_impact_table?${paramstring}`);
@@ -621,6 +404,7 @@ export function* generateRefreshedData() {
     // console.log(err);
   }
 }
+
 export function* doAjaxApplyBtn() {
   const watcher = yield takeLatest(APPLY_BTN_CLICK, generateRefreshedData);
   yield take(LOCATION_CHANGE);
@@ -632,30 +416,19 @@ export function* doAjaxApplyBtn() {
 /* GENERATE SIDE FILTER*/
 export function* generateSaveScenario() {
   try {
-    // todo: update url
     console.log("Trying to save scenario")
     let urlName = yield select(selectDelistContainerDomain());
     let urlParamsString = urlName.get('urlParamsString');
-    let urlparamsDelist = urlName.get('urlparamsDelist');
-    // let user_id = "user_id=bc";
     let scenarioName = urlName.get('scenarioName');
-    // let sessionID= "session_id=2";
     let tagName = urlName.get('tagName');
+    let cookie_params=gettingUserDetails();
+    let editScenarioOverWrite = urlName.get('editScenarioOverWrite');
 
-    let params = "";
 
-    if ((typeof(urlParamsString) == "undefined") || (urlParamsString == "")) {
-      params = urlparamsDelist.replace('?', '');
-    } else {
-      params = urlParamsString;
-  }
+    let AJAX_args =urlParamsString+"&scenario_name="+scenarioName+"&"+cookie_params+"&"+editScenarioOverWrite;
 
-    let AJAX_args =params+"&scenario_name="+scenarioName;
-    // let AJAX_args =urlParams+"&scenario_name="+scenarioName+'&scenario_tag='+tagName+"&"+user_id+"&"+sessionID ;
 
     //Adding the user information
-    let cookie_params=gettingUserDetails();
-    AJAX_args =AJAX_args +"&"+cookie_params;
 
     console.log(host_url+'/api/npd_impact_save_scenario?' + AJAX_args);
     let data = yield call(request, host_url+'/api/delist_scenario?' + AJAX_args);
@@ -683,7 +456,7 @@ export default [
   // doTableFetch,
   doWaterfallChartValueFetch,
   doSubstitutesFetch, doGenerateSideFilter, doGenerateTable,
-  doAjaxFetch,
+
   doSupplierPopupTableFetch,
   doAjaxApplyBtn,
   doDelistTableFetch,

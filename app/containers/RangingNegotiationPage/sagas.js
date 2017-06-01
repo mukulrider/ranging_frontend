@@ -21,7 +21,7 @@ import {
 
 
 // let nego_host_url="http://dvcmpapp00002uk.dev.global.tesco.org";
-let nego_host_url="http://172.20.181.88:8000";
+let nego_host_url="http://172.20.181.16:8000";
 
 let gettingUserDetails = () =>{
   let getCookie = (name) => {

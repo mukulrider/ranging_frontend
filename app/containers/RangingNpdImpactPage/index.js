@@ -68,6 +68,7 @@ export class RangingNpdImpactPage extends React.PureComponent { // eslint-disabl
 
     //for preselection of filters
     let Preselection=getCookie('Preselection');
+    let NPDfilterPreSelection=getCookie('NPDfilterPreSelection');
 
     if(Preselection){
       this.setState({edit_scenario: true});
@@ -94,6 +95,13 @@ export class RangingNpdImpactPage extends React.PureComponent { // eslint-disabl
       document.cookie = 'Size_PreSelection'+'=;expires=Thu, 01 Jan 1970 00:00:01 GMT;domain=localhost;path=/;';
 
       this.props.onGenerateSideFilter()
+    }
+
+    if(NPDfilterPreSelection){
+      this.props.onSaveFilterSelectionsTillNow(NPDfilterPreSelection);
+      document.cookie = 'NPDfilterPreSelection'+'=;expires=Thu, 01 Jan 1970 00:00:01 GMT;domain=localhost;path=/;';
+      this.props.onGenerateSideFilter()
+
     }
 
   };
@@ -208,11 +216,7 @@ export class RangingNpdImpactPage extends React.PureComponent { // eslint-disabl
                                   <span className="pageModuleTitle"><b>Save Scenario</b>
                                   <span style={{textAlign: 'right', float: 'right'}}
                                         onClick={() => {
-                                          {/*this.props.onSaveTagName('');*/}
-                                          {/*this.props.onSaveScenarioName('');*/}
-                                          {/*this.props.onSaveScenarioResponse('');*/}
                                           this.setState({showSaveScenarioModalFlag: false});
-                                          {/*this.setState({saveScenarioStatus:''});*/}
 
                                         }}>
                                   <b>X</b></span></span>
@@ -434,11 +438,9 @@ export class RangingNpdImpactPage extends React.PureComponent { // eslint-disabl
               <div className="col-xs-4">
                 <Button onClick={() => {
                   this.props.onSaveScenarioResponse('rename');
-                  {/*this.setState({showSaveScenarioOverwriteConfirmationModalFlag: false});*/}
-                  {/*this.setState({showSaveScenarioModalFlag: true});*/}
 
                 }}
-                        style={{display: 'block', marginTop:"1%",marginLeft:'35%'}}>Save As</Button>
+              style={{display: 'block', marginTop:"1%",marginLeft:'13%'}}>Save As</Button>
               </div>
               <div className="col-xs-4">
                 <Button onClick={() => {
@@ -448,7 +450,7 @@ export class RangingNpdImpactPage extends React.PureComponent { // eslint-disabl
 
 
                 }}
-                  style={{display: 'block', marginTop:"1%",marginLeft:'35%'}}>Overwrite</Button>
+                  style={{display: 'block', marginTop:"1%",marginLeft:'13%'}}>Overwrite</Button>
               </div>
               <div className="col-xs-4">
                 <Button onClick={() => {
@@ -459,7 +461,7 @@ export class RangingNpdImpactPage extends React.PureComponent { // eslint-disabl
                   window.location = objString;
 
                 }}
-                        style={{display: 'block', marginTop:"1%",marginLeft:'28%'}}>Go to Scenario Tracker</Button>
+                style={{display: 'block', marginTop:"1%",marginLeft:'13%'}}>Scenario Tracker <span className="glyphicon glyphicon-arrow-right"/></Button>
               </div>
             </div>
 

@@ -53,7 +53,7 @@ import {
   GENERATE_URL_PARAMS_DATA,
   URL_PARAMS,
   SIDE_FILTER_RESET,
-  SAVE_SCENARIO_RESPONSE,SAVE_TAG_NAME,
+  SAVE_SCENARIO_RESPONSE,SAVE_TAG_NAME,EDIT_SCENARIO_OVER_WRITE,
 
   SAVE_SCENARIO,SAVE_SCENARIO_NAME,
   } from './constants';
@@ -250,14 +250,14 @@ export function SubstitutesClickSuccess(data) {
 
 // WATERFALL CHART - VALUE
 export function WaterfallValueChart() {
-  console.log('calling waterfall-----------------------');
+  // console.log('calling waterfall-----------------------');
   return {
     type: WATERFALL_VALUE,
   };
 }
 
 export function WaterfallValueChartSuccess(data) {
-  console.log("waterfall data ---------------------------", data);
+  // console.log("waterfall data ---------------------------", data);
   return {
     type: WATERFALL_VALUE_SUCCESS,
     data,
@@ -275,7 +275,7 @@ export function WaterfallValueChartSuccess(data) {
 
 
 export function WaterfallSpinnerSuccess(spinnerCheck) {
-  console.log("waterfall data ---------------------------", spinnerCheck);
+  // console.log("waterfall data ---------------------------", spinnerCheck);
   return {
     type: WATERFALL_SPINNER_SUCCESS,
     spinnerCheck,
@@ -284,7 +284,7 @@ export function WaterfallSpinnerSuccess(spinnerCheck) {
 
 
 export function WaterfallProfitSpinnerSuccess(spinnerCheck) {
-  console.log("waterfall data Volume---------------------------", spinnerCheck);
+  // console.log("waterfall data Volume---------------------------", spinnerCheck);
   return {
     type: WATERFALL_PROFIT_SPINNER_SUCCESS,
     spinnerCheck,
@@ -293,7 +293,7 @@ export function WaterfallProfitSpinnerSuccess(spinnerCheck) {
 
 // SUPPLIER IMPACT TABLE - SPINNER
 export function SupplierImpactTableSpinnerSuccess(spinnerCheck) {
-  console.log("SUPPLIER IMPACT TABLE---------------------------", spinnerCheck);
+  // console.log("SUPPLIER IMPACT TABLE---------------------------", spinnerCheck);
   return {
     type: SUPPLIER_IMPACT_SPINNER_SUCCESS,
     spinnerCheck,
@@ -302,7 +302,7 @@ export function SupplierImpactTableSpinnerSuccess(spinnerCheck) {
 
 // SUPPLIER POPUP TABLE - SPINNER
 export function SupplierPopupTableSpinnerSuccess(spinnerCheck) {
-  console.log("SUPPLIER POPUP TABLE---------------------------", spinnerCheck);
+  // console.log("SUPPLIER POPUP TABLE---------------------------", spinnerCheck);
   return {
     type: SUPPLIER_POPUP_SPINNER_SUCCESS,
     spinnerCheck,
@@ -311,7 +311,7 @@ export function SupplierPopupTableSpinnerSuccess(spinnerCheck) {
 
 // DELIST PRODUCT TABLE - SPINNER
 export function DelistProductTableSpinnerSuccess(spinnerCheck) {
-  console.log("DELIST PRODUCT TABLE---------------------------", spinnerCheck);
+  // console.log("DELIST PRODUCT TABLE---------------------------", spinnerCheck);
   return {
     type: DELIST_PRODUCT_SPINNER_SUCCESS,
     spinnerCheck,
@@ -320,7 +320,7 @@ export function DelistProductTableSpinnerSuccess(spinnerCheck) {
 
 // DELIST POPUP TABLE - SPINNER
 export function DelistPopupTableSpinnerSuccess(spinnerCheck) {
-  console.log("DELIST POPUP TABLE---------------------------", spinnerCheck);
+  // console.log("DELIST POPUP TABLE---------------------------", spinnerCheck);
   return {
     type: DELIST_POPUP_SPINNER_SUCCESS,
     spinnerCheck,
@@ -329,7 +329,7 @@ export function DelistPopupTableSpinnerSuccess(spinnerCheck) {
 
 // DELIST DEFAULT VIEW
 export function onDelistDefaultView(defaultViewCheck) {
-  console.log("DELIST DEFAULT VIEW---------------------------", defaultViewCheck);
+  // console.log("DELIST DEFAULT VIEW---------------------------", defaultViewCheck);
   return {
     type: DELIST_DEFAULT_VIEW,
     defaultViewCheck,
@@ -440,7 +440,7 @@ export function ApplyClick() {
 //--------------------- SAVE SCENARIO -------------------------------
 
 export function saveScenarioFlag() {
-  console.log('Saving url params in action');
+  // console.log('Saving url params in action');
   return {
     type: SAVE_SCENARIO
   };
@@ -474,4 +474,11 @@ export function saveTagName(data) {
   };
 };
 
+
+export function editScenarioOverWrite(data) {
+  return {
+    type: EDIT_SCENARIO_OVER_WRITE,
+    data
+  };
+};
 

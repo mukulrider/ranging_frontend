@@ -15,44 +15,37 @@ import Button from 'components/button';
 import styles from './style.scss';
 
 class NewSelector2 extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
+
   updateUrl = (category) => {
     let queryString = '';
     [...this.refs.selector.querySelectorAll('input')].map(obj => {
       if (obj.checked == true) {
-        console.log(obj);
         let category = obj.id.split('__');
 
+      if (category[0] === 'long_description') {
 
-        // if (category[0] === 'buying_controller') {
-        //   this.props.onGenerateBuyingController(category[category.length - 1])
-        // }
-        // if (category[1] === 'category_director') {
-        //   // this.props.onGenerateBuyingController(category[category.length - 1])
-        //   this.props.onGenerateCategoryDirector(category[category.length - 2])
-        // }
-        queryString = queryString + `${category[0]}=${category[category.length - 1]}&`;
-      }
+          let product_code=category[2].slice(-8);
+          queryString = queryString + `base_product_number=${product_code}&`;
+        }else {
+          queryString = queryString + `${category[0]}=${category[category.length - 1]}&`;
+        }
+        // queryString = queryString + `${category[0]}=${category[category.length - 1]}&`;
+        }
+
     });
     queryString = queryString.substring(0, queryString.length - 1);
-    // alert(queryString);
+
+
     // APPEND URL PARAMS
     this.props.onGenerateUrlParamsString(queryString);
-    // let filterParam = this.props.onGenerateUrlParamsString(queryString);
     this.props.onGenerateFilterParamsString(queryString);
-    // this.props.onGenerateUrlParamsData();
-    // this.updateNewState(newUrl + '?' + queryString);
-    // browserHistory.push(newUrl + '?' + queryString);
   };
 
   componentDidMount = () => {
-    console.log('location->>> ');
-    // this.props.onGenerateUrlParamsString(this.props.location.search.substring(1, this.props.location.search.length));
-    // this.props.onGenerateFilterParamsString(this.props.location.search.substring(1, this.props.location.search.length));
-    // this.props.onGenerateTable();
+
   };
   componentDidUpdate = () => {
-    console.log('NewSelector componentDidUpdate', this.props.location);
-    // this.props.onGenerateTable();
+
   };
 
   constructor(props) {
@@ -227,7 +220,7 @@ class NewSelector2 extends React.PureComponent { // eslint-disable-line react/pr
                   let filterData = this.props.filterUrlParamString;
                   console.log('filterData',filterData);
                   if(!(typeof(filterData) == "undefined")){
-                  if (filterData.includes("buying_controller") && filterData.includes("long_description") ) {
+                  if (filterData.includes("buying_controller") && filterData.includes("base_product_number") ) {
                     this.props.onwaterfallSpinner(0);
                     this.props.onwaterfallProfitSpinner(0);
                     this.props.onSupplierImpactTableSpinner(0);
@@ -242,6 +235,7 @@ class NewSelector2 extends React.PureComponent { // eslint-disable-line react/pr
 
               <div className="text-center">
               <Button onClick={() => {
+              this.props.onDelistDefaultView(0);
               this.clearFilter();
               }}>Reset Filters</Button>&nbsp;&nbsp;
               </div>

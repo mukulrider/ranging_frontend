@@ -495,6 +495,12 @@ export class RangingNpdPage extends React.PureComponent { // eslint-disable-line
             <Button buttonType={'primary'}
                     style={{marginTop:"7px"}}
                     onClick={() => {
+                      let urlParamsString=this.props.RangingNpdPage.urlParamsString;
+
+                      if(urlParamsString!==''){
+                        document.cookie = `NPDfilterPreSelection=${urlParamsString};domain=localhost;path=/;`;
+                      }
+
 
                       let objString = '/ranging/npd-impact';
                       window.location = objString;

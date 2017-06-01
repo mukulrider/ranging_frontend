@@ -1235,7 +1235,7 @@ export class RangingNegotiationPage extends React.PureComponent { // eslint-disa
 
 
                                     for(let i=0;i<productSelections.length;i++){
-                                      objString += 'long_description=' + productSelections[i] + '&'
+                                      objString += 'base_product_number=' + productSelections[i] + '&'
                                     }
 
                                     objString = objString.slice(0, objString.length - 1);

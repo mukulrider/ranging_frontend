@@ -47,7 +47,7 @@ import {
   STORE_BREADCRUMB,
   URL_PARAMS,
   SAVE_SCENARIO_RESPONSE,
-  SAVE_SCENARIO_NAME,SAVE_TAG_NAME
+  SAVE_SCENARIO_NAME,SAVE_TAG_NAME,EDIT_SCENARIO_OVER_WRITE
 } from './constants';
 
 const initialState = fromJS(
@@ -67,6 +67,7 @@ const initialState = fromJS(
     scenarioName:'',
     tagName:'',
     saveScenarioResponse:'',
+    editScenarioOverWrite:"overwrite=0",
     waterFallChart2Data_1: [{name: ' Product Revenue ', value: 420000},
       {name: ' Services Revenue ', value: 210000},
       {name: ' Employee Revenue ', value: 190000},
@@ -172,44 +173,36 @@ function delistContainerReducer(state = initialState, action) {
 
     // WATERFALL CHART - VALUE
     case WATERFALL_VALUE_SUCCESS:
-      console.log('water fall');
       return state.set('waterfallValue', action.data);
 
     // WATERFALL CHART - VALUE - SPINNER SUCCESS
     case WATERFALL_SPINNER_SUCCESS:
-      console.log('water fall spinner');
       return state.set('waterfallSpinner', action.spinnerCheck);
 
 
 
     // WATERFALL CHART - VOLUME - SPINNER SUCCESS
     case WATERFALL_PROFIT_SPINNER_SUCCESS:
-      console.log('water fall volume spinner');
       return state.set('waterfallVolumeSpinner', action.spinnerCheck);
 
     // SUPPLIER IMPACT TABLE - SPINNER SUCCESS
     case SUPPLIER_IMPACT_SPINNER_SUCCESS:
-      console.log('SUPPLIER IMPACT TABLE SPINNER');
       return state.set('supplierImpactTableSpinner', action.spinnerCheck);
 
     // SUPPLIER POPUP TABLE - SPINNER SUCCESS
     case SUPPLIER_POPUP_SPINNER_SUCCESS:
-      console.log('SUPPLIER POPUP TABLE SPINNER');
       return state.set('supplierPopupTableSpinner', action.spinnerCheck);
 
     // DELIST PRODUCT TABLE - SPINNER SUCCESS
     case DELIST_PRODUCT_SPINNER_SUCCESS:
-      console.log('DELIST PRODUCT TABLE SPINNER');
       return state.set('delistProductTableSpinner', action.spinnerCheck);
 
  // DELIST POPUP TABLE - SPINNER SUCCESS
     case DELIST_POPUP_SPINNER_SUCCESS:
-      console.log('DELIST POPUP TABLE SPINNER');
       return state.set('delistPopupTableSpinner', action.spinnerCheck);
 
 // DELIST DEFAULT VIEW CHECK
     case DELIST_DEFAULT_VIEW:
-      console.log('DELIST DEFAULT VIEW CHECK');
       return state.set('delistDefaultView', action.defaultViewCheck);
 
 
@@ -240,6 +233,8 @@ function delistContainerReducer(state = initialState, action) {
       return state.set('saveScenarioResponse', action.data);
     case SAVE_TAG_NAME:
       return state.set('tagName', action.data);
+    case EDIT_SCENARIO_OVER_WRITE:
+      return state.set('editScenarioOverWrite', action.data);
 
     default:
       return state;

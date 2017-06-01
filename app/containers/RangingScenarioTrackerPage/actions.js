@@ -5,7 +5,8 @@
  */
 
 import {
-  DEFAULT_ACTION,ALL_SCENARIO_TABLE_FETCH,ALL_SCENARIO_TABLE_SUCCESS,TAB_CHANGE,DELETE_SCENARIO
+  DEFAULT_ACTION,ALL_SCENARIO_TABLE_FETCH,ALL_SCENARIO_TABLE_SUCCESS,TAB_CHANGE,DELETE_SCENARIO,
+  LOADING_INDICATION,LOADING_INDICATION_TEXT,
 } from './constants';
 
 export function defaultAction() {
@@ -50,3 +51,19 @@ export function deleteScenario(data) {
   };
 }
 
+
+//--------------------Loading page---------------------
+
+export function updateLoadingIndicationStatus(flag) {
+  return {
+    type: LOADING_INDICATION,
+    flag
+  }
+}
+
+export function updateLoadingIndicationText(data) {
+  return {
+    type: LOADING_INDICATION_TEXT,
+    data
+  }
+}

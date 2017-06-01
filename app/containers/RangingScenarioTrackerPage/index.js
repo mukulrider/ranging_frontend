@@ -23,7 +23,7 @@ import {Pagination, Accordion} from 'react-bootstrap';
 require('react-bootstrap-table/css/react-bootstrap-table.css')
 
 import {
-  fetchRangingAllScenarioData, tabChange,deleteScenario
+  fetchRangingAllScenarioData, tabChange,deleteScenario,updateLoadingIndicationStatus,updateLoadingIndicationText,
 } from './actions';
 
 export class RangingScenarioTrackerPage extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
@@ -149,6 +149,9 @@ export class RangingScenarioTrackerPage extends React.PureComponent { // eslint-
             let tab = "npd";
 
             this.props.onTabChange(tab);
+            this.props.onUpdateLoadingIndicationText("Loading saved scenarios from NPD...")
+            this.props.onUpdateLoadingIndicationStatus(true)
+
             this.props.onFetchRangingAllScenarioData();
 
 
@@ -159,7 +162,11 @@ export class RangingScenarioTrackerPage extends React.PureComponent { // eslint-
             let tab = "delist";
 
             this.props.onTabChange(tab);
+            this.props.onUpdateLoadingIndicationText("Loading saved scenarios from Delist...")
+            this.props.onUpdateLoadingIndicationStatus(true)
+
             this.props.onFetchRangingAllScenarioData();
+
 
 
           }}><span className="tab_label">Delist</span></NavItem>
@@ -174,14 +181,52 @@ export class RangingScenarioTrackerPage extends React.PureComponent { // eslint-
 
             return (
               <Panel>
+
+                {(()=>{
+                  if(this.props.RangingScenarioTrackerPage.showLoading){
+                    return(
+                      <div className="loadingAfterApply">
+
+                        {(()=>{
+                          document.body.style.cursor='wait';
+                        })()}
+
+                        <div>
+                          <div id="tabChangeLoading" style={{marginLeft: '35%', position: 'fixed'}}>{this.props.RangingScenarioTrackerPage.loadingText}</div>
+                        </div>
+                      </div>
+                    )
+                  }else{
+                    document.body.style.cursor='default';
+                  }
+
+                })()}
+
                 <div className="row">
                   <div className="col-xs-12">
 
 
                     {/*Heading and info button*/}
                     <div className="row" style={{marginBottom: '3%'}}>
-                      <div className="col-xs-12">
+                      <div className="col-xs-10">
                         <div className="scenarioTitle">Select the scenario to be viewed</div>
+                      </div>
+                      <div className="col-xs-2">
+                        <div className="scenarioTitle" float="right">
+                          <button className="btn btn-warning" style={{marginLeft:'-2%'}}
+                                  onClick={() =>{
+                                    let page;
+                                    if (this.props.RangingScenarioTrackerPage.selectedTab === "npd") {
+                                      page = '/ranging/npd?';
+                                    } else {
+                                      page = '/ranging/negotiation?';
+                                    }
+
+                                    window.location = page;
+                                  }}>
+                            Create new Scenario <span className="glyphicon glyphicon-plus"/>
+                        </button>
+                        </div>
                       </div>
 
                     </div>
@@ -230,7 +275,7 @@ export class RangingScenarioTrackerPage extends React.PureComponent { // eslint-
                                   <TableHeaderColumn dataField="system_time" isKey={true} dataSort={true}
                                                      dataAlign="center" width="20%">Date</TableHeaderColumn>
                                   <TableHeaderColumn dataField="scenario_name" dataSort={true} dataAlign="center"
-                                                     width="40%">Scenario Name</TableHeaderColumn>
+                                                     width="40%" dataFormat={formatName}>Scenario Name</TableHeaderColumn>
                                   <TableHeaderColumn dataFormat={this.cellButton} dataSort={true} dataAlign="center"
                                                      width="20%"></TableHeaderColumn>
                                   <TableHeaderColumn dataFormat={this.cellButton2} dataSort={true} dataAlign="center"
@@ -258,19 +303,6 @@ export class RangingScenarioTrackerPage extends React.PureComponent { // eslint-
           } else {
             return (
               <div className="loading-scenario">
-                {/*{(() => {*/}
-                  {/*document.body.style.cursor = 'wait';*/}
-
-                  {/*let dots = window.setInterval(function () {*/}
-                    {/*let wait = document.getElementById("wait");*/}
-                    {/*if (wait.innerHTML.length > 9)*/}
-                      {/*wait.innerHTML = "Loading";*/}
-                    {/*else*/}
-                      {/*wait.innerHTML += ".";*/}
-                  {/*}, 1500);*/}
-
-                {/*})()}*/}
-
 
                 {/*<Spinner/>*/}
                 <div id="wait" style={{marginLeft: '47%'}}>Loading...</div>
@@ -301,6 +333,8 @@ function mapDispatchToProps(dispatch) {
     onFetchRangingAllScenarioData: (e) => dispatch(fetchRangingAllScenarioData(e)),
     onTabChange: (e) => dispatch(tabChange(e)),
     onDeleteScenario: (e) => dispatch(deleteScenario(e)),
+    onUpdateLoadingIndicationStatus: (e) => dispatch(updateLoadingIndicationStatus(e)),
+    onUpdateLoadingIndicationText: (e) => dispatch(updateLoadingIndicationText(e)),
   };
 }
 
