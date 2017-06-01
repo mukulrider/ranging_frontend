@@ -1222,39 +1222,77 @@ export class RangingNegotiationPage extends React.PureComponent { // eslint-disa
                       }
                     })()}
 
-                    <div className="delistButton"
-                    style={{marginTop:"5%"}}>
-                      <Button buttonType={'primary'}
-                              onClick={() => {
+                    {/*<div className="delistButton"*/}
+                    {/*style={{marginTop:"5%"}}>*/}
+                      {/*<Button buttonType={'primary'}*/}
+                              {/*onClick={() => {*/}
 
-                                let objString = '/ranging/delist?';
-                                let selected=this.props.RangingNegotiationPage.prodArrayOpacity;
+                                {/*let objString = '/ranging/delist?';*/}
+                                {/*let selected=this.props.RangingNegotiationPage.prodArrayOpacity;*/}
 
-                                if(selected!=='[]'){
-                                    let productSelections = JSON.parse(selected);
+                                {/*if(selected!=='[]'){*/}
+                                    {/*let productSelections = JSON.parse(selected);*/}
 
 
-                                    for(let i=0;i<productSelections.length;i++){
-                                      objString += 'base_product_number=' + productSelections[i] + '&'
-                                    }
+                                    {/*for(let i=0;i<productSelections.length;i++){*/}
+                                      {/*objString += 'base_product_number=' + productSelections[i] + '&'*/}
+                                    {/*}*/}
 
-                                    objString = objString.slice(0, objString.length - 1);
+                                    {/*objString = objString.slice(0, objString.length - 1);*/}
 
-                                    window.location = objString;
+                                    {/*window.location = objString;*/}
 
-                              }else{
+                              {/*}else{*/}
 
-                                  alert("You have not selected any products to delist. Are you sure you want to see the delist impact?")
-                                }
+                                  {/*alert("You have not selected any products to delist. Are you sure you want to see the delist impact?")*/}
+                                {/*}*/}
 
-                              }}>SEND TO DE-LIST</Button>
-                    </div>
+                              {/*}}>SEND TO DE-LIST</Button>*/}
+                    {/*</div>*/}
                   </div>
 
                 </Panel>
 
               </div>
 
+                {/*Fixed footer*/}
+                <div style={{
+                  width: '100%',
+                  background: '#e5e5e5',
+                  bottom: '0',
+                  textAlign: 'center',
+                  left: '0',
+                  position: 'fixed',
+                  zIndex: 100,
+                  boxShadow: '0px -4px 8px 0 rgba(0, 0, 0, 0.3), 0 6px 20px 0 rgba(0, 0, 0, 0.19)',
+                  height:'55px'
+                }}>
+                  <Button buttonType={'primary'}
+                          style={{marginTop:"7px"}}
+                          onClick={() => {
+
+                            let objString = '/ranging/delist?';
+                            let selected=this.props.RangingNegotiationPage.prodArrayOpacity;
+
+                            if(selected!=='[]'){
+                              let productSelections = JSON.parse(selected);
+
+
+                              for(let i=0;i<productSelections.length;i++){
+                                objString += 'base_product_number=' + productSelections[i] + '&'
+                              }
+
+                              objString = objString.slice(0, objString.length - 1);
+
+                              window.location = objString;
+
+                            }else{
+
+                              alert("You have not selected any products to delist. Are you sure you want to see the delist impact?")
+                            }
+
+                          }}>SEND TO DE-LIST</Button>
+                </div>
 
               </div>
             </div>

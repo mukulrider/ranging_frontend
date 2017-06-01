@@ -218,6 +218,57 @@ class WaterFallChart2 extends React.PureComponent { // eslint-disable-line react
       }
     };
 
+    const formatSales1 = (i, chart_id, total_or_not) => {
+      console.log("--------------", i, total_or_not);
+      // if (total_or_not !== 3 && i < 0) {
+      // i = -1 * i;
+      // }
+
+      if (chart_id == "waterfallChart_4") {
+
+        if (i >= 1000 || i <= -1000) {
+          const rounded = Math.round(i / 1000);
+          let a = `£ ${rounded.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')}K`;
+          // alert("if greater than 0")
+          // alert(a);
+          return (`£ ${rounded.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')}K`);
+        } else {
+          // alert("else less than 0");
+          let b = `£ ${Math.round(i)}`;
+          // alert(b);
+          return (`£ ${Math.round(i)}`);
+        }
+      }
+      else {
+        i = -1 * i;
+        if (chart_id != "waterfallChart_2") {
+          if (i >= 1000 || i <= -1000) {
+            const rounded = Math.round(i / 1000);
+            let a = `£ ${rounded.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')}K`;
+            // alert("if greater than 0")
+            // alert(a);
+            return (`£ ${rounded.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')}K`);
+          } else {
+            // alert("else less than 0");
+            let b = `£ ${Math.round(i)}`;
+            // alert(b);
+            return (`£ ${Math.round(i)}`);
+          }
+        } else {
+          if (i >= 1000 || i <= -1000) {
+            const rounded = Math.round(i / 1000);
+            let a = (`${rounded.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')}K`);
+            console.log("aaa", a);
+            return (`${rounded.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')}K`);
+          } else {
+            let a = Math.round(i);
+            console.log("a else", a);
+            return (Math.round(i));
+          }
+        }
+      }
+    };
+
 
     const formatVolume = (i) => {
       if (i >= 1000 || i <= -1000) {
@@ -438,7 +489,7 @@ class WaterFallChart2 extends React.PureComponent { // eslint-disable-line react
       })
       // .attr('dy', (d) => `${(d.class == 'negative') ? '-' : ''}.75em`)
       // .text((d) => ((d.end - d.start)/1000));
-      .text((d, i) => ((formatSales(Math.abs((d.end - d.start)), id, 3))))
+      .text((d, i) => ((formatSales1(((d.end - d.start)), id, 1))))
       .style("font-size", "10px")
       .style('fill', 'black');
 
@@ -465,7 +516,7 @@ class WaterFallChart2 extends React.PureComponent { // eslint-disable-line react
       return result;
     }
   }
-  ;
+    ;
 
   componentDidMount = () => {
     this.createChart(this.props.data, this.props.id, this.props.yAxisName, this.props.formatter, this.props.positive_text, this.props.negative_text, this.props.total_text);

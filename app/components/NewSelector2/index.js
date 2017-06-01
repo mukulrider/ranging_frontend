@@ -235,6 +235,7 @@ class NewSelector2 extends React.PureComponent { // eslint-disable-line react/pr
 
               <div className="text-center">
               <Button onClick={() => {
+              this.props.onGenerateUrlParamsString('');
               this.props.onDelistDefaultView(0);
               this.clearFilter();
               }}>Reset Filters</Button>&nbsp;&nbsp;

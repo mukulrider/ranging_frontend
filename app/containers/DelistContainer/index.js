@@ -1092,6 +1092,13 @@ export class DelistContainer extends React.PureComponent { // eslint-disable-lin
                               <h2 className="text-center">Something went wrong. Please reload the page....!</h2>
                             </div>
                           )
+                        } else if (this.props.DelistContainer.waterfallValue.message) {
+                          let abcd = 1;
+                          return (
+                            <div>
+                              <h2 className="text-center">{this.props.DelistContainer.waterfallValue.message}</h2>
+                            </div>
+                          )
                         }
                         else {
                           let abcd = 1;
@@ -1334,6 +1341,13 @@ export class DelistContainer extends React.PureComponent { // eslint-disable-lin
                           return (
                             <div>
                               <h2 className="text-center">Something went wrong. Please reload the page....!</h2>
+                            </div>
+                          )
+                        } else if (this.props.DelistContainer.waterfallValue.message) {
+                          let abcd = 1;
+                          return (
+                            <div>
+                              <h2 className="text-center">{this.props.DelistContainer.waterfallValue.message}</h2>
                             </div>
                           )
                         }
