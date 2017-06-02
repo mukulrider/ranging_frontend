@@ -29,9 +29,6 @@ import {
 import {
   apiFetch,
   delistTable,
-  openModal,
-  openModal1,
-  onDelistDefaultView,
   apiFetchSuccess,
   SupplierImpactTableSpinnerSuccess,
   DelistProductTableSpinnerSuccess,
@@ -234,7 +231,7 @@ export function* generateDelistTableFetch() {
   try {
 
     let data = yield call(request, host_url + `/api/product_impact_delist_table?` + urlParams);
-    // console.log("delist table",data)
+    console.log("delist table",data)
     let spinnerCheck = 1;
     yield put(delistTableSuccess(data));
     yield put(DelistProductTableSpinnerSuccess(spinnerCheck));
@@ -302,18 +299,6 @@ export function* generateWaterfallValueFetch() {
     yield put(WaterfallProfitSpinnerSuccess(spinnerCheck));
     yield put(apiFetch());
     yield put(delistTable());
-
-    if(data.message){
-      console.log('data data1',data.message);
-      yield put(onDelistDefaultView(0));
-      yield put(openModal1(true));
-    } else {
-      console.log('data data2',data.message);
-      yield put(onDelistDefaultView(0));
-      yield put(openModal1(false));
-    }
-
-
   } catch (err) {
 
     let spinnerCheck = 2;
@@ -366,7 +351,7 @@ export function* generateSideFilter() {
   urlParams = urlParams.replace('&', '');
 
   try {
-    // console.log(host_url + `/api/product_impact/filter_new?${urlParams}`)
+    console.log(host_url + `/api/product_impact/filter_new?${urlParams}`)
     const data = yield call(request, host_url + `/api/product_impact/filter_new?${urlParams}`);
   yield put(generateSideFilterSuccess(data));
 
@@ -385,8 +370,7 @@ export function* doGenerateSideFilter() {
 export function* generateSideFilterReset() {
   try {
 
-    // const data = yield call(request, `http://172.20.244.141:8000/api/product_impact/filter_data/`);
-    const data = yield call(request, host_url + `/api/product_impact/filter_new/`);
+    const data = yield call(request, host_url + `/api/product_impact/filter_data/`);
 
     yield put(generateSideFilterSuccess(data));
 
@@ -435,7 +419,7 @@ export function* doAjaxApplyBtn() {
 /* GENERATE SIDE FILTER*/
 export function* generateSaveScenario() {
   try {
-    // console.log("Trying to save scenario")
+    console.log("Trying to save scenario")
     let urlName = yield select(selectDelistContainerDomain());
     let urlParamsString = urlName.get('urlParamsString');
     let scenarioName = urlName.get('scenarioName');
@@ -449,7 +433,7 @@ export function* generateSaveScenario() {
 
     //Adding the user information
 
-    // console.log(host_url+'/api/npd_impact_save_scenario?' + AJAX_args);
+    console.log(host_url+'/api/npd_impact_save_scenario?' + AJAX_args);
     let data = yield call(request, host_url+'/api/delist_scenario?' + AJAX_args);
     yield put(updateSaveScenarioResponse(data));
 
