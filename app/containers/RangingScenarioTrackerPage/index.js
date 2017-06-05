@@ -7,7 +7,7 @@
 import React, {PropTypes} from 'react';
 import {connect} from 'react-redux';
 import Helmet from 'react-helmet';
-import { BootstrapTable, TableHeaderColumn } from 'react-bootstrap-table';
+import {BootstrapTable, TableHeaderColumn} from 'react-bootstrap-table';
 import {FormattedMessage} from 'react-intl';
 import {createStructuredSelector} from 'reselect';
 import makeSelectRangingScenarioTrackerPage from './selectors';
@@ -21,9 +21,15 @@ import InputField from 'components/input_field';
 import {Modal, Nav, NavItem, MenuItem, NavDropdown} from 'react-bootstrap';
 import {Pagination, Accordion} from 'react-bootstrap';
 require('react-bootstrap-table/css/react-bootstrap-table.css')
+import LinearProgress from 'material-ui/LinearProgress';
 
 import {
-  fetchRangingAllScenarioData, tabChange,deleteScenario,updateLoadingIndicationStatus,updateLoadingIndicationText,
+  fetchRangingAllScenarioData,
+  fetchPricingAllScenarioData,
+  tabChange,
+  deleteScenario,
+  updateLoadingIndicationStatus,
+  updateLoadingIndicationText,
 } from './actions';
 
 export class RangingScenarioTrackerPage extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
@@ -37,18 +43,19 @@ export class RangingScenarioTrackerPage extends React.PureComponent { // eslint-
     // this.props.onFetchRangingAllScenarioData();
   };
 
-  cellButton=(cell, row,enumObject, rowIndex)=>{
+  cellButton = (cell, row, enumObject, rowIndex) => {
     return (
       <button
         type="button"
         className="btn btn-primary"
-        onClick={() =>{
+        onClick={() => {
           let page, attributes;
           if (this.props.RangingScenarioTrackerPage.selectedTab === "npd") {
             page = '/ranging/view-scenario?';
-            {/*let user_id=this.props.RangingScenarioTrackerPage.user_id;*/}
+            {/*let user_id=this.props.RangingScenarioTrackerPage.user_id;*/
+            }
 
-            attributes = "&scenario_name=" + row.scenario_name+"&scenario_tag=" + row.scenario_tag;
+            attributes = "&scenario_name=" + row.scenario_name + "&scenario_tag=" + row.scenario_tag;
 
 
           } else {
@@ -65,19 +72,19 @@ export class RangingScenarioTrackerPage extends React.PureComponent { // eslint-
     )
   }
 
-  cellButton2=(cell,row)=>{
+  cellButton2 = (cell, row) => {
     return (
       <button
         type="button"
         className="btn btn-danger"
-        onClick={() =>{
+        onClick={() => {
           if (this.props.RangingScenarioTrackerPage.selectedTab === "npd") {
-            let scenario_details = "&scenario_name=" + row.scenario_name + "&scenario_tag=" + row.scenario_tag+"&delete=1";
+            let scenario_details = "&scenario_name=" + row.scenario_name + "&scenario_tag=" + row.scenario_tag + "&delete=1";
             this.props.onDeleteScenario(scenario_details);
             this.props.onFetchRangingAllScenarioData();
-          }else{
+          } else {
 
-            let scenario_details = "&scenario_name=" + row.scenario_name+"&delete=1";
+            let scenario_details = "&scenario_name=" + row.scenario_name + "&delete=1";
             this.props.onDeleteScenario(scenario_details);
             this.props.onFetchRangingAllScenarioData();
           }
@@ -86,21 +93,70 @@ export class RangingScenarioTrackerPage extends React.PureComponent { // eslint-
     )
 
   }
+
   constructor(props) {
     super(props);
     this.state = {
       activeScenarioListTable: 1,
-      activeKey:1,
-
+      activeKey: 1,
+      smShow: false, lgShow: false
     };
 
+  }
+
+
+  pricingCellButton = (cell, row) => {
+    // console.log("Row:", row);
+    // console.log("Cell:", cell);
+    let page, attribute;
+    page = '/pricing/forecast-scenario-2/';
+    attribute = row.event_name.replace(/ /g, '-') + '-' + row.a_id + '/' + row.scenario_buyer_id + '-' + row.b_id;
+    let windowRedirectUrl = page + attribute;
+
+    if (row.status == true)
+      return (
+        <a href={windowRedirectUrl} className="btn btn-primary btn-lg text-center">View</a>
+      )
+    else
+      return (
+        <span>Pending <Spinner/></span>
+      )
+  }
+
+  pricingCellButton2 = (cell, row) => {
+    return (
+      <button
+        className="btn btn-danger"
+        onClick={() => {
+          // console.log("Inside Delete Button:");
+          this.setState({lgShow: true})
+          this.props.onDeleteKey(row.scenario_buyer_id)
+        }}>
+        <span className="glyphicon glyphicon-trash"> </span>
+
+      </button>
+    )
+  }
+
+  weeks = (row, cell) => {
+    console.log('row', row);
+    console.log('cell', cell);
+    console.log(parseInt(cell.weeks / 12))
+    return (
+      <div>
+        {cell.weeks}
+        <br/>
+        <LinearProgress mode="determinate" value={parseInt(cell.weeks * 100 / 12)}/>
+
+      </div>
+    )
   }
 
 
   render() {
     const options = {
       page: 1,  // which page you want to show as default
-      sizePerPageList: [ {
+      sizePerPageList: [{
         text: '5', value: 5
       }, {
         text: '10', value: 10
@@ -108,7 +164,7 @@ export class RangingScenarioTrackerPage extends React.PureComponent { // eslint-
         text: '15', value: 15
       }, {
         text: 'All', value: 25
-      } ], // you can change the dropdown list for size per page
+      }], // you can change the dropdown list for size per page
       sizePerPage: 5,  // which size per page you want to locate as default
       pageStartIndex: 1, // where to start counting the pages
       paginationSize: 5,  // the pagination bar size.
@@ -125,10 +181,59 @@ export class RangingScenarioTrackerPage extends React.PureComponent { // eslint-
     };
 
 
-        let formatName=(scenario_detail)=>{
-          scenario_detail = scenario_detail.replace("_*_", "'");
-        return scenario_detail;
+    let formatName = (scenario_detail) => {
+      scenario_detail = scenario_detail.replace("_*_", "'");
+      return scenario_detail;
+    }
+
+    let arr = []
+
+    // if (!this.props.RangingScenarioTrackerPage.pricingScenarioStatus && this.props.RangingScenarioTrackerPage.selectedTab === "pricing") {
+    //   console.log('>>>>', this.props.RangingScenarioTrackerPage.pricingScenarioStatus, this.props.RangingScenarioTrackerPage.selectedTab);
+    //   return (
+    //     <div>
+    //       <br/><br/>
+    //       <h1 style={{textAlign: 'center'}}>Loading Pricing <Spinner/></h1>
+    //     </div>
+    //   )
+    // }
+
+    if (this.props.RangingScenarioTrackerPage.pricingScenarioStatus) {
+      this.props.RangingScenarioTrackerPage.pricingScenarioStatus.map((obj_a, x) => {
+        let storevar = obj_a.event;
+        {/*console.log("storevar", storevar);*/
         }
+        return storevar.map((obj_b, q) => {
+          {/*console.log("bb", obj_b);*/
+          }
+          if (obj_b.status !== 0 && obj_b.display_scenario === 1) {
+
+            let s_no = x + 1;
+            arr.push({
+              s_no: s_no,
+              a_id: obj_a.id,
+              b_id: obj_b.id,
+              event_name: obj_a.event_name,
+              scenario_name: obj_b.scenario_name,
+              start_date: new Intl.DateTimeFormat("en-GB").format(new Date(obj_a.start_date)),
+              created_date: new Intl.DateTimeFormat("en-GB").format(new Date(obj_a.created_on)),
+              weeks: obj_a.weeks,
+              store_format: obj_a.store_format,
+              scenario_buyer_id: obj_b.scenario_buyer_id,
+              status: (() => {
+                if ([4, 5, 6].includes(obj_b.status)) {
+                  return true
+                } else {
+                  return false
+                }
+              })()
+
+            })
+
+          }
+        })
+      });
+    }
     return (
       <div>
         <Helmet
@@ -168,36 +273,51 @@ export class RangingScenarioTrackerPage extends React.PureComponent { // eslint-
             this.props.onFetchRangingAllScenarioData();
 
 
-
           }}><span className="tab_label">Delist</span></NavItem>
+
+          <NavItem className="tabsCustomList" eventKey="3" onClick={() => {
+            this.setState({activeKey: "3"});
+            let tab = "pricing";
+
+            this.props.onTabChange(tab);
+            this.props.onUpdateLoadingIndicationText("Loading saved scenarios from Pricing...")
+            this.props.onUpdateLoadingIndicationStatus(true)
+
+            this.props.onFetchPricingAllScenarioData();
+
+
+          }}><span className="tab_label">Pricing</span></NavItem>
 
 
         </Nav>
 
 
         {(() => {
-          if (this.props.RangingScenarioTrackerPage.allScenarioList) {
+          if (this.props.RangingScenarioTrackerPage.allScenarioList || this.props.RangingScenarioTrackerPage.pricingScenarioStatus) {
             document.body.style.cursor = 'default';
 
             return (
               <Panel>
 
-                {(()=>{
-                  if(this.props.RangingScenarioTrackerPage.showLoading){
-                    return(
+                {(() => {
+                  if (this.props.RangingScenarioTrackerPage.showLoading) {
+                    return (
                       <div className="loadingAfterApply">
 
-                        {(()=>{
-                          document.body.style.cursor='wait';
+                        {(() => {
+                          document.body.style.cursor = 'wait';
                         })()}
 
                         <div>
-                          <div id="tabChangeLoading" style={{marginLeft: '35%', position: 'fixed'}}>{this.props.RangingScenarioTrackerPage.loadingText}</div>
+                          <div id="tabChangeLoading" style={{
+                            marginLeft: '35%',
+                            position: 'fixed'
+                          }}>{this.props.RangingScenarioTrackerPage.loadingText}</div>
                         </div>
                       </div>
                     )
-                  }else{
-                    document.body.style.cursor='default';
+                  } else {
+                    document.body.style.cursor = 'default';
                   }
 
                 })()}
@@ -213,8 +333,8 @@ export class RangingScenarioTrackerPage extends React.PureComponent { // eslint-
                       </div>
                       <div className="col-xs-2">
                         <div className="scenarioTitle" float="right">
-                          <button className="btn btn-warning" style={{marginLeft:'-2%'}}
-                                  onClick={() =>{
+                          <button className="btn btn-warning" style={{marginLeft: '-2%'}}
+                                  onClick={() => {
                                     let page;
                                     if (this.props.RangingScenarioTrackerPage.selectedTab === "npd") {
                                       page = '/ranging/npd?';
@@ -225,7 +345,7 @@ export class RangingScenarioTrackerPage extends React.PureComponent { // eslint-
                                     window.location = page;
                                   }}>
                             Create new Scenario <span className="glyphicon glyphicon-plus"/>
-                        </button>
+                          </button>
                         </div>
                       </div>
 
@@ -234,34 +354,94 @@ export class RangingScenarioTrackerPage extends React.PureComponent { // eslint-
                       {
                         (() => {
 
-                            if (this.props.RangingScenarioTrackerPage.selectedTab === "npd") {
-                              return (
-                                <div>
-                                  <BootstrapTable
-                                    data={this.props.RangingScenarioTrackerPage.allScenarioList} options={options}
-                                    striped={true}
-                                    hover
-                                    condensed
-                                    pagination={ true }
-                                    search={true}
-                                    exportCSV={true}
-                                  >
-                                    <TableHeaderColumn dataField="system_time" isKey={true} dataSort={true}
-                                                       dataAlign="center" width="20%">Date</TableHeaderColumn>
-                                    <TableHeaderColumn dataField="scenario_name" dataSort={true} dataFormat={formatName} dataAlign="center"
-                                                       width="40%">Scenario Name</TableHeaderColumn>
-                                    <TableHeaderColumn dataField="scenario_tag" dataFormat={formatName}dataSort={true} dataAlign="center"
-                                                       width="40%">Scenario Tag</TableHeaderColumn>
-                                    <TableHeaderColumn dataFormat={this.cellButton} dataSort={true} dataAlign="center"
-                                                       width="20%"></TableHeaderColumn>
-                                    <TableHeaderColumn dataFormat={this.cellButton2} dataSort={true} dataAlign="center"
-                                                       width="20%"></TableHeaderColumn>
-                                  </BootstrapTable>
+                          if (this.props.RangingScenarioTrackerPage.selectedTab === "npd") {
+                            return (
+                              <div>
+                                <BootstrapTable
+                                  data={this.props.RangingScenarioTrackerPage.allScenarioList} options={options}
+                                  striped={true}
+                                  hover
+                                  condensed
+                                  pagination={ true }
+                                  search={true}
+                                  exportCSV={true}
+                                >
+                                  <TableHeaderColumn dataField="system_time" isKey={true} dataSort={true}
+                                                     dataAlign="center" width="20%">Date</TableHeaderColumn>
+                                  <TableHeaderColumn dataField="scenario_name" dataSort={true} dataFormat={formatName}
+                                                     dataAlign="center"
+                                                     width="40%">Scenario Name</TableHeaderColumn>
+                                  <TableHeaderColumn dataField="scenario_tag" dataFormat={formatName} dataSort={true}
+                                                     dataAlign="center"
+                                                     width="40%">Scenario Tag</TableHeaderColumn>
+                                  <TableHeaderColumn dataFormat={this.cellButton} dataSort={true} dataAlign="center"
+                                                     width="20%"></TableHeaderColumn>
+                                  <TableHeaderColumn dataFormat={this.cellButton2} dataSort={true} dataAlign="center"
+                                                     width="20%"></TableHeaderColumn>
+                                </BootstrapTable>
 
-                                </div>
-                              )
-                            }else{
-                              return(
+                              </div>
+                            )
+                          } else if (this.props.RangingScenarioTrackerPage.selectedTab === "pricing") {
+                            this.props.onUpdateLoadingIndicationStatus(false);
+
+                            return (
+                              <div>
+                                <Modal show={this.state.lgShow}
+                                       onHide={() => {
+                                         this.setState({lgShow: false})
+                                       }} bsSize="small" aria-labelledby="contained-modal-title-sm">
+                                  <Modal.Header closeButton>
+                                    <Modal.Title id="contained-modal-title-sm text-center">Delete Scenario</Modal.Title>
+                                  </Modal.Header>
+                                  <Modal.Body>
+                                    <div className="text-center">
+                                      Are you sure you want to delete scenario ?
+                                      <br/>
+                                      <br/>
+                                      <button className="btn btn-danger" onClick={() => {
+                                        console.log(this.state.deleteKey);
+                                        this.props.onDeleteScenario(this.props.RangingScenarioTrackerPage.deleteKey)
+                                      }}>
+                                        Delete
+                                      </button>
+                                    </div>
+                                  </Modal.Body>
+                                </Modal>
+                                <BootstrapTable
+                                  data={ arr }
+                                  exportCSV={ true }
+                                  search={ true }
+                                  pagination striped hover condensed>
+                                  <TableHeaderColumn dataField='s_no' width='5%' dataAlign='center' headerAlign='center'
+                                                     dataSort isKey>Sl.
+                                    No.</TableHeaderColumn>
+                                  <TableHeaderColumn dataField='event_name' dataAlign='center' headerAlign='center'
+                                                     dataSort>Event
+                                    Name</TableHeaderColumn>
+                                  <TableHeaderColumn dataField='scenario_name' dataAlign='center' headerAlign='center'
+                                                     dataSort>Scenario
+                                    Name</TableHeaderColumn>
+                                  <TableHeaderColumn dataField='created_date' dataAlign='center' headerAlign='center'
+                                                     dataSort>Event Created
+                                    Date</TableHeaderColumn>
+                                  <TableHeaderColumn dataField='start_date' dataAlign='center' headerAlign='center'
+                                                     dataSort>Start
+                                    Date</TableHeaderColumn>
+                                  <TableHeaderColumn dataFormat={this.weeks} dataAlign='center' headerAlign='center'>Forecast
+                                    Weeks</TableHeaderColumn>
+                                  <TableHeaderColumn dataField='store_format' dataAlign='center' headerAlign='center'
+                                                     dataSort>Store
+                                    Format</TableHeaderColumn>
+                                  <TableHeaderColumn dataFormat={this.pricingCellButton} dataAlign='center'
+                                                     headerAlign='center'>Status</TableHeaderColumn>
+                                  <TableHeaderColumn dataFormat={this.pricingCellButton2} dataAlign='center'
+                                                     headerAlign='center'>Delete</TableHeaderColumn>
+                                </BootstrapTable>
+                              </div>
+                            )
+                          } else {
+                            return (
                               <div>
                                 <BootstrapTable
                                   data={this.props.RangingScenarioTrackerPage.allScenarioList} options={options}
@@ -275,7 +455,8 @@ export class RangingScenarioTrackerPage extends React.PureComponent { // eslint-
                                   <TableHeaderColumn dataField="system_time" isKey={true} dataSort={true}
                                                      dataAlign="center" width="20%">Date</TableHeaderColumn>
                                   <TableHeaderColumn dataField="scenario_name" dataSort={true} dataAlign="center"
-                                                     width="40%" dataFormat={formatName}>Scenario Name</TableHeaderColumn>
+                                                     width="40%" dataFormat={formatName}>Scenario
+                                    Name</TableHeaderColumn>
                                   <TableHeaderColumn dataFormat={this.cellButton} dataSort={true} dataAlign="center"
                                                      width="20%"></TableHeaderColumn>
                                   <TableHeaderColumn dataFormat={this.cellButton2} dataSort={true} dataAlign="center"
@@ -283,16 +464,13 @@ export class RangingScenarioTrackerPage extends React.PureComponent { // eslint-
                                 </BootstrapTable>
 
                               </div>
-                              )
-                            }
-
+                            )
+                          }
 
 
                         })()}
 
                     </div>
-
-
 
 
                   </div>
@@ -349,6 +527,7 @@ const mapStateToProps = createStructuredSelector({
 function mapDispatchToProps(dispatch) {
   return {
     onFetchRangingAllScenarioData: (e) => dispatch(fetchRangingAllScenarioData(e)),
+    onFetchPricingAllScenarioData: (e) => dispatch(fetchPricingAllScenarioData(e)),
     onTabChange: (e) => dispatch(tabChange(e)),
     onDeleteScenario: (e) => dispatch(deleteScenario(e)),
     onUpdateLoadingIndicationStatus: (e) => dispatch(updateLoadingIndicationStatus(e)),

@@ -5,8 +5,8 @@
  */
 
 import {
-  DEFAULT_ACTION,ALL_SCENARIO_TABLE_FETCH,ALL_SCENARIO_TABLE_SUCCESS,TAB_CHANGE,DELETE_SCENARIO,
-  LOADING_INDICATION,LOADING_INDICATION_TEXT,
+  DEFAULT_ACTION, ALL_SCENARIO_TABLE_FETCH, ALL_SCENARIO_TABLE_SUCCESS, TAB_CHANGE, DELETE_SCENARIO,
+  LOADING_INDICATION, LOADING_INDICATION_TEXT, ALL_PRICING_TABLE_FETCH, ALL_PRICING_TABLE_SUCCESS,
 } from './constants';
 
 export function defaultAction() {
@@ -27,6 +27,23 @@ export function fetchRangingAllScenarioData() {
 export function fetchRangingAllScenarioDataSuccess(data) {
   return {
     type: ALL_SCENARIO_TABLE_SUCCESS,
+    data
+  };
+}
+
+
+//--------------------Fetching default data on page load---------------------
+
+export function fetchPricingAllScenarioData() {
+  // alert()
+  return {
+    type: ALL_PRICING_TABLE_FETCH,
+  };
+}
+
+export function fetchPricingAllScenarioDataSuccess(data) {
+  return {
+    type: ALL_PRICING_TABLE_SUCCESS,
     data
   };
 }

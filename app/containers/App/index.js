@@ -17,6 +17,7 @@ import {FormattedMessage} from 'react-intl';
 import Footer from 'components/footer';
 import Header from 'components/header';
 import styles from './style.scss';
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 
 export default class App extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
 
@@ -60,9 +61,12 @@ export default class App extends React.PureComponent { // eslint-disable-line re
     return (
       <div>
         <Header />
+        <MuiThemeProvider>
+
         <div className="container-fluid" style={{marginTop: '160px'}}>
           {React.Children.toArray(this.props.children)}
         </div>
+        </MuiThemeProvider>
         <Footer footerLinks={[]}/>
       </div>
     );
