@@ -122,7 +122,3 @@ export const SAVE_SCENARIO_NAME= 'app/DelistContainer/SAVE_SCENARIO_NAME';
 export const SAVE_SCENARIO_RESPONSE= 'app/DelistContainer/SAVE_SCENARIO_RESPONSE';
 export const SAVE_TAG_NAME = 'app/DelistContainer/SAVE_TAG_NAME';
 export const EDIT_SCENARIO_OVER_WRITE = 'app/DelistContainer/EDIT_SCENARIO_OVER_WRITE';
-
-
-export const OPEN_MODAL = 'app/DelistContainer/OPEN_MODAL';
-export const OPEN_MODAL1 = 'app/DelistContainer/OPEN_MODAL1';

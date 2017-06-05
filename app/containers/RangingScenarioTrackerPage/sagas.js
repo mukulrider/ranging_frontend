@@ -8,7 +8,7 @@ import {
 } from './constants';
 
 import {
-  fetchRangingAllScenarioDataSuccess,
+  fetchRangingAllScenarioDataSuccess,updateLoadingIndicationStatus,
 } from 'containers/RangingScenarioTrackerPage/actions';
 
 import {
@@ -82,6 +82,8 @@ export function* generateAllScenarioList() {
       yield put(fetchRangingAllScenarioDataSuccess(scenario_list));
     }
 
+
+    yield put(updateLoadingIndicationStatus(false));
 
   } catch (err) {
 

@@ -54,7 +54,7 @@ import {
   URL_PARAMS,
   SIDE_FILTER_RESET,
   SAVE_SCENARIO_RESPONSE,SAVE_TAG_NAME,EDIT_SCENARIO_OVER_WRITE,
-  OPEN_MODAL,OPEN_MODAL1,
+
   SAVE_SCENARIO,SAVE_SCENARIO_NAME,
   } from './constants';
 
@@ -329,7 +329,7 @@ export function DelistPopupTableSpinnerSuccess(spinnerCheck) {
 
 // DELIST DEFAULT VIEW
 export function onDelistDefaultView(defaultViewCheck) {
-  console.log("DELIST DEFAULT VIEW---------------------------", defaultViewCheck);
+  // console.log("DELIST DEFAULT VIEW---------------------------", defaultViewCheck);
   return {
     type: DELIST_DEFAULT_VIEW,
     defaultViewCheck,
@@ -482,18 +482,3 @@ export function editScenarioOverWrite(data) {
   };
 };
 
-export function openModal(data) {
-  console.log('OPEN MODAL',data);
-  return {
-    type: OPEN_MODAL,
-    data
-  }
-}
-
-export function openModal1(data) {
-  console.log('OPEN MODAL1',data);
-  return {
-    type: OPEN_MODAL1,
-    data
-  }
-}
