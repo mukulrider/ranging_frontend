@@ -65,7 +65,7 @@ import {
   DelistProductTableSpinnerSuccess,
   onDelistDefaultView,
   DelistPopupTableSpinnerSuccess,
-  waterfallSpinner,
+  showNoDataErrorMessage,
   GenerateTextBoxQueryString,
   GenerateTextBoxQueryStringDelist,
   WeekTabClick,
@@ -198,6 +198,7 @@ export class DelistContainer extends React.PureComponent { // eslint-disable-lin
       showSaveScenarioModalFlag: false,
       showSaveScenarioOverwriteConfirmationModalFlag: false,
       edit_scenario:false,
+      showNoDataErrorModal:false,
 
     };
   }
@@ -285,6 +286,33 @@ export class DelistContainer extends React.PureComponent { // eslint-disable-lin
         {/*Page title*/}
         <div className="pageTitle" style={{marginTop: '-1%'}}>DELIST IMPACT</div>
 
+
+        {/*No data error modal*/}
+        <Modal show={this.state.showNoDataErrorModal} onHide={() => {
+          this.props.onShowNoDataErrorMessage(false)
+          this.setState({showNoDataErrorModal: false})
+         }}bsSize="lg" style={{marginTop: '10%'}}
+               aria-labelledby="contained-modal-title-lg">
+       <Modal.Body className="infoModalText">
+
+            {/*Error msg*/}
+            {(()=>{
+              if(this.props.DelistContainer.noDataErrorMessage){
+                return(
+
+                  <div className="row formattedText center-this">
+
+                    {this.props.DelistContainer.waterfallValue.message}
+
+                  </div>
+
+                )
+
+              }
+            })()}
+
+          </Modal.Body>
+        </Modal>
 
         {/*Save Scenario Modal*/}
         <Modal show={this.state.showSaveScenarioModalFlag} bsSize="lg" style={{marginTop: '10%'}}
@@ -430,6 +458,9 @@ export class DelistContainer extends React.PureComponent { // eslint-disable-lin
 
                   document.cookie = 'Preselection'+'=;expires=Thu, 01 Jan 1970 00:00:01 GMT;domain=localhost;path=/;';
 
+                  let domain="localhost"
+                  document.cookie = `ScenarioTrackerTabPreselection=delist;domain=${domain};path=/;`;
+
                   let page = '/ranging/scenario-tracker?';
 
                   let objString = page;
@@ -503,6 +534,12 @@ export class DelistContainer extends React.PureComponent { // eslint-disable-lin
 
           </Modal.Body>
         </Modal>
+
+
+        {(()=>{
+          if(this.props.DelistContainer.noDataErrorMessage)
+            this.setState({showNoDataErrorModal: true})
+        })()}
 
 
         <div className="row" style={{
@@ -1128,13 +1165,6 @@ export class DelistContainer extends React.PureComponent { // eslint-disable-lin
                               <h2 className="text-center">Something went wrong. Please reload the page....!</h2>
                             </div>
                           )
-                        } else if (this.props.DelistContainer.waterfallValue && this.props.DelistContainer.waterfallValue.message) {
-                          let abcd = 1;
-                          return (
-                            <div>
-                              <h2 className="text-center">{this.props.DelistContainer.waterfallValue.message}</h2>
-                            </div>
-                          )
                         }
                         else {
                           let abcd = 1;
@@ -1377,13 +1407,6 @@ export class DelistContainer extends React.PureComponent { // eslint-disable-lin
                           return (
                             <div>
                               <h2 className="text-center">Something went wrong. Please reload the page....!</h2>
-                            </div>
-                          )
-                        } else if (this.props.DelistContainer.waterfallValue && this.props.DelistContainer.waterfallValue.message) {
-                          let abcd = 1;
-                          return (
-                            <div>
-                              <h2 className="text-center">{this.props.DelistContainer.waterfallValue.message}</h2>
                             </div>
                           )
                         }
@@ -1788,6 +1811,7 @@ function mapDispatchToProps(dispatch) {
     onSaveTagName: (e) => dispatch(saveTagName(e.target.value)),
 
     onEditScenarioOverWrite: (e) => dispatch(editScenarioOverWrite(e)),
+    onShowNoDataErrorMessage: (e) => dispatch(showNoDataErrorMessage(e)),
 
   };
 }

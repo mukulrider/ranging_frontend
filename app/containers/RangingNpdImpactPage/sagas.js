@@ -17,7 +17,7 @@ import {
 } from 'containers/RangingNpdImpactPage/selectors';
 
 // const host_url="http://dvcmpapp00002uk.dev.global.tesco.org"
-const host_url="http://172.20.181.16:8000"
+const host_url="http://10.1.181.13:8000"
 // Individual exports for testing
 export function* defaultSaga() {
   // See example in containers/HomePage/sagas.js

@@ -35,6 +35,30 @@ import {
 export class RangingScenarioTrackerPage extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
   componentDidMount = () => {
     console.log("Mounted");
+
+
+    let  getCookie = (name) => {
+      const value = `; ${document.cookie}`;
+      const parts = value.split(`; ${name}=`);
+      if (parts.length === 2) {
+        return parts.pop().split(';').shift();
+      }
+    };
+
+    //for preselection of filters
+    let ScenarioTrackerTabPreselection=getCookie('ScenarioTrackerTabPreselection');
+
+    if(ScenarioTrackerTabPreselection){
+      document.cookie = 'ScenarioTrackerTabPreselection'+'=;expires=Thu, 01 Jan 1970 00:00:01 GMT;domain=localhost;path=/;';
+      if(ScenarioTrackerTabPreselection==="npd"){
+        this.setState({activeKey: "1"});
+        this.setState({currentTab: "NPD"});
+      }else if(ScenarioTrackerTabPreselection==="delist"){
+        this.setState({activeKey: "2"});
+        this.setState({currentTab: "Delist"});
+      }
+    }
+
     this.props.onFetchRangingAllScenarioData();
 
   };
@@ -98,8 +122,9 @@ export class RangingScenarioTrackerPage extends React.PureComponent { // eslint-
     super(props);
     this.state = {
       activeScenarioListTable: 1,
-      activeKey: 1,
-      smShow: false, lgShow: false
+      activeKey: '1',
+      smShow: false, lgShow: false,
+      currentTab:'NPD'
     };
 
   }
@@ -251,6 +276,7 @@ export class RangingScenarioTrackerPage extends React.PureComponent { // eslint-
 
           <NavItem className="tabsCustomList" eventKey="1" onClick={() => {
             this.setState({activeKey: "1"});
+            this.setState({currentTab: "NPD"});
             let tab = "npd";
 
             this.props.onTabChange(tab);
@@ -264,6 +290,7 @@ export class RangingScenarioTrackerPage extends React.PureComponent { // eslint-
 
           <NavItem className="tabsCustomList" eventKey="2" onClick={() => {
             this.setState({activeKey: "2"});
+            this.setState({currentTab: "Delist"});
             let tab = "delist";
 
             this.props.onTabChange(tab);
@@ -277,6 +304,7 @@ export class RangingScenarioTrackerPage extends React.PureComponent { // eslint-
 
           <NavItem className="tabsCustomList" eventKey="3" onClick={() => {
             this.setState({activeKey: "3"});
+            this.setState({currentTab: "Pricing"});
             let tab = "pricing";
 
             this.props.onTabChange(tab);
@@ -329,7 +357,8 @@ export class RangingScenarioTrackerPage extends React.PureComponent { // eslint-
                     {/*Heading and info button*/}
                     <div className="row" style={{marginBottom: '3%'}}>
                       <div className="col-xs-10">
-                        <div className="scenarioTitle">Select the scenario to be viewed</div>
+                        {/*<div className="scenarioTitle">{this.state.currentTab}</div>*/}
+                        <div className="scenarioTitle">Select the scenario to be viewed:</div>
                       </div>
                       <div className="col-xs-2">
                         <div className="scenarioTitle" float="right">

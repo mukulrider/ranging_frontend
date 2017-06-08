@@ -182,8 +182,8 @@ class Header extends Component {
               {/*</div>*/}
               <div className="col-md-8">
                 <Nav bsStyle="tabs" className="tabsCustom" style={{marginWidth:"5%"}}>
-                  <NavItem className="tabsNavPanelList" href="http://dvcmpweb00001uk.dev.global.tesco.org:82/ranging/negotiation">Negotiation</NavItem>
-                  <NavItem className="tabsNavPanelList" href="http://dvcmpweb00001uk.dev.global.tesco.org:82/ranging/delist/">Product Impact</NavItem>
+                  <NavItem className="tabsNavPanelList" href="http://dvcmpweb00001uk.dev.global.tesco.org:82/ranging/negotiation">Scenario Tracker</NavItem>
+                  <NavItem className="tabsNavPanelList" href="http://dvcmpweb00001uk.dev.global.tesco.org:82/ranging/delist/">Delist Impact</NavItem>
                   <NavItem className="tabsNavPanelList" href="http://dvcmpweb00001uk.dev.global.tesco.org:82/ranging/npd/">NPD</NavItem>
                   <NavItem className="tabsNavPanelLogoutList" style={{ float: 'right', marginTop: '-8px' }}>
                     <span>
@@ -192,6 +192,7 @@ class Header extends Component {
                                       pullRight style={{ backgroundColor: 'transparent', borderColor: 'transparent', color: '#00539f', fontSize:"18px"}}>
                         <MenuItem style={{textDecoration:"none"}}><span ><b>Hi,User</b></span></MenuItem>
                         <MenuItem onClick={() => {
+                          localStorage.clear();
                           const getCookie = (name) => {
                             const value = `; ${document.cookie}`;
                             const parts = value.split(`; ${name}=`);
@@ -220,6 +221,7 @@ class Header extends Component {
                           document.cookie = 'tpx_id'.concat(`=;expires=Thu, 01 Jan 1970 00:00:01 GMT;domain=${hostName};Path=/;`);
                           document.cookie = 'user'.concat(`=;expires=Thu, 01 Jan 1970 00:00:01 GMT;domain=${hostName};Path=/;`);
                           window.location = `http://${hostName}:${hostPort}/login/`;
+
                         }}>Logout</MenuItem>
                       </DropdownButton></span>
                     </span></NavItem>

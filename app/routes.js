@@ -17,108 +17,7 @@ export default function createRoutes(store) {
   const { injectReducer, injectSagas } = getAsyncInjectors(store); // eslint-disable-line no-unused-vars
   const namespace = '';
   return [
-    {
-      path: namespace + '/pricing',
-      name: 'pricing',
-      getComponent(nextState, cb) {
-        // importModules.then(([component]) => {
-        //   renderRoute(component);
-        // });
-        const importModules = Promise.all([
-        import('containers/HomePage/reducer'),
-        import('containers/HomePage/sagas'),
-        import('containers/HomePage'),
-      ]);
 
-        const renderRoute = loadModule(cb);
-
-        importModules.then(([reducer, sagas, component]) => {
-          injectReducer('home', reducer.default);
-          injectSagas(sagas.default);
-
-          renderRoute(component);
-        });
-
-        importModules.catch(errorLoading);
-      },
-    },
-
-    {
-      path: namespace + '/pricing/scenario-tracker',
-      name: 'pricing scenario tracker',
-      getComponent(nextState, cb) {
-        // importModules.then(([component]) => {
-        //   renderRoute(component);
-        // });
-        const importModules = Promise.all([
-        import('containers/PricingScenarioTrackerPage/reducer'),
-        import('containers/PricingScenarioTrackerPage/sagas'),
-        import('containers/PricingScenarioTrackerPage'),
-      ]);
-
-        const renderRoute = loadModule(cb);
-
-        importModules.then(([reducer, sagas, component]) => {
-          injectReducer('pricingScenarioTrackerPage', reducer.default);
-          injectSagas(sagas.default);
-
-          renderRoute(component);
-        });
-
-        importModules.catch(errorLoading);
-      },
-    },
-    {
-      path: namespace + '/pricing/forecast',
-      name: 'pricing forecast page',
-      getComponent(nextState, cb) {
-        // importModules.then(([component]) => {
-        //   renderRoute(component);
-        // });
-        const importModules = Promise.all([
-        import('containers/PricingForecastPage/reducer'),
-        import('containers/PricingForecastPage/sagas'),
-        import('containers/PricingForecastPage'),
-      ]);
-
-        const renderRoute = loadModule(cb);
-
-        importModules.then(([reducer, sagas, component]) => {
-          injectReducer('pricingForecastPage', reducer.default);
-          injectSagas(sagas.default);
-
-          renderRoute(component);
-        });
-
-        importModules.catch(errorLoading);
-      },
-    },
-
-    {
-      path: namespace + '/pricing/forecast/:scenario/:forecast',
-      name: 'pricing forecast page',
-      getComponent(nextState, cb) {
-        // importModules.then(([component]) => {
-        //   renderRoute(component);
-        // });
-        const importModules = Promise.all([
-        import('containers/PricingForecastPage/reducer'),
-        import('containers/PricingForecastPage/sagas'),
-        import('containers/PricingForecastPage'),
-      ]);
-
-        const renderRoute = loadModule(cb);
-
-        importModules.then(([reducer, sagas, component]) => {
-          injectReducer('pricingForecastPage', reducer.default);
-          injectSagas(sagas.default);
-
-          renderRoute(component);
-        });
-
-        importModules.catch(errorLoading);
-      },
-    },
     {
       path: namespace + '/userinput',
       name: 'userInputPage',
@@ -141,73 +40,6 @@ export default function createRoutes(store) {
       },
     },
     {
-      path: '/pricing/scenario-compare',
-      name: 'pricingScenarioComparePage',
-      getComponent(nextState, cb) {
-        const importModules = Promise.all([
-          import('containers/PricingScenarioComparePage/reducer'),
-          import('containers/PricingScenarioComparePage/sagas'),
-          import('containers/PricingScenarioComparePage'),
-        ]);
-
-        const renderRoute = loadModule(cb);
-
-        importModules.then(([reducer, sagas, component]) => {
-          injectReducer('pricingScenarioComparePage', reducer.default);
-          injectSagas(sagas.default);
-          renderRoute(component);
-        });
-
-        importModules.catch(errorLoading);
-      },
-    },
-    {
-      path: '/pricing/home',
-      name: 'pricingHomePage',
-      getComponent(nextState, cb) {
-        const importModules = Promise.all([
-          import('containers/PricingHomePage/reducer'),
-          import('containers/PricingHomePage/sagas'),
-          import('containers/PricingHomePage'),
-        ]);
-
-        const renderRoute = loadModule(cb);
-
-        importModules.then(([reducer, sagas, component]) => {
-          injectReducer('pricingHomePage', reducer.default);
-          injectSagas(sagas.default);
-          renderRoute(component);
-        });
-
-        importModules.catch(errorLoading);
-      },
-    },
-
-    {
-      path: namespace + '/pricing/:eventId',
-      name: 'pricing',
-      getComponent(nextState, cb) {
-        // importModules.then(([component]) => {
-        //   renderRoute(component);
-        // });
-        const importModules = Promise.all([
-        import('containers/HomePage/reducer'),
-        import('containers/HomePage/sagas'),
-        import('containers/HomePage'),
-      ]);
-
-        const renderRoute = loadModule(cb);
-
-        importModules.then(([reducer, sagas, component]) => {
-          injectReducer('home', reducer.default);
-          injectSagas(sagas.default);
-
-          renderRoute(component);
-        });
-
-        importModules.catch(errorLoading);
-      },
-    },{
       path: '/ranging/npd',
       name: 'rangingNpdPage',
       getComponent(nextState, cb) {
@@ -290,7 +122,8 @@ export default function createRoutes(store) {
 
         importModules.catch(errorLoading);
       },
-    }, {
+    },
+    {
       path: '/ranging/negotiation',
       name: 'rangingNegotiationPage',
       getComponent(nextState, cb) {
@@ -310,7 +143,8 @@ export default function createRoutes(store) {
 
         importModules.catch(errorLoading);
       },
-    }, {
+    },
+    {
       path: '/ranging/scenario-tracker',
       name: 'rangingScenarioTrackerPage',
       getComponent(nextState, cb) {
@@ -330,7 +164,8 @@ export default function createRoutes(store) {
 
         importModules.catch(errorLoading);
       },
-    }, {
+    },
+    {
       path: '/ranging/view-scenario',
       name: 'rangingViewScenarioPage',
       getComponent(nextState, cb) {
@@ -350,7 +185,8 @@ export default function createRoutes(store) {
 
         importModules.catch(errorLoading);
       },
-    }, {
+    },
+    {
       path: '/ranging/view-delist-scenario',
       name: 'rangingViewDelistScenarioPage',
       getComponent(nextState, cb) {
@@ -370,7 +206,8 @@ export default function createRoutes(store) {
 
         importModules.catch(errorLoading);
       },
-    }, {
+    },
+    {
       path: '*',
       name: 'notfound',
       getComponent(nextState, cb) {

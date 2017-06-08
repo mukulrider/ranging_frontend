@@ -53,7 +53,7 @@ import {
   GENERATE_URL_PARAMS_DATA,
   URL_PARAMS,
   SIDE_FILTER_RESET,
-  SAVE_SCENARIO_RESPONSE,SAVE_TAG_NAME,EDIT_SCENARIO_OVER_WRITE,
+  SAVE_SCENARIO_RESPONSE,SAVE_TAG_NAME,EDIT_SCENARIO_OVER_WRITE,NO_DATA_MESSAGE,
 
   SAVE_SCENARIO,SAVE_SCENARIO_NAME,
   } from './constants';
@@ -478,6 +478,14 @@ export function saveTagName(data) {
 export function editScenarioOverWrite(data) {
   return {
     type: EDIT_SCENARIO_OVER_WRITE,
+    data
+  };
+};
+
+
+export function showNoDataErrorMessage(data) {
+  return {
+    type: NO_DATA_MESSAGE,
     data
   };
 };

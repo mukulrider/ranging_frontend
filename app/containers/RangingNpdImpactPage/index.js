@@ -78,6 +78,7 @@ export class RangingNpdImpactPage extends React.PureComponent { // eslint-disabl
       let ASP_PreSelection=getCookie('ASP_PreSelection');
       let Size_PreSelection=getCookie('Size_PreSelection');
       let ACP_PreSelection=getCookie('ACP_PreSelection');
+      this.setState({filterAttributeWording: "edit"});
 
       this.props.onSaveFilterSelectionsTillNow(filterPreSelection);
       this.props.onUpdateOrClearScenarioName(scenario_name_PreSelection);
@@ -133,6 +134,8 @@ export class RangingNpdImpactPage extends React.PureComponent { // eslint-disabl
 
       showEditForecastModal:false,
       showEditForecastSuccessModal:false,
+
+      filterAttributeWording:"select",
 
       edit_scenario:false,
 
@@ -244,32 +247,11 @@ export class RangingNpdImpactPage extends React.PureComponent { // eslint-disabl
 
                     <div className="col-xs-6">
 
-                      <span style={{color:'#00539f',fontSize:'22px',fontWeight:'600'}}>Scenario Tag : </span>
+                      {/*<span style={{color:'#00539f',fontSize:'22px',fontWeight:'600'}}>Scenario Tag : </span>*/}
+                      <span style={{color:'#00539f',fontSize:'22px',fontWeight:'600'}}>Product Description: </span>
                       <span style={{color:'#333333',fontSize:'20px'}}>{this.props.RangingNpdImpactPage.tagName}</span>
 
                     </div>
-
-                    {/*<div className="col-xs-6">*/}
-
-                      {/*<div className="col-xs-6">*/}
-                        {/*Scenario Name:*/}
-                      {/*</div>*/}
-                      {/*<div className="col-xs-6">*/}
-                        {/*/!*{this.props.RangingNpdImpactPage.scenarioName}*!/*/}
-                        {/*Sample Scenario Name*/}
-                      {/*</div>*/}
-
-                    {/*</div>*/}
-
-                    {/*<div className="col-xs-6">*/}
-                      {/*<div className="col-xs-6">*/}
-                        {/*Tag Name:*/}
-                      {/*</div>*/}
-                      {/*<div className="col-xs-6">*/}
-                      {/*/!*{this.props.RangingNpdImpactPage.tagName}*!/*/}
-                        {/*Sample Scenario Tag*/}
-                      {/*</div>*/}
-                    {/*</div>*/}
 
                   </div>
               )
@@ -394,6 +376,9 @@ export class RangingNpdImpactPage extends React.PureComponent { // eslint-disabl
                 <Button onClick={() => {
 
                   document.cookie = 'Preselection'+'=;expires=Thu, 01 Jan 1970 00:00:01 GMT;domain=localhost;path=/;';
+
+                  let domain="localhost"
+                  document.cookie = `ScenarioTrackerTabPreselection=npd;domain=${domain};path=/;`;
 
                   let page='/ranging/scenario-tracker?';
 
@@ -610,7 +595,7 @@ export class RangingNpdImpactPage extends React.PureComponent { // eslint-disabl
 
                   <div className="selectAttributeIndicator">
                     <div>
-                      <div> ----- Please select the attributes ------</div>
+                      <div> ----- Please {this.state.filterAttributeWording} the attributes ------</div>
                     </div>
                   </div>
 
@@ -657,7 +642,11 @@ export class RangingNpdImpactPage extends React.PureComponent { // eslint-disabl
                             {/*Content*/}
                             <div className="content-wrap">
 
-
+                              {(()=>{
+                                if(this.state.filterAttributeWording==="edit") {
+                                  this.setState({filterAttributeWording: "select"});
+                                }
+                              })()}
                               <Nav bsStyle="tabs" activeKey={this.state.activeKey} onSelect={this.handleSelect}
                                    className="tabsCustom">
 

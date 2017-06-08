@@ -24,8 +24,9 @@ class NewSelector2 extends React.PureComponent { // eslint-disable-line react/pr
         let category = obj.id.split('__');
 
       if (category[0] === 'long_description') {
-
-          let product_code= parseInt(category[2].slice(-8));
+          let selectedProduct=category[2];
+          selectedProduct=selectedProduct.replace(/[^\w]/gi, ''); //to make sure the last 8 letters are the product code
+          let product_code= parseInt(selectedProduct.slice(-8));
 
           queryString = queryString + `base_product_number=${product_code}&`;
           product_selection_for_nego.push(product_code);

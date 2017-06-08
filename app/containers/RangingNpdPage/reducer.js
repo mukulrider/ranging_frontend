@@ -27,160 +27,94 @@ const initialState = fromJS({
   textBoxQueryString:'',
   showSelectFilterIndicator:true,
   breadCrumbs:'',
-
-  // data: [{competitor_product_desc: "Prod1", retailer: "ret1", asp: 1},
-  //   {
-  //     competitor_product_desc: "Prod2", retailer: "ret2", asp: 2
-  //   }, {
-  //     competitor_product_desc: "Prod3", retailer: "ret3", asp: 3
-  //   }, {
-  //     competitor_product_desc: "Prod3", retailer: "ret3", asp: 3
-  //   }, {
-  //     competitor_product_desc: "Prod3", retailer: "ret3", asp: 3
-  //   }, {
-  //     competitor_product_desc: "Prod3", retailer: "ret3", asp: 3
-  //   }, {
-  //     competitor_product_desc: "Prod3", retailer: "ret3", asp: 3
-  //   }, {
-  //     competitor_product_desc: "Prod3", retailer: "ret3", asp: 3
-  //   }],
-  // multiBarChartData: {
-  //   data: [{
-  //     "psg": "OTHER FORTIFIED WINES",
-  //     "Asda": 7.0,
-  //     "JS": 5.0,
-  //     "Tesco": 11.0,
-  //     "Morrisons": 7.0,
-  //     "Aldi": 2.0
-  //   },
+  // price_gravity_data: {
+  //   price_bucket:["6.51 - 7.63","7.63 - 19.00", "3.04 - 5.27", "5.27 - 6.07","6.07 - 6.51"],
+  //   data:[
   //     {
-  //       "psg": "SEAS ALCOHOL GIFT PACKS",
-  //       "Asda": 7.0,
-  //       "Tesco": 9.0,
-  //       "JS": 5.0,
-  //       "Aldi": 20.0,
-  //       "Morrisons": 7.0
+  //       "id": "Asda",
+  //       "sku_gravity": 11,
+  //       "price_gravity": "6.51 - 7.63"
   //     },
   //     {
-  //       "psg": "WHITE WINE AUSTRALIAN",
-  //       "Asda": 51.0,
-  //       "JS": 10,
-  //       "Tesco": 89.0,
-  //       "Morrisons": 10,
-  //       "Aldi": 10.0,
+  //       "id": "Asda",
+  //       "sku_gravity": 8,
+  //       "price_gravity": "7.63 - 19.00"
+  //     },
+  //     {
+  //       "id": "Asda",
+  //       "sku_gravity": 20,
+  //       "price_gravity": "3.04 - 5.27"
+  //     },
+  //     {
+  //       "id": "Asda",
+  //       "sku_gravity": 13,
+  //       "price_gravity": "5.27 - 6.07"
+  //     },
+  //     {
+  //       "id": "Asda",
+  //       "sku_gravity": 6,
+  //       "price_gravity": "6.07 - 6.51"
+  //     },
+  //     {
+  //       "id": "JS",
+  //       "sku_gravity": 7,
+  //       "price_gravity": "6.51 - 7.63"
+  //     },
+  //     {
+  //       "id": "JS",
+  //       "sku_gravity": 7,
+  //       "price_gravity": "7.63 - 19.00"
+  //     },
+  //     {
+  //       "id": "JS",
+  //       "sku_gravity": 9,
+  //       "price_gravity": "3.04 - 5.27"
+  //     },
+  //     {
+  //       "id": "JS",
+  //       "sku_gravity": 2,
+  //       "price_gravity": "5.27 - 6.07"
+  //     },
   //
-  //     }, {
-  //       "psg": "LIGHT & FRUIT PERRY",
-  //       "Asda": 19.0,
-  //       "JS": 25.0,
-  //       "Tesco": 44.0,
-  //       "Morrisons": 32.0,
-  //       "Aldi": 11.0,
-  //     }],
-  //   labels: ["Aldi", "Asda", "JS", "Tesco", "Morrisons"]
-  // },
-  // multiHoriBarChartData: {
-  //   labels: [
-  //     'Series1', 'Series2', 'Series3'
-  //   ],
-  //   series: [
   //     {
-  //       label: 'Outperformance (%)',
-  //       values: [4, 8, 12]
+  //       "id": "JS",
+  //       "sku_gravity": 8,
+  //       "price_gravity": "6.07 - 6.51"
   //     },
   //     {
-  //       label: 'Outperformance Unit(%)',
-  //       values: [12, 43, 28]
-  //     }]
-  // },
-  price_gravity_data: {
-    price_bucket:["6.51 - 7.63","7.63 - 19.00", "3.04 - 5.27", "5.27 - 6.07","6.07 - 6.51"],
-    data:[
-      {
-        "id": "Asda",
-        "sku_gravity": 11,
-        "price_gravity": "6.51 - 7.63"
-      },
-      {
-        "id": "Asda",
-        "sku_gravity": 8,
-        "price_gravity": "7.63 - 19.00"
-      },
-      {
-        "id": "Asda",
-        "sku_gravity": 20,
-        "price_gravity": "3.04 - 5.27"
-      },
-      {
-        "id": "Asda",
-        "sku_gravity": 13,
-        "price_gravity": "5.27 - 6.07"
-      },
-      {
-        "id": "Asda",
-        "sku_gravity": 6,
-        "price_gravity": "6.07 - 6.51"
-      },
-      {
-        "id": "JS",
-        "sku_gravity": 7,
-        "price_gravity": "6.51 - 7.63"
-      },
-      {
-        "id": "JS",
-        "sku_gravity": 7,
-        "price_gravity": "7.63 - 19.00"
-      },
-      {
-        "id": "JS",
-        "sku_gravity": 9,
-        "price_gravity": "3.04 - 5.27"
-      },
-      {
-        "id": "JS",
-        "sku_gravity": 2,
-        "price_gravity": "5.27 - 6.07"
-      },
-
-      {
-        "id": "JS",
-        "sku_gravity": 8,
-        "price_gravity": "6.07 - 6.51"
-      },
-      {
-        "id": "Coop",
-        "sku_gravity": 10,
-        "price_gravity": "6.51 - 7.63"
-      },
-      {
-        "id": "Coop",
-        "sku_gravity": 8,
-        "price_gravity": "7.63 - 19.00"
-      },
-      {
-        "id": "Coop",
-        "sku_gravity": 6,
-        "price_gravity": "3.04 - 5.27"
-      },
-      {
-        "id": "Coop",
-        "sku_gravity": 4,
-        "price_gravity": "5.27 - 6.07"
-      },
-
-      {
-        "id": "Coop",
-        "sku_gravity": 2,
-        "price_gravity": "6.07 - 6.51"
-      }
-    ],
-    colors:["#B2B2B2","#7FB256",
-      "#0931F6",
-      "#C288D6",
-      "#896219",
-      "#F60909",
-      "#E5F213"]
-  }
+  //       "id": "Coop",
+  //       "sku_gravity": 10,
+  //       "price_gravity": "6.51 - 7.63"
+  //     },
+  //     {
+  //       "id": "Coop",
+  //       "sku_gravity": 8,
+  //       "price_gravity": "7.63 - 19.00"
+  //     },
+  //     {
+  //       "id": "Coop",
+  //       "sku_gravity": 6,
+  //       "price_gravity": "3.04 - 5.27"
+  //     },
+  //     {
+  //       "id": "Coop",
+  //       "sku_gravity": 4,
+  //       "price_gravity": "5.27 - 6.07"
+  //     },
+  //
+  //     {
+  //       "id": "Coop",
+  //       "sku_gravity": 2,
+  //       "price_gravity": "6.07 - 6.51"
+  //     }
+  //   ],
+  //   colors:["#B2B2B2","#7FB256",
+  //     "#0931F6",
+  //     "#C288D6",
+  //     "#896219",
+  //     "#F60909",
+  //     "#E5F213"]
+  // }
 });
 
 

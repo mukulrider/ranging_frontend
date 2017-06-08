@@ -214,21 +214,13 @@ export class RangingViewScenarioPage extends React.PureComponent { // eslint-dis
                     let objString = page;
                     window.location = objString;
 
-                  }}><span className="glyphicon glyphicon-arrow-left"/> Go back to Scenario tracker</Button></div>
-                  <div className="col-xs-10 breadCrumbsScenario">{user_attributes.product_sub_group_description}
+                  }}><span className="glyphicon glyphicon-arrow-left"/>  Scenario tracker</Button></div>
+                  <div className="col-xs-8 breadCrumbsScenario">{user_attributes.product_sub_group_description}
                     > {user_attributes.brand_name} <b>|</b> {user_attributes.till_roll_description}
                     <b>|</b> {user_attributes.package_type}
                     <b>|</b> {user_attributes.size}{user_attributes.measure_type}   </div>
 
-                  {/*<div className="col-xs-2"><Button onClick={() => {*/}
-                  {/*let page='/ranging/npd-impact?';*/}
-                  {/*/!*let attributes='userid=sachin123'+"&scenario_name="+obj.scenario_name+"&event_name="+obj.event_name;*!/*/}
-
-                  {/*let objString = page;*/}
-                  {/*window.location = objString;*/}
-
-                  {/*}}>NPD Opportunity<span className="glyphicon glyphicon-arrow-right"/></Button></div>*/}
-
+                  <div className="col-xs-2"></div>
                 </div>
 
                 {/*ASP,ACP & Size*/}

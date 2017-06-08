@@ -21,7 +21,7 @@ export function* defaultSaga() {
   // See example in containers/HomePage/sagas.js
 }
 
-const host_url="http://172.20.181.16:8000"
+const host_url="http://10.1.181.13:8000"
 
 //getting user details from cookies
 let gettingUserDetails = () =>{

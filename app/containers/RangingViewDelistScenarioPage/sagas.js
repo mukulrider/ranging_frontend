@@ -20,7 +20,7 @@ export function* defaultSaga() {
   // See example in containers/HomePage/sagas.js
 }
 
-let host_url = "http://172.20.181.16:8000"
+let host_url = "http://10.1.181.13:8000"
 
 let gettingUserDetails = () => {
   let getCookie = (name) => {

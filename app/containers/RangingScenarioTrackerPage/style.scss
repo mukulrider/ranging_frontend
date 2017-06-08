@@ -14,7 +14,7 @@
 
   width: 100%;
   line-height: 28px;
-  font-size: 20px;
+  font-size: 22px;
   height: 28px;
   color: #00539f !important;
   //font-weight: bold;
@@ -83,14 +83,6 @@ th {
 
 
 //TABS
-.tabsCustomList {
-  //color: red;
-  //width: 30%;
-  //text-align: center;
-  //border-style: ridge;
-  //border-radius: 8px;
-  //margin-left: 35px;
-}
 
 .tabsCustomList {
   display: inline-block;
@@ -126,7 +118,3 @@ th {
 
 }
 
-
-.tabsCustomList.active span.tab_label{
-  border-bottom: #048EC3 solid 4px;
-}

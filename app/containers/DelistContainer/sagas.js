@@ -45,7 +45,9 @@ import {
   SupplierPopupTableDataFetchSuccess,
   SupplierPopupTableSpinnerSuccess,
   delistTableSuccess,
-  updateSaveScenarioResponse
+  updateSaveScenarioResponse,
+  showNoDataErrorMessage,
+  onDelistDefaultView
 
 } from 'containers/DelistContainer/actions';
 import {browserHistory} from 'react-router';
@@ -78,7 +80,8 @@ let gettingUserDetails = () => {
   return (cookie_params);
 }
 
-let host_url = "http://172.20.181.16:8000"
+// let host_url = "http://172.20.181.13:8000"
+let host_url = "http://10.1.181.13:8000"
 
 // All sagas to be loaded
 
@@ -294,11 +297,23 @@ export function* generateWaterfallValueFetch() {
       `/api/product_impact_chart?${urlParams}`);
 
     let spinnerCheck = 1;
-    yield put(WaterfallValueChartSuccess(data));
     yield put(WaterfallSpinnerSuccess(spinnerCheck));
     yield put(WaterfallProfitSpinnerSuccess(spinnerCheck));
-    yield put(apiFetch());
-    yield put(delistTable());
+
+    if(data.message){
+      yield put(onDelistDefaultView(0));
+      yield put(showNoDataErrorMessage(true));
+      yield put(WaterfallValueChartSuccess(data));
+    }else{
+      yield put(WaterfallValueChartSuccess(data));
+      yield put(apiFetch());
+      yield put(delistTable());
+  }
+
+
+
+
+
   } catch (err) {
 
     let spinnerCheck = 2;

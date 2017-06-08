@@ -47,7 +47,8 @@ import {
   STORE_BREADCRUMB,
   URL_PARAMS,
   SAVE_SCENARIO_RESPONSE,
-  SAVE_SCENARIO_NAME,SAVE_TAG_NAME,EDIT_SCENARIO_OVER_WRITE
+  SAVE_SCENARIO_NAME,SAVE_TAG_NAME,EDIT_SCENARIO_OVER_WRITE,
+  NO_DATA_MESSAGE
 } from './constants';
 
 const initialState = fromJS(
@@ -69,6 +70,7 @@ const initialState = fromJS(
     tagName:'',
     saveScenarioResponse:'',
     editScenarioOverWrite:"overwrite=0",
+    noDataErrorMessage:false,
     waterFallChart2Data_1: [{name: ' Product Revenue ', value: 420000},
       {name: ' Services Revenue ', value: 210000},
       {name: ' Employee Revenue ', value: 190000},
@@ -236,6 +238,9 @@ function delistContainerReducer(state = initialState, action) {
       return state.set('tagName', action.data);
     case EDIT_SCENARIO_OVER_WRITE:
       return state.set('editScenarioOverWrite', action.data);
+
+    case NO_DATA_MESSAGE:
+      return state.set('noDataErrorMessage', action.data);
 
     default:
       return state;

@@ -57,10 +57,10 @@ class WaterFallChartNpd extends React.PureComponent { // eslint-disable-line rea
     }
 
     data.push({
-      name: 'Total',
+      name: 'Net Gain/Loss',
       end: cumulative,
       start: 0,
-      class: 'total',
+      class: ( cumulative>= 0 ) ? 'positive' : 'negative',
       value: cumulative
     });
 
@@ -70,13 +70,17 @@ class WaterFallChartNpd extends React.PureComponent { // eslint-disable-line rea
         return d.end;
       });
 
+      if(max>0){
       //function to calculate the value by adding 20% more
       let add = max + (max * 20 / 100);
 
       //function to round the value to the nearest whole number
       let newRound = (Math.round(add*1000)/1000);
 
-      return newRound;
+      return newRound;}
+      else{
+        return 0;
+      }
     };
 
 
