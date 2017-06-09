@@ -27,7 +27,7 @@
 
 .loading-scenario{
   font:Tesco;
-  font-size: 20px;
+  font-size: 25px;
   font-weight: 700;
   //text-align: center;
   //z-index: 100;
@@ -50,13 +50,24 @@
   z-index: 100;
   height: 100%;
   width: 100%;
-  background: rgba(204, 204, 204, 0.6);
+  background: rgba(204, 204, 204, 0.5);
   color: #00294f;
-  margin-left:-1%;
   line-height: 200px;
   margin-top: -2%;
+
 }
 
+#wait{
+  margin-left: 40%;
+}
+
+.alertModalStyle{
+  font-size: 20px;
+  font-family: Tesco;
+  color:#00294f !important;
+  text-align: center;
+
+}
 
 
 td {

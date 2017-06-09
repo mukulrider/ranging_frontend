@@ -81,7 +81,7 @@ let gettingUserDetails = () => {
 }
 
 // let host_url = "http://172.20.181.13:8000"
-let host_url = "http://10.1.181.13:8000"
+let host_url = "http://172.20.181.16:8000"
 
 // All sagas to be loaded
 

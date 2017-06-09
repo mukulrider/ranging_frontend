@@ -282,7 +282,7 @@ export class RangingNpdImpactPage extends React.PureComponent { // eslint-disabl
 
                       <div className="col-xs-6">
                         <div className="col-xs-6">
-                          Tag Name:
+                          Product Description:
                         </div>
                         <div className="col-xs-6">
                           <InputField type="text"

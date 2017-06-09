@@ -22,7 +22,7 @@ export function* defaultSaga() {
   // See example in containers/HomePage/sagas.js
 }
 
-let host_url_rangingScenario = `http://10.1.181.13:8000`
+let host_url_rangingScenario = `http://172.20.181.16:8000`
 
 
 let gettingUserDetails = () => {
@@ -99,40 +99,14 @@ export function* doAllScenarioList() {
 
 export function* generateAllPricingScenarioList() {
 
-// alert()
-//   let urlName = yield select(selectRangingScenarioTrackerPageDomain());
-//   let selectedTab = urlName.get('selectedTab');
-//   let deletedScenario = urlName.get('deletedScenario');
-//   // let user_id = "user_id=nita";
-//
-//   let API_params = '';
-//
-//   if (deletedScenario !== '') {
-//     API_params = API_params + "&" + deletedScenario;
-//   }
-//
-//
-//   let cookie_params = gettingUserDetails();
-//   API_params = API_params + "&" + cookie_params;
-//   API_params = API_params.replace('&', '');
 
   try {
-    // Table data
 
-    // if(selectedTab==="npd"){
-    //   const scenario_list= yield call(request,host_url_rangingScenario+`/api/npd_impact_list_scenario?`+API_params);
-    //   yield put(fetchRangingAllScenarioDataSuccess(scenario_list));
-    // }else{
-    //   const scenario_list= yield call(request,host_url_rangingScenario+`/api/delist_list_scenario?`+API_params);
-    //   yield put(fetchRangingAllScenarioDataSuccess(scenario_list));
-    // }
 
-    console.log('fetcing pricng')
     const scenario_list = yield call(request, 'http://10.1.181.10:8000/api/pricing/scenario2/');
-    console.log('scneairo_ata', scenario_list)
-
     yield put(fetchPricingAllScenarioDataSuccess(scenario_list));
 
+    yield put(updateLoadingIndicationStatus(false));
 
   } catch (err) {
 

@@ -30,6 +30,7 @@ import {
   deleteScenario,
   updateLoadingIndicationStatus,
   updateLoadingIndicationText,
+  fetchRangingAllScenarioDataSuccess,
 } from './actions';
 
 export class RangingScenarioTrackerPage extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
@@ -53,9 +54,21 @@ export class RangingScenarioTrackerPage extends React.PureComponent { // eslint-
       if(ScenarioTrackerTabPreselection==="npd"){
         this.setState({activeKey: "1"});
         this.setState({currentTab: "NPD"});
+
+        let tab = "npd";
+
+        this.props.onTabChange(tab);
+        this.props.onFetchRangingAllScenarioData();
+
       }else if(ScenarioTrackerTabPreselection==="delist"){
         this.setState({activeKey: "2"});
         this.setState({currentTab: "Delist"});
+
+        let tab = "delist";
+
+        this.props.onTabChange(tab);
+        this.props.onFetchRangingAllScenarioData();
+
       }
     }
 
@@ -105,13 +118,14 @@ export class RangingScenarioTrackerPage extends React.PureComponent { // eslint-
           if (this.props.RangingScenarioTrackerPage.selectedTab === "npd") {
             let scenario_details = "&scenario_name=" + row.scenario_name + "&scenario_tag=" + row.scenario_tag + "&delete=1";
             this.props.onDeleteScenario(scenario_details);
-            this.props.onFetchRangingAllScenarioData();
+
           } else {
 
             let scenario_details = "&scenario_name=" + row.scenario_name + "&delete=1";
             this.props.onDeleteScenario(scenario_details);
-            this.props.onFetchRangingAllScenarioData();
+
           }
+          this.setState({deleteConfirmationShow: true})
         }}><span className="glyphicon glyphicon-trash"/>
       </button>
     )
@@ -124,7 +138,8 @@ export class RangingScenarioTrackerPage extends React.PureComponent { // eslint-
       activeScenarioListTable: 1,
       activeKey: '1',
       smShow: false, lgShow: false,
-      currentTab:'NPD'
+      currentTab:'NPD',
+      deleteConfirmationShow:false
     };
 
   }
@@ -211,17 +226,21 @@ export class RangingScenarioTrackerPage extends React.PureComponent { // eslint-
       return scenario_detail;
     }
 
+    let formatVolume = (i) => {
+      if (i >= 1000 || i <= -1000) {
+        let rounded = Math.round(i / 1000)
+        return (rounded.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + 'K');
+
+      } else {
+        return (Math.round(i));
+      }
+
+
+    };
+
+
     let arr = []
 
-    // if (!this.props.RangingScenarioTrackerPage.pricingScenarioStatus && this.props.RangingScenarioTrackerPage.selectedTab === "pricing") {
-    //   console.log('>>>>', this.props.RangingScenarioTrackerPage.pricingScenarioStatus, this.props.RangingScenarioTrackerPage.selectedTab);
-    //   return (
-    //     <div>
-    //       <br/><br/>
-    //       <h1 style={{textAlign: 'center'}}>Loading Pricing <Spinner/></h1>
-    //     </div>
-    //   )
-    // }
 
     if (this.props.RangingScenarioTrackerPage.pricingScenarioStatus) {
       this.props.RangingScenarioTrackerPage.pricingScenarioStatus.map((obj_a, x) => {
@@ -271,12 +290,58 @@ export class RangingScenarioTrackerPage extends React.PureComponent { // eslint-
         {/*Page title*/}
         <div className="pageTitle" style={{marginBottom: '1%'}}>Scenario Tracker</div>
 
+
+        {/*Delete confirmation modal*/}
+        <Modal show={this.state.deleteConfirmationShow} onHide={() => {
+          this.setState({deleteConfirmationShow: false})
+        }} bsSize="large" aria-labelledby="contained-modal-title-sm">
+          <Modal.Body>
+
+            <div className="row">
+              <div className="col-xs-12 alertModalStyle">
+                Are you sure you want to delete this event?
+              </div>
+            </div>
+
+
+          </Modal.Body>
+          <Modal.Footer>
+            <div className="row">
+              <div className="col-xs-6">
+                <Button buttonType='secondary'
+                        onClick={() => {
+                          this.props.onDeleteScenario('');
+                          this.setState({deleteConfirmationShow: false})
+                        }}
+                        style={{display: 'block', margin: '0 auto'}}>Cancel</Button>
+              </div>
+              <div className="col-xs-6">
+                <Button buttonType='primary'
+                        onClick={() => {
+                          this.props.onFetchRangingAllScenarioData();
+                          this.setState({deleteConfirmationShow: false})
+                          this.props.onUpdateLoadingIndicationText("Deleting the scenario")
+                          this.props.onUpdateLoadingIndicationStatus(true)
+
+                        }}
+                        style={{display: 'block', margin: '0 auto'}}>Delete</Button>
+              </div>
+
+            </div>
+
+          </Modal.Footer>
+        </Modal>
+
+
         <Nav bsStyle="tabs" activeKey={this.state.activeKey} onSelect={this.handleSelect}
              className="tabsCustom">
 
           <NavItem className="tabsCustomList" eventKey="1" onClick={() => {
             this.setState({activeKey: "1"});
             this.setState({currentTab: "NPD"});
+
+            this.props.onFetchRangingAllScenarioDataSuccess(false)
+
             let tab = "npd";
 
             this.props.onTabChange(tab);
@@ -291,7 +356,11 @@ export class RangingScenarioTrackerPage extends React.PureComponent { // eslint-
           <NavItem className="tabsCustomList" eventKey="2" onClick={() => {
             this.setState({activeKey: "2"});
             this.setState({currentTab: "Delist"});
+
+            this.props.onFetchRangingAllScenarioDataSuccess(false)
+
             let tab = "delist";
+
 
             this.props.onTabChange(tab);
             this.props.onUpdateLoadingIndicationText("Loading saved scenarios from Delist...")
@@ -321,7 +390,7 @@ export class RangingScenarioTrackerPage extends React.PureComponent { // eslint-
 
 
         {(() => {
-          if (this.props.RangingScenarioTrackerPage.allScenarioList || this.props.RangingScenarioTrackerPage.pricingScenarioStatus) {
+          if (this.props.RangingScenarioTrackerPage.allScenarioList || this.props.RangingScenarioTrackerPage.pricingScenarioStatus && !this.props.RangingScenarioTrackerPage.showLoading) {
             document.body.style.cursor = 'default';
 
             return (
@@ -361,7 +430,7 @@ export class RangingScenarioTrackerPage extends React.PureComponent { // eslint-
                         <div className="scenarioTitle">Select the scenario to be viewed:</div>
                       </div>
                       <div className="col-xs-2">
-                        <div className="scenarioTitle" float="right">
+                        <div className="scenarioTitle">
                           <button className="btn btn-warning" style={{marginLeft: '-2%'}}
                                   onClick={() => {
                                     let page;
@@ -402,7 +471,7 @@ export class RangingScenarioTrackerPage extends React.PureComponent { // eslint-
                                                      width="40%">Scenario Name</TableHeaderColumn>
                                   <TableHeaderColumn dataField="scenario_tag" dataFormat={formatName} dataSort={true}
                                                      dataAlign="center"
-                                                     width="40%">Scenario Tag</TableHeaderColumn>
+                                                     width="40%">Product Description</TableHeaderColumn>
                                   <TableHeaderColumn dataFormat={this.cellButton} dataSort={true} dataAlign="center"
                                                      width="20%"></TableHeaderColumn>
                                   <TableHeaderColumn dataFormat={this.cellButton2} dataSort={true} dataAlign="center"
@@ -509,12 +578,20 @@ export class RangingScenarioTrackerPage extends React.PureComponent { // eslint-
             )
           } else {
             return (
+            <div>
+
               <div className="loading-scenario">
 
-                {/*<Spinner/>*/}
-                <div id="wait" style={{marginLeft: '47%'}}>Loading...</div>
+                {(() => {
+                document.body.style.cursor = 'wait';
+                })()}
 
-              </div>
+
+                {/*<Spinner/>*/}
+                <div id="wait" style={{height:this.props.RangingScenarioTrackerPage.allScenarioList || this.props.RangingScenarioTrackerPage.pricingScenarioStatus?'100%':'500px'}}>{this.props.RangingScenarioTrackerPage.loadingText}</div>
+                </div>
+
+                </div>
             )
 
           }
@@ -556,6 +633,7 @@ const mapStateToProps = createStructuredSelector({
 function mapDispatchToProps(dispatch) {
   return {
     onFetchRangingAllScenarioData: (e) => dispatch(fetchRangingAllScenarioData(e)),
+    onFetchRangingAllScenarioDataSuccess: (e) => dispatch(fetchRangingAllScenarioDataSuccess(e)),
     onFetchPricingAllScenarioData: (e) => dispatch(fetchPricingAllScenarioData(e)),
     onTabChange: (e) => dispatch(tabChange(e)),
     onDeleteScenario: (e) => dispatch(deleteScenario(e)),

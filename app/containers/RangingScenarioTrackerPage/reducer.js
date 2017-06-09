@@ -10,7 +10,7 @@ import {
   ALL_PRICING_TABLE_SUCCESS
 } from './constants';
 
-const initialState = fromJS({scenarioName:'',selectedTab:'npd',deletedScenario:''});
+const initialState = fromJS({scenarioName:'',selectedTab:'npd',deletedScenario:'',loadingText:"Loading saved scenarios from NPD..."});
 
 function rangingScenarioTrackerPageReducer(state = initialState, action) {
   switch (action.type) {

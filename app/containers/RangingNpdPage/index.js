@@ -88,17 +88,16 @@ export class RangingNpdPage extends React.PureComponent { // eslint-disable-line
       // withFirstAndLast: false > Hide the going to First and Last page button
     };
 
+    let price_gravity_axis_bands,price_gravity_data,price_gravity_comp_color;
     if(this.props.RangingNpdPage.price_gravity_data) {
-      const price_gravity_axis_bands = this.props.RangingNpdPage.price_gravity_data.price_bucket;
-      const price_gravity_data = this.props.RangingNpdPage.price_gravity_data.data;
-      const price_gravity_comp_color = this.props.RangingNpdPage.price_gravity_data.colors;
+      price_gravity_axis_bands = this.props.RangingNpdPage.price_gravity_data.price_bucket;
+      price_gravity_data = this.props.RangingNpdPage.price_gravity_data.data;
+      price_gravity_comp_color = this.props.RangingNpdPage.price_gravity_data.colors;
     }
 
     //For url parameters
     let dataWeekUrlParams=this.props.RangingNpdPage.dataWeekUrlParams;
     let dataPageUrlParams=this.props.RangingNpdPage.dataPageUrlParams;
-    let dataFilterUrlParams=this.props.RangingNpdPage.urlParamsString;
-// console.log('previous selection',this.props.RangingNpdPage.filter_selection);
 
     let formatSales = (i) => {
       if (i >= 1000 || i <= -1000) {

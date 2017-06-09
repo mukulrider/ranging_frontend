@@ -27,7 +27,7 @@ const initialState = fromJS({
   ASP_field_entry:'',
   ACP_field_entry:'',
   Size_field_entry:'',
-  // ASP_field_entry:1.98,
+  showLoading:true,
   // ACP_field_entry:1.45,
   // Size_field_entry:500,
   filterSelectionsTillNow:'',
